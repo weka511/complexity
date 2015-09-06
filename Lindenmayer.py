@@ -18,19 +18,20 @@
 import turtle
 
 class Lindenmayer:
-    def __init__(self,rule,start,rendering):
+    def __init__(self,rule,start,rendering,angle=0):
         self.rule=rule
         self.start=start
         self.rendering=rendering
         self.dist=1
         self.string=start
         self.states=[]
+        self.angle=angle
     def subst(self,char):
         return self.rule[char] if char in self.rule.keys() else char        
     def step(self):
         self.string= ''.join([self.subst(x) for x in self.string])    
     def propagate(self):
-        for i in range(10):
+        for i in range(7):
             self.step()
             print (self.string)  
     def render(self):
@@ -41,6 +42,7 @@ class Lindenmayer:
         turtle.shape("turtle")
         for c in self.string:
             self.draw(c)
+        turtle.hideturtle()
         turtle.exitonclick()        
     def draw(self,c):
         for f in self.rendering[c]:
@@ -49,8 +51,10 @@ class Lindenmayer:
         self.states.append((turtle.heading(),turtle.position()))
     def pop(self):
         heading,position=self.states.pop()
-        turtle.setheading(heading)
-        turtle.setposition(position)        
+        turtle.up()
+        turtle.setposition(position)
+        turtle.down()
+        turtle.setheading(heading)      
         
 class Cantor(Lindenmayer):
     def __init__(self):
@@ -73,9 +77,10 @@ class Koch(Lindenmayer):
             'f',
             {
                 'f':[lambda:turtle.down(),lambda:turtle.forward(5)],
-                '+':[lambda:turtle.left(90)],
-                '-':[lambda:turtle.right(90)]
-            }
+                '+':[lambda:turtle.left(self.angle)],
+                '-':[lambda:turtle.right(self.angle)]
+            },
+            90
         )
 
 class Pythagorus(Lindenmayer):
@@ -86,16 +91,32 @@ class Pythagorus(Lindenmayer):
                 '0':'1[0]0'
                 },
             '0',
-        {'0':[lambda:turtle.down(),lambda:turtle.forward(1)],
-         '1':[lambda:turtle.down(),lambda:turtle.forward(1)],
-         '[':[lambda:self.push(),lambda:turtle.left(45)],
-         ']':[lambda:self.pop(),lambda:turtle.right(45)]
-         })
+        {'0':[lambda:turtle.down(),lambda:turtle.forward(5)],
+         '1':[lambda:turtle.down(),lambda:turtle.forward(5)],
+         '[':[lambda:self.push(),lambda:turtle.left(self.angle)],
+         ']':[lambda:self.pop(),lambda:turtle.right(self.angle)]
+         },
+        45)
     
-
+class Plant(Lindenmayer):
+    def __init__(self):
+        super().__init__(
+            {
+                'x':'f-[[x]+x]+f[+fx]-x',
+                'f':'ff'
+            },
+            'x',
+            {'x':[],
+             'f':[lambda:turtle.down(),lambda:turtle.forward(5)],
+             '+':[lambda:turtle.right(self.angle)],
+             '-':[lambda:turtle.left(self.angle)],
+             '[':[lambda:self.push()],
+             ']':[lambda:self.pop()]
+             },
+            25)
         
 if __name__=='__main__':
-    lindenmayer=Pythagorus()
+    lindenmayer=Plant()
     lindenmayer.propagate()
     lindenmayer.render()
 
