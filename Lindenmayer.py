@@ -24,6 +24,7 @@ class Lindenmayer:
         self.rendering=rendering
         self.dist=1
         self.string=start
+        self.states=[]
     def subst(self,char):
         return self.rule[char] if char in self.rule.keys() else char        
     def step(self):
@@ -44,7 +45,13 @@ class Lindenmayer:
     def draw(self,c):
         for f in self.rendering[c]:
             f()
-    
+    def push(self):
+        self.states.append((turtle.heading(),turtle.position()))
+    def pop(self):
+        heading,position=self.states.pop()
+        turtle.setheading(heading)
+        turtle.setposition(position)        
+        
 class Cantor(Lindenmayer):
     def __init__(self):
         super().__init__(
@@ -81,14 +88,11 @@ class Pythagorus(Lindenmayer):
             '0',
         {'0':[lambda:turtle.down(),lambda:turtle.forward(1)],
          '1':[lambda:turtle.down(),lambda:turtle.forward(1)],
-         '[':[lambda:self.angles.append((turtle.heading(),turtle.position())),lambda:turtle.left(45)],
-         ']':[lambda:self.restore(self.angles.pop()),lambda:turtle.right(45)]
+         '[':[lambda:self.push(),lambda:turtle.left(45)],
+         ']':[lambda:self.pop(),lambda:turtle.right(45)]
          })
-        self.angles=[]
-    def restore(self,state):
-        heading,position=state
-        turtle.setheading(heading)
-        turtle.setposition(position)
+    
+
         
 if __name__=='__main__':
     lindenmayer=Pythagorus()
