@@ -1,3 +1,20 @@
+# Lindenmayer.py
+
+# Copyright (C) 2015 Greenweaves Software Pty Ltd
+
+# This is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+
 import turtle
 
 class Lindenmayer:
@@ -12,7 +29,7 @@ class Lindenmayer:
     def step(self):
         self.string= ''.join([self.subst(x) for x in self.string])    
     def propagate(self):
-        for i in range(6):
+        for i in range(10):
             self.step()
             print (self.string)  
     def render(self):
@@ -53,9 +70,28 @@ class Koch(Lindenmayer):
                 '-':[lambda:turtle.right(90)]
             }
         )
-           
+
+class Pythagorus(Lindenmayer):
+    def __init__(self):
+        super().__init__(
+            {
+                '1':'11',
+                '0':'1[0]0'
+                },
+            '0',
+        {'0':[lambda:turtle.down(),lambda:turtle.forward(1)],
+         '1':[lambda:turtle.down(),lambda:turtle.forward(1)],
+         '[':[lambda:self.angles.append((turtle.heading(),turtle.position())),lambda:turtle.left(45)],
+         ']':[lambda:self.restore(self.angles.pop()),lambda:turtle.right(45)]
+         })
+        self.angles=[]
+    def restore(self,state):
+        heading,position=state
+        turtle.setheading(heading)
+        turtle.setposition(position)
+        
 if __name__=='__main__':
-    lindenmayer=Koch()
+    lindenmayer=Pythagorus()
     lindenmayer.propagate()
     lindenmayer.render()
 
