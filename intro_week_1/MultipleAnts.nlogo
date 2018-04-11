@@ -4,7 +4,7 @@ to setup
   clear-all
   reset-ticks
   create-turtles population
-  
+
   ask turtles
   [
     set shape "bug"
@@ -13,23 +13,31 @@ to setup
     set food-eaten 0
   ]
   grow-food
+  build-nest
 end
 
 to go
-  if not any? patches with [pcolor = green] [stop]
-  ask turtles 
+  if not any? patches with [pcolor = green] and not any? turtles with [color = magenta] [stop]
+  ask turtles
   [
-    ifelse coin-flip? [right random max-turn-angle][left random max-turn-angle]  ; if coin-flip? is true, turn right else turn left
+    if color = red [
+      ifelse coin-flip? [right random max-turn-angle][left random max-turn-angle]  ; if coin-flip? is true, turn right else turn left
+    ]
     forward random max-step-size
-    if pcolor = green ; if the turtle is located on a green patch
+    if pcolor = green and color = red; if the turtle is located on a green patch
     [
-      set pcolor black 
+      set pcolor black
+      facexy 0 0
+      set color magenta
+    ]
+    if pcolor = cyan and color = magenta [
       set food-eaten (food-eaten + 1)
       set label food-eaten
+      set  color red
     ]
   ]
- 
-  tick 
+
+  tick
 end
 
 to-report coin-flip?     ; returns true or false at random
@@ -49,14 +57,21 @@ to grow-food
   [ set pcolor green ]
   ]
 end
+
+to build-nest
+  ask patches
+    [if pxcor < 2 and pxcor > -2 and pycor < 2 and pycor > -2
+      [set pcolor cyan]]
+end
+
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
 10
-649
-470
-16
-16
+647
+448
+-1
+-1
 13.0
 1
 10
@@ -130,7 +145,7 @@ population
 population
 1
 200
-200
+25.0
 1
 1
 NIL
@@ -163,7 +178,7 @@ max-step-size
 max-step-size
 1
 10
-4
+4.0
 1
 1
 NIL
@@ -178,7 +193,7 @@ max-turn-angle
 max-turn-angle
 1
 180
-60
+60.0
 1
 1
 NIL
@@ -515,9 +530,8 @@ false
 0
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
-
 @#$#@#$#@
-NetLogo 5.0.3
+NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
@@ -525,15 +539,14 @@ NetLogo 5.0.3
 @#$#@#$#@
 default
 0.0
--0.2 0 1.0 0.0
+-0.2 0 0.0 1.0
 0.0 1 1.0 0.0
-0.2 0 1.0 0.0
+0.2 0 0.0 1.0
 link direction
 true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
-
 @#$#@#$#@
 0
 @#$#@#$#@
