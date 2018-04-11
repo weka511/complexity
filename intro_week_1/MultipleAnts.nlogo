@@ -1,4 +1,5 @@
 turtles-own [food-eaten]
+patches-own [pheromone]
 
 to setup
   clear-all
@@ -13,27 +14,49 @@ to setup
     set food-eaten 0
   ]
   grow-food
-  build-nest
+  ask patches [
+    set pheromone 0
+  ]
+  if go-home[
+    build-nest
+  ]
 end
 
 to go
   if not any? patches with [pcolor = green] and not any? turtles with [color = magenta] [stop]
-  ask turtles
-  [
+
+  ask turtles [
     if color = red [
-      ifelse coin-flip? [right random max-turn-angle][left random max-turn-angle]  ; if coin-flip? is true, turn right else turn left
-    ]
+      ifelse coin-flip? [right random max-turn-angle][left random max-turn-angle]]
     forward random max-step-size
-    if pcolor = green and color = red; if the turtle is located on a green patch
-    [
+    if pcolor = green and color = red   [
       set pcolor black
       facexy 0 0
-      set color magenta
+      if go-home[
+        set color magenta
+      ]
     ]
-    if pcolor = cyan and color = magenta [
-      set food-eaten (food-eaten + 1)
-      set label food-eaten
-      set  color red
+    if color = magenta [
+       if pcolor = cyan [
+         set food-eaten (food-eaten + 1)
+         set label food-eaten
+         set  color red
+       ]
+        if pcolor = black and leave-trail [
+         set pcolor yellow
+         set pheromone pheromone + 1
+        ]
+      ]
+  ]
+
+  ask patches  [
+    if pheromone > 0 [
+      if random-float 1.0 <  decay-probability [
+        set pheromone pheromone - 1
+        if pheromone < 1[
+          set pcolor black
+        ]
+      ]
     ]
   ]
 
@@ -63,12 +86,11 @@ to build-nest
     [if pxcor < 2 and pxcor > -2 and pycor < 2 and pycor > -2
       [set pcolor cyan]]
 end
-
 @#$#@#$#@
 GRAPHICS-WINDOW
-210
+222
 10
-647
+659
 448
 -1
 -1
@@ -145,17 +167,17 @@ population
 population
 1
 200
-25.0
+12.0
 1
 1
 NIL
 HORIZONTAL
 
 PLOT
--1
-229
-209
-418
+5
+319
+215
+508
 Total Food Eaten
 Time
 Total Food Eaten
@@ -198,6 +220,43 @@ max-turn-angle
 1
 NIL
 HORIZONTAL
+
+SWITCH
+8
+237
+101
+270
+go-home
+go-home
+0
+1
+-1000
+
+SLIDER
+8
+277
+180
+310
+decay-probability
+decay-probability
+0
+1
+0.79
+0.01
+1
+NIL
+HORIZONTAL
+
+SWITCH
+108
+237
+198
+270
+leave-trail
+leave-trail
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
