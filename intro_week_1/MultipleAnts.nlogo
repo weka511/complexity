@@ -27,13 +27,23 @@ to go
 
   ask turtles [
     if color = red [
-      ifelse coin-flip? [right random max-turn-angle][left random max-turn-angle]]
-    forward random max-step-size
+      ifelse pheromone > 0 [
+        let candidates neighbors with [ pheromone > 0 ]
+        ifelse any? candidates [
+          move-to one-of candidates
+        ][
+          move-random
+        ]
+      ][
+        move-random
+      ]
+
+    ]
     if pcolor = green and color = red   [
       set pcolor black
-      facexy 0 0
       if go-home[
         set color magenta
+        facexy 0 0
       ]
     ]
     if color = magenta [
@@ -42,7 +52,8 @@ to go
          set label food-eaten
          set  color red
        ]
-        if pcolor = black and leave-trail [
+       forward 1
+       if pcolor = black and leave-trail [
          set pcolor yellow
          set pheromone pheromone + 1
         ]
@@ -85,6 +96,11 @@ to build-nest
   ask patches
     [if pxcor < 2 and pxcor > -2 and pycor < 2 and pycor > -2
       [set pcolor cyan]]
+end
+
+to move-random
+  ifelse coin-flip? [right random max-turn-angle][left random max-turn-angle]
+  forward random max-step-size
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -167,7 +183,7 @@ population
 population
 1
 200
-12.0
+25.0
 1
 1
 NIL
@@ -241,7 +257,7 @@ decay-probability
 decay-probability
 0
 1
-0.79
+0.1
 0.01
 1
 NIL
