@@ -6,21 +6,20 @@ to setup
   reset-ticks
   create-turtles population
 
-  ask turtles
-  [
+  ask turtles  [
     set shape "bug"
     set size 1
     set color red
     set food-eaten 0
   ]
+
   grow-food
-  ask patches [
-    set pheromone 0
-  ]
+
   if go-home[
     build-nest
   ]
 end
+
 
 to go
   if not any? patches with [pcolor = green] and not any? turtles with [color = magenta] [stop]
@@ -30,7 +29,7 @@ to go
       ifelse pheromone > 0 [
         let candidates neighbors with [ pheromone > 0 ]
         ifelse any? candidates [
-          move-to one-of candidates
+          move-to max-one-of candidates [pxcor * pxcor + pycor * pycor]
         ][
           move-random
         ]
@@ -81,14 +80,20 @@ end
 to grow-food
   ;; patch procedure
   ;; setup food source one on the right
-  ask patches [if (distancexy (0.6 * max-pxcor) 0) < 5
-  [ set pcolor green ]
-  ;; setup food source two on the lower-left
-  if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
-  [ set pcolor green ]
-  ;; setup food source three on the upper-left
-  if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
-  [ set pcolor green ]
+  ask patches [
+    set pheromone 0
+
+    if (distancexy (0.6 * max-pxcor) 0) < 5  [
+      set pcolor green
+    ]
+    ;; setup food source two on the lower-left
+    if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5  [
+      set pcolor green
+    ]
+    ;; setup food source three on the upper-left
+    if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5  [
+      set pcolor green
+    ]
   ]
 end
 
@@ -257,7 +262,7 @@ decay-probability
 decay-probability
 0
 1
-0.1
+0.05
 0.01
 1
 NIL
