@@ -1,4 +1,4 @@
-# complexity
+# Complexity Explorations
 
 Code inspired by [Complexity Explorer Courses](https://www.complexityexplorer.org/courses)
 
