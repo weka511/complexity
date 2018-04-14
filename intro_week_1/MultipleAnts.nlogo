@@ -188,7 +188,7 @@ population
 population
 1
 200
-25.0
+200.0
 1
 1
 NIL
@@ -221,7 +221,7 @@ max-step-size
 max-step-size
 1
 10
-4.0
+8.0
 1
 1
 NIL
@@ -262,7 +262,7 @@ decay-probability
 decay-probability
 0
 1
-0.05
+0.1
 0.01
 1
 NIL
@@ -615,6 +615,40 @@ NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="experiment" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>ticks</metric>
+    <enumeratedValueSet variable="max-step-size">
+      <value value="2"/>
+      <value value="4"/>
+      <value value="8"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="decay-probability">
+      <value value="0.01"/>
+      <value value="0.05"/>
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="leave-trail">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="population">
+      <value value="25"/>
+      <value value="50"/>
+      <value value="100"/>
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-turn-angle">
+      <value value="30"/>
+      <value value="45"/>
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="go-home">
+      <value value="true"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
