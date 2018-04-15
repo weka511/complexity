@@ -8,11 +8,11 @@ to setup
   __clear-all-and-reset-ticks
   set num-turtles-created -1; first turtle created will be number 0
   draw-axes
-  draw-parabola 
-           
+  draw-parabola
+
   set x-current x0
   set x-new (R / 4 * sin (180 * x-current)) ; sine map, using pi in degrees (180)
-  
+
   create-turtles 1; this turtle will plot x_{t+1} vs x_t using initial condition x0
   [
     set color blue
@@ -20,10 +20,10 @@ to setup
     set ycor (x-new * max-pycor)
     set shape "dot"
     set size 3
-  ]    
+  ]
   set num-turtles-created num-turtles-created + 1
   set turtlex0-who num-turtles-created   ; "id number" for this turtle
-  
+
   setup-plot
   set-current-plot-pen "initial condition x0"
   plot x-current    ; this plots x_t vs. t using initial condition x0
@@ -38,29 +38,29 @@ end
 to iterate
   set x-current x-new
   set x-new (R / 4 * sin (180 * x-current))  ; one iteration of sine map
-  
+
   ask turtle turtlex0-who
   [
       set xcor (x-current * max-pxcor)  ; update coordinates for turtle representing first initial condition
-      set ycor (x-new * max-pycor) 
-  ]                   
+      set ycor (x-new * max-pycor)
+  ]
 end
 
 to draw-axes   ; draws x and y axes
-  ask patches 
+  ask patches
     [set pcolor white]
   create-turtles 1
   set num-turtles-created num-turtles-created + 1
   ask turtles
   [
     set color black
-    set xcor min-pxcor 
-    set ycor min-pycor 
+    set xcor min-pxcor
+    set ycor min-pycor
     set heading 0
     pen-down
     fd max-pycor   ; draw y axis
     pen-up
-    set xcor min-pxcor 
+    set xcor min-pxcor
     set ycor min-pycor
     set heading 90
     pen-down
@@ -72,9 +72,9 @@ end
 to draw-parabola  ; draws parabola representing sine map for given value of R
  let x 0
  let y 0
- create-turtles 1 
+ create-turtles 1
  set num-turtles-created num-turtles-created + 1
-  ask turtles 
+  ask turtles
   [
     set color black
     set xcor x * min-pxcor
@@ -92,7 +92,7 @@ to draw-parabola  ; draws parabola representing sine map for given value of R
   ]
   ask turtles [die]
 end
-    
+
 ;;plotting procedures -------------------
 
 to setup-plot
@@ -101,16 +101,16 @@ to setup-plot
   set-plot-y-range  0 1
 end
 
-to update-plot 
+to update-plot
   set-current-plot-pen "initial condition x0"
-  plot x-current    
+  plot x-current
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
 483
 25
-929
-492
+927
+470
 -1
 -1
 13.212121212121213
@@ -667,9 +667,8 @@ false
 0
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
-
 @#$#@#$#@
-NetLogo 5.0.3
+NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
@@ -685,7 +684,6 @@ true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
-
 @#$#@#$#@
 0
 @#$#@#$#@

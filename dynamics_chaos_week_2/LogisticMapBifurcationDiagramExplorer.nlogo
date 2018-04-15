@@ -3,31 +3,31 @@ globals[x r]
 
 to create-map [#iterations #pts]
   ca
-  crt 1 
+  crt 1
   set r min-r
-  let step (1.0 / world-width)  
+  let step (1.0 / world-width)
   while [ r < max-r ] [
        set x 0.5
        repeat #iterations [set x ( r * x * (1 - x)) ] ;throw away some values, throw away more for finer resolution, throw away fewer for faster rendering
        repeat  #pts [
-         
+
             ;the central equation
-              set x ( r * x * (1 - x))      ;plot final points. continue iterating 
-              
+              set x ( r * x * (1 - x))      ;plot final points. continue iterating
+
             ;use the values obtained above and scale them to fit the available viewing area
-              
+
               let scaled-r convert-coordinate offset-adjusted-r r  r-range  world-width  ;value on horizontal axis
               let scaled-x convert-coordinate offset-adjusted-x x  x-range  world-height ;value on vertical axis
-              
+
             ;plot the scaled values
-              
-              ask turtles [ setxy scaled-r scaled-x 
+
+              ask turtles [ setxy scaled-r scaled-x
                             ask patch-here [set pcolor red]]
         ]
-       
+
        ;move on to the next value of r
-       
-       set r r + step-size 
+
+       set r r + step-size
        ]
 end
 
@@ -37,47 +37,47 @@ end
 
 to-report r-range
   report max-r - min-r
-end 
+end
 
 to-report offset-adjusted-r [#r]
   report #r - min-r
-end 
+end
 
 to-report x-range
   report max-x - min-x
-end 
+end
 
 to-report offset-adjusted-x [#x]
-  ifelse #x > min-x and #x < max-x 
+  ifelse #x > min-x and #x < max-x
        [report #x - min-x]
        [report 0]
-end 
+end
 
 to-report convert-coordinate [#coor #virtual-range #real-range]
    report (#coor / #virtual-range) * #real-range
 end
 
-to-report step-size  ;We want the step-size to match the world width. I use a world 2000 wide here so steps are 1/2000 
+to-report step-size  ;We want the step-size to match the world width. I use a world 2000 wide here so steps are 1/2000
   report r-range / (world-width )
-end 
-  
-  
-  
-to x-ray [#max-x #min-x #max-r  #min-r]   ;example  .6 .4 3.9 3.5   
+end
+
+
+
+to x-ray [#max-x #min-x #max-r  #min-r]   ;example  .6 .4 3.9 3.5
   ask patches with [
-    pycor < convert-coordinate #max-x x-range world-height and 
+    pycor < convert-coordinate #max-x x-range world-height and
     pycor > convert-coordinate #min-x x-range world-height and
-    pxcor < convert-coordinate #max-r r-range world-width and 
-    pxcor > convert-coordinate #min-r r-range world-width    
-    ] [set pcolor pcolor + 9.9] 
-         
-end 
+    pxcor < convert-coordinate #max-r r-range world-width and
+    pxcor > convert-coordinate #min-r r-range world-width
+    ] [set pcolor pcolor + 9.9]
+
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 6
 133
-2025
-792
+2023
+770
 -1
 -1
 1.004
@@ -106,7 +106,7 @@ BUTTON
 524
 124
 Go
-if min-r > max-r or min-x > max-x [user-message \"Check your slider values! Min values should be smaller than max values.\"]\n\n\ncreate-map num-iterations num-points\n
+if min-r > max-r or min-x > max-x [user-message \"Check your slider values! Min values should be smaller than max values.\"]\n\n\ncreate-map num-iterations num-points
 NIL
 1
 T
@@ -136,7 +136,7 @@ min-r
 min-r
 0
 3.8
-3.48
+3.53
 .0000001
 1
 NIL
@@ -158,7 +158,7 @@ BUTTON
 1152
 129
 Zoom
-\nx-ray 0.6 0.45 3.9 3.5  ; max-x min-x max-r min-r\nwait 4\nset min-r 3.48\nset max-r 3.9\nset min-x 0.4\nset max-x 0.6\ncreate-map 1200 200 ;#iterations #plotted
+x-ray 0.6 0.45 3.9 3.5  ; max-x min-x max-r min-r\nwait 4\nset min-r 3.48\nset max-r 3.9\nset min-x 0.4\nset max-x 0.6\ncreate-map 1200 200 ;#iterations #plotted
 NIL
 1
 T
@@ -178,7 +178,7 @@ max-r
 max-r
 1
 4
-3.9
+4.0
 .0000001
 1
 NIL
@@ -193,7 +193,7 @@ max-x
 max-x
 0
 1
-0.6
+0.555
 .0000001
 1
 NIL
@@ -208,7 +208,7 @@ min-x
 min-x
 0
 .9
-0.4
+0.551
 .0000001
 1
 NIL
@@ -220,7 +220,7 @@ BUTTON
 523
 57
 Setup
-  set min-r 0\n  set max-r 4\n  set min-x 0\n  set max-x 1\n  create-map 1000 100
+set min-r 0\n  set max-r 4\n  set min-x 0\n  set max-x 1\n  create-map 1000 100
 NIL
 1
 T
@@ -237,7 +237,7 @@ BUTTON
 1221
 129
 Zoom-2
-\nx-ray 0.555 0.551 3.6 3.55  ; max-x min-x max-r min-r\nwait 4\nset min-r 3.53\nset max-r 4\nset min-x 0.551\nset max-x 0.555\ncreate-map  10000 2000  ;#iterations #plotted
+x-ray 0.555 0.551 3.6 3.55  ; max-x min-x max-r min-r\nwait 4\nset min-r 3.53\nset max-r 4\nset min-x 0.551\nset max-x 0.555\ncreate-map  10000 2000  ;#iterations #plotted
 NIL
 1
 T
@@ -267,7 +267,7 @@ num-points
 num-points
 100
 3000
-1350
+1350.0
 50
 1
 NIL
@@ -282,7 +282,7 @@ num-iterations
 num-iterations
 1000
 100000
-11700
+11700.0
 100
 1
 NIL
@@ -690,9 +690,8 @@ false
 0
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
-
 @#$#@#$#@
-NetLogo 5.0.2
+NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
@@ -700,15 +699,14 @@ NetLogo 5.0.2
 @#$#@#$#@
 default
 0.0
--0.2 0 1.0 0.0
+-0.2 0 0.0 1.0
 0.0 1 1.0 0.0
-0.2 0 1.0 0.0
+0.2 0 0.0 1.0
 link direction
 true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
-
 @#$#@#$#@
 0
 @#$#@#$#@

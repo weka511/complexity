@@ -7,7 +7,7 @@ to setup
   ca
   let one-patch (patch-set patch 0 0)
   ask one-patch [sprout-bunnies initial-population [set old false set shape "bunny2" set color white set size 4 disperse]]
-end 
+end
 
 to reproduce
   ifelse (count bunnies) = 0 [
@@ -20,39 +20,39 @@ to reproduce
     ask bunnies with [old] [die]
     do-plotting
   ]
-end 
+end
 
 to-report how-many-to-hatch
   report birthrate * count bunnies
-end 
+end
 
 to disperse
-  set size size * .98 set heading random 360 
-  let new-x random max-pxcor 
-  let new-y random max-pycor 
+  set size size * .98 set heading random 360
+  let new-x random max-pxcor
+  let new-y random max-pycor
   let x-sign random 2
   let y-sign random 2
   ifelse (x-sign = 0) [set  xcor 0 - new-x] [set xcor new-x]
   ifelse (y-sign = 0) [set ycor 0 - new-y] [set ycor new-y]
-  set old false 
-end 
+  set old false
+end
 
 to do-plotting
   set-current-plot "Population vs. Time"
   plot count bunnies
-  
+
   set-current-plot "This year's pop. vs. last year's pop."
   plotxy last-count count bunnies
-  
-end 
+
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 195
 10
-634
-470
-16
-16
+632
+448
+-1
+-1
 13.0
 1
 10
@@ -155,7 +155,7 @@ birthrate
 birthrate
 0
 5
-2
+2.0
 1
 1
 NIL
@@ -198,7 +198,7 @@ initial-population
 initial-population
 0
 10
-1
+1.0
 1
 1
 NIL
@@ -259,7 +259,6 @@ If you use this model, please cite it as: "Simple Population Growth" model, Comp
 Copyright 2013 Santa Fe Institute.
 
 This model is licensed by the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License ( http://creativecommons.org/licenses/by-nc-nd/3.0/ ). This states that you may copy, distribute, and transmit the work under the condition that you give attribution to ComplexityExplorer.org, and your use is for non-commercial purposes.
-
 
 
 
@@ -599,9 +598,8 @@ false
 0
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
-
 @#$#@#$#@
-NetLogo 5.0.3
+NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
@@ -609,15 +607,14 @@ NetLogo 5.0.3
 @#$#@#$#@
 default
 0.0
--0.2 0 1.0 0.0
+-0.2 0 0.0 1.0
 0.0 1 1.0 0.0
-0.2 0 1.0 0.0
+0.2 0 0.0 1.0
 link direction
 true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
-
 @#$#@#$#@
 0
 @#$#@#$#@
