@@ -435,10 +435,10 @@ end
 GRAPHICS-WINDOW
 270
 15
-801
-567
-260
-260
+799
+545
+-1
+-1
 1.0
 1
 10
@@ -622,7 +622,7 @@ initial-box-length
 initial-box-length
 .2
 100
-4
+4.0
 .1
 1
 NIL
@@ -649,7 +649,7 @@ BUTTON
 128
 103
 Koch Curve
-ca\nset fractal-example \"koch-curve\"\nsetup\n
+ca\nset fractal-example \"koch-curve\"\nsetup
 NIL
 1
 T
@@ -1123,9 +1123,8 @@ false
 0
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
-
 @#$#@#$#@
-NetLogo 5.3.1
+NetLogo 6.0.3
 @#$#@#$#@
 ballSetup
 repeat 14 [ go ]
@@ -1143,7 +1142,6 @@ true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
-
 @#$#@#$#@
 0
 @#$#@#$#@
