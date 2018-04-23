@@ -35,6 +35,8 @@ Your analysis should include (but is not limited to):
 
 | Name | Purpose |
 |--------------------|--------------------------------------------------------------------------|
+| Proposal.pdf | Agent Based Modelling Proposal |
+| Proposal.tex | Agent Based Modelling Proposal |
 | README.md | This File |
 
 ## Journal
