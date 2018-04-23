@@ -30,3 +30,18 @@ Your analysis should include (but is not limited to):
 
   * tau is altered?
   * you change the total number of agents in the world?
+  
+## Files
+
+| Name | Purpose |
+|--------------------|--------------------------------------------------------------------------|
+| README.md | This File |
+
+## Journal
+
+| Date | Remarks |
+|-----------|--------------------------------------------------------------------------------|
+|24&nbsp;Apr&nbsp;2018| Started. Created repository and Wrote up Proposal |
+
+
+
