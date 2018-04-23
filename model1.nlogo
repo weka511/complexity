@@ -14,17 +14,46 @@ to setup
   reset-ticks
 end
 
+to-report get-payoff [pool-number]
+  let payoff 0
+  let odds 2
+  let dividend 40
+  if pool-number = 2 [
+    set odds 4
+    set dividend 80
+  ]
+  if random odds = 0 [
+    let n-payees count turtles with [pool = pool-number]
+    set payoff dividend / n-payees
+  ]
+  report payoff
+end
+
 to go
+  if ticks >= n-steps [stop]
+  let payoff_low_risk get-payoff 1
+  let payoff_high_risk get-payoff 2
   ask turtles [
     ifelse pool = 0 [
       set wealth wealth + 1
     ][
       ifelse pool = 2[
+        set wealth wealth + payoff_low_risk
       ][
+        set wealth wealth + payoff_high_risk
       ]
     ]
     display-wealth
+    if wealth > tau and random-float 1 < p-change [
+      let new-pool pool
+      while [new-pool = pool] [
+        set new-pool random 3
+      ]
+      set pool new-pool
+      set wealth wealth - tau
+    ]
   ]
+  tick
 end
 
 to create-pools
@@ -42,10 +71,11 @@ to create-pools
 end
 
 to display-wealth
+  let scale  (max-pycor - min-pycor) / n-steps
   let agent-offset random max-pxcor / 3
   let pool_offset 2 * pool * max-pxcor / 3 - max-pxcor + 1
   set xcor agent-offset + pool_offset
-  set ycor wealth + min-pycor + 1
+  set ycor scale * wealth + min-pycor + 1
 end
 
 @#$#@#$#@
@@ -138,6 +168,91 @@ n-agents
 100
 50.0
 1
+1
+NIL
+HORIZONTAL
+
+PLOT
+0
+234
+200
+384
+plot 1
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -10899396 true "" "plot count turtles with [pool = 0]"
+"pen-1" 1.0 0 -1184463 true "" "plot count turtles with [pool = 1]"
+"pen-2" 1.0 0 -2674135 true "" "plot count turtles with [pool = 2]"
+
+PLOT
+10
+418
+210
+568
+plot 2
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -10899396 true "" "plot sum [wealth] of turtles with [pool = 0]"
+"pen-1" 1.0 0 -1184463 true "" "plot sum [wealth] of turtles with [pool = 1]"
+"pen-2" 1.0 0 -2674135 true "" "plot sum [wealth] of turtles with [pool = 2]"
+
+SLIDER
+15
+117
+187
+150
+n-steps
+n-steps
+0
+200
+99.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+16
+156
+188
+189
+tau
+tau
+1
+100
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+15
+193
+187
+226
+p-change
+p-change
+0
+1
+0.1
+0.01
 1
 NIL
 HORIZONTAL
