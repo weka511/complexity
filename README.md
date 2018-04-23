@@ -1,6 +1,6 @@
 # Complexity Explorer Challenge 2018 April
 
-## Problem Statement
+## [Problem Statement](https://www.complexityexplorer.org/challenges/2-spring-2018-complexity-challenge/submissions)
 
 Suppose there are fifty (50) agents.  At each time step, each agent must decide to locate at one of three possible pools (investing options) described below. These pools are called: stable, high, and low. Agents must choose their pool without knowing what the other agents have picked, and can only rely on information from prior time steps (in particular, each agent must make their choice knowing only the number of agents (but not their identity) that located at each pool and each pool's payoff for all prior time steps). Agents are allowed to switch pools at the start of any time step, but to do so costs the agent a payment of tau (where 0 <= tau).  You are not charged tau for your first choice of a pool. 
 
