@@ -125,7 +125,7 @@ NIL
 
 BUTTON
 139
-18
+16
 194
 51
 Go
@@ -158,25 +158,25 @@ NIL
 0
 
 SLIDER
-15
-68
-187
-101
+8
+57
+180
+90
 n-agents
 n-agents
 0
 100
-50.0
+49.0
 1
 1
 NIL
 HORIZONTAL
 
 PLOT
-0
-234
-200
-384
+8
+279
+204
+429
 plot 1
 NIL
 NIL
@@ -193,10 +193,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot count turtles with [pool = 2]"
 
 PLOT
-10
-418
-210
-568
+8
+438
+206
+588
 plot 2
 NIL
 NIL
@@ -213,25 +213,25 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot sum [wealth] of turtles with [pool = 2]"
 
 SLIDER
-15
-117
-187
-150
+8
+104
+180
+137
 n-steps
 n-steps
 0
 200
-99.0
+98.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-16
-156
-188
-189
+8
+146
+180
+179
 tau
 tau
 1
@@ -243,19 +243,29 @@ NIL
 HORIZONTAL
 
 SLIDER
-15
-193
+8
 187
-226
+181
+220
 p-change
 p-change
 0
 1
-0.1
+0.12
 0.01
 1
 NIL
 HORIZONTAL
+
+CHOOSER
+8
+227
+148
+272
+strategy
+strategy
+"Random"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
