@@ -1,8 +1,40 @@
+turtles-own [wealth]
+
 to setup
   establish-pools
+  create-turtles n-agents
+  ask turtles [
+    set shape "sheep"
+    set size 2
+    set color white
+    set wealth 0
+    let p2 p-low0 + p-high0
+    let p random-float 1
+    let pool 0
+    ifelse p < p-low0[
+      set pool 1
+    ][
+      if p < p2[
+        set pool 2
+    ]]
+    display-investor pool
+  ]
+  reset-ticks
 end
 
 to go
+end
+
+to display-investor [pool]
+  ifelse pool = 0 [
+    set xcor 2 * min-pxcor / 3
+  ][
+    ifelse pool = 1 [
+      set xcor 0
+  ][ set xcor 2 * max-pxcor / 3]]
+  let offset ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 6
+  set xcor xcor + offset
+  set ycor wealth + min-pycor + 2
 end
 
 to establish-pools
@@ -193,6 +225,36 @@ strategy
 strategy
 "Random"
 0
+
+SLIDER
+5
+284
+97
+317
+p-low0
+p-low0
+0
+1
+0.21
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+103
+284
+195
+317
+p-high0
+p-high0
+0
+1
+0.1
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
