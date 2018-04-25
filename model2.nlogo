@@ -1,8 +1,11 @@
+extensions [csv]
 turtles-own [wealth]
 
-globals [payoff_low_risk payoff_high_risk]
 to setup
   clear-all
+  file-close-all
+  let strategies csv:from-file "strategies.csv"
+  show strategies
   establish-pools
   create-turtles n-agents
   ask turtles [
@@ -17,8 +20,8 @@ end
 
 to go
   if ticks >= n-steps [stop]
-  set payoff_low_risk get-payoff yellow
-  set payoff_high_risk get-payoff red
+  let payoff_low_risk get-payoff yellow
+  let payoff_high_risk get-payoff red
   ask turtles [
     ifelse pcolor = green [
       set wealth wealth + 1
