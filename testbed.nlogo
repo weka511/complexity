@@ -1,23 +1,32 @@
 extensions [csv]
-turtles-own [wealth strategy]
 
-globals [tower names strategies k total-probability g-low-payoff
-      g-high-payoff
-      g-low-number
-      g-high-number
-      g-my-payoffs
-      g-my-choices]
+turtles-own [
+  wealth    ;; accumulated payout, allowing for tau
+  strategy
+  payoffs   ;; list of payouts, most recent first, before tau subtracted
+  choices
+]
+
+globals [
+  tower
+  names
+  strategies
+  k
+  total-probability
+  g-low-payoff  ;; list of  payouts per agent from low pool, most recent first
+  g-high-payoff ;; list of  payouts per agent from high pool, most recent first
+  g-low-number  ;; list of numbers of agents in low pool, most recent first
+  g-high-number ;; list of numbers of agents in high pool, most recent first
+]
 
 
 
 to setup
   clear-all
   set g-low-payoff []
-  set     g-high-payoff []
-  set     g-low-number []
-  set     g-high-number []
-  set    g-my-payoffs []
-  set     g-my-choices []
+  set g-high-payoff []
+  set g-low-number []
+  set g-high-number []
   establish-pools
 
   set k 0
@@ -29,6 +38,8 @@ to setup
 
   create-turtles n-agents
   ask turtles [
+    set payoffs []
+    set choices []
     assign-strategy
     set shape "sheep"
     show strategy
@@ -43,23 +54,33 @@ end
 to go
   if ticks >= n-steps [stop]
   let payoff_low_risk get-payoff yellow
+  let pay-dividend-low? pay-dividend? [yellow]
   let payoff_high_risk get-payoff red
+  let pay-dividend-high? pay-dividend? [red]
+  let my-payoff 1   ;; assume stable
   ask turtles [
-    ifelse pcolor = green [
-      set wealth wealth + 1
-    ][ifelse pcolor = red [
-        set wealth wealth + payoff_high_risk
-      ][
-        set wealth wealth + payoff_low_risk
-      ]
+    if pcolor = red [
+      set my-payoff ifelse-value pay-dividend-high? [payoff_high_risk] [0]
     ]
+    if pcolor = yellow [
+      set my-payoff ifelse-value pay-dividend-low? [payoff_low_risk] [0]
+    ]
+
+    set wealth wealth + my-payoff
+    set payoffs lput my-payoff payoffs
   ]
   ask turtles [
-    let new-pool choose-strategy g-low-payoff g-high-payoff g-low-number g-high-number g-my-payoffs g-my-choices
+    let new-pool choose-strategy g-low-payoff g-high-payoff g-low-number g-high-number payoffs choices
     ifelse new-pool > -1 [display-investor new-pool][display-wealth]
+    set choices lput new-pool choices
   ]
   set g-low-payoff lput payoff_low_risk  g-low-payoff
   set g-high-payoff lput payoff_high_risk  g-high-payoff
+  let n-payees-low count turtles with [pcolor = yellow]
+  set g-low-number lput n-payees-low  g-low-number
+  let n-payees-high count turtles with [pcolor = red]
+  set g-high-number lput n-payees-high g-high-number
+
   tick
 end
 
@@ -125,34 +146,40 @@ to establish-pools
   ]
 end
 
-to-report get-payoff [pool-colour]
+to-report pay-dividend? [pool-colour]
   let odds 2
-  let dividend 40
   if pool-colour = red [
     set odds 4
+  ]
+  report random odds = 0
+end
+
+to-report get-payoff [pool-colour]
+  let dividend 40
+  if pool-colour = red [
     set dividend 80
   ]
-  let payoff 0
-  if random odds = 0 [
-    let n-payees count turtles with [pcolor = pool-colour]
-    set payoff dividend / max list n-payees 1
-  ]
-  report payoff
+  let n-payees count turtles with [pcolor = pool-colour]
+  report dividend / max list n-payees 1
 end
 
 ;; low-payoff and high-payoff are lists where the first element in the list is the
 ;; payoff received by the low (high) pool in the last round,
-;; the second element is the round before that all the way to the beginning of the tournament.
+;; the second element is the round before that all the way to the beginning
+;; of the tournament.
 ;; If no agents choose the low pool or the high pool then the value that will be
 ;; recorded is the same as if exactly one agent had chosen that pool.
 
 ;; low-number and high-number are lists where the first element in the list is the
 ;; number of agents received in the low (high) pool in the last round,
-;; the second element is the round before that all the way to the beginning of the tournament.
+;; the second element is the round before that all the way to the beginning
+;; of the tournament.
+
+;; Question: what does "received mean"
 
 ;; my-payoffs is a list where the first elements indicates the payoff that your
 ;; received in the previous round, the second element is the round before that
-;; all the way to the beginning of the tournament.
+;; all the way to the beginning of the tournament, before tau has been subtracted (see Forum).
 
 ;; my-choices is a list where the first elements indicates the choice that your
 ;; agent made in the previous round, the second element is the round before
@@ -298,9 +325,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-5
+10
 170
-97
+102
 203
 p-low0
 p-low0
@@ -313,9 +340,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-103
+108
 170
-195
+200
 203
 p-high0
 p-high0
@@ -368,9 +395,9 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot mean [wealth] of turtles with [pcolor = red]"
 
 CHOOSER
-5
+10
 120
-152
+157
 165
 allow-negative-wealth
 allow-negative-wealth
@@ -380,7 +407,7 @@ allow-negative-wealth
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+Testbed to investigate the [Complexity Explorer](https://www.complexityexplorer.org) [Spring Challenge](https://www.complexityexplorer.org/challenges/2-spring-2018-complexity-challenge/submissions)
 
 ## HOW IT WORKS
 
