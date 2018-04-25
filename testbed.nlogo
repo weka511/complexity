@@ -12,6 +12,12 @@ globals [tower names strategies k total-probability g-low-payoff
 
 to setup
   clear-all
+  set g-low-payoff []
+  set     g-high-payoff []
+  set     g-low-number []
+  set     g-high-number []
+  set    g-my-payoffs []
+  set     g-my-choices []
   establish-pools
 
   set k 0
@@ -52,6 +58,8 @@ to go
     let new-pool choose-strategy g-low-payoff g-high-payoff g-low-number g-high-number g-my-payoffs g-my-choices
     ifelse new-pool > -1 [display-investor new-pool][display-wealth]
   ]
+  set g-low-payoff lput payoff_low_risk  g-low-payoff
+  set g-high-payoff lput payoff_high_risk  g-high-payoff
   tick
 end
 
@@ -150,7 +158,7 @@ end
 ;; agent made in the previous round, the second element is the round before
 ;; that all the way to the beginning of the tournament.
 to-report choose-strategy [
-  glow-payoff
+  low-payoff
   high-payoff
   low-number
   high-number
@@ -247,7 +255,7 @@ NIL
 SLIDER
 10
 48
-182
+102
 81
 n-agents
 n-agents
@@ -260,25 +268,25 @@ NIL
 HORIZONTAL
 
 SLIDER
-8
-88
-180
-121
+110
+50
+202
+83
 n-steps
 n-steps
 0
 200
-100.0
+101.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-8
-128
-180
-161
+10
+85
+182
+118
 tau
 tau
 1
@@ -358,6 +366,16 @@ PENS
 "Stable" 1.0 0 -10899396 true "" "plot mean [wealth] of turtles with [pcolor = green]"
 "Low Risk" 1.0 0 -1184463 true "" "plot mean [wealth] of turtles with [pcolor = yellow]"
 "pen-2" 1.0 0 -2674135 true "" "plot mean [wealth] of turtles with [pcolor = red]"
+
+CHOOSER
+5
+120
+152
+165
+allow-negative-wealth
+allow-negative-wealth
+"yes" "no" "die"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
