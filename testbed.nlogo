@@ -1,15 +1,31 @@
 extensions [csv]
-turtles-own [wealth]
+turtles-own [wealth strategy]
+
+globals [tower names strategies k total-probability g-low-payoff
+      g-high-payoff
+      g-low-number
+      g-high-number
+      g-my-payoffs
+      g-my-choices]
+
+
 
 to setup
   clear-all
-  file-close-all
-  let strategies csv:from-file "strategies.csv"
-  show strategies
   establish-pools
+
+  set k 0
+  set strategies []
+  set names []
+  set tower []
+  set total-probability 0
+  foreach csv:from-file "strategies.csv" store-strategy
+
   create-turtles n-agents
   ask turtles [
+    assign-strategy
     set shape "sheep"
+    show strategy
     set size 2
     set color white
     set wealth 0
@@ -32,8 +48,33 @@ to go
       ]
     ]
   ]
+  ask turtles [
+    let new-pool choose-strategy g-low-payoff g-high-payoff g-low-number g-high-number g-my-payoffs g-my-choices
+    ifelse new-pool > -1 [display-investor new-pool][display-wealth]
+  ]
   tick
 end
+
+to store-strategy [strategy-parameters]
+  if k > 0 [
+    let name item 0 strategy-parameters
+    set names lput name names
+    set total-probability total-probability + item 1  strategy-parameters
+    set tower lput  total-probability tower
+    set strategies lput strategy-parameters strategies
+  ]
+  set k k + 1
+end
+
+to assign-strategy
+    let r random-float 1
+    let row 0
+    while [row < length tower and item row tower < r] [
+      set row row + 1
+    ]
+    set strategy item row names
+end
+
 
 to-report choose-initial-pool
     let p2 p-low0 + p-high0
@@ -57,7 +98,11 @@ to display-investor [pool]
   ][ set xcor 2 * max-pxcor / 3]]
   let offset ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 4
   set xcor xcor + offset
-  set ycor wealth + min-pycor + 2
+  display-wealth
+end
+
+to display-wealth
+   set ycor min (list (max-pycor - 2)  (wealth + min-pycor + 2))
 end
 
 to establish-pools
@@ -105,14 +150,19 @@ end
 ;; agent made in the previous round, the second element is the round before
 ;; that all the way to the beginning of the tournament.
 to-report choose-strategy [
-  low-payoff
+  glow-payoff
   high-payoff
   low-number
   high-number
   my-payoffs
   my-choices ]
-
-report 0
+if strategy = "Stay" [report -1]
+if strategy = "Random" [
+  let r  random-float 1
+  ifelse r < 0.1 [report 0][ifelse r < 0.2 [report 1][ifelse r < 0.3 [report 2][]]]
+  report -1
+]
+report -1
 
 end
 @#$#@#$#@
@@ -248,7 +298,7 @@ p-low0
 p-low0
 0
 1
-0.13
+0.1
 0.01
 1
 NIL
@@ -263,17 +313,17 @@ p-high0
 p-high0
 0
 1
-0.06
+0.11
 0.01
 1
 NIL
 HORIZONTAL
 
 PLOT
-6
-308
-206
-445
+10
+210
+210
+347
 Counts
 NIL
 NIL
@@ -290,10 +340,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot count turtles with [pcolor = red]"
 
 PLOT
-7
-449
-207
-584
+11
+351
+211
+486
 Wealth
 NIL
 NIL
