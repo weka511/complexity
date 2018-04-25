@@ -35,10 +35,11 @@ Your analysis should include (but is not limited to):
 
 | Name | Purpose |
 |--------------------|--------------------------------------------------------------------------|
-| model1.nlogo | First model |
 | Proposal.pdf | Agent Based Modelling Proposal |
 | Proposal.tex | Agent Based Modelling Proposal |
 | README.md | This File |
+| testbed.nogo | Testbed for evealuating alternative strategies |
+| strategies.csv | Parameters for strategies |
 
 ## Journal
 
