@@ -1,6 +1,8 @@
 turtles-own [wealth]
 
+globals [payoff_low_risk payoff_high_risk]
 to setup
+  clear-all
   establish-pools
   create-turtles n-agents
   ask turtles [
@@ -8,6 +10,29 @@ to setup
     set size 2
     set color white
     set wealth 0
+    display-investor choose-initial-pool
+  ]
+  reset-ticks
+end
+
+to go
+  if ticks >= n-steps [stop]
+  set payoff_low_risk get-payoff yellow
+  set payoff_high_risk get-payoff red
+  ask turtles [
+    ifelse pcolor = green [
+      set wealth wealth + 1
+    ][ifelse pcolor = red [
+        set wealth wealth + payoff_high_risk
+      ][
+        set wealth wealth + payoff_low_risk
+      ]
+    ]
+  ]
+  tick
+end
+
+to-report choose-initial-pool
     let p2 p-low0 + p-high0
     let p random-float 1
     let pool 0
@@ -17,12 +42,7 @@ to setup
       if p < p2[
         set pool 2
     ]]
-    display-investor pool
-  ]
-  reset-ticks
-end
-
-to go
+  report pool
 end
 
 to display-investor [pool]
@@ -32,7 +52,7 @@ to display-investor [pool]
     ifelse pool = 1 [
       set xcor 0
   ][ set xcor 2 * max-pxcor / 3]]
-  let offset ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 6
+  let offset ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 4
   set xcor xcor + offset
   set ycor wealth + min-pycor + 2
 end
@@ -43,10 +63,25 @@ to establish-pools
       set pcolor red
     ][
       ifelse pxcor < min-pxcor / 3 [
-      set pcolor green
+        set pcolor green
       ][set pcolor yellow]
     ]
   ]
+end
+
+to-report get-payoff [pool-colour]
+  let odds 2
+  let dividend 40
+  if pool-colour = red [
+    set odds 4
+    set dividend 80
+  ]
+  let payoff 0
+  if random odds = 0 [
+    let n-payees count turtles with [pcolor = pool-colour]
+    set payoff dividend / max list n-payees 1
+  ]
+  report payoff
 end
 
 ;; low-payoff and high-payoff are lists where the first element in the list is the
@@ -92,8 +127,8 @@ GRAPHICS-WINDOW
 1
 1
 0
-1
-1
+0
+0
 1
 -16
 16
@@ -106,10 +141,10 @@ ticks
 30.0
 
 BUTTON
-8
-16
-63
-49
+10
+10
+65
+43
 Setup
 setup
 NIL
@@ -123,10 +158,10 @@ NIL
 1
 
 BUTTON
-139
-16
-194
-51
+141
+10
+196
+45
 Go
 go
 T
@@ -140,10 +175,10 @@ NIL
 0
 
 BUTTON
-76
-16
-131
-49
+78
+10
+133
+43
 Step
 go
 NIL
@@ -157,15 +192,15 @@ NIL
 0
 
 SLIDER
-8
-57
-180
-90
+10
+48
+182
+81
 n-agents
 n-agents
 0
 100
-49.0
+50.0
 1
 1
 NIL
@@ -173,14 +208,14 @@ HORIZONTAL
 
 SLIDER
 8
-104
+88
 180
-137
+121
 n-steps
 n-steps
 0
 200
-98.0
+100.0
 1
 1
 NIL
@@ -188,14 +223,14 @@ HORIZONTAL
 
 SLIDER
 8
-146
+128
 180
-179
+161
 tau
 tau
 1
 100
-5.0
+7.0
 1
 1
 NIL
@@ -203,9 +238,9 @@ HORIZONTAL
 
 SLIDER
 8
-187
+168
 181
-220
+201
 p-change
 p-change
 0
@@ -217,44 +252,84 @@ NIL
 HORIZONTAL
 
 CHOOSER
-8
-227
-148
-272
+7
+208
+147
+253
 strategy
 strategy
 "Random"
 0
 
 SLIDER
-5
-284
-97
-317
+8
+261
+100
+294
 p-low0
 p-low0
 0
 1
-0.21
+0.13
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-103
-284
-195
-317
+106
+261
+198
+294
 p-high0
 p-high0
 0
 1
-0.1
+0.06
 0.01
 1
 NIL
 HORIZONTAL
+
+PLOT
+6
+308
+206
+445
+Counts
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -10899396 true "" "plot count turtles with [pcolor = green]"
+"pen-1" 1.0 0 -1184463 true "" "plot count turtles with [pcolor = yellow]"
+"pen-2" 1.0 0 -2674135 true "" "plot count turtles with [pcolor = red]"
+
+PLOT
+7
+449
+207
+584
+Wealth
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"Stable" 1.0 0 -10899396 true "" "plot mean [wealth] of turtles with [pcolor = green]"
+"Low Risk" 1.0 0 -1184463 true "" "plot mean [wealth] of turtles with [pcolor = yellow]"
+"pen-2" 1.0 0 -2674135 true "" "plot mean [wealth] of turtles with [pcolor = red]"
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -615,5 +690,5 @@ true
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
 @#$#@#$#@
-0
+1
 @#$#@#$#@
