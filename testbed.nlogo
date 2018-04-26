@@ -1,12 +1,18 @@
 extensions [csv]
 
-patches-own [pool-number]
+breed [punters punter]       ;; The investores
 
-turtles-own [
+breed [predictors predictor] ;; Investors rely on these for advice
+
+patches-own [
+  pool-number  ;; Used to translate from colour to numbers used in Tournament
+]
+
+punters-own [
   wealth    ;; accumulated payout, allowing for tau
   strategy
   payoffs   ;; list of payouts, most recent first, before tau subtracted
-  choices   ;; list of choices made by turtle, most recent first
+  choices   ;; list of choices made by punter, most recent first
 ]
 
 globals [
@@ -21,15 +27,21 @@ globals [
   g-high-number ;; list of numbers of agents in high pool, most recent first
 ]
 
-
+;; Set up patches and investors
 
 to setup
   clear-all
+
+  ;; Initialize globals
+
   set g-low-payoff []
   set g-high-payoff []
   set g-low-number []
   set g-high-number []
-  establish-pools
+
+  ask patches[
+    establish-pools
+  ]
 
   set k 0
   set strategies []
@@ -38,30 +50,26 @@ to setup
   set total-probability 0
   foreach csv:from-file "strategies.csv" store-strategy
 
-  create-turtles n-agents
-  ask turtles [
-    set payoffs []
-    set choices []
-    assign-strategy
-    set shape "sheep"
-    show strategy
-    set size 2
-    set color white
-    set wealth 0
-    display-investor choose-initial-pool
+  create-punters n-agents [
+    establish-punter
   ]
   reset-ticks
 end
 
 
+;; Collect any payout and decide whether to change pools
+
 to go
   if ticks >= n-steps [stop]
+
   let payoff_low_risk get-payoff yellow
   let pay-dividend-low? pay-dividend? [yellow]
   let payoff_high_risk get-payoff red
   let pay-dividend-high? pay-dividend? [red]
-  let my-payoff 1   ;; assume stable
-  ask turtles [
+
+  ask punters [
+    ;; Calculate payout for this step
+    let my-payoff 1   ;; assume stable
     if pcolor = red [
       set my-payoff ifelse-value pay-dividend-high? [payoff_high_risk] [0]
     ]
@@ -71,33 +79,56 @@ to go
 
     set wealth wealth + my-payoff
 
-    ifelse length choices >  0 [
+    ;; Decide whether to switch pools
+
+    ifelse length choices =  0 [
+      set choices lput pool-number choices
+    ][
       let new-pool choose-strategy g-low-payoff g-high-payoff g-low-number g-high-number payoffs choices
+
       ifelse new-pool = pool-number [
         display-wealth
       ][
         ifelse wealth >= tau [
+          set wealth wealth - tau
           display-investor new-pool
         ][
-          if can-borrow = "yes"[display-investor new-pool]
+          if can-borrow = "yes"[
+            set wealth wealth - tau
+            display-investor new-pool
+          ]
           if can-borrow = "no"[display-wealth]
           if can-borrow = "die"[die]
         ]
       ]
       set choices lput new-pool choices
-    ][
-      set choices lput pool-number choices
     ]
    set payoffs lput my-payoff payoffs
   ]
+
+  ;; Update history
+
   set g-low-payoff lput payoff_low_risk  g-low-payoff
   set g-high-payoff lput payoff_high_risk  g-high-payoff
-  let n-payees-low count turtles with [pcolor = yellow]
+  let n-payees-low count punters with [pcolor = yellow]
   set g-low-number lput n-payees-low  g-low-number
-  let n-payees-high count turtles with [pcolor = red]
+  let n-payees-high count punters with [pcolor = red]
   set g-high-number lput n-payees-high g-high-number
 
   tick
+end
+
+;; Set up an investor
+
+to establish-punter
+    set payoffs []
+    set choices []
+    assign-strategy
+    set shape "sheep"
+    set size 2
+    set color white
+    set wealth 0
+    display-investor choose-initial-pool
 end
 
 to store-strategy [strategy-parameters]
@@ -150,39 +181,39 @@ to display-wealth
    set ycor min (list (max-pycor - 2)  (wealth + min-pycor + 2))
 end
 
-to establish-pools
-  ask patches[
-    ifelse pxcor > max-pxcor / 3 [
-      set pcolor red
-      set pool-number 2
-    ][
-      ifelse pxcor < min-pxcor / 3 [
-        set pcolor green
-        set pool-number 1
-      ][
-        set pcolor yellow
-        set pool-number 0
-      ]
-    ]
-  ]
+;; Convert a patch colour to a pool number
+
+to-report colour2pool
+  if pcolor = red[report 2]
+  if pcolor = yellow[report 1]
+  report 0
 end
 
+;; Assign background colours and pool numbers to patches
+
+to establish-pools
+    set pcolor yellow
+    if pxcor > max-pxcor / 3 [set pcolor red]
+    if pxcor < min-pxcor / 3 [set pcolor green]
+    set pool-number colour2pool
+end
+
+;; Decide whether or not a pool will payoff this tick
+;; High pays one in 4 ticks, low one in 2
 to-report pay-dividend? [pool-colour]
-  let odds 2
-  if pool-colour = red [
-    set odds 4
-  ]
+  let odds ifelse-value (pool-colour = red) [4][2]
   report random odds = 0
 end
 
+;; Compute payoff for specified pool, assuming it occurs
+;; i.e. dividend per eligible investor
+
 to-report get-payoff [pool-colour]
-  let dividend 40
-  if pool-colour = red [
-    set dividend 80
-  ]
-  let n-payees count turtles with [pcolor = pool-colour]
+  let dividend ifelse-value (pool-colour = red) [80][40]
+  let n-payees count punters with [pcolor = pool-colour]
   report dividend / max list n-payees 1
 end
+
 
 to-report choose-strategy [
   low-payoff  ;; list of  payouts per agent from low pool, most recent first
@@ -190,7 +221,7 @@ to-report choose-strategy [
   low-number  ;; list of numbers of agents in low pool, most recent first
   high-number ;; list of numbers of agents in high pool, most recent first
   my-payoffs  ;; list of payouts, most recent first, before tau subtracted
-  my-choices  ;; list of choices made by turtle, most recent first
+  my-choices  ;; list of choices made by punter, most recent first
 ]
 
    if strategy = "Stay" [report item 0 my-choices]
@@ -320,7 +351,7 @@ tau
 tau
 1
 100
-49.0
+10.0
 1
 1
 NIL
@@ -335,7 +366,7 @@ p-low0
 p-low0
 0
 1
-0.11
+0.33
 0.01
 1
 NIL
@@ -350,7 +381,7 @@ p-high0
 p-high0
 0
 1
-0.11
+0.33
 0.01
 1
 NIL
