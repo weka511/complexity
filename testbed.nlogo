@@ -1,33 +1,32 @@
-extensions [csv]
-
-breed [punters punter]       ;; The investores
-
-breed [predictors predictor] ;; Investors rely on these for advice
+extensions[CSV]
 
 patches-own [
   pool-number  ;; Used to translate from colour to numbers used in Tournament
 ]
 
-punters-own [
-  wealth    ;; accumulated payout, allowing for tau
-  strategy
-  payoffs   ;; list of payouts, most recent first, before tau subtracted
-  choices   ;; list of choices made by punter, most recent first
+turtles-own [
+  wealth        ;; accumulated payout, allowing for tau
+  favourite
+  my-predictors ;; these tell me what course to follow
+  payoffs       ;; list of payouts, most recent first, before tau subtracted
+  choices       ;; list of choices made by turtle, most recent first
 ]
 
+
 globals [
-  tower
-  names
-  strategies
-  k
-  total-probability
   g-low-payoff  ;; list of  payouts per agent from low pool, most recent first
   g-high-payoff ;; list of  payouts per agent from high pool, most recent first
   g-low-number  ;; list of numbers of agents in low pool, most recent first
   g-high-number ;; list of numbers of agents in high pool, most recent first
+  g-predictor-pool
 ]
 
 ;; Set up patches and investors
+
+to process-row [row]
+;  let count0 item 1 row
+  repeat item 1 row [set g-predictor-pool lput row g-predictor-pool]
+end
 
 to setup
   clear-all
@@ -38,21 +37,17 @@ to setup
   set g-high-payoff []
   set g-low-number []
   set g-high-number []
+  set g-predictor-pool []
+  foreach csv:from-file "predictors.csv" process-row
 
   ask patches[
     establish-pools
   ]
 
-  set k 0
-  set strategies []
-  set names []
-  set tower []
-  set total-probability 0
-  foreach csv:from-file "strategies.csv" store-strategy
-
-  create-punters n-agents [
-    establish-punter
+  create-turtles n-agents [
+    establish-turtle
   ]
+
   reset-ticks
 end
 
@@ -67,7 +62,7 @@ to go
   let payoff_high_risk get-payoff red
   let pay-dividend-high? pay-dividend? [red]
 
-  ask punters [
+  ask turtles [
     ;; Calculate payout for this step
     let my-payoff 1   ;; assume stable
     if pcolor = red [
@@ -110,9 +105,9 @@ to go
 
   set g-low-payoff lput payoff_low_risk  g-low-payoff
   set g-high-payoff lput payoff_high_risk  g-high-payoff
-  let n-payees-low count punters with [pcolor = yellow]
+  let n-payees-low count turtles with [pcolor = yellow]
   set g-low-number lput n-payees-low  g-low-number
-  let n-payees-high count punters with [pcolor = red]
+  let n-payees-high count turtles with [pcolor = red]
   set g-high-number lput n-payees-high g-high-number
 
   tick
@@ -120,36 +115,19 @@ end
 
 ;; Set up an investor
 
-to establish-punter
-    set payoffs []
-    set choices []
-    assign-strategy
-    set shape "sheep"
-    set size 2
-    set color white
-    set wealth 0
-    display-investor choose-initial-pool
+to establish-turtle
+  set payoffs []
+  set choices []
+  set my-predictors n-of 5 g-predictor-pool
+  set favourite one-of my-predictors
+  set shape "sheep"
+  set size 2
+  set color white
+  set wealth 0
+  display-investor choose-initial-pool
 end
 
-to store-strategy [strategy-parameters]
-  if k > 0 [
-    let name item 0 strategy-parameters
-    set names lput name names
-    set total-probability total-probability + item 1  strategy-parameters
-    set tower lput  total-probability tower
-    set strategies lput strategy-parameters strategies
-  ]
-  set k k + 1
-end
 
-to assign-strategy
-    let r random-float 1
-    let row 0
-    while [row < length tower and item row tower < r] [
-      set row row + 1
-    ]
-    set strategy item row names
-end
 
 
 to-report choose-initial-pool
@@ -210,10 +188,12 @@ end
 
 to-report get-payoff [pool-colour]
   let dividend ifelse-value (pool-colour = red) [80][40]
-  let n-payees count punters with [pcolor = pool-colour]
+  let n-payees count turtles with [pcolor = pool-colour]
   report dividend / max list n-payees 1
 end
 
+to evaluate [pred]
+end
 
 to-report choose-strategy [
   low-payoff  ;; list of  payouts per agent from low pool, most recent first
@@ -221,17 +201,17 @@ to-report choose-strategy [
   low-number  ;; list of numbers of agents in low pool, most recent first
   high-number ;; list of numbers of agents in high pool, most recent first
   my-payoffs  ;; list of payouts, most recent first, before tau subtracted
-  my-choices  ;; list of choices made by punter, most recent first
+  my-choices]  ;; list of choices made by turtle, most recent first
+
+;;foreach my-predictors [pred -> evaluate pred]
+let action item 0 favourite
+show action
+if action = "Random" [
+  let r random 2
+  report r
 ]
+report item 0 my-choices
 
-   if strategy = "Stay" [report item 0 my-choices]
-
-   if strategy = "Random" [
-     let r  random-float 1
-     ifelse r < 0.1 [report 0][ifelse r < 0.2 [report 1][ifelse r < 0.3 [report 2][]]]
-     report item 0 my-choices
-   ]
-   report item 0 my-choices
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -424,7 +404,7 @@ false
 "" ""
 PENS
 "Stable" 1.0 0 -10899396 true "" "plot mean [wealth] of turtles with [pcolor = green]"
-"Low Risk" 1.0 0 -1184463 true "" "plot mean [wealth] of turtles with [pcolor = yellow]"
+"Low" 1.0 0 -1184463 true "" "plot mean [wealth] of turtles with [pcolor = yellow]"
 "pen-2" 1.0 0 -2674135 true "" "plot mean [wealth] of turtles with [pcolor = red]"
 
 CHOOSER
