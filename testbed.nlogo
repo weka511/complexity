@@ -192,7 +192,25 @@ to-report get-payoff [pool-colour]
   report dividend / max list n-payees 1
 end
 
-to evaluate [pred]
+to-report stay [my-payoffs my-choices]
+  report item 0 my-choices
+end
+
+to-report random-jump [my-payoffs my-choices]
+  report (random 2)
+end
+
+to-report get-action [action-name]
+;  let action-name item 0 favourite
+
+  if action-name = "Stay" [
+    report [[a b] -> stay a b]
+  ]
+
+  if action-name = "Random" [
+    report [[a b] -> random-jump a b]
+  ]
+
 end
 
 to-report choose-strategy [
@@ -202,15 +220,8 @@ to-report choose-strategy [
   high-number ;; list of numbers of agents in high pool, most recent first
   my-payoffs  ;; list of payouts, most recent first, before tau subtracted
   my-choices]  ;; list of choices made by turtle, most recent first
-
-;;foreach my-predictors [pred -> evaluate pred]
-let action item 0 favourite
-show action
-if action = "Random" [
-  let r random 2
-  report r
-]
-report item 0 my-choices
+let action get-action item 0 favourite
+report (runresult action my-choices my-payoffs)
 
 end
 @#$#@#$#@
