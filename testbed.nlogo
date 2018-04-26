@@ -23,11 +23,6 @@ globals [
 
 ;; Set up patches and investors
 
-to process-row [row]
-;  let count0 item 1 row
-  repeat item 1 row [set g-predictor-pool lput row g-predictor-pool]
-end
-
 to setup
   clear-all
 
@@ -38,7 +33,10 @@ to setup
   set g-low-number []
   set g-high-number []
   set g-predictor-pool []
-  foreach csv:from-file "predictors.csv" process-row
+  foreach csv:from-file "predictors.csv" [
+    [row] -> repeat item 1 row [
+      set g-predictor-pool lput row g-predictor-pool
+  ]]
 
   ask patches[
     establish-pools
@@ -118,7 +116,7 @@ end
 to establish-turtle
   set payoffs []
   set choices []
-  set my-predictors n-of 5 g-predictor-pool
+  set my-predictors n-of n-predictors g-predictor-pool
   set favourite one-of my-predictors
   set shape "sheep"
   set size 2
@@ -200,8 +198,21 @@ to-report random-jump [my-payoffs my-choices]
   report (random 2)
 end
 
-to-report get-action [action-name]
-;  let action-name item 0 favourite
+to-report use-number [my-payoffs my-choices action-list]
+
+  report (random 2)
+end
+
+to-report get-estimator [action-list]
+  let estimator-name item 2 action-list
+  show estimator-name
+  if estimator-name = "Average" [
+    report [[a b] -> stay a b]
+  ]
+end
+
+to-report get-action [action-list]
+  let action-name item 0 action-list
 
   if action-name = "Stay" [
     report [[a b] -> stay a b]
@@ -209,6 +220,10 @@ to-report get-action [action-name]
 
   if action-name = "Random" [
     report [[a b] -> random-jump a b]
+  ]
+
+  if action-name = "Number" [
+    report [[a b] -> use-number a b action-list]
   ]
 
 end
@@ -220,8 +235,8 @@ to-report choose-strategy [
   high-number ;; list of numbers of agents in high pool, most recent first
   my-payoffs  ;; list of payouts, most recent first, before tau subtracted
   my-choices]  ;; list of choices made by turtle, most recent first
-let action get-action item 0 favourite
-report (runresult action my-choices my-payoffs)
+let action get-action favourite
+report (runresult action low-payoff high-payoff low-number my-choices my-choices my-payoffs)
 
 end
 @#$#@#$#@
@@ -427,6 +442,21 @@ can-borrow
 can-borrow
 "yes" "no" "die"
 1
+
+SLIDER
+25
+460
+197
+493
+n-predictors
+n-predictors
+1
+10
+5.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
