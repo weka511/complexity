@@ -1,10 +1,12 @@
 extensions [csv]
 
+patches-own [pool-number]
+
 turtles-own [
   wealth    ;; accumulated payout, allowing for tau
   strategy
   payoffs   ;; list of payouts, most recent first, before tau subtracted
-  choices
+  choices   ;; list of choices made by turtle, most recent first
 ]
 
 globals [
@@ -51,6 +53,7 @@ to setup
   reset-ticks
 end
 
+
 to go
   if ticks >= n-steps [stop]
   let payoff_low_risk get-payoff yellow
@@ -67,12 +70,25 @@ to go
     ]
 
     set wealth wealth + my-payoff
-    set payoffs lput my-payoff payoffs
-  ]
-  ask turtles [
-    let new-pool choose-strategy g-low-payoff g-high-payoff g-low-number g-high-number payoffs choices
-    ifelse new-pool > -1 [display-investor new-pool][display-wealth]
-    set choices lput new-pool choices
+
+    ifelse length choices >  0 [
+      let new-pool choose-strategy g-low-payoff g-high-payoff g-low-number g-high-number payoffs choices
+      ifelse new-pool = pool-number [
+        display-wealth
+      ][
+        ifelse wealth >= tau [
+          display-investor new-pool
+        ][
+          if can-borrow = "yes"[display-investor new-pool]
+          if can-borrow = "no"[display-wealth]
+          if can-borrow = "die"[die]
+        ]
+      ]
+      set choices lput new-pool choices
+    ][
+      set choices lput pool-number choices
+    ]
+   set payoffs lput my-payoff payoffs
   ]
   set g-low-payoff lput payoff_low_risk  g-low-payoff
   set g-high-payoff lput payoff_high_risk  g-high-payoff
@@ -138,10 +154,15 @@ to establish-pools
   ask patches[
     ifelse pxcor > max-pxcor / 3 [
       set pcolor red
+      set pool-number 2
     ][
       ifelse pxcor < min-pxcor / 3 [
         set pcolor green
-      ][set pcolor yellow]
+        set pool-number 1
+      ][
+        set pcolor yellow
+        set pool-number 0
+      ]
     ]
   ]
 end
@@ -163,42 +184,23 @@ to-report get-payoff [pool-colour]
   report dividend / max list n-payees 1
 end
 
-;; low-payoff and high-payoff are lists where the first element in the list is the
-;; payoff received by the low (high) pool in the last round,
-;; the second element is the round before that all the way to the beginning
-;; of the tournament.
-;; If no agents choose the low pool or the high pool then the value that will be
-;; recorded is the same as if exactly one agent had chosen that pool.
-
-;; low-number and high-number are lists where the first element in the list is the
-;; number of agents received in the low (high) pool in the last round,
-;; the second element is the round before that all the way to the beginning
-;; of the tournament.
-
-;; Question: what does "received mean"
-
-;; my-payoffs is a list where the first elements indicates the payoff that your
-;; received in the previous round, the second element is the round before that
-;; all the way to the beginning of the tournament, before tau has been subtracted (see Forum).
-
-;; my-choices is a list where the first elements indicates the choice that your
-;; agent made in the previous round, the second element is the round before
-;; that all the way to the beginning of the tournament.
 to-report choose-strategy [
-  low-payoff
-  high-payoff
-  low-number
-  high-number
-  my-payoffs
-  my-choices ]
-if strategy = "Stay" [report -1]
-if strategy = "Random" [
-  let r  random-float 1
-  ifelse r < 0.1 [report 0][ifelse r < 0.2 [report 1][ifelse r < 0.3 [report 2][]]]
-  report -1
+  low-payoff  ;; list of  payouts per agent from low pool, most recent first
+  high-payoff ;; list of  payouts per agent from high pool, most recent first
+  low-number  ;; list of numbers of agents in low pool, most recent first
+  high-number ;; list of numbers of agents in high pool, most recent first
+  my-payoffs  ;; list of payouts, most recent first, before tau subtracted
+  my-choices  ;; list of choices made by turtle, most recent first
 ]
-report -1
 
+   if strategy = "Stay" [report item 0 my-choices]
+
+   if strategy = "Random" [
+     let r  random-float 1
+     ifelse r < 0.1 [report 0][ifelse r < 0.2 [report 1][ifelse r < 0.3 [report 2][]]]
+     report item 0 my-choices
+   ]
+   report item 0 my-choices
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -312,13 +314,13 @@ HORIZONTAL
 SLIDER
 10
 85
-182
+102
 118
 tau
 tau
 1
 100
-7.0
+49.0
 1
 1
 NIL
@@ -326,14 +328,14 @@ HORIZONTAL
 
 SLIDER
 10
-170
+135
 102
-203
+168
 p-low0
 p-low0
 0
 1
-0.1
+0.11
 0.01
 1
 NIL
@@ -341,9 +343,9 @@ HORIZONTAL
 
 SLIDER
 108
-170
+135
 200
-203
+168
 p-high0
 p-high0
 0
@@ -356,9 +358,9 @@ HORIZONTAL
 
 PLOT
 10
+175
 210
-210
-347
+312
 Counts
 NIL
 NIL
@@ -376,9 +378,9 @@ PENS
 
 PLOT
 11
-351
+316
 211
-486
+451
 Wealth
 NIL
 NIL
@@ -395,14 +397,14 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot mean [wealth] of turtles with [pcolor = red]"
 
 CHOOSER
-10
-120
-157
-165
-allow-negative-wealth
-allow-negative-wealth
+110
+85
+202
+130
+can-borrow
+can-borrow
 "yes" "no" "die"
-0
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -440,6 +442,32 @@ Testbed to investigate the [Complexity Explorer](https://www.complexityexplorer.
 ## CREDITS AND REFERENCES
 
 (a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+
+[Github repository](https://github.com/weka511/201804)
+
+## COPYRIGHT & LICENCE
+
+MIT License
+
+Copyright (c) 2018 Simon Crase
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 @#$#@#$#@
 default
 true
