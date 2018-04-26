@@ -199,16 +199,34 @@ to-report random-jump [my-payoffs my-choices]
 end
 
 to-report use-number [my-payoffs my-choices action-list]
-
-  report (random 2)
+  let estimator get-estimator action-list
+  let estimate-low-number (runresult estimator 1 action-list)
+  let estimate-low-payoff (80 / 4) / (estimate-low-number + 1)
+  let estimate-high-number (runresult estimator 2 action-list)
+  let estimate-high-payoff (20 / 2) / (estimate-high-number + 1)
+  let pool 0
+  let predicted-payoff 1
+  if estimate-low-payoff > predicted-payoff [
+    set pool 1
+    set predicted-payoff estimate-low-payoff
+  ]
+  if estimate-high-payoff > predicted-payoff [
+    set pool 2
+    set predicted-payoff estimate-high-payoff
+  ]
+  report pool
 end
 
 to-report get-estimator [action-list]
   let estimator-name item 2 action-list
   show estimator-name
   if estimator-name = "Average" [
-    report [[a b] -> stay a b]
+    report [ [a] -> get-average a action-list]
   ]
+end
+
+to-report get-average [pool action-list]
+  report 1
 end
 
 to-report get-action [action-list]
