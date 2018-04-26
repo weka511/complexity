@@ -1,5 +1,5 @@
 \documentclass[]{article}
-\usepackage{float,url}
+\usepackage{float,url,multirow}
 \usepackage[nottoc,numbib]{tocbibind}
 
 %opening
@@ -16,61 +16,61 @@
 
 
  
-\section{What part of your phenomenon would you like to build a model of?}
+\section{What part of phenomenon would you like to model?}
 
 \section{What are the principal types of agents involved in this phenomenon?}
-\begin{itemize}
-	\item Investors (these are the Agents in the Problem Statement)
-	\item Pools (can be patches)
-	\item Predictors
-\end{itemize}
+
+\begin{tabular}{|l|l|} \hline
+	Agent&Goal\\ \hline
+	Investor & these are the Agents in the Problem Statement\\ \hline
+	Pools & can be patches\\ \hline
+	Predictors &these function closures, not Turtles \\ \hline
+\end{tabular}
+
 \section{What properties do these agents have?}
-\begin{itemize}
-	\item Investors
-	\begin{itemize}
-		\item Nett payoff
-	\end{itemize}
-	\item Pools
-	\begin{itemize}
-		\item Total investors at each time step
-		\item Nett payoff at each time step
-	\end{itemize}
-	\item Predictors
-	\begin{itemize}
-		\item ...
-	\end{itemize}	
-\end{itemize}
+
+
+\begin{center}
+	\begin{tabular}{ |l|l|l| } 
+		\hline
+		Agent & Property & Remarks \\
+		\hline
+		\multirow{5}{4em}{Investor} & wealth & accumulated payout, allowing for tau \\ 
+		& favourite-predictor & tell Investor what course to follow \\ 
+		& alternative-predictor & switch if favourite not doing well \\ 
+		& payoffs & list of payouts, most recent first, before tau subtracted \\ 
+		& choices & list of choices made by turtle, most recent first \\ 
+		\hline
+		\multirow{3}{4em}{Pool} & Total & cell3 \\ 
+		& probability & cell6 \\ 
+		\hline
+		\multirow{3}{4em}{Predictor} & action & cell3 \\ 
+		& history & cell6 \\ 
+		& parameters & cell9 \\ 
+		\hline
+	\end{tabular}
+\end{center}
+
+
+
 \section{What actions (or behaviors) can these agents take?}
 
-\begin{itemize}
-	\item Investors
-	\begin{itemize}
-		\item 
-	\end{itemize}
-	\item Pools
-	\begin{itemize}
-		\item 
-	\end{itemize}
-	\item Predictors
-	\begin{itemize}
-		\item 
-	\end{itemize}
-\end{itemize}
+\begin{tabular}{|l|l|} \hline
+	Agent&Goal\\ \hline
+	Investor & Accumulate wealth\\ \hline
+	Pools & \\ \hline
+	Predictors & \\ \hline
+\end{tabular}
 \section{If the agents have goals, what are their goals?}
-\begin{itemize}
-	\item Investors
-	\begin{itemize}
-		\item 
-	\end{itemize}
-	\item Pools
-	\begin{itemize}
-		\item 
-	\end{itemize}
-	\item Predictors
-	\begin{itemize}
-		\item 
-	\end{itemize}
-\end{itemize}
+
+\begin{tabular}{|l|l|} \hline
+	Agent&Goal\\ \hline
+	Investor & Accumulate wealth\\ \hline
+	Pools & \\ \hline
+	Predictors & \\ \hline
+\end{tabular}
+
+
 \section{In what kind of environment do these agents operate?}
 \section{How do these agents interact with this environment?}
 
@@ -83,5 +83,15 @@ Vol. 84, No. 2, Papers and Proceedings of the
 Hundred and Sixth Annual Meeting of the American Economic Association (May, 1994), pp. 406-411
 Published by: American Economic Association
 \url{https://ocw.tudelft.nl/wp-content/uploads/ElFarolArtur1994.pdf}
+\bibitem{PAISE2009}
+The Kolkata Paise Restaurant Problem and Resource Utilization,
+Anindya-Sundar Chakrabarti, Bikas K. Chakrabarti, Arnab Chatterjee,and Manipushpak Mitra,
+New Journal of Physics. 12: 075033. 
+\url{https://arxiv.org/pdf/0711.1639.pdf}
+\bibitem{PAISE2007}
+Kolkata Restaurant Problem as a generalised El Farol Bar Problem,
+Bikas K. Chakrabarti,
+in Econophysics of Markets and Business Networks, pages 239-246, Eds. A. Chatterjee and B. K. Chakrabarti, New Economic Windows Series, Springer,Milan (2007);
+\url{https://arxiv.org/abs/0705.2098}
 \end{thebibliography}
 \end{document}
