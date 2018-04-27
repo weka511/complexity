@@ -20,6 +20,12 @@ globals [
   g-high-payoff ;; list of  payouts per agent from high pool, most recent first
   g-low-number  ;; list of numbers of agents in low pool, most recent first
   g-high-number ;; list of numbers of agents in high pool, most recent first
+  G-POOL-STABLE
+  G-POOL-LOW
+  G-POOL-HIGH
+  G-PRED-COUNT  ;; index of count in predictor row
+  G-PRED-ACTION ;; index of action in predictor row
+  G-PRED-ESTIMATOR ;; index of action in predictor row
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -33,10 +39,18 @@ to setup
 
   ;; Initialize globals
 
-  set g-low-payoff []
+  set g-low-payoff  []
   set g-high-payoff []
-  set g-low-number []
+  set g-low-number  []
   set g-high-number []
+
+  set G-POOL-STABLE 0
+  set G-POOL-LOW    1
+  set G-POOL-HIGH   2
+
+  set G-PRED-ACTION    0
+  set G-PRED-COUNT     1
+  set G-PRED-ESTIMATOR 2
 
   ask patches[
     establish-pools
@@ -46,7 +60,7 @@ to setup
   ;; each turtle gets a subset
   let predictor-pool []
   foreach csv:from-file "predictors.csv" [
-    [row] -> repeat item 1 row [
+    [row] -> repeat item G-PRED-COUNT row [
       set predictor-pool lput row predictor-pool
   ]]
 
@@ -135,6 +149,79 @@ end
 
 
 
+
+
+;; Set up an investor with a collection of predictors
+;; and assign to a pool
+
+to establish-turtle  [predictor-pool]
+  set payoffs []
+  set choices []
+  set candidate-predictors n-of n-predictors predictor-pool
+  set predictor-index random length candidate-predictors
+  set favourite-predictor item predictor-index  candidate-predictors
+  let shape-index  predictor-index mod length shapes
+  set shape item shape-index  shapes
+  set size 1
+  set color white
+  set wealth starting-wealth
+  display-investor choose-initial-pool
+end
+
+to-report starting-wealth  ;; TODO
+  report 0
+end
+
+
+to-report choose-initial-pool
+  let rvalue random-float 1
+  show rvalue
+  if rvalue < p-low0 [report G-POOL-LOW]
+  if rvalue < (p-low0 + p-high0) [report G-POOL-HIGH]
+  report G-POOL-STABLE
+end
+
+to display-investor [pool]
+  show pool
+  ifelse pool = G-POOL-STABLE [
+    set xcor 2 * min-pxcor / 3
+  ][
+    ifelse pool = G-POOL-LOW [
+      set xcor 0
+  ][ ;; G-POOL-HIGH
+      set xcor 2 * max-pxcor / 3
+  ]]
+
+  let offset ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 4
+  set xcor xcor + offset
+  display-wealth
+end
+
+to display-wealth
+   set ycor min (list (max-pycor - 2)  (wealth + min-pycor + 2))
+end
+
+;; Convert a patch colour to a pool number
+
+to-report colour2pool
+  if pcolor = red [report G-POOL-HIGH]
+  if pcolor = yellow [report G-POOL-LOW]
+  report G-POOL-STABLE
+end
+
+;; Assign background colours and pool numbers to patches
+
+to establish-pools
+    set pcolor yellow
+    if pxcor > max-pxcor / 3 [set pcolor red]
+    if pxcor < min-pxcor / 3 [set pcolor green]
+    set pool-number colour2pool
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Predictors and choice of strategy
+
 to review-predictors
   let scores map score-predictor candidate-predictors
   let min-score min scores
@@ -151,88 +238,6 @@ to-report score-predictor [predictor]  ;; TODO
   report random 18
 end
 
-;; Set up an investor with a collection of predictors
-;; and assign to a pool
-
-to establish-turtle  [predictor-pool]
-  set payoffs []
-  set choices []
-  set candidate-predictors n-of n-predictors predictor-pool
-  set predictor-index random length candidate-predictors
-  set favourite-predictor item predictor-index  candidate-predictors
-  let shape-index  predictor-index mod length shapes
-  set shape item shape-index  shapes
-  set size 1
-  set color white
-  set wealth 0
-  display-investor choose-initial-pool
-end
-
-
-
-
-to-report choose-initial-pool
-    let p2 p-low0 + p-high0
-    let p random-float 1
-    let pool 0
-    ifelse p < p-low0[
-      set pool 1
-    ][
-      if p < p2[
-        set pool 2
-    ]]
-  report pool
-end
-
-to display-investor [pool]
-  ifelse pool = 0 [
-    set xcor 2 * min-pxcor / 3
-  ][
-    ifelse pool = 1 [
-      set xcor 0
-  ][ set xcor 2 * max-pxcor / 3]]
-  let offset ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 4
-  set xcor xcor + offset
-  display-wealth
-end
-
-to display-wealth
-   set ycor min (list (max-pycor - 2)  (wealth + min-pycor + 2))
-end
-
-;; Convert a patch colour to a pool number
-
-to-report colour2pool
-  if pcolor = red[report 2]
-  if pcolor = yellow[report 1]
-  report 0
-end
-
-;; Assign background colours and pool numbers to patches
-
-to establish-pools
-    set pcolor yellow
-    if pxcor > max-pxcor / 3 [set pcolor red]
-    if pxcor < min-pxcor / 3 [set pcolor green]
-    set pool-number colour2pool
-end
-
-;; Decide whether or not a pool will payoff this tick
-;; High pays one in 4 ticks, low one in 2
-to-report pay-dividend? [pool-colour]
-  let probability ifelse-value (pool-colour = red) [freq-high-payoff][freq-low-payoff]
-  report random-float 1 < probability
-end
-
-;; Compute payoff for specified pool, assuming it occurs
-;; i.e. dividend per eligible investor
-
-to-report get-payoff [pool-colour]
-  let dividend ifelse-value (pool-colour = red) [max-high-payoff][max-low-payoff]
-  let n-payees count turtles with [pcolor = pool-colour]
-  report dividend / max list n-payees 1
-end
-
 to-report stay [my-payoffs my-choices]
   report item 0 my-choices
 end
@@ -244,24 +249,24 @@ end
 to-report use-number [my-payoffs my-choices action-list]
   let estimator get-estimator action-list
   let estimate-low-number (runresult estimator g-low-number action-list)
-  let estimate-low-payoff (max-low-payoff * freq-low-payoff) / (estimate-low-number + 1)
+  let estimate-low-payoff (max-low-payoff * p-low-payoff) / (estimate-low-number + 1)
   let estimate-high-number (runresult estimator g-high-number action-list)
-  let estimate-high-payoff (max-high-payoff * freq-high-payoff) / (estimate-high-number + 1)
-  let pool 0
+  let estimate-high-payoff (max-high-payoff * p-high-payoff) / (estimate-high-number + 1)
+  let pool G-POOL-STABLE
   let predicted-payoff 1
   if estimate-low-payoff > predicted-payoff [
-    set pool 1
+    set pool G-POOL-LOW
     set predicted-payoff estimate-low-payoff
   ]
   if estimate-high-payoff > predicted-payoff [
-    set pool 2
+    set pool G-POOL-HIGH
     set predicted-payoff estimate-high-payoff
   ]
   report pool
 end
 
 to-report get-estimator [action-list]
-  let estimator-name item 2 action-list
+  let estimator-name item G-PRED-ESTIMATOR  action-list
 
   if estimator-name = "Average" [
     report [ [a] -> get-average a action-list]
@@ -284,7 +289,7 @@ to-report get-average [pool action-list]
 end
 
 to-report get-action [action-list]
-  let action-name item 0 action-list
+  let action-name item G-PRED-ACTION action-list
 
   if action-name = "Stay" [
     report [[a b] -> stay a b]
@@ -307,9 +312,35 @@ to-report choose-strategy [
   high-number ;; list of numbers of agents in high pool, most recent first
   my-payoffs  ;; list of payouts, most recent first, before tau subtracted
   my-choices]  ;; list of choices made by turtle, most recent first
-let action get-action favourite-predictor
-report (runresult action low-payoff high-payoff low-number my-choices my-choices my-payoffs)
+report (
+  runresult
+  (get-action favourite-predictor)
+  low-payoff
+  high-payoff
+  low-number
+  my-choices
+  my-choices
+  my-payoffs)
+end
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; payoffs
+
+;; Decide whether or not a pool will payoff this tick
+;; High pays one in 4 ticks, low one in 2
+to-report pay-dividend? [pool-colour]
+  let probability ifelse-value (pool-colour = red) [p-high-payoff][p-low-payoff]
+  report random-float 1 < probability
+end
+
+;; Compute payoff for specified pool, assuming it occurs
+;; i.e. dividend per eligible investor
+
+to-report get-payoff [pool-colour]
+  let dividend ifelse-value (pool-colour = red) [max-high-payoff][max-low-payoff]
+  let n-payees count turtles with [pcolor = pool-colour]
+  report dividend / max list n-payees 1
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -444,7 +475,7 @@ p-low0
 p-low0
 0
 1
-0.01
+0.2
 0.01
 1
 NIL
@@ -459,7 +490,7 @@ p-high0
 p-high0
 0
 1
-0.0
+0.1
 0.01
 1
 NIL
@@ -546,10 +577,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-230
-20
-340
-53
+225
+10
+335
+43
 max-low-payoff
 max-low-payoff
 1
@@ -562,9 +593,9 @@ HORIZONTAL
 
 SLIDER
 350
-20
+10
 475
-53
+43
 max-high-payoff
 max-high-payoff
 1
@@ -576,27 +607,27 @@ NIL
 HORIZONTAL
 
 SLIDER
-230
-65
-350
-98
-freq-low-payoff
-freq-low-payoff
+225
+50
+345
+83
+p-low-payoff
+p-low-payoff
 0
 1
-0.5
+0.49
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-365
-70
-490
-103
-freq-high-payoff
-freq-high-payoff
+350
+50
+475
+83
+p-high-payoff
+p-high-payoff
 0
 1
 0.25
@@ -636,10 +667,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-495
-25
-605
-58
+490
+10
+600
+43
 payoff-stable
 payoff-stable
 0
