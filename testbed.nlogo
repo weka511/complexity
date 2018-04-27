@@ -16,15 +16,16 @@ turtles-own [
 
 
 globals [
-  g-low-payoff  ;; list of  payouts per agent from low pool, most recent first
-  g-high-payoff ;; list of  payouts per agent from high pool, most recent first
-  g-low-number  ;; list of numbers of agents in low pool, most recent first
-  g-high-number ;; list of numbers of agents in high pool, most recent first
-  G-POOL-STABLE
-  G-POOL-LOW
-  G-POOL-HIGH
-  G-PRED-COUNT  ;; index of count in predictor row
-  G-PRED-ACTION ;; index of action in predictor row
+  g-low-payoff     ;; list of  payouts per agent from low pool, most recent first
+  g-high-payoff    ;; list of  payouts per agent from high pool, most recent first
+  g-low-number     ;; list of numbers of agents in low pool, most recent first
+  g-high-number    ;; list of numbers of agents in high pool, most recent first
+  G-POOL-STABLE    ;; Index used for stable pool
+  G-POOL-LOW       ;; Index used for low risk pool
+  G-POOL-HIGH      ;; Index used for low risk pool
+  G-PAYOFF-ZILCH   ;; Payoff of 0
+  G-PRED-COUNT     ;; index of count in predictor row
+  G-PRED-ACTION    ;; index of action in predictor row
   G-PRED-ESTIMATOR ;; index of action in predictor row
 ]
 
@@ -48,6 +49,7 @@ to setup
   set G-POOL-LOW    1
   set G-POOL-HIGH   2
 
+  set G-PAYOFF-ZILCH 0
   set G-PRED-ACTION    0
   set G-PRED-COUNT     1
   set G-PRED-ESTIMATOR 2
@@ -115,8 +117,8 @@ end
 
 ;; Calculate actual payout for specific turtle
 to-report get-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
-  if pcolor = red [report ifelse-value pay-dividend-high? [payoff_high_risk] [0] ]
-  if pcolor = yellow [report ifelse-value pay-dividend-low? [payoff_low_risk] [0] ]
+  if pcolor = red [report ifelse-value pay-dividend-high? [payoff_high_risk] [G-PAYOFF-ZILCH] ]
+  if pcolor = yellow [report ifelse-value pay-dividend-low? [payoff_low_risk] [G-PAYOFF-ZILCH] ]
   report payoff-stable
 end
 
@@ -147,10 +149,6 @@ to decide-whether-to-switch-pools
     ]
 end
 
-
-
-
-
 ;; Set up an investor with a collection of predictors
 ;; and assign to a pool
 
@@ -168,7 +166,7 @@ to establish-turtle  [predictor-pool]
   display-investor choose-initial-pool
 end
 
-to-report starting-wealth  ;; TODO
+to-report starting-wealth  ;; TODO - allow flexibility
   report 0
 end
 
@@ -268,14 +266,12 @@ end
 to-report get-estimator [action-list]
   let estimator-name item G-PRED-ESTIMATOR  action-list
 
-  if estimator-name = "Average" [
-    report [ [a] -> get-average a action-list]
-  ]
+  if estimator-name = "Average" [report [ [a] -> get-average a action-list]]
 end
 
 to-report get-average [pool action-list]
   let i 0
-  let j 3
+  let j G-PRED-ESTIMATOR + 1
   let total 0
   let total-weight 0
   while [i < length pool and j < length action-list] [
@@ -291,17 +287,11 @@ end
 to-report get-action [action-list]
   let action-name item G-PRED-ACTION action-list
 
-  if action-name = "Stay" [
-    report [[a b] -> stay a b]
-  ]
+  if action-name = "Stay" [report [[a b] -> stay a b]]
 
-  if action-name = "Random" [
-    report [[a b] -> random-jump a b]
-  ]
+  if action-name = "Random" [report [[a b] -> random-jump a b]]
 
-  if action-name = "Number" [
-    report [[a b] -> use-number a b action-list]
-  ]
+  if action-name = "Number" [report [[a b] -> use-number a b action-list] ]
 
 end
 
