@@ -200,9 +200,9 @@ end
 
 to-report use-number [my-payoffs my-choices action-list]
   let estimator get-estimator action-list
-  let estimate-low-number (runresult estimator 1 action-list)
+  let estimate-low-number (runresult estimator g-low-number action-list)
   let estimate-low-payoff (80 / 4) / (estimate-low-number + 1)
-  let estimate-high-number (runresult estimator 2 action-list)
+  let estimate-high-number (runresult estimator g-high-number action-list)
   let estimate-high-payoff (20 / 2) / (estimate-high-number + 1)
   let pool 0
   let predicted-payoff 1
@@ -219,14 +219,25 @@ end
 
 to-report get-estimator [action-list]
   let estimator-name item 2 action-list
-  show estimator-name
+
   if estimator-name = "Average" [
     report [ [a] -> get-average a action-list]
   ]
 end
 
 to-report get-average [pool action-list]
-  report 1
+  let i 0
+  let j 3
+  let total 0
+  let total-weight 0
+  while [i < length pool and j < length action-list] [
+    let weight item j action-list
+    set total total + weight * item i pool
+    set total-weight total-weight + weight
+    set i i + 1
+    set j j + 1
+  ]
+  report ifelse-value ( total-weight > 0 ) [total / total-weight] [0]
 end
 
 to-report get-action [action-list]
