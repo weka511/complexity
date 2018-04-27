@@ -117,9 +117,11 @@ to establish-turtle
   set payoffs []
   set choices []
   set my-predictors n-of n-predictors g-predictor-pool
-  set favourite one-of my-predictors
-  set shape "sheep"
-  set size 2
+  let predictor-index random length g-predictor-pool
+  set favourite item predictor-index  g-predictor-pool
+  let shape-index  predictor-index mod length shapes
+  set shape item shape-index  shapes
+  set size 1
   set color white
   set wealth 0
   display-investor choose-initial-pool
@@ -177,15 +179,15 @@ end
 ;; Decide whether or not a pool will payoff this tick
 ;; High pays one in 4 ticks, low one in 2
 to-report pay-dividend? [pool-colour]
-  let odds ifelse-value (pool-colour = red) [4][2]
-  report random odds = 0
+  let probability ifelse-value (pool-colour = red) [freq-high-payoff][freq-low-payoff]
+  report random-float 1 < probability
 end
 
 ;; Compute payoff for specified pool, assuming it occurs
 ;; i.e. dividend per eligible investor
 
 to-report get-payoff [pool-colour]
-  let dividend ifelse-value (pool-colour = red) [80][40]
+  let dividend ifelse-value (pool-colour = red) [max-high-payoff][max-low-payoff]
   let n-payees count turtles with [pcolor = pool-colour]
   report dividend / max list n-payees 1
 end
@@ -201,9 +203,9 @@ end
 to-report use-number [my-payoffs my-choices action-list]
   let estimator get-estimator action-list
   let estimate-low-number (runresult estimator g-low-number action-list)
-  let estimate-low-payoff (80 / 4) / (estimate-low-number + 1)
+  let estimate-low-payoff (max-low-payoff * freq-low-payoff) / (estimate-low-number + 1)
   let estimate-high-number (runresult estimator g-high-number action-list)
-  let estimate-high-payoff (20 / 2) / (estimate-high-number + 1)
+  let estimate-high-payoff (max-high-payoff * freq-high-payoff) / (estimate-high-number + 1)
   let pool 0
   let predicted-payoff 1
   if estimate-low-payoff > predicted-payoff [
@@ -270,10 +272,10 @@ report (runresult action low-payoff high-payoff low-number my-choices my-choices
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-210
-10
-647
-448
+215
+110
+652
+548
 -1
 -1
 13.0
@@ -283,8 +285,8 @@ GRAPHICS-WINDOW
 1
 1
 0
-0
-0
+1
+1
 1
 -16
 16
@@ -386,7 +388,7 @@ tau
 tau
 1
 100
-10.0
+11.0
 1
 1
 NIL
@@ -401,7 +403,7 @@ p-low0
 p-low0
 0
 1
-0.33
+0.01
 0.01
 1
 NIL
@@ -416,7 +418,7 @@ p-high0
 p-high0
 0
 1
-0.33
+0.0
 0.01
 1
 NIL
@@ -473,9 +475,9 @@ can-borrow
 1
 
 SLIDER
-25
+10
 460
-197
+102
 493
 n-predictors
 n-predictors
@@ -483,6 +485,81 @@ n-predictors
 10
 5.0
 1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+115
+460
+207
+493
+n-review
+n-review
+1
+100
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+230
+20
+340
+53
+max-low-payoff
+max-low-payoff
+1
+100
+40.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+350
+20
+475
+53
+max-high-payoff
+max-high-payoff
+1
+100
+80.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+230
+65
+350
+98
+freq-low-payoff
+freq-low-payoff
+0
+1
+0.5
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+365
+70
+475
+103
+freq-high-payoff
+freq-high-payoff
+0
+1
+0.25
+0.01
 1
 NIL
 HORIZONTAL
