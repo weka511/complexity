@@ -49,9 +49,6 @@ to setup
   reset-ticks
 end
 
-
-;; Collect any payout and decide whether to change pools
-
 to go
   if ticks >= n-steps [stop]
 
@@ -61,7 +58,29 @@ to go
   let pay-dividend-high? pay-dividend? [red]
 
   ask turtles [
-    ;; Calculate payout for this step
+    calculate-payout-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
+  ]
+
+  ;; Update history
+
+  set g-low-payoff lput payoff_low_risk  g-low-payoff
+  set g-high-payoff lput payoff_high_risk  g-high-payoff
+  let n-payees-low count turtles with [pcolor = yellow]
+  set g-low-number lput n-payees-low  g-low-number
+  let n-payees-high count turtles with [pcolor = red]
+  set g-high-number lput n-payees-high g-high-number
+
+  if ticks mod n-review = 0 and ticks > n-horizon[
+    ask turtles[
+      review-predictors
+    ]
+  ]
+  tick
+end
+
+;; Collect any payout and decide whether to change pools
+
+to calculate-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
     let my-payoff 1   ;; assume stable
     if pcolor = red [
       set my-payoff ifelse-value pay-dividend-high? [payoff_high_risk] [0]
@@ -97,18 +116,22 @@ to go
       set choices lput new-pool choices
     ]
    set payoffs lput my-payoff payoffs
-  ]
+end
 
-  ;; Update history
+to review-predictors
+  let scores map score-predictor my-predictors
+  let min-score min scores
+  let full-indices n-values (length scores) [ i -> i ]
+  let min-indices filter [i -> item i scores = min-score] full-indices
+  let predictor-index  one-of min-indices
+  set favourite item predictor-index  g-predictor-pool
+  let shape-index  predictor-index mod length shapes
+  set shape item shape-index  shapes
+end
 
-  set g-low-payoff lput payoff_low_risk  g-low-payoff
-  set g-high-payoff lput payoff_high_risk  g-high-payoff
-  let n-payees-low count turtles with [pcolor = yellow]
-  set g-low-number lput n-payees-low  g-low-number
-  let n-payees-high count turtles with [pcolor = red]
-  set g-high-number lput n-payees-high g-high-number
-
-  tick
+to-report score-predictor [predictor]  ;; TODO
+  show predictor
+  report random 18
 end
 
 ;; Set up an investor
@@ -270,6 +293,7 @@ let action get-action favourite
 report (runresult action low-payoff high-payoff low-number my-choices my-choices my-payoffs)
 
 end
+
 @#$#@#$#@
 GRAPHICS-WINDOW
 215
@@ -552,7 +576,7 @@ HORIZONTAL
 SLIDER
 365
 70
-475
+490
 103
 freq-high-payoff
 freq-high-payoff
@@ -560,6 +584,21 @@ freq-high-payoff
 1
 0.25
 0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+115
+500
+207
+533
+n-horizon
+n-horizon
+1
+100
+5.0
+1
 1
 NIL
 HORIZONTAL
