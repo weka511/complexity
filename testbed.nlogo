@@ -5,11 +5,13 @@ patches-own [
 ]
 
 turtles-own [
-  wealth        ;; accumulated payout, allowing for tau
-  favourite
-  my-predictors ;; these tell me what course to follow
-  payoffs       ;; list of payouts, most recent first, before tau subtracted
-  choices       ;; list of choices made by turtle, most recent first
+  wealth               ;; accumulated payout, allowing for tau
+  favourite-predictor  ;; the predictor that is actually used to switch pools
+  predictor-index      ;; index of favourite-prodictor in candidates
+  candidate-predictors ;; a pool of predictors, which could be used if
+                       ;; favourite-predictor is ntr performing well
+  payoffs              ;; list of payouts, most recent first, before tau subtracted
+  choices              ;; list of choices made by turtle, most recent first
 ]
 
 
@@ -18,8 +20,11 @@ globals [
   g-high-payoff ;; list of  payouts per agent from high pool, most recent first
   g-low-number  ;; list of numbers of agents in low pool, most recent first
   g-high-number ;; list of numbers of agents in high pool, most recent first
-  g-predictor-pool
 ]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Top level procedures
 
 ;; Set up patches and investors
 
@@ -32,18 +37,21 @@ to setup
   set g-high-payoff []
   set g-low-number []
   set g-high-number []
-  set g-predictor-pool []
-  foreach csv:from-file "predictors.csv" [
-    [row] -> repeat item 1 row [
-      set g-predictor-pool lput row g-predictor-pool
-  ]]
 
   ask patches[
     establish-pools
   ]
 
+  ;; Create big pool of all predictors;
+  ;; each turtle gets a subset
+  let predictor-pool []
+  foreach csv:from-file "predictors.csv" [
+    [row] -> repeat item 1 row [
+      set predictor-pool lput row predictor-pool
+  ]]
+
   create-turtles n-agents [
-    establish-turtle
+    establish-turtle  predictor-pool
   ]
 
   reset-ticks
@@ -78,22 +86,30 @@ to go
   tick
 end
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; implementation
+
 ;; Collect any payout and decide whether to change pools
 
 to calculate-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
-    let my-payoff 1   ;; assume stable
-    if pcolor = red [
-      set my-payoff ifelse-value pay-dividend-high? [payoff_high_risk] [0]
-    ]
-    if pcolor = yellow [
-      set my-payoff ifelse-value pay-dividend-low? [payoff_low_risk] [0]
-    ]
+  let my-payoff get-payout-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
+  set wealth wealth + my-payoff
+  decide-whether-to-switch-pools
+  set payoffs lput my-payoff payoffs
+end
 
-    set wealth wealth + my-payoff
+;; Calculate actual payout for specific turtle
+to-report get-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
+  if pcolor = red [report ifelse-value pay-dividend-high? [payoff_high_risk] [0] ]
+  if pcolor = yellow [report ifelse-value pay-dividend-low? [payoff_low_risk] [0] ]
+  report payoff-stable
+end
 
-    ;; Decide whether to switch pools
+;; Decide whether to switch pools
 
-    ifelse length choices =  0 [
+to decide-whether-to-switch-pools
+     ifelse length choices =  0 [
       set choices lput pool-number choices
     ][
       let new-pool choose-strategy g-low-payoff g-high-payoff g-low-number g-high-number payoffs choices
@@ -115,16 +131,17 @@ to calculate-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_high
       ]
       set choices lput new-pool choices
     ]
-   set payoffs lput my-payoff payoffs
 end
 
+
+
 to review-predictors
-  let scores map score-predictor my-predictors
+  let scores map score-predictor candidate-predictors
   let min-score min scores
   let full-indices n-values (length scores) [ i -> i ]
   let min-indices filter [i -> item i scores = min-score] full-indices
-  let predictor-index  one-of min-indices
-  set favourite item predictor-index  g-predictor-pool
+  set predictor-index  one-of min-indices
+  set favourite-predictor item predictor-index  candidate-predictors
   let shape-index  predictor-index mod length shapes
   set shape item shape-index  shapes
 end
@@ -134,14 +151,15 @@ to-report score-predictor [predictor]  ;; TODO
   report random 18
 end
 
-;; Set up an investor
+;; Set up an investor with a collection of predictors
+;; and assign to a pool
 
-to establish-turtle
+to establish-turtle  [predictor-pool]
   set payoffs []
   set choices []
-  set my-predictors n-of n-predictors g-predictor-pool
-  let predictor-index random length g-predictor-pool
-  set favourite item predictor-index  g-predictor-pool
+  set candidate-predictors n-of n-predictors predictor-pool
+  set predictor-index random length candidate-predictors
+  set favourite-predictor item predictor-index  candidate-predictors
   let shape-index  predictor-index mod length shapes
   set shape item shape-index  shapes
   set size 1
@@ -289,11 +307,10 @@ to-report choose-strategy [
   high-number ;; list of numbers of agents in high pool, most recent first
   my-payoffs  ;; list of payouts, most recent first, before tau subtracted
   my-choices]  ;; list of choices made by turtle, most recent first
-let action get-action favourite
+let action get-action favourite-predictor
 report (runresult action low-payoff high-payoff low-number my-choices my-choices my-payoffs)
 
 end
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 215
@@ -603,6 +620,36 @@ n-horizon
 NIL
 HORIZONTAL
 
+SLIDER
+10
+500
+105
+533
+n-grace
+n-grace
+0
+100
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+495
+25
+605
+58
+payoff-stable
+payoff-stable
+0
+100
+1.0
+1
+1
+NIL
+HORIZONTAL
+
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -615,6 +662,29 @@ Testbed to investigate the [Complexity Explorer](https://www.complexityexplorer.
 ## HOW TO USE IT
 
 (how to use the model, including a description of each of the items in the Interface tab)
+
+ * Buttons
+    * Setup
+    * Step
+    * Go
+  * n-agents
+  * n-steps
+  * tau
+  * can-borrow
+  * p-low0
+  * p-high0
+  * Counts
+  * Wealth
+  * n-predictors
+  * Review
+    * n-review
+    * n-horizon
+    * n-grace
+  * Pools
+    * max-low-payoff
+    * max-high-payoff
+    * freq-low-payoff
+    * freq-high-payoff
 
 ## THINGS TO NOTICE
 
