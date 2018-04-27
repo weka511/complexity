@@ -46,6 +46,7 @@ Your analysis should include (but is not limited to):
 | Date | Remarks |
 |-----------|--------------------------------------------------------------------------------|
 |24&nbsp;Apr&nbsp;2018| Started. Created repository and Wrote up Proposal |
+| 27 Apr 2018 |Started implementing focal rules as in the original El Farol paper. Also started reading the Kolkaka Paise restaurant papers. Think about criteria for evaluating rules, e.g. review every n iterations to see whther I could do better, review against target performance, etc.|
 
 
 
