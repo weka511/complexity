@@ -14,24 +14,54 @@ turtles-own [
   choices              ;; list of choices made by turtle, most recent first
 ]
 
-
 globals [
   g-low-payoff     ;; list of  payouts per agent from low pool, most recent first
   g-high-payoff    ;; list of  payouts per agent from high pool, most recent first
   g-low-number     ;; list of numbers of agents in low pool, most recent first
   g-high-number    ;; list of numbers of agents in high pool, most recent first
-  G-POOL-STABLE    ;; Index used for stable pool
-  G-POOL-LOW       ;; Index used for low risk pool
-  G-POOL-HIGH      ;; Index used for low risk pool
-  G-PAYOFF-ZILCH   ;; Payoff of 0
-  G-PRED-COUNT     ;; index of count in predictor row
-  G-PRED-ACTION    ;; index of action in predictor row
-  G-PRED-ESTIMATOR ;; index of action in predictor row
+
   g-changed-predictors
   g-ticks-without-change
   g-changed-assignments
   g-maximum-wealth-for-scaling
 ]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Define constants
+
+to-report  POOL-STABLE    ;; Index used for stable pool
+  report 0
+end
+
+to-report    POOL-LOW      ;; Index used for low risk pool
+  report 1
+end
+
+to-report    POOL-HIGH     ;; Index used for low risk pool
+  report 2
+end
+
+to-report   ZILCH   ;; Payoff of 0
+  report 0
+end
+
+to-report   PRED-ACTION    ;; index of action in predictor row
+  report 0
+end
+
+to-report    PRED-COUNT    ;; index of count in predictor row
+  report 1
+end
+
+
+
+to-report   PRED-ESTIMATOR ;; index of action in predictor row
+  report 2
+end
+
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -53,14 +83,6 @@ to setup
   set g-ticks-without-change 0
   set g-changed-assignments  0
   set g-maximum-wealth-for-scaling n-steps * payoff-stable
-  set G-POOL-STABLE 0
-  set G-POOL-LOW    1
-  set G-POOL-HIGH   2
-
-  set G-PAYOFF-ZILCH   0
-  set G-PRED-ACTION    0
-  set G-PRED-COUNT     1
-  set G-PRED-ESTIMATOR 2
 
   ask patches[
     establish-pools
@@ -70,7 +92,7 @@ to setup
   ;; each turtle gets a subset
   let predictor-pool []
   foreach csv:from-file "predictors.csv" [
-    [row] -> repeat item G-PRED-COUNT row [
+    [row] -> repeat item PRED-COUNT row [
       set predictor-pool fput row predictor-pool
   ]]
 
@@ -139,8 +161,8 @@ end
 
 ;; Calculate actual payout for specific turtle
 to-report get-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
-  if pcolor = red [report ifelse-value pay-dividend-high? [payoff_high_risk] [G-PAYOFF-ZILCH] ]
-  if pcolor = yellow [report ifelse-value pay-dividend-low? [payoff_low_risk] [G-PAYOFF-ZILCH] ]
+  if pcolor = red [report ifelse-value pay-dividend-high? [payoff_high_risk] [ZILCH] ]
+  if pcolor = yellow [report ifelse-value pay-dividend-low? [payoff_low_risk] [ZILCH] ]
   report payoff-stable
 end
 
@@ -200,15 +222,15 @@ end
 to-report choose-initial-pool
   let rvalue random-float 1
 
-  if rvalue < p-low0 [report G-POOL-LOW]
-  if rvalue < (p-low0 + p-high0) [report G-POOL-HIGH]
-  report G-POOL-STABLE
+  if rvalue < p-low0 [report POOL-LOW]
+  if rvalue < (p-low0 + p-high0) [report POOL-HIGH]
+  report POOL-STABLE
 end
 
 to-report get-x [pool]
-  if pool = G-POOL-STABLE [report 2 * min-pxcor / 3]
-  if pool = G-POOL-LOW [report 0]
-  report  2 * max-pxcor / 3 ;; G-POOL-HIGH
+  if pool = POOL-STABLE [report 2 * min-pxcor / 3]
+  if pool = POOL-LOW [report 0]
+  report  2 * max-pxcor / 3 ;; POOL-HIGH
 end
 
 to display-investor [pool]
@@ -223,9 +245,9 @@ end
 ;; Convert a patch colour to a pool number
 
 to-report colour2pool
-  if pcolor = red [report G-POOL-HIGH]
-  if pcolor = yellow [report G-POOL-LOW]
-  report G-POOL-STABLE
+  if pcolor = red [report POOL-HIGH]
+  if pcolor = yellow [report POOL-LOW]
+  report POOL-STABLE
 end
 
 ;; Assign background colours and pool numbers to patches
@@ -302,18 +324,18 @@ to-report use-number [dummy1 dummy2 action-list]
   let estimate-high-number (runresult estimator g-high-number action-list)
   let estimate-high-payoff (max-high-payoff * p-high-payoff) / (estimate-high-number + 1)
 
-  let pool G-POOL-STABLE   ; Assume stable pool - see if other two can do better
+  let pool POOL-STABLE   ; Assume stable pool - see if other two can do better
   let predicted-payoff payoff-stable
   if estimate-low-payoff > predicted-payoff [
-    set pool G-POOL-LOW
+    set pool POOL-LOW
     set predicted-payoff estimate-low-payoff
   ]
-  if estimate-high-payoff > predicted-payoff [set pool G-POOL-HIGH]
+  if estimate-high-payoff > predicted-payoff [set pool POOL-HIGH]
   report pool
 end
 
 to-report get-estimator [action-list]
-  let estimator-name item G-PRED-ESTIMATOR  action-list
+  let estimator-name item PRED-ESTIMATOR  action-list
 
   if estimator-name = "Average" [report [ [a] -> get-average a action-list]]
 end
@@ -321,7 +343,7 @@ end
 ;; Calculate weighted average of history (numbers in low wisk or high risk pool)
 to-report get-average [history action-list]
   let i 0
-  let j G-PRED-ESTIMATOR + 1
+  let j PRED-ESTIMATOR + 1
   let weighted-sum 0
   let total-weight 0
   while [i < length history and j < length action-list] [
@@ -335,7 +357,7 @@ to-report get-average [history action-list]
 end
 
 to-report get-action [action-list]
-  let action-name item G-PRED-ACTION action-list
+  let action-name item PRED-ACTION action-list
 
   if action-name = "Stay" [report [[a b] -> stay a b]]
 
