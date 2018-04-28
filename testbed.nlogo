@@ -128,7 +128,7 @@ to decide-whether-to-switch-pools
      ifelse length choices =  0 [
       set choices lput pool-number choices
     ][
-      let new-pool choose-strategy g-low-payoff g-high-payoff g-low-number g-high-number payoffs choices
+      let new-pool (runresult (get-action favourite-predictor) payoffs choices)
 
       ifelse new-pool = pool-number [
         display-wealth
@@ -173,14 +173,14 @@ end
 
 to-report choose-initial-pool
   let rvalue random-float 1
-  show rvalue
+
   if rvalue < p-low0 [report G-POOL-LOW]
   if rvalue < (p-low0 + p-high0) [report G-POOL-HIGH]
   report G-POOL-STABLE
 end
 
 to display-investor [pool]
-  show pool
+
   ifelse pool = G-POOL-STABLE [
     set xcor 2 * min-pxcor / 3
   ][
@@ -232,7 +232,7 @@ to review-predictors
 end
 
 to-report score-predictor [predictor]  ;; TODO
-  show predictor
+
   report random 18
 end
 
@@ -244,22 +244,23 @@ to-report random-jump [my-payoffs my-choices]
   report (random 2)
 end
 
-to-report use-number [my-payoffs my-choices action-list]
+;; Decide which pool to join by predicting the number of investors in each
+;; pool, predicting expected payoff, then choosing the pool that maximizes
+;; the expected payoff
+to-report use-number [dummy1 dummy2 action-list]
   let estimator get-estimator action-list
   let estimate-low-number (runresult estimator g-low-number action-list)
   let estimate-low-payoff (max-low-payoff * p-low-payoff) / (estimate-low-number + 1)
   let estimate-high-number (runresult estimator g-high-number action-list)
   let estimate-high-payoff (max-high-payoff * p-high-payoff) / (estimate-high-number + 1)
-  let pool G-POOL-STABLE
-  let predicted-payoff 1
+
+  let pool G-POOL-STABLE   ; Assume stable pool - see if other two can do better
+  let predicted-payoff payoff-stable
   if estimate-low-payoff > predicted-payoff [
     set pool G-POOL-LOW
     set predicted-payoff estimate-low-payoff
   ]
-  if estimate-high-payoff > predicted-payoff [
-    set pool G-POOL-HIGH
-    set predicted-payoff estimate-high-payoff
-  ]
+  if estimate-high-payoff > predicted-payoff [set pool G-POOL-HIGH]
   report pool
 end
 
@@ -269,19 +270,20 @@ to-report get-estimator [action-list]
   if estimator-name = "Average" [report [ [a] -> get-average a action-list]]
 end
 
-to-report get-average [pool action-list]
+;; Calculate weighted average of history (numbers in low wisk or high risk pool)
+to-report get-average [history action-list]
   let i 0
   let j G-PRED-ESTIMATOR + 1
-  let total 0
+  let weighted-sum 0
   let total-weight 0
-  while [i < length pool and j < length action-list] [
+  while [i < length history and j < length action-list] [
     let weight item j action-list
-    set total total + weight * item i pool
+    set weighted-sum weighted-sum + weight * item i history
     set total-weight total-weight + weight
     set i i + 1
     set j j + 1
   ]
-  report ifelse-value ( total-weight > 0 ) [total / total-weight] [0]
+  report ifelse-value ( total-weight > 0 ) [weighted-sum / total-weight] [0]
 end
 
 to-report get-action [action-list]
@@ -295,23 +297,6 @@ to-report get-action [action-list]
 
 end
 
-to-report choose-strategy [
-  low-payoff  ;; list of  payouts per agent from low pool, most recent first
-  high-payoff ;; list of  payouts per agent from high pool, most recent first
-  low-number  ;; list of numbers of agents in low pool, most recent first
-  high-number ;; list of numbers of agents in high pool, most recent first
-  my-payoffs  ;; list of payouts, most recent first, before tau subtracted
-  my-choices]  ;; list of choices made by turtle, most recent first
-report (
-  runresult
-  (get-action favourite-predictor)
-  low-payoff
-  high-payoff
-  low-number
-  my-choices
-  my-choices
-  my-payoffs)
-end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -321,7 +306,7 @@ end
 ;; High pays one in 4 ticks, low one in 2
 to-report pay-dividend? [pool-colour]
   let probability ifelse-value (pool-colour = red) [p-high-payoff][p-low-payoff]
-  report random-float 1 < probability
+  report (random-float 1) < probability
 end
 
 ;; Compute payoff for specified pool, assuming it occurs
@@ -465,7 +450,7 @@ p-low0
 p-low0
 0
 1
-0.2
+0.05
 0.01
 1
 NIL
@@ -480,7 +465,7 @@ p-high0
 p-high0
 0
 1
-0.1
+0.05
 0.01
 1
 NIL
@@ -605,7 +590,7 @@ p-low-payoff
 p-low-payoff
 0
 1
-0.49
+0.5
 0.01
 1
 NIL
