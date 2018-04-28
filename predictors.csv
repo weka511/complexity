@@ -8,5 +8,5 @@ Number,2,Average,1,0.5,0.25,0.125
 Number,2,Average,0,1
 Number,2,Average,0,0,1
 Number,2,Average,0,0,0,1
-Number,2,Average,0,0,0,0,1
-Number,2,Average,0,0,0,0,0,1
+Number,2,Trend,3,0,50
+Number,2,Trend,5,0,50

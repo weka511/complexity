@@ -1,4 +1,6 @@
-extensions[CSV]
+extensions[
+  CSV
+]
 
 patches-own [
   pool-number  ;; Used to translate from colour to numbers used in Tournament
@@ -338,6 +340,7 @@ to-report get-estimator [action-list]
   let estimator-name item PRED-ESTIMATOR  action-list
 
   if estimator-name = "Average" [report [ [a] -> get-average a action-list]]
+  if estimator-name = "Trend" [report [ [a] -> get-trend a action-list]]
 end
 
 ;; Calculate weighted average of history (numbers in low wisk or high risk pool)
@@ -354,6 +357,28 @@ to-report get-average [history action-list]
     set j j + 1
   ]
   report ifelse-value ( total-weight > 0 ) [weighted-sum / total-weight] [0]
+end
+
+; Use trend to estimate number
+;
+; Formulae snarfed from
+; http://www.statisticshowto.com/probability-and-statistics/regression-analysis/find-a-linear-regression-equation/
+
+to-report get-trend [history action-list]
+  if length history < 2 [report item 0 history]
+  let n min (list length history item (PRED-ESTIMATOR + 1) action-list)
+  let n-min item (PRED-ESTIMATOR + 2) action-list
+  let n-max item (PRED-ESTIMATOR + 3) action-list
+  let xs n-values n [ i -> i ]
+  let ys n-values n [ i -> item i history]
+  let sum_y sum(ys)
+  let sum_xsq sum(map [x -> x * x] xs)
+  let sum_x sum (xs)
+  let sum_xy  sum (map [i -> i * (item i ys)] xs)
+  let a (sum_y * sum_xsq - sum_x * sum_xy )/(n * sum_xsq - sum_x * sum_x)
+  let b (n * sum_xy - sum_x * sum_y )/(n * sum_xsq - sum_x * sum_x)
+  let raw-prediction round(a - b) ; a + (-1) * b
+  report ifelse-value (raw-prediction  < n-min) [n-min] [ifelse-value (raw-prediction  < n-max)[raw-prediction ][n-max]]
 end
 
 to-report get-action [action-list]
@@ -617,7 +642,7 @@ n-review
 n-review
 1
 n-steps
-1.0
+5.0
 1
 1
 NIL
