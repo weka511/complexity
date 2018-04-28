@@ -63,7 +63,7 @@ to setup
   let predictor-pool []
   foreach csv:from-file "predictors.csv" [
     [row] -> repeat item G-PRED-COUNT row [
-      set predictor-pool lput row predictor-pool
+      set predictor-pool fput row predictor-pool
   ]]
 
   create-turtles n-agents [
@@ -87,12 +87,12 @@ to go
 
   ;; Update history
 
-  set g-low-payoff lput payoff_low_risk  g-low-payoff
-  set g-high-payoff lput payoff_high_risk  g-high-payoff
+  set g-low-payoff fput ifelse-value pay-dividend-low? [payoff_low_risk] [0] g-low-payoff
+  set g-high-payoff fput ifelse-value pay-dividend-high? [payoff_high_risk] [0]  g-high-payoff
   let n-payees-low count turtles with [pcolor = yellow]
-  set g-low-number lput n-payees-low  g-low-number
+  set g-low-number fput n-payees-low  g-low-number
   let n-payees-high count turtles with [pcolor = red]
-  set g-high-number lput n-payees-high g-high-number
+  set g-high-number fput n-payees-high g-high-number
 
   if ticks mod n-review = 0 and ticks > n-horizon[
     ask turtles[
@@ -112,7 +112,7 @@ to calculate-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_high
   let my-payoff get-payout-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
   set wealth wealth + my-payoff
   decide-whether-to-switch-pools
-  set payoffs lput my-payoff payoffs
+  set payoffs fput my-payoff payoffs
 end
 
 ;; Calculate actual payout for specific turtle
@@ -126,7 +126,7 @@ end
 
 to decide-whether-to-switch-pools
      ifelse length choices =  0 [
-      set choices lput pool-number choices
+      set choices fput pool-number choices
     ][
       let new-pool (runresult (get-action favourite-predictor) payoffs choices)
 
@@ -145,7 +145,7 @@ to decide-whether-to-switch-pools
           if can-borrow = "die"[die]
         ]
       ]
-      set choices lput new-pool choices
+      set choices fput new-pool choices
     ]
 end
 
@@ -166,10 +166,13 @@ to establish-turtle  [predictor-pool]
   display-investor choose-initial-pool
 end
 
+;; Decide how much wealth each individual starts with
+
 to-report starting-wealth  ;; TODO - allow flexibility
   report 0
 end
 
+;; Allocate agents to pools at the start
 
 to-report choose-initial-pool
   let rvalue random-float 1
@@ -190,8 +193,8 @@ to display-investor [pool]
       set xcor 2 * max-pxcor / 3
   ]]
 
-  let offset ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 4
-  set xcor xcor + offset
+  let random-offset ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 4
+  set xcor xcor + random-offset
   display-wealth
 end
 
@@ -221,19 +224,46 @@ end
 ;; Predictors and choice of strategy
 
 to review-predictors
-  let scores map score-predictor candidate-predictors
-  let min-score min scores
-  let full-indices n-values (length scores) [ i -> i ]
-  let min-indices filter [i -> item i scores = min-score] full-indices
-  set predictor-index  one-of min-indices
-  set favourite-predictor item predictor-index  candidate-predictors
-  let shape-index  predictor-index mod length shapes
-  set shape item shape-index  shapes
+  ifelse evaluate-altenatives? [
+    let scores map score-predictor candidate-predictors
+    let min-score min scores
+    let full-indices n-values (length scores) [ i -> i ]
+    let min-indices filter [i -> item i scores = min-score] full-indices
+    set predictor-index  one-of min-indices
+    set favourite-predictor item predictor-index  candidate-predictors
+    let shape-index  predictor-index mod length shapes
+    set shape item shape-index  shapes
+  ][
+
+    let best-payoff max (
+      list
+      (payoff-stable * n-horizon)
+      truncate-history-horizon g-low-payoff
+      truncate-history-horizon g-low-payoff)
+    let my-payout truncate-history-horizon payoffs
+    if my-payout + n-grace < best-payoff [
+      let new-predictor-index predictor-index
+      while [new-predictor-index = predictor-index] [
+        set new-predictor-index random length candidate-predictors
+      ]
+      set predictor-index  new-predictor-index
+      set favourite-predictor item predictor-index  candidate-predictors
+      let shape-index  predictor-index mod length shapes
+      set shape item shape-index  shapes
+    ]
+
+  ]
+end
+
+to-report truncate-history-horizon [history]
+  report sum n-values n-horizon [ i -> item i history]
 end
 
 to-report score-predictor [predictor]  ;; TODO
+  let score 0
+  let i 0
 
-  report random 18
+  report score
 end
 
 to-report stay [my-payoffs my-choices]
@@ -319,13 +349,13 @@ to-report get-payoff [pool-colour]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-215
-110
-652
-548
+225
+90
+639
+505
 -1
 -1
-13.0
+12.303030303030303
 1
 10
 1
@@ -635,7 +665,7 @@ n-grace
 n-grace
 0
 100
-5.0
+0.0
 1
 1
 NIL
@@ -655,6 +685,17 @@ payoff-stable
 1
 NIL
 HORIZONTAL
+
+SWITCH
+10
+550
+170
+583
+evaluate-altenatives?
+evaluate-altenatives?
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
