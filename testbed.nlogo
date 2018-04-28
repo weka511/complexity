@@ -27,6 +27,9 @@ globals [
   G-PRED-COUNT     ;; index of count in predictor row
   G-PRED-ACTION    ;; index of action in predictor row
   G-PRED-ESTIMATOR ;; index of action in predictor row
+  g-changed-predictors
+  g-ticks-without-change
+  g-changed-assignments
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -45,11 +48,14 @@ to setup
   set g-low-number  []
   set g-high-number []
 
+  set g-changed-predictors   0
+  set g-ticks-without-change 0
+  set g-changed-assignments  0
   set G-POOL-STABLE 0
   set G-POOL-LOW    1
   set G-POOL-HIGH   2
 
-  set G-PAYOFF-ZILCH 0
+  set G-PAYOFF-ZILCH   0
   set G-PRED-ACTION    0
   set G-PRED-COUNT     1
   set G-PRED-ESTIMATOR 2
@@ -81,6 +87,7 @@ to go
   let payoff_high_risk get-payoff red
   let pay-dividend-high? pay-dividend? [red]
 
+  set g-changed-assignments 0
   ask turtles [
     calculate-payout-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
   ]
@@ -94,11 +101,13 @@ to go
   let n-payees-high count turtles with [pcolor = red]
   set g-high-number fput n-payees-high g-high-number
 
+  set g-changed-predictors 0
   if ticks mod n-review = 0 and ticks > n-horizon[
     ask turtles[
       review-predictors
     ]
   ]
+  set g-ticks-without-change ifelse-value (g-changed-predictors = 0) [g-ticks-without-change + 1][0]
   tick
 end
 
@@ -133,6 +142,7 @@ to decide-whether-to-switch-pools
       ifelse new-pool = pool-number [
         display-wealth
       ][
+      set g-changed-assignments g-changed-assignments + 1
         ifelse wealth >= tau [
           set wealth wealth - tau
           display-investor new-pool
@@ -182,19 +192,14 @@ to-report choose-initial-pool
   report G-POOL-STABLE
 end
 
+to-report get-x [pool]
+  if pool = G-POOL-STABLE [report 2 * min-pxcor / 3]
+  if pool = G-POOL-LOW [report 0]
+  report  2 * max-pxcor / 3 ;; G-POOL-HIGH
+end
+
 to display-investor [pool]
-
-  ifelse pool = G-POOL-STABLE [
-    set xcor 2 * min-pxcor / 3
-  ][
-    ifelse pool = G-POOL-LOW [
-      set xcor 0
-  ][ ;; G-POOL-HIGH
-      set xcor 2 * max-pxcor / 3
-  ]]
-
-  let random-offset ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 4
-  set xcor xcor + random-offset
+  set xcor get-x pool + ( min-pxcor + 2 * max-pxcor * random-float 1.0) / 4
   display-wealth
 end
 
@@ -234,7 +239,6 @@ to review-predictors
     let shape-index  predictor-index mod length shapes
     set shape item shape-index  shapes
   ][
-
     let best-payoff max (
       list
       (payoff-stable * n-horizon)
@@ -242,6 +246,7 @@ to review-predictors
       truncate-history-horizon g-low-payoff)
     let my-payout truncate-history-horizon payoffs
     if my-payout + n-grace < best-payoff [
+      set g-changed-predictors g-changed-predictors + 1
       let new-predictor-index predictor-index
       while [new-predictor-index = predictor-index] [
         set new-predictor-index random length candidate-predictors
@@ -347,12 +352,14 @@ to-report get-payoff [pool-colour]
   let n-payees count turtles with [pcolor = pool-colour]
   report dividend / max list n-payees 1
 end
+
+;; Copyright (c) 2018 Simon Crase - see info tab for details of licence
 @#$#@#$#@
 GRAPHICS-WINDOW
-225
-90
-639
-505
+445
+135
+859
+550
 -1
 -1
 12.303030303030303
@@ -433,7 +440,7 @@ SLIDER
 81
 n-agents
 n-agents
-0
+3
 100
 50.0
 1
@@ -449,8 +456,8 @@ SLIDER
 n-steps
 n-steps
 0
-200
-101.0
+1000
+100.0
 1
 1
 NIL
@@ -465,17 +472,17 @@ tau
 tau
 1
 100
-11.0
+10.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-10
-135
-102
-168
+220
+90
+312
+123
 p-low0
 p-low0
 0
@@ -487,10 +494,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-108
-135
-200
-168
+318
+90
+410
+123
 p-high0
 p-high0
 0
@@ -522,10 +529,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot count turtles with [pcolor = red]"
 
 PLOT
-11
-316
-211
-451
+215
+170
+415
+305
 Wealth
 NIL
 NIL
@@ -537,9 +544,9 @@ true
 false
 "" ""
 PENS
-"Stable" 1.0 0 -10899396 true "" "plot mean [wealth] of turtles with [pcolor = green]"
-"Low" 1.0 0 -1184463 true "" "plot mean [wealth] of turtles with [pcolor = yellow]"
-"pen-2" 1.0 0 -2674135 true "" "plot mean [wealth] of turtles with [pcolor = red]"
+"Stable" 1.0 0 -10899396 true "" "plot sum [wealth] of turtles with [pcolor = green]"
+"Low" 1.0 0 -1184463 true "" "plot sum [wealth] of turtles with [pcolor = yellow]"
+"High" 1.0 0 -2674135 true "" "plot sum [wealth] of turtles with [pcolor = red]"
 
 CHOOSER
 110
@@ -552,30 +559,30 @@ can-borrow
 1
 
 SLIDER
+605
 10
-460
-102
-493
+697
+43
 n-predictors
 n-predictors
 1
 10
-5.0
+7.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-115
-460
-207
-493
+710
+10
+802
+43
 n-review
 n-review
 1
-100
-5.0
+n-steps
+1.0
 1
 1
 NIL
@@ -642,30 +649,30 @@ NIL
 HORIZONTAL
 
 SLIDER
-115
-500
-207
-533
+710
+50
+802
+83
 n-horizon
 n-horizon
 1
-100
-5.0
+n-steps
+10.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-10
-500
-105
-533
+605
+50
+700
+83
 n-grace
 n-grace
 0
-100
-0.0
+n-steps
+5.0
 1
 1
 NIL
@@ -687,15 +694,35 @@ NIL
 HORIZONTAL
 
 SWITCH
-10
-550
-170
-583
+595
+90
+755
+123
 evaluate-altenatives?
 evaluate-altenatives?
 1
 1
 -1000
+
+PLOT
+10
+330
+410
+480
+Changes to predictors
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Changes" 1.0 0 -11221820 true "" "plot g-changed-predictors"
+"Unchanged" 1.0 0 -5825686 true "" "plot g-ticks-without-change"
+"Pool changes" 1.0 0 -2064490 true "" "plot g-changed-assignments"
 
 @#$#@#$#@
 ## WHAT IS IT?
