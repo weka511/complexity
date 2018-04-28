@@ -30,6 +30,7 @@ globals [
   g-changed-predictors
   g-ticks-without-change
   g-changed-assignments
+  g-maximum-wealth-for-scaling
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51,6 +52,7 @@ to setup
   set g-changed-predictors   0
   set g-ticks-without-change 0
   set g-changed-assignments  0
+  set g-maximum-wealth-for-scaling n-steps * payoff-stable
   set G-POOL-STABLE 0
   set G-POOL-LOW    1
   set G-POOL-HIGH   2
@@ -80,7 +82,14 @@ to setup
 end
 
 to go
-  if ticks >= n-steps [stop]
+  if ticks >= n-steps [
+    let rules []
+    ask turtles[
+      set rules lput favourite-predictor rules
+    ]
+    csv:to-file "out.csv" rules
+    stop
+  ]
 
   let payoff_low_risk get-payoff yellow
   let pay-dividend-low? pay-dividend? [yellow]
@@ -108,6 +117,10 @@ to go
     ]
   ]
   set g-ticks-without-change ifelse-value (g-changed-predictors = 0) [g-ticks-without-change + 1][0]
+  set g-maximum-wealth-for-scaling 0
+  ask turtles [
+    set g-maximum-wealth-for-scaling max (list g-maximum-wealth-for-scaling wealth)
+  ]
   tick
 end
 
@@ -204,7 +217,7 @@ to display-investor [pool]
 end
 
 to display-wealth
-   set ycor min (list (max-pycor - 2)  (wealth + min-pycor + 2))
+   set ycor min-pycor +  ((max-pycor - min-pycor) * wealth / g-maximum-wealth-for-scaling)
 end
 
 ;; Convert a patch colour to a pool number
@@ -487,7 +500,7 @@ p-low0
 p-low0
 0
 1
-0.05
+0.1
 0.01
 1
 NIL
@@ -502,17 +515,17 @@ p-high0
 p-high0
 0
 1
-0.05
+0.1
 0.01
 1
 NIL
 HORIZONTAL
 
 PLOT
-10
-175
-210
-312
+5
+130
+420
+267
 Counts
 NIL
 NIL
@@ -521,18 +534,18 @@ NIL
 0.0
 10.0
 true
-false
+true
 "" ""
 PENS
-"default" 1.0 0 -10899396 true "" "plot count turtles with [pcolor = green]"
-"pen-1" 1.0 0 -1184463 true "" "plot count turtles with [pcolor = yellow]"
-"pen-2" 1.0 0 -2674135 true "" "plot count turtles with [pcolor = red]"
+"Stable" 1.0 0 -10899396 true "" "plot count turtles with [pcolor = green]"
+"Low Risk" 1.0 0 -1184463 true "" "plot count turtles with [pcolor = yellow]"
+"High Risk" 1.0 0 -2674135 true "" "plot count turtles with [pcolor = red]"
 
 PLOT
-215
-170
-415
-305
+220
+270
+420
+405
 Wealth
 NIL
 NIL
@@ -566,8 +579,8 @@ SLIDER
 n-predictors
 n-predictors
 1
-10
-7.0
+20
+10.0
 1
 1
 NIL
@@ -706,9 +719,9 @@ evaluate-altenatives?
 
 PLOT
 10
-330
+415
 410
-480
+565
 Changes to predictors
 NIL
 NIL
@@ -723,6 +736,26 @@ PENS
 "Changes" 1.0 0 -11221820 true "" "plot g-changed-predictors"
 "Unchanged" 1.0 0 -5825686 true "" "plot g-ticks-without-change"
 "Pool changes" 1.0 0 -2064490 true "" "plot g-changed-assignments"
+
+PLOT
+5
+270
+205
+420
+Average Wealth
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -10899396 true "" "plot (sum [wealth] of turtles with [pcolor = green]) / max (list count turtles with [pcolor = green] 1)"
+"pen-1" 1.0 0 -1184463 true "" "plot (sum [wealth] of turtles with [pcolor = yellow]) / max (list count turtles with [pcolor = yellow] 1)"
+"pen-2" 1.0 0 -2674135 true "" "plot (sum [wealth] of turtles with [pcolor = red]) / max (list count turtles with [pcolor = red] 1)"
 
 @#$#@#$#@
 ## WHAT IS IT?
