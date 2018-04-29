@@ -9,13 +9,14 @@ patches-own [
 turtles-own [
   wealth               ;; accumulated payout, allowing for tau
   favourite-predictor  ;; the predictor that is actually used to switch pools
-  predictor-index      ;; index of favourite-prodictor in candidates
+  predictor-index      ;; index of favourite-predictor in candidates
   candidate-predictors ;; a pool of predictors, which could be used if
                        ;; favourite-predictor is not performing well
   payoffs              ;; list of payouts, most recent first, before tau subtracted
   choices              ;; list of choices made by turtle, most recent first
-  alternative-payoffs
-  alternative-choices
+  alternative-choices  ;; the choices that the alternative-payoffs would have recommended
+                       ;; during the last n-review time steps
+  alternative-payoffs  ;; the payoffs if the alternative-choices had been made
 ]
 
 globals [
@@ -58,14 +59,9 @@ to-report    PRED-COUNT    ;; index of count in predictor row
   report 1
 end
 
-
-
 to-report   PRED-ESTIMATOR ;; index of action in predictor row
   report 2
 end
-
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -107,13 +103,11 @@ to setup
   reset-ticks
 end
 
+;; Calculate payout from favourite proeictor and alternatives and
+;; update history. Decode whther to change pool or predictor.
 to go
   if ticks >= n-steps [
-    let rules []
-    ask turtles[
-      set rules lput favourite-predictor rules
-    ]
-    csv:to-file "out.csv" rules
+    save-rules
     stop
   ]
 
@@ -125,11 +119,7 @@ to go
   set g-changed-assignments 0
   ask turtles [
     calculate-payout-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
-    if length choices >  1 [
-      let alternatives map [predictor -> (runresult (get-action predictor) payoffs choices)] candidate-predictors
-      set alternative-choices lput alternatives alternative-choices
-      if length alternative-choices > n-review [set alternative-choices remove-item 0 alternative-choices]
-    ]
+    determine-alternative-choices
   ]
 
   ;; Update history
@@ -142,16 +132,7 @@ to go
   set g-high-number fput n-payees-high g-high-number
 
   ask turtles [
-    if length alternative-choices > 0 [
-      let alternatives item (length alternative-choices - 1) alternative-choices
-      let choice item 0 choices
-      let alt-n-payees-low map [alt-choice -> adjust-numbers (alt-choice = POOL-LOW) (item 0 g-low-number) (choice = POOL-LOW)] alternatives
-      let alt-n-payees-high map [alt-choice -> adjust-numbers (alt-choice = POOL-HIGH) (item 0 g-high-number) (choice = POOL-HIGH)] alternatives
-
-      let alternative-payout map [i -> get-alternative-payout (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-horizon [ j -> j ])
-
-      set alternative-payoffs lput alternative-payout alternative-payoffs
-    ]
+    determine-alternative-payoffs
   ]
 
   set g-changed-predictors 0
@@ -168,27 +149,7 @@ to go
   tick
 end
 
-to-report  get-alternative-payout [choice n-low n-high]
-  report ifelse-value (choice = POOL-STABLE) [payoff-stable][
-    ifelse-value (choice = POOL-LOW) [
-      payoff-risk-pool n-low (item 0 g-low-number) (item 0 g-low-payoff)
-    ][
-     payoff-risk-pool n-high (item 0 g-high-number) (item 0 g-high-payoff)
-    ]]
-end
 
-to-report payoff-risk-pool [n m p]
-  report ifelse-value (p = 0) [0] [p * (max (list 1 m))  / max (list 1 n)]
-end
-
-;; Recalculate numbers in low or high point, after replacing choice with alternative
-to-report adjust-numbers [alt-choice numbers choice]
-  report  adjust-number alt-choice numbers choice
-end
-
-to-report adjust-number [alt-choice number choice]
-  report number + ifelse-value alt-choice [1][0] - ifelse-value choice [1][0]
-end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -211,7 +172,6 @@ to-report get-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_hig
 end
 
 ;; Decide whether to switch pools
-
 to decide-whether-to-switch-pools
      ifelse length choices =  0 [
       set choices fput pool-number choices
@@ -237,6 +197,51 @@ to decide-whether-to-switch-pools
       set choices fput new-pool choices
     ]
 end
+
+;; Find out what each of the alternative prodictrs would have done
+;; so we can cualate altenative payouts
+to determine-alternative-choices
+  if length choices >  1 [  ;; TODO - why does program crash without this?
+    let alternatives-for-this-step map [predictor -> (runresult (get-action predictor) payoffs choices)] candidate-predictors
+    set alternative-choices lput alternatives-for-this-step  alternative-choices
+    if length alternative-choices > n-review [set alternative-choices remove-item 0 alternative-choices]
+  ]
+end
+
+;; Calculate what payouts would have been with different prodictors.
+;; TODO: allow for tau
+to determine-alternative-payoffs
+  if length alternative-choices > 0 [
+    let alternatives item (length alternative-choices - 1) alternative-choices
+    let actual-choice item 0 choices
+    let alt-n-payees-low map [alt-choice -> adjust-numbers (alt-choice = POOL-LOW) (item 0 g-low-number) (actual-choice = POOL-LOW)] alternatives
+    let alt-n-payees-high map [alt-choice -> adjust-numbers (alt-choice = POOL-HIGH) (item 0 g-high-number) (actual-choice = POOL-HIGH)] alternatives
+    let alternative-payout map [i -> get-alternative-payout (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-horizon [ j -> j ])
+    set alternative-payoffs lput alternative-payout alternative-payoffs
+  ]
+end
+
+;; Calculate what payouts would have been with specific choice.
+;; TODO: allow for tau
+to-report  get-alternative-payout [choice n-low n-high]
+  report ifelse-value (choice = POOL-STABLE) [payoff-stable][
+    ifelse-value (choice = POOL-LOW) [
+      payoff-risk-pool n-low (item 0 g-low-number) (item 0 g-low-payoff)
+    ][
+     payoff-risk-pool n-high (item 0 g-high-number) (item 0 g-high-payoff)
+    ]]
+end
+
+;; Calculate payout from high or low risk pool
+to-report payoff-risk-pool [n-alternative n-actual actual-total-payoff]
+  report ifelse-value (actual-total-payoff = 0) [0] [actual-total-payoff * (max (list 1 n-actual))  / max (list 1 n-alternative)]
+end
+
+;; Recalculate numbers in low or high point, after replacing choice with alternative
+to-report adjust-numbers [alt-choice number choice]
+  report number + ifelse-value alt-choice [1][0] - ifelse-value choice [1][0]
+end
+
 
 ;; Set up an investor with a collection of predictors
 ;; and assign to a pool
@@ -322,24 +327,19 @@ end
 
 to review-predictors
   ifelse evaluate-altenatives? [
-;    output-print alternative-payoffs
     let scores   n-values n-horizon [i -> 0]
-;    output-print scores0
     let i 0
     while [i < length alternative-payoffs] [
       set scores accumulate item i alternative-payoffs scores
       set i i + 1
     ]
- ;   output-print scores
-;    let scores map score-predictor candidate-predictors
+
     let max-score max scores
-    if max-score > item predictor-index scores [
+    if max-score > n-grace + item predictor-index scores [
       set g-changed-predictors g-changed-predictors + 1
       let full-indices n-values (length scores) [ j -> j ]
       let max-indices filter [j -> item j scores = max-score] full-indices
-      ;   output-print  predictor-index
       set predictor-index  one-of max-indices
-      ;    output-print (list max-score predictor-index)
       set favourite-predictor item predictor-index  candidate-predictors
       let shape-index  predictor-index mod length shapes
       set shape item shape-index  shapes
@@ -377,6 +377,14 @@ end
 to-report score-one [index predictor]  ;; TODO
   let predicted-pool (runresult (get-action predictor) payoffs choices)
   report 0
+end
+
+to save-rules
+  let rules []
+  ask turtles[
+    set rules lput favourite-predictor rules
+  ]
+  csv:to-file "out.csv" rules
 end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -499,10 +507,10 @@ end
 ;; Copyright (c) 2018 Simon Crase - see info tab for details of licence
 @#$#@#$#@
 GRAPHICS-WINDOW
-445
-135
-859
-550
+845
+10
+1259
+425
 -1
 -1
 12.303030303030303
@@ -598,7 +606,7 @@ SLIDER
 83
 n-steps
 n-steps
-0
+1
 1000
 100.0
 1
@@ -815,7 +823,7 @@ n-grace
 n-grace
 0
 n-steps
-0.0
+100.0
 1
 1
 NIL
@@ -848,10 +856,10 @@ evaluate-altenatives?
 -1000
 
 PLOT
-10
-415
-410
-565
+425
+145
+825
+295
 Changes to predictors
 NIL
 NIL
@@ -865,7 +873,7 @@ true
 PENS
 "Changes" 1.0 0 -11221820 true "" "plot g-changed-predictors"
 "Unchanged" 1.0 0 -5825686 true "" "plot g-ticks-without-change"
-"Pool changes" 1.0 0 -2064490 true "" "plot g-changed-assignments"
+"Pool changes" 1.0 0 -955883 true "" "plot g-changed-assignments"
 
 PLOT
 5
