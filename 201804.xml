@@ -1,9 +1,9 @@
 <NotepadPlus>
     <Project name="Model">
-        <File name="201804.bib" />
         <File name="LICENSE" />
         <File name="predictors.csv" />
         <File name="testbed.nlogo" />
+        <File name="README.md" />
     </Project>
     <Project name="Outputs">
         <File name="out.csv" />
@@ -11,5 +11,6 @@
     <Project name="Documentation">
         <File name="Proposal.tex" />
         <File name="Writeup.tex" />
+        <File name="201804.bib" />
     </Project>
 </NotepadPlus>
