@@ -127,9 +127,7 @@ to go
     calculate-payout-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
     if length choices >  1 [
       let alternatives map [predictor -> (runresult (get-action predictor) payoffs choices)] candidate-predictors
-      output-print (list "00" alternatives)
       set alternative-choices lput alternatives alternative-choices
-      output-print (list "0" alternative-choices)
       if length alternative-choices > n-review [set alternative-choices remove-item 0 alternative-choices]
     ]
   ]
@@ -145,14 +143,14 @@ to go
 
   ask turtles [
     if length alternative-choices > 0 [
-      output-print (list "a" alternative-choices)
       let alternatives item (length alternative-choices - 1) alternative-choices
-      output-print (list "aa" alternatives)
       let choice item 0 choices
-      let alt-n-payees-low map [alt-choice -> adjust-numbers (alt-choice = POOL-LOW) g-low-number (choice = POOL-LOW)] alternatives
-      let alt-n-payees-high map [alt-choice -> adjust-numbers (alt-choice = POOL-HIGH) g-low-number (choice = POOL-HIGH)] alternatives
-       output-print (list "aaa"  alt-n-payees-low  alt-n-payees-high)
-      let alternative-payout map [i -> get-alternative-payout (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] n-values n-horizon [ j -> j ]
+      let alt-n-payees-low map [alt-choice -> adjust-numbers (alt-choice = POOL-LOW) (item 0 g-low-number) (choice = POOL-LOW)] alternatives
+      let alt-n-payees-high map [alt-choice -> adjust-numbers (alt-choice = POOL-HIGH) (item 0 g-high-number) (choice = POOL-HIGH)] alternatives
+
+      let alternative-payout map [i -> get-alternative-payout (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-horizon [ j -> j ])
+
+      set alternative-payoffs lput alternative-payout alternative-payoffs
     ]
   ]
 
@@ -171,27 +169,24 @@ to go
 end
 
 to-report  get-alternative-payout [choice n-low n-high]
-  output-print ( list "b" choice n-low g-low-number n-high g-high-number)
   report ifelse-value (choice = POOL-STABLE) [payoff-stable][
     ifelse-value (choice = POOL-LOW) [
-      p1 n-low (item 0 g-low-number) (item 0 g-low-payoff)
+      payoff-risk-pool n-low (item 0 g-low-number) (item 0 g-low-payoff)
     ][
-      p1 n-high (item 0 g-high-number) (item 0 g-high-payoff)]
-  ]
+     payoff-risk-pool n-high (item 0 g-high-number) (item 0 g-high-payoff)
+    ]]
 end
 
-to-report p1 [n m p]
-  output-print (list "p1" n m p)
-  report ifelse-value (p = 0) [0] [p * (max (list 1 m))  < n]
+to-report payoff-risk-pool [n m p]
+  report ifelse-value (p = 0) [0] [p * (max (list 1 m))  / max (list 1 n)]
 end
 
+;; Recalculate numbers in low or high point, after replacing choice with alternative
 to-report adjust-numbers [alt-choice numbers choice]
-;  output-print (list "b" alt-choice numbers choice)
-  report map [number -> adjust-number alt-choice number choice] numbers
+  report  adjust-number alt-choice numbers choice
 end
 
 to-report adjust-number [alt-choice number choice]
-;  output-print (list "c" alt-choice number choice)
   report number + ifelse-value alt-choice [1][0] - ifelse-value choice [1][0]
 end
 
@@ -315,16 +310,40 @@ end
 
 ;; Predictors and choice of strategy
 
+to-report accumulate [a b]
+  let result   []
+  let i 0
+  while [i < length a] [
+    set result fput (item i a + item i b) result
+    set i i + 1
+  ]
+  report result
+end
+
 to review-predictors
   ifelse evaluate-altenatives? [
-    let scores map score-predictor candidate-predictors
-    let min-score min scores
-    let full-indices n-values (length scores) [ i -> i ]
-    let min-indices filter [i -> item i scores = min-score] full-indices
-    set predictor-index  one-of min-indices
-    set favourite-predictor item predictor-index  candidate-predictors
-    let shape-index  predictor-index mod length shapes
-    set shape item shape-index  shapes
+;    output-print alternative-payoffs
+    let scores   n-values n-horizon [i -> 0]
+;    output-print scores0
+    let i 0
+    while [i < length alternative-payoffs] [
+      set scores accumulate item i alternative-payoffs scores
+      set i i + 1
+    ]
+ ;   output-print scores
+;    let scores map score-predictor candidate-predictors
+    let max-score max scores
+    if max-score > item predictor-index scores [
+      set g-changed-predictors g-changed-predictors + 1
+      let full-indices n-values (length scores) [ j -> j ]
+      let max-indices filter [j -> item j scores = max-score] full-indices
+      ;   output-print  predictor-index
+      set predictor-index  one-of max-indices
+      ;    output-print (list max-score predictor-index)
+      set favourite-predictor item predictor-index  candidate-predictors
+      let shape-index  predictor-index mod length shapes
+      set shape item shape-index  shapes
+    ]
   ][
     let best-payoff max (
       list
@@ -796,7 +815,7 @@ n-grace
 n-grace
 0
 n-steps
-5.0
+0.0
 1
 1
 NIL
@@ -824,7 +843,7 @@ SWITCH
 123
 evaluate-altenatives?
 evaluate-altenatives?
-1
+0
 1
 -1000
 
