@@ -1,5 +1,5 @@
 Random,2
-Stay,10
+Stay,2
 Number,2,Average,1,1,1
 Number,2,Average,1,1,1,1
 Number,2,Average,1,1,1,1,1,1
@@ -9,5 +9,16 @@ Number,2,Cycle,1
 Number,2,Cycle,2
 Number,2,Cycle,3
 Number,2,Cycle,4
+Number,2,Cycle,5
+Number,2,Cycle,6
+Number,2,Cycle,7
+Number,2,Cycle,8
+Number,2,Cycle,9
+Number,2,Cycle,10
+Number,2,Trend,2,0,50
 Number,2,Trend,3,0,50
+Number,2,Trend,4,0,50
 Number,2,Trend,5,0,50
+Number,2,Trend,6,0,50
+Number,2,Trend,7,0,50
+Number,2,Trend,8,0,50
