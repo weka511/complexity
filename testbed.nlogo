@@ -63,6 +63,14 @@ to-report   PRED-ESTIMATOR ;; index of action in predictor row
   report 2
 end
 
+to-report PRED-PARAMETERS-START ;; index of first parameter in predictor row
+  report 3
+end
+
+to-report get-parameter-index [index]
+  report PRED-PARAMETERS-START + index
+end
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Top level procedures
@@ -405,7 +413,10 @@ end
 
 ;; Dumb rule, which randomly jumps to another pool
 to-report random-jump [action-list]
-  report (random 2)
+  let low-threshold item get-parameter-index 0 action-list
+  let high-threshold low-threshold +  item get-parameter-index 1 action-list
+  let selection random-float 1
+  report ifelse-value (selection < low-threshold) [POOL-LOW][ifelse-value (selection < high-threshold)[POOL-HIGH][POOL-STABLE]]
 end
 
 ;; Decide which pool to join by predicting the number of investors in each
@@ -441,14 +452,14 @@ end
 
 ;; Look for cycles
 to-report get-cycle [history action-list]
-  let n item (PRED-ESTIMATOR + 1) action-list
+  let n item PRED-PARAMETERS-START action-list
   report ifelse-value (n < length history) [item n history] [item 0 history]
 end
 
 ;; Calculate weighted average of history (numbers in low wisk or high risk pool)
 to-report get-average [history action-list]
   let i 0
-  let j PRED-ESTIMATOR + 1
+  let j PRED-PARAMETERS-START
   let weighted-sum 0
   let total-weight 0
   while [i < length history and j < length action-list] [
@@ -468,9 +479,9 @@ end
 
 to-report get-trend [history action-list]
   if length history < 2 [report item 0 history]
-  let n min (list length history item (PRED-ESTIMATOR + 1) action-list)
-  let n-min item (PRED-ESTIMATOR + 2) action-list
-  let n-max item (PRED-ESTIMATOR + 3) action-list
+  let n min (list length history item PRED-PARAMETERS-START action-list)
+  let n-min item get-parameter-index 1 action-list
+  let n-max item get-parameter-index 2 action-list
   let xs n-values n [ i -> i ]
   let ys n-values n [ i -> item i history]
   let sum_y sum(ys)
