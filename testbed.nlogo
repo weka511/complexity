@@ -333,44 +333,53 @@ to-report accumulate [a b]
   report result
 end
 
+; Review performance of predictor, and replace it if it is not doing well
 to review-predictors
-  ifelse evaluate-altenatives? [
-    let scores   n-values n-horizon [i -> 0]
-    let i 0
-    while [i < length alternative-payoffs] [
-      set scores accumulate item i alternative-payoffs scores
-      set i i + 1
-    ]
+  ifelse evaluate-altenatives? [review-against-alternatives][review-against-competitors]
+end
 
-    let max-score max scores
-    if max-score > n-grace + item predictor-index scores [
-      set g-changed-predictors g-changed-predictors + 1
-      let full-indices n-values (length scores) [ j -> j ]
-      let max-indices filter [j -> item j scores = max-score] full-indices
-      set predictor-index  one-of max-indices
-      set favourite-predictor item predictor-index  candidate-predictors
-      let shape-index  predictor-index mod length shapes
-      set shape item shape-index  shapes
+; Compare recent payofs with the competition
+; if not good enoughm choose new predicytor at random
+to review-against-competitors
+  let best-payoff max (
+    list
+    (payoff-stable * n-horizon)
+    truncate-history-horizon g-low-payoff
+    truncate-history-horizon g-low-payoff)
+  let my-payout truncate-history-horizon payoffs
+  if my-payout + n-grace < best-payoff [
+    set g-changed-predictors g-changed-predictors + 1
+    let new-predictor-index predictor-index
+    while [new-predictor-index = predictor-index] [
+      set new-predictor-index random length candidate-predictors
     ]
-  ][
-    let best-payoff max (
-      list
-      (payoff-stable * n-horizon)
-      truncate-history-horizon g-low-payoff
-      truncate-history-horizon g-low-payoff)
-    let my-payout truncate-history-horizon payoffs
-    if my-payout + n-grace < best-payoff [
-      set g-changed-predictors g-changed-predictors + 1
-      let new-predictor-index predictor-index
-      while [new-predictor-index = predictor-index] [
-        set new-predictor-index random length candidate-predictors
-      ]
-      set predictor-index  new-predictor-index
-      set favourite-predictor item predictor-index  candidate-predictors
-      let shape-index  predictor-index mod length shapes
-      set shape item shape-index  shapes
-    ]
+    set predictor-index  new-predictor-index
+    set favourite-predictor item predictor-index  candidate-predictors
+    let shape-index  predictor-index mod length shapes
+    set shape item shape-index  shapes
+  ]
 
+end
+
+; Compare predictions with out pool
+; if not good enough, choose best alternative
+to review-against-alternatives
+  let scores   n-values n-horizon [i -> 0]
+  let i 0
+  while [i < length alternative-payoffs] [
+    set scores accumulate item i alternative-payoffs scores
+    set i i + 1
+  ]
+
+  let max-score max scores
+  if max-score > n-grace + item predictor-index scores [
+    set g-changed-predictors g-changed-predictors + 1
+    let full-indices n-values (length scores) [ j -> j ]
+    let max-indices filter [j -> item j scores = max-score] full-indices
+    set predictor-index  one-of max-indices
+    set favourite-predictor item predictor-index  candidate-predictors
+    let shape-index  predictor-index mod length shapes
+    set shape item shape-index  shapes
   ]
 end
 
