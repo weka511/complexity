@@ -17,15 +17,15 @@ turtles-own [
 ]
 
 globals [
-  g-low-payoff     ;; list of  payouts per agent from low pool, most recent first
-  g-high-payoff    ;; list of  payouts per agent from high pool, most recent first
-  g-low-number     ;; list of numbers of agents in low pool, most recent first
-  g-high-number    ;; list of numbers of agents in high pool, most recent first
-
-  g-changed-predictors
-  g-ticks-without-change
-  g-changed-assignments
-  g-maximum-wealth-for-scaling
+  g-low-payoff                 ;; list of  payouts per agent from low pool, most recent first
+  g-high-payoff                ;; list of  payouts per agent from high pool, most recent first
+  g-low-number                 ;; list of numbers of agents in low pool, most recent first
+  g-high-number                ;; list of numbers of agents in high pool, most recent first
+  g-changed-predictors         ;; Number of predictors that were replaced in the current round
+  g-ticks-without-change       ;; Number of ticks that have had no change in predictors
+                               ;; Reset each time even one predictor changed
+  g-changed-assignments        ;; Number of pools chnaged during current round
+  g-maximum-wealth-for-scaling ;; Maximum wealth this round - used to scale output area
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -308,6 +308,18 @@ to-report score-predictor [predictor]  ;; TODO
   report score
 end
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Actions
+
+;; Find the action that has been stepicified
+to-report get-action [action-list]
+  let action-name item PRED-ACTION action-list
+  if action-name = "Stay" [report [[a b] -> stay a b]]
+  if action-name = "Random" [report [[a b] -> random-jump a b]]
+  if action-name = "Number" [report [[a b] -> use-number a b action-list] ]
+end
+
 to-report stay [my-payoffs my-choices]
   report item 0 my-choices
 end
@@ -336,6 +348,10 @@ to-report use-number [dummy1 dummy2 action-list]
   report pool
 end
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Estimators
+
 to-report get-estimator [action-list]
   let estimator-name item PRED-ESTIMATOR  action-list
   if estimator-name = "Cycle" [report [ [a] -> get-cycle a action-list]]
@@ -343,6 +359,7 @@ to-report get-estimator [action-list]
   if estimator-name = "Trend" [report [ [a] -> get-trend a action-list]]
 end
 
+;; Look for cycles
 to-report get-cycle [history action-list]
   let n item (PRED-ESTIMATOR + 1) action-list
   report ifelse-value (n < length history) [item n history] [item 0 history]
@@ -364,10 +381,10 @@ to-report get-average [history action-list]
   report ifelse-value ( total-weight > 0 ) [weighted-sum / total-weight] [0]
 end
 
-; Use trend to estimate number
-;
-; Formulae snarfed from
-; http://www.statisticshowto.com/probability-and-statistics/regression-analysis/find-a-linear-regression-equation/
+;l Use trend to estimate number
+;;
+;; Formulae snarfed from
+;; http://www.statisticshowto.com/probability-and-statistics/regression-analysis/find-a-linear-regression-equation/
 
 to-report get-trend [history action-list]
   if length history < 2 [report item 0 history]
@@ -386,16 +403,7 @@ to-report get-trend [history action-list]
   report ifelse-value (raw-prediction  < n-min) [n-min] [ifelse-value (raw-prediction  < n-max)[raw-prediction ][n-max]]
 end
 
-to-report get-action [action-list]
-  let action-name item PRED-ACTION action-list
 
-  if action-name = "Stay" [report [[a b] -> stay a b]]
-
-  if action-name = "Random" [report [[a b] -> random-jump a b]]
-
-  if action-name = "Number" [report [[a b] -> use-number a b action-list] ]
-
-end
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
