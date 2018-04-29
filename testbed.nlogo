@@ -7,12 +7,12 @@ patches-own [
 ]
 
 turtles-own [
-  wealth               ;; accumulated payout, allowing for tau
+  wealth               ;; accumulated payoff, allowing for tau
   favourite-predictor  ;; the predictor that is actually used to switch pools
   predictor-index      ;; index of favourite-predictor in candidates
   candidate-predictors ;; a pool of predictors, which could be used if
                        ;; favourite-predictor is not performing well
-  payoffs              ;; list of payouts, most recent first, before tau subtracted
+  payoffs              ;; list of payoffs, most recent first, before tau subtracted
   choices              ;; list of choices made by turtle, most recent first
   alternative-choices  ;; the choices that the alternative-payoffs would have recommended
                        ;; during the last n-review time steps
@@ -20,8 +20,8 @@ turtles-own [
 ]
 
 globals [
-  g-low-payoff                 ;; list of  payouts per agent from low pool, most recent first
-  g-high-payoff                ;; list of  payouts per agent from high pool, most recent first
+  g-low-payoff                 ;; list of  payoffs per agent from low pool, most recent first
+  g-high-payoff                ;; list of  payoffs per agent from high pool, most recent first
   g-low-number                 ;; list of numbers of agents in low pool, most recent first
   g-high-number                ;; list of numbers of agents in high pool, most recent first
   g-changed-predictors         ;; Number of predictors that were replaced in the current round
@@ -111,7 +111,7 @@ to setup
   reset-ticks
 end
 
-;; Calculate payout from favourite proeictor and alternatives and
+;; Calculate payoff from favourite proeictor and alternatives and
 ;; update history. Decode whther to change pool or predictor.
 to go
   if ticks >= n-steps [
@@ -126,7 +126,7 @@ to go
 
   set g-changed-assignments 0
   ask turtles [
-    calculate-payout-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
+    calculate-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
     determine-alternative-choices
   ]
 
@@ -163,17 +163,17 @@ end
 ;;
 ;; implementation
 
-;; Collect any payout and decide whether to change pools
+;; Collect any payoff and decide whether to change pools
 
-to calculate-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
-  let my-payoff get-payout-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
+to calculate-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
+  let my-payoff get-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
   set wealth wealth + my-payoff
   decide-whether-to-switch-pools
   set payoffs fput my-payoff payoffs
 end
 
-;; Calculate actual payout for specific turtle
-to-report get-payout-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
+;; Calculate actual payoff for specific turtle
+to-report get-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
   if pcolor = red [report ifelse-value pay-dividend-high? [payoff_high_risk] [ZILCH] ]
   if pcolor = yellow [report ifelse-value pay-dividend-low? [payoff_low_risk] [ZILCH] ]
   report payoff-stable
@@ -207,7 +207,7 @@ to decide-whether-to-switch-pools
 end
 
 ;; Find out what each of the alternative prodictrs would have done
-;; so we can cualate altenative payouts
+;; so we can cualate altenative payoffs
 to determine-alternative-choices
   if length choices >  1 [  ;; TODO - why does program crash without this?
     let alternatives-for-this-step map [predictor -> (runresult (get-action predictor) payoffs choices)] candidate-predictors
@@ -216,7 +216,7 @@ to determine-alternative-choices
   ]
 end
 
-;; Calculate what payouts would have been with different prodictors.
+;; Calculate what payoffs would have been with different prodictors.
 ;; TODO: allow for tau
 to determine-alternative-payoffs
   if length alternative-choices > 0 [
@@ -224,14 +224,14 @@ to determine-alternative-payoffs
     let actual-choice item 0 choices
     let alt-n-payees-low map [alt-choice -> adjust-numbers (alt-choice = POOL-LOW) (item 0 g-low-number) (actual-choice = POOL-LOW)] alternatives
     let alt-n-payees-high map [alt-choice -> adjust-numbers (alt-choice = POOL-HIGH) (item 0 g-high-number) (actual-choice = POOL-HIGH)] alternatives
-    let alternative-payout map [i -> get-alternative-payout (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-horizon [ j -> j ])
-    set alternative-payoffs lput alternative-payout alternative-payoffs
+    let alternative-payoff map [i -> get-alternative-payoff (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-horizon [ j -> j ])
+    set alternative-payoffs lput alternative-payoff alternative-payoffs
   ]
 end
 
-;; Calculate what payouts would have been with specific choice.
+;; Calculate what payoffs would have been with specific choice.
 ;; TODO: allow for tau
-to-report  get-alternative-payout [choice n-low n-high]
+to-report  get-alternative-payoff [choice n-low n-high]
   report ifelse-value (choice = POOL-STABLE) [payoff-stable][
     ifelse-value (choice = POOL-LOW) [
       payoff-risk-pool n-low (item 0 g-low-number) (item 0 g-low-payoff)
@@ -240,7 +240,7 @@ to-report  get-alternative-payout [choice n-low n-high]
     ]]
 end
 
-;; Calculate payout from high or low risk pool
+;; Calculate payoff from high or low risk pool
 to-report payoff-risk-pool [n-alternative n-actual actual-total-payoff]
   report ifelse-value (actual-total-payoff = 0) [0] [actual-total-payoff * (max (list 1 n-actual))  / max (list 1 n-alternative)]
 end
@@ -346,8 +346,8 @@ to review-against-competitors
     (payoff-stable * n-horizon)
     truncate-history-horizon g-low-payoff
     truncate-history-horizon g-low-payoff)
-  let my-payout truncate-history-horizon payoffs
-  if my-payout + n-grace < best-payoff [
+  let my-payoff truncate-history-horizon payoffs
+  if my-payoff + n-grace < best-payoff [
     set g-changed-predictors g-changed-predictors + 1
     let new-predictor-index predictor-index
     while [new-predictor-index = predictor-index] [
