@@ -393,23 +393,25 @@ end
 ;; Find the action that has been stepicified
 to-report get-action [action-list]
   let action-name item PRED-ACTION action-list
-  if action-name = "Stay" [report [[a b] -> stay a b]]
-  if action-name = "Random" [report [[a b] -> random-jump a b]]
-  if action-name = "Number" [report [[a b] -> use-number a b action-list] ]
+  if action-name = "Stay"   [report [[my-payoffs my-choices] -> stay my-choices]]
+  if action-name = "Random" [report [[my-payoffs my-choice] ->  random-jump action-list]]
+  if action-name = "Number" [report [[my-payoffs my-choice] ->  use-number action-list] ]
 end
 
-to-report stay [my-payoffs my-choices]
+;; Dumb rule, which just stays wherever it is
+to-report stay [ my-choices]
   report item 0 my-choices
 end
 
-to-report random-jump [my-payoffs my-choices]
+;; Dumb rule, which randomly jumps to another pool
+to-report random-jump [action-list]
   report (random 2)
 end
 
 ;; Decide which pool to join by predicting the number of investors in each
 ;; pool, predicting expected payoff, then choosing the pool that maximizes
 ;; the expected payoff
-to-report use-number [dummy1 dummy2 action-list]
+to-report use-number [ action-list]
   let estimator get-estimator action-list
   let estimate-low-number (runresult estimator g-low-number action-list)
   let estimate-low-payoff (max-low-payoff * p-low-payoff) / (estimate-low-number + 1)
@@ -823,7 +825,7 @@ n-grace
 n-grace
 0
 n-steps
-100.0
+24.0
 1
 1
 NIL
