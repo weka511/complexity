@@ -1,11 +1,15 @@
 <NotepadPlus>
-    <Project name="201804">
+    <Project name="Model">
         <File name="201804.bib" />
         <File name="LICENSE" />
-        <File name="out.csv" />
         <File name="predictors.csv" />
         <File name="testbed.nlogo" />
-        <File name="Proposal.log" />
-        <File name="Writeup.log" />
+    </Project>
+    <Project name="Outputs">
+        <File name="out.csv" />
+    </Project>
+    <Project name="Documentation">
+        <File name="Proposal.tex" />
+        <File name="Writeup.tex" />
     </Project>
 </NotepadPlus>
