@@ -11,9 +11,11 @@ turtles-own [
   favourite-predictor  ;; the predictor that is actually used to switch pools
   predictor-index      ;; index of favourite-prodictor in candidates
   candidate-predictors ;; a pool of predictors, which could be used if
-                       ;; favourite-predictor is ntr performing well
+                       ;; favourite-predictor is not performing well
   payoffs              ;; list of payouts, most recent first, before tau subtracted
   choices              ;; list of choices made by turtle, most recent first
+  alternative-payoffs
+  alternative-choices
 ]
 
 globals [
@@ -123,6 +125,13 @@ to go
   set g-changed-assignments 0
   ask turtles [
     calculate-payout-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
+    if length choices >  1 [
+      let alternatives map [predictor -> (runresult (get-action predictor) payoffs choices)] candidate-predictors
+      output-print (list "00" alternatives)
+      set alternative-choices lput alternatives alternative-choices
+      output-print (list "0" alternative-choices)
+      if length alternative-choices > n-review [set alternative-choices remove-item 0 alternative-choices]
+    ]
   ]
 
   ;; Update history
@@ -134,6 +143,19 @@ to go
   let n-payees-high count turtles with [pcolor = red]
   set g-high-number fput n-payees-high g-high-number
 
+  ask turtles [
+    if length alternative-choices > 0 [
+      output-print (list "a" alternative-choices)
+      let alternatives item (length alternative-choices - 1) alternative-choices
+      output-print (list "aa" alternatives)
+      let choice item 0 choices
+      let alt-n-payees-low map [alt-choice -> adjust-numbers (alt-choice = POOL-LOW) g-low-number (choice = POOL-LOW)] alternatives
+      let alt-n-payees-high map [alt-choice -> adjust-numbers (alt-choice = POOL-HIGH) g-low-number (choice = POOL-HIGH)] alternatives
+       output-print (list "aaa"  alt-n-payees-low  alt-n-payees-high)
+      let alternative-payout map [i -> get-alternative-payout (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] n-values n-horizon [ j -> j ]
+    ]
+  ]
+
   set g-changed-predictors 0
   if ticks mod n-review = 0 and ticks > n-horizon[
     ask turtles[
@@ -141,11 +163,36 @@ to go
     ]
   ]
   set g-ticks-without-change ifelse-value (g-changed-predictors = 0) [g-ticks-without-change + 1][0]
-  set g-maximum-wealth-for-scaling 0
+  set g-maximum-wealth-for-scaling 1
   ask turtles [
     set g-maximum-wealth-for-scaling max (list g-maximum-wealth-for-scaling wealth)
   ]
   tick
+end
+
+to-report  get-alternative-payout [choice n-low n-high]
+  output-print ( list "b" choice n-low g-low-number n-high g-high-number)
+  report ifelse-value (choice = POOL-STABLE) [payoff-stable][
+    ifelse-value (choice = POOL-LOW) [
+      p1 n-low (item 0 g-low-number) (item 0 g-low-payoff)
+    ][
+      p1 n-high (item 0 g-high-number) (item 0 g-high-payoff)]
+  ]
+end
+
+to-report p1 [n m p]
+  output-print (list "p1" n m p)
+  report ifelse-value (p = 0) [0] [p * (max (list 1 m))  < n]
+end
+
+to-report adjust-numbers [alt-choice numbers choice]
+;  output-print (list "b" alt-choice numbers choice)
+  report map [number -> adjust-number alt-choice number choice] numbers
+end
+
+to-report adjust-number [alt-choice number choice]
+;  output-print (list "c" alt-choice number choice)
+  report number + ifelse-value alt-choice [1][0] - ifelse-value choice [1][0]
 end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -210,6 +257,9 @@ to establish-turtle  [predictor-pool]
   set size 1
   set color white
   set wealth starting-wealth
+  set alternative-payoffs []
+  set alternative-choices []
+
   display-investor choose-initial-pool
 end
 
@@ -302,12 +352,13 @@ to-report truncate-history-horizon [history]
 end
 
 to-report score-predictor [predictor]  ;; TODO
-  let score 0
-  let i 0
-
-  report score
+  report sum(map [i -> score-one i predictor ] n-values n-horizon [ i -> i ])
 end
 
+to-report score-one [index predictor]  ;; TODO
+  let predicted-pool (runresult (get-action predictor) payoffs choices)
+  report 0
+end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Actions
