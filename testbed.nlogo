@@ -233,7 +233,7 @@ to determine-alternative-payoffs
     let alternative-payoff-before-tau map [i -> get-alternative-payoff (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-horizon [ j -> j ])
     let previous-alternatives item ifelse-value (length alternative-choices > 1)[1][0] alternative-choices
     let alternative-payoff-after-tau (map [[a b p] -> ifelse-value (a = b)[p][p - tau]] alternatives previous-alternatives alternative-payoff-before-tau)
-    set alternative-payoffs trim-list (lput alternative-payoff-after-tau alternative-payoffs) n-review
+    set alternative-payoffs trim-list (fput alternative-payoff-after-tau alternative-payoffs) n-review
   ]
 end
 
@@ -362,18 +362,19 @@ end
 ; Compare predictions with our pool
 ; if not good enough, choose best alternative
 to review-against-alternatives
-  let alternative-scores   n-values n-horizon [i -> 0]
+  let total-alternative-scores   n-values n-horizon [i -> 0]
   let i 0
   while [i < length alternative-payoffs] [
-    set alternative-scores (map [[a b] -> 1 + b] item i alternative-payoffs alternative-scores)
+    set total-alternative-scores (map [[a b] -> a + b] item i alternative-payoffs total-alternative-scores)
     set i i + 1
   ]
-;  output-print alternative-scores
-  let max-score max alternative-scores
-  if max-score > n-grace + item predictor-index alternative-scores [
+;  output-print (list "Alt scores" total-alternative-scores)
+  let max-score max total-alternative-scores
+;  output-print (list "current" (item predictor-index total-alternative-scores) "max" max-score)
+  if max-score > n-grace + item predictor-index total-alternative-scores [
     set g-changed-predictors g-changed-predictors + 1
-    let full-indices n-values (length alternative-scores) [ j -> j ]
-    let max-indices filter [j -> item j alternative-scores = max-score] full-indices
+    let full-indices n-values (length total-alternative-scores) [ j -> j ]
+    let max-indices filter [j -> item j total-alternative-scores = max-score] full-indices
     set predictor-index  one-of max-indices
     set favourite-predictor item predictor-index  candidate-predictors
     let shape-index  predictor-index mod length shapes
@@ -643,7 +644,7 @@ tau
 tau
 1
 100
-10.0
+11.0
 1
 1
 NIL
@@ -753,7 +754,7 @@ n-review
 n-review
 1
 n-steps
-5.0
+7.0
 1
 1
 NIL
@@ -843,7 +844,7 @@ n-grace
 n-grace
 0
 n-steps
-0.0
+11.0
 1
 1
 NIL
