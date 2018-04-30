@@ -395,14 +395,17 @@ to-report score-one [index predictor]  ;; TODO
   report 0
 end
 
-;; REcord performace of rules
+to-report incorporate-wealth [rule w]
+  report replace-item PRED-COUNT rule w
+end
+
+;; Record performace of rules
 to save-rules
   let rules []
   ask turtles[
-    foreach candidate-predictors [r -> set rules lput r rules]
-;    set rules lput favourite-predictor rulesxx
+    foreach candidate-predictors [r -> set rules lput (incorporate-wealth r wealth) rules]
   ]
-  csv:to-file "out.csv" rules
+  csv:to-file "out.csv" sort-by [[l1 l2] -> item 0 l1 < item 0 l2] rules
 end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
