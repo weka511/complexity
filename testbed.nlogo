@@ -696,7 +696,7 @@ tau
 tau
 1
 100
-11.0
+21.0
 1
 1
 NIL
@@ -780,7 +780,7 @@ CHOOSER
 can-borrow
 can-borrow
 "yes" "no" "die"
-0
+1
 
 SLIDER
 605
@@ -990,7 +990,7 @@ SWITCH
 123
 b-save-rules
 b-save-rules
-0
+1
 1
 -1000
 
@@ -1390,12 +1390,86 @@ NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
+  <experiment name="Vary tau" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>sum [wealth] of turtles with [pcolor = green]</metric>
+    <metric>sum [wealth] of turtles with [pcolor = yellow]</metric>
+    <metric>sum [wealth] of turtles with [pcolor = red]</metric>
+    <metric>(sum [wealth] of turtles with [pcolor = green]) / max (list count turtles with [pcolor = green] 1)</metric>
+    <metric>(sum [wealth] of turtles with [pcolor = yellow]) / max (list count turtles with [pcolor = yellow] 1)</metric>
+    <metric>(sum [wealth] of turtles with [pcolor = red]) / max (list count turtles with [pcolor = red] 1)</metric>
+    <enumeratedValueSet variable="p-high0">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-review">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
+      <value value="&quot;no&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-low0">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-agents">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-low-payoff">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-review">
+      <value value="0.69"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-horizon">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="evaluate-altenatives?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-low-payoff">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-high-payoff">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="payoff-stable">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="2"/>
+      <value value="3"/>
+      <value value="5"/>
+      <value value="8"/>
+      <value value="13"/>
+      <value value="21"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-grace">
+      <value value="11"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="18"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-steps">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-high-payoff">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="b-save-rules">
+      <value value="false"/>
+    </enumeratedValueSet>
+  </experiment>
   <experiment name="Vary Borrowing" repetitions="10" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <metric>sum [wealth] of turtles with [pcolor = green]</metric>
     <metric>sum [wealth] of turtles with [pcolor = yellow]</metric>
     <metric>sum [wealth] of turtles with [pcolor = red]</metric>
+    <metric>(sum [wealth] of turtles with [pcolor = green]) / max (list count turtles with [pcolor = green] 1)</metric>
+    <metric>(sum [wealth] of turtles with [pcolor = yellow]) / max (list count turtles with [pcolor = yellow] 1)</metric>
+    <metric>(sum [wealth] of turtles with [pcolor = red]) / max (list count turtles with [pcolor = red] 1)</metric>
     <enumeratedValueSet variable="p-high0">
       <value value="0.1"/>
     </enumeratedValueSet>
@@ -1435,7 +1509,7 @@ NetLogo 6.0.3
       <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="tau">
-      <value value="11"/>
+      <value value="8"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-grace">
       <value value="11"/>
