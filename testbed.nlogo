@@ -230,7 +230,7 @@ to determine-alternative-payoffs
     let actual-choice item 0 choices
     let alt-n-payees-low map [alt-choice -> adjust-numbers (alt-choice = POOL-LOW) (item 0 g-low-number) (actual-choice = POOL-LOW)] alternatives
     let alt-n-payees-high map [alt-choice -> adjust-numbers (alt-choice = POOL-HIGH) (item 0 g-high-number) (actual-choice = POOL-HIGH)] alternatives
-    let alternative-payoff-before-tau map [i -> get-alternative-payoff (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-predictors [ j -> j ])
+    let alternative-payoff-before-tau map [i -> get-alternative-payoff (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (range n-predictors)
     let previous-alternatives item ifelse-value (length alternative-choices > 1)[1][0] alternative-choices
     let alternative-payoff-after-tau (map [[a b p] -> ifelse-value (a = b)[p][p - tau]] alternatives previous-alternatives alternative-payoff-before-tau)
     set alternative-payoffs trim-list (fput alternative-payoff-after-tau alternative-payoffs) n-review
@@ -374,7 +374,7 @@ to review-against-alternatives
 ;  output-print (list "current" (item predictor-index total-alternative-scores) "max" max-score)
   if max-score > n-grace + item predictor-index total-alternative-scores [
     set g-changed-predictors g-changed-predictors + 1
-    let full-indices n-values (length total-alternative-scores) [ j -> j ]
+    let full-indices range (length total-alternative-scores)
     let max-indices filter [j -> item j total-alternative-scores = max-score] full-indices
     set predictor-index  one-of max-indices
     set favourite-predictor item predictor-index  candidate-predictors
@@ -388,7 +388,7 @@ to-report truncate-history-horizon [history]
 end
 
 to-report score-predictor [predictor]  ;; TODO
-  report sum(map [i -> score-one i predictor ] n-values n-horizon [ i -> i ])
+  report sum(map [i -> score-one i predictor ] range n-horizon)
 end
 
 to-report score-one [index predictor]  ;; TODO
@@ -977,7 +977,7 @@ p-review
 p-review
 0
 1
-0.69
+0.5
 0.01
 1
 NIL
@@ -990,7 +990,7 @@ SWITCH
 123
 b-save-rules
 b-save-rules
-1
+0
 1
 -1000
 
