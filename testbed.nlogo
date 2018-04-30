@@ -405,8 +405,48 @@ to save-rules
   ask turtles[
     foreach candidate-predictors [r -> set rules lput (incorporate-wealth r wealth) rules]
   ]
-  csv:to-file "out.csv" sort-by [[l1 l2] -> item 0 l1 < item 0 l2] rules
+
+  csv:to-file "out.csv" consolidate-rules sort-by compare-rules? rules
 end
+
+to-report consolidate-rules [rules]
+  let consolidated-rules []
+  let i 0
+  let rule item i rules
+  let next-rule (list )
+  set i i + 1
+  while [i < length rules][
+    set next-rule item i rules
+    ifelse compare-rules? rule next-rule[
+      set consolidated-rules lput rule consolidated-rules
+      set rule next-rule
+    ] [
+      set rule replace-item PRED-COUNT rule (item PRED-COUNT next-rule)
+    ]
+    set i i + 1
+  ]
+  set consolidated-rules lput rule consolidated-rules
+  let total-wealth sum (map [r -> item PRED-COUNT r] consolidated-rules)
+  report (map [r -> replace-item PRED-COUNT r ((item PRED-COUNT r) / total-wealth)] consolidated-rules)
+end
+
+to-report compare-rules? [rule1 rule2]
+  if item PRED-ACTION rule1 < item PRED-ACTION rule2 [report true]
+  if item PRED-ACTION rule1 > item PRED-ACTION rule2 [report false]
+  if item PRED-ACTION rule1 = "Number" [
+    if item PRED-ESTIMATOR  rule1 < item PRED-ESTIMATOR  rule2 [report true]
+    if item PRED-ESTIMATOR  rule1 > item PRED-ESTIMATOR  rule2 [report false]
+  ]
+  if length rule1 < length rule2 [report true]
+  if length rule1 > length rule2 [report false]
+  let i PRED-PARAMETERS-START
+  while [i < length rule1] [
+    if item i  rule1 < item i rule2 [report true]
+    set i i + 1
+  ]
+  report false
+end
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Actions
@@ -634,7 +674,7 @@ n-steps
 n-steps
 1
 1000
-100.0
+1000.0
 1
 1
 NIL
