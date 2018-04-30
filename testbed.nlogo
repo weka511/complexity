@@ -206,31 +206,38 @@ to decide-whether-to-switch-pools
     ]
 end
 
-;; Find out what each of the alternative prodictrs would have done
-;; so we can cualate altenative payoffs
+;; Find out what each of the alternative predictrs would have done
+;; so we can calculate alternative payoffs
 to determine-alternative-choices
   if length choices >  1 [  ;; TODO - why does program crash without this?
     let alternatives-for-this-step map [predictor -> (runresult (get-action predictor) payoffs choices)] candidate-predictors
-    set alternative-choices lput alternatives-for-this-step  alternative-choices
-    if length alternative-choices > n-review [set alternative-choices remove-item 0 alternative-choices]
+    set alternative-choices trim-list (fput alternatives-for-this-step  alternative-choices) n-review
   ]
 end
 
-;; Calculate what payoffs would have been with different prodictors.
-;; TODO: allow for tau
+;; Constrain list to be no longer than specified limit
+to-report trim-list [mylist max-length]
+  while  [length mylist > max-length] [
+    report remove-item (length mylist - 1) mylist
+  ]
+  report mylist
+end
+
+;; Calculate what payoffs would have been with different predictors.
 to determine-alternative-payoffs
   if length alternative-choices > 0 [
-    let alternatives item (length alternative-choices - 1) alternative-choices
+    let alternatives item 0 alternative-choices
     let actual-choice item 0 choices
     let alt-n-payees-low map [alt-choice -> adjust-numbers (alt-choice = POOL-LOW) (item 0 g-low-number) (actual-choice = POOL-LOW)] alternatives
     let alt-n-payees-high map [alt-choice -> adjust-numbers (alt-choice = POOL-HIGH) (item 0 g-high-number) (actual-choice = POOL-HIGH)] alternatives
-    let alternative-payoff map [i -> get-alternative-payoff (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-horizon [ j -> j ])
-    set alternative-payoffs lput alternative-payoff alternative-payoffs
+    let alternative-payoff-before-tau map [i -> get-alternative-payoff (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-horizon [ j -> j ])
+    let previous-alternatives item ifelse-value (length alternative-choices > 1)[1][0] alternative-choices
+    let alternative-payoff-after-tau (map [[a b p] -> ifelse-value (a = b)[p][p - tau]] alternatives previous-alternatives alternative-payoff-before-tau)
+    set alternative-payoffs trim-list (lput alternative-payoff-after-tau alternative-payoffs) n-review
   ]
 end
 
 ;; Calculate what payoffs would have been with specific choice.
-;; TODO: allow for tau
 to-report  get-alternative-payoff [choice n-low n-high]
   report ifelse-value (choice = POOL-STABLE) [payoff-stable][
     ifelse-value (choice = POOL-LOW) [
@@ -323,15 +330,6 @@ end
 
 ;; Predictors and choice of strategy
 
-to-report accumulate [a b]
-  let result   []
-  let i 0
-  while [i < length a] [
-    set result fput (item i a + item i b) result
-    set i i + 1
-  ]
-  report result
-end
 
 ; Review performance of predictor, and replace it if it is not doing well
 to review-predictors
@@ -361,21 +359,21 @@ to review-against-competitors
 
 end
 
-; Compare predictions with out pool
+; Compare predictions with our pool
 ; if not good enough, choose best alternative
 to review-against-alternatives
-  let scores   n-values n-horizon [i -> 0]
+  let alternative-scores   n-values n-horizon [i -> 0]
   let i 0
   while [i < length alternative-payoffs] [
-    set scores accumulate item i alternative-payoffs scores
+    set alternative-scores (map [[a b] -> 1 + b] item i alternative-payoffs alternative-scores)
     set i i + 1
   ]
-
-  let max-score max scores
-  if max-score > n-grace + item predictor-index scores [
+;  output-print alternative-scores
+  let max-score max alternative-scores
+  if max-score > n-grace + item predictor-index alternative-scores [
     set g-changed-predictors g-changed-predictors + 1
-    let full-indices n-values (length scores) [ j -> j ]
-    let max-indices filter [j -> item j scores = max-score] full-indices
+    let full-indices n-values (length alternative-scores) [ j -> j ]
+    let max-indices filter [j -> item j alternative-scores = max-score] full-indices
     set predictor-index  one-of max-indices
     set favourite-predictor item predictor-index  candidate-predictors
     let shape-index  predictor-index mod length shapes
@@ -845,7 +843,7 @@ n-grace
 n-grace
 0
 n-steps
-24.0
+0.0
 1
 1
 NIL
