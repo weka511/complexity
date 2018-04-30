@@ -395,10 +395,12 @@ to-report score-one [index predictor]  ;; TODO
   report 0
 end
 
+;; REcord performace of rules
 to save-rules
   let rules []
   ask turtles[
-    set rules lput favourite-predictor rules
+    foreach candidate-predictors [r -> set rules lput r rules]
+;    set rules lput favourite-predictor rulesxx
   ]
   csv:to-file "out.csv" rules
 end
