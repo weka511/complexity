@@ -115,7 +115,7 @@ end
 ;; update history. Decode whther to change pool or predictor.
 to go
   if ticks >= n-steps [
-    save-rules
+    if b-save-rules [save-rules]
     stop
   ]
 
@@ -333,7 +333,8 @@ end
 
 ; Review performance of predictor, and replace it if it is not doing well
 to review-predictors
-  ifelse evaluate-altenatives? [review-against-alternatives][review-against-competitors]
+  if random-float 1 < p-review[
+    ifelse evaluate-altenatives? [review-against-alternatives][review-against-competitors]]
 end
 
 ; Compare recent payofs with the competition
@@ -663,10 +664,10 @@ SLIDER
 81
 n-agents
 n-agents
-3
+10
 100
 50.0
-1
+10
 1
 NIL
 HORIZONTAL
@@ -678,10 +679,10 @@ SLIDER
 83
 n-steps
 n-steps
-1
+10
 1000
 100.0
-1
+10
 1
 NIL
 HORIZONTAL
@@ -779,7 +780,7 @@ CHOOSER
 can-borrow
 can-borrow
 "yes" "no" "die"
-1
+0
 
 SLIDER
 605
@@ -966,6 +967,32 @@ PENS
 "default" 1.0 0 -10899396 true "" "plot (sum [wealth] of turtles with [pcolor = green]) / max (list count turtles with [pcolor = green] 1)"
 "pen-1" 1.0 0 -1184463 true "" "plot (sum [wealth] of turtles with [pcolor = yellow]) / max (list count turtles with [pcolor = yellow] 1)"
 "pen-2" 1.0 0 -2674135 true "" "plot (sum [wealth] of turtles with [pcolor = red]) / max (list count turtles with [pcolor = red] 1)"
+
+SLIDER
+490
+55
+582
+88
+p-review
+p-review
+0
+1
+0.69
+0.01
+1
+NIL
+HORIZONTAL
+
+SWITCH
+430
+90
+552
+123
+b-save-rules
+b-save-rules
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1362,6 +1389,71 @@ NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="Vary Borrowing" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>sum [wealth] of turtles with [pcolor = green]</metric>
+    <metric>sum [wealth] of turtles with [pcolor = yellow]</metric>
+    <metric>sum [wealth] of turtles with [pcolor = red]</metric>
+    <enumeratedValueSet variable="p-high0">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-review">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
+      <value value="&quot;no&quot;"/>
+      <value value="&quot;yes&quot;"/>
+      <value value="&quot;die&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-low0">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-agents">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-low-payoff">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-review">
+      <value value="0.69"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-horizon">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="evaluate-altenatives?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-low-payoff">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-high-payoff">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="payoff-stable">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="11"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-grace">
+      <value value="11"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="18"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-steps">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-high-payoff">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="b-save-rules">
+      <value value="false"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
