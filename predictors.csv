@@ -5,6 +5,7 @@ Number,2,Average,1,1,1,1
 Number,2,Average,1,1,1,1,1,1
 Number,2,Average,1,0.9,0.81,0.729
 Number,2,Average,1,0.5,0.25,0.125
+Number,2,Mirror,20
 Number,2,Cycle,1
 Number,2,Cycle,2
 Number,2,Cycle,3

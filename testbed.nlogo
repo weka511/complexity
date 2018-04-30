@@ -501,12 +501,18 @@ to-report get-estimator [action-list]
   if estimator-name = "Cycle" [report [ [a] -> get-cycle a action-list]]
   if estimator-name = "Average" [report [ [a] -> get-average a action-list]]
   if estimator-name = "Trend" [report [ [a] -> get-trend a action-list]]
+  if estimator-name = "Mirror" [report [ [a] -> get-mirror a action-list]]
 end
 
 ;; Look for cycles
 to-report get-cycle [history action-list]
   let n item PRED-PARAMETERS-START action-list
   report ifelse-value (n < length history) [item n history] [item 0 history]
+end
+
+to-report get-mirror [history action-list]
+  let value (item PRED-PARAMETERS-START action-list) - item 0 history
+  report ifelse-value (value > 0) [value] [0]
 end
 
 ;; Calculate weighted average of history (numbers in low wisk or high risk pool)
