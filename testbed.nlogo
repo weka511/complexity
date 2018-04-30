@@ -230,7 +230,7 @@ to determine-alternative-payoffs
     let actual-choice item 0 choices
     let alt-n-payees-low map [alt-choice -> adjust-numbers (alt-choice = POOL-LOW) (item 0 g-low-number) (actual-choice = POOL-LOW)] alternatives
     let alt-n-payees-high map [alt-choice -> adjust-numbers (alt-choice = POOL-HIGH) (item 0 g-high-number) (actual-choice = POOL-HIGH)] alternatives
-    let alternative-payoff-before-tau map [i -> get-alternative-payoff (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-horizon [ j -> j ])
+    let alternative-payoff-before-tau map [i -> get-alternative-payoff (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (n-values n-predictors [ j -> j ])
     let previous-alternatives item ifelse-value (length alternative-choices > 1)[1][0] alternative-choices
     let alternative-payoff-after-tau (map [[a b p] -> ifelse-value (a = b)[p][p - tau]] alternatives previous-alternatives alternative-payoff-before-tau)
     set alternative-payoffs trim-list (fput alternative-payoff-after-tau alternative-payoffs) n-review
@@ -362,7 +362,7 @@ end
 ; Compare predictions with our pool
 ; if not good enough, choose best alternative
 to review-against-alternatives
-  let total-alternative-scores   n-values n-horizon [i -> 0]
+  let total-alternative-scores   n-values n-predictors [i -> 0]
   let i 0
   while [i < length alternative-payoffs] [
     set total-alternative-scores (map [[a b] -> a + b] item i alternative-payoffs total-alternative-scores)
@@ -680,7 +680,7 @@ n-steps
 n-steps
 1
 1000
-1000.0
+100.0
 1
 1
 NIL
@@ -790,7 +790,7 @@ n-predictors
 n-predictors
 1
 20
-10.0
+18.0
 1
 1
 NIL
@@ -805,7 +805,7 @@ n-review
 n-review
 1
 n-steps
-7.0
+1.0
 1
 1
 NIL
