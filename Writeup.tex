@@ -1,8 +1,8 @@
 \documentclass[]{article}
-\usepackage{float,url}
+\usepackage{float,url,natbib,amsmath}
 \usepackage[nottoc,numbib]{tocbibind}
 %opening
-\title{Pools}
+\title{The Sheep of Wall Street}
 \author{Simon Crase}
 
 \begin{document}
@@ -14,32 +14,32 @@
 \end{abstract}
 
 \section{Introduction}
-The Santa Fe Institute Spring 2018 Challenge, \cite{Challenge:2018}, models the behaviour of investors.
+The Santa Fe Institute Spring 2018 Challenge\cite{Challenge:2018}, models the behaviour of investors who need to choose between a pool that provides a stable income stream, and two pools that offer potentially higher, but risky returns. Each investor has access to aggregate information for each pool, and their own history. The Challenge can be interpreted as a simple model of technical analysis\cite{wiki:technical}.
 
 \section{Background}
+Brian Arthur \cite{arthur1994inductive} investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer 61 people attended. Arthur discovered there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of strategies for estimating attendance. A simple machine learning method replaces poorly performing strategies with more accurate ones.
 
 
-Brian Arthur \cite{arthur1994inductive} investigated the behaviour of a group of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be attendance data from previous weeks. Arthur assumed that the visit to the bar would be enjoyable if fewer than 60 people attended, which corresponds to an investment being worthwhile only if there were not too many investors to divide the profit.
+David Fogel \cite{fogel1999inductive} used a genetic algorithm that "bred" autoregressive models. William Rand and Forrest Stonedahl\cite{rand2007farol} pointed out that Fogel's solution uses more computational effort than Arthur to produce a lower societal bebfit.
 
-Fogel applied machine leaning \cite{fogel1999inductive}
-
-Rand \cite{rand2007farol} computational effort
-
-Review \cite{szabo2007evolutionary}
-
-Kolkata Paise Restaurant \cite{chakrabarti2007kolkata}
+The El Farol problem can be generalized to the Minority game. Review \cite{szabo2007evolutionary} Kolkata Paise Restaurant \cite{chakrabarti2007kolkata}
 \cite{chakrabarti2009kolkata}
 
 \section{Methods}
-I developed model, \emph{testbed.nlogo}, \cite{Github:2018}, using Netlogo, \cite{Wilensky:1999}.
+I developed a model, \emph{testbed.nlogo}, \cite{Github:2018}, using Netlogo, \cite{Wilensky:1999}. I followed the approach of \cite{arthur1994inductive}, using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Teach agent keeps track of the performance of the strategies in its bag, and replaces them if they are not doing well.
 
+According to Eduardo Zambrano\cite{zambrano2001boundedly}, Arthur rated the performance of predictors using the formula:
+\begin{equation}
+U_{t}(s^i)=\lambda U_{t-1}(s^i)+(1-\lambda)\lvert s^i(d(h_{t-1}))-y_t \rvert \label{eq:arthur}
+\end{equation}
+where $U_{t}(s^i)$ represents the performance of predictor $s^i$ at time $t$, $\lambda$ is a parameter in the range $[0,1]$, and the last term represents the difference between the predicted and actual lengths. Since accuracy in predicting length is of value only to the extent that it contributes to wealth, I use the gain in wealth as my only criterion for rating rules. 
 \section{Results}
 
 \subsection{Behaviours}What general behaviors arise in this system?  How does the wealth of the agents change over time? At the aggregate level? At the individual level?
 \subsection{Diversity}How does the diversity of strategies influence the dynamics of the system?
 \subsection{Behaviours}Are there generally classes of agent behavior (say, based on what data they use, how they process it, or the agent's overall sophistication) that lead to better performance?
 \subsection{Violate Assumptions}What happens to the system if you violate one of the original assumptions of the problem and allow the agents to alter their strategies over time by observing the performance and strategic details of the other agents?
-\subsection{Mete-Agents}Suppose that meta-agents exist that can coordinate the behaviors of a subset of the agents (and split the resulting payoffs equally across the subset)---how does this impact the system's behavior?
+\subsection{Meta-Agents}Suppose that meta-agents exist that can coordinate the behaviors of a subset of the agents (and split the resulting payoffs equally across the subset)---how does this impact the system's behavior?
 \subsection{Changes}How do the answers to the above questions change as:
 \begin{itemize}
 	\item tau is altered?
@@ -54,3 +54,4 @@ I developed model, \emph{testbed.nlogo}, \cite{Github:2018}, using Netlogo, \cit
 \bibliography{201804}
 
 \end{document}
+
