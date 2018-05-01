@@ -554,10 +554,12 @@ end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Calculate average wealth for a pool
 to-report average-wealth [pool-colour]
   report  (sum [wealth] of turtles with [pcolor = pool-colour]) / max (list count turtles with [pcolor = pool-colour] 1)
 end
 
+;; Calculate standard deviation of wealth for a pool
 to-report sigma-wealth [pool-colour]
   let mu average-wealth pool-colour
   report  sqrt (sum [( wealth - mu ) * ( wealth - mu )] of turtles with [pcolor = pool-colour]) / max (list count turtles with [pcolor = pool-colour] 1)
