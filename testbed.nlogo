@@ -552,6 +552,17 @@ to-report get-payoff [pool-colour]
   report dividend / max list n-payees 1
 end
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to-report average-wealth [pool-colour]
+  report  (sum [wealth] of turtles with [pcolor = pool-colour]) / max (list count turtles with [pcolor = pool-colour] 1)
+end
+
+to-report sigma-wealth [pool-colour]
+  let mu average-wealth pool-colour
+  report  sqrt (sum [( wealth - mu ) * ( wealth - mu )] of turtles with [pcolor = pool-colour]) / max (list count turtles with [pcolor = pool-colour] 1)
+end
+
 ;; Copyright (c) 2018 Simon Crase - see info tab for details of licence
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -654,10 +665,10 @@ SLIDER
 83
 n-steps
 n-steps
-10
+50
 1000
-100.0
-10
+1000.0
+50
 1
 NIL
 HORIZONTAL
@@ -879,9 +890,9 @@ HORIZONTAL
 
 PLOT
 425
-145
+130
 825
-295
+280
 Changes to predictors
 NIL
 NIL
@@ -913,9 +924,9 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -10899396 true "" "plot (sum [wealth] of turtles with [pcolor = green]) / max (list count turtles with [pcolor = green] 1)"
-"pen-1" 1.0 0 -1184463 true "" "plot (sum [wealth] of turtles with [pcolor = yellow]) / max (list count turtles with [pcolor = yellow] 1)"
-"pen-2" 1.0 0 -2674135 true "" "plot (sum [wealth] of turtles with [pcolor = red]) / max (list count turtles with [pcolor = red] 1)"
+"default" 1.0 0 -10899396 true "" "plot average-wealth green"
+"pen-1" 1.0 0 -1184463 true "" "plot average-wealth yellow"
+"pen-2" 1.0 0 -2674135 true "" "plot average-wealth red"
 
 SLIDER
 490
@@ -942,6 +953,26 @@ b-save-rules
 0
 1
 -1000
+
+PLOT
+430
+285
+630
+435
+Standard Deviation Wealth
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -10899396 true "" "plot sigma-wealth green"
+"pen-1" 1.0 0 -1184463 true "" "plot sigma-wealth yellow"
+"pen-2" 1.0 0 -2674135 true "" "plot sigma-wealth red"
 
 @#$#@#$#@
 ## WHAT IS IT?
