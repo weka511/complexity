@@ -2,18 +2,20 @@ extensions[
   CSV
 ]
 
+breed [sheep a-sheep]
+
 patches-own [
   pool-number  ;; Used to translate from colour to numbers used in Tournament
 ]
 
-turtles-own [
+sheep-own [
   wealth               ;; accumulated payoff, allowing for tau
   favourite-predictor  ;; the predictor that is actually used to switch pools
   predictor-index      ;; index of favourite-predictor in candidates
   candidate-predictors ;; a pool of predictors, which could be used if
                        ;; favourite-predictor is not performing well
   payoffs              ;; list of payoffs, most recent first, before tau subtracted
-  choices              ;; list of choices made by turtle, most recent first
+  choices              ;; list of choices made by a-sheep, most recent first
   alternative-choices  ;; the choices that the alternative-payoffs would have recommended
                        ;; during the last n-review time steps
   alternative-payoffs  ;; the payoffs if the alternative-choices had been made
@@ -97,15 +99,15 @@ to setup
   ]
 
   ;; Create big pool of all predictors;
-  ;; each turtle gets a subset
+  ;; each a-sheep gets a subset
   let predictor-pool []
   foreach csv:from-file "predictors.csv" [
     [row] -> repeat item PRED-COUNT row [
       set predictor-pool fput row predictor-pool
   ]]
 
-  create-turtles n-agents [
-    establish-turtle  predictor-pool
+  create-sheep n-agents [
+    establish-sheep  predictor-pool
   ]
 
   reset-ticks
@@ -125,7 +127,7 @@ to go
   let pay-dividend-high? pay-dividend? [red]
 
   set g-changed-assignments 0
-  ask turtles [
+  ask sheep [
     calculate-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
     determine-alternative-choices
   ]
@@ -134,24 +136,24 @@ to go
 
   set g-low-payoff fput ifelse-value pay-dividend-low? [payoff_low_risk] [0] g-low-payoff
   set g-high-payoff fput ifelse-value pay-dividend-high? [payoff_high_risk] [0]  g-high-payoff
-  let n-payees-low count turtles with [pcolor = yellow]
+  let n-payees-low count sheep with [pcolor = yellow]
   set g-low-number fput n-payees-low  g-low-number
-  let n-payees-high count turtles with [pcolor = red]
+  let n-payees-high count sheep with [pcolor = red]
   set g-high-number fput n-payees-high g-high-number
 
-  ask turtles [
+  ask sheep [
     determine-alternative-payoffs
   ]
 
   set g-changed-predictors 0
 
-  ask turtles[
+  ask sheep[
     review-predictors
   ]
 
   set g-ticks-without-change ifelse-value (g-changed-predictors = 0) [g-ticks-without-change + 1][0]
   set g-maximum-wealth-for-scaling 1
-  ask turtles [
+  ask sheep [
     set g-maximum-wealth-for-scaling max (list g-maximum-wealth-for-scaling wealth)
   ]
   tick
@@ -172,7 +174,7 @@ to calculate-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_high
   set payoffs fput my-payoff payoffs
 end
 
-;; Calculate actual payoff for specific turtle
+;; Calculate actual payoff for specific a-sheep
 to-report get-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
   if pcolor = red [report ifelse-value pay-dividend-high? [payoff_high_risk] [ZILCH] ]
   if pcolor = yellow [report ifelse-value pay-dividend-low? [payoff_low_risk] [ZILCH] ]
@@ -264,7 +266,7 @@ end
 ;; Set up an investor with a collection of predictors
 ;; and assign to a pool
 
-to establish-turtle  [predictor-pool]
+to establish-sheep  [predictor-pool]
   set payoffs []
   set choices []
   set candidate-predictors n-of n-predictors predictor-pool
@@ -376,7 +378,7 @@ end
 ;; Record performace of rules
 to save-rules
   let rules []
-  ask turtles[
+  ask sheep[
     foreach candidate-predictors [r -> set rules lput (incorporate-wealth r wealth) rules]
   ]
 
@@ -546,7 +548,7 @@ end
 
 to-report get-payoff [pool-colour]
   let dividend ifelse-value (pool-colour = red) [max-high-payoff][max-low-payoff]
-  let n-payees count turtles with [pcolor = pool-colour]
+  let n-payees count sheep with [pcolor = pool-colour]
   report dividend / max list n-payees 1
 end
 
@@ -669,7 +671,7 @@ tau
 tau
 1
 100
-21.0
+10.0
 1
 1
 NIL
@@ -764,7 +766,7 @@ n-predictors
 n-predictors
 1
 20
-18.0
+10.0
 1
 1
 NIL
@@ -839,7 +841,7 @@ n-horizon
 n-horizon
 1
 n-steps
-10.0
+22.0
 1
 1
 NIL
@@ -854,7 +856,7 @@ lambda
 lambda
 0
 1
-0.25
+0.75
 0.01
 1
 NIL
