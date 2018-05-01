@@ -144,11 +144,11 @@ to go
   ]
 
   set g-changed-predictors 0
-  if ticks mod n-review = 0 and ticks > n-horizon[
-    ask turtles[
-      review-predictors
-    ]
+
+  ask turtles[
+    review-predictors
   ]
+
   set g-ticks-without-change ifelse-value (g-changed-predictors = 0) [g-ticks-without-change + 1][0]
   set g-maximum-wealth-for-scaling 1
   ask turtles [
@@ -211,7 +211,7 @@ end
 to determine-alternative-choices
   if length choices >  1 [  ;; TODO - why does program crash without this?
     let alternatives-for-this-step map [predictor -> (runresult (get-action predictor) payoffs choices)] candidate-predictors
-    set alternative-choices trim-list (fput alternatives-for-this-step  alternative-choices) n-review
+    set alternative-choices trim-list (fput alternatives-for-this-step  alternative-choices) n-horizon
   ]
 end
 
@@ -233,7 +233,10 @@ to determine-alternative-payoffs
     let alternative-payoff-before-tau map [i -> get-alternative-payoff (item i alternatives) (item i alt-n-payees-low) (item i alt-n-payees-high)] (range n-predictors)
     let previous-alternatives item ifelse-value (length alternative-choices > 1)[1][0] alternative-choices
     let alternative-payoff-after-tau (map [[a b p] -> ifelse-value (a = b)[p][p - tau]] alternatives previous-alternatives alternative-payoff-before-tau)
-    set alternative-payoffs trim-list (fput alternative-payoff-after-tau alternative-payoffs) n-review
+    if length alternative-payoffs > 0 [
+      set alternative-payoff-after-tau (map  [[ a b ] -> lambda * a + (1 - lambda) * b] item 0 alternative-payoffs alternative-payoff-after-tau)
+    ]
+    set alternative-payoffs trim-list (fput alternative-payoff-after-tau alternative-payoffs) n-horizon
   ]
 end
 
@@ -333,36 +336,6 @@ end
 
 ; Review performance of predictor, and replace it if it is not doing well
 to review-predictors
-  if random-float 1 < p-review[
-    ifelse evaluate-altenatives? [review-against-alternatives][review-against-competitors]]
-end
-
-; Compare recent payofs with the competition
-; if not good enoughm choose new predicytor at random
-to review-against-competitors
-  let best-payoff max (
-    list
-    (payoff-stable * n-horizon)
-    truncate-history-horizon g-low-payoff
-    truncate-history-horizon g-low-payoff)
-  let my-payoff truncate-history-horizon payoffs
-  if my-payoff + n-grace < best-payoff [
-    set g-changed-predictors g-changed-predictors + 1
-    let new-predictor-index predictor-index
-    while [new-predictor-index = predictor-index] [
-      set new-predictor-index random length candidate-predictors
-    ]
-    set predictor-index  new-predictor-index
-    set favourite-predictor item predictor-index  candidate-predictors
-    let shape-index  predictor-index mod length shapes
-    set shape item shape-index  shapes
-  ]
-
-end
-
-; Compare predictions with our pool
-; if not good enough, choose best alternative
-to review-against-alternatives
   let total-alternative-scores   n-values n-predictors [i -> 0]
   let i 0
   while [i < length alternative-payoffs] [
@@ -372,7 +345,7 @@ to review-against-alternatives
 ;  output-print (list "Alt scores" total-alternative-scores)
   let max-score max total-alternative-scores
 ;  output-print (list "current" (item predictor-index total-alternative-scores) "max" max-score)
-  if max-score > n-grace + item predictor-index total-alternative-scores [
+  if max-score >  item predictor-index total-alternative-scores [
     set g-changed-predictors g-changed-predictors + 1
     let full-indices range (length total-alternative-scores)
     let max-indices filter [j -> item j total-alternative-scores = max-score] full-indices
@@ -798,21 +771,6 @@ NIL
 HORIZONTAL
 
 SLIDER
-710
-10
-802
-43
-n-review
-n-review
-1
-n-steps
-1.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
 225
 10
 335
@@ -892,12 +850,12 @@ SLIDER
 50
 700
 83
-n-grace
-n-grace
+lambda
+lambda
 0
-n-steps
-11.0
 1
+0.25
+0.01
 1
 NIL
 HORIZONTAL
@@ -916,17 +874,6 @@ payoff-stable
 1
 NIL
 HORIZONTAL
-
-SWITCH
-595
-90
-755
-123
-evaluate-altenatives?
-evaluate-altenatives?
-0
-1
--1000
 
 PLOT
 425
