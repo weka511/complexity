@@ -8,14 +8,18 @@ patches-own [
   pool-number  ;; Used to translate from colour to numbers used in Tournament
 ]
 
-sheep-own [
+turtles-own [
   wealth               ;; accumulated payoff, allowing for tau
+  payoffs              ;; list of payoffs, most recent first, before tau subtracted
+  choices              ;; list of choices made by this investor, most recent first
+]
+
+sheep-own [
   favourite-predictor  ;; the predictor that is actually used to switch pools
   predictor-index      ;; index of favourite-predictor in candidates
   candidate-predictors ;; a pool of predictors, which could be used if
                        ;; favourite-predictor is not performing well
-  payoffs              ;; list of payoffs, most recent first, before tau subtracted
-  choices              ;; list of choices made by a-sheep, most recent first
+
   alternative-choices  ;; the choices that the alternative-payoffs would have recommended
                        ;; during the last n-review time steps
   alternative-payoffs  ;; the payoffs if the alternative-choices had been made
@@ -272,8 +276,7 @@ to establish-sheep  [predictor-pool]
   set candidate-predictors n-of n-predictors predictor-pool
   set predictor-index random length candidate-predictors
   set favourite-predictor item predictor-index  candidate-predictors
-  let shape-index  predictor-index mod length shapes
-  set shape item shape-index  shapes
+  set shape "sheep"
   set size 1
   set color white
   set wealth starting-wealth
@@ -353,8 +356,6 @@ to review-predictors
     let max-indices filter [j -> item j total-alternative-scores = max-score] full-indices
     set predictor-index  one-of max-indices
     set favourite-predictor item predictor-index  candidate-predictors
-    let shape-index  predictor-index mod length shapes
-    set shape item shape-index  shapes
   ]
 end
 
@@ -385,6 +386,7 @@ to save-rules
   csv:to-file "out.csv" consolidate-rules sort-by compare-rules? rules
 end
 
+;; Consolidate rules so that we get a total count of wealth for all turtles
 to-report consolidate-rules [rules]
   let consolidated-rules []
   let i 0
@@ -405,6 +407,9 @@ to-report consolidate-rules [rules]
   let total-wealth sum (map [r -> item PRED-COUNT r] consolidated-rules)
   report (map [r -> replace-item PRED-COUNT r ((item PRED-COUNT r) / total-wealth)] consolidated-rules)
 end
+
+;; Used to sort rules when we consolidate them in the output file
+;; We want all rules that have the same form grouped together
 
 to-report compare-rules? [rule1 rule2]
   if item PRED-ACTION rule1 < item PRED-ACTION rule2 [report true]
@@ -486,6 +491,7 @@ to-report get-cycle [history action-list]
   report ifelse-value (n < length history) [item n history] [item 0 history]
 end
 
+;; Predict length to be the provious length, reflected about a specified value
 to-report get-mirror [history action-list]
   let value (item PRED-PARAMETERS-START action-list) - item 0 history
   report ifelse-value (value > 0) [value] [0]
@@ -507,7 +513,7 @@ to-report get-average [history action-list]
   report ifelse-value ( total-weight > 0 ) [weighted-sum / total-weight] [0]
 end
 
-;l Use trend to estimate number
+;; Use trend to estimate number
 ;;
 ;; Formulae snarfed from
 ;; http://www.statisticshowto.com/probability-and-statistics/regression-analysis/find-a-linear-regression-equation/
@@ -669,7 +675,7 @@ n-steps
 n-steps
 50
 1000
-1000.0
+100.0
 50
 1
 NIL

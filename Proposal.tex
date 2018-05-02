@@ -3,7 +3,7 @@
 \usepackage[nottoc,numbib]{tocbibind}
 
 %opening
-\title{Proposal}
+\title{Sheep of Wall Street\\Proposal}
 \author{Simon Crase}
 
 \begin{document}
@@ -18,17 +18,23 @@
  
 \section{What part of phenomenon would you like to model?}
 
+\begin{enumerate}
+	\item Investors deciding whether or not to change investments\cite{Challenge:2018}
+	\item Investors deciding whether or not to change their investing strategies.
+	\item Criteria for assessing the above.
+	
+	The challenge designers have intentionally left that a little vague at the start. For the challenge itself (the mandatory write-up and video part of this challenge), it would be good to explore different meanings of “winning” … median and/or mean of rank over multiple rounds, median and/or mean of earnings over multiple rounds, and any other outcomes you can think of. For the tournament (the optional part of this challenge), the instructors are leaning towards using the median rank over a small number of rounds, but this is still under discussion. If that changes, we will let you know. (Rank is placing in a given round without regard to gross earnings, rank 1 being assigned to the agent with the highest earnings in a given round of 100 steps, rank 2 to the agent with the second highest earning, etc. Ties receive the same ranking in a given round.)
+\end{enumerate}
 \section{What are the principal types of agents involved in this phenomenon?}
 
 \begin{tabular}{|l|l|} \hline
 	Agent&Goal\\ \hline
 	Investor & these are the Agents in the Problem Statement\\ \hline
 	Pools & can be patches\\ \hline
-	Predictors &these function closures, not Turtles \\ \hline
+	Predictors &these are function closures, not Turtles \\ \hline
 \end{tabular}
 
 \section{What properties do these agents have?}
-
 
 \begin{center}
 	\begin{tabular}{ |l|l|l| } 
@@ -53,14 +59,18 @@
 
 
 
-\section{What actions (or behaviors) can these agents take?}
+\section{What actions (or behaviours) can these agents take?}
 
-\begin{tabular}{|l|l|} \hline
-	Agent&Goal\\ \hline
-	Investor & Accumulate wealth\\ \hline
-	Pools & \\ \hline
-	Predictors & \\ \hline
+\begin{tabular}{|l|l|l|} \hline
+	Agent&Goal&\\ \hline
+	\multirow{2}{4em}{Investor} & Switch pools & Has a cost $\tau$ \\ \cline{2-3}
+	&Switch strategies &See \cite{arthur1994inductive} and \cite{fogel1999inductive}\\ \hline
+
+	Pools && \\ \hline
+	Predictors && \\ \hline
 \end{tabular}
+
+
 \section{If the agents have goals, what are their goals?}
 
 \begin{tabular}{|l|l|} \hline
@@ -71,27 +81,12 @@
 \end{tabular}
 
 
-\section{In what kind of environment do these agents operate?}
-\section{How do these agents interact with this environment?}
+\section{Agents operate in what kind of environment?}
+\section{How do agents interact with environment?}
 
-\begin{thebibliography}{9}
-\bibitem{ElFarol}
-Inductive Reasoning and Bounded Rationality,
-W. Brian Arthur,
-The American Economic Review, 
-Vol. 84, No. 2, Papers and Proceedings of the
-Hundred and Sixth Annual Meeting of the American Economic Association (May, 1994), pp. 406-411
-Published by: American Economic Association
-\url{https://ocw.tudelft.nl/wp-content/uploads/ElFarolArtur1994.pdf}
-\bibitem{PAISE2009}
-The Kolkata Paise Restaurant Problem and Resource Utilization,
-Anindya-Sundar Chakrabarti, Bikas K. Chakrabarti, Arnab Chatterjee,and Manipushpak Mitra,
-New Journal of Physics. 12: 075033. 
-\url{https://arxiv.org/pdf/0711.1639.pdf}
-\bibitem{PAISE2007}
-Kolkata Restaurant Problem as a generalised El Farol Bar Problem,
-Bikas K. Chakrabarti,
-in Econophysics of Markets and Business Networks, pages 239-246, Eds. A. Chatterjee and B. K. Chakrabarti, New Economic Windows Series, Springer,Milan (2007);
-\url{https://arxiv.org/abs/0705.2098}
-\end{thebibliography}
+\medskip
+
+\bibliographystyle{unsrt}
+\bibliography{201804}
+
 \end{document}
