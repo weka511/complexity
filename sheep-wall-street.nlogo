@@ -378,12 +378,15 @@ end
 
 ;; Record performace of rules
 to save-rules
+  csv:to-file "out.csv" consolidate-rules sort-by compare-rules? get-rules
+end
+
+to-report get-rules
   let rules []
   ask sheep[
     foreach candidate-predictors [r -> set rules lput (incorporate-wealth r wealth) rules]
   ]
-
-  csv:to-file "out.csv" consolidate-rules sort-by compare-rules? rules
+  report rules
 end
 
 ;; Consolidate rules so that we get a total count of wealth for all turtles
@@ -406,6 +409,11 @@ to-report consolidate-rules [rules]
   set consolidated-rules lput rule consolidated-rules
   let total-wealth sum (map [r -> item PRED-COUNT r] consolidated-rules)
   report (map [r -> replace-item PRED-COUNT r ((item PRED-COUNT r) / total-wealth)] consolidated-rules)
+end
+
+to-report list-rules
+  let rules consolidate-rules sort-by compare-rules? get-rules
+  report map [r -> item PRED-COUNT r] rules
 end
 
 ;; Used to sort rules when we consolidate them in the output file
@@ -674,7 +682,7 @@ SLIDER
 n-steps
 n-steps
 50
-1000
+10000
 100.0
 50
 1
@@ -690,7 +698,7 @@ tau
 tau
 1
 100
-10.0
+1.0
 1
 1
 NIL
@@ -740,7 +748,7 @@ NIL
 10.0
 true
 true
-"" ""
+"set-plot-pen-mode 2" ""
 PENS
 "Stable" 1.0 0 -10899396 true "" "plot count turtles with [pcolor = green]"
 "Low Risk" 1.0 0 -1184463 true "" "plot count turtles with [pcolor = yellow]"
@@ -774,7 +782,7 @@ CHOOSER
 can-borrow
 can-borrow
 "yes" "no" "die"
-1
+0
 
 SLIDER
 605
@@ -785,7 +793,7 @@ n-predictors
 n-predictors
 1
 20
-10.0
+3.0
 1
 1
 NIL
@@ -981,6 +989,25 @@ PENS
 "default" 1.0 0 -10899396 true "" "plot sigma-wealth green"
 "pen-1" 1.0 0 -1184463 true "" "plot sigma-wealth yellow"
 "pen-2" 1.0 0 -2674135 true "" "plot sigma-wealth red"
+
+PLOT
+640
+290
+840
+440
+Wealth by rules
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"set-plot-y-range 0 0.5\nset-plot-pen-mode 2\n" ""
+PENS
+"SdDev" 1.0 0 -5825686 true "" "plot max list-rules"
+"pen-1" 1.0 0 -11221820 true "" "plot median list-rules"
 
 @#$#@#$#@
 ## WHAT IS IT?
