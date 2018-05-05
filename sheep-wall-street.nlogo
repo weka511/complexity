@@ -3,6 +3,7 @@ extensions[
 ]
 
 breed [sheep a-sheep]
+breed [players player]
 
 patches-own [
   pool-number  ;; Used to translate from colour to numbers used in Tournament
@@ -17,6 +18,7 @@ turtles-own [
 sheep-own [
   favourite-predictor  ;; the predictor that is actually used to switch pools
   predictor-index      ;; index of favourite-predictor in candidates
+  predictor-wealth
   candidate-predictors ;; a pool of predictors, which could be used if
                        ;; favourite-predictor is not performing well
 
@@ -110,8 +112,14 @@ to setup
       set predictor-pool fput row predictor-pool
   ]]
 
-  create-sheep n-agents [
+  create-sheep n-sheep [
     establish-sheep  predictor-pool
+  ]
+
+  create-players 1  [
+    set shape "butterfly"
+    set color magenta
+    display-investor random 3
   ]
 
   reset-ticks
@@ -136,6 +144,23 @@ to go
     determine-alternative-choices
   ]
 
+  ask players [
+    let my-payoff-high sum(g-high-payoff)
+    let my-payoff-low sum(g-low-payoff)
+    let my-payoff-stable (ticks * payoff-stable)
+    if pool-number = POOL-STABLE[
+      set my-payoff-high my-payoff-high - tau
+      set my-payoff-low my-payoff-low - tau
+    ]
+    if pool-number = POOL-LOW[
+      set my-payoff-high my-payoff-high - tau
+      set my-payoff-stable my-payoff-stable - tau
+    ]
+    if pool-number = POOL-HIGH[
+      set my-payoff-stable my-payoff-stable - tau
+      set my-payoff-low my-payoff-low - tau
+    ]
+  ]
   ;; Update history
 
   set g-low-payoff fput ifelse-value pay-dividend-low? [payoff_low_risk] [0] g-low-payoff
@@ -174,6 +199,7 @@ end
 to calculate-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
   let my-payoff get-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
   set wealth wealth + my-payoff
+  set predictor-wealth replace-item predictor-index predictor-wealth  (my-payoff + (item predictor-index predictor-wealth))
   decide-whether-to-switch-pools
   set payoffs fput my-payoff payoffs
 end
@@ -187,29 +213,30 @@ end
 
 ;; Decide whether to switch pools
 to decide-whether-to-switch-pools
-     ifelse length choices =  0 [
-      set choices fput pool-number choices
-    ][
-      let new-pool (runresult (get-action favourite-predictor) payoffs choices)
+  ifelse length choices =  0 [
+    set choices fput pool-number choices
+  ][
+    let new-pool (runresult (get-action favourite-predictor) payoffs choices)
 
-      ifelse new-pool = pool-number [
-        display-wealth
-      ][
+    ifelse new-pool = pool-number [
+      display-wealth
+    ][
       set g-changed-assignments g-changed-assignments + 1
-        ifelse wealth >= tau [
+      ifelse wealth >= tau [
+        set wealth wealth - tau
+        display-investor new-pool
+      ][
+        if can-borrow = "yes"[
           set wealth wealth - tau
+          set predictor-wealth replace-item predictor-index predictor-wealth  ( (item predictor-index predictor-wealth) - tau)
           display-investor new-pool
-        ][
-          if can-borrow = "yes"[
-            set wealth wealth - tau
-            display-investor new-pool
-          ]
-          if can-borrow = "no"[display-wealth]
-          if can-borrow = "die"[die]
         ]
+        if can-borrow = "no"[display-wealth]
+        if can-borrow = "die"[die]
       ]
-      set choices fput new-pool choices
     ]
+    set choices fput new-pool choices
+  ]
 end
 
 ;; Find out what each of the alternative predictrs would have done
@@ -266,7 +293,6 @@ to-report adjust-numbers [alt-choice number choice]
   report number + ifelse-value alt-choice [1][0] - ifelse-value choice [1][0]
 end
 
-
 ;; Set up an investor with a collection of predictors
 ;; and assign to a pool
 
@@ -282,7 +308,7 @@ to establish-sheep  [predictor-pool]
   set wealth starting-wealth
   set alternative-payoffs []
   set alternative-choices []
-
+  set predictor-wealth n-values n-predictors [a -> 0]
   display-investor choose-initial-pool
 end
 
@@ -381,10 +407,16 @@ to save-rules
   csv:to-file "out.csv" consolidate-rules sort-by compare-rules? get-rules
 end
 
+to foo [i rules]
+  let rr item i candidate-predictors
+  let w item i predictor-wealth
+  set rules lput (incorporate-wealth rr w) rules
+end
+
 to-report get-rules
   let rules []
   ask sheep[
-    foreach candidate-predictors [r -> set rules lput (incorporate-wealth r wealth) rules]
+   ( foreach candidate-predictors predictor-wealth [ [r w] -> set rules lput (incorporate-wealth r w) rules])
   ]
   report rules
 end
@@ -440,7 +472,7 @@ end
 ;;
 ;; Actions
 
-;; Find the action that has been stepicified
+;; Find the action that has been specified
 to-report get-action [action-list]
   let action-name item PRED-ACTION action-list
   if action-name = "Stay"   [report [[my-payoffs my-choices] -> stay my-choices]]
@@ -664,8 +696,8 @@ SLIDER
 48
 102
 81
-n-agents
-n-agents
+n-sheep
+n-sheep
 10
 100
 50.0
@@ -713,7 +745,7 @@ p-low0
 p-low0
 0
 1
-0.1
+0.17
 0.01
 1
 NIL
@@ -748,7 +780,7 @@ NIL
 10.0
 true
 true
-"set-plot-pen-mode 2" ""
+"" ""
 PENS
 "Stable" 1.0 0 -10899396 true "" "plot count turtles with [pcolor = green]"
 "Low Risk" 1.0 0 -1184463 true "" "plot count turtles with [pcolor = yellow]"
@@ -782,7 +814,7 @@ CHOOSER
 can-borrow
 can-borrow
 "yes" "no" "die"
-0
+1
 
 SLIDER
 605
@@ -793,7 +825,7 @@ n-predictors
 n-predictors
 1
 20
-3.0
+7.0
 1
 1
 NIL
@@ -1001,13 +1033,28 @@ NIL
 0.0
 10.0
 0.0
-10.0
+1.0
 true
 false
-"set-plot-y-range 0 0.5\nset-plot-pen-mode 2\n" ""
+"\n\n" ""
 PENS
-"SdDev" 1.0 0 -5825686 true "" "plot max list-rules"
-"pen-1" 1.0 0 -11221820 true "" "plot median list-rules"
+"Max score" 1.0 0 -5825686 true "" "plot max list-rules"
+"Median Score" 1.0 0 -11221820 true "" "plot median list-rules"
+
+SLIDER
+720
+10
+812
+43
+epsilon
+epsilon
+0
+1
+0.05
+0.05
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
