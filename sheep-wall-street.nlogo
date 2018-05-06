@@ -2,8 +2,10 @@ extensions[
   CSV
 ]
 
-breed [sheep a-sheep]
-breed [players player]
+breed [sheep a-sheep]    ;; Sheep use original El Farol rules as described
+                         ;; by Brian Arthur
+breed [players player]   ;; Players follow the epsilon-greedy strategy from
+                         ;; the multi-armed bandit
 
 patches-own [
   pool-number  ;; Used to translate from colour to numbers used in Tournament
@@ -443,6 +445,10 @@ to-report consolidate-rules [rules]
   report (map [r -> replace-item PRED-COUNT r ((item PRED-COUNT r) / total-wealth)] consolidated-rules)
 end
 
+to-report list-rules-raw
+  report consolidate-rules sort-by compare-rules? get-rules
+end
+
 to-report list-rules
   let rules consolidate-rules sort-by compare-rules? get-rules
   report map [r -> item PRED-COUNT r] rules
@@ -531,7 +537,7 @@ to-report get-cycle [history action-list]
   report ifelse-value (n < length history) [item n history] [item 0 history]
 end
 
-;; Predict length to be the provious length, reflected about a specified value
+;; Predict length to be the previous length, reflected about a specified value
 to-report get-mirror [history action-list]
   let value (item PRED-PARAMETERS-START action-list) - item 0 history
   report ifelse-value (value > 0) [value] [0]
@@ -714,8 +720,8 @@ SLIDER
 n-steps
 n-steps
 50
-10000
-100.0
+1000
+150.0
 50
 1
 NIL
@@ -730,7 +736,7 @@ tau
 tau
 1
 100
-1.0
+5.0
 1
 1
 NIL
@@ -745,7 +751,7 @@ p-low0
 p-low0
 0
 1
-0.17
+0.05
 0.01
 1
 NIL
@@ -760,31 +766,11 @@ p-high0
 p-high0
 0
 1
-0.1
+0.05
 0.01
 1
 NIL
 HORIZONTAL
-
-PLOT
-5
-130
-420
-267
-Counts
-NIL
-NIL
-0.0
-10.0
-0.0
-10.0
-true
-true
-"" ""
-PENS
-"Stable" 1.0 0 -10899396 true "" "plot count turtles with [pcolor = green]"
-"Low Risk" 1.0 0 -1184463 true "" "plot count turtles with [pcolor = yellow]"
-"High Risk" 1.0 0 -2674135 true "" "plot count turtles with [pcolor = red]"
 
 PLOT
 220
@@ -825,7 +811,7 @@ n-predictors
 n-predictors
 1
 20
-7.0
+10.0
 1
 1
 NIL
@@ -1055,6 +1041,26 @@ epsilon
 1
 NIL
 HORIZONTAL
+
+PLOT
+5
+130
+420
+267
+Counts
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Stable" 1.0 0 -10899396 true "" "plot count turtles with [pcolor = green]"
+"Low Risk" 1.0 0 -1184463 true "" "plot count turtles with [pcolor = yellow]"
+"High Risk" 1.0 0 -2674135 true "" "plot count turtles with [pcolor = red]"
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1587,6 +1593,62 @@ NetLogo 6.0.3
     </enumeratedValueSet>
     <enumeratedValueSet variable="b-save-rules">
       <value value="false"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="CheckRules" repetitions="10" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>get-rules</metric>
+    <enumeratedValueSet variable="p-high0">
+      <value value="0.05"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="lambda">
+      <value value="0.75"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
+      <value value="&quot;no&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-sheep">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-low0">
+      <value value="0.05"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-low-payoff">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-review">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-horizon">
+      <value value="22"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-low-payoff">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-high-payoff">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="payoff-stable">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="b-save-rules">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="epsilon">
+      <value value="0.05"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-steps">
+      <value value="150"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-high-payoff">
+      <value value="80"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
