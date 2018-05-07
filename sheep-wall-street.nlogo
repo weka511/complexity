@@ -4,8 +4,7 @@ extensions[
 
 breed [sheep a-sheep]    ;; Sheep use original El Farol rules as described
                          ;; by Brian Arthur
-breed [players player]   ;; Players follow the epsilon-greedy strategy from
-                         ;; the multi-armed bandit
+breed [fogels fogel]
 
 patches-own [
   pool-number  ;; Used to translate from colour to numbers used in Tournament
@@ -29,6 +28,10 @@ sheep-own [
                        ;; are in the same sequence as in candidate predictors
   alternative-payoffs  ;; the payoffs if the alternative-choices had been made. Elements
                        ;; are in the same sequence as in candidate predictors
+]
+
+fogels-own [
+  coefficient-set
 ]
 
 globals [
@@ -110,7 +113,7 @@ to setup
 
   create-sheep n-sheep [establish-sheep  predictor-pool]
 
-  create-players 1  [establish-player]
+  create-fogels 1 [establish-fogel]
 
   reset-ticks
 end
@@ -154,17 +157,41 @@ to establish-sheep  [predictor-pool]
   display-investor choose-initial-pool
 end
 
-to establish-player
-    set shape "butterfly"
-    set color magenta
-    display-investor random 3
+to establish-fogel
+  set color cyan
+  set shape "fish"
+  set size 2
+  set coefficient-set map [dummy -> create-coefficients] range n-coefficient-sets
+  display-investor choose-initial-pool
 end
 
-;; Calculate payoff from favourite proeictor and alternatives and
-;; update history. Decode whther to change pool or predictor.
+to-report create-coefficients
+  let n 1 + random n-coefficients
+  report map [r -> -1 + 2 * random-float 1] range n
+end
+
+;; Allocate agents to pools at the start
+
+to-report choose-initial-pool
+  let rvalue random-float 1
+  if rvalue < p-low0 [report POOL-LOW]
+  if rvalue < (p-low0 + p-high0) [report POOL-HIGH]
+  report POOL-STABLE
+end
+
+;; Decide how much wealth each individual starts with
+
+to-report starting-wealth  ;; TODO - allow flexibility
+  report 0
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Calculate payoff from favourite predictor and alternatives and
+;; update history. Decide whether to change pool or predictor.
 to go
   if ticks >= n-steps [
-    if b-save-rules [save-rules]
+    save-rules
     stop
   ]
 
@@ -179,9 +206,8 @@ to go
     determine-alternative-choices
   ]
 
-  ask players [
-    calculate-payoff-epsilon-greedy
-  ]
+  ask fogels [calculate-payoff-learning]
+
   ;; Update history
 
   set g-low-payoff fput ifelse-value pay-dividend-low? [payoff_low_risk] [0] g-low-payoff
@@ -191,42 +217,64 @@ to go
   let n-payees-high count sheep with [pcolor = red]
   set g-high-number fput n-payees-high g-high-number
 
-  ask sheep [
-    determine-alternative-payoffs
-  ]
+  ask sheep [determine-alternative-payoffs]
 
   set g-changed-predictors 0
 
-  ask sheep[
-    review-predictors
-  ]
+  ask sheep[review-predictors]
 
   set g-ticks-without-change ifelse-value (g-changed-predictors = 0) [g-ticks-without-change + 1][0]
   set g-maximum-wealth-for-scaling 1
-  ask sheep [
-    set g-maximum-wealth-for-scaling max (list g-maximum-wealth-for-scaling wealth)
-  ]
+  ask turtles [set g-maximum-wealth-for-scaling max (list g-maximum-wealth-for-scaling wealth)]
   tick
 end
 
-to calculate-payoff-epsilon-greedy
-  let my-payoff-high sum(g-high-payoff)
-  let my-payoff-low sum(g-low-payoff)
-  let my-payoff-stable (ticks * payoff-stable)
-  if pool-number = POOL-STABLE[
-    set my-payoff-high my-payoff-high - tau
-    set my-payoff-low my-payoff-low - tau
-  ]
-  if pool-number = POOL-LOW[
-    set my-payoff-high my-payoff-high - tau
-    set my-payoff-stable my-payoff-stable - tau
-  ]
-  if pool-number = POOL-HIGH[
-    set my-payoff-stable my-payoff-stable - tau
-    set my-payoff-low my-payoff-low - tau
-  ]
+to calculate-payoff-learning
+  set coefficient-set sentence coefficient-set map [[coefficients] -> create-new-coefficients coefficients] coefficient-set
+
+;  let pred-payoff-low p-low-payoff * max-low-payoff / (1 + predict-count-learning g-low-number)
+;  let pred-payoff-high p-high-payoff * max-high-payoff / (1 + predict-count-learning g-high-number)
 end
 
+to-report  create-new-coefficients [coefficients]
+  let len new-length coefficients
+  if len < length coefficients [report mutate remove-item len coefficients]
+  if len > length coefficients [report mutate lput 0.0 coefficients]
+  report mutate coefficients
+end
+
+to-report mutate [coefficients]
+  report map [c -> c + random-normal 0 0.1] coefficients   ;; FIXME - sigma
+end
+
+to-report new-length [coefficients]
+  let result -1
+  while [result < 1 or result > n-coefficients] [
+    let r  random-float 1
+    ifelse r < 1.0 / 3.0 [
+      set result length coefficients - 1
+    ][
+      ifelse r < 2.0 / 3.0 [
+        report length coefficients
+      ][
+        set result length coefficients + 1
+    ]]
+
+  ]
+  report result
+end
+
+to-report predict-count-learning [counts coefficients]
+  let result 0
+  let i  0
+  while [i < length counts and i < length coefficients] [
+    set result result + (item i coefficients) * (item i counts)
+    set i i + 1
+  ]
+  if result < 0 [report 0]
+  if result > n-sheep [report n-sheep]
+  report result
+end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -333,21 +381,8 @@ end
 
 
 
-;; Decide how much wealth each individual starts with
 
-to-report starting-wealth  ;; TODO - allow flexibility
-  report 0
-end
 
-;; Allocate agents to pools at the start
-
-to-report choose-initial-pool
-  let rvalue random-float 1
-
-  if rvalue < p-low0 [report POOL-LOW]
-  if rvalue < (p-low0 + p-high0) [report POOL-HIGH]
-  report POOL-STABLE
-end
 
 to-report get-x [pool]
   if pool = POOL-STABLE [report 2 * min-pxcor / 3]
@@ -989,17 +1024,6 @@ p-review
 NIL
 HORIZONTAL
 
-SWITCH
-430
-90
-552
-123
-b-save-rules
-b-save-rules
-0
-1
--1000
-
 PLOT
 430
 285
@@ -1073,6 +1097,36 @@ PENS
 "Stable" 1.0 0 -10899396 true "" "plot count turtles with [pcolor = green]"
 "Low Risk" 1.0 0 -1184463 true "" "plot count turtles with [pcolor = yellow]"
 "High Risk" 1.0 0 -2674135 true "" "plot count turtles with [pcolor = red]"
+
+SLIDER
+430
+100
+602
+133
+n-coefficient-sets
+n-coefficient-sets
+0
+20
+10.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+650
+105
+822
+138
+n-coefficients
+n-coefficients
+0
+20
+10.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
