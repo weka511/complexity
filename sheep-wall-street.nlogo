@@ -4,7 +4,7 @@ extensions[
 
 breed [sheep a-sheep]    ;; Sheep use original El Farol rules as described
                          ;; by Brian Arthur
-breed [fogels fogel]
+breed [foegel fogel]
 
 patches-own [
   pool-number  ;; Used to translate from colour to numbers used in Tournament
@@ -30,7 +30,7 @@ sheep-own [
                        ;; are in the same sequence as in candidate predictors
 ]
 
-fogels-own [
+foegel-own [
   coefficient-set
 ]
 
@@ -113,7 +113,7 @@ to setup
 
   create-sheep n-sheep [establish-sheep  predictor-pool]
 
-  create-fogels 1 [establish-fogel]
+  create-foegel 5 [establish-fogel]
 
   reset-ticks
 end
@@ -206,7 +206,7 @@ to go
     determine-alternative-choices
   ]
 
-  ask fogels [calculate-payoff-learning]
+  ask foegel [calculate-payoff-learning  payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
 
   ;; Update history
 
@@ -229,22 +229,45 @@ to go
   tick
 end
 
-to calculate-payoff-learning
-  set coefficient-set sentence coefficient-set map [[coefficients] -> create-new-coefficients coefficients] coefficient-set
-  let indexed-scores (map [[coefficients index] -> (list evaluate coefficients index) ] coefficient-set range length coefficient-set)
-;  output-print indexed-scores
+to-report get-new-coefficient-set
+  let coefficient-set-with-offspring sentence coefficient-set map [[coefficients] -> create-new-coefficients coefficients] coefficient-set
+  let indexed-scores (map [[coefficients index] -> (list evaluate coefficients index) ] coefficient-set-with-offspring range length coefficient-set-with-offspring)
   let sorted-indexed-scores sort-by [[l1 l2]-> item 0 l1 < item 0 l2] indexed-scores
-;  output-print sorted-indexed-scores
-  let new-indices map [l -> item 1 l] sorted-indexed-scores
-;  output-print new-indices
-  let trimmed-indices sublist new-indices n-coefficient-sets length new-indices
-;  output-print trimmed-indices
-;  let pred-payoff-low p-low-payoff * max-low-payoff / (1 + predict-count-learning g-low-number)
-;  let pred-payoff-high p-high-payoff * max-high-payoff / (1 + predict-count-learning g-high-number)
+  let new-indices map [pair -> item 1 pair] sorted-indexed-scores
+  let trimmed-indices sublist new-indices 0 n-coefficient-sets
+  report map [index -> item index coefficient-set-with-offspring] trimmed-indices
 end
 
+to calculate-payoff-learning [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
+  foreach range n-train [dummy -> set coefficient-set  get-new-coefficient-set]
+  let pred-payoff-low p-low-payoff * max-low-payoff / (1 + predict-count-learning g-low-number item 0 coefficient-set)
+  let pred-payoff-high p-high-payoff * max-high-payoff / (1 + predict-count-learning g-high-number  item 0 coefficient-set)
+  let mypayoffs (list payoff-stable pred-payoff-low pred-payoff-high)
+  let max-payoff max mypayoffs
+  let best-pool position max-payoff mypayoffs
+  if pool-number != best-pool [
+    set wealth wealth - tau
+    display-investor best-pool
+  ]
+  set wealth wealth + get-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
+  display-wealth
+end
+
+
 to-report evaluate [coefficients]
-  report random 100
+  report evaluate-pool coefficients g-low-number + evaluate-pool coefficients g-high-number
+end
+
+to-report evaluate-pool [coefficients pool]
+  report reduce + map [index -> sq-error coefficients pool index] range n-periods
+end
+
+to-report sq-error [coefficients pool index]
+  if length pool < 1 + index [report 0]                 ;; FIXME
+  let target-count item index pool
+  let predicted-count predict-count-learning (sublist pool (index + 1) (length pool)) coefficients
+  let delta predicted-count - target-count
+  report delta * delta
 end
 
 to-report  create-new-coefficients [coefficients]
@@ -282,14 +305,8 @@ to-report predict-count-learning [counts coefficients]
     set result result + (item i coefficients) * (item i counts)
     set i i + 1
   ]
-  if result < 0 [report 0]
-  if result > n-sheep [report n-sheep]
-  report result
+  report min (list n-sheep abs result)
 end
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; implementation
 
 ;; Collect any payoff and decide whether to change pools
 
@@ -301,7 +318,7 @@ to calculate-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_high
   set payoffs fput my-payoff payoffs
 end
 
-;; Calculate actual payoff for specific a-sheep
+;; Calculate actual payoff for specific sheep
 to-report get-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
   if pcolor = red [report ifelse-value pay-dividend-high? [payoff_high_risk] [ZILCH] ]
   if pcolor = yellow [report ifelse-value pay-dividend-low? [payoff_low_risk] [ZILCH] ]
@@ -1125,14 +1142,44 @@ NIL
 HORIZONTAL
 
 SLIDER
-580
+545
 90
-680
+645
 123
 n-coefficients
 n-coefficients
 0
 20
+10.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+650
+90
+742
+123
+n-periods
+n-periods
+0
+20
+12.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+745
+90
+837
+123
+n-train
+n-train
+0
+25
 10.0
 1
 1
