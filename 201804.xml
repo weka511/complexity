@@ -1,8 +1,6 @@
 <NotepadPlus>
     <Project name="Model">
-        <File name="LICENSE" />
         <File name="predictors.csv" />
-        <File name="README.md" />
         <File name="sheep-wall-street.nlogo" />
     </Project>
     <Project name="Outputs">
@@ -12,6 +10,10 @@
         <File name="Proposal.tex" />
         <File name="Writeup.tex" />
         <File name="201804.bib" />
+    </Project>
+    <Project name="git">
+        <File name="LICENSE" />
+        <File name="README.md" />
         <File name=".gitignore" />
     </Project>
 </NotepadPlus>
