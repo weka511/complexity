@@ -20,13 +20,15 @@ turtles-own [
 sheep-own [
   favourite-predictor  ;; the predictor that is actually used to switch pools
   predictor-index      ;; index of favourite-predictor in candidates
-  predictor-wealth
+  predictor-wealth     ;; a list of wealth acquired by each predictor. Elements
+                       ;; are in the same sequence as in candidate predictors
   candidate-predictors ;; a pool of predictors, which could be used if
                        ;; favourite-predictor is not performing well
-
   alternative-choices  ;; the choices that the alternative-payoffs would have recommended
-                       ;; during the last n-review time steps
-  alternative-payoffs  ;; the payoffs if the alternative-choices had been made
+                       ;; during the last n-review time steps. Elements
+                       ;; are in the same sequence as in candidate predictors
+  alternative-payoffs  ;; the payoffs if the alternative-choices had been made. Elements
+                       ;; are in the same sequence as in candidate predictors
 ]
 
 globals [
@@ -81,9 +83,9 @@ to-report get-parameter-index [index]
   report PRED-PARAMETERS-START + index
 end
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Top level procedures
+;; Initialization
 
 ;; Set up patches and investors
 
@@ -102,29 +104,60 @@ to setup
   set g-changed-assignments  0
   set g-maximum-wealth-for-scaling n-steps * payoff-stable
 
-  ask patches[
-    establish-pools
-  ]
+  ask patches[establish-pools]
 
-  ;; Create big pool of all predictors;
-  ;; each a-sheep gets a subset
+  let predictor-pool establish-predictor-pool
+
+  create-sheep n-sheep [establish-sheep  predictor-pool]
+
+  create-players 1  [establish-player]
+
+  reset-ticks
+end
+
+;; Assign background colours and pool numbers to patches
+
+to establish-pools
+    set pcolor yellow
+    if pxcor > max-pxcor / 3 [set pcolor red]
+    if pxcor < min-pxcor / 3 [set pcolor green]
+    set pool-number colour2pool
+end
+
+;; Create big pool of all predictors;
+;; each sheep gets a subset
+to-report establish-predictor-pool
   let predictor-pool []
   foreach csv:from-file "predictors.csv" [
     [row] -> repeat item PRED-COUNT row [
       set predictor-pool fput row predictor-pool
   ]]
+  report predictor-pool
+end
 
-  create-sheep n-sheep [
-    establish-sheep  predictor-pool
-  ]
+;; Set up an investor with a collection of predictors
+;; and assign to a pool
 
-  create-players 1  [
+to establish-sheep  [predictor-pool]
+  set payoffs []
+  set choices []
+  set candidate-predictors n-of n-predictors predictor-pool
+  set predictor-index random length candidate-predictors
+  set favourite-predictor item predictor-index  candidate-predictors
+  set shape "sheep"
+  set size 1
+  set color white
+  set wealth starting-wealth
+  set alternative-payoffs []
+  set alternative-choices []
+  set predictor-wealth n-values n-predictors [a -> 0]
+  display-investor choose-initial-pool
+end
+
+to establish-player
     set shape "butterfly"
     set color magenta
     display-investor random 3
-  ]
-
-  reset-ticks
 end
 
 ;; Calculate payoff from favourite proeictor and alternatives and
@@ -147,21 +180,7 @@ to go
   ]
 
   ask players [
-    let my-payoff-high sum(g-high-payoff)
-    let my-payoff-low sum(g-low-payoff)
-    let my-payoff-stable (ticks * payoff-stable)
-    if pool-number = POOL-STABLE[
-      set my-payoff-high my-payoff-high - tau
-      set my-payoff-low my-payoff-low - tau
-    ]
-    if pool-number = POOL-LOW[
-      set my-payoff-high my-payoff-high - tau
-      set my-payoff-stable my-payoff-stable - tau
-    ]
-    if pool-number = POOL-HIGH[
-      set my-payoff-stable my-payoff-stable - tau
-      set my-payoff-low my-payoff-low - tau
-    ]
+    calculate-payoff-epsilon-greedy
   ]
   ;; Update history
 
@@ -190,6 +209,23 @@ to go
   tick
 end
 
+to calculate-payoff-epsilon-greedy
+  let my-payoff-high sum(g-high-payoff)
+  let my-payoff-low sum(g-low-payoff)
+  let my-payoff-stable (ticks * payoff-stable)
+  if pool-number = POOL-STABLE[
+    set my-payoff-high my-payoff-high - tau
+    set my-payoff-low my-payoff-low - tau
+  ]
+  if pool-number = POOL-LOW[
+    set my-payoff-high my-payoff-high - tau
+    set my-payoff-stable my-payoff-stable - tau
+  ]
+  if pool-number = POOL-HIGH[
+    set my-payoff-stable my-payoff-stable - tau
+    set my-payoff-low my-payoff-low - tau
+  ]
+end
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -295,24 +331,7 @@ to-report adjust-numbers [alt-choice number choice]
   report number + ifelse-value alt-choice [1][0] - ifelse-value choice [1][0]
 end
 
-;; Set up an investor with a collection of predictors
-;; and assign to a pool
 
-to establish-sheep  [predictor-pool]
-  set payoffs []
-  set choices []
-  set candidate-predictors n-of n-predictors predictor-pool
-  set predictor-index random length candidate-predictors
-  set favourite-predictor item predictor-index  candidate-predictors
-  set shape "sheep"
-  set size 1
-  set color white
-  set wealth starting-wealth
-  set alternative-payoffs []
-  set alternative-choices []
-  set predictor-wealth n-values n-predictors [a -> 0]
-  display-investor choose-initial-pool
-end
 
 ;; Decide how much wealth each individual starts with
 
@@ -353,14 +372,7 @@ to-report colour2pool
   report POOL-STABLE
 end
 
-;; Assign background colours and pool numbers to patches
 
-to establish-pools
-    set pcolor yellow
-    if pxcor > max-pxcor / 3 [set pcolor red]
-    if pxcor < min-pxcor / 3 [set pcolor green]
-    set pool-number colour2pool
-end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1598,7 +1610,7 @@ NetLogo 6.0.3
   <experiment name="CheckRules" repetitions="10" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go</go>
-    <metric>get-rules</metric>
+    <metric>list-rules-raw</metric>
     <enumeratedValueSet variable="p-high0">
       <value value="0.05"/>
     </enumeratedValueSet>
