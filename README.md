@@ -35,11 +35,15 @@ Your analysis should include (but is not limited to):
 
 | Name | Purpose |
 |--------------------|--------------------------------------------------------------------------|
+| 201804.bib | Bibtex input to documentation |
+| 201804.xml | Workspace for Notepad++ | 
 | Proposal.pdf | Agent Based Modelling Proposal |
 | Proposal.tex | Agent Based Modelling Proposal |
 | README.md | This File |
-| testbed.nogo | Testbed for evealuating alternative strategies |
+| sheep-wall-street.nlogo | Testbed for evealuating alternative strategies |
 | strategies.csv | Parameters for strategies |
+| Writeup.pdf | Writeup for submission to SFI |
+| Writeup.tex | Writeup for submission to SFI |
 
 ## Journal
 
@@ -47,6 +51,7 @@ Your analysis should include (but is not limited to):
 |-----------|--------------------------------------------------------------------------------|
 |24&nbsp;Apr&nbsp;2018| Started. Created repository and Wrote up Proposal |
 | 27 Apr 2018 |Started implementing focal rules as in the original El Farol paper. Also started reading the Kolkaka Paise restaurant papers. Think about criteria for evaluating rules, e.g. review every n iterations to see whther I could do better, review against target performance, etc.|
+| 8 May 2018 | Started on machine Learning after Fogel. I need to think through starting conditions. Is there enough time to start the way Fogel does? |
 
 
 
