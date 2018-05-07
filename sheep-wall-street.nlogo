@@ -159,7 +159,7 @@ end
 
 to establish-fogel
   set color cyan
-  set shape "fish"
+  set shape "bird side"  ;; Fogel is an old form of the German word Vogel, "bird"
   set size 2
   set coefficient-set map [dummy -> create-coefficients] range n-coefficient-sets
   display-investor choose-initial-pool
@@ -231,9 +231,20 @@ end
 
 to calculate-payoff-learning
   set coefficient-set sentence coefficient-set map [[coefficients] -> create-new-coefficients coefficients] coefficient-set
-
+  let indexed-scores (map [[coefficients index] -> (list evaluate coefficients index) ] coefficient-set range length coefficient-set)
+;  output-print indexed-scores
+  let sorted-indexed-scores sort-by [[l1 l2]-> item 0 l1 < item 0 l2] indexed-scores
+;  output-print sorted-indexed-scores
+  let new-indices map [l -> item 1 l] sorted-indexed-scores
+;  output-print new-indices
+  let trimmed-indices sublist new-indices n-coefficient-sets length new-indices
+;  output-print trimmed-indices
 ;  let pred-payoff-low p-low-payoff * max-low-payoff / (1 + predict-count-learning g-low-number)
 ;  let pred-payoff-high p-high-payoff * max-high-payoff / (1 + predict-count-learning g-high-number)
+end
+
+to-report evaluate [coefficients]
+  report random 100
 end
 
 to-report  create-new-coefficients [coefficients]
@@ -1099,10 +1110,10 @@ PENS
 "High Risk" 1.0 0 -2674135 true "" "plot count turtles with [pcolor = red]"
 
 SLIDER
-430
-100
-602
-133
+420
+90
+540
+123
 n-coefficient-sets
 n-coefficient-sets
 0
@@ -1114,10 +1125,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-650
-105
-822
-138
+580
+90
+680
+123
 n-coefficients
 n-coefficients
 0
@@ -1228,6 +1239,12 @@ arrow
 true
 0
 Polygon -7500403 true true 150 0 0 150 105 150 105 293 195 293 195 150 300 150
+
+bird side
+false
+0
+Polygon -7500403 true true 0 120 45 90 75 90 105 120 150 120 240 135 285 120 285 135 300 150 240 150 195 165 255 195 210 195 150 210 90 195 60 180 45 135
+Circle -16777216 true false 38 98 14
 
 box
 false
