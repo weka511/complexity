@@ -14,19 +14,18 @@
 \end{abstract}
 
 \section{Introduction}
-The Santa Fe Institute Spring 2018 Challenge\cite{Challenge:2018}, models the behaviour of investors who need to choose between a pool that provides a stable income stream, and two pools that offer potentially higher, but risky returns. Each investor has access to aggregate information for each pool, and their own history. The Challenge can be interpreted as a simple model of technical analysis\cite{romero2014hedge}.
+The Santa Fe Institute Spring 2018 Challenge\cite{Challenge:2018}, models the behaviour of investors who choose between a pool that provides a stable income stream, and two pools that offer potentially higher, but risky returns. Each investor has access to aggregate information for each pool, and their own history, so the Challenge can be interpreted as a simple model of Technical Analysis\cite[Chapter 5]{romero2014hedge} \cite{wiki:technical}. My personal intuition at the start of this investigation, was that simulation would support the the weak form of Efficient Market Hypothesis \cite[Chapter 8]{romero2014hedge} \cite{wiki:emh}: "future asset prices \emph{cannot} be predicted using historical price and volume data".
 
 \section{Background}
-Brian Arthur \cite{arthur1994inductive} investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer 61 people attended. Arthur discovered there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of strategies for estimating attendance. A simple machine learning method replaces poorly performing strategies with more accurate ones.
+Brian Arthur \cite{arthur1994inductive} investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer people attended. Arthur discovered there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance. A simple machine learning method replaces poorly performing strategies with ones that have proven more accurate on recent data.
 
 
 David Fogel \cite{fogel1999inductive} used a genetic algorithm that "bred" autoregressive models. William Rand and Forrest Stonedahl\cite{rand2007farol} pointed out that Fogel's solution uses more computational effort than Arthur to produce a lower societal benefit.
 
-The El Farol problem can be generalized to the Minority game. Review \cite{szabo2007evolutionary} Kolkata Paise Restaurant \cite{chakrabarti2007kolkata}
-\cite{chakrabarti2009kolkata}
+The El Farol problem can be generalized to the Minority game \cite{challet1997emergence}, \cite{challet1998minority}, \cite{szabo2007evolutionary}, \cite{chakrabarti2007kolkata}, and \cite{chakrabarti2009kolkata}.
 
 \section{Methods}
-I developed a model, \emph{testbed.nlogo}, \cite{Github:2018}, using Netlogo, \cite{Wilensky:1999}. I followed the approach of \cite{arthur1994inductive}, using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Teach agent keeps track of the performance of the strategies in its bag, and replaces them if they are not doing well.
+I developed a model, \emph{testbed.nlogo}, \cite{Github:2018}, using Netlogo, \cite{Wilensky:1999}. I followed the approach of \cite{arthur1994inductive}, using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent keeps track of the performance of the strategies in its bag, and replaces them if they are not doing well.
 
 According to Eduardo Zambrano\cite{zambrano2001boundedly}, Arthur rated the performance of predictors using the formula:
 \begin{equation}
