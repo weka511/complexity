@@ -216,7 +216,7 @@ to go
     determine-alternative-choices
   ]
 
-  ask foegel [fogel-calculate-payoff  payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
+  ask foegel [fogel-calculate-payoff payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
 
   ;; Update history
 
@@ -243,13 +243,18 @@ end
 ;; Create a new generation of linear estimators, estimate accuracy,
 ;; and cull half of them, leaving only the best
 to-report fogel-create-new-generation-and-cull
-  let coefficient-set-with-offspring sentence coefficient-set map [[coefficients] -> create-new-coefficients coefficients] coefficient-set
-  let indexed-scores (map [[coefficients index] -> (list evaluate coefficients index) ] coefficient-set-with-offspring range length coefficient-set-with-offspring)
-  let sorted-indexed-scores sort-by [[l1 l2]-> item 0 l1 < item 0 l2] indexed-scores
-  let new-indices map [pair -> item 1 pair] sorted-indexed-scores
-  let trimmed-indices sublist new-indices 0 n-coefficient-sets
-  report map [index -> item index coefficient-set-with-offspring] trimmed-indices
+  let offspring  map [[coefficients] -> create-new-coefficients coefficients] coefficient-set
+  let coefficient-set-with-offspring sentence  coefficient-set offspring
+  let indices range length coefficient-set-with-offspring
+  let indexed-scores (map [[coefficients index] -> (list evaluate-linear-estimator coefficients index) ] coefficient-set-with-offspring indices)
+  let sorted-indexed-scores sort-by [[l1 l2]-> item 0 l1 < item 0 l2] indexed-scores  ;; sort by evaulation score
+  let indices-sorted-by-scores map [pair -> item 1 pair] sorted-indexed-scores
+  let culled-indices sublist indices-sorted-by-scores 0 n-coefficient-sets
+  ;; now use sorted culled indices to extract estitors that have performed best
+  report map [index -> item index coefficient-set-with-offspring] culled-indices
 end
+
+;; Collect any payoff and decide whether to change pools
 
 to fogel-calculate-payoff [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
   let my-payoff get-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
@@ -260,7 +265,7 @@ end
 
 
 
-to-report evaluate [coefficients]
+to-report evaluate-linear-estimator [coefficients]
   report evaluate-pool coefficients g-low-number + evaluate-pool coefficients g-high-number
 end
 
