@@ -108,5 +108,7 @@ ENV/
 
 # Netlogo stuff
 .*.tmp.nlogo
+out.csv
+
 
 
