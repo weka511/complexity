@@ -4,7 +4,9 @@ extensions[
 
 breed [sheep a-sheep]    ;; Sheep use original El Farol rules as described
                          ;; by Brian Arthur
-breed [foegel fogel]
+
+breed [foegel fogel]     ;; Foegel use the evaolutionary algorithm
+                         ;; descrived by Fogel et al
 
 patches-own [
   pool-number  ;; Used to translate from colour to numbers used in Tournament
@@ -31,7 +33,7 @@ sheep-own [
 ]
 
 foegel-own [
-  coefficient-set
+  coefficient-set      ;; The coefficients in the various linear predictors in Fogel et al
 ]
 
 globals [
@@ -39,11 +41,16 @@ globals [
   g-high-payoff                ;; list of  payoffs per agent from high pool, most recent first
   g-low-number                 ;; list of numbers of agents in low pool, most recent first
   g-high-number                ;; list of numbers of agents in high pool, most recent first
+
   g-changed-predictors         ;; Number of predictors that were replaced in the current round
+                               ;; For display by GUI
   g-ticks-without-change       ;; Number of ticks that have had no change in predictors
                                ;; Reset each time even one predictor changed
+                               ;; For display by GUI
   g-changed-assignments        ;; Number of pools chnaged during current round
+                               ;; For display by GUI
   g-maximum-wealth-for-scaling ;; Maximum wealth this round - used to scale output area
+                               ;; For display by GUI
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -107,20 +114,20 @@ to setup
   set g-changed-assignments  0
   set g-maximum-wealth-for-scaling n-steps * payoff-stable
 
-  ask patches[establish-pools]
+  ask patches[patches-establish-pools]
 
-  let predictor-pool establish-predictor-pool
+  let predictor-pool sheep-establish-predictor-pool
 
-  create-sheep n-sheep [establish-sheep  predictor-pool]
+  create-sheep n-sheep [sheep-establish  predictor-pool]
 
-  create-foegel 5 [establish-fogel]
+  create-foegel n-fogel [fogel-establish]
 
   reset-ticks
 end
 
 ;; Assign background colours and pool numbers to patches
 
-to establish-pools
+to patches-establish-pools
     set pcolor yellow
     if pxcor > max-pxcor / 3 [set pcolor red]
     if pxcor < min-pxcor / 3 [set pcolor green]
@@ -129,7 +136,7 @@ end
 
 ;; Create big pool of all predictors;
 ;; each sheep gets a subset
-to-report establish-predictor-pool
+to-report sheep-establish-predictor-pool
   let predictor-pool []
   foreach csv:from-file "predictors.csv" [
     [row] -> repeat item PRED-COUNT row [
@@ -141,49 +148,50 @@ end
 ;; Set up an investor with a collection of predictors
 ;; and assign to a pool
 
-to establish-sheep  [predictor-pool]
-  set payoffs []
-  set choices []
+to sheep-establish  [predictor-pool]
+  turtle-establish
   set candidate-predictors n-of n-predictors predictor-pool
   set predictor-index random length candidate-predictors
   set favourite-predictor item predictor-index  candidate-predictors
   set shape "sheep"
   set size 1
   set color white
-  set wealth starting-wealth
   set alternative-payoffs []
   set alternative-choices []
   set predictor-wealth n-values n-predictors [a -> 0]
-  display-investor choose-initial-pool
+  display-investor turtle-choose-initial-pool
 end
 
-to establish-fogel
+;; Set up an investor with a linear estimator
+;; and assign to a pool
+to fogel-establish
+  turtle-establish
   set color cyan
   set shape "bird side"  ;; Fogel is an old form of the German word Vogel, "bird"
   set size 2
-  set coefficient-set map [dummy -> create-coefficients] range n-coefficient-sets
-  display-investor choose-initial-pool
+  set coefficient-set map [dummy -> fogel-create-coefficients] range n-coefficient-sets
+  display-investor turtle-choose-initial-pool
 end
 
-to-report create-coefficients
-  let n 1 + random n-coefficients
-  report map [r -> -1 + 2 * random-float 1] range n
+to turtle-establish
+  set wealth 0
+  set payoffs []
+  set choices []
+end
+
+to-report fogel-create-coefficients
+  report map [r -> -1 + 2 * random-float 1] range (1 + random n-coefficients)
 end
 
 ;; Allocate agents to pools at the start
 
-to-report choose-initial-pool
+to-report turtle-choose-initial-pool
   let rvalue random-float 1
   if rvalue < p-low0 [report POOL-LOW]
   if rvalue < (p-low0 + p-high0) [report POOL-HIGH]
   report POOL-STABLE
 end
 
-;; Decide how much wealth each individual starts with
-
-to-report starting-wealth  ;; TODO - allow flexibility
-  report 0
-end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -195,18 +203,20 @@ to go
     stop
   ]
 
-  let payoff_low_risk get-payoff yellow
-  let pay-dividend-low? pay-dividend? [yellow]
+  let payoff_low_risk get-payoff yellow         ;; Payoff on the assumption that pay-dividend-low? is TRUE
+  let pay-dividend-low? pay-dividend? yellow
   let payoff_high_risk get-payoff red
-  let pay-dividend-high? pay-dividend? [red]
+  let pay-dividend-high? pay-dividend? red      ;; Payoff on the assumption that pay-dividend-high? is TRUE
 
-  set g-changed-assignments 0
+  set g-changed-assignments 0     ;; Stats to be plotted
+  set g-changed-predictors 0      ;; Stats to be plotted
+
   ask sheep [
-    calculate-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
+    sheep-calculate-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
     determine-alternative-choices
   ]
 
-  ask foegel [calculate-payoff-learning  payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
+  ask foegel [fogel-calculate-payoff  payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
 
   ;; Update history
 
@@ -219,17 +229,20 @@ to go
 
   ask sheep [determine-alternative-payoffs]
 
-  set g-changed-predictors 0
-
   ask sheep[review-predictors]
 
-  set g-ticks-without-change ifelse-value (g-changed-predictors = 0) [g-ticks-without-change + 1][0]
+  set g-ticks-without-change ifelse-value (g-changed-predictors = 0) [g-ticks-without-change + 1][0]  ;; for GUI
+
+  ;; Establish vertical scaling for wealth so we can display everything
+
   set g-maximum-wealth-for-scaling 1
   ask turtles [set g-maximum-wealth-for-scaling max (list g-maximum-wealth-for-scaling wealth)]
   tick
 end
 
-to-report get-new-coefficient-set
+;; Create a new generation of linear estimators, estimate accuracy,
+;; and cull half of them, leaving only the best
+to-report fogel-create-new-generation-and-cull
   let coefficient-set-with-offspring sentence coefficient-set map [[coefficients] -> create-new-coefficients coefficients] coefficient-set
   let indexed-scores (map [[coefficients index] -> (list evaluate coefficients index) ] coefficient-set-with-offspring range length coefficient-set-with-offspring)
   let sorted-indexed-scores sort-by [[l1 l2]-> item 0 l1 < item 0 l2] indexed-scores
@@ -238,20 +251,13 @@ to-report get-new-coefficient-set
   report map [index -> item index coefficient-set-with-offspring] trimmed-indices
 end
 
-to calculate-payoff-learning [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
-  foreach range n-train [dummy -> set coefficient-set  get-new-coefficient-set]
-  let pred-payoff-low p-low-payoff * max-low-payoff / (1 + predict-count-learning g-low-number item 0 coefficient-set)
-  let pred-payoff-high p-high-payoff * max-high-payoff / (1 + predict-count-learning g-high-number  item 0 coefficient-set)
-  let mypayoffs (list payoff-stable pred-payoff-low pred-payoff-high)
-  let max-payoff max mypayoffs
-  let best-pool position max-payoff mypayoffs
-  if pool-number != best-pool [
-    set wealth wealth - tau
-    display-investor best-pool
-  ]
-  set wealth wealth + get-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
-  display-wealth
+to fogel-calculate-payoff [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
+  let my-payoff get-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
+  set wealth wealth + my-payoff
+  fogel-decide-whether-to-switch-pools
+  set payoffs fput my-payoff payoffs
 end
+
 
 
 to-report evaluate [coefficients]
@@ -310,11 +316,11 @@ end
 
 ;; Collect any payoff and decide whether to change pools
 
-to calculate-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
+to sheep-calculate-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
   let my-payoff get-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
   set wealth wealth + my-payoff
   set predictor-wealth replace-item predictor-index predictor-wealth  (my-payoff + (item predictor-index predictor-wealth))
-  decide-whether-to-switch-pools
+  sheep-decide-whether-to-switch-pools
   set payoffs fput my-payoff payoffs
 end
 
@@ -325,32 +331,49 @@ to-report get-payoff-for-this-step [payoff_low_risk pay-dividend-low? payoff_hig
   report payoff-stable
 end
 
-;; Decide whether to switch pools
-to decide-whether-to-switch-pools
+to fogel-decide-whether-to-switch-pools
   ifelse length choices =  0 [
     set choices fput pool-number choices
   ][
-    let new-pool (runresult (get-action favourite-predictor) payoffs choices)
-
-    ifelse new-pool = pool-number [
-      display-wealth
-    ][
-      set g-changed-assignments g-changed-assignments + 1
-      ifelse wealth >= tau [
-        set wealth wealth - tau
-        display-investor new-pool
-      ][
-        if can-borrow = "yes"[
-          set wealth wealth - tau
-          set predictor-wealth replace-item predictor-index predictor-wealth  ( (item predictor-index predictor-wealth) - tau)
-          display-investor new-pool
-        ]
-        if can-borrow = "no"[display-wealth]
-        if can-borrow = "die"[die]
-      ]
-    ]
-    set choices fput new-pool choices
+    foreach range n-train [dummy -> set coefficient-set  fogel-create-new-generation-and-cull]
+    let pred-payoff-low p-low-payoff * max-low-payoff / (1 + predict-count-learning g-low-number item 0 coefficient-set)
+    let pred-payoff-high p-high-payoff * max-high-payoff / (1 + predict-count-learning g-high-number  item 0 coefficient-set)
+    let mypayoffs (list payoff-stable pred-payoff-low pred-payoff-high)
+    let max-payoff max mypayoffs
+    let best-pool position max-payoff mypayoffs
+    decide-internal best-pool
   ]
+end
+
+;; Decide whether to switch pools
+to sheep-decide-whether-to-switch-pools
+  ifelse length choices =  0 [
+    set choices fput pool-number choices
+  ][
+    decide-internal (runresult (get-action favourite-predictor) payoffs choices)
+  ]
+end
+
+to decide-internal [new-pool]
+  ifelse new-pool = pool-number [
+    display-wealth
+  ][
+    set g-changed-assignments g-changed-assignments + 1
+    ifelse wealth >= tau [
+      set wealth wealth - tau
+      display-investor new-pool
+    ][
+      if can-borrow = "yes"[
+        set wealth wealth - tau
+        set predictor-wealth replace-item predictor-index predictor-wealth  ( (item predictor-index predictor-wealth) - tau)
+        display-investor new-pool
+      ]
+      if can-borrow = "no"[display-wealth]
+      if can-borrow = "die"[die]
+    ]
+  ]
+  set choices fput new-pool choices
+
 end
 
 ;; Find out what each of the alternative predictrs would have done
@@ -675,7 +698,7 @@ end
 
 to-report get-payoff [pool-colour]
   let dividend ifelse-value (pool-colour = red) [max-high-payoff][max-low-payoff]
-  let n-payees count sheep with [pcolor = pool-colour]
+  let n-payees count turtles with [pcolor = pool-colour]
   report dividend / max list n-payees 1
 end
 
@@ -781,7 +804,7 @@ n-sheep
 n-sheep
 10
 100
-50.0
+40.0
 10
 1
 NIL
@@ -796,7 +819,7 @@ n-steps
 n-steps
 50
 1000
-150.0
+100.0
 50
 1
 NIL
@@ -848,10 +871,10 @@ NIL
 HORIZONTAL
 
 PLOT
-220
-270
-420
-405
+225
+320
+425
+455
 Wealth
 NIL
 NIL
@@ -998,10 +1021,10 @@ NIL
 HORIZONTAL
 
 PLOT
-425
-130
-825
-280
+430
+180
+830
+330
 Changes to predictors
 NIL
 NIL
@@ -1018,10 +1041,10 @@ PENS
 "Pool changes" 1.0 0 -955883 true "" "plot g-changed-assignments"
 
 PLOT
-5
-270
-205
-420
+10
+320
+210
+470
 Average Wealth
 NIL
 NIL
@@ -1053,10 +1076,10 @@ NIL
 HORIZONTAL
 
 PLOT
-430
-285
-630
 435
+335
+635
+485
 Standard Deviation Wealth
 NIL
 NIL
@@ -1073,10 +1096,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot sigma-wealth red"
 
 PLOT
-640
-290
-840
-440
+645
+340
+845
+490
 Wealth by rules
 NIL
 NIL
@@ -1107,10 +1130,10 @@ NIL
 HORIZONTAL
 
 PLOT
-5
-130
-420
-267
+10
+180
+425
+317
 Counts
 NIL
 NIL
@@ -1180,8 +1203,23 @@ n-train
 n-train
 0
 25
-10.0
+11.0
 1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+10
+125
+102
+158
+n-fogel
+n-fogel
+0
+100
+10.0
+5
 1
 NIL
 HORIZONTAL
@@ -1587,201 +1625,6 @@ NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
-<experiments>
-  <experiment name="Vary tau" repetitions="10" runMetricsEveryStep="true">
-    <setup>setup</setup>
-    <go>go</go>
-    <metric>sum [wealth] of turtles with [pcolor = green]</metric>
-    <metric>sum [wealth] of turtles with [pcolor = yellow]</metric>
-    <metric>sum [wealth] of turtles with [pcolor = red]</metric>
-    <metric>(sum [wealth] of turtles with [pcolor = green]) / max (list count turtles with [pcolor = green] 1)</metric>
-    <metric>(sum [wealth] of turtles with [pcolor = yellow]) / max (list count turtles with [pcolor = yellow] 1)</metric>
-    <metric>(sum [wealth] of turtles with [pcolor = red]) / max (list count turtles with [pcolor = red] 1)</metric>
-    <enumeratedValueSet variable="p-high0">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-review">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="can-borrow">
-      <value value="&quot;no&quot;"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-low0">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-agents">
-      <value value="50"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-low-payoff">
-      <value value="0.5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-review">
-      <value value="0.69"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-horizon">
-      <value value="10"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="evaluate-altenatives?">
-      <value value="true"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="max-low-payoff">
-      <value value="40"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-high-payoff">
-      <value value="0.25"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="payoff-stable">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="tau">
-      <value value="0"/>
-      <value value="1"/>
-      <value value="2"/>
-      <value value="3"/>
-      <value value="5"/>
-      <value value="8"/>
-      <value value="13"/>
-      <value value="21"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-grace">
-      <value value="11"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-predictors">
-      <value value="18"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-steps">
-      <value value="100"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="max-high-payoff">
-      <value value="80"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="b-save-rules">
-      <value value="false"/>
-    </enumeratedValueSet>
-  </experiment>
-  <experiment name="Vary Borrowing" repetitions="10" runMetricsEveryStep="true">
-    <setup>setup</setup>
-    <go>go</go>
-    <metric>sum [wealth] of turtles with [pcolor = green]</metric>
-    <metric>sum [wealth] of turtles with [pcolor = yellow]</metric>
-    <metric>sum [wealth] of turtles with [pcolor = red]</metric>
-    <metric>(sum [wealth] of turtles with [pcolor = green]) / max (list count turtles with [pcolor = green] 1)</metric>
-    <metric>(sum [wealth] of turtles with [pcolor = yellow]) / max (list count turtles with [pcolor = yellow] 1)</metric>
-    <metric>(sum [wealth] of turtles with [pcolor = red]) / max (list count turtles with [pcolor = red] 1)</metric>
-    <enumeratedValueSet variable="p-high0">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-review">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="can-borrow">
-      <value value="&quot;no&quot;"/>
-      <value value="&quot;yes&quot;"/>
-      <value value="&quot;die&quot;"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-low0">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-agents">
-      <value value="50"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-low-payoff">
-      <value value="0.5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-review">
-      <value value="0.69"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-horizon">
-      <value value="10"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="evaluate-altenatives?">
-      <value value="true"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="max-low-payoff">
-      <value value="40"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-high-payoff">
-      <value value="0.25"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="payoff-stable">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="tau">
-      <value value="8"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-grace">
-      <value value="11"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-predictors">
-      <value value="18"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-steps">
-      <value value="100"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="max-high-payoff">
-      <value value="80"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="b-save-rules">
-      <value value="false"/>
-    </enumeratedValueSet>
-  </experiment>
-  <experiment name="CheckRules" repetitions="10" runMetricsEveryStep="false">
-    <setup>setup</setup>
-    <go>go</go>
-    <metric>list-rules-raw</metric>
-    <enumeratedValueSet variable="p-high0">
-      <value value="0.05"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="lambda">
-      <value value="0.75"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="can-borrow">
-      <value value="&quot;no&quot;"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-sheep">
-      <value value="50"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-low0">
-      <value value="0.05"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-low-payoff">
-      <value value="0.5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-review">
-      <value value="0.5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-horizon">
-      <value value="22"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="max-low-payoff">
-      <value value="40"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-high-payoff">
-      <value value="0.25"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="tau">
-      <value value="5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="payoff-stable">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="b-save-rules">
-      <value value="true"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-predictors">
-      <value value="10"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="epsilon">
-      <value value="0.05"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="n-steps">
-      <value value="150"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="max-high-payoff">
-      <value value="80"/>
-    </enumeratedValueSet>
-  </experiment>
-</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
