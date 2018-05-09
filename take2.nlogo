@@ -47,7 +47,7 @@ to setup
 
   create-ordered-investors n-investors [
     set wealth 0
-    set predictors (list [[ low-payoff high-payoff low-number high-number ]-> test-predictor  low-payoff high-payoff low-number high-number ])
+    set predictors (list [[function low-payoff high-payoff low-number high-number ]-> test-predictor function low-payoff high-payoff low-number high-number])
     set my-payoffs []
     fd 15
     set shape "fish"
@@ -109,7 +109,7 @@ to go
 
     ;; Review predictors
   ask investors [  ;; Select best pool
-    let prediction (runresult (item 0 predictors) low-payoff high-payoff low-number high-number)
+    let prediction (runresult (item 0 predictors) PREDICT low-payoff high-payoff low-number high-number)
     let recommended-pool item 0 prediction
     let predicted-benefit item 1 prediction
      ;; If pool different, consider whether to change (tau)
@@ -147,8 +147,27 @@ to-report random-tower [probabilities]
   report i
 end
 
-to-report test-predictor [ low-payoff high-payoff low-number high-number ]
-  report (list random 3 1)
+to-report test-predictor [function low-payoff high-payoff low-number high-number]
+  if who = 24[
+    set wealth 55
+    output-print (list who wealth)
+  ]
+
+  if function = PREDICT [report (list random 3 1)]
+  output-print "recurse"
+  report test-predictor PREDICT low-payoff high-payoff low-number high-number
+end
+
+to-report INIT
+  report  0
+end
+
+to-report PREDICT
+  report  INIT + 1
+end
+
+to-report EVALUATE
+  report  PREDICT + 1
 end
 
 to-report  POOL-STABLE    ;; Index used for stable pool
@@ -379,10 +398,10 @@ NIL
 HORIZONTAL
 
 PLOT
-19
-332
-219
-482
+10
+310
+210
+460
 Spread
 Wealth
 Count
@@ -395,6 +414,28 @@ false
 "set-plot-pen-mode 1\nset-plot-x-range 0 250\nset-plot-y-range 0 5\nset-histogram-num-bars 20" ""
 PENS
 "default" 1.0 0 -13345367 true "" "histogram [wealth] of investors"
+
+MONITOR
+8
+477
+111
+522
+Average Wealth
+mean [wealth] of investors
+0
+1
+11
+
+MONITOR
+122
+477
+208
+522
+Sigma
+standard-deviation [wealth] of investors
+1
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
