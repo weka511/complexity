@@ -14,6 +14,8 @@ pools-own [
 investors-own [
   wealth
   predictors
+  my-payoffs
+  my-choices
 ]
 
 to setup
@@ -23,17 +25,17 @@ to setup
     fd 1
     set shape "face neutral"
     set pool-number next-pool
-    if next-pool = 0 [
+    if pool-number = POOL-STABLE [
       set color green
       set max-payoff 1
-      set probability-payoff 1.0000001  ;; force payoff (probabbly not needed, but roundoff...)
+      set probability-payoff 1.0000001  ;; force payoff (probably not needed, but roundoff...)
     ]
-    if next-pool = 1 [
+    if pool-number = POOL-LOW [
       set color yellow
       set max-payoff max-payoff-low
       set probability-payoff p-payoff-low
     ]
-    if next-pool = 2 [
+    if pool-number = POOL-HIGH [
       set color red
       set max-payoff max-payoff-high
       set probability-payoff p-payoff-high
@@ -45,17 +47,24 @@ to setup
 
   create-ordered-investors n-investors [
     set wealth 0
-    set predictors []
+    set predictors (list [[ low-payoff high-payoff low-number high-number ]-> test-predictor  low-payoff high-payoff low-number high-number ])
+    set my-payoffs []
     fd 15
     set shape "fish"
     let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
     create-link-with one-of pools with [pool-number = pool-index]
+    set my-choices (list pool-index)
   ]
   reset-ticks
 end
 
 to go
   if ticks > n-ticks [stop]
+  let low-payoff []
+  let high-payoff []
+  let low-number []
+  let high-number[]
+
   ask pools [
     let r random-float 1
     let mypayoff ifelse-value (r < probability-payoff) [max-payoff][0]
@@ -64,22 +73,49 @@ to go
     if n-members > 0 and probability-payoff < 1 [set mypayoff mypayoff / n-members]
     set numbers fput n-members numbers
     set payoffs fput mypayoff payoffs
+    if pool-number = POOL-LOW [
+      set low-payoff  payoffs
+      set low-number numbers
+    ]
+    if pool-number = POOL-HIGH [
+      set high-payoff  payoffs
+      set high-number numbers
+    ]
   ]
 
   ask investors [    ;; Update wealth
     let delta-wealth 0
     ask one-of in-link-neighbors [set delta-wealth item 0 payoffs]
     set wealth wealth + delta-wealth
+    set my-payoffs fput delta-wealth my-payoffs
   ]
+
   let richest investors with-max [wealth]
   let max-wealth 0
   ask one-of richest [set max-wealth wealth]
   ask investors [
-    set size 5 * round wealth / max-wealth
+    set size max (list 2 (5 * round wealth / max (list 1 max-wealth)))
   ]
+
+
     ;; Review predictors
-    ;; Select best pool
-    ;; If pool different, consider whether to change (tau)
+  ask investors [  ;; Select best pool
+    let prediction (runresult (item 0 predictors) low-payoff high-payoff low-number high-number)
+    let recommended-pool item 0 prediction
+    let predicted-benefit item 1 prediction
+     ;; If pool different, consider whether to change (tau)
+    ifelse recommended-pool = item 0 my-choices [
+      set my-choices fput recommended-pool my-choices
+    ][
+      if predicted-benefit * (n-ticks - ticks) > tau [
+        set wealth wealth - tau
+        set my-choices fput recommended-pool my-choices
+        ask one-of my-out-links [die]
+        show pools with [pool-number = recommended-pool]
+        create-link-with one-of pools with [pool-number = recommended-pool]
+      ]
+    ]
+  ]
 
   tick
 end
@@ -95,15 +131,33 @@ to-report random-tower [probabilities]
   ]
   report i
 end
+
+to-report test-predictor [ low-payoff high-payoff low-number high-number ]
+  report (list random 3 1)
+end
+
+to-report  POOL-STABLE    ;; Index used for stable pool
+  report 0
+end
+
+to-report    POOL-LOW      ;; Index used for low risk pool
+  report 1
+end
+
+to-report    POOL-HIGH     ;; Index used for low risk pool
+  report 2
+end
+
+;; Copyright (c) 2018 Simon Crase - see info tab for details of licence
 @#$#@#$#@
 GRAPHICS-WINDOW
 244
 10
-681
-448
+713
+480
 -1
 -1
-13.0
+13.97
 1
 10
 1
@@ -302,9 +356,9 @@ SLIDER
 tau
 tau
 0
-100
-5.0
-0.01
+20
+2.0
+1
 1
 NIL
 HORIZONTAL
