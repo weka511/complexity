@@ -54,6 +54,7 @@ to setup
     let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
     create-link-with one-of pools with [pool-number = pool-index]
     set my-choices (list pool-index)
+    colourize
   ]
   reset-ticks
 end
@@ -111,13 +112,19 @@ to go
         set wealth wealth - tau
         set my-choices fput recommended-pool my-choices
         ask one-of my-out-links [die]
-        show pools with [pool-number = recommended-pool]
         create-link-with one-of pools with [pool-number = recommended-pool]
+        colourize
       ]
     ]
   ]
 
   tick
+end
+
+to colourize
+  let new-color 0
+  ask one-of in-link-neighbors [set new-color color]
+  set color new-color
 end
 
 to-report random-tower [probabilities]
@@ -267,7 +274,7 @@ max-payoff-low
 max-payoff-low
 0
 100
-46.0
+40.0
 1
 1
 NIL
@@ -357,11 +364,29 @@ tau
 tau
 0
 20
-2.0
+0.0
 1
 1
 NIL
 HORIZONTAL
+
+PLOT
+19
+332
+219
+482
+Spread
+Wealth
+Count
+0.0
+10.0
+0.0
+10.0
+true
+false
+"set-plot-pen-mode 1\nset-plot-x-range 0 250\nset-plot-y-range 0 5\nset-histogram-num-bars 20" ""
+PENS
+"default" 1.0 0 -13345367 true "" "histogram [wealth] of investors"
 
 @#$#@#$#@
 ## WHAT IS IT?
