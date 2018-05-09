@@ -2,29 +2,31 @@ breed [pools pool]
 
 breed [investors investor]
 
-globals []
 
 pools-own [
   pool-number
   max-payoff
   probability-payoff
-  payoff
-  number
+  payoffs
+  numbers
 ]
 
-investors-own []
+investors-own [
+  wealth
+  predictors
+]
 
 to setup
   clear-all
   let next-pool 0
   create-ordered-pools 3 [
     fd 1
-    set shape "house"
+    set shape "face neutral"
     set pool-number next-pool
     if next-pool = 0 [
       set color green
       set max-payoff 1
-      set probability-payoff 1
+      set probability-payoff 1.0000001  ;; force payoff (probabbly not needed, but roundoff...)
     ]
     if next-pool = 1 [
       set color yellow
@@ -36,20 +38,50 @@ to setup
       set max-payoff max-payoff-high
       set probability-payoff p-payoff-high
     ]
+    set payoffs []
+    set numbers []
     set next-pool next-pool + 1
   ]
 
-  create-ordered-investors 10 [
-    fd 10
+  create-ordered-investors n-investors [
+    set wealth 0
+    set predictors []
+    fd 15
     set shape "fish"
     let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
-    output-print pool-index
     create-link-with one-of pools with [pool-number = pool-index]
   ]
   reset-ticks
 end
 
 to go
+  if ticks > n-ticks [stop]
+  ask pools [
+    let r random-float 1
+    let mypayoff ifelse-value (r < probability-payoff) [max-payoff][0]
+    set shape ifelse-value (r < probability-payoff) ["face happy"]["face sad"]
+    let n-members count link-neighbors
+    if n-members > 0 and probability-payoff < 1 [set mypayoff mypayoff / n-members]
+    set numbers fput n-members numbers
+    set payoffs fput mypayoff payoffs
+  ]
+
+  ask investors [    ;; Update wealth
+    let delta-wealth 0
+    ask one-of in-link-neighbors [set delta-wealth item 0 payoffs]
+    set wealth wealth + delta-wealth
+  ]
+  let richest investors with-max [wealth]
+  let max-wealth 0
+  ask one-of richest [set max-wealth wealth]
+  ask investors [
+    set size 5 * round wealth / max-wealth
+  ]
+    ;; Review predictors
+    ;; Select best pool
+    ;; If pool different, consider whether to change (tau)
+
+  tick
 end
 
 to-report random-tower [probabilities]
@@ -92,10 +124,10 @@ ticks
 30.0
 
 BUTTON
-4
-140
-68
-173
+5
+260
+69
+293
 Setup
 setup
 NIL
@@ -109,10 +141,10 @@ NIL
 1
 
 BUTTON
-141
-140
-204
-173
+142
+260
+205
+293
 Go
 go
 T
@@ -126,10 +158,10 @@ NIL
 0
 
 BUTTON
-71
-140
-134
-173
+72
+260
+135
+293
 Step
 go
 NIL
@@ -151,7 +183,7 @@ p-payoff-low
 p-payoff-low
 0
 1
-0.25
+0.5
 0.01
 1
 NIL
@@ -166,7 +198,7 @@ p-payoff-high
 p-payoff-high
 0
 1
-0.31
+0.25
 0.01
 1
 NIL
@@ -227,6 +259,51 @@ p-start-high
 0
 1
 0.1
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+6
+141
+98
+174
+n-investors
+n-investors
+0
+100
+50.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+121
+140
+219
+173
+n-ticks
+n-ticks
+0
+200
+100.0
+5
+1
+NIL
+HORIZONTAL
+
+SLIDER
+7
+187
+99
+220
+tau
+tau
+0
+100
+5.0
 0.01
 1
 NIL
