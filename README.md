@@ -40,7 +40,8 @@ Your analysis should include (but is not limited to):
 | Proposal.pdf | Agent Based Modelling Proposal |
 | Proposal.tex | Agent Based Modelling Proposal |
 | README.md | This File |
-| sheep-wall-street.nlogo | Testbed for evealuating alternative strategies |
+| sheep-wall-street.nlogo | Testbed for evaluating alternative strategies |
+| take2.nlogo | New model using links for assignment to pool |
 | strategies.csv | Parameters for strategies |
 | Writeup.pdf | Writeup for submission to SFI |
 | Writeup.tex | Writeup for submission to SFI |
