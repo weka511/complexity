@@ -169,7 +169,7 @@ to fogel-establish
   set color cyan
   set shape "bird side"  ;; Fogel is an old form of the German word Vogel, "bird"
   set size 2
-  set coefficient-set map [dummy -> fogel-create-coefficients] range n-coefficient-sets
+  set coefficient-set map [ -> fogel-create-coefficients] range n-coefficient-sets
   display-investor turtle-choose-initial-pool
 end
 
@@ -243,19 +243,18 @@ end
 ;; Create a new generation of linear estimators, estimate accuracy,
 ;; and cull half of them, leaving only the best
 to-report fogel-create-new-generation-and-cull
-  let offspring  map [[coefficients] -> create-new-coefficients coefficients] coefficient-set
+  let offspring  map [coefficients -> fogel-create-new-coefficients coefficients] coefficient-set
   let coefficient-set-with-offspring sentence  coefficient-set offspring
   let indices range length coefficient-set-with-offspring
-  let indexed-scores (map [[coefficients index] -> (list evaluate-linear-estimator coefficients index) ] coefficient-set-with-offspring indices)
-  let sorted-indexed-scores sort-by [[l1 l2]-> item 0 l1 < item 0 l2] indexed-scores  ;; sort by evaulation score
-  let indices-sorted-by-scores map [pair -> item 1 pair] sorted-indexed-scores
+  let scores-with-indices (map [[coefficients index] -> (list fogel-evaluate-linear-estimator coefficients index) ] coefficient-set-with-offspring indices)
+  let scores-sorted-with-indices sort-by [[l1 l2]-> item 0 l1 < item 0 l2] scores-with-indices  ;; sort by evaulation score
+  let indices-sorted-by-scores map [pair -> item 1 pair] scores-sorted-with-indices
   let culled-indices sublist indices-sorted-by-scores 0 n-coefficient-sets
-  ;; now use sorted culled indices to extract estitors that have performed best
+  ;; now use sorted culled indices to extract estimators that have performed best
   report map [index -> item index coefficient-set-with-offspring] culled-indices
 end
 
 ;; Collect any payoff and decide whether to change pools
-
 to fogel-calculate-payoff [payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?]
   let my-payoff get-payoff-for-this-step payoff_low_risk pay-dividend-low? payoff_high_risk pay-dividend-high?
   set wealth wealth + my-payoff
@@ -264,16 +263,17 @@ to fogel-calculate-payoff [payoff_low_risk pay-dividend-low? payoff_high_risk pa
 end
 
 
-
-to-report evaluate-linear-estimator [coefficients]
-  report evaluate-pool coefficients g-low-number + evaluate-pool coefficients g-high-number
+;; Evaluate performance against high and low pools.
+to-report fogel-evaluate-linear-estimator [coefficients]
+  report fogel-evaluate-pool coefficients g-low-number + fogel-evaluate-pool coefficients g-high-number
 end
 
-to-report evaluate-pool [coefficients pool]
-  report reduce + map [index -> sq-error coefficients pool index] range n-periods
+;; Evaluate performance against a specific pool
+to-report fogel-evaluate-pool [coefficients pool]
+  report reduce + map [index -> fogel-sq-error coefficients pool index] range n-periods
 end
 
-to-report sq-error [coefficients pool index]
+to-report fogel-sq-error [coefficients pool index]
   if length pool < 1 + index [report 0]                 ;; FIXME
   let target-count item index pool
   let predicted-count predict-count-learning (sublist pool (index + 1) (length pool)) coefficients
@@ -281,7 +281,7 @@ to-report sq-error [coefficients pool index]
   report delta * delta
 end
 
-to-report  create-new-coefficients [coefficients]
+to-report  fogel-create-new-coefficients [coefficients]
   let len new-length coefficients
   if len < length coefficients [report mutate remove-item len coefficients]
   if len > length coefficients [report mutate lput 0.0 coefficients]
@@ -340,7 +340,7 @@ to fogel-decide-whether-to-switch-pools
   ifelse length choices =  0 [
     set choices fput pool-number choices
   ][
-    foreach range n-train [dummy -> set coefficient-set  fogel-create-new-generation-and-cull]
+    foreach range n-train [ -> set coefficient-set  fogel-create-new-generation-and-cull]
     let pred-payoff-low p-low-payoff * max-low-payoff / (1 + predict-count-learning g-low-number item 0 coefficient-set)
     let pred-payoff-high p-high-payoff * max-high-payoff / (1 + predict-count-learning g-high-number  item 0 coefficient-set)
     let mypayoffs (list payoff-stable pred-payoff-low pred-payoff-high)
