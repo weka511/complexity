@@ -59,13 +59,19 @@ to setup
   reset-ticks
 end
 
+to-report return [mypayoffs mynumbers]
+  let weighted-payoffs reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
+  report weighted-payoffs / max (list 1 length mypayoffs)
+end
+
 to go
   if ticks > n-ticks [stop]
   let low-payoff []
   let high-payoff []
   let low-number []
   let high-number[]
-
+  let low-return 0
+  let high-return 0
   ask pools [
     let r random-float 1
     let mypayoff ifelse-value (r < probability-payoff) [max-payoff][0]
@@ -77,10 +83,12 @@ to go
     if pool-number = POOL-LOW [
       set low-payoff  payoffs
       set low-number numbers
+      set low-return return payoffs numbers
     ]
     if pool-number = POOL-HIGH [
       set high-payoff  payoffs
       set high-number numbers
+      set high-return return payoffs numbers
     ]
   ]
 
