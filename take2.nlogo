@@ -47,7 +47,7 @@ to setup
 
   create-ordered-investors n-investors [
     set wealth 0
-    set predictors (list [[function low-payoff high-payoff low-number high-number ]-> test-predictor function low-payoff high-payoff low-number high-number])
+    set predictors map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
     set my-payoffs []
     fd 15
     set shape "fish"
@@ -55,6 +55,7 @@ to setup
     create-link-with one-of pools with [pool-number = pool-index]
     set my-choices (list pool-index)
     colourize
+;   foreach predictors [predictor -> let dummy (runresult predictor INIT [] [] [] [])]
   ]
   reset-ticks
 end
@@ -99,6 +100,8 @@ to go
     set my-payoffs fput delta-wealth my-payoffs
   ]
 
+  ;; Scale wealth for display
+
   let richest investors with-max [wealth]
   let max-wealth 0
   ask one-of richest [set max-wealth wealth]
@@ -106,8 +109,6 @@ to go
     set size max (list 2 (5 * round wealth / max (list 1 max-wealth)))
   ]
 
-
-    ;; Review predictors
   ask investors [  ;; Select best pool
     let prediction (runresult (item 0 predictors) PREDICT low-payoff high-payoff low-number high-number)
     let recommended-pool item 0 prediction
@@ -126,6 +127,13 @@ to go
     ]
   ]
 
+  ;; Review predictors
+
+  ask investors [
+    let offspring map [predictor -> (runresult predictor CLONE low-payoff high-payoff low-number high-number)] predictors
+    if is-anonymous-reporter? item 0 offspring  [set predictors sentence predictors offspring]
+    output-print length predictors
+  ]
   tick
 end
 
@@ -147,15 +155,96 @@ to-report random-tower [probabilities]
   report i
 end
 
-to-report test-predictor [function low-payoff high-payoff low-number high-number]
-  if who = 24[
-    set wealth 55
-    output-print (list who wealth)
+to-report linear-predict-count [counts coefficients]
+  let result 0
+  let i  0
+  while [i < length counts and i < length coefficients] [
+    set result result + (item i coefficients) * (item i counts)
+    set i i + 1
+  ]
+  report min (list n-investors abs result)
+end
+
+to-report linear-predictor [function low-payoff high-payoff low-number high-number coefficients]
+  if function = INIT [
+    let my-coefficients map [r -> -1 + 2 * random-float 1] range (1 + random n-coefficients)
+    report  [[func a b c d] -> linear-predictor func a b c d my-coefficients]
   ]
 
-  if function = PREDICT [report (list random 3 1)]
-  output-print "recurse"
-  report test-predictor PREDICT low-payoff high-payoff low-number high-number
+  if function = PREDICT [
+    let return-low return low-payoff low-number
+    let return-high return high-payoff high-number
+    let predicted-low-length linear-predict-count low-number coefficients
+    let predicted-high-length linear-predict-count high-number coefficients
+    let predicted-return-low return-low / (predicted-low-length + 1)
+    let predicted-return-high return-high / (predicted-high-length + 1)
+    let recommended-pool POOL-STABLE
+    let estimated-return 1
+    if predicted-return-low > estimated-return[
+      set recommended-pool POOL-LOW
+      set estimated-return predicted-return-low
+    ]
+    if predicted-return-high > estimated-return[
+      set recommended-pool POOL-HIGH
+      set estimated-return predicted-return-high
+    ]
+    report (list recommended-pool estimated-return)
+  ]
+
+  if function = CLONE [
+    let my-coefficients create-new-coefficients coefficients
+    report  [[func a b c d] -> linear-predictor func a b c d my-coefficients]
+  ]
+
+  if function = EVALUATE []
+
+  report NOTHING
+end
+
+to-report  create-new-coefficients [coefficients]
+  let len new-length coefficients
+  if len < length coefficients [report mutate remove-item len coefficients]
+  if len > length coefficients [report mutate lput 0.0 coefficients]
+  report mutate coefficients
+end
+
+to-report mutate [coefficients]
+  report map [c -> c + random-normal 0 0.1] coefficients   ;; FIXME - sigma
+end
+
+to-report new-length [coefficients]
+  let result -1
+  while [result < 1 or result > n-coefficients] [
+    let r  random-float 1
+    ifelse r < 1.0 / 3.0 [
+      set result length coefficients - 1
+    ][
+      ifelse r < 2.0 / 3.0 [
+        report length coefficients
+      ][
+        set result length coefficients + 1
+    ]]
+
+  ]
+  report result
+end
+
+
+to-report test-predictor [function low-payoff high-payoff low-number high-number]
+
+  if function = INIT [
+    show self;
+    report 0
+  ]
+  if function = PREDICT [
+    report (list random 3 1)
+  ]
+;  output-print "recurse"
+;  report test-predictor PREDICT low-payoff high-payoff low-number high-number
+end
+
+to-report NOTHING
+  report -1
 end
 
 to-report INIT
@@ -166,8 +255,12 @@ to-report PREDICT
   report  INIT + 1
 end
 
-to-report EVALUATE
+to-report CLONE
   report  PREDICT + 1
+end
+
+to-report EVALUATE
+  report  CLONE + 1
 end
 
 to-report  POOL-STABLE    ;; Index used for stable pool
@@ -436,6 +529,36 @@ standard-deviation [wealth] of investors
 1
 1
 11
+
+SLIDER
+725
+10
+826
+43
+n-coefficients
+n-coefficients
+1
+25
+10.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+842
+13
+962
+46
+n-predictors
+n-predictors
+0
+25
+11.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
