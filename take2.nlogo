@@ -55,7 +55,6 @@ to setup
     create-link-with one-of pools with [pool-number = pool-index]
     set my-choices (list pool-index)
     colourize
-;   foreach predictors [predictor -> let dummy (runresult predictor INIT [] [] [] [])]
   ]
   reset-ticks
 end
@@ -127,12 +126,20 @@ to go
     ]
   ]
 
-  ;; Review predictors
+  ;; Breed predictors
 
   ask investors [
     let offspring map [predictor -> (runresult predictor CLONE low-payoff high-payoff low-number high-number)] predictors
     if is-anonymous-reporter? item 0 offspring  [set predictors sentence predictors offspring]
-    output-print length predictors
+  ]
+
+  ask investors [
+    let indices range length predictors
+    let scores-with-indices (map [[predictor index] -> (list (runresult predictor EVALUATE low-payoff high-payoff low-number high-number) index) ] predictors indices)
+    let scores-sorted-with-indices sort-by [[l1 l2]-> item 0 l1 < item 0 l2] scores-with-indices  ;; sort by evaulation score
+    let indices-sorted-by-scores map [pair -> item 1 pair] scores-sorted-with-indices
+    let culled-indices sublist indices-sorted-by-scores 0 n-predictors
+    set predictors map [index -> item index predictors] culled-indices
   ]
   tick
 end
@@ -196,7 +203,24 @@ to-report linear-predictor [function low-payoff high-payoff low-number high-numb
     report  [[func a b c d] -> linear-predictor func a b c d my-coefficients]
   ]
 
-  if function = EVALUATE []
+  if function = EVALUATE [
+    let sum-squares 0
+    let i 0
+    let len length low-number
+    while [i < n-history and i < len - 1][
+      let historical-low item i low-number
+      let historical-high item i high-number
+      set i i + 1
+      let predicted-low-length linear-predict-count (sublist low-number i len) coefficients
+      let predicted-high-length linear-predict-count (sublist high-number i len) coefficients
+      let diff-low predicted-low-length - historical-low
+      set sum-squares sum-squares + diff-low * diff-low
+      let diff-high predicted-high-length - historical-high
+      set sum-squares sum-squares + diff-high * diff-high
+    ]
+
+    report sum-squares
+  ]
 
   report NOTHING
 end
@@ -555,6 +579,21 @@ n-predictors
 0
 25
 11.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+990
+20
+1082
+53
+n-history
+n-history
+0
+25
+2.0
 1
 1
 NIL
