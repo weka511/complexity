@@ -9,6 +9,7 @@ pools-own [
   probability-payoff
   payoffs
   numbers
+  total-payoff
 ]
 
 investors-own [
@@ -16,7 +17,9 @@ investors-own [
   predictors
   my-payoffs
   my-choices
+  sum-squares-error
 ]
+
 
 to setup
   clear-all
@@ -43,6 +46,7 @@ to setup
     set payoffs []
     set numbers []
     set next-pool next-pool + 1
+    set total-payoff 0
   ]
 
   create-ordered-investors n-investors [
@@ -80,6 +84,7 @@ to go
     if n-members > 0 and probability-payoff < 1 [set mypayoff mypayoff / n-members]
     set numbers fput n-members numbers
     set payoffs fput mypayoff payoffs
+    output-print (list mypayoff n-members)
     if pool-number = POOL-LOW [
       set low-payoff  payoffs
       set low-number numbers
@@ -90,11 +95,13 @@ to go
       set high-number numbers
       set high-return return payoffs numbers
     ]
+    set total-payoff total-payoff + mypayoff * n-members
   ]
 
   ask investors [    ;; Update wealth
     let delta-wealth 0
     ask one-of in-link-neighbors [set delta-wealth item 0 payoffs]
+    output-print (list delta-wealth count in-link-neighbors)
     set wealth wealth + delta-wealth
     set my-payoffs fput delta-wealth my-payoffs
   ]
@@ -116,7 +123,7 @@ to go
     ifelse recommended-pool = item 0 my-choices [
       set my-choices fput recommended-pool my-choices
     ][
-      if predicted-benefit * (n-ticks - ticks) > tau [
+      if predicted-benefit  > tau [
         set wealth wealth - tau
         set my-choices fput recommended-pool my-choices
         ask one-of my-out-links [die]
@@ -137,6 +144,7 @@ to go
     let indices range length predictors
     let scores-with-indices (map [[predictor index] -> (list (runresult predictor EVALUATE low-payoff high-payoff low-number high-number) index) ] predictors indices)
     let scores-sorted-with-indices sort-by [[l1 l2]-> item 0 l1 < item 0 l2] scores-with-indices  ;; sort by evaulation score
+    set sum-squares-error item 0 (item 0 scores-sorted-with-indices)
     let indices-sorted-by-scores map [pair -> item 1 pair] scores-sorted-with-indices
     let culled-indices sublist indices-sorted-by-scores 0 n-predictors
     set predictors map [index -> item index predictors] culled-indices
@@ -204,7 +212,7 @@ to-report linear-predictor [function low-payoff high-payoff low-number high-numb
   ]
 
   if function = EVALUATE [
-    let sum-squares 0
+    set sum-squares-error 0
     let i 0
     let len length low-number
     while [i < n-history and i < len - 1][
@@ -214,12 +222,12 @@ to-report linear-predictor [function low-payoff high-payoff low-number high-numb
       let predicted-low-length linear-predict-count (sublist low-number i len) coefficients
       let predicted-high-length linear-predict-count (sublist high-number i len) coefficients
       let diff-low predicted-low-length - historical-low
-      set sum-squares sum-squares + diff-low * diff-low
+      set sum-squares-error sum-squares-error + diff-low * diff-low
       let diff-high predicted-high-length - historical-high
-      set sum-squares sum-squares + diff-high * diff-high
+      set sum-squares-error sum-squares-error + diff-high * diff-high
     ]
 
-    report sum-squares
+    report sum-squares-error
   ]
 
   report NOTHING
@@ -492,7 +500,7 @@ SLIDER
 n-ticks
 n-ticks
 0
-200
+1000
 100.0
 5
 1
@@ -508,7 +516,7 @@ tau
 tau
 0
 20
-0.0
+2.0
 1
 1
 NIL
@@ -598,6 +606,44 @@ n-history
 1
 NIL
 HORIZONTAL
+
+PLOT
+739
+63
+939
+213
+Prediction errors
+NIL
+Sum squared error
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -5825686 true "" "plot mean [sum-squares-error] of investors"
+
+PLOT
+741
+254
+941
+404
+Wealth
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"wealth" 1.0 0 -11221820 true "" "plot sum [wealth] of investors"
+"payout" 1.0 0 -5825686 true "" "plot sum[total-payoff] of pools"
+"Switching" 1.0 0 -955883 true "" "plot (sum[total-payoff] of pools - sum [wealth] of investors )"
 
 @#$#@#$#@
 ## WHAT IS IT?
