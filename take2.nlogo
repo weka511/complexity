@@ -7,8 +7,10 @@ pools-own [
   pool-number
   max-payoff
   probability-payoff
-  payoffs
-  numbers
+  payoffs                ;; List of payoffs from pool
+                         ;; sorted, latest first
+  numbers                ;; List of number of investors in pool
+                         ;; sorted, latest first
   total-payoff
   potential-payoff
 ]
@@ -119,9 +121,15 @@ to go
     let revised-prediction (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau))]] predicted-returns range 3)
     let recommended-return max revised-prediction
     let predicted-benefit recommended-return - item current-pool revised-prediction
-    let r random-float sum (revised-prediction)
+
     let recommended-pool 0
-    if r > item 0 revised-prediction [set recommended-pool ifelse-value ( r < (item 1 revised-prediction) + (item 0 revised-prediction))[1][2]   ]
+    ifelse randomize-step [
+      let r random-float sum (revised-prediction)
+      if r > item 0 revised-prediction [set recommended-pool ifelse-value ( r < (item 1 revised-prediction) + (item 0 revised-prediction))[1][2]   ]
+    ][
+      if recommended-return = item 1 revised-prediction [set recommended-pool 1]
+      if recommended-return = item 2 revised-prediction [set recommended-pool 2]
+    ]
      ;; If pool different, consider whether to change (tau)
     ifelse recommended-pool = item 0 my-choices [
       set my-choices fput recommended-pool my-choices
@@ -192,29 +200,32 @@ to-report linear-predict-count [counts coefficients]
 end
 
 ;; This is the linear predictor
+;; The function controls its behaiviour
+;;        INIT      Initialize coefficients that make prediction
+;;        PREDICT   Predict return for all three pools
+;;        CLONE     Copy coefficients and mutate
+;;        EVALUATE  Evaluate performace of this set of coefficients
 
 to-report linear-predictor [function low-payoff high-payoff low-number high-number coefficients]
-  if function = INIT [
+
+  if function = INIT [ ;; Initialize coefficients that make prediction
     let my-coefficients map [r -> -1 + 2 * random-float 1] range (1 + random n-coefficients)
     report  [[func a b c d] -> linear-predictor func a b c d my-coefficients]
   ]
 
-  if function = PREDICT [
-    let estimated-total-return-low estimate-return low-payoff low-number
-    let estimated-total-return-high estimate-return high-payoff high-number
-    let predicted-low-length linear-predict-count low-number coefficients
-    let predicted-high-length linear-predict-count high-number coefficients
-    let predicted-return-low estimated-total-return-low / (predicted-low-length + 1)
-    let predicted-return-high estimated-total-return-high / (predicted-high-length + 1)
-    report (list RETURN-STABLE-POOL predicted-return-low predicted-return-high)
+  if function = PREDICT [  ;; Predict return for all three pools
+    report (list
+      RETURN-STABLE-POOL
+      predict-return low-payoff low-number coefficients
+      predict-return high-payoff high-number coefficients)
   ]
 
-  if function = CLONE [
-    let my-coefficients create-new-coefficients coefficients
+  if function = CLONE [ ;; Copy coefficients and mutate
+    let my-coefficients create-mutate-coefficients coefficients
     report  [[func a b c d] -> linear-predictor func a b c d my-coefficients]
   ]
 
-  if function = EVALUATE [
+  if function = EVALUATE [ ;; Evaluate performace of this set of coefficients
     set sum-squares-error 0
     let i 0
     let len length low-number
@@ -236,11 +247,22 @@ to-report linear-predictor [function low-payoff high-payoff low-number high-numb
   report NOTHING
 end
 
-;; Create new coefficients as described by Fogel
-to-report  create-new-coefficients [coefficients]
+;; predict return for specific pool
+to-report predict-return [payoff number coefficients]
+  let estimated-total-return  estimate-return payoff number
+  let predicted-length        linear-predict-count number coefficients
+  report estimated-total-return / (predicted-length + 1)
+end
+
+;; Create new coefficients as described by Fogel and mutate them
+to-report  create-mutate-coefficients [coefficients]
   let len new-length coefficients
+  ;; If we are reducing length, get rid of last coefficient
   if len < length coefficients [report mutate remove-item len coefficients]
-  if len > length coefficients [report mutate lput 0.0 coefficients]
+
+  ;; If increasing, add random coefficient at end
+  if len > length coefficients [report mutate lput (-1 + 2 * random-float 1) coefficients]
+
   report mutate coefficients
 end
 
@@ -266,7 +288,7 @@ to-report new-length [coefficients]
   report result
 end
 
-;; Estimate return from hitorical data
+;; Estimate return from historical data
 to-report estimate-return [mypayoffs mynumbers]
   let weighted-payoffs reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
   report weighted-payoffs / max (list 1 length mypayoffs)
@@ -278,22 +300,33 @@ to-report census [pool-no]
   report  ifelse-value (ticks > 0) [sum [item 0  numbers] of mypools][0]
 end
 
+to-report outgoings [pool-no]
+  let mypools pools with [pool-number = pool-no]
+  let non-zero-payoffs (map [[p n] -> ifelse-value (n > 0)[p][0]] (item 0 [payoffs] of mypools) (item 0 [numbers] of mypools) )
+  report  ifelse-value (ticks > 0) [sum non-zero-payoffs / ticks][0];[sum payoffs] of mypools][0]
+end
+
+;; Used to indicate that a reporter has failed to compute a meaningful value
 to-report NOTHING
   report -1
 end
 
+;; Used to initialize a predictor
 to-report INIT
   report  0
 end
 
+;; Used by a predictor to predict a count
 to-report PREDICT
   report  INIT + 1
 end
 
+;; Used to clone a predictor
 to-report CLONE
   report  PREDICT + 1
 end
 
+;; Used to evaluate the parformance of a predictor
 to-report EVALUATE
   report  CLONE + 1
 end
@@ -309,6 +342,8 @@ end
 to-report    POOL-HIGH     ;; Index used for low risk pool
   report 2
 end
+
+;; Return from choosing stable pool
 
 to-report RETURN-STABLE-POOL
   report 1
@@ -523,7 +558,7 @@ tau
 tau
 0
 20
-5.0
+1.0
 1
 1
 NIL
@@ -570,9 +605,9 @@ standard-deviation [wealth] of investors
 11
 
 SLIDER
-725
+723
 10
-826
+824
 43
 n-coefficients
 n-coefficients
@@ -587,7 +622,7 @@ HORIZONTAL
 SLIDER
 842
 13
-962
+934
 46
 n-predictors
 n-predictors
@@ -600,10 +635,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-990
-20
-1082
-53
+942
+10
+1034
+43
 n-history
 n-history
 0
@@ -635,7 +670,7 @@ PENS
 PLOT
 741
 254
-941
+998
 404
 Wealth
 NIL
@@ -654,10 +689,10 @@ PENS
 "pen-3" 1.0 0 -7500403 true "" "plot sum[potential-payoff] of pools"
 
 PLOT
-970
-239
-1193
-389
+963
+64
+1186
+214
 Numbers in each pool
 NIL
 NIL
@@ -674,10 +709,10 @@ PENS
 "High Risk" 1.0 0 -2674135 true "" "plot census POOL-HIGH"
 
 SLIDER
-1004
-82
-1116
-115
+1038
+10
+1150
+43
 benefit-weight
 benefit-weight
 0
@@ -689,10 +724,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-987
-150
-1159
-183
+1157
+10
+1279
+43
 sigma-mutation
 sigma-mutation
 0
@@ -702,6 +737,92 @@ sigma-mutation
 1
 NIL
 HORIZONTAL
+
+MONITOR
+741
+415
+798
+460
+Stable
+census POOL-STABLE
+0
+1
+11
+
+MONITOR
+808
+414
+868
+459
+Low Risk
+census POOL-LOW
+0
+1
+11
+
+MONITOR
+877
+416
+940
+461
+High Risk
+census POOL-HIGH
+0
+1
+11
+
+MONITOR
+808
+463
+868
+508
+Payout
+outgoings POOL-LOW
+2
+1
+11
+
+MONITOR
+877
+465
+931
+510
+Payout
+outgoings POOL-HIGH
+2
+1
+11
+
+PLOT
+1028
+269
+1228
+419
+Return per step
+NIL
+NIL
+0.0
+100.0
+0.0
+1.0
+true
+true
+"" ""
+PENS
+"Stable" 1.0 0 -10899396 true "" "plot outgoings POOL-STABLE"
+"Low" 1.0 0 -1184463 true "" "plot outgoings POOL-LOW"
+"High" 1.0 0 -2674135 true "" "plot outgoings POOL-HIGH"
+
+SWITCH
+987
+457
+1128
+490
+randomize-step
+randomize-step
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1049,6 +1170,71 @@ NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="experiment" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>census POOL-STABLE</metric>
+    <metric>outgoings POOL-STABLE</metric>
+    <metric>census POOL-LOW</metric>
+    <metric>outgoings POOL-LOW</metric>
+    <metric>census POOL-HIGH</metric>
+    <metric>outgoings POOL-HIGH</metric>
+    <metric>mean [wealth] of investors</metric>
+    <metric>standard-deviation [wealth] of investors</metric>
+    <enumeratedValueSet variable="max-payoff-high">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-ticks">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-low">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-history">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="benefit-weight">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-investors">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-high">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-low">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-high">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sigma-mutation">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="randomize-step">
+      <value value="true"/>
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="2"/>
+      <value value="3"/>
+      <value value="4"/>
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="11"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-payoff-low">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-coefficients">
+      <value value="6"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
