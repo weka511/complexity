@@ -10,6 +10,7 @@ pools-own [
   payoffs
   numbers
   total-payoff
+  potential-payoff
 ]
 
 investors-own [
@@ -43,8 +44,8 @@ to setup
       set max-payoff max-payoff-high
       set probability-payoff p-payoff-high
     ]
-    set payoffs []
-    set numbers []
+    set payoffs [] ;(map [-> random-normal (max-payoff * probability-payoff) 1 ] range n-history)
+    set numbers [] ;(map [-> random-normal ifelse-value(pool-number = 0)[60][20] 2] range n-history)
     set next-pool next-pool + 1
     set total-payoff 0
   ]
@@ -70,7 +71,7 @@ to go
   let low-payoff []
   let high-payoff []
   let low-number []
-  let high-number[]
+  let high-number []
   let low-return 0
   let high-return 0
   ask pools [
@@ -81,7 +82,6 @@ to go
     if n-members > 0 and probability-payoff < 1 [set mypayoff mypayoff / n-members]
     set numbers fput n-members numbers
     set payoffs fput mypayoff payoffs
-;    output-print (list mypayoff n-members)
     if pool-number = POOL-LOW [
       set low-payoff  payoffs
       set low-number numbers
@@ -93,11 +93,8 @@ to go
       set high-return estimate-return payoffs numbers
     ]
     set total-payoff total-payoff + mypayoff * n-members
+    set potential-payoff ifelse-value(pool-number = POOL-STABLE) [potential-payoff + mypayoff * n-investors][total-payoff ]
   ]
-
-;  output-print "---------------"
-;  output-print low-number
-;  output-print high-number
 
   ;; Use links to find out how much current pool will pay each onvestor
   ask investors [
@@ -117,10 +114,14 @@ to go
   ]
 
   ask investors [  ;; Select best pool
-    let prediction (runresult (item 0 predictors) PREDICT low-payoff high-payoff low-number high-number)
-    let recommended-pool item 0 prediction
-    let predicted-benefit item 1 prediction
-;    output-print (list "recommended pool" recommended-pool "predicted benefit" predicted-benefit my-choices)
+    let predicted-returns (runresult (item 0 predictors) PREDICT low-payoff high-payoff low-number high-number)
+    let current-pool item 0 my-choices
+    let revised-prediction (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau))]] predicted-returns range 3)
+    let recommended-return max revised-prediction
+    let predicted-benefit recommended-return - item current-pool revised-prediction
+    let r random-float sum (revised-prediction)
+    let recommended-pool 0
+    if r > item 0 revised-prediction [set recommended-pool ifelse-value ( r < (item 1 revised-prediction) + (item 0 revised-prediction))[1][2]   ]
      ;; If pool different, consider whether to change (tau)
     ifelse recommended-pool = item 0 my-choices [
       set my-choices fput recommended-pool my-choices
@@ -142,6 +143,8 @@ to go
     if is-anonymous-reporter? item 0 offspring  [set predictors sentence predictors offspring]
   ]
 
+  ;; Select best predictors for next iteration
+
   ask investors [
     let indices range length predictors
     let scores-with-indices (map [[predictor index] -> (list (runresult predictor EVALUATE low-payoff high-payoff low-number high-number) index) ] predictors indices)
@@ -154,12 +157,17 @@ to go
   tick
 end
 
+;; Assign colours to pools
+
 to colourize
   let new-color 0
   ask one-of in-link-neighbors [set new-color color]
   set color new-color
 end
 
+;; Select a random value in accordance with epcified probabities
+;; Use tower sampling - Statistical Mechanics Algorihms and Computations, Wener Krauth
+;; http://blancopeck.net/Statistics.pdf
 to-report random-tower [probabilities]
   let i 0
   let selector random-float 1
@@ -172,15 +180,18 @@ to-report random-tower [probabilities]
   report i
 end
 
+;; Predict count by taking inner weighted sum of previous values
 to-report linear-predict-count [counts coefficients]
-  let result 0
-  let i  0
-  while [i < length counts and i < length coefficients] [
-    set result result + (item i coefficients) * (item i counts)
-    set i i + 1
+  let mycounts counts
+  while [length mycounts < length coefficients][  ;; If too few values, pad as described by Fogel
+    set mycounts fput (random-normal 33 10) mycounts
   ]
-  report int min (list n-investors abs result)
+  let length-vectors min (list (length mycounts) (length coefficients))
+  let inner-product reduce + (map [[a b] -> a * b] sublist mycounts 0 length-vectors sublist coefficients 0 length-vectors)
+  report int min (list n-investors abs inner-product)
 end
+
+;; This is the linear predictor
 
 to-report linear-predictor [function low-payoff high-payoff low-number high-number coefficients]
   if function = INIT [
@@ -195,20 +206,7 @@ to-report linear-predictor [function low-payoff high-payoff low-number high-numb
     let predicted-high-length linear-predict-count high-number coefficients
     let predicted-return-low estimated-total-return-low / (predicted-low-length + 1)
     let predicted-return-high estimated-total-return-high / (predicted-high-length + 1)
-;    output-print coefficients
-;    output-print (list "Low" "estimated total return" estimated-total-return-low "predicted length" predicted-low-length "predicted return" predicted-return-low)
-;    output-print (list "High" "estimated total return" estimated-total-return-high "predicted length" predicted-high-length "predicted return" predicted-return-high)
-    let recommended-pool POOL-STABLE
-    let estimated-return 1
-    if predicted-return-low > estimated-return[
-      set recommended-pool POOL-LOW
-      set estimated-return predicted-return-low
-    ]
-    if predicted-return-high > estimated-return[
-      set recommended-pool POOL-HIGH
-      set estimated-return predicted-return-high
-    ]
-    report (list recommended-pool estimated-return)
+    report (list RETURN-STABLE-POOL predicted-return-low predicted-return-high)
   ]
 
   if function = CLONE [
@@ -238,6 +236,7 @@ to-report linear-predictor [function low-payoff high-payoff low-number high-numb
   report NOTHING
 end
 
+;; Create new coefficients as described by Fogel
 to-report  create-new-coefficients [coefficients]
   let len new-length coefficients
   if len < length coefficients [report mutate remove-item len coefficients]
@@ -245,10 +244,13 @@ to-report  create-new-coefficients [coefficients]
   report mutate coefficients
 end
 
+;; Mutate coefficients as described by Fogel
 to-report mutate [coefficients]
-  report map [c -> c + random-normal 0 0.1] coefficients   ;; FIXME - sigma
+  report map [c -> c + random-normal 0 sigma-mutation] coefficients
 end
 
+;; Change length of coefficient vector as described by Fogel
+;; either increase by one, leave the same, or decrease by one
 to-report new-length [coefficients]
   let result -1
   while [result < 1 or result > n-coefficients] [
@@ -260,18 +262,17 @@ to-report new-length [coefficients]
         report length coefficients
       ][
         set result length coefficients + 1
-    ]]
-
-  ]
+    ]]]
   report result
 end
 
-
+;; Estimate return from hitorical data
 to-report estimate-return [mypayoffs mynumbers]
   let weighted-payoffs reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
   report weighted-payoffs / max (list 1 length mypayoffs)
 end
 
+;; Count investors in pool
 to-report census [pool-no]
   let mypools pools with [pool-number = pool-no]
   report  ifelse-value (ticks > 0) [sum [item 0  numbers] of mypools][0]
@@ -307,6 +308,10 @@ end
 
 to-report    POOL-HIGH     ;; Index used for low risk pool
   report 2
+end
+
+to-report RETURN-STABLE-POOL
+  report 1
 end
 
 ;; Copyright (c) 2018 Simon Crase - see info tab for details of licence
@@ -429,7 +434,7 @@ max-payoff-low
 0
 100
 40.0
-1
+5
 1
 NIL
 HORIZONTAL
@@ -444,7 +449,7 @@ max-payoff-high
 0
 100
 80.0
-1
+5
 1
 NIL
 HORIZONTAL
@@ -518,7 +523,7 @@ tau
 tau
 0
 20
-1.0
+5.0
 1
 1
 NIL
@@ -646,13 +651,14 @@ PENS
 "wealth" 1.0 0 -11221820 true "" "plot sum [wealth] of investors"
 "payout" 1.0 0 -5825686 true "" "plot sum[total-payoff] of pools"
 "Switching" 1.0 0 -955883 true "" "plot (sum[total-payoff] of pools - sum [wealth] of investors )"
+"pen-3" 1.0 0 -7500403 true "" "plot sum[potential-payoff] of pools"
 
 PLOT
 970
 239
-1170
+1193
 389
-plot 1
+Numbers in each pool
 NIL
 NIL
 0.0
@@ -660,24 +666,39 @@ NIL
 0.0
 10.0
 true
-false
+true
 "" ""
 PENS
-"default" 1.0 0 -10899396 true "" "plot census POOL-STABLE"
-"pen-1" 1.0 0 -1184463 true "" "plot census POOL-LOW"
-"pen-2" 1.0 0 -2674135 true "" "plot census POOL-HIGH"
+"Stable" 1.0 0 -10899396 true "" "plot census POOL-STABLE"
+"Low Risk" 1.0 0 -1184463 true "" "plot census POOL-LOW"
+"High Risk" 1.0 0 -2674135 true "" "plot census POOL-HIGH"
 
 SLIDER
 1004
 82
-1176
+1116
 115
 benefit-weight
 benefit-weight
 0
+10
+1.0
+0.1
 1
-0.25
-0.01
+NIL
+HORIZONTAL
+
+SLIDER
+987
+150
+1159
+183
+sigma-mutation
+sigma-mutation
+0
+5
+0.1
+0.05
 1
 NIL
 HORIZONTAL
