@@ -63,10 +63,7 @@ to setup
   reset-ticks
 end
 
-to-report return [mypayoffs mynumbers]
-  let weighted-payoffs reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
-  report weighted-payoffs / max (list 1 length mypayoffs)
-end
+
 
 to go
   if ticks > n-ticks [stop]
@@ -84,24 +81,28 @@ to go
     if n-members > 0 and probability-payoff < 1 [set mypayoff mypayoff / n-members]
     set numbers fput n-members numbers
     set payoffs fput mypayoff payoffs
-    output-print (list mypayoff n-members)
+;    output-print (list mypayoff n-members)
     if pool-number = POOL-LOW [
       set low-payoff  payoffs
       set low-number numbers
-      set low-return return payoffs numbers
+      set low-return estimate-return payoffs numbers
     ]
     if pool-number = POOL-HIGH [
       set high-payoff  payoffs
       set high-number numbers
-      set high-return return payoffs numbers
+      set high-return estimate-return payoffs numbers
     ]
     set total-payoff total-payoff + mypayoff * n-members
   ]
 
-  ask investors [    ;; Update wealth
+;  output-print "---------------"
+;  output-print low-number
+;  output-print high-number
+
+  ;; Use links to find out how much current pool will pay each onvestor
+  ask investors [
     let delta-wealth 0
     ask one-of in-link-neighbors [set delta-wealth item 0 payoffs]
-    output-print (list delta-wealth count in-link-neighbors)
     set wealth wealth + delta-wealth
     set my-payoffs fput delta-wealth my-payoffs
   ]
@@ -119,11 +120,12 @@ to go
     let prediction (runresult (item 0 predictors) PREDICT low-payoff high-payoff low-number high-number)
     let recommended-pool item 0 prediction
     let predicted-benefit item 1 prediction
+;    output-print (list "recommended pool" recommended-pool "predicted benefit" predicted-benefit my-choices)
      ;; If pool different, consider whether to change (tau)
     ifelse recommended-pool = item 0 my-choices [
       set my-choices fput recommended-pool my-choices
     ][
-      if predicted-benefit  > tau [
+      if benefit-weight * predicted-benefit  > random-float tau [
         set wealth wealth - tau
         set my-choices fput recommended-pool my-choices
         ask one-of my-out-links [die]
@@ -177,7 +179,7 @@ to-report linear-predict-count [counts coefficients]
     set result result + (item i coefficients) * (item i counts)
     set i i + 1
   ]
-  report min (list n-investors abs result)
+  report int min (list n-investors abs result)
 end
 
 to-report linear-predictor [function low-payoff high-payoff low-number high-number coefficients]
@@ -187,12 +189,15 @@ to-report linear-predictor [function low-payoff high-payoff low-number high-numb
   ]
 
   if function = PREDICT [
-    let return-low return low-payoff low-number
-    let return-high return high-payoff high-number
+    let estimated-total-return-low estimate-return low-payoff low-number
+    let estimated-total-return-high estimate-return high-payoff high-number
     let predicted-low-length linear-predict-count low-number coefficients
     let predicted-high-length linear-predict-count high-number coefficients
-    let predicted-return-low return-low / (predicted-low-length + 1)
-    let predicted-return-high return-high / (predicted-high-length + 1)
+    let predicted-return-low estimated-total-return-low / (predicted-low-length + 1)
+    let predicted-return-high estimated-total-return-high / (predicted-high-length + 1)
+;    output-print coefficients
+;    output-print (list "Low" "estimated total return" estimated-total-return-low "predicted length" predicted-low-length "predicted return" predicted-return-low)
+;    output-print (list "High" "estimated total return" estimated-total-return-high "predicted length" predicted-high-length "predicted return" predicted-return-high)
     let recommended-pool POOL-STABLE
     let estimated-return 1
     if predicted-return-low > estimated-return[
@@ -262,17 +267,14 @@ to-report new-length [coefficients]
 end
 
 
-to-report test-predictor [function low-payoff high-payoff low-number high-number]
+to-report estimate-return [mypayoffs mynumbers]
+  let weighted-payoffs reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
+  report weighted-payoffs / max (list 1 length mypayoffs)
+end
 
-  if function = INIT [
-    show self;
-    report 0
-  ]
-  if function = PREDICT [
-    report (list random 3 1)
-  ]
-;  output-print "recurse"
-;  report test-predictor PREDICT low-payoff high-payoff low-number high-number
+to-report census [pool-no]
+  let mypools pools with [pool-number = pool-no]
+  report  ifelse-value (ticks > 0) [sum [item 0  numbers] of mypools][0]
 end
 
 to-report NOTHING
@@ -485,8 +487,8 @@ SLIDER
 n-investors
 n-investors
 0
-100
-50.0
+200
+100.0
 1
 1
 NIL
@@ -516,7 +518,7 @@ tau
 tau
 0
 20
-2.0
+1.0
 1
 1
 NIL
@@ -571,7 +573,7 @@ n-coefficients
 n-coefficients
 1
 25
-10.0
+6.0
 1
 1
 NIL
@@ -601,7 +603,7 @@ n-history
 n-history
 0
 25
-2.0
+10.0
 1
 1
 NIL
@@ -644,6 +646,41 @@ PENS
 "wealth" 1.0 0 -11221820 true "" "plot sum [wealth] of investors"
 "payout" 1.0 0 -5825686 true "" "plot sum[total-payoff] of pools"
 "Switching" 1.0 0 -955883 true "" "plot (sum[total-payoff] of pools - sum [wealth] of investors )"
+
+PLOT
+970
+239
+1170
+389
+plot 1
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -10899396 true "" "plot census POOL-STABLE"
+"pen-1" 1.0 0 -1184463 true "" "plot census POOL-LOW"
+"pen-2" 1.0 0 -2674135 true "" "plot census POOL-HIGH"
+
+SLIDER
+1004
+82
+1176
+115
+benefit-weight
+benefit-weight
+0
+1
+0.25
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
