@@ -1,0 +1,30 @@
+---
+title: "Challenge"
+author: "Simon Crase"
+date: "12 May 2018"
+output: pdf_document
+bibliography: 201804.bib
+csl: ieee.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018], models the behaviour of investors who choose between a pool that provides a stable income stream, and two pools that offer potentially higher, but risky returns. Each investor has access to aggregate information for each pool, and their own history, so the Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge] [@wiki:technical]. My personal intuition at the start of this investigation, was that simulation would support the the weak form of Efficient Market Hypothesis [@romero2014hedge] [@wiki:emh]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
+
+# Background
+
+Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer people attended. Arthur discovered there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance. A simple machine learning method replaces poorly performing strategies with ones that have proven more accurate on recent data.
+
+
+David Fogel [@fogel1999inductive] used a genetic algorithm that "bred" autoregressive models. William Rand and Forrest Stonedahl [@rand2007farol] pointed out that Fogel's solution uses more computational effort than Arthur to produce a lower societal benefit.
+
+The El Farol problem can be generalized to the Minority game [@challet1997emergence], [@challet1998minority], [@szabo2007evolutionary], [@chakrabarti2007kolkata], and [@chakrabarti2009kolkata].
+
+# Methods
+
+#Discussion
+
+
