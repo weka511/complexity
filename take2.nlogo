@@ -134,7 +134,7 @@ to go
     ifelse recommended-pool = item 0 my-choices [
       set my-choices fput recommended-pool my-choices
     ][
-      if benefit-weight * predicted-benefit  > random-float tau [
+      if benefit-weight * predicted-benefit  > random-float tau and (can-borrow or wealth >= tau) [
         set wealth wealth - tau
         set my-choices fput recommended-pool my-choices
         ask one-of my-out-links [die]
@@ -824,6 +824,17 @@ randomize-step
 1
 -1000
 
+SWITCH
+8
+264
+127
+297
+can-borrow
+can-borrow
+0
+1
+-1000
+
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -840,13 +851,14 @@ Normal usage is to set the sliders and switches to suitable values, then press _
 ![Figure missing for View](file:view.jpg)
 
 
-* Buttons
+* **Buttons**
     * **Setup**    Initialize
     * **Step**     Single step for debugging
     * **Go**       Execute model
 
- * Sliders
-    * **n-investors**  Number if investors
+ * **Sliders**
+
+    * **n-investors**  Number of investors
     * **n-ticks** Duration of simulation
     * **p-start-low** Probability that an investor will start in low risk pool
     * **p-start-high** Probability that an investor will start in high rish pool
@@ -855,21 +867,24 @@ Normal usage is to set the sliders and switches to suitable values, then press _
     * **max-payoff-low** Maximum payoff for low risk pool, to be divided among investors
     * **max-payoff-high** Maximum payoff for high risk pool, to be divided among investors
     * **tau** The cost of switching pools
-    * **n-coefficients**
-    * **n-predictors**
-    * **n-history**
-    * **benefit-weight**
-    * **sigma-mutation**
- * Switches
-    * **randomize step**
-    * **can-borrow**  [TO DO]
- * Plots
+    * **n-coefficients** _Maximum_ number of coefficients used by linear predictors (actual numbers chosen at random).
+    * **n-predictors** Number of linear predictors
+    * **n-history** Number of periods to be used when evaluating predictors
+    * **benefit-weight** Amount of weight we give to estimated benefit when comparing with tau
+    * **sigma-mutation** Standard deviation when we mutate coefficients
+
+ * **Switches**
+    * **randomize step** Controls whether model always follows recommendation, or selects a pool at random, with probability determined by estimated benefit.
+    * **can-borrow**  Allow wealth to become negative if we need to pay tau to switch
+
+ * **Plots**
     * **Spread**
     * **Prediction Errors**
     * **Number in Each Pool**
     * **Wealth**
     * **Return per step**
- * Monitors
+
+ * **Monitors**
     * **Average Wealth**
     * **Sigma**
     * **Stable**
