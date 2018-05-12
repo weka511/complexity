@@ -13,6 +13,7 @@ csl: ieee-with-url.csl
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+source('tau.r')
 ```
 
 # Introduction
@@ -39,8 +40,8 @@ $U_{t}(s^i)=\lambda U_{t-1}(s^i)+(1-\lambda)\lvert s^i(d(h_{t-1}))-y_t$, where $
 
 #Results
 
-```{r pressure, echo=FALSE,fig.cap="\\label{fig:figs}Test Plot"}
-plot(pressure)
+```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:figs}Test Plot"}
+plot(my.df$tau,my.df$mean_wealth_of_investors)
 ```
 
 Figure \ref{fig:figs} is a test!.
