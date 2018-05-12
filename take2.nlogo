@@ -379,10 +379,10 @@ ticks
 30.0
 
 BUTTON
-5
-260
-69
-293
+175
+184
+239
+217
 Setup
 setup
 NIL
@@ -396,10 +396,10 @@ NIL
 1
 
 BUTTON
-142
-260
-205
-293
+176
+220
+239
+253
 Go
 go
 T
@@ -413,10 +413,10 @@ NIL
 0
 
 BUTTON
-72
-260
-135
-293
+174
+266
+237
+299
 Step
 go
 NIL
@@ -565,10 +565,10 @@ NIL
 HORIZONTAL
 
 PLOT
-10
-310
-210
-460
+1027
+351
+1227
+501
 Spread
 Wealth
 Count
@@ -583,10 +583,10 @@ PENS
 "default" 1.0 0 -13345367 true "" "histogram [wealth] of investors"
 
 MONITOR
-8
-477
-111
-522
+743
+346
+846
+391
 Average Wealth
 mean [wealth] of investors
 0
@@ -594,10 +594,10 @@ mean [wealth] of investors
 11
 
 MONITOR
-122
-477
-208
-522
+857
+346
+943
+391
 Sigma
 standard-deviation [wealth] of investors
 1
@@ -605,10 +605,10 @@ standard-deviation [wealth] of investors
 11
 
 SLIDER
-723
-10
-824
-43
+6
+302
+107
+335
 n-coefficients
 n-coefficients
 1
@@ -620,10 +620,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-842
-13
-934
-46
+125
+305
+217
+338
 n-predictors
 n-predictors
 0
@@ -635,10 +635,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-942
-10
-1034
-43
+4
+353
+96
+386
 n-history
 n-history
 0
@@ -650,10 +650,10 @@ NIL
 HORIZONTAL
 
 PLOT
-739
-63
-939
-213
+729
+13
+929
+163
 Prediction errors
 NIL
 Sum squared error
@@ -668,10 +668,10 @@ PENS
 "default" 1.0 0 -5825686 true "" "plot mean [sum-squares-error] of investors"
 
 PLOT
-741
-254
-998
-404
+730
+176
+987
+326
 Wealth
 NIL
 NIL
@@ -689,10 +689,10 @@ PENS
 "pen-3" 1.0 0 -7500403 true "" "plot sum[potential-payoff] of pools"
 
 PLOT
-963
-64
-1186
-214
+953
+14
+1176
+164
 Numbers in each pool
 NIL
 NIL
@@ -709,10 +709,10 @@ PENS
 "High Risk" 1.0 0 -2674135 true "" "plot census POOL-HIGH"
 
 SLIDER
-1038
-10
-1150
-43
+100
+353
+212
+386
 benefit-weight
 benefit-weight
 0
@@ -724,10 +724,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1157
-10
-1279
-43
+28
+403
+150
+436
 sigma-mutation
 sigma-mutation
 0
@@ -794,10 +794,10 @@ outgoings POOL-HIGH
 11
 
 PLOT
-1028
-269
-1228
-419
+1017
+191
+1217
+341
 Return per step
 NIL
 NIL
@@ -814,10 +814,10 @@ PENS
 "High" 1.0 0 -2674135 true "" "plot outgoings POOL-HIGH"
 
 SWITCH
-987
-457
-1128
-490
+7
+223
+148
+256
 randomize-step
 randomize-step
 0
@@ -841,36 +841,42 @@ Normal usage is to set the sliders and switches to suitable values, then press _
 
 
 * Buttons
-    * Setup    Initialize
-    * Step     Single step for debugging
-    * Go       Execute model
+    * **Setup**    Initialize
+    * **Step**     Single step for debugging
+    * **Go**       Execute model
 
  * Sliders
-    * n-investors  Number if investors
-    * n-ticks Duration of simulation
-    * tau The cost of switching pools
-    * can-borrow  [TO DO]
-    * n-coefficients
-    * n-predictors
-    * n-history
-    * benefit-weight
-    * sigma-mutation
+    * **n-investors**  Number if investors
+    * **n-ticks** Duration of simulation
+    * **p-start-low** Probability that an investor will start in low risk pool
+    * **p-start-high** Probability that an investor will start in high rish pool
+    * **p-payoff-low** Probability that low risk pool will pay off during a tick
+    * **p-payoff-high** Probability that low risk pool will pay off during a tick
+    * **max-payoff-low** Maximum payoff for low risk pool, to be divided among investors
+    * **max-payoff-high** Maximum payoff for high risk pool, to be divided among investors
+    * **tau** The cost of switching pools
+    * **n-coefficients**
+    * **n-predictors**
+    * **n-history**
+    * **benefit-weight**
+    * **sigma-mutation**
  * Switches
-    * randomize step
+    * **randomize step**
+    * **can-borrow**  [TO DO]
  * Plots
-    * Spread
-    * Prediction Errors
-    * Number in Each Pool
-    * Wealth
-    * Return per step
+    * **Spread**
+    * **Prediction Errors**
+    * **Number in Each Pool**
+    * **Wealth**
+    * **Return per step**
  * Monitors
-    * Average Wealth
-    * Sigma
-    * Stable
-    * Low Risk
-    * High Risk
-    * Payout
-    * Payout
+    * **Average Wealth**
+    * **Sigma**
+    * **Stable**
+    * **Low Risk**
+    * **High Risk**
+    * **Payout**
+    * **Payout**
 
 
 ## THINGS TO NOTICE
