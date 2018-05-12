@@ -558,7 +558,7 @@ tau
 tau
 0
 20
-1.0
+20.0
 1
 1
 NIL
@@ -827,7 +827,7 @@ randomize-step
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+Testbed to investigate the [Complexity Explorer](https://www.complexityexplorer.org) [Spring Challenge](https://www.complexityexplorer.org/challenges/2-spring-2018-complexity-challenge/submissions)
 
 ## HOW IT WORKS
 
@@ -835,7 +835,43 @@ randomize-step
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
+Normal usage is to set the sliders and switches to suitable values, then press _Setup_ followed by _Go_. The View depicts the investors as fishes,  and the pools as faces, which will be happy or sad, depending on whether there was a payout during the current step. Colours are used to indicate to risk of the pool, links indicate the pool to which an investor belongs, and the size of the fish increases with relative wealth.
+
+![Figure missing for View](file:view.jpg)
+
+
+* Buttons
+    * Setup    Initialize
+    * Step     Single step for debugging
+    * Go       Execute model
+
+ * Sliders
+    * n-investors  Number if investors
+    * n-ticks Duration of simulation
+    * tau The cost of switching pools
+    * can-borrow  [TO DO]
+    * n-coefficients
+    * n-predictors
+    * n-history
+    * benefit-weight
+    * sigma-mutation
+ * Switches
+    * randomize step
+ * Plots
+    * Spread
+    * Prediction Errors
+    * Number in Each Pool
+    * Wealth
+    * Return per step
+ * Monitors
+    * Average Wealth
+    * Sigma
+    * Stable
+    * Low Risk
+    * High Risk
+    * Payout
+    * Payout
+
 
 ## THINGS TO NOTICE
 
@@ -860,6 +896,32 @@ randomize-step
 ## CREDITS AND REFERENCES
 
 (a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+
+[Github repository](https://github.com/weka511/201804)
+
+## COPYRIGHT & LICENCE
+
+MIT License
+
+Copyright (c) 2018 Simon Crase -- simon@greenweaves.nz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 @#$#@#$#@
 default
 true
@@ -1174,6 +1236,7 @@ NetLogo 6.0.3
   <experiment name="experiment" repetitions="10" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
+    <timeLimit steps="100"/>
     <metric>census POOL-STABLE</metric>
     <metric>outgoings POOL-STABLE</metric>
     <metric>census POOL-LOW</metric>
