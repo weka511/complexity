@@ -559,7 +559,7 @@ tau
 tau
 0
 20
-5.0
+25.0
 1
 1
 NIL
@@ -1312,6 +1312,10 @@ NetLogo 6.0.3
       <value value="3"/>
       <value value="4"/>
       <value value="5"/>
+      <value value="10"/>
+      <value value="15"/>
+      <value value="20"/>
+      <value value="25"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-predictors">
       <value value="11"/>

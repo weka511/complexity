@@ -22,21 +22,24 @@
 
 rm(list=ls())
 
-setwd ("C:/Users/Weka/201804/Experiments")
-my.df<-read.table("take2 experiment-table.csv",
-                  header = T,   # set columns names true
-                  sep = ",",    # define the separator between       columns
-                  skip = 6,     # skip first 6 rows 
-                  quote = "\"", # correct the column separator
-                  fill = TRUE ) # add blank fields if rows
 
-i <- 1
-for (name in colnames(my.df)) {
-  new_name <- gsub("\\.","_",name)
-  names(my.df)[i]<-new_name
-  i = i + 1
+get.tau <- function () {
+  my.df<-read.table("C:/Users/Weka/201804/Experiments/take2 experiment-table.csv",
+                    header = T,   # set columns names true
+                    sep = ",",    # define the separator between       columns
+                    skip = 6,     # skip first 6 rows 
+                    quote = "\"", # correct the column separator
+                    fill = TRUE ) # add blank fields if rows
+  
+  i <- 1
+  for (name in colnames(my.df)) {
+    new_name <- gsub("\\.","_",name)
+    names(my.df)[i]<-new_name
+    i = i + 1
+  }
+  
+    return(my.df[my.df$X_step_==max(my.df$X_step_),]) 
 }
+  
 
-last.steps <- my.df[my.df$X_step_==max(my.df$X_step_),]
 
-aggregate.by.tau<- aggregate(last.steps,by=list(last.steps$tau),FUN=mean,na.rm=TRUE)
