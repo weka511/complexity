@@ -17,7 +17,7 @@ source('tau.r')
 ```
 
 # Introduction
-The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018], models the behaviour of investors who choose between a pool that provides a stable income stream, and two pools that offer potentially higher, but risky returns. Each investor has access to aggregate information for each pool, and their own history, so the Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32] [@wiki:technical]. My personal intuition at the start of this investigation, was that simulation would support the the weak form of Efficient Market Hypothesis [@romero2014hedge, ch. 8] [@wiki:emh]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
+The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behaviour of investors who choose between three pools, one providing a stable income stream, and two others offering potentially higher, but risky returns. Since each investor has access to historical data --- their own choices and payouts, and aggregate data for each pool --- the Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32] [@wiki:technical]. My personal intuition at the start of this investigation, was that simulation would support the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8] [@wiki:emh]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
 
 # Background
 
@@ -28,23 +28,17 @@ David Fogel [@fogel1999inductive] used a genetic algorithm that "bred" autoregre
 
 The El Farol problem can be generalized to the Minority game [@challet1997emergence], [@challet1998minority], [@szabo2007evolutionary], [@chakrabarti2007kolkata], and [@chakrabarti2009kolkata].
 
-
-
 # Methods
 
 
-I developed a model, _testbed.nlogo_, [@Github:2018], using Netlogo, [@Wilensky:1999], see figure \ref{fig:figs}. I followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent keeps track of the performance of the strategies in its bag, and replaces them if they are not doing well.
+I developed a model, _testbed.nlogo_, [@Github:2018], using Netlogo, [@Wilensky:1999]. I followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent keeps track of the performance of the strategies in its bag, and replaces them if they are not doing well.
 
 According to Eduardo Zambrano[@zambrano2001boundedly], Arthur rated the performance of predictors using the formula:
 $U_{t}(s^i)=\lambda U_{t-1}(s^i)+(1-\lambda)\lvert s^i(d(h_{t-1}))-y_t$, where $U_{t}(s^i)$ represents the performance of predictor $s^i$ at time $t$, $\lambda$ is a parameter in the range $[0,1]$, and the last term represents the difference between the predicted and actual lengths. Since accuracy in predicting length is of value only to the extent that it contributes to wealth, I use the gain in wealth as my only criterion for rating rules. 
 
 #Results
 
-```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:figs}Test Plot"}
-plot(my.df$tau,my.df$mean_wealth_of_investors)
-```
 
-Figure \ref{fig:figs} is a test!.
 
 ##Behaviours
 
@@ -71,8 +65,21 @@ Suppose that meta-agents exist that can coordinate the behaviors of a subset of 
 
 How do the answers to the above questions change as:
 
- *  $\tau$ is altered?
- *  you change the total number of agents in the world?
+### $\tau$ is altered?
+
+Figure \ref{fig:figs} shows the effect of varying $\tau$.
+
+```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:figs}Variation of $\\tau$"}
+plot(aggregate.by.tau$tau,aggregate.by.tau$mean__wealth__of_investors,type="l",col="red",
+     xlab="tau",ylab="",main="Dependence of wealth on tau")
+par(new = T)
+plot(aggregate.by.tau$tau,aggregate.by.tau$standard_deviation__wealth__of_investors,type="l",col="blue",
+     xlab="",ylab="",xaxt = "n",yaxt = "n")
+```
+
+
+
+###   you change the total number of agents in the world?
 
 #Discussion
 

@@ -30,19 +30,13 @@ my.df<-read.table("take2 experiment-table.csv",
                   quote = "\"", # correct the column separator
                   fill = TRUE ) # add blank fields if rows
 
-# [1] "X.run.number."                            "max.payoff.high"                         
-# [3] "n.ticks"                                  "p.start.low"                             
-# [5] "n.history"                                "benefit.weight"                          
-# [7] "n.investors"                              "p.start.high"                            
-# [9] "p.payoff.low"                             "p.payoff.high"                           
-# [11] "sigma.mutation"                           "randomize.step"                          
-# [13] "tau"                                      "n.predictors"                            
-# [15] "max.payoff.low"                           "n.coefficients"                          
-# [17] "X.step."                                  "census.POOL.STABLE"                      
-# [19] "outgoings.POOL.STABLE"                    "census.POOL.LOW"                         
-# [21] "outgoings.POOL.LOW"                       "census.POOL.HIGH"                        
-# [23] "outgoings.POOL.HIGH"                      "mean..wealth..of.investors"              
-# [25] "standard.deviation..wealth..of.investors"
+i <- 1
+for (name in colnames(my.df)) {
+  new_name <- gsub("\\.","_",name)
+  names(my.df)[i]<-new_name
+  i = i + 1
+}
 
-names(my.df)[24]<-"mean_wealth_of_investors"
+last.steps <- my.df[my.df$X_step_==max(my.df$X_step_),]
 
+aggregate.by.tau<- aggregate(last.steps,by=list(last.steps$tau),FUN=mean,na.rm=TRUE)

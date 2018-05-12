@@ -26,6 +26,7 @@ investors-own [
 
 to setup
   clear-all
+  ask patches [set pcolor blue]
   let next-pool 0
   create-ordered-pools 3 [
     fd 1
@@ -558,7 +559,7 @@ tau
 tau
 0
 20
-20.0
+5.0
 1
 1
 NIL
@@ -820,7 +821,7 @@ SWITCH
 256
 randomize-step
 randomize-step
-0
+1
 1
 -1000
 
@@ -831,7 +832,7 @@ SWITCH
 297
 can-borrow
 can-borrow
-0
+1
 1
 -1000
 
@@ -848,7 +849,7 @@ Testbed to investigate the [Complexity Explorer](https://www.complexityexplorer.
 
 Normal usage is to set the sliders and switches to suitable values, then press _Setup_ followed by _Go_. The View depicts the investors as fishes,  and the pools as faces, which will be happy or sad, depending on whether there was a payout during the current step. Colours are used to indicate to risk of the pool, links indicate the pool to which an investor belongs, and the size of the fish increases with relative wealth.
 
-![Figure missing for View](file:view.jpg)
+![Figure missing for View](file:View.jpg)
 
 
 * **Buttons**
@@ -1297,6 +1298,10 @@ NetLogo 6.0.3
       <value value="0.1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="randomize-step">
+      <value value="true"/>
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
       <value value="true"/>
       <value value="false"/>
     </enumeratedValueSet>
