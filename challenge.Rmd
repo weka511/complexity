@@ -71,10 +71,11 @@ Figure \ref{fig:figs} shows the effect of varying $\tau$.
 
 ```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:figs}Variation of $\\tau$",warning=FALSE}
 tau.data<-get.tau()
+tau.data<-extract.tau(tau.data,can_borrow=TRUE,randomize_step=TRUE)
 tau.agg<-aggregate(tau.data,by=list(tau.data$tau),FUN=mean,na.rm=TRUE)
 plot(tau.agg$tau,tau.agg$mean__wealth__of_investors,type="l",col="red",
      xlab="tau",ylab="",main="Dependence of wealth on tau")
-par(new = T)
+par(new = F)
 plot(tau.agg$tau,tau.agg$standard_deviation__wealth__of_investors,type="l",col="blue",
      xlab="",ylab="",xaxt = "n",yaxt = "n")
 ```

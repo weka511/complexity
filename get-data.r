@@ -22,24 +22,36 @@
 
 rm(list=ls())
 
-
-get.tau <- function () {
-  my.df<-read.table("C:/Users/Weka/201804/Experiments/take2 experiment-table.csv",
-                    header = T,   # set columns names true
-                    sep = ",",    # define the separator between       columns
-                    skip = 6,     # skip first 6 rows 
-                    quote = "\"", # correct the column separator
-                    fill = TRUE ) # add blank fields if rows
-  
-  i <- 1
-  for (name in colnames(my.df)) {
-    new_name <- gsub("\\.","_",name)
-    names(my.df)[i]<-new_name
-    i = i + 1
+read.nlogo.experiment<-function(path.name,file.name){
+    my.df <-
+      read.table(
+        file.path(path.name,file.name),
+        header = T,
+        sep = ",",
+        skip = 6,
+        quote = "\"",
+        fill = TRUE
+      )
+    i <- 1
+    for (name in colnames(my.df)) {
+      new_name <- gsub("\\.", "_", name)
+      names(my.df)[i] <- new_name
+      i = i + 1
+    }
+    return (my.df)
   }
   
-    return(my.df[my.df$X_step_==max(my.df$X_step_),]) 
-}
+get.tau <-
+  function (path.name="C:/Users/Weka/201804/Experiments",file.name="take2 experiment-table.csv") {
+    my.df = read.nlogo.experiment(path.name,file.name)
+    return(my.df[my.df$X_step_ == max(my.df$X_step_), ])
+  }
   
+extract.tau<-function(tau.data,can_borrow=TRUE,randomize_step=TRUE){
+  mydata.canborrow <- if (can_borrow) "true" else "false"
+  mydata.randomize_step <- if (randomize_step) "true" else "false"
+  return (tau.data[tau.data$randomize_step==mydata.randomize_step&tau.data$can_borrow==mydata.canborrow,]) 
+}
 
+# x<-tau.data[tau.data$randomize_step=="true"&tau.data$can_borrow=="true",]
 
