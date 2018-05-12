@@ -2,9 +2,12 @@
 title: "Challenge"
 author: "Simon Crase"
 date: "12 May 2018"
-output: pdf_document
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
 bibliography: 201804.bib
-csl: ieee.csl
+csl: ieee-with-url.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -12,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
-The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018], models the behaviour of investors who choose between a pool that provides a stable income stream, and two pools that offer potentially higher, but risky returns. Each investor has access to aggregate information for each pool, and their own history, so the Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge] [@wiki:technical]. My personal intuition at the start of this investigation, was that simulation would support the the weak form of Efficient Market Hypothesis [@romero2014hedge] [@wiki:emh]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
+The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018], models the behaviour of investors who choose between a pool that provides a stable income stream, and two pools that offer potentially higher, but risky returns. Each investor has access to aggregate information for each pool, and their own history, so the Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32] [@wiki:technical]. My personal intuition at the start of this investigation, was that simulation would support the the weak form of Efficient Market Hypothesis [@romero2014hedge, ch. 8] [@wiki:emh]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
 
 # Background
 
@@ -25,6 +28,44 @@ The El Farol problem can be generalized to the Minority game [@challet1997emerge
 
 # Methods
 
+I developed a model, _testbed.nlogo_, [@Github:2018], using Netlogo, [@Wilensky:1999]. I followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent keeps track of the performance of the strategies in its bag, and replaces them if they are not doing well.
+
+According to Eduardo Zambrano[@zambrano2001boundedly], Arthur rated the performance of predictors using the formula:
+$U_{t}(s^i)=\lambda U_{t-1}(s^i)+(1-\lambda)\lvert s^i(d(h_{t-1}))-y_t$, where $U_{t}(s^i)$ represents the performance of predictor $s^i$ at time $t$, $\lambda$ is a parameter in the range $[0,1]$, and the last term represents the difference between the predicted and actual lengths. Since accuracy in predicting length is of value only to the extent that it contributes to wealth, I use the gain in wealth as my only criterion for rating rules. 
+
+#Results
+
+##Behaviours
+
+What general behaviors arise in this system?  How does the wealth of the agents change over time? At the aggregate level? At the individual level?
+
+##Diversity
+
+How does the diversity of strategies influence the dynamics of the system?
+
+##Behaviours
+
+Are there generally classes of agent behavior (say, based on what data they use, how they process it, or the agent's overall sophistication) that lead to better performance?
+
+##Violate Assumptions
+
+What happens to the system if you violate one of the original assumptions of the problem and allow the agents to alter their strategies over time by observing the performance and strategic details of the other agents?
+
+##Meta-Agents
+
+Suppose that meta-agents exist that can coordinate the behaviors of a subset of the agents (and split the resulting payoffs equally across the subset)---how does this impact the system's behavior?
+
+##Changes
+
+How do the answers to the above questions change as:
+
+ *  tau is altered?
+ *  you change the total number of agents in the world?
+
 #Discussion
+
+#References
+ 
+ 
 
 
