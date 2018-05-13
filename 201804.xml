@@ -14,7 +14,7 @@
         <File name="challenge.Rmd" />
         <File name="ieee.csl" />
         <File name="ieee-with-url.csl" />
-        <File name="tau.r" />
+        <File name="get-data.r" />
     </Project>
     <Project name="git">
         <File name="LICENSE" />
