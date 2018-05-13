@@ -41,11 +41,11 @@ $U_{t}(s^i)=\lambda U_{t-1}(s^i)+(1-\lambda)\lvert s^i(d(h_{t-1}))-y_t$, where $
 n.repetitions<-get.n.repetitions(tau.data)
 ```
 
-I used R to analyze the data, and a RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. The model was executed by Behaviouspace, `r n.repetitions` repetitions, using the cobfigurations described in Table \ref{table:configs}
+I used R to analyze the data, and a RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. The model was executed by Behaviourspace, which performed `r n.repetitions` repetitions, varying the parameters listed in Table \ref{table:configs}
 
 ```{r echo=FALSE,results='asis'}
 library(knitr)
-kable(get.configurations(tau.data),caption="\\label{table:configs}Foo")
+kable(get.configurations(tau.data),caption="\\label{table:configs}Paramters varied by Behaviourspace")
 
 ```
 

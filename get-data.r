@@ -66,18 +66,17 @@ extract.errors.vs.tau<-function(tau.data,tau=0,can_borrow=TRUE,randomize_step=TR
 
 get.configurations<-function(data,min_col=2,max_col=17) {
   is.varying<-function(name){
-    
     return (length(unique(data[name])[,1])>1)
   }
   return (Filter(is.varying,colnames(data)[min_col:max_col]))
 }
 
 get.n.configurations<-function(data) {
-  return (  length(unique(data$tau)) * 
-            length(unique(data$randomize_step)) *
-            length(unique(data$can_borrow)) *
-            length(unique(data$n_predictors)) *
-            length(unique(data$n_predictors)) )
+  product = 1
+  for (name in get.configurations(data)) {
+    product = product * length(unique(data[name])[,1])
+  }
+  return (product)
 }
 
 get.n.repetitions<-function(data){
