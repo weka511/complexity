@@ -109,6 +109,10 @@ plot(tau.agg22$tau,tau.agg22$standard_deviation__wealth__of_investors,type="l",c
 
 #Discussion
 
+#Acknowledgements
+
+Thanks are due to the SFI staff and mentors, my fellow students for discussions and recommended reading, and to Rosanna van Hespen, for valuable advice on using RMarkdown [@vanhespen2016thesis].
+
 #References
  
  
