@@ -119,10 +119,10 @@ to go
   ask investors [  ;; Select best pool
     let predicted-returns (runresult (item 0 predictors) PREDICT low-payoff high-payoff low-number high-number)
     let current-pool item 0 my-choices
-    let revised-prediction (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau))]] predicted-returns range 3)
+    let revised-prediction predicted-returns;;(map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau))]] predicted-returns range 3)
     let recommended-return max revised-prediction
     let predicted-benefit recommended-return - item current-pool revised-prediction
-
+ ;   output-print (list predicted-returns predicted-benefit)
     let recommended-pool 0
     ifelse randomize-step [
       let r random-float sum (revised-prediction)
@@ -431,15 +431,15 @@ NIL
 0
 
 SLIDER
-2
+5
 10
-116
+119
 43
 p-payoff-low
 p-payoff-low
 0
 1
-0.5
+0.49
 0.01
 1
 NIL
@@ -559,7 +559,7 @@ tau
 tau
 0
 20
-25.0
+0.0
 1
 1
 NIL
@@ -614,7 +614,7 @@ n-coefficients
 n-coefficients
 1
 25
-6.0
+3.0
 1
 1
 NIL
@@ -629,7 +629,7 @@ n-predictors
 n-predictors
 0
 25
-11.0
+6.0
 1
 1
 NIL
@@ -1267,6 +1267,7 @@ NetLogo 6.0.3
     <metric>outgoings POOL-HIGH</metric>
     <metric>mean [wealth] of investors</metric>
     <metric>standard-deviation [wealth] of investors</metric>
+    <metric>mean [sum-squares-error] of investors</metric>
     <enumeratedValueSet variable="max-payoff-high">
       <value value="80"/>
     </enumeratedValueSet>
@@ -1308,23 +1309,20 @@ NetLogo 6.0.3
     <enumeratedValueSet variable="tau">
       <value value="0"/>
       <value value="1"/>
-      <value value="2"/>
-      <value value="3"/>
-      <value value="4"/>
       <value value="5"/>
-      <value value="10"/>
-      <value value="15"/>
-      <value value="20"/>
-      <value value="25"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-predictors">
-      <value value="11"/>
+      <value value="3"/>
+      <value value="6"/>
+      <value value="9"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="max-payoff-low">
       <value value="40"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-coefficients">
+      <value value="3"/>
       <value value="6"/>
+      <value value="9"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
@@ -1341,5 +1339,5 @@ true
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
 @#$#@#$#@
-0
+1
 @#$#@#$#@
