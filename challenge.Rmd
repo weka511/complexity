@@ -69,15 +69,38 @@ How do the answers to the above questions change as:
 
 Figure \ref{fig:figs} shows the effect of varying $\tau$.
 
-```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:figs}Variation of $\\tau$",warning=FALSE}
+```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:figs}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center'}
 tau.data<-get.tau()
-tau.data<-extract.tau(tau.data,can_borrow=TRUE,randomize_step=TRUE)
-tau.agg<-aggregate(tau.data,by=list(tau.data$tau),FUN=mean,na.rm=TRUE)
-plot(tau.agg$tau,tau.agg$mean__wealth__of_investors,type="l",col="red",
-     xlab="tau",ylab="",main="Dependence of wealth on tau")
-par(new = F)
-plot(tau.agg$tau,tau.agg$standard_deviation__wealth__of_investors,type="l",col="blue",
-     xlab="",ylab="",xaxt = "n",yaxt = "n")
+
+tau.agg11 <- extract.wealth.vs.tau(tau.data,can_borrow=TRUE,randomize_step=TRUE)
+plot(tau.agg11$tau,tau.agg11$mean__wealth__of_investors,type="l",col="blue",lty=1,
+     xlab="",ylab="",yaxt='n',main = "Mean Wealth")
+par(new=TRUE)
+tau.agg12 <- extract.wealth.vs.tau(tau.data,can_borrow=TRUE,randomize_step=FALSE)
+plot(tau.agg12$tau,tau.agg12$mean__wealth__of_investors,type="l",col="magenta",lty=2,
+     xlab="",ylab="",yaxt='n')
+par(new=TRUE)
+tau.agg21 <- extract.wealth.vs.tau(tau.data,can_borrow=FALSE,randomize_step=TRUE)
+plot(tau.agg21$tau,tau.agg21$mean__wealth__of_investors,type="l",col="slategray",lty=6,
+     xlab="",ylab="",yaxt='n')
+par(new=TRUE)
+tau.agg22 <- extract.wealth.vs.tau(tau.data,can_borrow=FALSE,randomize_step=FALSE)
+plot(tau.agg22$tau,tau.agg22$mean__wealth__of_investors,type="l",col="steelblue",lty=4,
+     xlab="",ylab="",yaxt='n')
+legend("bottomright", legend=c("TT", "FT","TF","FF"),
+       col=c("blue", "magenta","slategrey","steelblue"), lty=c(1,2,6,4), cex=0.8)
+
+plot(tau.agg11$tau,tau.agg11$standard_deviation__wealth__of_investors,type="l",col="blue",lty=1,
+     xlab="",ylab="",yaxt='n',main="Standard Deviation")
+par(new=TRUE)
+plot(tau.agg12$tau,tau.agg12$standard_deviation__wealth__of_investors,type="l",col="magenta",lty=2,
+     xlab="",ylab="",yaxt='n')
+par(new=TRUE)
+plot(tau.agg21$tau,tau.agg21$standard_deviation__wealth__of_investors,type="l",col="slategray",lty=6,
+     xlab="",ylab="",yaxt='n')
+par(new=TRUE)
+plot(tau.agg22$tau,tau.agg22$standard_deviation__wealth__of_investors,type="l",col="black",lty=5,
+     xlab="",ylab="",yaxt='n')
 ```
 
 

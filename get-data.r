@@ -53,5 +53,10 @@ extract.tau<-function(tau.data,can_borrow=TRUE,randomize_step=TRUE){
   return (tau.data[tau.data$randomize_step==mydata.randomize_step&tau.data$can_borrow==mydata.canborrow,]) 
 }
 
-# x<-tau.data[tau.data$randomize_step=="true"&tau.data$can_borrow=="true",]
+extract.wealth.vs.tau<-function(tau.data,can_borrow=TRUE,randomize_step=TRUE) {
+  tau.data11<-extract.tau(tau.data,can_borrow,randomize_step)
+  tau.data.end<-tau.data11[tau.data11$X_step_==tau.data11$n_ticks,]
+  return (aggregate(tau.data.end,by=list(tau.data.end$tau),FUN=mean,na.rm=TRUE))
+}
+
 
