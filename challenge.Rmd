@@ -14,6 +14,7 @@ csl: ieee-with-url.csl
 ```{r setup, include=FALSE,echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 source('get-data.r')
+tau.data<-get.tau()
 ```
 
 # Introduction
@@ -35,6 +36,18 @@ I developed a model, _testbed.nlogo_, [@Github:2018], using Netlogo, [@Wilensky:
 
 According to Eduardo Zambrano[@zambrano2001boundedly], Arthur rated the performance of predictors using the formula:
 $U_{t}(s^i)=\lambda U_{t-1}(s^i)+(1-\lambda)\lvert s^i(d(h_{t-1}))-y_t$, where $U_{t}(s^i)$ represents the performance of predictor $s^i$ at time $t$, $\lambda$ is a parameter in the range $[0,1]$, and the last term represents the difference between the predicted and actual lengths. Since accuracy in predicting length is of value only to the extent that it contributes to wealth, I use the gain in wealth as my only criterion for rating rules. 
+
+```{r setrep,echo=FALSE}
+n.repetitions<-get.n.repetitions(tau.data)
+```
+
+I used R to analyze the data, and a RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. The model was executed by Behaviouspace, `r n.repetitions` repetitions, using the cobfigurations described in Table \ref{table:configs}
+
+```{r echo=FALSE,results='asis'}
+library(knitr)
+kable(get.configurations(tau.data),caption="\\label{table:configs}Foo")
+
+```
 
 #Results
 
@@ -67,7 +80,7 @@ Suppose that meta-agents exist that can coordinate the behaviors of a subset of 
 
 Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically total wealth increases with $\tau$. Figure \ref{fig:tau_error} shows that the transisnts in the total error are dampled when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discouarages agnts from jumping from pool to pool.
 
-```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:tau_wealth}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center'}
+```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:tau_wealth}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 tau.data<-get.tau()
 
 tau.agg11 <- extract.wealth.vs.tau(tau.data,can_borrow=TRUE,randomize_step=TRUE)
@@ -103,7 +116,7 @@ plot(tau.agg22$tau,tau.agg22$standard_deviation__wealth__of_investors,type="l",c
 
 
 
-```{r plot_errors, echo=FALSE,fig.cap="\\label{fig:tau_error}Variation of Error with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center'}
+```{r plot_errors, echo=FALSE,fig.cap="\\label{fig:tau_error}Variation of Error with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 dd<-read.nlogo.experiment()
 zz0<-extract.errors.vs.tau(dd)
 aa0<-aggregate(zz0,by=list(zz0$X_step_),FUN=mean,na.rm=TRUE)
@@ -111,18 +124,16 @@ zz1<-extract.errors.vs.tau(dd,tau=1)
 aa1<-aggregate(zz1,by=list(zz1$X_step_),FUN=mean,na.rm=TRUE)
 zz5<-extract.errors.vs.tau(dd,tau=5)
 aa5<-aggregate(zz5,by=list(zz5$X_step_),FUN=mean,na.rm=TRUE)
-zz10<-extract.errors.vs.tau(dd,tau=1)
-aa10<-aggregate(zz10,by=list(zz10$X_step_),FUN=mean,na.rm=TRUE)
+
 
 plot(aa0$X_step_,aa0$mean__sum_squares_error__of_investors,type="l",col="blue",lty=1,xlab="Step",ylab="",yaxt='n',main="Variation of Squared error")
-legend("topright", legend=c("tau=0", "tau=1","tau=5","tau=10"),
-       col=c("blue", "magenta","slategrey","steelblue"), lty=c(1,2,6,4), cex=0.8)
+legend("topright", legend=c("tau=0", "tau=1","tau=5"),
+       col=c("blue", "magenta","slategrey"), lty=c(1,2,6), cex=0.8)
 par(new=TRUE)
 plot(aa1$X_step_,aa1$mean__sum_squares_error__of_investors,type="l",col="magenta",lty=2,xlab="",ylab="",yaxt='n')
 par(new=TRUE)
 plot(aa5$X_step_,aa5$mean__sum_squares_error__of_investors,type="l",col="slategray",lty=6,xlab="",ylab="",yaxt='n')
-par(new=TRUE)
-plot(aa10$X_step_,aa10$mean__sum_squares_error__of_investors,type="l",col="black",lty=1,xlab="",ylab="",yaxt='n')
+
 
 ```
 
@@ -132,7 +143,7 @@ plot(aa10$X_step_,aa10$mean__sum_squares_error__of_investors,type="l",col="black
 
 #Acknowledgements
 
-Thanks are due to the SFI staff and mentors, my fellow students for discussions and recommended reading, and to Rosanna van Hespen, for valuable advice on using RMarkdown [@vanhespen2016thesis].
+Thanks are due to the SFI staff and mentors, and to my fellow students for discussions and recommended reading.
 
 #References
  
