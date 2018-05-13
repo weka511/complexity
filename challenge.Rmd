@@ -1,7 +1,7 @@
 ---
-title: "Challenge"
+title: "Complexity Challenge"
 author: "Simon Crase"
-date: "12 May 2018"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   pdf_document:
     fig_caption: yes
@@ -41,7 +41,7 @@ $U_{t}(s^i)=\lambda U_{t-1}(s^i)+(1-\lambda)\lvert s^i(d(h_{t-1}))-y_t$, where $
 n.repetitions<-get.n.repetitions(tau.data)
 ```
 
-I used R to analyze the data, and a RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. The model was executed by Behaviourspace, which performed `r n.repetitions` repetitions, varying the parameters listed in Table \ref{table:configs}
+I used R to analyze the data, and an RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. The model was executed by Behaviourspace, which performed `r n.repetitions` repetitions, varying the parameters listed in Table \ref{table:configs}
 
 ```{r echo=FALSE,results='asis'}
 library(knitr)
@@ -78,7 +78,7 @@ Suppose that meta-agents exist that can coordinate the behaviors of a subset of 
 
 ### Variation of $\tau$
 
-Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically total wealth increases with $\tau$. Figure \ref{fig:tau_error} shows that the transisnts in the total error are dampled when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discouarages agnts from jumping from pool to pool.
+Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically total wealth increases with $\tau$. Figure \ref{fig:tau_error} shows that the transients in the total error are damped when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discourages agents from jumping from pool to pool.
 
 ```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:tau_wealth}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 tau.data<-get.tau()
