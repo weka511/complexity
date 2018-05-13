@@ -63,18 +63,16 @@ Suppose that meta-agents exist that can coordinate the behaviors of a subset of 
 
 ##Changes
 
-How do the answers to the above questions change as:
+### Variation of $\tau$
 
-### $\tau$ is altered?
+Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically total wealth increases with $\tau$. Figure \ref{fig:tau_error} shows that the transisnts in the total error are dampled when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discouarages agnts from jumping from pool to pool.
 
-Figure \ref{fig:figs} shows the effect of varying $\tau$.
-
-```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:figs}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center'}
+```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:tau_wealth}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center'}
 tau.data<-get.tau()
 
 tau.agg11 <- extract.wealth.vs.tau(tau.data,can_borrow=TRUE,randomize_step=TRUE)
 plot(tau.agg11$tau,tau.agg11$mean__wealth__of_investors,type="l",col="blue",lty=1,
-     xlab="",ylab="",yaxt='n',main = "Mean Wealth")
+     xlab="tau",ylab="",yaxt='n',main = "Mean Wealth")
 par(new=TRUE)
 tau.agg12 <- extract.wealth.vs.tau(tau.data,can_borrow=TRUE,randomize_step=FALSE)
 plot(tau.agg12$tau,tau.agg12$mean__wealth__of_investors,type="l",col="magenta",lty=2,
@@ -91,7 +89,7 @@ legend("bottomright", legend=c("TT", "FT","TF","FF"),
        col=c("blue", "magenta","slategrey","steelblue"), lty=c(1,2,6,4), cex=0.8)
 
 plot(tau.agg11$tau,tau.agg11$standard_deviation__wealth__of_investors,type="l",col="blue",lty=1,
-     xlab="",ylab="",yaxt='n',main="Standard Deviation")
+     xlab="tau",ylab="",yaxt='n',main="Standard Deviation")
 par(new=TRUE)
 plot(tau.agg12$tau,tau.agg12$standard_deviation__wealth__of_investors,type="l",col="magenta",lty=2,
      xlab="",ylab="",yaxt='n')
@@ -104,6 +102,29 @@ plot(tau.agg22$tau,tau.agg22$standard_deviation__wealth__of_investors,type="l",c
 ```
 
 
+
+```{r plot_errors, echo=FALSE,fig.cap="\\label{fig:tau_error}Variation of Error with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center'}
+dd<-read.nlogo.experiment()
+zz0<-extract.errors.vs.tau(dd)
+aa0<-aggregate(zz0,by=list(zz0$X_step_),FUN=mean,na.rm=TRUE)
+zz1<-extract.errors.vs.tau(dd,tau=1)
+aa1<-aggregate(zz1,by=list(zz1$X_step_),FUN=mean,na.rm=TRUE)
+zz5<-extract.errors.vs.tau(dd,tau=5)
+aa5<-aggregate(zz5,by=list(zz5$X_step_),FUN=mean,na.rm=TRUE)
+zz10<-extract.errors.vs.tau(dd,tau=1)
+aa10<-aggregate(zz10,by=list(zz10$X_step_),FUN=mean,na.rm=TRUE)
+
+plot(aa0$X_step_,aa0$mean__sum_squares_error__of_investors,type="l",col="blue",lty=1,xlab="Step",ylab="",yaxt='n',main="Variation of Squared error")
+legend("topright", legend=c("tau=0", "tau=1","tau=5","tau=10"),
+       col=c("blue", "magenta","slategrey","steelblue"), lty=c(1,2,6,4), cex=0.8)
+par(new=TRUE)
+plot(aa1$X_step_,aa1$mean__sum_squares_error__of_investors,type="l",col="magenta",lty=2,xlab="",ylab="",yaxt='n')
+par(new=TRUE)
+plot(aa5$X_step_,aa5$mean__sum_squares_error__of_investors,type="l",col="slategray",lty=6,xlab="",ylab="",yaxt='n')
+par(new=TRUE)
+plot(aa10$X_step_,aa10$mean__sum_squares_error__of_investors,type="l",col="black",lty=1,xlab="",ylab="",yaxt='n')
+
+```
 
 ###   you change the total number of agents in the world?
 

@@ -22,7 +22,7 @@
 
 rm(list=ls())
 
-read.nlogo.experiment<-function(path.name,file.name){
+read.nlogo.experiment<-function(path.name="C:/Users/Weka/201804/Experiments",file.name="take2 experiment-table.csv"){
     my.df <-
       read.table(
         file.path(path.name,file.name),
@@ -54,9 +54,14 @@ extract.tau<-function(tau.data,can_borrow=TRUE,randomize_step=TRUE){
 }
 
 extract.wealth.vs.tau<-function(tau.data,can_borrow=TRUE,randomize_step=TRUE) {
-  tau.data11<-extract.tau(tau.data,can_borrow,randomize_step)
-  tau.data.end<-tau.data11[tau.data11$X_step_==tau.data11$n_ticks,]
+  tau.data<-extract.tau(tau.data,can_borrow,randomize_step)
+  tau.data.end<-tau.data[tau.data$X_step_==tau.data$n_ticks,]
   return (aggregate(tau.data.end,by=list(tau.data.end$tau),FUN=mean,na.rm=TRUE))
+}
+
+extract.errors.vs.tau<-function(tau.data,tau=0,can_borrow=TRUE,randomize_step=TRUE) {
+  tau.data<-extract.tau(tau.data,can_borrow,randomize_step)
+  return (tau.data[tau.data$tau==tau,])
 }
 
 
