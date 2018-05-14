@@ -88,6 +88,14 @@ get.ns<-function(data){
   return (lapply(get.configurations(data),f))
 }
 
+get.netlogo.values<-function(data){
+  get.param.values<-function(name){
+      values<-unique(data[name])[[1]]
+      return (paste(values,collapse=", "))
+    }
+  return (lapply(get.configurations(data),get.param.values))
+}
+
 get.netlogo.params<-function(data){
-  return ( data.frame(get.configurations(data),unlist(get.ns(data))) )
+  return ( data.frame(get.configurations(data),unlist(get.netlogo.values(data))) )
 }
