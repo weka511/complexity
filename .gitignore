@@ -111,5 +111,12 @@ ENV/
 out.csv
 Experiments/
 
+# R stuff
+.RData
+.Rhistory
+*.pdf
+
+
+
 
 
