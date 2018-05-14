@@ -6,10 +6,15 @@ output:
   pdf_document:
     fig_caption: yes
     number_sections: true
- 
+fontsize: 12pt
+mainfont: Times New Roman 
 bibliography: 201804.bib
 csl: ieee-with-url.csl
 ---
+\fontfamily{cmr}
+\fontsize{12}{22}
+\fontseries{b}
+\selectfont
 
 ```{r setup, include=FALSE,echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
