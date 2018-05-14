@@ -22,6 +22,7 @@
 
 rm(list=ls())
 
+# Extract data from a Netlogo BehaviourSpace experiment
 read.nlogo.experiment<-function(path.name="C:/Users/Weka/201804/Experiments",file.name="take2 experiment-table.csv"){
     my.df <-
       read.table(
@@ -64,16 +65,18 @@ extract.errors.vs.tau<-function(tau.data,tau=0,can_borrow=TRUE,randomize_step=TR
   return (tau.data[tau.data$tau==tau,])
 }
 
-get.configurations<-function(data,min_col=2,max_col=17) {
+# Get names of input parameters that have more than one value in experiment file
+get.names.of.varying.parameters<-function(data,min_col=2,max_col=17) {
   is.varying<-function(name){
     return (nrow(unique(data[name]))>1)
   }
   return (Filter(is.varying,colnames(data)[min_col:max_col]))
 }
 
+# Get total number of combinations of input parameters values
 get.n.configurations<-function(data) {
   product = 1
-  for (name in get.configurations(data)) {
+  for (name in get.names.of.varying.parameters(data)) {
     product = product * nrow(unique(data[name]))
   }
   return (product)
@@ -93,9 +96,10 @@ get.netlogo.values<-function(data){
       values<-unique(data[name])[[1]]
       return (paste(values,collapse=", "))
     }
-  return (lapply(get.configurations(data),get.param.values))
+  return (lapply(get.names.of.varying.parameters(data),get.param.values))
 }
 
 get.netlogo.params<-function(data){
-  return ( data.frame(get.configurations(data),unlist(get.netlogo.values(data))) )
+  return ( data.frame(get.names.of.varying.parameters(data),
+                      unlist(get.netlogo.values(data))) )
 }
