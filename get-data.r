@@ -82,3 +82,12 @@ get.n.configurations<-function(data) {
 get.n.repetitions<-function(data){
   return (  length(unique(data$X_run_number_)) / get.n.configurations(data))
 }
+
+get.ns<-function(data){
+  f<-function(name){toString(unique(data[name]))}
+  return (lapply(get.configurations(data),f))
+}
+
+get.netlogo.params<-function(data){
+  return ( data.frame(get.configurations(data),unlist(get.ns(data))) )
+}
