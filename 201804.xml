@@ -6,6 +6,7 @@
     </Project>
     <Project name="Outputs">
         <File name="out.csv" />
+        <File name="Experiments\take2 experiment-table.csv" />
     </Project>
     <Project name="Documentation">
         <File name="Proposal.tex" />
