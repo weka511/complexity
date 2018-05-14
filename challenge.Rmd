@@ -6,51 +6,44 @@ output:
   pdf_document:
     fig_caption: yes
     number_sections: true
-fontsize: 12pt
-mainfont: Times New Roman 
+
 bibliography: 201804.bib
 csl: ieee-with-url.csl
+
 ---
-\fontfamily{cmr}
-\fontsize{12}{22}
-\fontseries{b}
-\selectfont
+
 
 ```{r setup, include=FALSE,echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 source('get-data.r')
 tau.data<-get.tau()
+n.repetitions<-get.n.repetitions(tau.data)
 ```
 
 # Introduction
-The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behaviour of investors who choose between three pools, one providing a stable income stream, and two others offering potentially higher, but risky returns. Since each investor has access to historical data --- their own choices and payouts, and aggregate data for each pool --- the Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32] [@wiki:technical]. My personal intuition at the start of this investigation, was that simulation would support the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8] [@wiki:emh]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
+The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behaviour of investors choosing between three pools, one providing a stable income stream, and two others offering potentially higher, but risky returns. Since each investor has access to historical data --- their own choices and payoffs, and aggregate data for each pool --- the Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32]. At the start of this investigation, I expected that simulation would support the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
 
 # Background
 
 Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer people attended. Arthur discovered there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance. A simple machine learning method replaces poorly performing strategies with ones that have proven more accurate on recent data.
 
 
-David Fogel [@fogel1999inductive] used a genetic algorithm that "bred" autoregressive models. William Rand and Forrest Stonedahl [@rand2007farol] pointed out that Fogel's solution uses more computational effort than Arthur to produce a lower societal benefit.
-
-The El Farol problem can be generalized to the Minority game [@challet1997emergence], [@challet1998minority], [@szabo2007evolutionary], [@chakrabarti2007kolkata], and [@chakrabarti2009kolkata].
+The El Farol problem can be generalized to the Minority game [@challet1997emergence].
 
 # Methods
 
 
-I developed a model, _testbed.nlogo_, [@Github:2018], using Netlogo, [@Wilensky:1999]. I followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent keeps track of the performance of the strategies in its bag, and replaces them if they are not doing well.
+I developed a model, _testbed.nlogo_, using Netlogo, [@Wilensky:1999]. I followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent kept track of the performance of the strategies in its bag, and replaced them if they are not doing well. The limitation of this  approach is that no new stratigies can arise. Subsequently I adopted the approach of Fogel [@fogel1999inductive], using a genetic algorithm that breeds autoregressive models. My model represents Investors and Pools as Breeds of Turtles. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}.
 
-According to Eduardo Zambrano[@zambrano2001boundedly], Arthur rated the performance of predictors using the formula:
-$U_{t}(s^i)=\lambda U_{t-1}(s^i)+(1-\lambda)\lvert s^i(d(h_{t-1}))-y_t$, where $U_{t}(s^i)$ represents the performance of predictor $s^i$ at time $t$, $\lambda$ is a parameter in the range $[0,1]$, and the last term represents the difference between the predicted and actual lengths. Since accuracy in predicting length is of value only to the extent that it contributes to wealth, I use the gain in wealth as my only criterion for rating rules. 
+![Investors are linked to Pools: a happy face represents a pool that has paid out, colours represent risk in a natural way (traffic lights), and the size of each fish correlates to the wealth of an investor.\label{fig:ui}](View.jpg){ width=50%, height=50% }
 
-```{r setrep,echo=FALSE}
-n.repetitions<-get.n.repetitions(tau.data)
-```
 
-I used R to analyze the data, and an RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. The model was executed by Behaviourspace, which performed `r n.repetitions` repetitions, varying the parameters listed in Table \ref{table:configs}
+
+The model was executed by the BehaviourSpace tool of Netlogo, which performed `r n.repetitions` repetitions, varying the parameters listed in Table \ref{table:configs}. I used R to analyze the data, and an RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. 
 
 ```{r echo=FALSE,results='asis'}
 library(knitr)
-kable(get.configurations(tau.data),caption="\\label{table:configs}Paramters varied by Behaviourspace")
+kable(get.configurations(tau.data),caption="\\label{table:configs}Parameters varied by BehaviourSpace")
 
 ```
 
