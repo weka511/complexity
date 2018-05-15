@@ -117,15 +117,19 @@ get.netlogo.params<-function(data){
 
 plot.errors<-function(netlogo.data,can_borrow=TRUE,randomize_step=TRUE,tau=0,n_predictors=3,n_coefficients=3) {
   err<-extract.step.data(netlogo.data,can_borrow,randomize_step,tau,n_predictors,n_coefficients)
+  rbPal <- colorRampPalette(c('red','blue'))
+  err$Col <- rbPal(10)[as.numeric(cut(err$X_run_number_,breaks = 10))]
   plot(err$X_step_,err$mean__sum_squares_error__of_investors,
-       xlab = "Step",ylab = "Squared error",pch=20,
+       xlab = "Step",ylab = "Squared error",pch=1,col=err$Col,
        main=sprintf("n_predictors=%d, n_coefficients=%d",n_predictors,n_coefficients))
 }
 
 plot.wealth<-function(netlogo.data,can_borrow=TRUE,randomize_step=TRUE,tau=0,n_predictors=3,n_coefficients=3) {
   err<-extract.step.data(netlogo.data,can_borrow,randomize_step,tau,n_predictors,n_coefficients)
+  rbPal <- colorRampPalette(c('red','blue'))
+  err$Col <- rbPal(10)[as.numeric(cut(err$X_run_number_,breaks = 10))]
   plot(err$X_step_,err$mean__wealth__of_investors,
-       xlab = "Step",ylab = "Wealth",pch=20,
+       xlab = "Step",ylab = "Wealth",pch=1,col=err$Col,
        main=sprintf("n_predictors=%d, n_coefficients=%d",n_predictors,n_coefficients))
 }
 
@@ -134,6 +138,6 @@ plot.outgoings<-function(netlogo.data,can_borrow=TRUE,randomize_step=TRUE,tau=0,
   plot(err$X_step_,err$outgoings_POOL_HIGH,
        xlab = "Step",ylab = "Payout",pch=20,col="red",
        main=sprintf("n_predictors=%d, n_coefficients=%d",n_predictors,n_coefficients))
-  points(err$X_step_,err$outgoings_POOL_LOW,pch=20,col="yellow")
+  points(err$X_step_,err$outgoings_POOL_LOW,pch=1,col="yellow")
   points(err$X_step_,err$outgoings_POOL_STABLE,pch=20,col="green")    
 }
