@@ -439,7 +439,7 @@ p-payoff-low
 p-payoff-low
 0
 1
-0.49
+0.5
 0.01
 1
 NIL
@@ -614,7 +614,7 @@ n-coefficients
 n-coefficients
 1
 25
-3.0
+6.0
 1
 1
 NIL
@@ -629,7 +629,7 @@ n-predictors
 n-predictors
 0
 25
-6.0
+9.0
 1
 1
 NIL
@@ -832,7 +832,7 @@ SWITCH
 297
 can-borrow
 can-borrow
-1
+0
 1
 -1000
 
@@ -1255,7 +1255,7 @@ NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="experiment" repetitions="10" runMetricsEveryStep="true">
+  <experiment name="experiment" repetitions="12" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <timeLimit steps="100"/>
@@ -1310,6 +1310,7 @@ NetLogo 6.0.3
       <value value="0"/>
       <value value="1"/>
       <value value="5"/>
+      <value value="10"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-predictors">
       <value value="3"/>

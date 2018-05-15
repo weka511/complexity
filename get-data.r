@@ -54,6 +54,17 @@ extract.tau<-function(tau.data,can_borrow=TRUE,randomize_step=TRUE){
   return (tau.data[tau.data$randomize_step==mydata.randomize_step&tau.data$can_borrow==mydata.canborrow,]) 
 }
 
+extract.squared.error<-function(netlogo.data,can_borrow=TRUE,randomize_step=TRUE,tau=0,n_predictors=3,n_coefficients=3){
+  mydata.canborrow <- if (can_borrow) "true" else "false"
+  mydata.randomize_step <- if (randomize_step) "true" else "false"
+  return (netlogo.data[netlogo.data$randomize_step==mydata.randomize_step & 
+                         netlogo.data$can_borrow==mydata.canborrow &
+                         netlogo.data$tau==tau &
+                         netlogo.data$n_predictors==n_predictors &
+                         netlogo.data$n_coefficients==n_coefficients,
+                       ]) 
+}
+
 extract.wealth.vs.tau<-function(tau.data,can_borrow=TRUE,randomize_step=TRUE) {
   tau.data<-extract.tau(tau.data,can_borrow,randomize_step)
   tau.data.end<-tau.data[tau.data$X_step_==tau.data$n_ticks,]
@@ -102,4 +113,11 @@ get.netlogo.values<-function(data){
 get.netlogo.params<-function(data){
   return ( data.frame(get.names.of.varying.parameters(data),
                       unlist(get.netlogo.values(data))) )
+}
+
+plot.errors<-function(netlogo.data,can_borrow=TRUE,randomize_step=TRUE,tau=0,n_predictors=3,n_coefficients=3) {
+  err<-extract.squared.error(netlogo.data,can_borrow,randomize_step,tau,n_predictors,n_coefficients)
+  plot(err$X_step_,err$mean__sum_squares_error__of_investors,
+       xlab = "Step",ylab = "Squared=error",pch=20,
+       main=sprintf("tau=%d, n_predictors=%d, n_coefficients=%d",tau,n_predictors,n_coefficients))
 }
