@@ -59,6 +59,22 @@ kable(get.netlogo.params(netlogo.data),
 
 What general behaviors arise in this system?  How does the wealth of the agents change over time? At the aggregate level? At the individual level?
 
+```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Wealth with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+plot.wealth(netlogo.data,tau=0)
+plot.wealth(netlogo.data,tau=0,n_coefficients = 6)
+plot.wealth(netlogo.data,tau=0,n_predictors  = 6)
+plot.wealth(netlogo.data,tau=0,n_coefficients = 6,n_predictors  = 6)
+plot.wealth(netlogo.data,tau=0,n_coefficients = 9,n_predictors  = 9)
+```
+
+```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth1}Variation of Wealth with number of coefficients with number of predictors, for $\\tau=1$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+plot.wealth(netlogo.data,tau=1)
+plot.wealth(netlogo.data,tau=1,n_coefficients = 6)
+plot.wealth(netlogo.data,tau=1,n_predictors  = 6)
+plot.wealth(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
+plot.wealth(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
+```
+
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_sq0}Variation of Error with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.errors(netlogo.data,tau=0)
 plot.errors(netlogo.data,tau=0,n_coefficients = 6)
