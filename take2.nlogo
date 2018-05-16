@@ -262,11 +262,10 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
 
   if function = PREDICT [
     let indices get-matches  low-payoff  high-payoff low-number high-number coarse-grainer
-    ifelse length indices > 2 [
-      let rr range (length indices - 2)
-      let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] rr)
-      let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] rr)
-      let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] rr)
+    ifelse length indices > 0 [
+      let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] range length indices)
+      let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] range length indices)
+      let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] range length indices)
       report (map [v -> ifelse-value (v > 0) [v][epsilon]] (list payoff-stable payoff-low payoff-high))
     ][
       report (list RETURN-STABLE-POOL epsilon epsilon)
@@ -631,7 +630,7 @@ n-ticks
 n-ticks
 0
 1000
-1000.0
+100.0
 5
 1
 NIL
@@ -949,6 +948,21 @@ p-experiencers
 1
 0.15
 0.05
+1
+NIL
+HORIZONTAL
+
+SLIDER
+5
+480
+97
+513
+n-memory
+n-memory
+1
+10
+1.0
+1
 1
 NIL
 HORIZONTAL
