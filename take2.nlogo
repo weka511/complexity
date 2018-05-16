@@ -59,12 +59,15 @@ to setup
     let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
     create-link-with one-of pools with [pool-number = pool-index]
     set my-choices (list pool-index)
-    fd 15
+
     ifelse random-float 1.0 < p-experiencers[
-      set predictors (list [[func a b c d] -> experience-predictor func a b c d [x -> simple-coarse-grainer x]])
+      set predictors (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
+      set shape "triangle"
+      fd 6
     ][
       set predictors map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
       set shape "fish"
+      fd 12
     ]
 
 
@@ -151,6 +154,7 @@ to go
         set my-choices fput current-pool my-choices
       ]
     ]
+
   ]
 
   ;; Breed predictors
@@ -173,8 +177,12 @@ to go
       set predictors map [index -> item index predictors] culled-indices
   ]]
 
+;   output-print (list low-payoff  low-number sub-total-payoff low-payoff  low-number break-even-attendance low-payoff  low-number)
+;   output-print (list high-payoff  high-number sub-total-payoff high-payoff  high-number break-even-attendance high-payoff  high-number)
+
   tick
 end
+
 
 ;; Assign colours to pools
 
@@ -233,16 +241,18 @@ to-report generic-predictor  [function low-payoff high-payoff low-number high-nu
   report NOTHING
 end
 
-to-report simple-coarse-grainer [element]
-  report ifelse-value (element < 20) [0][1]
+to-report simple-coarse-grainer [element break-even-point]
+  report ifelse-value (element < break-even-point) [0][1]
 end
 
-to-report get-matches [low-payoff  high-payoff coarse-grainer]
-  let target-low (runresult coarse-grainer item 0 low-payoff)
-  let target-high (runresult coarse-grainer item 0 high-payoff)
+to-report get-matches [low-payoff  high-payoff low-number high-number coarse-grainer]
+  let break-low break-even-attendance low-payoff  low-number
+  let break-high break-even-attendance high-payoff  high-number
+  let target-low (runresult coarse-grainer item 0 low-payoff break-low)
+  let target-high (runresult coarse-grainer item 0 high-payoff break-high)
   report filter [i -> i > 0 and
-    (runresult coarse-grainer item i low-payoff) = target-low and
-    (runresult coarse-grainer item i high-payoff) = target-high] range length low-payoff
+    (runresult coarse-grainer item i low-payoff break-low) = target-low and
+    (runresult coarse-grainer item i high-payoff break-high) = target-high] range length low-payoff
   report []
 end
 
@@ -251,9 +261,7 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
   if function = INIT [  ]
 
   if function = PREDICT [
-    let indices get-matches  low-payoff  high-payoff coarse-grainer
-    output-print indices
-    output-print my-choices
+    let indices get-matches  low-payoff  high-payoff low-number high-number coarse-grainer
     ifelse length indices > 2 [
       let rr range (length indices - 2)
       let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] rr)
@@ -362,8 +370,16 @@ end
 
 ;; Estimate return from historical data
 to-report estimate-return [mypayoffs mynumbers]
-  let weighted-payoffs reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
-  report weighted-payoffs / max (list 1 length mypayoffs)
+;  let weighted-payoffs reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
+  report sub-total-payoff mypayoffs mynumbers / max (list 1 length mypayoffs)
+end
+
+to-report break-even-attendance[mypayoffs mynumbers]
+  report int ((sub-total-payoff mypayoffs mynumbers) / (length mynumbers))
+end
+
+to-report sub-total-payoff [mypayoffs mynumbers]
+  report reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
 end
 
 ;; Count investors in pool
@@ -424,13 +440,13 @@ end
 ;; Copyright (c) 2018 Simon Crase - see info tab for details of licence
 @#$#@#$#@
 GRAPHICS-WINDOW
-244
+260
 10
-713
-480
+809
+560
 -1
 -1
-13.97
+16.4
 1
 10
 1
@@ -615,7 +631,7 @@ n-ticks
 n-ticks
 0
 1000
-100.0
+1000.0
 5
 1
 NIL
@@ -637,10 +653,10 @@ NIL
 HORIZONTAL
 
 PLOT
-1027
-351
-1227
-501
+1150
+355
+1350
+505
 Spread
 Wealth
 Count
@@ -655,10 +671,10 @@ PENS
 "default" 1.0 0 -13345367 true "" "histogram [wealth] of investors"
 
 MONITOR
-743
-346
-846
-391
+866
+350
+969
+395
 Average Wealth
 mean [wealth] of investors
 0
@@ -666,10 +682,10 @@ mean [wealth] of investors
 11
 
 MONITOR
-857
-346
-943
-391
+980
+350
+1066
+395
 Sigma
 standard-deviation [wealth] of investors
 1
@@ -722,10 +738,10 @@ NIL
 HORIZONTAL
 
 PLOT
-729
-13
-929
-163
+852
+17
+1052
+167
 Prediction errors
 NIL
 Sum squared error
@@ -740,10 +756,10 @@ PENS
 "default" 1.0 0 -5825686 true "" "plot mean [sum-squares-error] of investors"
 
 PLOT
-730
-176
-987
-326
+853
+180
+1110
+330
 Wealth
 NIL
 NIL
@@ -761,10 +777,10 @@ PENS
 "pen-3" 1.0 0 -7500403 true "" "plot sum[potential-payoff] of pools"
 
 PLOT
-953
-14
-1176
-164
+1076
+18
+1299
+168
 Numbers in each pool
 NIL
 NIL
@@ -811,10 +827,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-741
-415
-798
-460
+864
+419
+921
+464
 Stable
 census POOL-STABLE
 0
@@ -822,10 +838,10 @@ census POOL-STABLE
 11
 
 MONITOR
-808
-414
-868
-459
+931
+418
+991
+463
 Low Risk
 census POOL-LOW
 0
@@ -833,10 +849,10 @@ census POOL-LOW
 11
 
 MONITOR
-877
-416
-940
-461
+1000
+420
+1063
+465
 High Risk
 census POOL-HIGH
 0
@@ -844,10 +860,10 @@ census POOL-HIGH
 11
 
 MONITOR
-808
-463
-868
-508
+931
+467
+991
+512
 Payout
 outgoings POOL-LOW
 2
@@ -855,10 +871,10 @@ outgoings POOL-LOW
 11
 
 MONITOR
-877
-465
-931
-510
+1000
+469
+1054
+514
 Payout
 outgoings POOL-HIGH
 2
@@ -866,10 +882,10 @@ outgoings POOL-HIGH
 11
 
 PLOT
-1017
-191
-1217
-341
+1140
+195
+1340
+345
 Return per step
 NIL
 NIL
@@ -923,15 +939,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-115
+105
 435
-230
+220
 468
 p-experiencers
 p-experiencers
 0
 1
-0.1
+0.15
 0.05
 1
 NIL
