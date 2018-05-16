@@ -61,7 +61,7 @@ to setup
     set my-choices (list pool-index)
     fd 15
     ifelse random-float 1.0 < p-experiencers[
-      set predictors (list [[func a b c d] -> experience-predictor func a b c d])
+      set predictors (list [[func a b c d] -> experience-predictor func a b c d [x -> simple-coarse-grainer x]])
     ][
       set predictors map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
       set shape "fish"
@@ -128,7 +128,7 @@ to go
     let revised-prediction predicted-returns;;(map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau))]] predicted-returns range 3)
     let recommended-return max revised-prediction
     let predicted-benefit recommended-return - item current-pool revised-prediction
- ;   output-print (list predicted-returns predicted-benefit)
+
     let recommended-pool 0
     ifelse randomize-step [
       let r random-float sum (revised-prediction)
@@ -138,15 +138,17 @@ to go
       if recommended-return = item 2 revised-prediction [set recommended-pool 2]
     ]
      ;; If pool different, consider whether to change (tau)
-    ifelse recommended-pool = item 0 my-choices [
+    ifelse recommended-pool = current-pool [
       set my-choices fput recommended-pool my-choices
     ][
-      if benefit-weight * predicted-benefit  > random-float tau and (can-borrow or wealth >= tau) [
+      ifelse benefit-weight * predicted-benefit  > random-float tau and (can-borrow or wealth >= tau) [
         set wealth wealth - tau
         set my-choices fput recommended-pool my-choices
         ask one-of my-out-links [die]
         create-link-with one-of pools with [pool-number = recommended-pool]
         colourize
+      ][
+        set my-choices fput current-pool my-choices
       ]
     ]
   ]
@@ -231,21 +233,32 @@ to-report generic-predictor  [function low-payoff high-payoff low-number high-nu
   report NOTHING
 end
 
-to-report get-matches [low-payoff  high-payoff]
+to-report simple-coarse-grainer [element]
+  report ifelse-value (element < 20) [0][1]
+end
+
+to-report get-matches [low-payoff  high-payoff coarse-grainer]
+  let target-low (runresult coarse-grainer item 0 low-payoff)
+  let target-high (runresult coarse-grainer item 0 high-payoff)
+  report filter [i -> i > 0 and
+    (runresult coarse-grainer item i low-payoff) = target-low and
+    (runresult coarse-grainer item i high-payoff) = target-high] range length low-payoff
   report []
 end
 
-to-report experience-predictor  [function low-payoff high-payoff low-number high-number]
+to-report experience-predictor  [function low-payoff high-payoff low-number high-number coarse-grainer]
 
   if function = INIT [  ]
 
   if function = PREDICT [
-    let indices get-matches  low-payoff  high-payoff
-    ifelse length indices > 0 [
-      let pays (list 0 0 0)
-      let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] range indices)
-      let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] range indices)
-      let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] range indices)
+    let indices get-matches  low-payoff  high-payoff coarse-grainer
+    output-print indices
+    output-print my-choices
+    ifelse length indices > 2 [
+      let rr range (length indices - 2)
+      let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] rr)
+      let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] rr)
+      let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] rr)
       report (map [v -> ifelse-value (v > 0) [v][epsilon]] (list payoff-stable payoff-low payoff-high))
     ][
       report (list RETURN-STABLE-POOL epsilon epsilon)
@@ -253,7 +266,7 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
 
   ]
 
-  if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d]) ] ;FIXME
+  if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d coarse-grainer]) ] ;FIXME
   if function = EVALUATE [report 0]
   report NOTHING
 end
