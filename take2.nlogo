@@ -161,7 +161,7 @@ to go
   ;; Select best predictors for next iteration
 
   ask investors [
-    if length predictors > 1[
+    if length predictors > 1[  ;;FIXME
       let indices range length predictors
       let scores-with-indices (map [[predictor index] -> (list (runresult predictor EVALUATE low-payoff high-payoff low-number high-number) index) ] predictors indices)
       let scores-sorted-with-indices sort-by [[l1 l2]-> item 0 l1 < item 0 l2] scores-with-indices  ;; sort by evaulation score
@@ -231,16 +231,26 @@ to-report generic-predictor  [function low-payoff high-payoff low-number high-nu
   report NOTHING
 end
 
+to-report get-matches [low-payoff  high-payoff]
+  report []
+end
+
 to-report experience-predictor  [function low-payoff high-payoff low-number high-number]
 
   if function = INIT [  ]
 
   if function = PREDICT [
-    report (list
-      RETURN-STABLE-POOL
-      1
-      1
-    )
+    let indices get-matches  low-payoff  high-payoff
+    ifelse length indices > 0 [
+      let pays (list 0 0 0)
+      let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] range indices)
+      let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] range indices)
+      let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] range indices)
+      report (map [v -> ifelse-value (v > 0) [v][epsilon]] (list payoff-stable payoff-low payoff-high))
+    ][
+      report (list RETURN-STABLE-POOL epsilon epsilon)
+    ]
+
   ]
 
   if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d]) ] ;FIXME
