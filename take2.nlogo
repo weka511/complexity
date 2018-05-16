@@ -53,30 +53,45 @@ to setup
     set total-payoff 0
   ]
 
-  create-ordered-investors n-investors [
-    set wealth 0
-    set my-payoffs []
-    let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
-    create-link-with one-of pools with [pool-number = pool-index]
-    set my-choices (list pool-index)
-
-    ifelse random-float 1.0 < p-experiencers[
-      set predictors (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
-      set shape "triangle"
-      fd 6
-    ][
-      set predictors map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
-      set shape "fish"
-      fd 12
-    ]
-
-
-    colourize
+  create-ordered-investors  n-investors - int (p-experiencers * n-investors) [
+    init-investor "fish" 12 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
   ]
+   create-ordered-investors int (p-experiencers * n-investors) [
+    init-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
+  ]
+;  create-ordered-investors n-investors [
+;    set wealth 0
+;    set my-payoffs []
+;    let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
+;    create-link-with one-of pools with [pool-number = pool-index]
+;    set my-choices (list pool-index)
+;
+;    ifelse random-float 1.0 < p-experiencers[
+;      set predictors (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
+;      set shape "fish 2"
+;      fd 6
+;    ][
+;      set predictors map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
+;      set shape "fish"
+;      fd 12
+;    ]
+;
+;    colourize
+;  ]
   reset-ticks
 end
 
-
+to init-investor [myshape myradius mypredictors]
+  set wealth 0
+  set my-payoffs []
+  let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
+  create-link-with one-of pools with [pool-number = pool-index]
+  set my-choices (list pool-index)
+  set shape myshape
+  fd myradius
+  set predictors mypredictors
+  colourize
+end
 
 to go
   if ticks > n-ticks [stop]
@@ -1091,6 +1106,12 @@ true
 0
 Polygon -7500403 true true 150 0 0 150 105 150 105 293 195 293 195 150 300 150
 
+bird side
+false
+0
+Polygon -7500403 true true 0 120 45 90 75 90 105 120 150 120 240 135 285 120 285 135 300 150 240 150 195 165 255 195 210 195 150 210 90 195 60 180 45 135
+Circle -16777216 true false 38 98 14
+
 box
 false
 0
@@ -1192,6 +1213,24 @@ Polygon -1 true false 135 195 119 235 95 218 76 210 46 204 60 165
 Polygon -1 true false 75 45 83 77 71 103 86 114 166 78 135 60
 Polygon -7500403 true true 30 136 151 77 226 81 280 119 292 146 292 160 287 170 270 195 195 210 151 212 30 166
 Circle -16777216 true false 215 106 30
+
+fish 2
+false
+0
+Polygon -1 true false 56 133 34 127 12 105 21 126 23 146 16 163 10 194 32 177 55 173
+Polygon -7500403 true true 156 229 118 242 67 248 37 248 51 222 49 168
+Polygon -7500403 true true 30 60 45 75 60 105 50 136 150 53 89 56
+Polygon -7500403 true true 50 132 146 52 241 72 268 119 291 147 271 156 291 164 264 208 211 239 148 231 48 177
+Circle -1 true false 237 116 30
+Circle -16777216 true false 241 127 12
+Polygon -1 true false 159 228 160 294 182 281 206 236
+Polygon -7500403 true true 102 189 109 203
+Polygon -1 true false 215 182 181 192 171 177 169 164 152 142 154 123 170 119 223 163
+Line -16777216 false 240 77 162 71
+Line -16777216 false 164 71 98 78
+Line -16777216 false 96 79 62 105
+Line -16777216 false 50 179 88 217
+Line -16777216 false 88 217 149 230
 
 flag
 false
