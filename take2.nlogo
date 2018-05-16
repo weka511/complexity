@@ -55,13 +55,19 @@ to setup
 
   create-ordered-investors n-investors [
     set wealth 0
-    set predictors map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
     set my-payoffs []
-    fd 15
-    set shape "fish"
     let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
     create-link-with one-of pools with [pool-number = pool-index]
     set my-choices (list pool-index)
+    fd 15
+    ifelse random-float 1.0 < p-experiencers[
+      set predictors (list [[func a b c d] -> experience-predictor func a b c d])
+    ][
+      set predictors map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
+      set shape "fish"
+    ]
+
+
     colourize
   ]
   reset-ticks
@@ -155,14 +161,16 @@ to go
   ;; Select best predictors for next iteration
 
   ask investors [
-    let indices range length predictors
-    let scores-with-indices (map [[predictor index] -> (list (runresult predictor EVALUATE low-payoff high-payoff low-number high-number) index) ] predictors indices)
-    let scores-sorted-with-indices sort-by [[l1 l2]-> item 0 l1 < item 0 l2] scores-with-indices  ;; sort by evaulation score
-    set sum-squares-error item 0 (item 0 scores-sorted-with-indices)
-    let indices-sorted-by-scores map [pair -> item 1 pair] scores-sorted-with-indices
-    let culled-indices sublist indices-sorted-by-scores 0 n-predictors
-    set predictors map [index -> item index predictors] culled-indices
-  ]
+    if length predictors > 1[
+      let indices range length predictors
+      let scores-with-indices (map [[predictor index] -> (list (runresult predictor EVALUATE low-payoff high-payoff low-number high-number) index) ] predictors indices)
+      let scores-sorted-with-indices sort-by [[l1 l2]-> item 0 l1 < item 0 l2] scores-with-indices  ;; sort by evaulation score
+      set sum-squares-error item 0 (item 0 scores-sorted-with-indices)
+      let indices-sorted-by-scores map [pair -> item 1 pair] scores-sorted-with-indices
+      let culled-indices sublist indices-sorted-by-scores 0 n-predictors
+      set predictors map [index -> item index predictors] culled-indices
+  ]]
+
   tick
 end
 
@@ -200,8 +208,48 @@ to-report linear-predict-count [counts coefficients]
   report int min (list n-investors abs inner-product)
 end
 
+;; This is a generic predictor - use as a model
+;; The function controls its behaviour
+;;        INIT      Initialize coefficients that make prediction
+;;        PREDICT   Predict return for all three pools
+;;        CLONE     Copy coefficients and mutate
+;;        EVALUATE  Evaluate performace of this set of coefficients
+to-report generic-predictor  [function low-payoff high-payoff low-number high-number coefficients]
+
+  if function = INIT [  ]
+
+  if function = PREDICT [
+    report (list
+      RETURN-STABLE-POOL
+      ;;...
+      ;;...
+    )
+  ]
+
+  if function = CLONE [   ]
+  if function = EVALUATE []
+  report NOTHING
+end
+
+to-report experience-predictor  [function low-payoff high-payoff low-number high-number]
+
+  if function = INIT [  ]
+
+  if function = PREDICT [
+    report (list
+      RETURN-STABLE-POOL
+      1
+      1
+    )
+  ]
+
+  if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d]) ] ;FIXME
+  if function = EVALUATE [report 0]
+  report NOTHING
+end
+
 ;; This is the linear predictor
-;; The function controls its behaiviour
+;; The function controls its behaviour
 ;;        INIT      Initialize coefficients that make prediction
 ;;        PREDICT   Predict return for all three pools
 ;;        CLONE     Copy coefficients and mutate
@@ -559,7 +607,7 @@ tau
 tau
 0
 20
-0.0
+5.0
 1
 1
 NIL
@@ -629,7 +677,7 @@ n-predictors
 n-predictors
 0
 25
-9.0
+6.0
 1
 1
 NIL
@@ -725,15 +773,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-28
-403
-150
-436
+5
+390
+125
+423
 sigma-mutation
 sigma-mutation
 0
 5
-0.1
+0.15
 0.05
 1
 NIL
@@ -821,7 +869,7 @@ SWITCH
 256
 randomize-step
 randomize-step
-1
+0
 1
 -1000
 
@@ -835,6 +883,36 @@ can-borrow
 0
 1
 -1000
+
+SLIDER
+2
+432
+97
+465
+epsilon
+epsilon
+0
+1
+0.5
+0.05
+1
+NIL
+HORIZONTAL
+
+SLIDER
+115
+435
+230
+468
+p-experiencers
+p-experiencers
+0
+1
+0.1
+0.05
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1324,6 +1402,72 @@ NetLogo 6.0.3
       <value value="3"/>
       <value value="6"/>
       <value value="9"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="many-agents" repetitions="12" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="100"/>
+    <metric>census POOL-STABLE</metric>
+    <metric>outgoings POOL-STABLE</metric>
+    <metric>census POOL-LOW</metric>
+    <metric>outgoings POOL-LOW</metric>
+    <metric>census POOL-HIGH</metric>
+    <metric>outgoings POOL-HIGH</metric>
+    <metric>mean [wealth] of investors</metric>
+    <metric>standard-deviation [wealth] of investors</metric>
+    <metric>mean [sum-squares-error] of investors</metric>
+    <enumeratedValueSet variable="max-payoff-high">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-ticks">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-low">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-history">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="benefit-weight">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-investors">
+      <value value="100"/>
+      <value value="200"/>
+      <value value="500"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-high">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-low">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-high">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sigma-mutation">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="randomize-step">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="6"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-payoff-low">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-coefficients">
+      <value value="6"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
