@@ -23,6 +23,7 @@ investors-own [
   sum-squares-error
 ]
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 to setup
   clear-all
@@ -54,34 +55,18 @@ to setup
   ]
 
   create-ordered-investors  n-investors - int (p-experiencers * n-investors) [
-    init-investor "fish" 12 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
+    initialize-investor "fish" 12 map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
   ]
-   create-ordered-investors int (p-experiencers * n-investors) [
-    init-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
+
+  create-ordered-investors int (p-experiencers * n-investors) [
+    initialize-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
   ]
-;  create-ordered-investors n-investors [
-;    set wealth 0
-;    set my-payoffs []
-;    let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
-;    create-link-with one-of pools with [pool-number = pool-index]
-;    set my-choices (list pool-index)
-;
-;    ifelse random-float 1.0 < p-experiencers[
-;      set predictors (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
-;      set shape "fish 2"
-;      fd 6
-;    ][
-;      set predictors map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
-;      set shape "fish"
-;      fd 12
-;    ]
-;
-;    colourize
-;  ]
+
   reset-ticks
 end
 
-to init-investor [myshape myradius mypredictors]
+;; Setup properties for one investor, andassign to a random pool
+to initialize-investor [myshape myradius mypredictors]
   set wealth 0
   set my-payoffs []
   let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
@@ -92,6 +77,8 @@ to init-investor [myshape myradius mypredictors]
   set predictors mypredictors
   colourize
 end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 to go
   if ticks > n-ticks [stop]
@@ -126,7 +113,7 @@ to go
   ;; Use links to find out how much current pool will pay each onvestor
   ask investors [
     let delta-wealth 0
-    ask one-of in-link-neighbors [set delta-wealth item 0 payoffs]
+    ask one-of in-link-neighbors [set delta-wealth first payoffs]
     set wealth wealth + delta-wealth
     set my-payoffs fput delta-wealth my-payoffs
   ]
@@ -141,8 +128,8 @@ to go
   ]
 
   ask investors [  ;; Select best pool
-    let predicted-returns (runresult (item 0 predictors) PREDICT low-payoff high-payoff low-number high-number)
-    let current-pool item 0 my-choices
+    let predicted-returns (runresult (first predictors) PREDICT low-payoff high-payoff low-number high-number)
+    let current-pool first my-choices
     let revised-prediction predicted-returns;;(map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau))]] predicted-returns range 3)
     let recommended-return max revised-prediction
     let predicted-benefit recommended-return - item current-pool revised-prediction
@@ -150,7 +137,7 @@ to go
     let recommended-pool 0
     ifelse randomize-step [
       let r random-float sum (revised-prediction)
-      if r > item 0 revised-prediction [set recommended-pool ifelse-value ( r < (item 1 revised-prediction) + (item 0 revised-prediction))[1][2]   ]
+      if r > first revised-prediction [set recommended-pool ifelse-value ( r < (item 1 revised-prediction) + (first revised-prediction))[1][2]   ]
     ][
       if recommended-return = item 1 revised-prediction [set recommended-pool 1]
       if recommended-return = item 2 revised-prediction [set recommended-pool 2]
@@ -159,7 +146,7 @@ to go
     ifelse recommended-pool = current-pool [
       set my-choices fput recommended-pool my-choices
     ][
-      ifelse benefit-weight * predicted-benefit  > random-float tau and (can-borrow or wealth >= tau) [
+      ifelse advice-is-credible predicted-benefit [
         set wealth wealth - tau
         set my-choices fput recommended-pool my-choices
         ask one-of my-out-links [die]
@@ -176,7 +163,7 @@ to go
 
   ask investors [
     let offspring map [predictor -> (runresult predictor CLONE low-payoff high-payoff low-number high-number)] predictors
-    if is-anonymous-reporter? item 0 offspring  [set predictors sentence predictors offspring]
+    if is-anonymous-reporter? first offspring  [set predictors sentence predictors offspring]
   ]
 
   ;; Select best predictors for next iteration
@@ -185,8 +172,8 @@ to go
     if length predictors > 1[  ;;FIXME
       let indices range length predictors
       let scores-with-indices (map [[predictor index] -> (list (runresult predictor EVALUATE low-payoff high-payoff low-number high-number) index) ] predictors indices)
-      let scores-sorted-with-indices sort-by [[l1 l2]-> item 0 l1 < item 0 l2] scores-with-indices  ;; sort by evaulation score
-      set sum-squares-error item 0 (item 0 scores-sorted-with-indices)
+      let scores-sorted-with-indices sort-by [[l1 l2]-> first l1 < first l2] scores-with-indices  ;; sort by evaulation score
+      set sum-squares-error first (first scores-sorted-with-indices)
       let indices-sorted-by-scores map [pair -> item 1 pair] scores-sorted-with-indices
       let culled-indices sublist indices-sorted-by-scores 0 n-predictors
       set predictors map [index -> item index predictors] culled-indices
@@ -198,6 +185,9 @@ to go
   tick
 end
 
+to-report advice-is-credible [predicted-benefit]
+  report benefit-weight * predicted-benefit  > random-float tau and (can-borrow or wealth >= tau)
+end
 
 ;; Assign colours to pools
 
@@ -263,8 +253,8 @@ end
 to-report get-matches [low-payoff  high-payoff low-number high-number coarse-grainer]
   let break-low break-even-attendance low-payoff  low-number
   let break-high break-even-attendance high-payoff  high-number
-  let target-low (runresult coarse-grainer item 0 low-payoff break-low)
-  let target-high (runresult coarse-grainer item 0 high-payoff break-high)
+  let target-low (runresult coarse-grainer first low-payoff break-low)
+  let target-high (runresult coarse-grainer first high-payoff break-high)
   report filter [i -> i > 0 and
     (runresult coarse-grainer item i low-payoff break-low) = target-low and
     (runresult coarse-grainer item i high-payoff break-high) = target-high] range length low-payoff
@@ -399,12 +389,12 @@ end
 ;; Count investors in pool
 to-report census [pool-no]
   let mypools pools with [pool-number = pool-no]
-  report  ifelse-value (ticks > 0) [sum [item 0  numbers] of mypools][0]
+  report  ifelse-value (ticks > 0) [sum [first  numbers] of mypools][0]
 end
 
 to-report outgoings [pool-no]
   let mypools pools with [pool-number = pool-no]
-  let non-zero-payoffs (map [[p n] -> ifelse-value (n > 0)[p][0]] (item 0 [payoffs] of mypools) (item 0 [numbers] of mypools) )
+  let non-zero-payoffs (map [[p n] -> ifelse-value (n > 0)[p][0]] (first [payoffs] of mypools) (first [numbers] of mypools) )
   report  ifelse-value (ticks > 0) [sum non-zero-payoffs / ticks][0];[sum payoffs] of mypools][0]
 end
 
