@@ -52,7 +52,7 @@ to setup
   create-ordered-investors int (p-experiencers * n-investors) [
     initialize-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]])
   ]
-  set output-file-name  "out.csv"
+
   reset-ticks
 end
 
@@ -440,16 +440,19 @@ to-report outgoings [pool-no]
 end
 
 to-report expand-investor [me my-wealth my-payoffs0 my-choices0 my-strategy-index]
-  output-print length my-choices0
-  output-print length my-payoffs0
-  report (map [[pay choice] -> (list me my-wealth pay choice my-strategy-index)] my-payoffs0 my-choices0 ) ;Fixme
+  report (map [[pay choice] -> (list me my-wealth pay choice my-strategy-index)] my-payoffs0 my-choices0 )
 end
 
 to output-investor-details
+  let i-wealth 1
+  let i-my-payoffs 2
+  let i-my-choices 3
+  let i-strategy-index 4
   let my-investors  [(list who wealth my-payoffs my-choices strategy-index)] of investors
-  let mapped (map [i -> expand-investor (item 0 i) (item 1 i) (item 2 i) (item 3 i) (item 4 i)] my-investors)
+  let mapped (map [i -> expand-investor first i (item i-wealth i) (item i-my-payoffs i) (item i-my-choices i) (item i-strategy-index i)] my-investors)
   let flattened (reduce sentence mapped)
-  csv:to-file output-file-name flattened
+  let data-with-headers fput (list "who" "wealth" "payoffs" "choices" "strategy") flattened
+  csv:to-file  user-new-file data-with-headers
 end
 
 
@@ -1062,17 +1065,6 @@ NIL
 NIL
 NIL
 0
-
-INPUTBOX
-30
-550
-247
-610
-output-file-name
-out.csv
-1
-0
-String
 
 @#$#@#$#@
 ## WHAT IS IT?
