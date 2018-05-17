@@ -93,7 +93,6 @@ end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 to go
-  if ticks > n-ticks [stop]
   ;; Historical data, which will be loaded from corresponding pools
   let low-payoff []
   let high-payoff []
@@ -148,7 +147,7 @@ to go
   ask investors [
     set size max (list 2 (5 * round wealth / max (list 1 max-wealth)))
   ]
-
+  if ticks > n-ticks [stop]
   ask investors [  ;; Select best pool
     let predicted-returns (runresult (first predictors) PREDICT low-payoff high-payoff low-number high-number)
     let current-pool first my-choices
@@ -443,7 +442,7 @@ end
 to-report expand-investor [me my-wealth my-payoffs0 my-choices0 my-strategy-index]
   output-print length my-choices0
   output-print length my-payoffs0
-  report (map [[pay choice] -> (list me my-wealth pay choice my-strategy-index)] my-payoffs0 sublist my-choices0 1 (length my-choices0) ) ;Fixme
+  report (map [[pay choice] -> (list me my-wealth pay choice my-strategy-index)] my-payoffs0 my-choices0 ) ;Fixme
 end
 
 to output-investor-details
