@@ -130,7 +130,7 @@ to go
   ask investors [  ;; Select best pool
     let predicted-returns (runresult (first predictors) PREDICT low-payoff high-payoff low-number high-number)
     let current-pool first my-choices
-    let revised-prediction predicted-returns;;(map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau))]] predicted-returns range 3)
+    let revised-prediction (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau-weight * tau))]] predicted-returns range 3)
     let recommended-return max revised-prediction
     let predicted-benefit recommended-return - item current-pool revised-prediction
 
@@ -146,7 +146,7 @@ to go
     ifelse recommended-pool = current-pool [
       set my-choices fput recommended-pool my-choices
     ][
-      ifelse advice-is-credible predicted-benefit [
+      ifelse advice-is-credible recommended-pool predicted-benefit [
         set wealth wealth - tau
         set my-choices fput recommended-pool my-choices
         ask one-of my-out-links [die]
@@ -179,14 +179,19 @@ to go
       set predictors map [index -> item index predictors] culled-indices
   ]]
 
-;   output-print (list low-payoff  low-number sub-total-payoff low-payoff  low-number break-even-attendance low-payoff  low-number)
-;   output-print (list high-payoff  high-number sub-total-payoff high-payoff  high-number break-even-attendance high-payoff  high-number)
-
   tick
 end
 
-to-report advice-is-credible [predicted-benefit]
-  report benefit-weight * predicted-benefit  > random-float tau and (can-borrow or wealth >= tau)
+to-report advice-is-credible [recommended-pool predicted-benefit]
+  if can-borrow or wealth >= tau [
+    ifelse length filter [choice -> choice = recommended-pool] my-choices > 0 [
+      let payoff-historical  reduce + (map [i -> ifelse-value (item i my-choices = recommended-pool)[item i  my-payoffs][0]] range length my-payoffs)
+      report random-float (payoff-historical + tau) < payoff-historical
+    ][
+      report random-float 1.0 < epsilon
+    ]
+  ]
+  report False
 end
 
 ;; Assign colours to pools
@@ -271,9 +276,9 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
       let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] range length indices)
       let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] range length indices)
       let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] range length indices)
-      report (map [v -> ifelse-value (v > 0) [v][epsilon]] (list payoff-stable payoff-low payoff-high))
+      report (map [v -> ifelse-value (v > 0) [v][epsilon2]] (list payoff-stable payoff-low payoff-high))
     ][
-      report (list RETURN-STABLE-POOL epsilon epsilon)
+      report (list RETURN-STABLE-POOL epsilon2 epsilon2)
     ]
 
   ]
@@ -635,7 +640,7 @@ n-ticks
 n-ticks
 0
 1000
-100.0
+1000.0
 5
 1
 NIL
@@ -650,7 +655,7 @@ tau
 tau
 0
 20
-5.0
+1.0
 1
 1
 NIL
@@ -805,12 +810,12 @@ SLIDER
 353
 212
 386
-benefit-weight
-benefit-weight
-0
-10
-1.0
-0.1
+tau-weight
+tau-weight
+0.05
+1
+0.5
+0.05
 1
 NIL
 HORIZONTAL
@@ -936,7 +941,7 @@ epsilon
 epsilon
 0
 1
-0.5
+0.55
 0.05
 1
 NIL
@@ -968,6 +973,21 @@ n-memory
 10
 1.0
 1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+110
+480
+202
+513
+epsilon2
+epsilon2
+0
+1
+0.5
+0.05
 1
 NIL
 HORIZONTAL
