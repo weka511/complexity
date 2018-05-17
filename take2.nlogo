@@ -1,71 +1,82 @@
+extensions [csv]
+
 breed [pools pool]
 
 breed [investors investor]
 
 
 pools-own [
-  pool-number
-  max-payoff
-  probability-payoff
+  pool-number            ;; Distinguish each pool from the others
+  max-payoff             ;; Amount to be distributed if there is any payout
+  probability-payoff     ;; Probability of payint out
   payoffs                ;; List of payoffs from pool
                          ;; sorted, latest first
   numbers                ;; List of number of investors in pool
                          ;; sorted, latest first
-  total-payoff
-  potential-payoff
+  total-payoff           ;; Total paid by this pool to date
+  potential-payoff       ;; Total that could have ben paid out.
+                         ;; For low and high pools, this is the
+                         ;; same as totol-payoff. For the stable pool
+                         ;; it is the payout assuming everyone is in
+                         ;; this pool. Caompare with total-payoff
+                         ;; to calculate the amout that has been foregone
+                         ;; by using risky pools
 ]
 
 investors-own [
-  wealth
-  predictors
-  my-payoffs
-  my-choices
-  sum-squares-error
+  wealth                 ;; Total payoff accumulated to date
+  predictors             ;; The predcits available for forcasting
+  my-payoffs             ;; List off payoffs received (not allowing for tau), in reverse chronological order
+  my-choices             ;; List of pools chosen to date, in reverse chronological order
+  sum-squares-error      ;; Error from predictors to date
+  strategy-index         ;; Indicates which strategy was used
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; When Setup button pressed, paint patched blue, and create the pools and investors
 
 to setup
   clear-all
   ask patches [set pcolor blue]
   let next-pool 0
   create-ordered-pools 3 [
-    fd 1
-    set shape "face neutral"
-    set pool-number next-pool
-    if pool-number = POOL-STABLE [
-      set color green
-      set max-payoff 1
-      set probability-payoff 1.0000001  ;; force payoff (probably not needed, but roundoff...)
-    ]
-    if pool-number = POOL-LOW [
-      set color yellow
-      set max-payoff max-payoff-low
-      set probability-payoff p-payoff-low
-    ]
-    if pool-number = POOL-HIGH [
-      set color red
-      set max-payoff max-payoff-high
-      set probability-payoff p-payoff-high
-    ]
-    set payoffs [] ;(map [-> random-normal (max-payoff * probability-payoff) 1 ] range n-history)
-    set numbers [] ;(map [-> random-normal ifelse-value(pool-number = 0)[60][20] 2] range n-history)
+    initialize-pool next-pool
     set next-pool next-pool + 1
-    set total-payoff 0
   ]
 
   create-ordered-investors  n-investors - int (p-experiencers * n-investors) [
-    initialize-investor "fish" 12 map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors
+    initialize-investor "fish" 12 (map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors)
   ]
 
   create-ordered-investors int (p-experiencers * n-investors) [
-    initialize-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer x y]])
+    initialize-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]])
   ]
-
+  set output-file-name  "out.csv"
   reset-ticks
 end
 
-;; Setup properties for one investor, andassign to a random pool
+;; Setup properties for one  pool
+to initialize-pool [next-pool]
+  fd 1
+  set shape "face neutral"
+  set pool-number next-pool
+  if pool-number = POOL-STABLE [set-pool-characteristics green 1 1]
+  if pool-number = POOL-LOW    [set-pool-characteristics yellow max-payoff-low p-payoff-low]
+  if pool-number = POOL-HIGH   [set-pool-characteristics red max-payoff-high p-payoff-high]
+  set payoffs []
+  set numbers []
+  set total-payoff 0
+end
+
+;; Setup those variables that ditinguish one pool from another
+to set-pool-characteristics [colour payoff p-payoff]
+  set color colour
+  set max-payoff max-payoff-high
+  set probability-payoff p-payoff-high
+end
+
+;; Setup properties for one investor, and assign to a random pool
 to initialize-investor [myshape myradius mypredictors]
   set wealth 0
   set my-payoffs []
@@ -75,6 +86,7 @@ to initialize-investor [myshape myradius mypredictors]
   set shape myshape
   fd myradius
   set predictors mypredictors
+  set strategy-index  (runresult (first predictors) ID [] [] [] [])
   colourize
 end
 
@@ -82,20 +94,26 @@ end
 
 to go
   if ticks > n-ticks [stop]
+  ;; Historical data, which will be loaded from corresponding pools
   let low-payoff []
   let high-payoff []
   let low-number []
   let high-number []
   let low-return 0
   let high-return 0
+
   ask pools [
-    let r random-float 1
-    let mypayoff ifelse-value (r < probability-payoff) [max-payoff][0]
-    set shape ifelse-value (r < probability-payoff) ["face happy"]["face sad"]
+    ;; Decide whther to pay
+    let selection random-float 1
+    let mypayoff ifelse-value (selection < probability-payoff) [max-payoff][0]
+    set shape ifelse-value (selection < probability-payoff) ["face happy"]["face sad"]
+
+    ;; Apportion payout between subscribers
     let n-members count link-neighbors
     if n-members > 0 and probability-payoff < 1 [set mypayoff mypayoff / n-members]
     set numbers fput n-members numbers
     set payoffs fput mypayoff payoffs
+
     if pool-number = POOL-LOW [
       set low-payoff  payoffs
       set low-number numbers
@@ -107,10 +125,14 @@ to go
       set high-return estimate-return payoffs numbers
     ]
     set total-payoff total-payoff + mypayoff * n-members
-    set potential-payoff ifelse-value(pool-number = POOL-STABLE) [potential-payoff + mypayoff * n-investors][total-payoff ]
+    set potential-payoff ifelse-value(pool-number = POOL-STABLE) [
+      potential-payoff + mypayoff * n-investors
+    ][
+      total-payoff
+    ]
   ]
 
-  ;; Use links to find out how much current pool will pay each onvestor
+  ;; Use links to find out how much current pool will pay each investor
   ask investors [
     let delta-wealth 0
     ask one-of in-link-neighbors [set delta-wealth first payoffs]
@@ -182,13 +204,16 @@ to go
   tick
 end
 
+;; Decide whether to accept advice to change pool
 to-report advice-is-credible [recommended-pool predicted-benefit]
-  if can-borrow or wealth >= tau [
-    ifelse length filter [choice -> choice = recommended-pool] my-choices > 0 [
-      let payoff-historical  reduce + (map [i -> ifelse-value (item i my-choices = recommended-pool)[item i  my-payoffs][0]] range length my-payoffs)
-      report random-float (payoff-historical + tau) < payoff-historical
+  if can-borrow or wealth >= tau [ ;; If we don't have enough wealth to change, or we can't borrow, then the decision is already made for us
+    let length-history length filter [choice -> choice = recommended-pool] my-choices
+    ifelse length-history > 0 [ ;; do we have any history of trying this choice?
+      ;; Calculate average payoff
+      let payoff-historical  (reduce + (map [i -> ifelse-value (item i my-choices = recommended-pool)[item i  my-payoffs][0]] range length my-payoffs)) / (length-history)
+      report random-float (payoff-historical + tau-weight * tau) < payoff-historical
     ][
-      report random-float 1.0 < epsilon
+      report random-float 1.0 < epsilon  ;; no history, so try with probability epsilon
     ]
   ]
   report False
@@ -236,6 +261,8 @@ end
 ;;        EVALUATE  Evaluate performace of this set of coefficients
 to-report generic-predictor  [function low-payoff high-payoff low-number high-number coefficients]
 
+  if function = ID []
+
   if function = INIT [  ]
 
   if function = PREDICT [
@@ -251,8 +278,14 @@ to-report generic-predictor  [function low-payoff high-payoff low-number high-nu
   report NOTHING
 end
 
-to-report simple-coarse-grainer [element break-even-point]
+to-report simple-coarse-grainer2 [element break-even-point]
   report ifelse-value (element < break-even-point) [0][1]
+end
+
+to-report simple-coarse-grainer3 [element break-even-point]
+  report ifelse-value (element < break-even-point / 1.2)
+  [0][
+   ifelse-value (element < break-even-point * 1.2) [1][2]]
 end
 
 to-report get-matches [low-payoff  high-payoff low-number high-number coarse-grainer]
@@ -268,6 +301,8 @@ end
 
 to-report experience-predictor  [function low-payoff high-payoff low-number high-number coarse-grainer]
 
+  if function = ID [report 0]
+
   if function = INIT [  ]
 
   if function = PREDICT [
@@ -276,9 +311,9 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
       let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] range length indices)
       let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] range length indices)
       let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] range length indices)
-      report (map [v -> ifelse-value (v > 0) [v][epsilon2]] (list payoff-stable payoff-low payoff-high))
+      report (map [v -> ifelse-value (v > 0) [v][epsilon-steady]] (list payoff-stable payoff-low payoff-high))
     ][
-      report (list RETURN-STABLE-POOL epsilon2 epsilon2)
+      report (list RETURN-STABLE-POOL epsilon-steady epsilon-steady)
     ]
 
   ]
@@ -296,6 +331,8 @@ end
 ;;        EVALUATE  Evaluate performace of this set of coefficients
 
 to-report linear-predictor [function low-payoff high-payoff low-number high-number coefficients]
+
+  if function = ID [report 1]
 
   if function = INIT [ ;; Initialize coefficients that make prediction
     let my-coefficients map [r -> -1 + 2 * random-float 1] range (1 + random n-coefficients)
@@ -403,14 +440,32 @@ to-report outgoings [pool-no]
   report  ifelse-value (ticks > 0) [sum non-zero-payoffs / ticks][0];[sum payoffs] of mypools][0]
 end
 
+to-report expand-investor [me my-wealth my-payoffs0 my-choices0 my-strategy-index]
+  output-print length my-choices0
+  output-print length my-payoffs0
+  report (map [[pay choice] -> (list me my-wealth pay choice my-strategy-index)] my-payoffs0 sublist my-choices0 1 (length my-choices0) ) ;Fixme
+end
+
+to output-investor-details
+  let my-investors  [(list who wealth my-payoffs my-choices strategy-index)] of investors
+  let mapped (map [i -> expand-investor (item 0 i) (item 1 i) (item 2 i) (item 3 i) (item 4 i)] my-investors)
+  let flattened (reduce sentence mapped)
+  csv:to-file output-file-name flattened
+end
+
+
 ;; Used to indicate that a reporter has failed to compute a meaningful value
 to-report NOTHING
   report -1
 end
 
+to-report ID
+  report 0
+end
+
 ;; Used to initialize a predictor
 to-report INIT
-  report  0
+  report  ID + 1
 end
 
 ;; Used by a predictor to predict a count
@@ -536,7 +591,7 @@ p-payoff-low
 0
 1
 0.5
-0.01
+0.05
 1
 NIL
 HORIZONTAL
@@ -551,7 +606,7 @@ p-payoff-high
 0
 1
 0.25
-0.01
+0.05
 1
 NIL
 HORIZONTAL
@@ -626,7 +681,7 @@ n-investors
 0
 200
 100.0
-1
+10
 1
 NIL
 HORIZONTAL
@@ -640,7 +695,7 @@ n-ticks
 n-ticks
 0
 1000
-1000.0
+100.0
 5
 1
 NIL
@@ -655,7 +710,7 @@ tau
 tau
 0
 20
-1.0
+5.0
 1
 1
 NIL
@@ -732,10 +787,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-4
-353
-96
-386
+0
+345
+92
+378
 n-history
 n-history
 0
@@ -806,15 +861,15 @@ PENS
 "High Risk" 1.0 0 -2674135 true "" "plot census POOL-HIGH"
 
 SLIDER
-100
-353
-212
-386
+96
+345
+208
+378
 tau-weight
 tau-weight
 0.05
-1
-0.5
+2
+0.95
 0.05
 1
 NIL
@@ -822,14 +877,14 @@ HORIZONTAL
 
 SLIDER
 5
-390
+380
 125
-423
+413
 sigma-mutation
 sigma-mutation
 0
 5
-0.15
+0.1
 0.05
 1
 NIL
@@ -933,30 +988,30 @@ can-borrow
 -1000
 
 SLIDER
-2
-432
-97
-465
+0
+420
+95
+453
 epsilon
 epsilon
 0
 1
-0.55
+0.35
 0.05
 1
 NIL
 HORIZONTAL
 
 SLIDER
-105
-435
-220
-468
+103
+423
+218
+456
 p-experiencers
 p-experiencers
 0
 1
-0.15
+0.2
 0.05
 1
 NIL
@@ -964,9 +1019,9 @@ HORIZONTAL
 
 SLIDER
 5
-480
+460
 97
-513
+493
 n-memory
 n-memory
 1
@@ -979,18 +1034,46 @@ HORIZONTAL
 
 SLIDER
 110
-480
-202
-513
-epsilon2
-epsilon2
+460
+225
+493
+epsilon-steady
+epsilon-steady
 0
-1
-0.5
+2
+2.0
 0.05
 1
 NIL
 HORIZONTAL
+
+BUTTON
+60
+500
+180
+533
+Output Details
+output-investor-details
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+0
+
+INPUTBOX
+30
+550
+247
+610
+output-file-name
+out.csv
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1564,6 +1647,71 @@ NetLogo 6.0.3
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-predictors">
       <value value="6"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-payoff-low">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-coefficients">
+      <value value="6"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="experiment" repetitions="1" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>all-investors</metric>
+    <enumeratedValueSet variable="max-payoff-high">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-ticks">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-low">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-experiencers">
+      <value value="0.15"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-history">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau-weight">
+      <value value="0.65"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="epsilon2">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-investors">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-high">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-low">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-memory">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-high">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sigma-mutation">
+      <value value="0.15"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="randomize-step">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="6"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="epsilon">
+      <value value="0.2"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="max-payoff-low">
       <value value="40"/>
