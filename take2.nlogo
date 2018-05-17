@@ -440,7 +440,7 @@ to-report outgoings [pool-no]
 end
 
 to-report expand-investor [me my-wealth my-payoffs0 my-choices0 my-strategy-index]
-  report (map [[pay choice] -> (list me my-wealth pay choice my-strategy-index)] my-payoffs0 my-choices0 )
+  report (map [i -> (list i me my-wealth item i my-payoffs0 item i my-choices0 my-strategy-index)] range length my-choices0 )
 end
 
 to output-investor-details
@@ -451,7 +451,7 @@ to output-investor-details
   let my-investors  [(list who wealth my-payoffs my-choices strategy-index)] of investors
   let mapped (map [i -> expand-investor first i (item i-wealth i) (item i-my-payoffs i) (item i-my-choices i) (item i-strategy-index i)] my-investors)
   let flattened (reduce sentence mapped)
-  let data-with-headers fput (list "who" "wealth" "payoffs" "choices" "strategy") flattened
+  let data-with-headers fput (list "step" "who" "wealth" "payoffs" "choices" "strategy") flattened
   csv:to-file  user-new-file data-with-headers
 end
 

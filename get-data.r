@@ -141,3 +141,41 @@ plot.outgoings<-function(netlogo.data,can_borrow=TRUE,randomize_step=TRUE,tau=0,
   points(err$X_step_,err$outgoings_POOL_LOW,pch=1,col="yellow")
   points(err$X_step_,err$outgoings_POOL_STABLE,pch=20,col="green")    
 }
+
+accumulate.wealth<-function(payoffs,choices,tau=1) {
+  my.wealth<-0
+  change.count<- -1
+  last.choice<- -1
+  calculate.wealth<-function(pay){
+    assign('my.wealth', my.wealth+pay, inherits=TRUE)
+    return (my.wealth)
+  }
+  count.changes<-function(choice){
+    if (choice!=last.choice){
+      assign('change.count',change.count+1,inherits = TRUE)
+      assign('last.choice',choice,inherits = TRUE)
+    }
+    return (change.count)
+  }
+  receipts <- sapply(payoffs,calculate.wealth)
+  costs <- sapply(choices,count.changes)
+
+  return ( receipts - tau * costs)
+}
+
+plot.individuals<-function(my.details,n=3){
+  wealths<-subset(my.details,step==max(my.details$step),select=c('wealth','who'))
+  wealths<-wealths[order(wealths$wealth),]
+  N=length(wealths$wealth)
+  n2 <- floor(N/2-n/2)
+  exemplars<-wealths[c(1:n,n2:(n2+n-1),(N-n+1):N),]
+  new.plot<-FALSE
+  for (who in exemplars$who) {
+    plot.data<-my.details[my.details$who==who,]
+    w<-accumulate.wealth(plot.data$payoffs,plot.data$choices)
+    plot.data["extra"]<-w
+    if (new.plot) par(new=TRUE)
+    plot(plot.data$step,plot.data$extra)
+    new.plot<-TRUE
+  }
+}
