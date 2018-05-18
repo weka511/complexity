@@ -6,12 +6,15 @@ output:
   pdf_document:
     fig_caption: yes
     number_sections: true
-fontsize: 12pt
+    keep_tex: true
 bibliography: 201804.bib
 csl: ieee-with-url.csl
 
 ---
-
+\fontfamily{cmr}
+\fontsize{12}{22}
+\fontseries{b}
+\selectfont
 
 ```{r setup, include=FALSE,echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -110,7 +113,8 @@ plot.errors(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_individual}Growth of wealth",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/even more details.csv')
-plot.individuals(my.individual.details)
+plot.individuals(my.individual.details,my.strategy=1,n=5)
+plot.individuals(my.individual.details,my.strategy=0,n=5)
 
 ```
 

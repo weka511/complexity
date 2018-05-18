@@ -22,6 +22,8 @@
 
 rm(list=ls())
 
+library(plyr)
+
 # Extract data from a Netlogo BehaviourSpace experiment
 read.nlogo.experiment<-function(path.name="C:/Users/Weka/201804/Experiments",file.name="take2 experiment-table.csv"){
     my.df <-
@@ -159,26 +161,23 @@ accumulate.wealth<-function(payoffs,choices,tau=1) {
   }
   receipts <- sapply(payoffs,calculate.wealth)
   costs <- sapply(choices,count.changes)
-
   return ( receipts - tau * costs)
 }
 
-plot.individuals<-function(my.details,n=3){
-  wealths<-subset(my.details,step==max(my.details$step),select=c('wealth','who'))
+plot.individuals<-function(my.details,n=3,my.strategy=0){
+  wealths<-subset(my.details,step==max(my.details$step) & strategy==my.strategy,select=c('wealth','who','strategy'))
   wealths<-wealths[order(wealths$wealth),]
   N=length(wealths$wealth)
   n2 <- floor(3*N/4-n/2)
   exemplars<-wealths[c(1:n,n2:(n2+n-1),(N-n+1):N),]
-  i<-1
-  colors=c(rep('blue',n),rep('green',n),rep('red',n))
+  max.wealth <- round_any(max(wealths$wealth),10,f=ceiling)
+  plot(0:100,0:100, xlab = "Step",ylab = "Wealth",type='n',
+       xlim=c(0,max(my.details$step)),ylim=c(0,max.wealth),
+       main=sprintf('Growth of wealth for strategy=%d',my.strategy))
+  colours=c('blue','red')
   for (who in exemplars$who) {
     plot.data<-my.details[my.details$who==who,]
     plot.data$extra<-accumulate.wealth(plot.data$payoffs,plot.data$choices)
-    if (i>1) {
-      par(new=TRUE)
-      plot(plot.data$step,plot.data$extra, xlab = "Step",ylab = "Wealth",pch=16,ylim = c(0,150),col=colors[i])
-    } else 
-      plot(plot.data$step,plot.data$extra, xlab = "",ylab = "",pch=16,ylim = c(0,150),col=colors[i])
-    i <- i + 1
+    lines(plot.data$step,plot.data$extra,type='l',col=colours[my.strategy+1])
   }
 }
