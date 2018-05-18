@@ -167,21 +167,18 @@ plot.individuals<-function(my.details,n=3){
   wealths<-subset(my.details,step==max(my.details$step),select=c('wealth','who'))
   wealths<-wealths[order(wealths$wealth),]
   N=length(wealths$wealth)
-  n2 <- floor(N/2-n/2)
+  n2 <- floor(3*N/4-n/2)
   exemplars<-wealths[c(1:n,n2:(n2+n-1),(N-n+1):N),]
-  print (exemplars)
-  new.plot<-FALSE
   i<-1
+  colors=c(rep('blue',n),rep('green',n),rep('red',n))
   for (who in exemplars$who) {
     plot.data<-my.details[my.details$who==who,]
-    w<-accumulate.wealth(plot.data$payoffs,plot.data$choices)
-    colors = c('blue','blue','blue','green','green','green','red','red','red')
-    if (new.plot) {
+    plot.data$extra<-accumulate.wealth(plot.data$payoffs,plot.data$choices)
+    if (i>1) {
       par(new=TRUE)
       plot(plot.data$step,plot.data$extra, xlab = "Step",ylab = "Wealth",pch=16,ylim = c(0,150),col=colors[i])
     } else 
       plot(plot.data$step,plot.data$extra, xlab = "",ylab = "",pch=16,ylim = c(0,150),col=colors[i])
-    new.plot<-TRUE
     i <- i + 1
   }
 }

@@ -6,7 +6,7 @@ output:
   pdf_document:
     fig_caption: yes
     number_sections: true
-
+fontsize: 12pt
 bibliography: 201804.bib
 csl: ieee-with-url.csl
 
@@ -107,6 +107,11 @@ plot.errors(netlogo.data,tau=1,n_coefficients = 6)
 plot.errors(netlogo.data,tau=1,n_predictors  = 6)
 plot.errors(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.errors(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
+```
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual}Growth of wealth",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/even more details.csv')
+plot.individuals(my.individual.details)
+
 ```
 
 ##Diversity
