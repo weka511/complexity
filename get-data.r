@@ -164,20 +164,24 @@ accumulate.wealth<-function(payoffs,choices,tau=1) {
   return ( receipts - tau * costs)
 }
 
-plot.individuals<-function(my.details,n=3,my.strategy=0){
-  wealths<-subset(my.details,step==max(my.details$step) & strategy==my.strategy,select=c('wealth','who','strategy'))
+plot.individuals<-function(my.details,n=3,my.strategy=0,col=c('blue','black','red')){
+  wealths<-subset(my.details,
+                  step==max(my.details$step) & strategy==my.strategy,select=c('wealth','who','strategy'))
   wealths<-wealths[order(wealths$wealth),]
   N=length(wealths$wealth)
-  n2 <- floor(3*N/4-n/2)
+  n2 <- floor(N/2-n/2)
   exemplars<-wealths[c(1:n,n2:(n2+n-1),(N-n+1):N),]
   max.wealth <- round_any(max(wealths$wealth),10,f=ceiling)
+  tau <- my.details$tau[1]
   plot(0:100,0:100, xlab = "Step",ylab = "Wealth",type='n',
        xlim=c(0,max(my.details$step)),ylim=c(0,max.wealth),
-       main=sprintf('Growth of wealth for strategy=%d',my.strategy))
-  colours=c('blue','red')
+       main=sprintf('Growth of wealth for strategy=%d, tau=%d',my.strategy,tau))
+  colours=c( rep(col[1],n), rep(col[2],n), rep(col[3],n) )
   for (who in exemplars$who) {
     plot.data<-my.details[my.details$who==who,]
     plot.data$extra<-accumulate.wealth(plot.data$payoffs,plot.data$choices)
-    lines(plot.data$step,plot.data$extra,type='l',col=colours[my.strategy+1])
+    lines(plot.data$step,plot.data$extra,type='l',col=colours[1])
+    colours<-colours[2:length(colours)]
   }
+  legend('topleft',c("Best","Median","Worst"),col=col,lty=1)
 }
