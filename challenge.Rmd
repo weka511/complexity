@@ -41,8 +41,6 @@ I developed a model, _testbed.nlogo_, using Netlogo, [@Wilensky:1999]. I followe
 
 ![Investors are linked to Pools: a happy face represents a pool that has paid out, colours represent risk in a natural way (traffic lights), and the size of each fish correlates to the wealth of an investor.\label{fig:ui}](View.jpg){ width=50%, height=50% }
 
-
-
 The model was executed by the BehaviourSpace tool of Netlogo, which performed `r n.repetitions` repetitions, varying the parameters listed in Table \ref{table:configs}. I used R to analyze the data, and an RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. 
 
 ```{r echo=FALSE,results='asis'}
@@ -203,7 +201,7 @@ plot(aa5$X_step_,aa5$mean__sum_squares_error__of_investors,type="l",col="slategr
 
 #Acknowledgements
 
-Thanks are due to the SFI staff and mentors, and to my fellow students for discussions and recommended reading.
+I wish to thank the SFI staff and mentors, and my fellow students for friendly and helpful discussions and recommended reading.
 
 #References
  
