@@ -169,13 +169,19 @@ plot.individuals<-function(my.details,n=3){
   N=length(wealths$wealth)
   n2 <- floor(N/2-n/2)
   exemplars<-wealths[c(1:n,n2:(n2+n-1),(N-n+1):N),]
+  print (exemplars)
   new.plot<-FALSE
+  i<-1
   for (who in exemplars$who) {
     plot.data<-my.details[my.details$who==who,]
     w<-accumulate.wealth(plot.data$payoffs,plot.data$choices)
-    plot.data["extra"]<-w
-    if (new.plot) par(new=TRUE)
-    plot(plot.data$step,plot.data$extra)
+    colors = c('blue','blue','blue','green','green','green','red','red','red')
+    if (new.plot) {
+      par(new=TRUE)
+      plot(plot.data$step,plot.data$extra, xlab = "Step",ylab = "Wealth",pch=16,ylim = c(0,150),col=colors[i])
+    } else 
+      plot(plot.data$step,plot.data$extra, xlab = "",ylab = "",pch=16,ylim = c(0,150),col=colors[i])
     new.plot<-TRUE
+    i <- i + 1
   }
 }
