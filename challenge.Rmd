@@ -13,7 +13,7 @@ geometry: margin=3cm
 ---
 \fontfamily{cmr}
 \fontsize{12}{22}
-\fontseries{b}
+\fontseries{m}
 \selectfont
 
 ```{r setup, include=FALSE,echo=FALSE}
@@ -29,37 +29,27 @@ The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behavio
 
 # Background
 
-Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer people attended. Arthur noted that there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance. A simple machine learning method replaces poorly performing strategies with ones that have proven more accurate on recent data. Subsequently David Fogel applied evolutionaty computing to the problem
-[@fogel1999inductive].
+Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer people attended. Arthur noted that there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance; poorly performing strategies are replaced by ones that have proven more accurate on recent data. Subsequently David Fogel applied evolutionaty computing to the problem
+[@fogel1999inductive]; linear autoregressive strategies were bred, mutated, and the weakest culled, so that new strategies could be inferred.
 
-The El Farol problem can be generalized to the Minority game [@challet1997emergence], where players choose to belong to one of two sets; those who choose to belong to the smaller set are rewarded.
+The El Farol problem can be generalized to the Minority game [@challet1997emergence], where players choose to belong to one of two sets; those who choose to belong to the smaller set are rewarded. The  Challenge is clearly related to minority games, since the rewards from the High and Low pools are worthwhile only if the number of "subscribers" is low enough.
 
 # Methods
 
 
 I developed a model, _testbed.nlogo_, using Netlogo, [@Wilensky:1999]. Initially I followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent kept track of the performance of the strategies in its bag, and replaced them if they are not doing well. The limitation of this  approach is that no new strategies can arise. Subsequently I adopted the approach of Fogel [@fogel1999inductive], using a genetic algorithm that breeds autoregressive models. My model represents Investors and Pools as Breeds of Turtles. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}.
 
-The model was executed by the BehaviourSpace tool of Netlogo, which performed `r n.repetitions` repetitions, varying the parameters listed in Table \ref{table:configs}. I used R to analyze the data, and an RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. 
-
-```{r echo=FALSE,results='asis'}
-library(knitr)
-kable(get.netlogo.params(netlogo.data),
-      col.names=c("Name","Range"),
-      caption="\\label{table:configs}Parameters varied by BehaviourSpace")
-
-```
+The model was executed by the BehaviourSpace tool of Netlogo, which performed `r n.repetitions` repetitions. I used R to analyze the data, and an RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. 
 
 #Results
 
+##General Behaviour
 
-
-##Behaviours
-
-
-What general behaviors arise in this system?  How does the wealth of the agents change over time? At the aggregate level? At the individual level?
+_What general behaviors arise in this system?  How does the wealth of the agents change over time? At the aggregate level? At the individual level?_
 
 Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth of wealth, over a range of values for $\tau$, and for the number of coefficients in predictors, and the number of predictors in the pool. Figures \ref{fig:plot_outgoings0} and \ref{fig:plot_outgoings1} show the return per investor in each pool: notice that they tend to stablize with returns that are roughly comparable. Figures \ref{fig:plot_sq0} and \ref{fig:plot_sq1} show the squared error of the best predictor in each pool. Each figure is plotted using data from `r n.repetitions` separate runs of the model.
 
+Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show the growth of wealth for a few of the richest individuals, a few of the poorest, and a few in the middle. Since it seems reasonable to expect a strategy to do better than random assignment, assuming it is any good, Figure \ref{fig:plot_individual_random} show the results of random decisions for comparison.
 
 
 ##Diversity
@@ -97,7 +87,6 @@ I wish to thank the SFI staff and mentors, and my fellow students for friendly a
 knitr::include_graphics('view.jpg')
 
 ```
-
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Wealth with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.wealth(netlogo.data,tau=0)
@@ -147,7 +136,7 @@ plot.errors(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.errors(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual01}Growth of wealth",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual01}Growth of wealth for $\\tau \\in \\{0,1\\}$. Results are shown for a few of the richest individuals (judged at the end of the simulation), a few of the poorest, and a few in the middle.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau0.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
@@ -156,7 +145,7 @@ plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth for $\\tau \\in \\{2,5\\}$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau2.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
