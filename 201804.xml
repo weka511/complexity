@@ -2,7 +2,7 @@
     <Project name="Model">
         <File name="predictors.csv" />
         <File name="sheep-wall-street.nlogo" />
-        <File name="take2.nlogo" />
+        <File name="challenge.nlogo" />
     </Project>
     <Project name="Outputs">
         <File name="out.csv" />
