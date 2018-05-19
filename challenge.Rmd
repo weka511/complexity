@@ -25,19 +25,19 @@ netlogo.data<-read.nlogo.experiment(file.name='take2 experiment-table-new.csv')
 ```
 
 # Introduction
-The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behaviour of investors choosing between three pools, one providing a stable income stream, and two others offering potentially higher, but risky returns. Since each investor has access to historical data --- their own choices and payoffs, and aggregate data for each pool --- the Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32]. At the start of this investigation, I expected that simulation would support the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
+The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behaviour of investors choosing between three pools, one providing a stable income stream, and two others offering riskier, but potentially higher, returns. Since each investor has access to historical data --- their own choices and payoffs, and aggregate data for each pool --- the Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32]. At the start of this investigation, I expected that simulation would support the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
 
 # Background
 
-Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer people attended. Arthur discovered there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance. A simple machine learning method replaces poorly performing strategies with ones that have proven more accurate on recent data.
+Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer people attended. Arthur noted that there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance. A simple machine learning method replaces poorly performing strategies with ones that have proven more accurate on recent data. Subsequently David Fogel applied evolutionaty computing to the problem
+[@fogel1999inductive].
 
-
-The El Farol problem can be generalized to the Minority game [@challet1997emergence].
+The El Farol problem can be generalized to the Minority game [@challet1997emergence], where players choose to belong to one of two sets; those who choose to belong to the smaller set are rewarded.
 
 # Methods
 
 
-I developed a model, _testbed.nlogo_, using Netlogo, [@Wilensky:1999]. I followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent kept track of the performance of the strategies in its bag, and replaced them if they are not doing well. The limitation of this  approach is that no new stratigies can arise. Subsequently I adopted the approach of Fogel [@fogel1999inductive], using a genetic algorithm that breeds autoregressive models. My model represents Investors and Pools as Breeds of Turtles. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}.
+I developed a model, _testbed.nlogo_, using Netlogo, [@Wilensky:1999]. Initially I followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent kept track of the performance of the strategies in its bag, and replaced them if they are not doing well. The limitation of this  approach is that no new strategies can arise. Subsequently I adopted the approach of Fogel [@fogel1999inductive], using a genetic algorithm that breeds autoregressive models. My model represents Investors and Pools as Breeds of Turtles. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}.
 
 ![Investors are linked to Pools: a happy face represents a pool that has paid out, colours represent risk in a natural way (traffic lights), and the size of each fish correlates to the wealth of an investor.\label{fig:ui}](View.jpg){ width=50%, height=50% }
 
@@ -61,6 +61,40 @@ kable(get.netlogo.params(netlogo.data),
 What general behaviors arise in this system?  How does the wealth of the agents change over time? At the aggregate level? At the individual level?
 
 Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth of wealth, over a range of values for $\tau$, and for the number of coefficients in predictors, and the number of predictors in the pool. Figures \ref{fig:plot_outgoings0} and \ref{fig:plot_outgoings1} show the return per investor in each pool: notice that they tend to stablize with returns that are roughly comparable. Figures \ref{fig:plot_sq0} and \ref{fig:plot_sq1} show the squared error of the best predictor in each pool. Each figure is plotted using data from `r n.repetitions` separate runs of the model.
+
+
+
+##Diversity
+
+How does the diversity of strategies influence the dynamics of the system?
+
+##Behaviours
+
+Are there generally classes of agent behavior (say, based on what data they use, how they process it, or the agent's overall sophistication) that lead to better performance?
+
+##Violate Assumptions
+
+What happens to the system if you violate one of the original assumptions of the problem and allow the agents to alter their strategies over time by observing the performance and strategic details of the other agents?
+
+##Meta-Agents
+
+Suppose that meta-agents exist that can coordinate the behaviors of a subset of the agents (and split the resulting payoffs equally across the subset)---how does this impact the system's behavior?
+
+##Changes
+
+### Variation of $\tau$
+
+Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically total wealth increases with $\tau$. Figure \ref{fig:tau_error} shows that the transients in the total error are damped when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discourages agents from jumping from pool to pool.
+
+
+###   you change the total number of agents in the world?
+
+#Discussion
+
+#Acknowledgements
+
+I wish to thank the SFI staff and mentors, and my fellow students for friendly and helpful discussions and recommended reading.
+
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Wealth with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.wealth(netlogo.data,tau=0)
@@ -128,27 +162,12 @@ plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
 ```
 
-##Diversity
-
-How does the diversity of strategies influence the dynamics of the system?
-
-##Behaviours
-
-Are there generally classes of agent behavior (say, based on what data they use, how they process it, or the agent's overall sophistication) that lead to better performance?
-
-##Violate Assumptions
-
-What happens to the system if you violate one of the original assumptions of the problem and allow the agents to alter their strategies over time by observing the performance and strategic details of the other agents?
-
-##Meta-Agents
-
-Suppose that meta-agents exist that can coordinate the behaviors of a subset of the agents (and split the resulting payoffs equally across the subset)---how does this impact the system's behavior?
-
-##Changes
-
-### Variation of $\tau$
-
-Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically total wealth increases with $\tau$. Figure \ref{fig:tau_error} shows that the transients in the total error are damped when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discourages agents from jumping from pool to pool.
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_random}Growth of wealth for random assignments",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/random-tau0.csv')
+plot.individuals(my.individual.details,my.strategy=1,n=5)
+my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/random-tau1.csv')
+plot.individuals(my.individual.details,my.strategy=1,n=5)
+```
 
 ```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:tau_wealth}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 endrun.data<-get.tau()
@@ -206,14 +225,6 @@ plot(aa5$X_step_,aa5$mean__sum_squares_error__of_investors,type="l",col="slategr
 
 
 ```
-
-###   you change the total number of agents in the world?
-
-#Discussion
-
-#Acknowledgements
-
-I wish to thank the SFI staff and mentors, and my fellow students for friendly and helpful discussions and recommended reading.
 
 #References
  

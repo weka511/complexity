@@ -45,11 +45,13 @@ to setup
     set next-pool next-pool + 1
   ]
 
-  create-ordered-investors  n-investors - int (p-experiencers * n-investors) [
+  let n-experiencers int (p-experiencers * n-investors)
+
+  create-ordered-investors  n-investors - n-experiencers [
     initialize-investor "fish" 12 (map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors)
   ]
 
-  create-ordered-investors int (p-experiencers * n-investors) [
+  create-ordered-investors  n-experiencers [
     initialize-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]])
   ]
 
@@ -149,32 +151,46 @@ to go
   ]
   if ticks > n-ticks [stop]
   ask investors [  ;; Select best pool
-    let predicted-returns (runresult (first predictors) PREDICT low-payoff high-payoff low-number high-number)
-    let current-pool first my-choices
-    let revised-prediction (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau-weight * tau))]] predicted-returns range 3)
-    let recommended-return max revised-prediction
-    let predicted-benefit recommended-return - item current-pool revised-prediction
-
-    let recommended-pool 0
-    ifelse randomize-step [
-      let r random-float sum (revised-prediction)
-      if r > first revised-prediction [set recommended-pool ifelse-value ( r < (item 1 revised-prediction) + (first revised-prediction))[1][2]   ]
-    ][
-      if recommended-return = item 1 revised-prediction [set recommended-pool 1]
-      if recommended-return = item 2 revised-prediction [set recommended-pool 2]
-    ]
-     ;; If pool different, consider whether to change (tau)
-    ifelse recommended-pool = current-pool [
-      set my-choices fput recommended-pool my-choices
-    ][
-      ifelse advice-is-credible recommended-pool predicted-benefit [
+    ifelse g-random-jump [
+      let recommended-pool (1 + random-tower (list p-start-low p-start-high)) mod 3
+      let current-pool first my-choices
+      ifelse recommended-pool = current-pool [
+        set my-choices fput recommended-pool my-choices
+      ][
         set wealth wealth - tau
         set my-choices fput recommended-pool my-choices
         ask one-of my-out-links [die]
         create-link-with one-of pools with [pool-number = recommended-pool]
         colourize
+      ]
+    ][
+      let predicted-returns (runresult (first predictors) PREDICT low-payoff high-payoff low-number high-number)
+      let current-pool first my-choices
+      let revised-prediction (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau-weight * tau))]] predicted-returns range 3)
+      let recommended-return max revised-prediction
+      let predicted-benefit recommended-return - item current-pool revised-prediction
+
+      let recommended-pool 0
+      ifelse randomize-step [
+        let r random-float sum (revised-prediction)
+        if r > first revised-prediction [set recommended-pool ifelse-value ( r < (item 1 revised-prediction) + (first revised-prediction))[1][2]   ]
       ][
-        set my-choices fput current-pool my-choices
+        if recommended-return = item 1 revised-prediction [set recommended-pool 1]
+        if recommended-return = item 2 revised-prediction [set recommended-pool 2]
+      ]
+      ;; If pool different, consider whether to change (tau)
+      ifelse recommended-pool = current-pool [
+        set my-choices fput recommended-pool my-choices
+      ][
+        ifelse advice-is-credible recommended-pool predicted-benefit [
+          set wealth wealth - tau
+          set my-choices fput recommended-pool my-choices
+          ask one-of my-out-links [die]
+          create-link-with one-of pools with [pool-number = recommended-pool]
+          colourize
+        ][
+          set my-choices fput current-pool my-choices
+        ]
       ]
     ]
 
@@ -567,10 +583,10 @@ NIL
 0
 
 BUTTON
-174
-266
-237
-299
+175
+260
+238
+293
 Step
 go
 NIL
@@ -584,25 +600,25 @@ NIL
 0
 
 SLIDER
-5
-10
+3
+9
 119
-43
+42
 p-payoff-low
 p-payoff-low
 0
 1
-0.5
+0.45
 0.05
 1
 NIL
 HORIZONTAL
 
 SLIDER
-125
-12
-238
-45
+130
+9
+243
+42
 p-payoff-high
 p-payoff-high
 0
@@ -615,9 +631,9 @@ HORIZONTAL
 
 SLIDER
 3
-53
+49
 117
-86
+82
 max-payoff-low
 max-payoff-low
 0
@@ -629,10 +645,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-121
-52
+130
+49
 240
-85
+82
 max-payoff-high
 max-payoff-high
 0
@@ -644,40 +660,40 @@ NIL
 HORIZONTAL
 
 SLIDER
-5
-97
+3
+89
 103
+122
+p-start-low
+p-start-low
+0
+1
+0.2
+.05
+1
+NIL
+HORIZONTAL
+
+SLIDER
 130
-p-start-low
-p-start-low
-0
-1
-0.1
-.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-124
-95
+89
 229
-128
+122
 p-start-high
 p-start-high
 0
 1
-0.1
-0.01
+0.2
+0.05
 1
 NIL
 HORIZONTAL
 
 SLIDER
-6
-141
+3
+129
 98
-174
+162
 n-investors
 n-investors
 0
@@ -689,10 +705,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-121
-140
-219
-173
+130
+129
+222
+162
 n-ticks
 n-ticks
 0
@@ -704,10 +720,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-7
-187
+3
+169
 99
-220
+202
 tau
 tau
 0
@@ -759,7 +775,7 @@ standard-deviation [wealth] of investors
 11
 
 SLIDER
-6
+3
 302
 107
 335
@@ -774,9 +790,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-125
+130
 305
-217
+222
 338
 n-predictors
 n-predictors
@@ -789,9 +805,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-0
+3
 345
-92
+95
 378
 n-history
 n-history
@@ -863,10 +879,10 @@ PENS
 "High Risk" 1.0 0 -2674135 true "" "plot census POOL-HIGH"
 
 SLIDER
-96
-345
-208
-378
+5
+250
+110
+283
 tau-weight
 tau-weight
 0.05
@@ -878,7 +894,7 @@ NIL
 HORIZONTAL
 
 SLIDER
-5
+3
 380
 125
 413
@@ -968,10 +984,10 @@ PENS
 "High" 1.0 0 -2674135 true "" "plot outgoings POOL-HIGH"
 
 SWITCH
-7
-223
-148
-256
+110
+340
+255
+373
 randomize-step
 randomize-step
 0
@@ -979,10 +995,10 @@ randomize-step
 -1000
 
 SWITCH
-8
-264
+3
+209
 127
-297
+242
 can-borrow
 can-borrow
 0
@@ -990,7 +1006,7 @@ can-borrow
 -1000
 
 SLIDER
-0
+3
 420
 95
 453
@@ -1005,9 +1021,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-103
+130
 423
-218
+245
 456
 p-experiencers
 p-experiencers
@@ -1020,7 +1036,7 @@ NIL
 HORIZONTAL
 
 SLIDER
-5
+3
 460
 97
 493
@@ -1035,9 +1051,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-110
+130
 460
-225
+255
 493
 epsilon-steady
 epsilon-steady
@@ -1065,6 +1081,17 @@ NIL
 NIL
 NIL
 0
+
+SWITCH
+130
+380
+250
+413
+g-random-jump
+g-random-jump
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
