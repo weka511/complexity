@@ -9,7 +9,7 @@ output:
     keep_tex: true
 bibliography: 201804.bib
 csl: ieee-with-url.csl
-
+geometry: margin=3cm
 ---
 \fontfamily{cmr}
 \fontsize{12}{22}
@@ -38,8 +38,6 @@ The El Farol problem can be generalized to the Minority game [@challet1997emerge
 
 
 I developed a model, _testbed.nlogo_, using Netlogo, [@Wilensky:1999]. Initially I followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include stay in pool, jump at random, and estimate length to select pool offering the best likely return. Each agent kept track of the performance of the strategies in its bag, and replaced them if they are not doing well. The limitation of this  approach is that no new strategies can arise. Subsequently I adopted the approach of Fogel [@fogel1999inductive], using a genetic algorithm that breeds autoregressive models. My model represents Investors and Pools as Breeds of Turtles. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}.
-
-![Investors are linked to Pools: a happy face represents a pool that has paid out, colours represent risk in a natural way (traffic lights), and the size of each fish correlates to the wealth of an investor.\label{fig:ui}](View.jpg){ width=50%, height=50% }
 
 The model was executed by the BehaviourSpace tool of Netlogo, which performed `r n.repetitions` repetitions, varying the parameters listed in Table \ref{table:configs}. I used R to analyze the data, and an RMarkdown script to present the results, following the excellent advice of Rosanna van Hespen[@vanhespen2016thesis]. 
 
@@ -94,6 +92,11 @@ Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically to
 #Acknowledgements
 
 I wish to thank the SFI staff and mentors, and my fellow students for friendly and helpful discussions and recommended reading.
+
+```{r echo=FALSE,fig.cap="Investors are linked to Pools: a happy face represents a pool that has paid out, colours represent risk in a natural way (traffic lights), and the size of each fish correlates to the wealth of an investor.\\label{fig:ui}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+knitr::include_graphics('view.jpg')
+
+```
 
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Wealth with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
