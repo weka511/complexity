@@ -109,7 +109,6 @@ ENV/
 # Netlogo stuff
 .*.tmp.nlogo
 out.csv
-Experiments/
 
 # R stuff
 .RData
