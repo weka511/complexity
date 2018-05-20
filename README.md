@@ -10,20 +10,17 @@
 | Name | Purpose |
 |--------------------|--------------------------------------------------------------------------|
 | 201804.bib | Bibtex input to documentation |
-| 201804.xml | Workspace for Notepad++ | 
+| 201804.xml | Workspace for Notepad++ |
+| challenge.nlogo | New model using links for assignment to pool |
 | challenge.Rmd | Writeup for submission to SFI |
 | get-data.r | Script to initialize data for challenge.Rmd |
-|~~ieee.csl~~| ~~Required by challenge.Rmd to build bibliography~~ |
 | ieee-with-url |Required by challenge.Rmd to build bibliography |
 | Proposal.pdf | Agent Based Modelling Proposal |
 | Proposal.tex | Agent Based Modelling Proposal |
 | README.md | This File |
 | sheep-wall-street.nlogo | Original Testbed for evaluating alternative strategies |
-| take2.nlogo | New model using links for assignment to pool |
 | strategies.csv | Parameters for strategies |
 | View.jpg | Image for Infor tab of take2.nlogo |
-| ~~Writeup.pdf~~ | ~~Writeup for submission to SFI (obsolete)~~ |
-| ~~Writeup.tex~~ | ~~Writeup for submission to SFI (obsolete)~~|
 
 ## Journal
 
