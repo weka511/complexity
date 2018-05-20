@@ -74,6 +74,8 @@ What happens to the system if you violate one of the original assumptions of the
 
 _Suppose that meta-agents exist that can coordinate the behaviors of a subset of the agents (and split the resulting payoffs equally across the subset)---how does this impact the system's behavior?_
 
+I implemeneted a _cartel_, where a group of agents attemp to monopolize one pool for their own benefit. Figure \ref{fig:ui-cartel} uses wolves to depict members of the cartel.
+
 ##Changes
 
 ### Variation of $\tau$
@@ -93,6 +95,8 @@ I wish to thank the SFI staff and mentors, and my fellow students for friendly a
 knitr::include_graphics('view.jpg')
 
 ```
+
+
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Wealth with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.wealth(netlogo.data,tau=0)
@@ -166,6 +170,13 @@ plot.individuals(my.individual.details,my.strategy=1,n=5)
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/random-tau1.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 ```
+
+
+```{r echo=FALSE,fig.cap="Wolves represent members of the Cartel. It appears that cartel members are able to intimidate agents who use the first learning algorithm, but not the second.\\label{fig:ui-cartel}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+knitr::include_graphics('Cartel.jpg')
+```
+
+
 
 ```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:tau_wealth}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 endrun.data<-get.tau(file.name='take2 experiment-table-new.csv')

@@ -49,12 +49,16 @@ to setup
 
   let n-experiencers int (p-experiencers * n-investors)
 
-  create-ordered-investors  n-investors - n-experiencers [
+  create-ordered-investors  n-investors - n-experiencers - n-cartel [
     initialize-investor "fish" 12 (map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors)
   ]
 
   create-ordered-investors  n-experiencers [
     initialize-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]])
+  ]
+
+  create-ordered-investors n-cartel[
+    initialize-investor "wolf" 18 (list [[func a b c d] -> cartel-predictor func a b c d ])
   ]
 
   set n-complete-runs 0
@@ -298,6 +302,21 @@ to-report generic-predictor  [function low-payoff high-payoff low-number high-nu
 
   if function = CLONE [   ]
   if function = EVALUATE []
+  report NOTHING
+end
+
+to-report cartel-predictor  [function low-payoff high-payoff low-number high-number]
+
+  if function = ID [report 2]
+
+  if function = INIT [  ]
+
+  if function = PREDICT [
+    report (list 0 0 100 )
+  ]
+
+  if function = CLONE [  report (list [[func a b c d] -> cartel-predictor func a b c d ]) ] ;FIXME
+  if function = EVALUATE [report 0]
   report NOTHING
 end
 
@@ -626,7 +645,7 @@ p-payoff-low
 p-payoff-low
 0
 1
-0.45
+0.5
 0.05
 1
 NIL
@@ -686,7 +705,7 @@ p-start-low
 p-start-low
 0
 1
-0.2
+0.1
 .05
 1
 NIL
@@ -701,7 +720,7 @@ p-start-high
 p-start-high
 0
 1
-0.2
+0.1
 0.05
 1
 NIL
@@ -746,7 +765,7 @@ tau
 tau
 0
 20
-1.0
+0.0
 1
 1
 NIL
@@ -801,7 +820,7 @@ n-coefficients
 n-coefficients
 1
 25
-6.0
+9.0
 1
 1
 NIL
@@ -816,7 +835,7 @@ n-predictors
 n-predictors
 0
 25
-6.0
+9.0
 1
 1
 NIL
@@ -1008,7 +1027,7 @@ SWITCH
 373
 randomize-step
 randomize-step
-0
+1
 1
 -1000
 
@@ -1032,7 +1051,7 @@ epsilon
 epsilon
 0
 1
-0.35
+0.1
 0.05
 1
 NIL
@@ -1107,7 +1126,7 @@ SWITCH
 413
 g-random-jump
 g-random-jump
-0
+1
 1
 -1000
 
@@ -1127,6 +1146,21 @@ NIL
 NIL
 NIL
 0
+
+SLIDER
+20
+510
+112
+543
+n-cartel
+n-cartel
+0
+25
+10.0
+5
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1571,7 +1605,7 @@ NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="experiment" repetitions="12" runMetricsEveryStep="true">
+  <experiment name="experiment" repetitions="25" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <timeLimit steps="100"/>
@@ -1595,9 +1629,6 @@ NetLogo 6.0.3
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-history">
       <value value="10"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="benefit-weight">
-      <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-investors">
       <value value="100"/>
