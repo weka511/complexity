@@ -4,6 +4,7 @@ breed [pools pool]
 
 breed [investors investor]
 
+globals [n-complete-runs]
 
 pools-own [
   pool-number            ;; Distinguish each pool from the others
@@ -30,6 +31,7 @@ investors-own [
   my-choices             ;; List of pools chosen to date, in reverse chronological order
   sum-squares-error      ;; Error from predictors to date
   strategy-index         ;; Indicates which strategy was used
+  wealth-history         ;; Used to comapre wealth with previous iterations
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,6 +57,7 @@ to setup
     initialize-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]])
   ]
 
+  set n-complete-runs 0
   reset-ticks
 end
 
@@ -89,11 +92,22 @@ to initialize-investor [myshape myradius mypredictors]
   fd myradius
   set predictors mypredictors
   set strategy-index  (runresult (first predictors) ID [] [] [] [])
+  set wealth-history []
   colourize
 end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+to reset
+  set n-complete-runs n-complete-runs + 1
+  ask investors [
+    set wealth-history fput wealth wealth-history
+    set wealth 0
+    resize
+  ]
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 to go
   ;; Historical data, which will be loaded from corresponding pools
   let low-payoff []
@@ -141,15 +155,9 @@ to go
     set my-payoffs fput delta-wealth my-payoffs
   ]
 
-  ;; Scale wealth for display
+  ask investors [resize]
 
-  let richest investors with-max [wealth]
-  let max-wealth 0
-  ask one-of richest [set max-wealth wealth]
-  ask investors [
-    set size max (list 2 (5 * round wealth / max (list 1 max-wealth)))
-  ]
-  if ticks > n-ticks [stop]
+  if ticks > (n-complete-runs + 1) * n-ticks [stop]
   ask investors [  ;; Select best pool
     ifelse g-random-jump [
       let recommended-pool (1 + random-tower (list p-start-low p-start-high)) mod 3
@@ -471,6 +479,16 @@ to output-investor-details
   csv:to-file  user-new-file data-with-headers
 end
 
+;; resize
+;;
+;; Scale wealth for display
+;;
+to resize
+  let richest investors with-max [wealth]
+  let max-wealth 0
+  ask one-of richest [set max-wealth wealth]
+  set size max (list 2 (5 * round wealth / max (list 1 max-wealth)))
+end
 
 ;; Used to indicate that a reporter has failed to compute a meaningful value
 to-report NOTHING
@@ -522,9 +540,9 @@ end
 ;; Copyright (c) 2018 Simon Crase - see info tab for details of licence
 @#$#@#$#@
 GRAPHICS-WINDOW
-260
+280
 10
-809
+829
 560
 -1
 -1
@@ -549,10 +567,10 @@ ticks
 30.0
 
 BUTTON
+210
 175
-184
-239
-217
+274
+208
 Setup
 setup
 NIL
@@ -566,10 +584,10 @@ NIL
 1
 
 BUTTON
-176
-220
-239
-253
+211
+211
+274
+244
 Go
 go
 T
@@ -583,10 +601,10 @@ NIL
 0
 
 BUTTON
-175
-260
-238
-293
+210
+251
+273
+284
 Step
 go
 NIL
@@ -1066,10 +1084,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-60
-500
-180
-533
+120
+255
+205
+288
 Output Details
 output-investor-details
 NIL
@@ -1092,6 +1110,23 @@ g-random-jump
 0
 1
 -1000
+
+BUTTON
+140
+175
+202
+208
+Reset
+reset
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
