@@ -765,7 +765,7 @@ tau
 tau
 0
 20
-0.0
+1.0
 1
 1
 NIL
@@ -893,7 +893,7 @@ PENS
 "wealth" 1.0 0 -11221820 true "" "plot sum [wealth] of investors"
 "payout" 1.0 0 -5825686 true "" "plot sum[total-payoff] of pools"
 "Switching" 1.0 0 -955883 true "" "plot (sum[total-payoff] of pools - sum [wealth] of investors )"
-"pen-3" 1.0 0 -7500403 true "" "plot sum[potential-payoff] of pools"
+"Theoretical" 1.0 0 -7500403 true "" "plot sum[potential-payoff] of pools"
 
 PLOT
 1076
@@ -1156,7 +1156,7 @@ n-cartel
 n-cartel
 0
 25
-10.0
+20.0
 5
 1
 NIL
@@ -1825,6 +1825,84 @@ NetLogo 6.0.3
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-coefficients">
       <value value="6"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="cartel" repetitions="5" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>outgoings POOL-HIGH</metric>
+    <enumeratedValueSet variable="max-payoff-high">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-ticks">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-low">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-experiencers">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-history">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="g-random-jump">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau-weight">
+      <value value="0.95"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-investors">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-cartel">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="2"/>
+      <value value="5"/>
+      <value value="10"/>
+      <value value="50"/>
+      <value value="20"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-high">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-memory">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-low">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sigma-mutation">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-high">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="randomize-step">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="0"/>
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="9"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="epsilon">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-payoff-low">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="epsilon-steady">
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-coefficients">
+      <value value="9"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>

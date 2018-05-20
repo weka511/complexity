@@ -105,6 +105,7 @@ ENV/
 *.bbl
 *.blg
 *.synctex.gz
+challenge.pdf
 
 # Netlogo stuff
 .*.tmp.nlogo

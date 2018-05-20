@@ -24,25 +24,29 @@ rm(list=ls())
 
 library(plyr)
 
+fix.column.names<-function(my.df){
+  i <- 1
+  for (name in colnames(my.df)) {
+    new_name <- gsub("\\.", "_", name)
+    names(my.df)[i] <- new_name
+    i = i + 1
+  }
+  return (my.df)
+}
+
 # Extract data from a Netlogo BehaviourSpace experiment
-read.nlogo.experiment<-function(path.name="C:/Users/Weka/201804/Experiments",file.name="take2 experiment-table.csv"){
-    my.df <-
+read.nlogo.experiment <-
+  function(path.name = "C:/Users/Weka/201804/Experiments",
+           file.name = "take2 experiment-table.csv") {
+    return (fix.column.names(
       read.table(
-        file.path(path.name,file.name),
+        file.path(path.name, file.name),
         header = T,
         sep = ",",
         skip = 6,
         quote = "\"",
         fill = TRUE
-      )
-    i <- 1
-    for (name in colnames(my.df)) {
-      new_name <- gsub("\\.", "_", name)
-      names(my.df)[i] <- new_name
-      i = i + 1
-    }
-    return (my.df)
-  }
+      ))) }
   
 get.tau <-
   function (path.name="C:/Users/Weka/201804/Experiments",file.name="take2 experiment-table.csv") {
@@ -185,3 +189,11 @@ plot.individuals<-function(my.details,n=3,my.strategy=0,col=c('blue','black','re
   }
   legend('topleft',c("Best","Median","Worst"),col=col,lty=1)
 }
+
+read.cartel <- function(path.name = "C:/Users/Weka/201804/Experiments", file.name = 'challenge-cartel-table.csv') {
+  return (fix.column.names( read.nlogo.experiment(path.name,file.name)))
+}
+
+cartel.data<- read.cartel()
+ 
+ 

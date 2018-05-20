@@ -43,7 +43,7 @@ I developed two Netlogo[@Wilensky:1999] models, _sheep-wall-stret.nlogo_ and _ch
   * _Challenge.nlogo_ uses the approach of Fogel [@fogel1999inductive]---a genetic algorithm that breeds autoregressive models. It represents Investors and Pools as separate Breeds of Agents. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}. There are three types of agents:
     1. the outer circle of fish in  Figure \ref{fig:ui} represent autoregressive agents, who use the  number and payoff historical data for both pools;
     1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs);
-    1. the wolves unlawfully form a cartel. They share information and try to manipulate the numbers in one pool to maximise thier profit. They are discussed in Section \ref{heading:violate-sssumptions}. 
+    1. in Figure \ref{fig:ui-cartel}, the sharks unlawfully form a cartel. They share information and try to manipulate the numbers in one pool to maximise their profit. They are discussed in Section \ref{heading:violate-sssumptions}. 
 
 _Challenge.nlogo_ was executed by the BehaviourSpace tool of Netlogo, which performed `r n.repetitions` repetitions. The model can also dump data for each step, e.g. for Figure \ref{fig:plot_individual01}. I used `r R.Version()$version.string` [@rcore2018r] to analyze the data, and an RMarkdown[@allaire2018rmarkdown] script to present the results, as suggested by Rosanna van Hespen[@vanhespen2016thesis]. 
 
@@ -68,13 +68,11 @@ _Are there generally classes of agent behavior (say, based on what data they use
 
 ##Violate Assumptions\label{heading:violate-sssumptions}
 
-What happens to the system if you violate one of the original assumptions of the problem and allow the agents to alter their strategies over time by observing the performance and strategic details of the other agents?
+_What happens to the system if you violate one of the original assumptions of the problem and allow the agents to alter their strategies over time by observing the performance and strategic details of the other agents?_
 
 ##Meta-Agents
 
-_Suppose that meta-agents exist that can coordinate the behaviors of a subset of the agents (and split the resulting payoffs equally across the subset)---how does this impact the system's behavior?_
-
-I implemeneted a _cartel_, where a group of agents attemp to monopolize one pool for their own benefit. Figure \ref{fig:ui-cartel} uses wolves to depict members of the cartel.
+I implemented a _cartel_, where some agents agree to monopolize one pool for their own benefit---see Figure \ref{fig:ui-cartel}. The cartel artificially increases the number of agents in one pool, to lead other agents to infer that the pool was crowded, and hence unattractive. It does not make sense for the cartel to jump from one pool to another, since they rould have to pay $\tau$, and wait for the second pool to clear out. While a very small cartel has little chance of influencing other agents, a large cartel reduces the payout per member; a cartel of 20 would do no better than someone who stayed in the stable pool. 
 
 ##Changes
 

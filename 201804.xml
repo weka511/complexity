@@ -6,7 +6,6 @@
     </Project>
     <Project name="Outputs">
         <File name="out.csv" />
-        <File name="Experiments\take2 experiment-table.csv" />
         <File name="Experiments\details-tau0.csv" />
         <File name="Experiments\details-tau1.csv" />
         <File name="Experiments\details-tau2.csv" />
@@ -14,6 +13,7 @@
         <File name="Experiments\random-tau0.csv" />
         <File name="Experiments\random-tau1.csv" />
         <File name="Experiments\take2 experiment-table-new.csv" />
+        <File name="Experiments\challenge-cartel-table.csv" />
     </Project>
     <Project name="Documentation">
         <File name="Proposal.tex" />
