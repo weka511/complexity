@@ -58,7 +58,7 @@ to setup
   ]
 
   create-ordered-investors n-cartel[
-    initialize-investor "wolf" 18 (list [[func a b c d] -> cartel-predictor func a b c d ])
+    initialize-investor "shark" 18 (list [[func a b c d] -> cartel-predictor func a b c d ])
   ]
 
   set n-complete-runs 0
@@ -1066,7 +1066,7 @@ p-experiencers
 p-experiencers
 0
 1
-0.2
+0.1
 0.05
 1
 NIL
@@ -1182,6 +1182,9 @@ Normal usage is to set the sliders and switches to suitable values, then press _
     * **Setup**    Initialize
     * **Step**     Single step for debugging
     * **Go**       Execute model
+    * **Reset**    Used instead of **Setup** to rerun model with wealth set back to zero. Allows a rerun to determine whether agents have learned from thir previous life.
+    * **Output Details** Dump data from each agent in each step for analysis
+
 
  * **Sliders**
 
@@ -1194,15 +1197,22 @@ Normal usage is to set the sliders and switches to suitable values, then press _
     * **max-payoff-low** Maximum payoff for low risk pool, to be divided among investors
     * **max-payoff-high** Maximum payoff for high risk pool, to be divided among investors
     * **tau** The cost of switching pools
+    * **tau-weight**
     * **n-coefficients** _Maximum_ number of coefficients used by linear predictors (actual numbers chosen at random).
     * **n-predictors** Number of linear predictors
     * **n-history** Number of periods to be used when evaluating predictors
     * **benefit-weight** Amount of weight we give to estimated benefit when comparing with tau
     * **sigma-mutation** Standard deviation when we mutate coefficients
+    * **epsilon**
+    * **p-experiencers**
+    * **n-memory**
+    * **epsilon-steady**
+    * **n-cartel** Create a cartel who try to manipulate other agents into deserting the High Risk pool. 
 
  * **Switches**
     * **randomize step** Controls whether model always follows recommendation, or selects a pool at random, with probability determined by estimated benefit.
     * **can-borrow**  Allow wealth to become negative if we need to pay tau to switch
+    * **g-random-jump**
 
  * **Plots**
     * **Spread**
@@ -1486,6 +1496,19 @@ Polygon -7500403 true true 165 180 165 210 225 180 255 120 210 135
 Polygon -7500403 true true 135 105 90 60 45 45 75 105 135 135
 Polygon -7500403 true true 165 105 165 135 225 105 255 45 210 60
 Polygon -7500403 true true 135 90 120 45 150 15 180 45 165 90
+
+shark
+false
+0
+Polygon -7500403 true true 283 153 288 149 271 146 301 145 300 138 247 119 190 107 104 117 54 133 39 134 10 99 9 112 19 142 9 175 10 185 40 158 69 154 64 164 80 161 86 156 132 160 209 164
+Polygon -7500403 true true 199 161 152 166 137 164 169 154
+Polygon -7500403 true true 188 108 172 83 160 74 156 76 159 97 153 112
+Circle -16777216 true false 256 129 12
+Line -16777216 false 222 134 222 150
+Line -16777216 false 217 134 217 150
+Line -16777216 false 212 134 212 150
+Polygon -7500403 true true 78 125 62 118 63 130
+Polygon -7500403 true true 121 157 105 161 101 156 106 152
 
 sheep
 false

@@ -172,7 +172,7 @@ plot.individuals(my.individual.details,my.strategy=1,n=5)
 ```
 
 
-```{r echo=FALSE,fig.cap="Wolves represent members of the Cartel. It appears that cartel members are able to intimidate agents who use the first learning algorithm, but not the second.\\label{fig:ui-cartel}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="Sharks represent members of the Cartel. It appears that cartel members are able to intimidate agents who use the first learning algorithm, but not the second.\\label{fig:ui-cartel}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 knitr::include_graphics('Cartel.jpg')
 ```
 
