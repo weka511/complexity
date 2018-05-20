@@ -168,7 +168,7 @@ plot.individuals(my.individual.details,my.strategy=1,n=5)
 ```
 
 ```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:tau_wealth}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
-endrun.data<-get.tau()
+endrun.data<-get.tau(file.name='take2 experiment-table-new.csv')
 
 tau.agg11 <- extract.wealth.vs.tau(endrun.data,can_borrow=TRUE,randomize_step=TRUE)
 plot(tau.agg11$tau,tau.agg11$mean__wealth__of_investors,type="l",col="blue",lty=1,
@@ -204,7 +204,7 @@ plot(tau.agg22$tau,tau.agg22$standard_deviation__wealth__of_investors,type="l",c
 
 
 ```{r plot_errors, echo=FALSE,fig.cap="\\label{fig:tau_error}Variation of Error with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
-dd<-read.nlogo.experiment()
+dd<-read.nlogo.experiment(file.name='take2 experiment-table-new.csv')
 zz0<-extract.errors.vs.tau(dd)
 aa0<-aggregate(zz0,by=list(zz0$X_step_),FUN=mean,na.rm=TRUE)
 zz1<-extract.errors.vs.tau(dd,tau=1)
