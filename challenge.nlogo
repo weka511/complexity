@@ -4,12 +4,10 @@ breed [pools pool]
 
 breed [investors investor]
 
-globals [n-complete-runs]
-
 pools-own [
   pool-number            ;; Distinguish each pool from the others
   max-payoff             ;; Amount to be distributed if there is any payout
-  probability-payoff     ;; Probability of payint out
+  probability-payoff     ;; Probability of this pool paying out
   payoffs                ;; List of payoffs from pool
                          ;; sorted, latest first
   numbers                ;; List of number of investors in pool
@@ -47,20 +45,20 @@ to setup
   ]
 
   let n-experiencers int (p-experiencers * n-investors)
-
+  let radius-inner-circle ifelse-value (n-cartel = 0) [9][6]
+  let radius-outer-circle ifelse-value (n-cartel = 0) [18][12]
   create-ordered-investors  n-investors - n-experiencers - n-cartel [
-    initialize-investor "fish" 12 (map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors)
+    initialize-investor "fish" radius-outer-circle (map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors)
   ]
 
   create-ordered-investors  n-experiencers [
-    initialize-investor "fish 2" 6 (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]])
+    initialize-investor "fish 2" radius-inner-circle (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]])
   ]
 
   create-ordered-investors n-cartel[
-    initialize-investor "shark" 18 (list [[func a b c d] -> cartel-predictor func a b c d ])
+    initialize-investor "shark" 20 (list [[func a b c d] -> cartel-predictor func a b c d ])
   ]
 
-  set n-complete-runs 0
   reset-ticks
 end
 
@@ -150,7 +148,8 @@ to go
 
   ask investors [resize]
 
-  if ticks > (n-complete-runs + 1) * n-ticks [stop]
+  if ticks >  n-ticks [stop]
+
   ask investors [  ;; Select best pool
     ifelse g-random-jump [
       let recommended-pool (1 + random-tower (list p-start-low p-start-high)) mod 3
@@ -548,26 +547,26 @@ end
 ;; Copyright (c) 2018 Simon Crase - see info tab for details of licence
 @#$#@#$#@
 GRAPHICS-WINDOW
-280
+285
 10
-829
-560
+824
+550
 -1
 -1
-16.4
+12.95122
 1
 10
 1
 1
 1
 0
+0
+0
 1
-1
-1
--16
-16
--16
-16
+-20
+20
+-20
+20
 0
 0
 1
@@ -761,10 +760,10 @@ NIL
 HORIZONTAL
 
 PLOT
-1150
-355
-1350
-505
+1135
+350
+1335
+500
 Spread
 Wealth
 Count
@@ -779,10 +778,10 @@ PENS
 "default" 1.0 0 -13345367 true "" "histogram [wealth] of investors"
 
 MONITOR
-866
-350
-969
-395
+851
+345
+954
+390
 Average Wealth
 mean [wealth] of investors
 0
@@ -790,10 +789,10 @@ mean [wealth] of investors
 11
 
 MONITOR
-980
-350
-1066
-395
+965
+345
+1051
+390
 Sigma
 standard-deviation [wealth] of investors
 1
@@ -846,10 +845,10 @@ NIL
 HORIZONTAL
 
 PLOT
-852
-17
-1052
-167
+837
+12
+1037
+162
 Prediction errors
 NIL
 Sum squared error
@@ -864,10 +863,10 @@ PENS
 "default" 1.0 0 -5825686 true "" "plot mean [sum-squares-error] of investors"
 
 PLOT
-853
-180
-1110
-330
+838
+175
+1095
+325
 Wealth
 NIL
 NIL
@@ -885,10 +884,10 @@ PENS
 "Theoretical" 1.0 0 -7500403 true "" "plot sum[potential-payoff] of pools"
 
 PLOT
-1076
-18
-1299
-168
+1061
+13
+1284
+163
 Numbers in each pool
 NIL
 NIL
@@ -935,10 +934,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-864
-419
-921
-464
+849
+414
+906
+459
 Stable
 census POOL-STABLE
 0
@@ -946,10 +945,10 @@ census POOL-STABLE
 11
 
 MONITOR
-931
-418
-991
-463
+916
+413
+976
+458
 Low Risk
 census POOL-LOW
 0
@@ -957,10 +956,10 @@ census POOL-LOW
 11
 
 MONITOR
-1000
-420
-1063
-465
+985
+415
+1048
+460
 High Risk
 census POOL-HIGH
 0
@@ -968,10 +967,10 @@ census POOL-HIGH
 11
 
 MONITOR
-931
-467
-991
-512
+916
+462
+976
+507
 Payout
 outgoings POOL-LOW
 2
@@ -979,10 +978,10 @@ outgoings POOL-LOW
 11
 
 MONITOR
-1000
-469
-1054
-514
+985
+464
+1039
+509
 Payout
 outgoings POOL-HIGH
 2
@@ -990,10 +989,10 @@ outgoings POOL-HIGH
 11
 
 PLOT
-1140
-195
-1340
-345
+1125
+190
+1325
+340
 Return per step
 NIL
 NIL
@@ -1010,9 +1009,9 @@ PENS
 "High" 1.0 0 -2674135 true "" "plot outgoings POOL-HIGH"
 
 SWITCH
-110
+130
 340
-255
+250
 373
 randomize-step
 randomize-step
@@ -1023,7 +1022,7 @@ randomize-step
 SWITCH
 3
 209
-127
+108
 242
 can-borrow
 can-borrow
@@ -1047,10 +1046,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-130
-423
-245
-456
+135
+380
+250
+413
 p-experiencers
 p-experiencers
 0
@@ -1077,10 +1076,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-130
-460
-255
-493
+135
+417
+260
+450
 epsilon-steady
 epsilon-steady
 0
@@ -1092,9 +1091,9 @@ NIL
 HORIZONTAL
 
 BUTTON
-135
+130
 210
-190
+185
 243
 Details
 output-investor-details
@@ -1110,9 +1109,9 @@ NIL
 
 SWITCH
 130
-380
 250
-413
+250
+283
 g-random-jump
 g-random-jump
 1
@@ -1120,15 +1119,15 @@ g-random-jump
 -1000
 
 SLIDER
-5
-505
-97
-538
+135
+460
+227
+493
 n-cartel
 n-cartel
 0
 25
-20.0
+0.0
 5
 1
 NIL
