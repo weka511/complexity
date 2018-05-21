@@ -47,16 +47,17 @@ to setup
   let n-experiencers int (p-experiencers * n-investors)
   let radius-inner-circle ifelse-value (n-cartel = 0) [9][6]
   let radius-outer-circle ifelse-value (n-cartel = 0) [18][12]
+  let radius-cartel 20
   create-ordered-investors  n-investors - n-experiencers - n-cartel [
-    initialize-investor "fish" radius-outer-circle (map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors)
+    initialize-investor "fish" radius-outer-circle (map [-> linear-predictor INIT [] [] [] [] [] ] range n-predictors) False
   ]
 
   create-ordered-investors  n-experiencers [
-    initialize-investor "fish 2" radius-inner-circle (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]])
+    initialize-investor "fish 2" radius-inner-circle (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]]) False
   ]
 
   create-ordered-investors n-cartel[
-    initialize-investor "shark" 20 (list [[func a b c d] -> cartel-predictor func a b c d ])
+    initialize-investor "shark" radius-cartel (list [[func a b c d] -> cartel-predictor func a b c d ]) True
   ]
 
   reset-ticks
@@ -83,10 +84,10 @@ to set-pool-characteristics [colour payoff p-payoff]
 end
 
 ;; Setup properties for one investor, and assign to a random pool
-to initialize-investor [myshape myradius mypredictors]
+to initialize-investor [myshape myradius mypredictors is-cartel]
   set wealth 0
   set my-payoffs []
-  let pool-index (1 + random-tower (list p-start-low p-start-high)) mod 3
+  let pool-index ifelse-value is-cartel [POOL-HIGH][(1 + random-tower (list p-start-low p-start-high)) mod 3]
   create-link-with one-of pools with [pool-number = pool-index]
   set my-choices (list pool-index)
   set shape myshape
@@ -1127,7 +1128,7 @@ n-cartel
 n-cartel
 0
 25
-0.0
+10.0
 5
 1
 NIL
