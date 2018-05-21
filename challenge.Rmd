@@ -74,6 +74,8 @@ _What happens to the system if you violate one of the original assumptions of th
 
 I implemented a _cartel_, where some agents agree to monopolize one pool for their own benefit---see Figure \ref{fig:ui-cartel}. The cartel artificially increases the number of agents in one pool, to lead other agents to infer that the pool was crowded, and hence unattractive. It does not make sense for the cartel to jump from one pool to another, since they rould have to pay $\tau$, and wait for the second pool to clear out. While a very small cartel has little chance of influencing other agents, a large cartel reduces the payout per member; a cartel of 20 would do no better than someone who stayed in the stable pool. 
 
+Figure\ref{fig:cartel_return} shows the return from the cartel. It scarcely seems worth the risk of ending up in Sante Fe jail for attmpting to rig the market.
+
 ##Changes
 
 ### Variation of $\tau$
@@ -229,10 +231,13 @@ par(new=TRUE)
 plot(aa1$X_step_,aa1$mean__sum_squares_error__of_investors,type="l",col="magenta",lty=2,xlab="",ylab="",yaxt='n')
 par(new=TRUE)
 plot(aa5$X_step_,aa5$mean__sum_squares_error__of_investors,type="l",col="slategray",lty=6,xlab="",ylab="",yaxt='n')
-
-
 ```
 
+
+```{r plot_cartel, echo=FALSE,fig.cap="\\label{fig:cartel_return}Return from Cartel, compared with Stable Pool",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+cartel.data<-read.cartel()
+plot.cartel(cartel.data )
+```
 #References
  
  

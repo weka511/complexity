@@ -191,9 +191,26 @@ plot.individuals<-function(my.details,n=3,my.strategy=0,col=c('blue','black','re
 }
 
 read.cartel <- function(path.name = "C:/Users/Weka/201804/Experiments", file.name = 'challenge-cartel-table.csv') {
-  return (fix.column.names( read.nlogo.experiment(path.name,file.name)))
+  cartel.data<-fix.column.names( read.nlogo.experiment(path.name,file.name))
+  return(cartel.data[cartel.data$X_step_ == max(cartel.data$X_step_), ])
 }
 
-cartel.data<- read.cartel()
- 
+
+plot.cartel<-function(cartel.data) {
+  col=c('blue','red','black')
+  my.data<-aggregate(cartel.data,by=list(cartel.data$tau,cartel.data$n_cartel),FUN=mean,na.rm=TRUE)
+  plot(0:20,0:20, xlab = "Number in Cartel",ylab = "Average Return",type='n',
+       xlim=c(0,max(cartel.data$n_cartel)),ylim=c(0,2),
+       main="Cartel")
+  i<-1
+  for (tau in  unique(cartel.data$tau)){
+    my.data.0<-my.data[my.data$tau==tau,]
+    lines( my.data.0$n_cartel, my.data.0$outgoings_POOL_HIGH,type='l',col=col[i])
+    i <- i + 1
+  }
+  lines( my.data.0$n_cartel, rep(1,length(my.data.0$n_cartel)),type='l',lty='dashed',col=col[i])
+  legend('topleft',c("tau=0","tau=1","Stable Pool"),col=col,lty=c('solid','solid','dashed'))
+}
+
+
  

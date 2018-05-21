@@ -1864,7 +1864,7 @@ NetLogo 6.0.3
       <value value="2"/>
       <value value="5"/>
       <value value="10"/>
-      <value value="50"/>
+      <value value="15"/>
       <value value="20"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="p-start-high">
