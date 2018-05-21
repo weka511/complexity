@@ -15,12 +15,12 @@ pools-own [
   numbers                ;; List of number of investors in pool
                          ;; sorted, latest first
   total-payoff           ;; Total paid by this pool to date
-  potential-payoff       ;; Total that could have ben paid out.
+  potential-payoff       ;; Total that could have been paid out.
                          ;; For low and high pools, this is the
-                         ;; same as totol-payoff. For the stable pool
+                         ;; same as total-payoff. For the stable pool
                          ;; it is the payout assuming everyone is in
-                         ;; this pool. Caompare with total-payoff
-                         ;; to calculate the amout that has been foregone
+                         ;; this pool. Compare with total-payoff
+                         ;; to calculate the amount that has been foregone
                          ;; by using risky pools
 ]
 
@@ -31,12 +31,11 @@ investors-own [
   my-choices             ;; List of pools chosen to date, in reverse chronological order
   sum-squares-error      ;; Error from predictors to date
   strategy-index         ;; Indicates which strategy was used
-  wealth-history         ;; Used to comapre wealth with previous iterations
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; When Setup button pressed, paint patched blue, and create the pools and investors
+;; When Setup button pressed, paint patches blue, and create the pools and investors
 
 to setup
   clear-all
@@ -96,20 +95,10 @@ to initialize-investor [myshape myradius mypredictors]
   fd myradius
   set predictors mypredictors
   set strategy-index  (runresult (first predictors) ID [] [] [] [])
-  set wealth-history []
+
   colourize
 end
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-to reset
-  set n-complete-runs n-complete-runs + 1
-  ask investors [
-    set wealth-history fput wealth wealth-history
-    set wealth 0
-    resize
-  ]
-end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 to go
@@ -333,8 +322,8 @@ end
 to-report get-matches [low-payoff  high-payoff low-number high-number coarse-grainer]
   let break-low break-even-attendance low-payoff  low-number
   let break-high break-even-attendance high-payoff  high-number
-  let target-low (runresult coarse-grainer first low-payoff break-low)
-  let target-high (runresult coarse-grainer first high-payoff break-high)
+  let target-low (map ([i -> (runresult coarse-grainer item i low-payoff break-low)]) (range n-memory))
+  let target-high (map ([i -> (runresult coarse-grainer item i high-payoff break-high)]) (range n-memory))
   report filter [i -> i > 0 and
     (runresult coarse-grainer item i low-payoff break-low) = target-low and
     (runresult coarse-grainer item i high-payoff break-high) = target-high] range length low-payoff
@@ -586,9 +575,9 @@ ticks
 30.0
 
 BUTTON
-210
+130
 175
-274
+194
 208
 Setup
 setup
@@ -603,10 +592,10 @@ NIL
 1
 
 BUTTON
-211
-211
-274
-244
+210
+175
+273
+208
 Go
 go
 T
@@ -621,9 +610,9 @@ NIL
 
 BUTTON
 210
-251
+210
 273
-284
+243
 Step
 go
 NIL
@@ -848,9 +837,9 @@ SLIDER
 378
 n-history
 n-history
-0
+2
 25
-10.0
+7.0
 1
 1
 NIL
@@ -1103,11 +1092,11 @@ NIL
 HORIZONTAL
 
 BUTTON
-120
-255
-205
-288
-Output Details
+135
+210
+190
+243
+Details
 output-investor-details
 NIL
 1
@@ -1130,28 +1119,11 @@ g-random-jump
 1
 -1000
 
-BUTTON
-140
-175
-202
-208
-Reset
-reset
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-0
-
 SLIDER
-20
-510
-112
-543
+5
+505
+97
+538
 n-cartel
 n-cartel
 0
@@ -1169,7 +1141,19 @@ Testbed to investigate the [Complexity Explorer](https://www.complexityexplorer.
 
 ## HOW IT WORKS
 
-(what rules the agents use to create the overall behavior of the model)
+There are twp  breeds of Agent, Investors and Pools. The heart of the model, in `to go`, involves each Investor consulting a predictor, which gives advice on the best Pool for the next step. The investor is responsible for deciding whether or not to accept the advice. Meanwhile the Pools make random decisions whether or not to pay off. Sime predictors use machine learning, so there is a chance for them to tune themselves at the end of each step. Membership of pools is tracked by having each Investor link to the Pool that is it currently in. There are three types of Predictor:
+
+ * a **Linear Predictor** uses a [linear autoregression](https://www.investopedia.com/terms/a/autoregressive.asp) to predict the number of investors in the High and Medium Risk pools during the next step, given the number in the previous few steps;
+ * an **Experiencer** compares the present state of the High and Medium Risk pools with the past, checks to see what it did last time this sitiation occurred, and what the outcome was.
+ * **Cartel Member**s try to manipulate the numbers in the High Risk Pool, and hence the behaviour of other investors, to benfit themselves.
+
+Those investors who use autoregressive pools are set up with multiple predictors, controlled by the *n-predictors* slider; each predictor is set up with up to *n-coefficients* (random selection). After each step the predictors are tuned:
+
+1. copy each predictor and randomly mutate the coefficients of the clone;
+1. evaluate all predictors against historical data to judge thier accuracy;
+1. choose the best predictor as the adviser for the next step;
+1. cull the predictors by removing the poorest performing 50%.
+
 
 ## HOW TO USE IT
 
@@ -1182,8 +1166,7 @@ Normal usage is to set the sliders and switches to suitable values, then press _
     * **Setup**    Initialize
     * **Step**     Single step for debugging
     * **Go**       Execute model
-    * **Reset**    Used instead of **Setup** to rerun model with wealth set back to zero. Allows a rerun to determine whether agents have learned from thir previous life.
-    * **Output Details** Dump data from each agent in each step for analysis
+    * **Details** Dump data from each agent in each step for analysis
 
 
  * **Sliders**
@@ -1247,6 +1230,26 @@ Normal usage is to set the sliders and switches to suitable values, then press _
 
 (interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
 
+
+    to-report generic-predictor  [function low-payoff high-payoff low-number high-number coefficients]
+
+      if function = ID []
+
+      if function = INIT [  ]
+
+      if function = PREDICT [
+        report (list
+          RETURN-STABLE-POOL
+          ;;...
+          ;;...
+        )
+      ]
+
+      if function = CLONE [   ]
+      if function = EVALUATE []
+      report NOTHING
+    end
+
 ## RELATED MODELS
 
 (models in the NetLogo Models Library and elsewhere which are of related interest)
@@ -1256,6 +1259,8 @@ Normal usage is to set the sliders and switches to suitable values, then press _
 (a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
 
 [Github repository](https://github.com/weka511/201804)
+
+The machine Learning algorithm was developed by David Fogel et al.   "Inductive reasoning and bounded rationality reconsidered", Fogel, D.B.; Chellapilla, K.; Angeline, P.J., IEEE Transactions on Evolutionary Computation, 1999, v3n2, p142-146.
 
 ## COPYRIGHT & LICENCE
 
@@ -1827,7 +1832,7 @@ NetLogo 6.0.3
       <value value="6"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="cartel" repetitions="5" runMetricsEveryStep="true">
+  <experiment name="cartel" repetitions="25" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <metric>outgoings POOL-HIGH</metric>
