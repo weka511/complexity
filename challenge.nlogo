@@ -28,7 +28,8 @@ investors-own [
   my-payoffs             ;; List off payoffs received (not allowing for tau), in reverse chronological order
   my-choices             ;; List of pools chosen to date, in reverse chronological order
   sum-squares-error      ;; Error from predictors to date
-  strategy-index         ;; Indicates which strategy was used
+  strategy-class         ;; Indicates which class of strategy was used
+                         ;; e.g. linear, experience based, cartel
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -53,7 +54,7 @@ to setup
   ]
 
   create-ordered-investors  n-experiencers [
-    initialize-investor "fish 2" radius-inner-circle (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer3 x y]]) False
+    initialize-investor "fish 2" radius-inner-circle (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer0 x y]]) False
   ]
 
   create-ordered-investors n-cartel[
@@ -76,7 +77,7 @@ to initialize-pool [next-pool]
   set total-payoff 0
 end
 
-;; Setup those variables that ditinguish one pool from another
+;; Setup those variables that distinguish one pool from another
 to set-pool-characteristics [colour payoff p-payoff]
   set color colour
   set max-payoff max-payoff-high
@@ -87,19 +88,25 @@ end
 to initialize-investor [myshape myradius mypredictors is-cartel]
   set wealth 0
   set my-payoffs []
+  ;; Link to a pool, and record this as our first choice
   let pool-index ifelse-value is-cartel [POOL-HIGH][(1 + random-tower (list p-start-low p-start-high)) mod 3]
   create-link-with one-of pools with [pool-number = pool-index]
   set my-choices (list pool-index)
+
   set shape myshape
   fd myradius
   set predictors mypredictors
-  set strategy-index  (runresult (first predictors) ID [] [] [] [])
+  ;; Record class - e.f. linear
+  set strategy-class  (runresult (first predictors) ID [] [] [] [])
 
   colourize
 end
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Run model
+
 to go
   ;; Historical data, which will be loaded from corresponding pools
   let low-payoff []
@@ -110,7 +117,7 @@ to go
   let high-return 0
 
   ask pools [
-    ;; Decide whther to pay
+    ;; Decide whether to pay
     let selection random-float 1
     let mypayoff ifelse-value (selection < probability-payoff) [max-payoff][0]
     set shape ifelse-value (selection < probability-payoff) ["face happy"]["face sad"]
@@ -132,8 +139,10 @@ to go
       set high-return estimate-return payoffs numbers
     ]
     set total-payoff total-payoff + mypayoff * n-members
+
+
     set potential-payoff ifelse-value(pool-number = POOL-STABLE) [
-      potential-payoff + mypayoff * n-investors
+      potential-payoff + mypayoff * (n-investors - 2)
     ][
       total-payoff
     ]
@@ -147,42 +156,47 @@ to go
     set my-payoffs fput delta-wealth my-payoffs
   ]
 
-  ask investors [resize]
+  ask investors [resize]        ;; Show off wealth as fatness
 
-  if ticks >  n-ticks [stop]
+  if ticks >  n-ticks [stop]    ;; are we there yet?
 
   ask investors [  ;; Select best pool
-    ifelse g-random-jump [
+
+    ifelse g-random-jump [ ;; This is the option to jump around at random,
+                           ;; for comparison with smarter methods
       let recommended-pool (1 + random-tower (list p-start-low p-start-high)) mod 3
-      let current-pool first my-choices
-      ifelse recommended-pool = current-pool [
+
+      ifelse recommended-pool = first my-choices [        ;; Recomendation is for same pool
         set my-choices fput recommended-pool my-choices
-      ][
+      ][                                                  ;; Recomendation is for some other pool
         set wealth wealth - tau
         set my-choices fput recommended-pool my-choices
         ask one-of my-out-links [die]
         create-link-with one-of pools with [pool-number = recommended-pool]
         colourize
       ]
-    ][
+    ][                                                    ;; We need to ask predictor for advice
       let predicted-returns (runresult (first predictors) PREDICT low-payoff high-payoff low-number high-number)
       let current-pool first my-choices
-      let revised-prediction (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau-weight * tau))]] predicted-returns range 3)
-      let recommended-return max revised-prediction
-      let predicted-benefit recommended-return - item current-pool revised-prediction
+      ;; If we need to change to another pool to have benefit of prediction, we need to make allowance for tau
+      let returns-allowing-for-tau (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau-weight * tau))]] predicted-returns range 3)
+      let recommended-return max returns-allowing-for-tau
+      ;; Benefit of changing is the return - benefit of staying put
+      let predicted-benefit recommended-return - item current-pool returns-allowing-for-tau
 
-      let recommended-pool 0
+      ;; Find out which pool corresponds to highest benefit
+      let recommended-pool POOL-STABLE
       ifelse randomize-step [
-        let r random-float sum (revised-prediction)
-        if r > first revised-prediction [set recommended-pool ifelse-value ( r < (item 1 revised-prediction) + (first revised-prediction))[1][2]   ]
+        let r random-float sum (returns-allowing-for-tau)
+        if r > first returns-allowing-for-tau [set recommended-pool ifelse-value ( r < (item 1 returns-allowing-for-tau) + (first returns-allowing-for-tau))[1][2]   ]
       ][
-        if recommended-return = item 1 revised-prediction [set recommended-pool 1]
-        if recommended-return = item 2 revised-prediction [set recommended-pool 2]
+        if recommended-return = item POOL-LOW returns-allowing-for-tau [set recommended-pool POOL-LOW]
+        if recommended-return = item POOL-HIGH returns-allowing-for-tau [set recommended-pool POOL-HIGH]
       ]
       ;; If pool different, consider whether to change (tau)
       ifelse recommended-pool = current-pool [
         set my-choices fput recommended-pool my-choices
-      ][
+      ][  ;; We need to decide whther or not to accept advice to change pools
         ifelse advice-is-credible recommended-pool predicted-benefit [
           set wealth wealth - tau
           set my-choices fput recommended-pool my-choices
@@ -191,11 +205,7 @@ to go
           colourize
         ][
           set my-choices fput current-pool my-choices
-        ]
-      ]
-    ]
-
-  ]
+        ]]]]
 
   ;; Breed predictors
 
@@ -204,13 +214,13 @@ to go
     if is-anonymous-reporter? first offspring  [set predictors sentence predictors offspring]
   ]
 
-  ;; Select best predictors for next iteration
+  ;; Select best predictors for next iteration, cull the rest
 
   ask investors [
-    if length predictors > 1[  ;;FIXME
+    if length predictors > 1 [
       let indices range length predictors
       let scores-with-indices (map [[predictor index] -> (list (runresult predictor EVALUATE low-payoff high-payoff low-number high-number) index) ] predictors indices)
-      let scores-sorted-with-indices sort-by [[l1 l2]-> first l1 < first l2] scores-with-indices  ;; sort by evaulation score
+      let scores-sorted-with-indices sort-by [[l1 l2]-> first l1 < first l2] scores-with-indices  ;; sort by evaluation score
       set sum-squares-error first (first scores-sorted-with-indices)
       let indices-sorted-by-scores map [pair -> item 1 pair] scores-sorted-with-indices
       let culled-indices sublist indices-sorted-by-scores 0 n-predictors
@@ -220,30 +230,41 @@ to go
   tick
 end
 
+;; advice-is-credible
+;;
 ;; Decide whether to accept advice to change pool
+;;
 to-report advice-is-credible [recommended-pool predicted-benefit]
-  if can-borrow or wealth >= tau [ ;; If we don't have enough wealth to change, or we can't borrow, then the decision is already made for us
+  if can-borrow or wealth >= tau [ ;; If we don't have enough wealth to change,
+                                   ;; or we can't borrow,
+                                   ;; then the decision has already been made for us.
+                                   ;; Here we need to investigate further
     let length-history length filter [choice -> choice = recommended-pool] my-choices
     ifelse length-history > 0 [ ;; do we have any history of trying this choice?
       ;; Calculate average payoff
       let payoff-historical  (reduce + (map [i -> ifelse-value (item i my-choices = recommended-pool)[item i  my-payoffs][0]] range length my-payoffs)) / (length-history)
+      ;; Accept or not, in proportion to payoff-historical : tau-weight * tau
       report random-float (payoff-historical + tau-weight * tau) < payoff-historical
-    ][
-      report random-float 1.0 < epsilon  ;; no history, so try with probability epsilon
+    ][ ;; no history, so try with probability epsilon
+      report random-float 1.0 < epsilon
     ]
   ]
   report False
 end
 
+;; colourize
+;;
 ;; Assign colours to pools
-
+;;
 to colourize
   let new-color 0
   ask one-of in-link-neighbors [set new-color color]
   set color new-color
 end
 
-;; Select a random value in accordance with epcified probabities
+;; random-tower
+;;
+;; Select a random value in accordance with speccified probabities
 ;; Use tower sampling - Statistical Mechanics Algorihms and Computations, Wener Krauth
 ;; http://blancopeck.net/Statistics.pdf
 to-report random-tower [probabilities]
@@ -258,7 +279,10 @@ to-report random-tower [probabilities]
   report i
 end
 
+;; linear-predict-count
+;;
 ;; Predict count by taking inner weighted sum of previous values
+;;
 to-report linear-predict-count [counts coefficients]
   let mycounts counts
   while [length mycounts < length coefficients][  ;; If too few values, pad as described by Fogel
@@ -271,6 +295,7 @@ end
 
 ;; This is a generic predictor - use as a model
 ;; The function controls its behaviour
+;;        ID        Used for reporting only, to identify class of model
 ;;        INIT      Initialize coefficients that make prediction
 ;;        PREDICT   Predict return for all three pools
 ;;        CLONE     Copy coefficients and mutate
@@ -294,6 +319,9 @@ to-report generic-predictor  [function low-payoff high-payoff low-number high-nu
   report NOTHING
 end
 
+;; cartel-predictor
+;;
+;; Used by cartel members to tell them what to do (squat High Risk pool)
 to-report cartel-predictor  [function low-payoff high-payoff low-number high-number]
 
   if function = ID [report 2]
@@ -309,6 +337,10 @@ to-report cartel-predictor  [function low-payoff high-payoff low-number high-num
   report NOTHING
 end
 
+to-report simple-coarse-grainer0 [element break-even-point]
+  report element
+end
+
 to-report simple-coarse-grainer2 [element break-even-point]
   report ifelse-value (element < break-even-point) [0][1]
 end
@@ -319,15 +351,48 @@ to-report simple-coarse-grainer3 [element break-even-point]
    ifelse-value (element < break-even-point * 1.2) [1][2]]
 end
 
+to-report diff [list1 list2]
+  report reduce + (map [ [a b] -> abs(a - b)] list1 list2)
+end
+
+to-report get-match-metrics [target payoff]
+  report  (map [i -> ifelse-value ((i + length target)<(length payoff)) [diff target sublist payoff i (i + length target)][MISMATCH]]  range length payoff)
+end
+
+to-report MISMATCH
+  report 999999
+end
+
+to-report best-matches [choice match-metrics]
+  let best-index -1
+  let best-value MISMATCH
+  let i 0
+  while [i < length match-metrics] [
+    if item i match-metrics < best-value and choice = item i my-choices[
+      set best-index i
+      set best-value item i match-metrics
+    ]
+    set i i + 1
+  ]
+  report best-index
+end
+
 to-report get-matches [low-payoff  high-payoff low-number high-number coarse-grainer]
   let break-low break-even-attendance low-payoff  low-number
   let break-high break-even-attendance high-payoff  high-number
-  let target-low (map ([i -> (runresult coarse-grainer item i low-payoff break-low)]) (range n-memory))
-  let target-high (map ([i -> (runresult coarse-grainer item i high-payoff break-high)]) (range n-memory))
-  report filter [i -> i > 0 and
-    (runresult coarse-grainer item i low-payoff break-low) = target-low and
-    (runresult coarse-grainer item i high-payoff break-high) = target-high] range length low-payoff
-  report []
+  let n-current-memory min (list n-memory length low-payoff)
+  let target-low (map ([i -> (runresult coarse-grainer item i low-payoff break-low)]) (range n-current-memory))
+;  output-print target-low
+  let target-high (map ([i -> (runresult coarse-grainer item i high-payoff break-high)]) (range n-current-memory))
+  let match-metrics (map [[a b] -> a + b] (get-match-metrics target-low low-payoff)  (get-match-metrics target-high high-payoff))
+;  output-print (list "m" match-metrics)
+  let matches  (list (best-matches POOL-STABLE match-metrics) (best-matches POOL-LOW match-metrics) (best-matches POOL-HIGH match-metrics))
+;  if length matches > 0 [output-print matches]
+  report matches ;filter [[i]-> i > -1]
+;  let matches filter [i -> i > 0 and
+;    (runresult coarse-grainer item i low-payoff break-low) = target-low and
+;    (runresult coarse-grainer item i high-payoff break-high) = target-high] range length low-payoff
+;  if length matches > 0 [output-print matches]
 end
 
 to-report experience-predictor  [function low-payoff high-payoff low-number high-number coarse-grainer]
@@ -339,10 +404,13 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
   if function = PREDICT [
     let indices get-matches  low-payoff  high-payoff low-number high-number coarse-grainer
     ifelse length indices > 0 [
-      let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] range length indices)
-      let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] range length indices)
-      let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] range length indices)
-      report (map [v -> ifelse-value (v > 0) [v][epsilon-steady]] (list payoff-stable payoff-low payoff-high))
+      let pp (map [i -> ifelse-value(i > -1) [item i  my-payoffs][0]] indices)
+;      output-print (list "pp" pp)
+      report (map [v -> ifelse-value (v > 0) [v][epsilon-steady]] pp)
+;      let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] range length indices)
+;      let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] range length indices)
+;      let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] range length indices)
+;      report (map [v -> ifelse-value (v > 0) [v][epsilon-steady]] (list payoff-stable payoff-low payoff-high))
     ][
       report (list RETURN-STABLE-POOL epsilon-steady epsilon-steady)
     ]
@@ -471,17 +539,25 @@ to-report outgoings [pool-no]
   report  ifelse-value (ticks > 0) [sum non-zero-payoffs / ticks][0];[sum payoffs] of mypools][0]
 end
 
-to-report expand-investor [me my-wealth my-payoffs0 my-choices0 my-strategy-index]
-  report (map [i -> (list i me my-wealth item i my-payoffs0 item i my-choices0 my-strategy-index tau)] range length my-choices0 )
+;; expand-investor
+;;
+;; When we save to a CSV file, we want one row per tick. This procedure expands
+;; the lists, and repeats constant data on each line
+to-report expand-investor [me my-wealth my-payoffs0 my-choices0 my-strategy-class]
+  report (map [i -> (list i me my-wealth item i my-payoffs0 item i my-choices0 my-strategy-class tau)] range length my-choices0 )
 end
 
+;; output-investor-details
+;;
+;; Create a CSV file with details of each turtle
+;;
 to output-investor-details
   let i-wealth 1
   let i-my-payoffs 2
   let i-my-choices 3
-  let i-strategy-index 4
-  let my-investors  [(list who wealth my-payoffs my-choices strategy-index)] of investors
-  let mapped (map [i -> expand-investor first i (item i-wealth i) (item i-my-payoffs i) (item i-my-choices i) (item i-strategy-index i)] my-investors)
+  let i-strategy-class 4
+  let my-investors  [(list who wealth my-payoffs my-choices strategy-class)] of investors
+  let mapped (map [i -> expand-investor first i (item i-wealth i) (item i-my-payoffs i) (item i-my-choices i) (item i-strategy-class i)] my-investors)
   let flattened (reduce sentence mapped)
   let data-with-headers fput (list "step" "who" "wealth" "payoffs" "choices" "strategy" "tau") flattened
   csv:to-file  user-new-file data-with-headers
@@ -913,7 +989,7 @@ tau-weight
 tau-weight
 0.05
 2
-0.95
+0.5
 0.05
 1
 NIL
@@ -1040,7 +1116,7 @@ epsilon
 epsilon
 0
 1
-0.1
+0.5
 0.05
 1
 NIL
@@ -1055,7 +1131,7 @@ p-experiencers
 p-experiencers
 0
 1
-0.1
+0.2
 0.05
 1
 NIL
@@ -1070,7 +1146,7 @@ n-memory
 n-memory
 1
 10
-1.0
+3.0
 1
 1
 NIL
@@ -1084,9 +1160,9 @@ SLIDER
 epsilon-steady
 epsilon-steady
 0
-2
-2.0
-0.05
+5
+3.5
+0.25
 1
 NIL
 HORIZONTAL
@@ -1180,13 +1256,13 @@ Normal usage is to set the sliders and switches to suitable values, then press _
     * **max-payoff-low** Maximum payoff for low risk pool, to be divided among investors
     * **max-payoff-high** Maximum payoff for high risk pool, to be divided among investors
     * **tau** The cost of switching pools
-    * **tau-weight**
+    * **tau-weight** If we need to change to another pool to have benefit of prediction, we need to make allowance for *tau*. But maybe we should amortize _tau_ over several steps. This variable eneables us to do this.
     * **n-coefficients** _Maximum_ number of coefficients used by linear predictors (actual numbers chosen at random).
     * **n-predictors** Number of linear predictors
     * **n-history** Number of periods to be used when evaluating predictors
     * **benefit-weight** Amount of weight we give to estimated benefit when comparing with tau
     * **sigma-mutation** Standard deviation when we mutate coefficients
-    * **epsilon**
+    * **epsilon** This is used to decide whether or not to accept a recommendation to try a different pool, but we have not history to guide us. Accept recommendation with probability *epsilon*.
     * **p-experiencers**
     * **n-memory**
     * **epsilon-steady**
@@ -1195,7 +1271,7 @@ Normal usage is to set the sliders and switches to suitable values, then press _
  * **Switches**
     * **randomize step** Controls whether model always follows recommendation, or selects a pool at random, with probability determined by estimated benefit.
     * **can-borrow**  Allow wealth to become negative if we need to pay tau to switch
-    * **g-random-jump**
+    * **g-random-jump** Ignore predictors and select recommended pool at random, following *p-start-low* and *p-start-high*
 
  * **Plots**
     * **Spread**
