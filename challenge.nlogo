@@ -349,9 +349,7 @@ to-report get-match-metrics [target payoff]
   report  (map [i -> ifelse-value ((i + length target)<(length payoff)) [get-hamming-distance target sublist payoff i (i + length target)][MISMATCH]]  range length payoff)
 end
 
-to-report MISMATCH
-  report 999999
-end
+
 
 to-report best-matches [choice match-metrics]
   let best-index -1
@@ -596,6 +594,14 @@ end
 
 to-report RETURN-STABLE-POOL
   report 1
+end
+
+;; MISMATCH
+;;
+;; Used yo report a large number
+;;
+to-report MISMATCH
+  report 999999
 end
 
 ;; Copyright (c) 2018 Simon Crase - see info tab for details of licence
