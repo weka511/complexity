@@ -54,7 +54,7 @@ to setup
   ]
 
   create-ordered-investors  n-experiencers [
-    initialize-investor "fish 2" radius-inner-circle (list [[func a b c d] -> experience-predictor func a b c d [[x y]-> simple-coarse-grainer0 x y]]) False
+    initialize-investor "fish 2" radius-inner-circle (list [[func a b c d] -> experience-predictor func a b c d ]) False
   ]
 
   create-ordered-investors n-cartel[
@@ -337,9 +337,6 @@ to-report cartel-predictor  [function low-payoff high-payoff low-number high-num
   report NOTHING
 end
 
-to-report simple-coarse-grainer0 [element break-even-point]
-  report element
-end
 
 
 to-report diff [list1 list2]
@@ -368,34 +365,32 @@ to-report best-matches [choice match-metrics]
   report best-index
 end
 
-to-report get-matches [low-payoff  high-payoff low-number high-number coarse-grainer]
-  let break-low break-even-attendance low-payoff  low-number
-  let break-high break-even-attendance high-payoff  high-number
+to-report get-matches [low-payoff  high-payoff low-number high-number ]
   let n-current-memory min (list n-memory length low-payoff)
-  let target-low (map ([i -> (runresult coarse-grainer item i low-payoff break-low)]) (range n-current-memory))
-  let target-high (map ([i -> (runresult coarse-grainer item i high-payoff break-high)]) (range n-current-memory))
+  let target-low (map ([i ->  item i low-payoff ]) (range n-current-memory))
+  let target-high (map ([i -> item i high-payoff]) (range n-current-memory))
   let match-metrics (map [[a b] -> a + b] (get-match-metrics target-low low-payoff)  (get-match-metrics target-high high-payoff))
   report  (list (best-matches POOL-STABLE match-metrics) (best-matches POOL-LOW match-metrics) (best-matches POOL-HIGH match-metrics))
 end
 
-to-report experience-predictor  [function low-payoff high-payoff low-number high-number coarse-grainer]
+to-report experience-predictor  [function low-payoff high-payoff low-number high-number]
 
   if function = ID [report 0]
 
   if function = INIT [  ]
 
   if function = PREDICT [
-    let indices get-matches  low-payoff  high-payoff low-number high-number coarse-grainer
+    let indices get-matches  low-payoff  high-payoff low-number high-number
     ifelse length indices > 0 [
-      let pp (map [i -> ifelse-value(i > -1) [item i  my-payoffs][0]] indices)
-      report (map [v -> ifelse-value (v > 0) [v][epsilon-steady]] pp)
+      let potential-payoffs (map [i -> ifelse-value(i > -1) [item i  my-payoffs][0]] indices)
+      report (map [v -> ifelse-value (v > 0) [v][epsilon-steady]] potential-payoffs)
     ][
       report (list RETURN-STABLE-POOL epsilon-steady epsilon-steady)
     ]
 
   ]
 
-  if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d coarse-grainer]) ] ;FIXME
+  if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d ]) ] ;FIXME
   if function = EVALUATE [report 0]
   report NOTHING
 end
@@ -815,10 +810,10 @@ NIL
 HORIZONTAL
 
 PLOT
-1135
-350
-1335
-500
+1285
+345
+1485
+495
 Spread
 Wealth
 Count
@@ -833,10 +828,10 @@ PENS
 "default" 1.0 0 -13345367 true "" "histogram [wealth] of investors"
 
 MONITOR
-851
-345
-954
-390
+1001
+340
+1104
+385
 Average Wealth
 mean [wealth] of investors
 0
@@ -844,10 +839,10 @@ mean [wealth] of investors
 11
 
 MONITOR
-965
-345
-1051
-390
+1115
+340
+1201
+385
 Sigma
 standard-deviation [wealth] of investors
 1
@@ -900,10 +895,10 @@ NIL
 HORIZONTAL
 
 PLOT
-837
-12
-1037
-162
+987
+7
+1187
+157
 Prediction errors
 NIL
 Sum squared error
@@ -918,10 +913,10 @@ PENS
 "default" 1.0 0 -5825686 true "" "plot mean [sum-squares-error] of investors"
 
 PLOT
-838
-175
-1095
-325
+988
+170
+1245
+320
 Wealth
 NIL
 NIL
@@ -939,10 +934,10 @@ PENS
 "Theoretical" 1.0 0 -7500403 true "" "plot sum[potential-payoff] of pools"
 
 PLOT
-1061
-13
-1284
-163
+1211
+8
+1434
+158
 Numbers in each pool
 NIL
 NIL
@@ -989,10 +984,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-849
-414
-906
-459
+999
+409
+1056
+454
 Stable
 census POOL-STABLE
 0
@@ -1000,10 +995,10 @@ census POOL-STABLE
 11
 
 MONITOR
-916
-413
-976
-458
+1066
+408
+1126
+453
 Low Risk
 census POOL-LOW
 0
@@ -1011,10 +1006,10 @@ census POOL-LOW
 11
 
 MONITOR
-985
-415
-1048
-460
+1135
+410
+1198
+455
 High Risk
 census POOL-HIGH
 0
@@ -1022,10 +1017,10 @@ census POOL-HIGH
 11
 
 MONITOR
-916
-462
-976
-507
+1066
+457
+1126
+502
 Payout
 outgoings POOL-LOW
 2
@@ -1033,10 +1028,10 @@ outgoings POOL-LOW
 11
 
 MONITOR
-985
-464
-1039
-509
+1135
+459
+1189
+504
 Payout
 outgoings POOL-HIGH
 2
@@ -1044,10 +1039,10 @@ outgoings POOL-HIGH
 11
 
 PLOT
-1125
-190
-1325
-340
+1275
+185
+1475
+335
 Return per step
 NIL
 NIL
@@ -1124,7 +1119,7 @@ n-memory
 n-memory
 1
 10
-3.0
+10.0
 1
 1
 NIL
