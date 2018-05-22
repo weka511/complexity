@@ -25,14 +25,17 @@ netlogo.data<-read.nlogo.experiment(file.name='take2 experiment-table-new.csv')
 ```
 
 # Introduction
-The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behaviour of investors choosing between three pools, one providing a stable income stream, and two others offering riskier, but potentially higher, returns. The Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32]: each investor has access to historical data --- their own choices and payoffs, and aggregate data for each pool --- but no information about fundamentals --- such as the fact the High Risk Pool is likely to pay out next step because the fund manager invested in a commodity that has become scarce. At the start of this investigation, I expected that simulation would support the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
+The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behaviour of investors choosing between three pools, one providing a stable income stream, and two others offering riskier, but potentially higher, returns. The Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32]: each investor has access to historical data --- their own choices and payoffs, and aggregate data for each pool --- but no information about fundamentals --- such as the fact the High Risk Pool is likely to pay out next step because the fund manager invested in a commodity that has become scarce. As expected the simulation supports the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
 
 # Background
 
-Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. The El Farol problem assumes that the visit would be enjoyable if 60 or fewer people attended. Arthur noted that there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction. Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance; poorly performing strategies are replaced by ones that have proven more accurate on recent data. Subsequently David Fogel applied evolutionaty computing to the problem
+Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. Arthur assumed that the visit would be enjoyable if 60 or fewer people attended. He noted that there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction.[^1] 
+Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance; poorly performing strategies are replaced by ones that have proven more accurate on recent data. Subsequently David Fogel applied evolutionaty computing to the problem
 [@fogel1999inductive]; linear autoregressive strategies were bred, mutated, and the weakest culled, so that new strategies could be inferred.
 
-The El Farol problem can be generalized to the Minority game [@challet1997emergence], where players choose to belong to one of two sets; those who choose to belong to the smaller set are rewarded. The  Challenge is clearly related to minority games, since the rewards from the High and Low pools are worthwhile only if the number of "subscribers" is low enough.
+[^1]: "Nobody goes there anymore. It's too crowded".--Yogi Berra.
+
+The El Farol problem can be generalized to the Minority game [@challet1997emergence], where players choose to belong to one of two sets; those who find themselves in the smaller set are rewarded. The  Challenge is clearly related to minority games, since the rewards from the High and Low pools are worthwhile only if the number of "subscribers" is low enough.
 
 # Methods
 
@@ -43,7 +46,7 @@ I developed two Netlogo[@Wilensky:1999] models, _sheep-wall-stret.nlogo_ and _ch
   * _Challenge.nlogo_ uses the approach of Fogel [@fogel1999inductive]---a genetic algorithm that breeds autoregressive models. It represents Investors and Pools as separate Breeds of Agents. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}. There are three types of agents:
     1. the outer circle of fish in  Figure \ref{fig:ui} represent autoregressive agents, who use the  number and payoff historical data for both pools;
     1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs);
-    1. in Figure \ref{fig:ui-cartel}, the sharks unlawfully form a cartel. They share information and try to manipulate the numbers in one pool to maximise their profit. They are discussed in Section \ref{heading:violate-sssumptions}. 
+    1. the sharks in Figure \ref{fig:ui-cartel}  unlawfully form a cartel. They share information and try to manipulate the numbers in one pool to maximise their profit. They are discussed in Section \ref{heading:violate-sssumptions}. 
 
 _Challenge.nlogo_ was executed by the BehaviourSpace tool of Netlogo, which performed `r n.repetitions` repetitions. The model can also dump data for each step, e.g. for Figure \ref{fig:plot_individual01}. I used `r R.Version()$version.string` [@rcore2018r] to analyze the data, and an RMarkdown[@allaire2018rmarkdown] script to present the results, as suggested by Rosanna van Hespen[@vanhespen2016thesis]. 
 
