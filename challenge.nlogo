@@ -341,15 +341,6 @@ to-report simple-coarse-grainer0 [element break-even-point]
   report element
 end
 
-to-report simple-coarse-grainer2 [element break-even-point]
-  report ifelse-value (element < break-even-point) [0][1]
-end
-
-to-report simple-coarse-grainer3 [element break-even-point]
-  report ifelse-value (element < break-even-point / 1.2)
-  [0][
-   ifelse-value (element < break-even-point * 1.2) [1][2]]
-end
 
 to-report diff [list1 list2]
   report reduce + (map [ [a b] -> abs(a - b)] list1 list2)
@@ -382,17 +373,9 @@ to-report get-matches [low-payoff  high-payoff low-number high-number coarse-gra
   let break-high break-even-attendance high-payoff  high-number
   let n-current-memory min (list n-memory length low-payoff)
   let target-low (map ([i -> (runresult coarse-grainer item i low-payoff break-low)]) (range n-current-memory))
-;  output-print target-low
   let target-high (map ([i -> (runresult coarse-grainer item i high-payoff break-high)]) (range n-current-memory))
   let match-metrics (map [[a b] -> a + b] (get-match-metrics target-low low-payoff)  (get-match-metrics target-high high-payoff))
-;  output-print (list "m" match-metrics)
-  let matches  (list (best-matches POOL-STABLE match-metrics) (best-matches POOL-LOW match-metrics) (best-matches POOL-HIGH match-metrics))
-;  if length matches > 0 [output-print matches]
-  report matches ;filter [[i]-> i > -1]
-;  let matches filter [i -> i > 0 and
-;    (runresult coarse-grainer item i low-payoff break-low) = target-low and
-;    (runresult coarse-grainer item i high-payoff break-high) = target-high] range length low-payoff
-;  if length matches > 0 [output-print matches]
+  report  (list (best-matches POOL-STABLE match-metrics) (best-matches POOL-LOW match-metrics) (best-matches POOL-HIGH match-metrics))
 end
 
 to-report experience-predictor  [function low-payoff high-payoff low-number high-number coarse-grainer]
@@ -405,12 +388,7 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
     let indices get-matches  low-payoff  high-payoff low-number high-number coarse-grainer
     ifelse length indices > 0 [
       let pp (map [i -> ifelse-value(i > -1) [item i  my-payoffs][0]] indices)
-;      output-print (list "pp" pp)
       report (map [v -> ifelse-value (v > 0) [v][epsilon-steady]] pp)
-;      let payoff-stable  reduce + (map [i -> ifelse-value (item i my-choices = POOL-STABLE)[item i  my-payoffs][0]] range length indices)
-;      let payoff-low  reduce + (map [i -> ifelse-value (item i my-choices = POOL-LOW)[item i  my-payoffs][0]] range length indices)
-;      let payoff-high  reduce + (map [i -> ifelse-value (item i my-choices = POOL-HIGH)[item i  my-payoffs][0]] range length indices)
-;      report (map [v -> ifelse-value (v > 0) [v][epsilon-steady]] (list payoff-stable payoff-low payoff-high))
     ][
       report (list RETURN-STABLE-POOL epsilon-steady epsilon-steady)
     ]
@@ -1204,7 +1182,7 @@ n-cartel
 n-cartel
 0
 25
-10.0
+0.0
 5
 1
 NIL
