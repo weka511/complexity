@@ -337,14 +337,16 @@ to-report cartel-predictor  [function low-payoff high-payoff low-number high-num
   report NOTHING
 end
 
-
-
-to-report diff [list1 list2]
+;; get-hamming-distanc
+;;
+;; Calculate Hamming distance bwteeen two lists
+;;
+to-report get-hamming-distance [list1 list2]
   report reduce + (map [ [a b] -> abs(a - b)] list1 list2)
 end
 
 to-report get-match-metrics [target payoff]
-  report  (map [i -> ifelse-value ((i + length target)<(length payoff)) [diff target sublist payoff i (i + length target)][MISMATCH]]  range length payoff)
+  report  (map [i -> ifelse-value ((i + length target)<(length payoff)) [get-hamming-distance target sublist payoff i (i + length target)][MISMATCH]]  range length payoff)
 end
 
 to-report MISMATCH
@@ -383,14 +385,12 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
     let indices get-matches  low-payoff  high-payoff low-number high-number
     ifelse length indices > 0 [
       let potential-payoffs (map [i -> ifelse-value(i > -1) [item i  my-payoffs][0]] indices)
-      report (map [v -> ifelse-value (v > 0) [v][epsilon-steady]] potential-payoffs)
+      report (map [v -> ifelse-value (v > 0) [max (list v epsilon-steady)][epsilon-steady]] potential-payoffs)
     ][
-      report (list RETURN-STABLE-POOL epsilon-steady epsilon-steady)
-    ]
+      report (list  random-float epsilon-steady random-float epsilon-steady random-float epsilon-steady)
+    ]]
 
-  ]
-
-  if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d ]) ] ;FIXME
+  if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d ]) ]
   if function = EVALUATE [report 0]
   report NOTHING
 end
@@ -533,8 +533,12 @@ to output-investor-details
   let mapped (map [i -> expand-investor first i (item i-wealth i) (item i-my-payoffs i) (item i-my-choices i) (item i-strategy-class i)] my-investors)
   let flattened (reduce sentence mapped)
   let data-with-headers fput (list "step" "who" "wealth" "payoffs" "choices" "strategy" "tau") flattened
-  csv:to-file  user-new-file data-with-headers
+  let csv-file-name user-new-file
+  if not member? ".csv" csv-file-name[set csv-file-name word csv-file-name ".csv"]
+  csv:to-file  csv-file-name data-with-headers
 end
+
+
 
 ;; resize
 ;;
@@ -803,7 +807,7 @@ tau
 tau
 0
 20
-1.0
+3.0
 1
 1
 NIL
@@ -858,7 +862,7 @@ n-coefficients
 n-coefficients
 1
 25
-9.0
+4.0
 1
 1
 NIL
@@ -1132,9 +1136,9 @@ SLIDER
 450
 epsilon-steady
 epsilon-steady
-0
+0.25
 5
-3.5
+0.25
 0.25
 1
 NIL
@@ -1177,7 +1181,7 @@ n-cartel
 n-cartel
 0
 25
-0.0
+10.0
 5
 1
 NIL
