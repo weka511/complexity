@@ -17,10 +17,8 @@
     </Project>
     <Project name="Documentation">
         <File name="Proposal.tex" />
-        <File name="Writeup.tex" />
         <File name="201804.bib" />
         <File name="challenge.Rmd" />
-        <File name="ieee.csl" />
         <File name="ieee-with-url.csl" />
         <File name="get-data.r" />
     </Project>
