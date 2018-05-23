@@ -4,6 +4,7 @@ breed [pools pool]
 
 breed [investors investor]
 
+globals [flip-pool]
 pools-own [
   pool-number            ;; Distinguish each pool from the others
   max-payoff             ;; Amount to be distributed if there is any payout
@@ -38,6 +39,7 @@ investors-own [
 
 to setup
   clear-all
+  set flip-pool 2
   ask patches [set pcolor blue]
   let next-pool 0
   create-ordered-pools 3 [
@@ -64,6 +66,9 @@ to setup
   reset-ticks
 end
 
+to flip
+  set flip-pool (flip-pool + 1) mod 3
+end
 ;; Setup properties for one  pool
 to initialize-pool [next-pool]
   fd 1
@@ -329,7 +334,7 @@ to-report cartel-predictor  [function low-payoff high-payoff low-number high-num
   if function = INIT [  ]
 
   if function = PREDICT [
-    report (list 0 0 100 )
+    report ifelse-value (flip-pool = 2) [(list 0 0 100 )] [ifelse-value (flip-pool = 0)[(list 100 0 0 )] [(list 0 100 0)]]
   ]
 
   if function = CLONE [  report (list [[func a b c d] -> cartel-predictor func a b c d ]) ] ;FIXME
@@ -381,11 +386,12 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
 
   if function = PREDICT [
     let indices get-matches  low-payoff  high-payoff low-number high-number
-    ifelse length indices > 0 [
+    ifelse length indices > 0 and length low-payoff > 4 [
       let potential-payoffs (map [i -> ifelse-value(i > -1) [item i  my-payoffs][0]] indices)
       report (map [v -> ifelse-value (v > 0) [max (list v epsilon-steady)][epsilon-steady]] potential-payoffs)
     ][
-      report (list  random-float epsilon-steady random-float epsilon-steady random-float epsilon-steady)
+      let index random 3
+      report (list  (ifelse-value (index = 0) [20][0]) (ifelse-value (index = 1) [20][0]) (ifelse-value (index = 2) [20][0]))
     ]]
 
   if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d ]) ]
@@ -798,7 +804,7 @@ n-ticks
 n-ticks
 0
 1000
-100.0
+1000.0
 5
 1
 NIL
@@ -813,16 +819,16 @@ tau
 tau
 0
 20
-3.0
+0.0
 1
 1
 NIL
 HORIZONTAL
 
 PLOT
-1285
+1130
 345
-1485
+1330
 495
 Spread
 Wealth
@@ -838,9 +844,9 @@ PENS
 "default" 1.0 0 -13345367 true "" "histogram [wealth] of investors"
 
 MONITOR
-1001
+846
 340
-1104
+949
 385
 Average Wealth
 mean [wealth] of investors
@@ -849,9 +855,9 @@ mean [wealth] of investors
 11
 
 MONITOR
-1115
+960
 340
-1201
+1046
 385
 Sigma
 standard-deviation [wealth] of investors
@@ -868,7 +874,7 @@ n-coefficients
 n-coefficients
 1
 25
-4.0
+12.0
 1
 1
 NIL
@@ -883,7 +889,7 @@ n-predictors
 n-predictors
 0
 25
-9.0
+25.0
 1
 1
 NIL
@@ -905,9 +911,9 @@ NIL
 HORIZONTAL
 
 PLOT
-987
+832
 7
-1187
+1032
 157
 Prediction errors
 NIL
@@ -923,9 +929,9 @@ PENS
 "default" 1.0 0 -5825686 true "" "plot mean [sum-squares-error] of investors"
 
 PLOT
-988
+833
 170
-1245
+1090
 320
 Wealth
 NIL
@@ -944,9 +950,9 @@ PENS
 "Theoretical" 1.0 0 -7500403 true "" "plot sum[potential-payoff] of pools"
 
 PLOT
-1211
+1056
 8
-1434
+1279
 158
 Numbers in each pool
 NIL
@@ -994,9 +1000,9 @@ NIL
 HORIZONTAL
 
 MONITOR
-999
+844
 409
-1056
+901
 454
 Stable
 census POOL-STABLE
@@ -1005,9 +1011,9 @@ census POOL-STABLE
 11
 
 MONITOR
-1066
+911
 408
-1126
+971
 453
 Low Risk
 census POOL-LOW
@@ -1016,9 +1022,9 @@ census POOL-LOW
 11
 
 MONITOR
-1135
+980
 410
-1198
+1043
 455
 High Risk
 census POOL-HIGH
@@ -1027,9 +1033,9 @@ census POOL-HIGH
 11
 
 MONITOR
-1066
+911
 457
-1126
+971
 502
 Payout
 outgoings POOL-LOW
@@ -1038,9 +1044,9 @@ outgoings POOL-LOW
 11
 
 MONITOR
-1135
+980
 459
-1189
+1034
 504
 Payout
 outgoings POOL-HIGH
@@ -1049,9 +1055,9 @@ outgoings POOL-HIGH
 11
 
 PLOT
-1275
+1120
 185
-1475
+1320
 335
 Return per step
 NIL
@@ -1114,7 +1120,7 @@ p-experiencers
 p-experiencers
 0
 1
-0.2
+0.1
 0.05
 1
 NIL
@@ -1187,11 +1193,28 @@ n-cartel
 n-cartel
 0
 25
-10.0
+0.0
 5
 1
 NIL
 HORIZONTAL
+
+BUTTON
+40
+500
+103
+533
+NIL
+flip
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?

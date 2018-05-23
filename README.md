@@ -15,12 +15,11 @@
 | challenge.Rmd | Writeup for submission to SFI |
 | get-data.r | Script to initialize data for challenge.Rmd |
 | ieee-with-url |Required by challenge.Rmd to build bibliography |
-| Proposal.pdf | Agent Based Modelling Proposal |
 | Proposal.tex | Agent Based Modelling Proposal |
 | README.md | This File |
 | sheep-wall-street.nlogo | Original Testbed for evaluating alternative strategies |
 | strategies.csv | Parameters for strategies |
-| View.jpg | Image for Infor tab of take2.nlogo |
+| View.jpg | Image for Info tab of take2.nlogo |
 
 ## Journal
 
@@ -32,7 +31,9 @@
 | 9 May 2018 | Started new version of model, using links for assignments to pools. Size of Fish (investors) indicates wealth, and happ/sad face indicates whether pool has paid off.|
 | 10&nbsp;May&nbsp;2018| Performed experiments on function closure. Bindings captured as doco indicates. Also function can recurse. So will use a function for predictor, withone argument indicating whther we want to initialize, predict or train.|
 | 11 May 2018 | Learning is converging to same estimates |
-| 13 May 2018 | I've digressed into working out how to use RMarkdown for writing up the challenge|
+| 13 May 2018 | I've digressed into working out how to use RMarkdown for writing up the challenge |
+| 23 May 2018 | Digression into game theory |
+| 24 May 2018 | Experiencers need to collect knowledge first. This is an optimal stopping problem |
 
 
 
