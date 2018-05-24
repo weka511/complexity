@@ -1,37 +1,37 @@
 extensions [csv]
 
-breed [pools pool]
+breed [pools pool]         ;; These Agents represent the pools; they decide when to make a payout
 
-breed [investors investor]
+breed [investors investor] ;; Agents that receive revnue from ppols
 
-globals [flip-pool]      ;; used to control the pool that cartel members camp in
+globals [flip-pool]        ;; used to control the pool that cartel members camp in
 
 pools-own [
-  pool-number            ;; Distinguish each pool from the others
-  max-payoff             ;; Amount to be distributed if there is any payout
-  probability-payoff     ;; Probability of this pool paying out
-  payoffs                ;; List of payoffs from pool
-                         ;; sorted, latest first
-  numbers                ;; List of number of investors in pool
-                         ;; sorted, latest first
-  total-payoff           ;; Total paid by this pool to date
-  potential-payoff       ;; Total that could have been paid out.
-                         ;; For low and high pools, this is the
-                         ;; same as total-payoff. For the stable pool
-                         ;; it is the payout assuming everyone is in
-                         ;; this pool. Compare with total-payoff
-                         ;; to calculate the amount that has been foregone
-                         ;; by using risky pools
+  pool-number              ;; Distinguish each pool from the others
+  max-payoff               ;; Amount to be distributed if there is any payout
+  probability-payoff       ;; Probability of this pool paying out
+  payoffs                  ;; List of payoffs from pool
+                           ;; sorted, latest first
+  numbers                  ;; List of number of investors in pool
+                           ;; sorted, latest first
+  total-payoff             ;; Total paid by this pool to date
+  potential-payoff         ;; Total that could have been paid out.
+                           ;; For low and high pools, this is the
+                           ;; same as total-payoff. For the stable pool
+                           ;; it is the payout assuming everyone is in
+                           ;; this pool. Compare with total-payoff
+                           ;; to calculate the amount that has been foregone
+                           ;; by using risky pools
 ]
 
 investors-own [
-  wealth                 ;; Total payoff accumulated to date
-  predictors             ;; The predcits available for forcasting
-  my-payoffs             ;; List off payoffs received (not allowing for tau), in reverse chronological order
-  my-choices             ;; List of pools chosen to date, in reverse chronological order
-  sum-squares-error      ;; Error from predictors to date
-  strategy-class         ;; Indicates which class of strategy was used
-                         ;; e.g. linear, experience based, cartel
+  wealth                   ;; Total payoff accumulated to date
+  predictors               ;; The predcits available for forcasting
+  my-payoffs               ;; List off payoffs received (not allowing for tau), in reverse chronological order
+  my-choices               ;; List of pools chosen to date, in reverse chronological order
+  sum-squares-error        ;; Error from predictors to date
+  strategy-class           ;; Indicates which class of strategy was used
+                           ;; e.g. linear, experience based, cartel
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40,7 +40,8 @@ investors-own [
 
 to setup
   clear-all
-  set flip-pool 2
+  set flip-pool 0
+
   ask patches [set pcolor blue]
   let next-pool 0
   create-ordered-pools 3 [
@@ -84,12 +85,13 @@ end
 
 ;; stop-learning-at-tick
 ;;
-;; Used to stop lerning at specifed tick
+;; Used to stop learning at specifed tick
 to-report stop-learning-at-tick [n]
   report ticks > n
 end
 
-
+;; initialize-pool
+;;
 ;; Setup properties for one  pool
 to initialize-pool [next-pool]
   fd 1
@@ -103,6 +105,8 @@ to initialize-pool [next-pool]
   set total-payoff 0
 end
 
+;; set-pool-characteristics
+;;
 ;; Setup those variables that distinguish one pool from another
 to set-pool-characteristics [colour payoff p-payoff]
   set color colour
@@ -110,6 +114,8 @@ to set-pool-characteristics [colour payoff p-payoff]
   set probability-payoff p-payoff-high
 end
 
+;; initialize-investor
+;;
 ;; Setup properties for one investor, and assign to a random pool
 to initialize-investor [myshape myradius mypredictors is-cartel]
   set wealth 0
@@ -391,6 +397,8 @@ to-report experience-predictor  [function low-payoff high-payoff low-number high
   report NOTHING
 end
 
+;; linear-predictor
+;;
 ;; This is the linear predictor
 ;; The function controls its behaviour
 ;;        INIT      Initialize coefficients that make prediction
@@ -441,13 +449,18 @@ to-report linear-predictor [function low-payoff high-payoff low-number high-numb
   report NOTHING
 end
 
-;; predict return for specific pool
+;; predict-return
+;;
+;; predict return for specific pool assuming agent joins it,
+;; so we have to add one to length
 to-report predict-return [payoff number coefficients]
   let estimated-total-return  estimate-return payoff number
   let predicted-length        linear-predict-count number coefficients
   report estimated-total-return / (predicted-length + 1)
 end
 
+;; create-mutate-coefficients
+;;
 ;; Create new coefficients as described by Fogel and mutate them
 to-report  create-mutate-coefficients [coefficients]
   let len new-length coefficients
@@ -460,11 +473,15 @@ to-report  create-mutate-coefficients [coefficients]
   report mutate coefficients
 end
 
+;; mutate
+;;
 ;; Mutate coefficients as described by Fogel
 to-report mutate [coefficients]
   report map [c -> c + random-normal 0 sigma-mutation] coefficients
 end
 
+;; new-length
+;;
 ;; Change length of coefficient vector as described by Fogel
 ;; either increase by one, leave the same, or decrease by one
 to-report new-length [coefficients]
@@ -543,30 +560,42 @@ to-report get-matches [low-payoff  high-payoff low-number high-number ]
     (get-best-matches POOL-HIGH match-metrics))
 end
 
+;; estimate-return
+;;
 ;; Estimate return from historical data
 to-report estimate-return [mypayoffs mynumbers]
-;  let weighted-payoffs reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
   report sub-total-payoff mypayoffs mynumbers / max (list 1 length mypayoffs)
 end
 
+;; break-even-attendance
+;;
+;; Compute number of subscribers who will return to same as stable pool
 to-report break-even-attendance[mypayoffs mynumbers]
   report int ((sub-total-payoff mypayoffs mynumbers) / (length mynumbers))
 end
 
+;; sub-total-payoff
+;;
+;; Addup up payouts weighted by number of subscribers
 to-report sub-total-payoff [mypayoffs mynumbers]
   report reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
 end
 
+;; census
+;;
 ;; Count investors in pool
 to-report census [pool-no]
   let mypools pools with [pool-number = pool-no]
   report  ifelse-value (ticks > 0) [sum [first  numbers] of mypools][0]
 end
 
+;; outgoings
+;;
+;; Payment per tick
 to-report outgoings [pool-no]
   let mypools pools with [pool-number = pool-no]
   let non-zero-payoffs (map [[p n] -> ifelse-value (n > 0)[p][0]] (first [payoffs] of mypools) (first [numbers] of mypools) )
-  report  ifelse-value (ticks > 0) [sum non-zero-payoffs / ticks][0];[sum payoffs] of mypools][0]
+  report  ifelse-value (ticks > 0) [sum non-zero-payoffs / ticks][0];
 end
 
 ;; expand-investor
@@ -669,7 +698,7 @@ end
 
 ;; MISMATCH
 ;;
-;; Used yo report a large number
+;; Used to report a large number when a mismatch has occurred
 ;;
 to-report MISMATCH
   report 999999
@@ -1375,31 +1404,44 @@ Normal usage is to set the sliders and switches to suitable values, then press _
 
 ## NETLOGO FEATURES
 
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
+Netlogo suports only one level of inhritance, and I needed more, as the model useds different type of investors.  Netlogo supports indirect function calls, though the _runresult_ command, so I decided to create _predictors_, functions which would attempt to forecat the likly payout for each pool. But some of these functions need parameters which vary from one agent (hence one bound instance of the function) to another. But the number and type of parameters vary from one type of predictor to another. I therefore could not store the parameters in the agent.
 
+Eventually I decided to use a trick, which I first saw in [Structure and Interpretation of Computer Programs, by Harold Abelson, Gerald Jay Sussman, and Julie Sussman , MIT Press, 1985](https://mitpress.mit.edu/sites/default/files/sicp/index.html). Each predictor is a [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)), with its parameters bound in. If a predictor needs to be cloned, with mutated paramters, we product a new closure, as shown in the following example.
 
-    to-report generic-predictor  [function low-payoff high-payoff low-number high-number coefficients]
+```
+to-report linear-predictor [function low-payoff high-payoff low-number high-number coefficients]
 
-      if function = ID []
+  if function = ID [report 1]
 
-      if function = INIT [  ]
+  if function = INIT [ ;; Initialize coefficients that make prediction
+    let my-coefficients map [r -> -1 + 2 * random-float 1] range (1 + random n-coefficients)
+    report  [[func a b c d] -> linear-predictor func a b c d my-coefficients]
+  ]
 
-      if function = PREDICT [
-        report (list
-          RETURN-STABLE-POOL
-          ;;...
-          ;;...
-        )
-      ]
+  if function = PREDICT [  ;; Predict return for all three pools
+    report (list ...)
+  ]
 
-      if function = CLONE [   ]
-      if function = EVALUATE []
-      report NOTHING
-    end
+  if function = CLONE [ ;; Copy coefficients and mutate
+    let my-coefficients create-mutate-coefficients coefficients
+    report  [[func a b c d] -> linear-predictor func a b c d my-coefficients]
+  ]
+
+  if function = EVALUATE [ ;; Evaluate performace of this set of coefficients
+    ...
+
+    report sum-squares-error
+  ]
+
+  report NOTHING
+end
+```
 
 ## RELATED MODELS
 
-(models in the NetLogo Models Library and elsewhere which are of related interest)
+[Rand, W., Wilensky, U. (2007). NetLogo El Farol model. . Center for Connected Learning and Computer-Based Modeling, Northwestern Institute on Complex Systems, Northwestern University, Evanston, IL.](http://ccl.northwestern.edu/netlogo/models/ElFarol)
+
+
 
 ## CREDITS AND REFERENCES
 
