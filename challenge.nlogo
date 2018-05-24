@@ -883,7 +883,7 @@ n-investors
 n-investors
 0
 200
-100.0
+500.0
 25
 1
 NIL
@@ -968,7 +968,7 @@ n-coefficients
 n-coefficients
 1
 25
-25.0
+10.0
 1
 1
 NIL
@@ -983,7 +983,7 @@ n-predictors
 n-predictors
 0
 25
-25.0
+10.0
 1
 1
 NIL
@@ -998,7 +998,7 @@ n-history
 n-history
 2
 25
-7.0
+10.0
 1
 1
 NIL
@@ -1214,7 +1214,7 @@ p-experiencers
 p-experiencers
 0
 1
-0.25
+0.5
 0.05
 1
 NIL
@@ -1317,11 +1317,11 @@ Testbed to investigate the [Complexity Explorer](https://www.complexityexplorer.
 
 ## HOW IT WORKS
 
-There are twp  breeds of Agent, Investors and Pools. The heart of the model, in `to go`, involves each Investor consulting a predictor, which gives advice on the best Pool for the next step. The investor is responsible for deciding whether or not to accept the advice. Meanwhile the Pools make random decisions whether or not to pay off. Sime predictors use machine learning, so there is a chance for them to tune themselves at the end of each step. Membership of pools is tracked by having each Investor link to the Pool that is it currently in. There are three types of Predictor:
+There are two  breeds of Agent, Investors and Pools. The heart of the model, `to go`, involves each Investor consulting a predictor, which gives advice on the best Pool for the next step. The investor is responsible for deciding whether or not to accept the advice. Meanwhile the Pools make random decisions whether or not to pay off. Some predictors use machine learning, so there is a chance for them to tune themselves at the end of each step. Membership of pools is tracked by having each Investor link to the Pool that is it currently subscribed to. There are three types of Predictor:
 
  * a **Linear Predictor** uses a [linear autoregression](https://www.investopedia.com/terms/a/autoregressive.asp) to predict the number of investors in the High and Medium Risk pools during the next step, given the number in the previous few steps;
  * an **Experiencer** compares the present state of the High and Medium Risk pools with the past, checks to see what it did last time this sitiation occurred, and what the outcome was.
- * **Cartel Member**s try to manipulate the numbers in the High Risk Pool, and hence the behaviour of other investors, to benfit themselves.
+ * **Cartel Member**s try to manipulate the numbers in the High Risk Pool, and hence the behaviour of other investors, to benefit themselves.
 
 Those investors who use autoregressive pools are set up with multiple predictors, controlled by the *n-predictors* slider; each predictor is set up with up to *n-coefficients* (random selection). After each step the predictors are tuned:
 
@@ -1342,7 +1342,8 @@ Normal usage is to set the sliders and switches to suitable values, then press _
     * **Setup**    Initialize
     * **Step**     Single step for debugging
     * **Go**       Execute model
-    * **Details** Dump data from each agent in each step for analysis
+    * **Details**  Dump data from each agent in each step for analysis
+    * **Flip**     change the pool that the cartels members squat in.
 
 
  * **Sliders**
@@ -1392,7 +1393,8 @@ Normal usage is to set the sliders and switches to suitable values, then press _
 
 ## THINGS TO NOTICE
 
-(suggested things for the user to notice while running the model)
+ * Do pools reach an equilibrium with returns approximately equal to stable poll?
+ * more
 
 ## THINGS TO TRY
 
@@ -1404,7 +1406,7 @@ Normal usage is to set the sliders and switches to suitable values, then press _
 
 ## NETLOGO FEATURES
 
-Netlogo suports only one level of inhritance, and I needed more, as the model useds different type of investors.  Netlogo supports indirect function calls, though the _runresult_ command, so I decided to create _predictors_, functions which would attempt to forecat the likly payout for each pool. But some of these functions need parameters which vary from one agent (hence one bound instance of the function) to another. But the number and type of parameters vary from one type of predictor to another. I therefore could not store the parameters in the agent.
+Netlogo suports only one level of inheritance, and I needed more, as the model used different type of investors.  Netlogo supports indirect function calls, though the _runresult_ command, so I decided to create _predictors_, functions which would attempt to forecat the likly payout for each pool. But some of these functions need parameters which vary from one agent (hence one bound instance of the function) to another. But the number and type of parameters vary from one type of predictor to another. I therefore could not store the parameters in the agent.
 
 Eventually I decided to use a trick, which I first saw in [Structure and Interpretation of Computer Programs, by Harold Abelson, Gerald Jay Sussman, and Julie Sussman , MIT Press, 1985](https://mitpress.mit.edu/sites/default/files/sicp/index.html). Each predictor is a [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)), with its parameters bound in. If a predictor needs to be cloned, with mutated paramters, we product a new closure, as shown in the following example.
 
@@ -2097,6 +2099,74 @@ NetLogo 6.0.3
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-coefficients">
       <value value="9"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="many-investors" repetitions="25" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="100"/>
+    <metric>census POOL-STABLE</metric>
+    <metric>outgoings POOL-STABLE</metric>
+    <metric>census POOL-LOW</metric>
+    <metric>outgoings POOL-LOW</metric>
+    <metric>census POOL-HIGH</metric>
+    <metric>outgoings POOL-HIGH</metric>
+    <metric>mean [wealth] of investors</metric>
+    <metric>standard-deviation [wealth] of investors</metric>
+    <metric>mean [sum-squares-error] of investors</metric>
+    <enumeratedValueSet variable="max-payoff-high">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-ticks">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-low">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-history">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-investors">
+      <value value="100"/>
+      <value value="200"/>
+      <value value="500"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-high">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-low">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-high">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sigma-mutation">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="randomize-step">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-payoff-low">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-coefficients">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-experiencers">
+      <value value="0"/>
+      <value value="0.25"/>
+      <value value="0.5"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>

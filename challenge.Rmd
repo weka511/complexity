@@ -29,7 +29,7 @@ The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behavio
 
 # Background
 
-Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether or not to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. Arthur assumed that the visit would be enjoyable if 60 or fewer people attended. He noted that there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction.[^1] 
+Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. Arthur assumed that the visit would be enjoyable if 60 or fewer people attended. He noted that there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction.[^1] 
 Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance; poorly performing strategies are replaced by ones that have proven more accurate on recent data. Subsequently David Fogel applied evolutionaty computing to the problem
 [@fogel1999inductive]; linear autoregressive strategies were bred, mutated, and the weakest culled, so that new strategies could be inferred.
 
@@ -44,10 +44,12 @@ I developed two Netlogo[@Wilensky:1999] models, _sheep-wall-stret.nlogo_ and _ch
 
  * The first followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include _stay in pool_, _jump at random_, and _estimate length_--- to select pool offering the best likely return. Each agent kept track of the performance of the strategies in its bag, and replaced them if they are not doing well. The limitation of this  approach is that new strategies cannot arise.
   * _Challenge.nlogo_ uses the approach of Fogel [@fogel1999inductive]---a genetic algorithm that breeds autoregressive models. It represents Investors and Pools as separate Breeds of Agents. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}. There are three types of agents:
-    1. the outer circle of fish in  Figure \ref{fig:ui} represent autoregressive agents, who use the  number and payoff historical data for both pools;
-    1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs);
-    1. the sharks in Figure \ref{fig:ui-cartel}  unlawfully form a cartel. They share information and try to manipulate the numbers in one pool to maximise their profit. They are discussed in Section \ref{heading:violate-sssumptions}. 
+    1. The outer circle of fish in  Figure \ref{fig:ui} represent autoregressive agents, who use the  number and payoff historical data for both pools;
+    1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs)[@hill2009knowing];
+    1. the sharks in Figure \ref{fig:ui-cartel}  unlawfully form a cartel. They share information and try to manipulate the numbers in one pool to maximise their profit. They are discussed in Section \ref{heading:violate-sssumptions}.
 
+I used a trick described in [@Abelson:1985:SIC:26777] to represent predictors as closures.
+c
 _Challenge.nlogo_ was executed by the BehaviourSpace tool of Netlogo, which performed `r n.repetitions` repetitions. The model can also dump data for each step, e.g. for Figure \ref{fig:plot_individual01}. I used `r R.Version()$version.string` [@rcore2018r] to analyze the data, and an RMarkdown[@allaire2018rmarkdown] script to present the results, as suggested by Rosanna van Hespen[@vanhespen2016thesis]. 
 
 #Results
@@ -86,7 +88,9 @@ Figure\ref{fig:cartel_return} shows the return from the cartel. It scarcely seem
 Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically total wealth increases with $\tau$. Figure \ref{fig:tau_error} shows that the transients in the total error are damped when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discourages agents from jumping from pool to pool.
 
 
-###   Varying of total number of agents
+###   Varying total number of agents
+
+Figure \ref{fig:many_investors} shows the effect of varying the number of agents.
 
 #Discussion
 
@@ -241,6 +245,20 @@ plot(aa5$X_step_,aa5$mean__sum_squares_error__of_investors,type="l",col="slategr
 cartel.data<-read.cartel()
 plot.cartel(cartel.data )
 ```
+
+```{r plot_many_investors, echo=FALSE,fig.cap="\\label{fig:many_investors}Many Investors",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+many.investors.data<-fix.column.names(read.nlogo.experiment(file.name="challenge-many-investors-table.csv"))
+many.investors.last.step.data<-get.last.step.data( many.investors.data)
+many.investors.means<-aggregate(many.investors.last.step.data,by=list(many.investors.last.step.data$tau,many.investors.last.step.data$n_investors,many.investors.last.step.data$p_experiencers),FUN=mean,na.rm=TRUE)
+plot.many.investors.pools(many.investors.means)
+plot.many.investors.pools(many.investors.means,tau=1)
+plot.many.investors.pools(many.investors.means,tau=5)
+plot.many.investors.pools(many.investors.means,p_experiencers=0.5)
+plot.many.investors.pools(many.investors.means,tau=1,p_experiencers=0.5)
+plot.many.investors.pools(many.investors.means,tau=5,p_experiencers=0.5)
+
+```
+
 #References
  
  

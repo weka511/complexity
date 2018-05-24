@@ -24,6 +24,10 @@ rm(list=ls())
 
 library(plyr)
 
+# fix.column.names
+#
+# Remove dots from column names, as they confuse R: foo$bar_baz is OK, but foo$bar.baz is not.
+
 fix.column.names<-function(my.df){
   i <- 1
   for (name in colnames(my.df)) {
@@ -47,11 +51,14 @@ read.nlogo.experiment <-
         quote = "\"",
         fill = TRUE
       ))) }
-  
+
+get.last.step.data <- function(my.df){
+  return(my.df[my.df$X_step_ == max(my.df$X_step_), ])
+} 
+
 get.tau <-
   function (path.name="C:/Users/Weka/201804/Experiments",file.name="take2 experiment-table.csv") {
-    my.df = read.nlogo.experiment(path.name,file.name)
-    return(my.df[my.df$X_step_ == max(my.df$X_step_), ])
+    return (get.last.step.data( read.nlogo.experiment(path.name,file.name)))
   }
   
 extract.tau<-function(tau.data,can_borrow=TRUE,randomize_step=TRUE){
@@ -212,5 +219,21 @@ plot.cartel<-function(cartel.data) {
   legend('topleft',c("tau=0","tau=1","Stable Pool"),col=col,lty=c('solid','solid','dashed'))
 }
 
-
+plot.many.investors.pools<-function(many.investors.means,tau=0,p_experiencers=0.25) {
+  my.data<- many.investors.means[many.investors.means$tau==tau &
+                                   many.investors.means$p_experiencers==p_experiencers,]
+  max.census=max(c(max(my.data$census_POOL_STABLE),
+                   max(my.data$census_POOL_LOW),
+                   max(my.data$census_POOL_LOW)))
+  plot(100:500,100:500,type='n', 
+       xlim=c(min(many.investors.means$n_investors),max(many.investors.means$n_investors)),
+       ylim=c(0,max.census),main=sprintf("tau=%d, p_experiencers=%.2sf",tau,p_experiencers))
+  lines( my.data$n_investors, my.data$census_POOL_STABLE,type='l',col="green")
+  lines( my.data$n_investors, my.data$census_POOL_LOW,type='l',col="yellow")
+  lines( my.data$n_investors, my.data$census_POOL_HIGH,type='l',col="red")
+  lines(my.data$n_investors, rep(20,length(my.data$n_investors),type='l',lty='dashed',col='gray'))
+  legend('topleft',
+         c("Stable","Low","High","profitable"),col=c("green","yellow","red","grey"),
+         lty=c('solid','solid','solid','dashed'))
+}
  
