@@ -4,7 +4,8 @@ breed [pools pool]
 
 breed [investors investor]
 
-globals [flip-pool]
+globals [flip-pool]      ;; used to control the pool that cartel members camp in
+
 pools-own [
   pool-number            ;; Distinguish each pool from the others
   max-payoff             ;; Amount to be distributed if there is any payout
@@ -56,7 +57,7 @@ to setup
   ]
 
   create-ordered-investors  n-experiencers [
-    initialize-investor "fish 2" radius-inner-circle (list [[func a b c d] -> experience-predictor func a b c d ]) False
+    initialize-investor "fish 2" radius-inner-circle (list [[func a b c d] -> experience-predictor func a b c d [-> stop-learning-when-enough-data (1 + random 5) ]]) False
   ]
 
   create-ordered-investors n-cartel[
@@ -66,9 +67,29 @@ to setup
   reset-ticks
 end
 
-to flip
-  set flip-pool (flip-pool + 1) mod 3
+;; get-choice-count
+;;
+;; Determine the number of choices that match a specified pool
+to-report get-choice-count [value]
+  report reduce + (map [choice -> ifelse-value (choice = value) [1][0] ] my-choices)
 end
+
+;; stop-learning-when-enough-data
+;;
+;; Used to stop learning when we have a specified insances of each pool
+
+to-report stop-learning-when-enough-data [n]
+  report get-choice-count POOL-STABLE > n and  get-choice-count POOL-LOW > n and get-choice-count POOL-HIGH > n
+end
+
+;; stop-learning-at-tick
+;;
+;; Used to stop lerning at specifed tick
+to-report stop-learning-at-tick [n]
+  report ticks > n
+end
+
+
 ;; Setup properties for one  pool
 to initialize-pool [next-pool]
   fd 1
@@ -342,59 +363,30 @@ to-report cartel-predictor  [function low-payoff high-payoff low-number high-num
   report NOTHING
 end
 
-;; get-hamming-distanc
+
+
+;; experience-predictor
 ;;
-;; Calculate Hamming distance bwteeen two lists
-;;
-to-report get-hamming-distance [list1 list2]
-  report reduce + (map [ [a b] -> abs(a - b)] list1 list2)
-end
+;; The experience-predictor uses its memory of previous actaions and payouts to rcommend an action
 
-to-report get-match-metrics [target payoff]
-  report  (map [i -> ifelse-value ((i + length target)<(length payoff)) [get-hamming-distance target sublist payoff i (i + length target)][MISMATCH]]  range length payoff)
-end
-
-
-
-to-report best-matches [choice match-metrics]
-  let best-index -1
-  let best-value MISMATCH
-  let i 0
-  while [i < length match-metrics] [
-    if item i match-metrics < best-value and choice = item i my-choices[
-      set best-index i
-      set best-value item i match-metrics
-    ]
-    set i i + 1
-  ]
-  report best-index
-end
-
-to-report get-matches [low-payoff  high-payoff low-number high-number ]
-  let n-current-memory min (list n-memory length low-payoff)
-  let target-low (map ([i ->  item i low-payoff ]) (range n-current-memory))
-  let target-high (map ([i -> item i high-payoff]) (range n-current-memory))
-  let match-metrics (map [[a b] -> a + b] (get-match-metrics target-low low-payoff)  (get-match-metrics target-high high-payoff))
-  report  (list (best-matches POOL-STABLE match-metrics) (best-matches POOL-LOW match-metrics) (best-matches POOL-HIGH match-metrics))
-end
-
-to-report experience-predictor  [function low-payoff high-payoff low-number high-number]
+to-report experience-predictor  [function low-payoff high-payoff low-number high-number stop-learning]
 
   if function = ID [report 0]
 
   if function = INIT [  ]
 
   if function = PREDICT [
-    let indices get-matches  low-payoff  high-payoff low-number high-number
-    ifelse length indices > 0 and length low-payoff > 4 [
+    ifelse runresult stop-learning [
+      let indices get-matches  low-payoff  high-payoff low-number high-number
       let potential-payoffs (map [i -> ifelse-value(i > -1) [item i  my-payoffs][0]] indices)
       report (map [v -> ifelse-value (v > 0) [max (list v epsilon-steady)][epsilon-steady]] potential-payoffs)
-    ][
+    ][ ;; We don't have enough data, so collect some more
+      let zeroes (list 0 0 0)
       let index random 3
-      report (list  (ifelse-value (index = 0) [20][0]) (ifelse-value (index = 1) [20][0]) (ifelse-value (index = 2) [20][0]))
-    ]]
+      report replace-item index zeroes  100
+  ]]
 
-  if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d ]) ]
+  if function = CLONE [  report (list [[func a b c d] -> experience-predictor func a b c d stop-learning]) ]
   if function = EVALUATE [report 0]
   report NOTHING
 end
@@ -490,6 +482,67 @@ to-report new-length [coefficients]
   report result
 end
 
+
+;; get-hamming-distanc
+;;
+;; Calculate Hamming distance bwteeen two lists
+;;
+to-report get-hamming-distance [list1 list2]
+  report reduce + (map [ [a b] -> abs(a - b)] list1 list2)
+end
+
+;; get-match-against-substring
+;;
+;; Compare target with a substring of the payoff with matching length
+to-report get-match-against-substring [i target payoff]
+  ifelse (i + length target)<(length payoff)[
+    let candidate sublist payoff i (i + length target)
+    report get-hamming-distance target candidate
+  ][
+    report MISMATCH
+  ]
+end
+
+;;  get-match-metrics
+;;
+;; Attempt to match target against every substring (of matching length) of payoff
+to-report get-match-metrics [target payoff]
+  report  (map [i -> get-match-against-substring i target payoff]  range length payoff)
+end
+
+;;  get-best-matches
+;;
+;; Determine the index of the match metric tht best matches the specified choice
+to-report get-best-matches [choice match-metrics]
+  let best-index -1
+  let best-value -1
+  let i 0
+  while [i < length match-metrics] [
+    if choice = item i my-choices [
+      if best-value = -1 or item i match-metrics < best-value [
+        set best-index i
+        set best-value item i match-metrics
+      ]
+    ]
+    set i i + 1
+  ]
+  report best-index
+end
+
+;;get-matches
+;;
+;; Determine the best match for each of the three possible choices
+to-report get-matches [low-payoff  high-payoff low-number high-number ]
+  let n-current-memory min (list n-memory length low-payoff)
+  let target-low (map ([i ->  item i low-payoff ]) (range n-current-memory))
+  let target-high (map ([i -> item i high-payoff]) (range n-current-memory))
+  let match-metrics (map [[a b] -> a + b] (get-match-metrics target-low low-payoff)  (get-match-metrics target-high high-payoff))
+  report  (list
+    (get-best-matches POOL-STABLE match-metrics)
+    (get-best-matches POOL-LOW match-metrics)
+    (get-best-matches POOL-HIGH match-metrics))
+end
+
 ;; Estimate return from historical data
 to-report estimate-return [mypayoffs mynumbers]
 ;  let weighted-payoffs reduce + (map [[a b]-> a * max (list 1 b)] mypayoffs mynumbers)
@@ -524,6 +577,18 @@ to-report expand-investor [me my-wealth my-payoffs0 my-choices0 my-strategy-clas
   report (map [i -> (list i me my-wealth item i my-payoffs0 item i my-choices0 my-strategy-class tau)] range length my-choices0 )
 end
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; flip
+;;
+;; Move cartel to a different pool
+
+to flip
+  set flip-pool (flip-pool + 1) mod 3
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; output-investor-details
 ;;
 ;; Create a CSV file with details of each turtle
@@ -790,7 +855,7 @@ n-investors
 0
 200
 100.0
-10
+25
 1
 NIL
 HORIZONTAL
@@ -804,7 +869,7 @@ n-ticks
 n-ticks
 0
 1000
-1000.0
+100.0
 5
 1
 NIL
@@ -819,7 +884,7 @@ tau
 tau
 0
 20
-0.0
+5.0
 1
 1
 NIL
@@ -874,7 +939,7 @@ n-coefficients
 n-coefficients
 1
 25
-12.0
+25.0
 1
 1
 NIL
@@ -1120,7 +1185,7 @@ p-experiencers
 p-experiencers
 0
 1
-0.1
+0.25
 0.05
 1
 NIL
