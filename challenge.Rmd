@@ -58,6 +58,8 @@ _Challenge.nlogo_ was executed by the BehaviourSpace tool of Netlogo, which perf
 
 _What general behaviors arise in this system?  How does the wealth of the agents change over time? At the aggregate level? At the individual level?_
 
+What effect do the initial conditions have on the results. According to [@sep-ergodic-hierarchy], a system is _ergodic_ iff $f* =\bar f$, where $f*$ is the infinite time average and $\bar f$ the space average for all complex-valued Lebesgue integrable functions $f$ almost everywhere, meaning for almost all initial conditions
+
 Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth of wealth, over a range of values for $\tau$, and for the number of coefficients in predictors, and the number of predictors in the pool. Figures \ref{fig:plot_outgoings0} and \ref{fig:plot_outgoings1} show the return per investor in each pool: notice that they tend to stablize with returns that are roughly comparable. Figures \ref{fig:plot_sq0} and \ref{fig:plot_sq1} show the squared error of the best predictor in each pool. Each figure is plotted using data from `r n.repetitions` separate runs of the model.
 
 Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show the growth of wealth for a few of the richest individuals, a few of the poorest, and a few in the middle. Since it seems reasonable to expect a strategy to do better than random assignment, assuming it is any good, Figure \ref{fig:plot_individual_random} show the results of random decisions for comparison.
@@ -81,18 +83,15 @@ I implemented a _cartel_, where some agents agree to monopolize one pool for the
 
 Figure\ref{fig:cartel_return} shows the return from the cartel. It scarcely seems worth the risk of ending up in Sante Fe jail for attmpting to rig the market.
 
-##Changes
-
-### Variation of $\tau$
+##Changes-- Variation of $\tau$ and of total number of agents
 
 Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically total wealth increases with $\tau$. Figure \ref{fig:tau_error} shows that the transients in the total error are damped when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discourages agents from jumping from pool to pool.
-
-
-###   Varying total number of agents
 
 Figure \ref{fig:many_investors} shows the effect of varying the number of agents.
 
 #Discussion
+
+
 
 #Acknowledgements
 

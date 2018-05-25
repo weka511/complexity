@@ -271,10 +271,8 @@ to-report advice-is-credible [recommended-pool predicted-benefit]
                                    ;; or we can't borrow,
                                    ;; then the decision has already been made for us.
                                    ;; Here we need to investigate further
-    let length-history length filter [choice -> choice = recommended-pool] my-choices
-    ifelse length-history > 0 [ ;; do we have any history of trying this choice?
-      ;; Calculate average payoff
-      let payoff-historical  (reduce + (map [i -> ifelse-value (item i my-choices = recommended-pool)[item i  my-payoffs][0]] range length my-payoffs)) / (length-history)
+    ifelse length filter [choice -> choice = recommended-pool] my-choices > 0 [ ;; do we have any history of trying this choice?
+      let payoff-historical outgoings recommended-pool
       ;; Accept or not, in proportion to payoff-historical : tau-weight * tau
       report random-float (payoff-historical + tau-weight * tau) < payoff-historical
     ][ ;; no history, so try with probability epsilon
@@ -594,7 +592,8 @@ end
 ;; Payment per tick
 to-report outgoings [pool-no]
   let mypools pools with [pool-number = pool-no]
-  let non-zero-payoffs (map [[p n] -> ifelse-value (n > 0)[p][0]] (first [payoffs] of mypools) (first [numbers] of mypools) )
+;  let non-zero-payoffs (map [[p n] -> ifelse-value (n > 0)[p][0]] (first [payoffs] of mypools) (first [numbers] of mypools) )
+  let non-zero-payoffs (first [payoffs] of mypools)
   report  ifelse-value (ticks > 0) [sum non-zero-payoffs / ticks][0];
 end
 
@@ -853,7 +852,7 @@ p-start-low
 p-start-low
 0
 1
-0.1
+1.0
 .05
 1
 NIL
@@ -868,7 +867,7 @@ p-start-high
 p-start-high
 0
 1
-0.1
+1.0
 0.05
 1
 NIL
@@ -883,7 +882,7 @@ n-investors
 n-investors
 0
 200
-500.0
+100.0
 25
 1
 NIL
@@ -913,7 +912,7 @@ tau
 tau
 0
 20
-5.0
+0.0
 1
 1
 NIL
@@ -1199,7 +1198,7 @@ epsilon
 epsilon
 0
 1
-0.5
+1.0
 0.05
 1
 NIL
@@ -1214,7 +1213,7 @@ p-experiencers
 p-experiencers
 0
 1
-0.5
+0.0
 0.05
 1
 NIL
@@ -1364,10 +1363,11 @@ Normal usage is to set the sliders and switches to suitable values, then press _
     * **benefit-weight** Amount of weight we give to estimated benefit when comparing with tau
     * **sigma-mutation** Standard deviation when we mutate coefficients
     * **epsilon** This is used to decide whether or not to accept a recommendation to try a different pool, but we have not history to guide us. Accept recommendation with probability *epsilon*.
-    * **p-experiencers**
-    * **n-memory**
-    * **epsilon-steady**
+    * **p-experiencers** Controls number of experience-based predictors: this is the probability that a newly created agent will use an experience-based predictor.
+    * **n-memory** The number of time steps that an experience based predictor remembers,
+    * **epsilon-steady** Lower bound on predicted payoffs for experience predictors
     * **n-cartel** Create a cartel who try to manipulate other agents into deserting the High Risk pool. 
+
 
  * **Switches**
     * **randomize step** Controls whether model always follows recommendation, or selects a pool at random, with probability determined by estimated benefit.
@@ -2167,6 +2167,85 @@ NetLogo 6.0.3
       <value value="0"/>
       <value value="0.25"/>
       <value value="0.5"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="transients" repetitions="5" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>census POOL-STABLE</metric>
+    <metric>census POOL-LOW</metric>
+    <metric>census POOL-HIGH</metric>
+    <enumeratedValueSet variable="max-payoff-high">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-ticks">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-low">
+      <value value="0"/>
+      <value value="0.3333"/>
+      <value value="0.6666"/>
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-experiencers">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-history">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="g-random-jump">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau-weight">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-investors">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-cartel">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-low">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-memory">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-high">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sigma-mutation">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-high">
+      <value value="0"/>
+      <value value="0.3333"/>
+      <value value="0.6666"/>
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="randomize-step">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="epsilon">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-payoff-low">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="epsilon-steady">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-coefficients">
+      <value value="10"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>

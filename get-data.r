@@ -227,13 +227,83 @@ plot.many.investors.pools<-function(many.investors.means,tau=0,p_experiencers=0.
                    max(my.data$census_POOL_LOW)))
   plot(100:500,100:500,type='n', 
        xlim=c(min(many.investors.means$n_investors),max(many.investors.means$n_investors)),
-       ylim=c(0,max.census),main=sprintf("tau=%d, p_experiencers=%.2sf",tau,p_experiencers))
+       ylim=c(0,max.census),main=sprintf("tau=%d, experiencers=%.0f%%",tau,100*p_experiencers))
   lines( my.data$n_investors, my.data$census_POOL_STABLE,type='l',col="green")
   lines( my.data$n_investors, my.data$census_POOL_LOW,type='l',col="yellow")
   lines( my.data$n_investors, my.data$census_POOL_HIGH,type='l',col="red")
-  lines(my.data$n_investors, rep(20,length(my.data$n_investors),type='l',lty='dashed',col='gray'))
+  lines( my.data$n_investors, rep(20,length(my.data$n_investors),type='l',lty='dashed',col='grey'))
   legend('topleft',
          c("Stable","Low","High","profitable"),col=c("green","yellow","red","grey"),
          lty=c('solid','solid','solid','dashed'))
+}
+
+analyze.ergodicity<-function(ergodic.data,
+                             cols=c("X_run_number_",
+                                   "p_start_low",
+                                   "p_start_high",
+                                   "X_step_",
+                                    "census_POOL_STABLE",
+                                    "census_POOL_LOW",
+                                    "census_POOL_HIGH"),
+                             n=7,
+                             nsigma=1.0) {
+  ergodic.data.reduced<-ergodic.data[ergodic.data$p_start_low+ergodic.data$p_start_high<=1.0,cols]
+ 
+  colnames(ergodic.data.reduced)=cols
+  my.means<-aggregate( ergodic.data.reduced,
+                       by=list( ergodic.data.reduced$X_run_number_,
+                                ergodic.data.reduced$p_start_low,
+                                ergodic.data.reduced$p_start_high),
+                       FUN=mean,
+                       na.rm=TRUE)
+ # my.means<-my.means[,cols]
+  my.sigmas<-aggregate( ergodic.data.reduced,
+                       by=list( ergodic.data.reduced$X_run_number_,
+                                ergodic.data.reduced$p_start_low,
+                                ergodic.data.reduced$p_start_high),
+                       FUN=sd,
+                       na.rm=TRUE)
+ # my.sigmas<-my.sigmas[,cols]
+  joined<-merge(my.means,my.sigmas,by=c("Group.1","Group.2","Group.3"))
+  is.within.limits<-function(low,x,y) {return (low <x && x < y) }
+  
+  for (i in 1:nrow(joined)) {
+    rolling.averages<-get.rolling.averages(ergodic.data.reduced,joined[i,4],joined[i,5],joined[i,6],n=n)
+    stable.pool0 <- joined$census_POOL_STABLE.x - nsigma * joined$census_POOL_STABLE.y
+    stable.pool1 <- joined$census_POOL_STABLE.x + nsigma * joined$census_POOL_HIGH.y
+    low.pool0    <- joined$census_POOL_LOW.x - nsigma * joined$census_POOL_LOW.y
+    low.pool1    <- joined$census_POOL_LOW.x + nsigma * joined$census_POOL_LOW.y
+    high.pool0   <- joined$census_POOL_HIGH.x - nsigma * joined$census_POOL_HIGH.y
+    high.pool1   <- joined$census_POOL_HIGH.x + nsigma * joined$census_POOL_HIGH.y
+    first = -1
+    for (j in 1:nrow(rolling.averages)){
+      if (is.within.limits(stable.pool0, rolling.averages$Stable[j],stable.pool1) &&
+          is.within.limits(low.pool0, rolling.averages$Low[j],low.pool1) &&
+          is.within.limits(high.pool0, rolling.averages$High[j],high.pool1)) {
+        if (first == -1) {
+          first = j
+        } 
+      } else {
+        first = -1
+      }
+    }
+    print (first)
+  }
+}
+
+
+
+get.rolling.averages<-function(ergodic.data.reduced,key1,key2,key3,eps=0.001,n=7){
+  mav <- function(x,n){filter(x,rep(1/n,n), sides=2)}
+  one.run.data <- ergodic.data.reduced[abs(ergodic.data.reduced$X_run_number -  key1) < eps &
+                                         abs(ergodic.data.reduced$p_start_low - key2) < eps &
+                                         abs(ergodic.data.reduced$p_start_high - key3) < eps, ]
+  averages <- data.frame(
+    mav(one.run.data$census_POOL_STABLE, n),
+    mav(one.run.data$census_POOL_LOW, n),
+    mav(one.run.data$census_POOL_HIGH, n)
+  )
+  colnames(averages) <- c("Stable", "Low", "High")
+  return (na.omit(averages))
 }
  
