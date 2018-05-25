@@ -256,17 +256,18 @@ analyze.ergodicity<-function(ergodic.data,
                                 ergodic.data.reduced$p_start_high),
                        FUN=mean,
                        na.rm=TRUE)
- # my.means<-my.means[,cols]
+ 
   my.sigmas<-aggregate( ergodic.data.reduced,
                        by=list( ergodic.data.reduced$X_run_number_,
                                 ergodic.data.reduced$p_start_low,
                                 ergodic.data.reduced$p_start_high),
                        FUN=sd,
                        na.rm=TRUE)
- # my.sigmas<-my.sigmas[,cols]
+
   joined<-merge(my.means,my.sigmas,by=c("Group.1","Group.2","Group.3"))
   is.within.limits<-function(low,x,y) {return (low <x && x < y) }
   
+  results<-list()
   for (i in 1:nrow(joined)) {
     rolling.averages<-get.rolling.averages(ergodic.data.reduced,joined[i,4],joined[i,5],joined[i,6],n=n)
     stable.pool0 <- joined$census_POOL_STABLE.x - nsigma * joined$census_POOL_STABLE.y
@@ -276,19 +277,30 @@ analyze.ergodicity<-function(ergodic.data,
     high.pool0   <- joined$census_POOL_HIGH.x - nsigma * joined$census_POOL_HIGH.y
     high.pool1   <- joined$census_POOL_HIGH.x + nsigma * joined$census_POOL_HIGH.y
     first = -1
+    count = 0
     for (j in 1:nrow(rolling.averages)){
       if (is.within.limits(stable.pool0, rolling.averages$Stable[j],stable.pool1) &&
           is.within.limits(low.pool0, rolling.averages$Low[j],low.pool1) &&
           is.within.limits(high.pool0, rolling.averages$High[j],high.pool1)) {
         if (first == -1) {
           first = j
+          count = 0
         } 
       } else {
-        first = -1
+        count = count + 1
+        if (count > 2) {
+          first = -1
+        }
+        
       }
     }
-    print (first)
+    
+    results<-append(results,if (first>0) first+floor(n/2) else nrow(rolling.averages)+floor(n/2))
+ 
   }
+  joined$onset<-results
+#  as.numeric(as.character(joined$onset))
+  return (joined)
 }
 
 

@@ -58,7 +58,7 @@ _Challenge.nlogo_ was executed by the BehaviourSpace tool of Netlogo, which perf
 
 _What general behaviors arise in this system?  How does the wealth of the agents change over time? At the aggregate level? At the individual level?_
 
-What effect do the initial conditions have on the results. According to [@sep-ergodic-hierarchy], a system is _ergodic_ iff $f* =\bar f$, where $f*$ is the infinite time average and $\bar f$ the space average for all complex-valued Lebesgue integrable functions $f$ almost everywhere, meaning for almost all initial conditions
+What effect do the initial conditions have on the results. According to [@sep-ergodic-hierarchy], a system is _ergodic_ iff $f* =\bar f$, where $f*$ is the infinite time average and $\bar f$ the space average for all complex-valued Lebesgue integrable functions $f$ almost everywhere, meaning for almost all initial conditions. See Figure \ref{fig:plot_ergodic}
 
 Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth of wealth, over a range of values for $\tau$, and for the number of coefficients in predictors, and the number of predictors in the pool. Figures \ref{fig:plot_outgoings0} and \ref{fig:plot_outgoings1} show the return per investor in each pool: notice that they tend to stablize with returns that are roughly comparable. Figures \ref{fig:plot_sq0} and \ref{fig:plot_sq1} show the squared error of the best predictor in each pool. Each figure is plotted using data from `r n.repetitions` separate runs of the model.
 
@@ -102,6 +102,18 @@ knitr::include_graphics('view.jpg')
 
 ```
 
+```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+n=7
+nsigma=1.0
+ergodic.data<-read.nlogo.experiment(file.name = "challenge-transients-table1.csv")
+ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma)
+hist(as.numeric(ergodic.metrics$onset),
+     main = sprintf("End of transient behaviour using %d point moving average and nsigma = %.1f",n,nsigma),
+     xlab="Onset of ergodicity",
+     border="blue", 
+     col="green",
+     las=1)
+```
 
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Wealth with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
