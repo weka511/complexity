@@ -102,20 +102,38 @@ knitr::include_graphics('view.jpg')
 
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour",warning=FALSE, out.width='.9\\linewidth', fig.width=8, fig.height=8,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 n=7
 nsigma=1.0
 ergodic.data<-read.nlogo.experiment(file.name = "challenge-transients-table.csv")
-ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma)
+ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=0)
 onset<-as.numeric(ergodic.metrics$onset)
 hist(onset,
-     main = sprintf("End of transient behaviour using %d point moving average and nsigma = %.1f",n,nsigma),
+     main = sprintf("End of transient behaviour, tau=0",n,nsigma),
      xlab="Onset of ergodicity",
-     border="blue", 
-     col="green",
+     col="blue",
      las=1,
      prob=TRUE)
 lines(density(onset))
+ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=1)
+onset<-as.numeric(ergodic.metrics$onset)
+hist(onset,
+     main = sprintf("End of transient behaviour, tau=1",n,nsigma),
+     xlab="Onset of ergodicity",
+     col="blue",
+     las=1,
+     prob=TRUE)
+lines(density(onset))
+ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=5)
+onset<-as.numeric(ergodic.metrics$onset)
+hist(onset,
+     main = sprintf("End of transient behaviour, tau=5",n,nsigma),
+     xlab="Onset of ergodicity",
+     col="blue",
+     las=1,
+     prob=TRUE)
+lines(density(onset))
+#legend('topleft')
 ```
 
 

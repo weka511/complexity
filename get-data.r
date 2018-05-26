@@ -242,12 +242,16 @@ analyze.ergodicity<-function(ergodic.data,
                                    "p_start_low",
                                    "p_start_high",
                                    "X_step_",
+                                   "tau",
                                     "census_POOL_STABLE",
                                     "census_POOL_LOW",
                                     "census_POOL_HIGH"),
                              n=7,
-                             nsigma=1.0) {
-  ergodic.data.reduced<-ergodic.data[ergodic.data$p_start_low+ergodic.data$p_start_high<=1.0,cols]
+                             nsigma=1.0,
+                             tau=1) {
+  ergodic.data.reduced<-ergodic.data[
+                          ergodic.data$p_start_low+ergodic.data$p_start_high<=1.0 & ergodic.data$tau==tau,
+                          cols]
  
   colnames(ergodic.data.reduced)=cols
   my.means<-aggregate( ergodic.data.reduced,
