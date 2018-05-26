@@ -25,12 +25,12 @@ netlogo.data<-read.nlogo.experiment(file.name='take2 experiment-table-new.csv')
 ```
 
 # Introduction
-The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behaviour of investors choosing between three pools, one providing a stable income stream, and two others offering riskier, but potentially higher, returns. The Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32]: each investor has access to historical data --- their own choices and payoffs, and aggregate data for each pool --- but no information about fundamentals --- such as the fact the High Risk Pool is likely to pay out next step because the fund manager invested in a commodity that has become scarce. As expected the simulation supports the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
+The Santa Fe Institute Spring 2018 Challenge[@Challenge:2018] models the behaviour of investors choosing between three pools, one providing a stable income stream, and two others offering riskier, but potentially higher, returns. The Challenge can be interpreted as a simple model of Technical Analysis[@romero2014hedge, pp. 32]: each investor has access to historical data --- their own choices and payoffs, and aggregate data for each pool --- but no information about fundamentals --- such as a model of the High Risk Pool's citeria for paying out. As expected the simulation supports the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
 
 # Background
 
 Brian Arthur [@arthur1994inductive] investigated the behaviour of people deciding whether to visit the El Farol Bar in Santa Fe, guided only be historical attendance data. Arthur assumed that the visit would be enjoyable if 60 or fewer people attended. He noted that there is no rational solution: if an algorithm existed to predict attendance accurately, either everyone would attend, or nobody would, falsifying the prediction.[^1] 
-Instead he modelled Bounded Rationality by equipping each person with a bag of fixed strategies for estimating attendance; poorly performing strategies are replaced by ones that have proven more accurate on recent data. Subsequently David Fogel applied evolutionaty computing to the problem
+Instead he equiped each person with a bag of fixed strategies for estimating attendance; poorly performing strategies are replaced by ones that have proven more accurate on recent data. Subsequently David Fogel applied evolutionaty computing to the problem
 [@fogel1999inductive]; linear autoregressive strategies were bred, mutated, and the weakest culled, so that new strategies could be inferred.
 
 [^1]: "Nobody goes there anymore. It's too crowded".--Yogi Berra.
@@ -40,34 +40,30 @@ The El Farol problem can be generalized to the Minority game [@challet1997emerge
 # Methods
 
 
-I developed two Netlogo[@Wilensky:1999] models, _sheep-wall-stret.nlogo_ and _challenge.nlogo_.
+I developed a Netlogo[@Wilensky:1999] model,  _challenge.nlogo_, which uses the approach of Fogel [@fogel1999inductive]---a genetic algorithm that breeds autoregressive models. It represents Investors and Pools as separate Breeds of Agents. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}. There are three types of agents:
 
- * The first followed the approach of [@arthur1994inductive], using a "bag of strategies" to assign agents to pools. The strategies include _stay in pool_, _jump at random_, and _estimate length_--- to select pool offering the best likely return. Each agent kept track of the performance of the strategies in its bag, and replaced them if they are not doing well. The limitation of this  approach is that new strategies cannot arise.
-  * _Challenge.nlogo_ uses the approach of Fogel [@fogel1999inductive]---a genetic algorithm that breeds autoregressive models. It represents Investors and Pools as separate Breeds of Agents. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}. There are three types of agents:
-    1. The outer circle of fish in  Figure \ref{fig:ui} represent autoregressive agents, who use the  number and payoff historical data for both pools;
-    1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs)[@hill2009knowing];
-    1. the sharks in Figure \ref{fig:ui-cartel}  unlawfully form a cartel. They share information and try to manipulate the numbers in one pool to maximise their profit. They are discussed in Section \ref{heading:violate-sssumptions}.
+ 1. The outer circle of fish in  Figure \ref{fig:ui} represent autoregressive agents, who use the  number and payoff historical data for both pools;
+ 1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs)[@hill2009knowing];
+ 1. the sharks in Figure \ref{fig:ui-cartel}  unlawfully form a cartel--Section \ref{heading:violate-sssumptions}. They share information and try to manipulate the numbers in one pool to maximise their profit.
 
-I used a trick described in [@Abelson:1985:SIC:26777] to represent predictors as closures.
-c
-_Challenge.nlogo_ was executed by the BehaviourSpace tool of Netlogo, which performed `r n.repetitions` repetitions. The model can also dump data for each step, e.g. for Figure \ref{fig:plot_individual01}. I used `r R.Version()$version.string` [@rcore2018r] to analyze the data, and an RMarkdown[@allaire2018rmarkdown] script to present the results, as suggested by Rosanna van Hespen[@vanhespen2016thesis]. 
+I used a trick described in [@Abelson:1985:SIC:26777] to represent predictors as _closures_. "Operationally,"... a closure is a record storing a function together with an environment. ... A closure...allows the function to access those captured variables through the closure's copies of their values or references, even when the function is invoked outside their scope."[@wiki:closure] In short, closures encapsulates data, very much like classes.
+
+_Challenge.nlogo_ was executed by the _BehaviourSpace_ tool of Netlogo, which performed `r n.repetitions` repetitions. The model can also dump data for each step, e.g. for Figure \ref{fig:plot_individual01}. I used `r R.Version()$version.string` [@rcore2018r] to analyze the data, and an RMarkdown[@allaire2018rmarkdown] script to present the results, as suggested by Rosanna van Hespen[@vanhespen2016thesis]. 
 
 #Results
 
-##General Behaviour
+##General Behaviour:  variation of wealth of the agents over time
 
-_What general behaviors arise in this system?  How does the wealth of the agents change over time? At the aggregate level? At the individual level?_
 
-What effect do the initial conditions have on the results. According to [@sep-ergodic-hierarchy], a system is _ergodic_ iff $f* =\bar f$, where $f*$ is the infinite time average and $\bar f$ the space average for all complex-valued Lebesgue integrable functions $f$ almost everywhere, meaning for almost all initial conditions. See Figure \ref{fig:plot_ergodic}
+Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth of aggregate wealth for auto-regressive agents only, over a range of values for $\tau$, and for the number of coefficients in predictors, and the number of predictors in the pool.  Broadly, aggregate wealth tends to increase. Figures \ref{fig:plot_outgoings0} and \ref{fig:plot_outgoings1} show the return per investor in each pool: notice that they tend to stabilize with returns that are _roughly_ comparable, and better than break even for subscribers. Figures \ref{fig:plot_sq0} and \ref{fig:plot_sq1} show the squared error of the best predictor in each pool. Each figure is plotted using data from `r n.repetitions` separate runs of the model. The error does reduce with time, but remains significant in many runs.
 
-Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth of wealth, over a range of values for $\tau$, and for the number of coefficients in predictors, and the number of predictors in the pool. Figures \ref{fig:plot_outgoings0} and \ref{fig:plot_outgoings1} show the return per investor in each pool: notice that they tend to stablize with returns that are roughly comparable. Figures \ref{fig:plot_sq0} and \ref{fig:plot_sq1} show the squared error of the best predictor in each pool. Each figure is plotted using data from `r n.repetitions` separate runs of the model.
+
+
+
+##Diversity: effect of diversity of strategies on dynamics
+
 
 Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show the growth of wealth for a few of the richest individuals, a few of the poorest, and a few in the middle. Since it seems reasonable to expect a strategy to do better than random assignment, assuming it is any good, Figure \ref{fig:plot_individual_random} show the results of random decisions for comparison.
-
-
-##Diversity
-
-_How does the diversity of strategies influence the dynamics of the system?_
 
 ##Agent Behaviour
 
@@ -91,7 +87,7 @@ Figure \ref{fig:many_investors} shows the effect of varying the number of agents
 
 #Discussion
 
-
+I wondered whether 100 steps were enough for the system to settle down, and for the intial conditions to be forgotten. I have used the concept of _ergodicity_ as a guide: very loosely, a system is ergodic if a sufficiently long part of its trajectory can be taken to be represent the entire trajectory. I encoded this as the following _operational definition_: the system can be considered ergodic, and the starting transients are insignificant, if the moving average of $n$ values is within one standard deviation of the mean taken over the entire trajectory. Figure \ref{fig:plot_ergodic} shows the results of taking $n=11$ and running the simulation for 250 steps, for different values of $\tau$, and varying initial allocations to the low and high risk pools. Notice that the transient has disappeared for most runs for $\tau=0$, but most runs are chaotic for $\tau>0$. In retrospect I believe that 100 steps are adequate if the tranjectory is not chaotic; if it is chaotic, increasing the number of steps is unlikely to lead to help. 
 
 #Acknowledgements
 
@@ -102,98 +98,40 @@ knitr::include_graphics('view.jpg')
 ```
 
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour. Plots show the number of steps required before the moving average over a few steps is close to the average over the entire run. We treat this as an estimate of the number of steps required for decay of the transient from starting conditions.",warning=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
-n=11
-nsigma=1.0
-ergodic.data<-read.nlogo.experiment(file.name = "challenge-transients-table.csv")
-ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=0)
-onset<-as.numeric(ergodic.metrics$onset)
-hist(onset,
-     main = sprintf("tau=%d, n=%d, nsigma=%.1f",0,n,nsigma),
-     xlab="Onset of ergodicity",
-     col="blue",
-     las=1,
-     prob=TRUE)
-lines(density(onset))
-
-ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=1)
-onset<-as.numeric(ergodic.metrics$onset)
-hist(onset,
-     main = sprintf("tau=%d, n=%d, nsigma=%.1f",1,n,nsigma),
-     xlab="Onset of ergodicity",
-     col="blue",
-     las=1,
-     prob=TRUE)
-lines(density(onset))
-
-ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=2)
-onset<-as.numeric(ergodic.metrics$onset)
-hist(onset,
-     main = sprintf("tau=%d, n=%d, nsigma=%.1f",2,n,nsigma),
-     xlab="Onset of ergodicity",
-     col="blue",
-     las=1,
-     prob=TRUE)
-lines(density(onset))
 
 
-ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=5)
-onset<-as.numeric(ergodic.metrics$onset)
-hist(onset,
-     main = sprintf("tau=%d, n=%d, nsigma=%.1f",5,n,nsigma),
-     xlab="Onset of ergodicity",
-     col="blue",
-     las=1,
-     prob=TRUE)
-lines(density(onset))
-#legend('topleft')
-```
-
-
-```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Wealth with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Aggregate Wealth with number of coefficients and number of predictors, for $\\tau=0$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.wealth(netlogo.data,tau=0)
-plot.wealth(netlogo.data,tau=0,n_coefficients = 6)
-plot.wealth(netlogo.data,tau=0,n_predictors  = 6)
 plot.wealth(netlogo.data,tau=0,n_coefficients = 6,n_predictors  = 6)
 plot.wealth(netlogo.data,tau=0,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth1}Variation of Wealth with number of coefficients with number of predictors, for $\\tau=1$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth1}Variation of Aggregate Wealth with number of coefficients with number of predictors, for $\\tau=1$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.wealth(netlogo.data,tau=1)
-plot.wealth(netlogo.data,tau=1,n_coefficients = 6)
-plot.wealth(netlogo.data,tau=1,n_predictors  = 6)
 plot.wealth(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.wealth(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_outgoings0}Variation of Payout with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_outgoings0}Variation of Payout per subscriber for $\\tau=0$. NB: payout gradually stabilizes and tends to be confined to a narrow region that is better than break-even for subscribers.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.outgoings(netlogo.data,tau=0)
-plot.outgoings(netlogo.data,tau=0,n_coefficients = 6)
-plot.outgoings(netlogo.data,tau=0,n_predictors  = 6)
 plot.outgoings(netlogo.data,tau=0,n_coefficients = 6,n_predictors  = 6)
 plot.outgoings(netlogo.data,tau=0,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_outgoings1}Variation of Payout with number of coefficients with number of predictors, for $\\tau=1$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_outgoings1}Variation of Payout per subscriber , for $\\tau=1$. NB: payout gradually stabilizes and tends to be confined to a narrow region that is better than break-even for subscribers.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.outgoings(netlogo.data,tau=1)
-plot.outgoings(netlogo.data,tau=1,n_coefficients = 6)
-plot.outgoings(netlogo.data,tau=1,n_predictors  = 6)
 plot.outgoings(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.outgoings(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_sq0}Variation of Error with number of coefficients and number of predictors, for $\\tau=0$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_sq0}Variation of Error for $\\tau=0$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.errors(netlogo.data,tau=0)
-plot.errors(netlogo.data,tau=0,n_coefficients = 6)
-plot.errors(netlogo.data,tau=0,n_predictors  = 6)
 plot.errors(netlogo.data,tau=0,n_coefficients = 6,n_predictors  = 6)
 plot.errors(netlogo.data,tau=0,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_sq1}Variation of Error with number of coefficients with number of predictors, for $\\tau=1$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_sq1}Variation of Error for $\\tau=1$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.errors(netlogo.data,tau=1)
-plot.errors(netlogo.data,tau=1,n_coefficients = 6)
-plot.errors(netlogo.data,tau=1,n_predictors  = 6)
 plot.errors(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.errors(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
@@ -303,6 +241,55 @@ plot.many.investors.pools(many.investors.means,tau=1,p_experiencers=0.5)
 plot.many.investors.pools(many.investors.means,tau=5,p_experiencers=0.5)
 
 ```
+
+```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour. Plots show the number of steps required before the moving average over a few steps is close to the average over the entire run. We treat this as an estimate of the number of steps required for decay of the transient from starting conditions. NB: a value of 250 means that the trajectory has not stabilized, and is possibley chaotic: it does not mean that the trajectory has stabilized magically after 250 steps. ",warning=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+n=11
+nsigma=1.0
+ergodic.data<-read.nlogo.experiment(file.name = "challenge-transients-table.csv")
+ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=0)
+onset<-as.numeric(ergodic.metrics$onset)
+hist(onset,
+     main = sprintf("tau=%d, n=%d, nsigma=%.1f",0,n,nsigma),
+     xlab="Onset of ergodicity",
+     col="blue",
+     las=1,
+     prob=TRUE)
+lines(density(onset))
+
+ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=1)
+onset<-as.numeric(ergodic.metrics$onset)
+hist(onset,
+     main = sprintf("tau=%d, n=%d, nsigma=%.1f",1,n,nsigma),
+     xlab="Onset of ergodicity",
+     col="blue",
+     las=1,
+     prob=TRUE)
+lines(density(onset))
+
+ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=2)
+onset<-as.numeric(ergodic.metrics$onset)
+hist(onset,
+     main = sprintf("tau=%d, n=%d, nsigma=%.1f",2,n,nsigma),
+     xlab="Onset of ergodicity",
+     col="blue",
+     las=1,
+     prob=TRUE)
+lines(density(onset))
+
+
+ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=5)
+onset<-as.numeric(ergodic.metrics$onset)
+hist(onset,
+     main = sprintf("tau=%d, n=%d, nsigma=%.1f",5,n,nsigma),
+     xlab="Onset of ergodicity",
+     col="blue",
+     las=1,
+     prob=TRUE)
+lines(density(onset))
+#legend('topleft')
+```
+
+
 
 #References
  
