@@ -63,7 +63,7 @@ Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth 
 ##Diversity: effect of diversity of strategies on dynamics
 
 
-Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show the growth of wealth for a few of the richest individuals, a few of the poorest, and a few in the middle. Since it seems reasonable to expect a strategy to do better than random assignment, assuming it is any good, Figure \ref{fig:plot_individual_random} show the results of random decisions for comparison.
+Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show the growth of wealth for a few of the richest individuals (measured at the end of the run), a few of the poorest, and a few in the middle.  Notice that the rich are generally agents who showed their promise early, and kept ahead. Since it seems reasonable to expect a strategy to do better than random assignment, assuming it is any good, Figure \ref{fig:plot_individual_random} show the results of random decisions for comparison. Notice that rich individuals tend to be lucky several times, rather than the steady growth shown in Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25}.
 
 ##Agent Behaviour
 
@@ -136,7 +136,7 @@ plot.errors(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.errors(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual01}Growth of wealth for $\\tau \\in \\{0,1\\}$. Results are shown for a few of the richest individuals (judged at the end of the simulation), a few of the poorest, and a few in the middle.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual01}Growth of wealth for $\\tau \\in \\{0,1\\}$. Results are shown for a few of the richest individuals (judged at the end of the simulation), a few of the poorest, and a few in the middle. The figures on the left use linear predictors, those on the right experince.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau0.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
@@ -145,7 +145,7 @@ plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth for $\\tau \\in \\{2,5\\}$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth for $\\tau \\in \\{2,5\\}. The figures on the left use linear predictors, those on the right experince.$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau2.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
