@@ -248,7 +248,8 @@ analyze.ergodicity<-function(ergodic.data,
                                     "census_POOL_HIGH"),
                              n=7,
                              nsigma=1.0,
-                             tau=1) {
+                             tau=1,
+                             max.count=3) {
   ergodic.data.reduced<-ergodic.data[
                           ergodic.data$p_start_low+ergodic.data$p_start_high<=1.0 & ergodic.data$tau==tau,
                           cols]
@@ -292,7 +293,7 @@ analyze.ergodicity<-function(ergodic.data,
         } 
       } else {
         count = count + 1
-        if (count > 2) {
+        if (count > max.count) {
           first = -1
         }
         

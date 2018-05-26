@@ -897,7 +897,7 @@ n-ticks
 n-ticks
 0
 1000
-100.0
+250.0
 5
 1
 NIL
@@ -912,7 +912,7 @@ tau
 tau
 0
 20
-0.0
+5.0
 1
 1
 NIL
@@ -2169,7 +2169,7 @@ NetLogo 6.0.3
       <value value="0.5"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="transients" repetitions="5" runMetricsEveryStep="true">
+  <experiment name="transients" repetitions="10" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <metric>census POOL-STABLE</metric>
@@ -2179,7 +2179,7 @@ NetLogo 6.0.3
       <value value="80"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-ticks">
-      <value value="100"/>
+      <value value="250"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="can-borrow">
       <value value="true"/>
@@ -2231,6 +2231,9 @@ NetLogo 6.0.3
     </enumeratedValueSet>
     <enumeratedValueSet variable="tau">
       <value value="0"/>
+      <value value="1"/>
+      <value value="2"/>
+      <value value="5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-predictors">
       <value value="10"/>

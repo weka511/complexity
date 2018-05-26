@@ -99,35 +99,48 @@ I wish to thank the SFI staff and mentors, and my fellow students for friendly a
 
 ```{r echo=FALSE,fig.cap="Investors are linked to Pools: a happy face represents a pool that has paid out, colours represent risk in a natural way (traffic lights), and the size of each fish correlates to the wealth of an investor.\\label{fig:ui}",warning=FALSE, out.width='.9\\linewidth', fig.width=8, fig.height=8,fig.show='hold',fig.align='center',fig.pos = 'p'}
 knitr::include_graphics('view.jpg')
-
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
-n=7
+
+```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour. Plots show the number of steps required before the moving average over a few steps is close to the average over the entire run. We treat this as an estimate of the number of steps required for decay of the transient from starting conditions.",warning=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+n=11
 nsigma=1.0
 ergodic.data<-read.nlogo.experiment(file.name = "challenge-transients-table.csv")
 ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=0)
 onset<-as.numeric(ergodic.metrics$onset)
 hist(onset,
-     main = sprintf("End of transient behaviour, tau=0",n,nsigma),
+     main = sprintf("tau=%d, n=%d, nsigma=%.1f",0,n,nsigma),
      xlab="Onset of ergodicity",
      col="blue",
      las=1,
      prob=TRUE)
 lines(density(onset))
+
 ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=1)
 onset<-as.numeric(ergodic.metrics$onset)
 hist(onset,
-     main = sprintf("End of transient behaviour, tau=1",n,nsigma),
+     main = sprintf("tau=%d, n=%d, nsigma=%.1f",1,n,nsigma),
      xlab="Onset of ergodicity",
      col="blue",
      las=1,
      prob=TRUE)
 lines(density(onset))
+
+ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=2)
+onset<-as.numeric(ergodic.metrics$onset)
+hist(onset,
+     main = sprintf("tau=%d, n=%d, nsigma=%.1f",2,n,nsigma),
+     xlab="Onset of ergodicity",
+     col="blue",
+     las=1,
+     prob=TRUE)
+lines(density(onset))
+
+
 ergodic.metrics<-analyze.ergodicity(ergodic.data,n=n,nsigma = nsigma,tau=5)
 onset<-as.numeric(ergodic.metrics$onset)
 hist(onset,
-     main = sprintf("End of transient behaviour, tau=5",n,nsigma),
+     main = sprintf("tau=%d, n=%d, nsigma=%.1f",5,n,nsigma),
      xlab="Onset of ergodicity",
      col="blue",
      las=1,
