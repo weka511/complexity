@@ -1,0 +1,7 @@
+"BehaviorSpace results (NetLogo 6.0.3)"
+"challenge.nlogo"
+"envy"
+"05/27/2018 15:57:59:732 +1200"
+"min-pxcor","max-pxcor","min-pycor","max-pycor"
+"-20","20","-20","20"
+"[run number]","max-payoff-high","n-ticks","p-start-low","n-history","n-investors","p-start-high","p-payoff-low","p-payoff-high","sigma-mutation","randomize-step","can-borrow","tau","n-predictors","max-payoff-low","n-coefficients","p-experiencers","envy-thrshold","[step]","census POOL-STABLE","outgoings POOL-STABLE","census POOL-LOW","outgoings POOL-LOW","census POOL-HIGH","outgoings POOL-HIGH","mean [wealth] of investors","standard-deviation [wealth] of investors","mean [sum-squares-error] of investors"

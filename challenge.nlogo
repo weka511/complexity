@@ -32,6 +32,7 @@ investors-own [
   sum-squares-error        ;; Error from predictors to date
   strategy-class           ;; Indicates which class of strategy was used
                            ;; e.g. linear, experience based, cartel
+  paid-tau
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -183,6 +184,7 @@ to go
   ;; Use links to find out how much current pool will pay each investor
   ask investors [
     let delta-wealth 0
+    set paid-tau False
     ask one-of in-link-neighbors [set delta-wealth first payoffs]
     set wealth wealth + delta-wealth
     set my-payoffs fput delta-wealth my-payoffs
@@ -231,13 +233,15 @@ to go
       ][  ;; We need to decide whther or not to accept advice to change pools
         ifelse advice-is-credible recommended-pool predicted-benefit [
           set wealth wealth - tau
+          set paid-tau True
           set my-choices fput recommended-pool my-choices
           ask one-of my-out-links [die]
           create-link-with one-of pools with [pool-number = recommended-pool]
           colourize
         ][
           set my-choices fput current-pool my-choices
-        ]]]]
+        ]]]  ]
+
 
   ;; Breed predictors
 
@@ -259,6 +263,23 @@ to go
       set predictors map [index -> item index predictors] culled-indices
   ]]
 
+  if envy-threshold > 1[
+    ask investors[
+      let my-wealth wealth
+      let high-flyers investors with [wealth > envy-threshold * my-wealth]
+      if any? high-flyers [
+        let a-high-flyer one-of high-flyers
+        let his-choices [my-choices] of a-high-flyer
+        let his-choice first his-choices
+        if his-choice != first my-choices [
+          set my-choices replace-item 0 my-choices first his-choices
+          if not paid-tau[
+            set wealth wealth - tau
+          ]
+        ]
+      ]
+    ]
+  ]
   tick
 end
 
@@ -852,7 +873,7 @@ p-start-low
 p-start-low
 0
 1
-1.0
+0.1
 .05
 1
 NIL
@@ -867,7 +888,7 @@ p-start-high
 p-start-high
 0
 1
-1.0
+0.1
 0.05
 1
 NIL
@@ -897,7 +918,7 @@ n-ticks
 n-ticks
 0
 1000
-250.0
+100.0
 5
 1
 NIL
@@ -1213,7 +1234,7 @@ p-experiencers
 p-experiencers
 0
 1
-0.0
+0.5
 0.05
 1
 NIL
@@ -1308,6 +1329,21 @@ NIL
 NIL
 NIL
 1
+
+SLIDER
+135
+505
+260
+538
+envy-threshold
+envy-threshold
+1
+10
+3.0
+0.25
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -2249,6 +2285,78 @@ NetLogo 6.0.3
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-coefficients">
       <value value="10"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="envy" repetitions="5" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="100"/>
+    <metric>census POOL-STABLE</metric>
+    <metric>outgoings POOL-STABLE</metric>
+    <metric>census POOL-LOW</metric>
+    <metric>outgoings POOL-LOW</metric>
+    <metric>census POOL-HIGH</metric>
+    <metric>outgoings POOL-HIGH</metric>
+    <metric>mean [wealth] of investors</metric>
+    <metric>standard-deviation [wealth] of investors</metric>
+    <metric>mean [sum-squares-error] of investors</metric>
+    <enumeratedValueSet variable="max-payoff-high">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-ticks">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-low">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-history">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-investors">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-start-high">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-low">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-payoff-high">
+      <value value="0.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sigma-mutation">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="randomize-step">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="can-borrow">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tau">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-predictors">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max-payoff-low">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-coefficients">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-experiencers">
+      <value value="0"/>
+      <value value="0.25"/>
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="envy-threshold">
+      <value value="1"/>
+      <value value="1.5"/>
+      <value value="2"/>
+      <value value="3"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
