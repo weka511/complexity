@@ -39,15 +39,15 @@ The  Challenge is related to minority games [@challet1997emergence], where playe
 # Methods
 
 
-I developed a Netlogo[@Wilensky:1999] model,  _challenge.nlogo_, which uses the approach of Fogel [@fogel1999inductive]---a genetic algorithm that breeds autoregressive models. It represents Investors and Pools as separate Breeds of Agents. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}. There are three types of Investors:
+I developed a Netlogo[@Wilensky:1999] model,  _challenge.nlogo_, which uses the approach of Fogel [@fogel1999inductive]---an evolutionary algorithm that breeds autoregressive models. It represents Investors and Pools as separate Breeds of Agents. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}. There are three types of Investors:
 
- 1. The outer circle of fish in  Figure \ref{fig:ui} represent autoregressive agents, who use the  number and payoff historical data for both pools;
+ 1. The outer circle of fish in  Figure \ref{fig:ui} represent autoregressive agents ("linear predictors"), who use the  number and payoff historical data for both pools;
  1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs)[@hill2009knowing];
  1. the sharks in Figure \ref{fig:ui-cartel}  unlawfully form a cartel--Section \ref{heading:violate-sssumptions}. They share information and try to manipulate the numbers in one pool to maximise their profit.
  
  Investors do not know the odds of the high and low risk pools paying out, or the amounts to be divided: they need to estimate these values from history. They do, however, understand that the payout needs to be divided between subscribers.
 
-I used a trick described in [@Abelson:1985:SIC:26777] to represent predictors as _closures_. "... a closure is a record storing a function together with an environment. ... A closure...allows the function to access those captured variables through the closure's copies of their values or references, even when the function is invoked outside their scope."[@wiki:closure] In short, closures encapsulates data, very much like classes.
+I used a trick described by Abelson et al[@Abelson:1985:SIC:26777] to represent agents' strategies as _closures_. "... a closure is a record storing a function together with an environment. ... A closure...allows the function to access those captured variables through the closure's copies of their values or references, even when the function is invoked outside their scope."[@wiki:closure] In short, closures encapsulates data, very much like classes.
 
 _Challenge.nlogo_ was executed by the _BehaviourSpace_ tool of Netlogo, which performed `r n.repetitions` repetitions. The model can also dump data for each step, e.g. for Figure \ref{fig:plot_individual01}. I used `r R.Version()$version.string` [@rcore2018r] to analyze the data, and an RMarkdown[@allaire2018rmarkdown] script to present the results, as suggested by Rosanna van Hespen[@vanhespen2016thesis]. 
 
@@ -56,7 +56,7 @@ _Challenge.nlogo_ was executed by the _BehaviourSpace_ tool of Netlogo, which pe
 ##General Behaviour:  variation of wealth of the agents over time
 
 
-Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth of aggregate wealth for auto-regressive agents only, over a range of values for $\tau$, and for the number of coefficients in predictors, and the number of predictors in the pool.  Broadly, aggregate wealth tends to increase. Figures \ref{fig:plot_outgoings0} and \ref{fig:plot_outgoings1} show the return per investor in each pool: notice that they tend to stabilize with returns that are _roughly_ comparable, and better than break even for subscribers. Figures \ref{fig:plot_sq0} and \ref{fig:plot_sq1} show the squared error of the best predictor in each pool. Each figure is plotted using data from `r n.repetitions` separate runs of the model. The error does reduce with time, but remains significant in many runs.
+Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth of aggregate wealth for auto-regressive agents only, over a range of values for $\tau$, and for the number of coefficients in predictors, and the number of predictors in the pool: aggregate wealth tends to increase. Figures \ref{fig:plot_outgoings0} and \ref{fig:plot_outgoings1} show the return per investor in each pool:  they tend to stabilize with returns that are _roughly_ comparable, and better than break even for subscribers. Figures \ref{fig:plot_sq0} and \ref{fig:plot_sq1} show the squared error of the best predictor in each pool. Each figure is plotted using data from `r n.repetitions` separate runs of the model. The error does reduce with time, but remains significant in many runs.
 
 
 
@@ -68,11 +68,11 @@ Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show the gro
 
 ##Agent Behaviour
 
-Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} suggest that there is relatively little variation between the two main classes of agent, Linear Predictors and Experiencers. On the contrary, variation within a class of agents is much greater. This is in accord with the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
+Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} suggest that there is relatively little variation between the two main classes of agent, Linear Predictors and Conservatives. In contrast, variation within a class of agents is much greater. This is in accord with the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
 
 ##Violate Assumptions: allow  agents to observe the performance and of other  agents\label{heading:violate-sssumptions}
 
-I decided to investigate _envy_: specifically to allow agents to look at the wealth of others and copy the behaviour of one other agent that has more than a certain multiplier of its own wealth. In Figures \ref{fig:plot_individual_envy01} and \ref{fig:plot_individual_envy23}, we look at the behaviour if an agent copies the choices of agents with 1.5, 2.0 or 3 times its own wealth. My first impression is that the behaviour is much less orderly. For a low _envy factor_ the linear predictrs are most affected, but for higher values the experiencers are more affected. NB. A higher the envy factor, means that relatively few high flyers are used as models, so there is more consistency in the intelligence that they provide. 
+I decided to investigate _envy_: specifically to allow agents to look at the wealth of others and copy the choice made by one other agent that has more than a certain multiplier of its own wealth. In Figures \ref{fig:plot_individual_envy01} and \ref{fig:plot_individual_envy23}, we look at the behaviour if an agent copies the choices of agents with 1.5, 2.0 or 3 times its own wealth. My first impression is that the behaviour is much less orderly. For a low _envy factor_ the linear predictrs are most affected, but for higher values the Conservatives are more affected. NB. A higher the envy factor, means that relatively few high flyers are used as models, so there is more consistency in the intelligence that they provide. 
 
 ##Meta-Agents
 
@@ -84,7 +84,7 @@ Figure \ref{fig:cartel_return} shows the return from the cartel. It scarcely see
 
 Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Average wealth increases with $\tau$, since wealth is taken aay from investors. Figure \ref{fig:tau_error} shows that the transients in the total error are damped when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discourages agents from jumping from pool to pool.
 
-Figure \ref{fig:many_investors} shows the effect of varying the number of agents. The number of subscribers in each pool increasses with number of investors, beyond what is profitable. This effect may be caused by experiencers being unduly influenced by the return from a pool "in the good old days".
+Figure \ref{fig:many_investors} shows the effect of varying the number of agents. The number of subscribers in each pool increasses with number of investors, beyond what is profitable. This effect may be caused by Conservatives being unduly influenced by the return from a pool "in the good old days".
 
 #Discussion
 
@@ -137,7 +137,7 @@ plot.errors(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.errors(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual01}Growth of wealth for $\\tau \\in \\{0,1\\}$. Results are shown for a few of the richest individuals (judged at the end of the simulation), a few of the poorest, and a few in the middle. The figures on the left use linear predictors, those on the right experience.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual01}Growth of wealth for $\\tau \\in \\{0,1\\}$. Results are shown for a few of the richest individuals (judged at the end of the simulation), a few of the poorest, and a few in the middle. The figures on the left use linear predictors, those on the right are conservative.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau0.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
@@ -148,7 +148,7 @@ plot.individuals(my.individual.details,my.strategy=0,n=5)
 
 
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth for $\\tau \\in \\{2,5\\}$. The figures on the left use linear predictors, those on the right experience.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth for $\\tau \\in \\{2,5\\}$. The figures on the left use linear predictors, those on the right are conservative.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau2.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
