@@ -72,8 +72,7 @@ Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} suggest that
 
 ##Violate Assumptions: allow  agents to observe the performance and of other  agents\label{heading:violate-sssumptions}
 
-
-I decided to investigate _envy_: specifically to allow agents to look at the wealth of others and copy the behaviour of one other agent that has more than a certain multiplier of its own wealth. In Figure xxx, we look at the behaviour if an agent copies the choices of agents with 1.5, 2.0 or 3 times its own wealth.
+I decided to investigate _envy_: specifically to allow agents to look at the wealth of others and copy the behaviour of one other agent that has more than a certain multiplier of its own wealth. In Figures \ref{fig:plot_individual_envy01} and \ref{fig:plot_individual_envy23}, we look at the behaviour if an agent copies the choices of agents with 1.5, 2.0 or 3 times its own wealth. My first impression is that the behaviour is much less orderly. For a low _envy factor_ the linear predictrs are most affected, but for higher values the experiencers are more affected. NB. A higher the envy factor, means that relatively few high flyers are used as models, so there is more consistency in the intelligence that they provide. 
 
 ##Meta-Agents
 
@@ -146,6 +145,8 @@ my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau1.c
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
 ```
+
+
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth for $\\tau \\in \\{2,5\\}$. The figures on the left use linear predictors, those on the right experience.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau2.csv')
@@ -241,6 +242,24 @@ plot.many.investors.pools(many.investors.means,tau=1)
 plot.many.investors.pools(many.investors.means,p_experiencers=0)
 plot.many.investors.pools(many.investors.means,tau=1,p_experiencers=0)
 
+```
+
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_envy01}The effects of allowing agents to spy on each other--see Section \\ref{heading:violate-sssumptions}. The top two plots form a control. The lower two show the effect of envy: if an agent is not in the upper stratum, as defined by the envy factor, it copies the behaviour of a randomly selected top player. See also remarks on Figure \\ref{fig:plot_individual01}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/envy1.csv')
+plot.individuals(my.individual.details,my.strategy=1,n=5)
+plot.individuals(my.individual.details,my.strategy=0,n=5)
+my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/envy1_5.csv')
+plot.individuals(my.individual.details,my.strategy=1,n=5,sub=sprintf("Envy factor 1.5"))
+plot.individuals(my.individual.details,my.strategy=0,n=5,sub=sprintf("Envy factor 1.5"))
+```
+
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_envy23}The effects of allowing agents to spy on each other (continued).",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/envy2.csv')
+plot.individuals(my.individual.details,my.strategy=1,n=5,sub=sprintf("Envy factor 2.0"))
+plot.individuals(my.individual.details,my.strategy=0,n=5,sub=sprintf("Envy factor 2.0"))
+my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/envy3.csv')
+plot.individuals(my.individual.details,my.strategy=1,n=5,sub=sprintf("Envy factor 3.0"))
+plot.individuals(my.individual.details,my.strategy=0,n=5,sub=sprintf("Envy factor 3,0"))
 ```
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour. Plots show the number of steps required before the moving average over a few steps is close to the average over the entire run. We treat this as an estimate of the number of steps required for decay of the transient from starting conditions. NB: a value of 250 means that the trajectory has not stabilized, and is possibley chaotic: it does not mean that the trajectory has stabilized magically after 250 steps. ",warning=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
