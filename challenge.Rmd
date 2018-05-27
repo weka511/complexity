@@ -45,7 +45,7 @@ I developed a Netlogo[@Wilensky:1999] model,  _challenge.nlogo_, which uses the 
  1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs)[@hill2009knowing];
  1. the sharks in Figure \ref{fig:ui-cartel}  unlawfully form a cartel--Section \ref{heading:violate-sssumptions}. They share information and try to manipulate the numbers in one pool to maximise their profit.
 
-I used a trick described in [@Abelson:1985:SIC:26777] to represent predictors as _closures_. "Operationally,"... a closure is a record storing a function together with an environment. ... A closure...allows the function to access those captured variables through the closure's copies of their values or references, even when the function is invoked outside their scope."[@wiki:closure] In short, closures encapsulates data, very much like classes.
+I used a trick described in [@Abelson:1985:SIC:26777] to represent predictors as _closures_. "... a closure is a record storing a function together with an environment. ... A closure...allows the function to access those captured variables through the closure's copies of their values or references, even when the function is invoked outside their scope."[@wiki:closure] In short, closures encapsulates data, very much like classes.
 
 _Challenge.nlogo_ was executed by the _BehaviourSpace_ tool of Netlogo, which performed `r n.repetitions` repetitions. The model can also dump data for each step, e.g. for Figure \ref{fig:plot_individual01}. I used `r R.Version()$version.string` [@rcore2018r] to analyze the data, and an RMarkdown[@allaire2018rmarkdown] script to present the results, as suggested by Rosanna van Hespen[@vanhespen2016thesis]. 
 
@@ -77,13 +77,13 @@ _What happens to the system if you violate one of the original assumptions of th
 
 I implemented a _cartel_, where some agents agree to monopolize one pool for their own benefit---see Figure \ref{fig:ui-cartel}. The cartel artificially increases the number of agents in one pool, to lead other agents to infer that the pool was crowded, and hence unattractive. It does not make sense for the cartel to jump from one pool to another, since they rould have to pay $\tau$, and wait for the second pool to clear out. While a very small cartel has little chance of influencing other agents, a large cartel reduces the payout per member; a cartel of 20 would do no better than someone who stayed in the stable pool. 
 
-Figure\ref{fig:cartel_return} shows the return from the cartel. It scarcely seems worth the risk of ending up in Sante Fe jail for attmpting to rig the market.
+Figure\ref{fig:cartel_return} shows the return from the cartel. It scarcely seems worth the risk of ending up in Sante Fe jail for attempting to rig the market.
 
 ##Changes-- Variation of $\tau$ and of total number of agents
 
-Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Paradoxically total wealth increases with $\tau$. Figure \ref{fig:tau_error} shows that the transients in the total error are damped when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discourages agents from jumping from pool to pool.
+Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Average wealth increases with $\tau$, since wealth is taken aay from investors. Figure \ref{fig:tau_error} shows that the transients in the total error are damped when $\tau>0$, but persist for $\tau=0$. Presumably $\tau$ discourages agents from jumping from pool to pool.
 
-Figure \ref{fig:many_investors} shows the effect of varying the number of agents.
+Figure \ref{fig:many_investors} shows the effect of varying the number of agents. The number of subscribers in each pool increasses with number of investors, beyond what is profitable. This effect is
 
 #Discussion
 
@@ -229,16 +229,14 @@ cartel.data<-read.cartel()
 plot.cartel(cartel.data )
 ```
 
-```{r plot_many_investors, echo=FALSE,fig.cap="\\label{fig:many_investors}Many Investors",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
+```{r plot_many_investors, echo=FALSE,fig.cap="\\label{fig:many_investors}Many Investors, showing number in each pool. The reference line shows the maximum number of subscribers if pool is to be profitable.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 many.investors.data<-fix.column.names(read.nlogo.experiment(file.name="challenge-many-investors-table.csv"))
 many.investors.last.step.data<-get.last.step.data( many.investors.data)
 many.investors.means<-aggregate(many.investors.last.step.data,by=list(many.investors.last.step.data$tau,many.investors.last.step.data$n_investors,many.investors.last.step.data$p_experiencers),FUN=mean,na.rm=TRUE)
 plot.many.investors.pools(many.investors.means)
 plot.many.investors.pools(many.investors.means,tau=1)
-plot.many.investors.pools(many.investors.means,tau=5)
 plot.many.investors.pools(many.investors.means,p_experiencers=0.5)
 plot.many.investors.pools(many.investors.means,tau=1,p_experiencers=0.5)
-plot.many.investors.pools(many.investors.means,tau=5,p_experiencers=0.5)
 
 ```
 

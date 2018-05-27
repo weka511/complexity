@@ -227,7 +227,9 @@ plot.many.investors.pools<-function(many.investors.means,tau=0,p_experiencers=0.
                    max(my.data$census_POOL_LOW)))
   plot(100:500,100:500,type='n', 
        xlim=c(min(many.investors.means$n_investors),max(many.investors.means$n_investors)),
-       ylim=c(0,max.census),main=sprintf("tau=%d, experiencers=%.0f%%",tau,100*p_experiencers))
+       ylim=c(0,max.census),
+       xlab="Number of Investors",ylab = "Number in pool",
+       main=sprintf("tau=%d, experiencers=%.0f%%",tau,100*p_experiencers))
   lines( my.data$n_investors, my.data$census_POOL_STABLE,type='l',col="green")
   lines( my.data$n_investors, my.data$census_POOL_LOW,type='l',col="yellow")
   lines( my.data$n_investors, my.data$census_POOL_HIGH,type='l',col="red")
