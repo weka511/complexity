@@ -90,58 +90,60 @@ Figure \ref{fig:tau_wealth} shows the effect of varying $\tau$. Average wealth i
 
 Figure \ref{fig:many_investors} shows the effect of varying the number of agents. The number of subscribers in each pool increasses with number of investors, beyond what is profitable. This effect may be caused by Conservatives being unduly influenced by the return from a pool "in the good old days".
 
-#Discussion
+#Discussion and Further Work
 
-I wondered whether 100 steps were enough for the system to settle down, and for the intial conditions to be forgotten. I have used the concept of _ergodicity_ as a guide: very loosely, a system is ergodic if a sufficiently long part of its trajectory can be taken to be represent the entire trajectory. I encoded this as the following _operational definition_: the system can be considered ergodic, and the starting transients are insignificant, if the moving average of $n$ values is within one standard deviation of the mean taken over the entire trajectory. Figure \ref{fig:plot_ergodic} shows the results of taking $n=11$ and running the simulation for 250 steps, for different values of $\tau$, and varying initial allocations to the low and high risk pools. Notice that the transient has disappeared for most runs for $\tau=0$, but most runs are chaotic for $\tau>0$. In retrospect I believe that 100 steps are adequate if the tranjectory is not chaotic; if it is chaotic, increasing the number of steps is unlikely to lead to help. 
+I wondered whether 100 steps were enough for the system to settle down, and for the intial conditions to be forgotten, so I needed an _operational definition_: the system can be considered ergodic, and the starting transients to be forgotten, if the moving average of $n$ values is within one standard deviation of the mean, calculated  over the entire trajectory. Figure \ref{fig:plot_ergodic} shows the results of taking $n=11$ and running the simulation for 250 steps, for different values of $\tau$, and varying initial allocations to the low and high risk pools. Notice that the transient has disappeared for most runs for $\tau=0$, but most runs are chaotic for $\tau>0$. In retrospect I believe that 100 steps are adequate if the tranjectory is not chaotic; if it is chaotic, increasing the number of steps is unlikely to help. 
+
+Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show that some Investors are better at acquiring wealth than others, as the plots diverge as time goes on; however, they don't indicate whether they are merely better at competing with their companions _in the same simulation_. It would be interesting to construct my own version of the Tournament, sample some of the best agents, and see whether some genius strategies that have emerged; it is possible that one agent is better than another only in the sense that Scissors is stronger than Paper[@wiki:roshambo]. 
 
 #Acknowledgements
 
 I wish to thank the SFI staff and mentors, and my fellow students for friendly and helpful discussions and recommended reading.
 
-```{r echo=FALSE,fig.cap="Investors are linked to Pools: a happy face represents a pool that has paid out, colours represent risk in a natural way (traffic lights), and the size of each fish correlates to the wealth of an investor.\\label{fig:ui}",warning=FALSE, out.width='.9\\linewidth', fig.width=8, fig.height=8,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="Investors are linked to Pools: a happy face represents a pool that has paid out, colours represent risk in a natural way (traffic lights), and the size of each fish correlates to the wealth of an investor.\\label{fig:ui}",warning=FALSE, out.width='.9\\linewidth', fig.width=8, fig.height=8,fig.show='hold',fig.align='center',fig.pos = 'p'}
 knitr::include_graphics('view.jpg')
 ```
 
 
 
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Aggregate Wealth with number of coefficients and number of predictors, for $\\tau=0$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth0}Variation of Aggregate Wealth with number of coefficients and number of predictors, for $\\tau=0$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.wealth(netlogo.data,tau=0)
 plot.wealth(netlogo.data,tau=0,n_coefficients = 6,n_predictors  = 6)
 plot.wealth(netlogo.data,tau=0,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth1}Variation of Aggregate Wealth with number of coefficients with number of predictors, for $\\tau=1$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_wealth1}Variation of Aggregate Wealth with number of coefficients with number of predictors, for $\\tau=1$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.wealth(netlogo.data,tau=1)
 plot.wealth(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.wealth(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_outgoings0}Variation of Payout per subscriber for $\\tau=0$. NB: payout gradually stabilizes and tends to be confined to a narrow region that is better than break-even for subscribers.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_outgoings0}Variation of Payout per subscriber for $\\tau=0$. NB: payout gradually stabilizes and tends to be confined to a narrow region that is better than break-even for subscribers.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.outgoings(netlogo.data,tau=0)
 plot.outgoings(netlogo.data,tau=0,n_coefficients = 6,n_predictors  = 6)
 plot.outgoings(netlogo.data,tau=0,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_outgoings1}Variation of Payout per subscriber , for $\\tau=1$. NB: payout gradually stabilizes and tends to be confined to a narrow region that is better than break-even for subscribers.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_outgoings1}Variation of Payout per subscriber , for $\\tau=1$. NB: payout gradually stabilizes and tends to be confined to a narrow region that is better than break-even for subscribers.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.outgoings(netlogo.data,tau=1)
 plot.outgoings(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.outgoings(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_sq0}Variation of Error for $\\tau=0$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_sq0}Variation of Error for $\\tau=0$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.errors(netlogo.data,tau=0)
 plot.errors(netlogo.data,tau=0,n_coefficients = 6,n_predictors  = 6)
 plot.errors(netlogo.data,tau=0,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_sq1}Variation of Error for $\\tau=1$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_sq1}Variation of Error for $\\tau=1$. Colour is used to distinguish one run for another, and has no other significance.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 plot.errors(netlogo.data,tau=1)
 plot.errors(netlogo.data,tau=1,n_coefficients = 6,n_predictors  = 6)
 plot.errors(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual01}Growth of wealth for $\\tau \\in \\{0,1\\}$. Results are shown for a few of the richest individuals (judged at the end of the simulation), a few of the poorest, and a few in the middle. The figures on the left use linear predictors, those on the right are conservative.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual01}Growth of wealth for $\\tau \\in \\{0,1\\}$. Results are shown for a few of the richest individuals (judged at the end of the simulation), a few of the poorest, and a few in the middle. The figures on the left use linear predictors, those on the right are conservative.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau0.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
@@ -152,7 +154,7 @@ plot.individuals(my.individual.details,my.strategy=0,n=5)
 
 
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth for $\\tau \\in \\{2,5\\}$. The figures on the left use linear predictors, those on the right are conservative.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth for $\\tau \\in \\{2,5\\}$. The figures on the left use linear predictors, those on the right are conservative.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/details-tau2.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
@@ -161,7 +163,7 @@ plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_random}Growth of wealth for random assignments. Notice that some of the richest investors start lucky, and continue to be rich despite mediocre performance (the Trump effect).",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_random}Growth of wealth for random assignments. Notice that some of the richest investors start lucky, and continue to be rich despite mediocre performance (the Trump effect).",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/random-tau0.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/random-tau1.csv')
@@ -169,18 +171,18 @@ plot.individuals(my.individual.details,my.strategy=1,n=5)
 ```
 
 
-```{r echo=FALSE,fig.cap="Sharks represent members of the Cartel. It appears that cartel members are able to intimidate agents who use the first learning algorithm, but not the second.\\label{fig:ui-cartel}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="Sharks represent members of the Cartel. It appears that cartel members are able to intimidate agents who use the first learning algorithm, but not the second.\\label{fig:ui-cartel}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 knitr::include_graphics('Cartel.jpg')
 ```
 
 
-```{r plot_cartel, echo=FALSE,fig.cap="\\label{fig:cartel_return}Return from Cartel, compared with Stable Pool",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r plot_cartel, echo=FALSE,fig.cap="\\label{fig:cartel_return}Return from Cartel, compared with Stable Pool",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 cartel.data<-read.cartel()
 plot.cartel(cartel.data )
 ```
 
 
-```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:tau_wealth}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r plot_wealth, echo=FALSE,fig.cap="\\label{fig:tau_wealth}Variation of accumulated wealth with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 endrun.data<-get.tau(file.name='take2 experiment-table-new.csv')
 
 tau.agg11 <- extract.wealth.vs.tau(endrun.data,can_borrow=TRUE,randomize_step=TRUE)
@@ -216,7 +218,7 @@ plot(tau.agg22$tau,tau.agg22$standard_deviation__wealth__of_investors,type="l",c
 
 
 
-```{r plot_errors, echo=FALSE,fig.cap="\\label{fig:tau_error}Variation of Error with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r plot_errors, echo=FALSE,fig.cap="\\label{fig:tau_error}Variation of Error with $\\tau$",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 dd<-read.nlogo.experiment(file.name='take2 experiment-table-new.csv')
 zz0<-extract.errors.vs.tau(dd)
 aa0<-aggregate(zz0,by=list(zz0$X_step_),FUN=mean,na.rm=TRUE)
@@ -237,7 +239,7 @@ plot(aa5$X_step_,aa5$mean__sum_squares_error__of_investors,type="l",col="slategr
 
 
 
-```{r plot_many_investors, echo=FALSE,fig.cap="\\label{fig:many_investors}Many Investors, showing number in each pool. The reference line shows the maximum number of subscribers if pool is to be profitable.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r plot_many_investors, echo=FALSE,fig.cap="\\label{fig:many_investors}Many Investors, showing number in each pool. The reference line shows the maximum number of subscribers if pool is to be profitable.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 many.investors.data<-fix.column.names(read.nlogo.experiment(file.name="challenge-many-investors-table.csv"))
 many.investors.last.step.data<-get.last.step.data( many.investors.data)
 many.investors.means<-aggregate(many.investors.last.step.data,by=list(many.investors.last.step.data$tau,many.investors.last.step.data$n_investors,many.investors.last.step.data$p_experiencers),FUN=mean,na.rm=TRUE)
@@ -248,7 +250,7 @@ plot.many.investors.pools(many.investors.means,tau=1,p_experiencers=0)
 
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_envy01}The effects of allowing agents to spy on each other--see Section \\ref{heading:violate-sssumptions}. The top two plots form a control. The lower two show the effect of envy: if an agent is not in the upper stratum, as defined by the envy factor, it copies the behaviour of a randomly selected top player. See also remarks on Figure \\ref{fig:plot_individual01}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_envy01}The effects of allowing agents to spy on each other--see Section \\ref{heading:violate-sssumptions}. The top two plots form a control. The lower two show the effect of envy: if an agent is not in the upper stratum, as defined by the envy factor, it copies the behaviour of a randomly selected top player. See also remarks on Figure \\ref{fig:plot_individual01}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/envy1.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
@@ -257,7 +259,7 @@ plot.individuals(my.individual.details,my.strategy=1,n=5,sub=sprintf("Envy facto
 plot.individuals(my.individual.details,my.strategy=0,n=5,sub=sprintf("Envy factor 1.5"))
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_envy23}The effects of allowing agents to spy on each other (continued).",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_envy23}The effects of allowing agents to spy on each other (continued).",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 my.individual.details<-read.csv('C:/Users/Weka/201804/Experiments/envy2.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5,sub=sprintf("Envy factor 2.0"))
 plot.individuals(my.individual.details,my.strategy=0,n=5,sub=sprintf("Envy factor 2.0"))
@@ -266,7 +268,7 @@ plot.individuals(my.individual.details,my.strategy=1,n=5,sub=sprintf("Envy facto
 plot.individuals(my.individual.details,my.strategy=0,n=5,sub=sprintf("Envy factor 3,0"))
 ```
 
-```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour. Plots show the number of steps required before the moving average over a few steps is close to the average over the entire run. We treat this as an estimate of the number of steps required for decay of the transient from starting conditions. NB: a value of 250 means that the trajectory has not stabilized, and is possibley chaotic: it does not mean that the trajectory has stabilized magically after 250 steps. ",warning=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p',out.extra = ''}
+```{r echo=FALSE,fig.cap="\\label{fig:plot_ergodic}Transient Behaviour. Plots show the number of steps required before the moving average over a few steps is close to the average over the entire run. We treat this as an estimate of the number of steps required for decay of the transient from starting conditions. NB: a value of 250 means that the trajectory has not stabilized, and is possibley chaotic: it does not mean that the trajectory has stabilized magically after 250 steps. ",warning=FALSE,out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
 n=11
 nsigma=1.0
 ergodic.data<-read.nlogo.experiment(file.name = "challenge-transients-table.csv")
