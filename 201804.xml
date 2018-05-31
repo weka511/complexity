@@ -5,7 +5,6 @@
         <File name="predictors.csv" />
     </Project>
     <Project name="Outputs">
-        <File name="out.csv" />
         <File name="Experiments\details-tau0.csv" />
         <File name="Experiments\details-tau1.csv" />
         <File name="Experiments\details-tau2.csv" />

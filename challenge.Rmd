@@ -1,6 +1,5 @@
 ---
-title: "Complexity Challenge"
-author: "Simon Crase"
+title: "Swimming Lessons in the Wall Street Pools"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 header-includes: 
 - \usepackage{float}
@@ -46,8 +45,8 @@ The  Challenge is related to minority games [@challet1997emergence], where playe
 I developed a Netlogo[@Wilensky:1999] model,  _challenge.nlogo_, which uses the approach of Fogel [@fogel1999inductive]---an evolutionary algorithm that breeds autoregressive models. It represents Investors and Pools as separate Breeds of Agents. Investors are connected to Pools by Links as shown in Figure \ref{fig:ui}. There are three types of Investors:
 
  1. The outer circle of fish in  Figure \ref{fig:ui} represent autoregressive agents ("linear predictors"), who use the  number and payoff historical data for both pools;
- 1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs)[@hill2009knowing];
- 1. the sharks in Figure \ref{fig:ui-cartel}  unlawfully form a cartel--Section \ref{heading:violate-sssumptions}. They share information and try to manipulate the numbers in one pool to maximise their profit.
+ 1. the inner circle are conservative fish, who select a pool that has worked well in the past (using their memory of their own past decisions and payoffs);
+ 1. the sharks in Figure \ref{fig:ui-cartel}  unlawfully form a cartel--Section \ref{heading:meta-agents}. They share information and try to manipulate the numbers in one pool to maximise their profit.
  
  Investors do not know the odds of the high and low risk pools paying out, or the amounts to be divided: they need to estimate these values from history. They do, however, understand that the payout needs to be divided between subscribers.
 
@@ -68,17 +67,17 @@ Figures \ref{fig:plot_wealth0} and \ref{fig:plot_wealth1} illustrate the growth 
 ##Diversity: effect of diversity of strategies on dynamics
 
 
-Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show the growth of wealth for a few of the richest individuals (measured at the end of the run), a few of the poorest, and a few in the middle.  Notice that the rich are generally agents who showed their promise early, and kept ahead. Since it seems reasonable to expect a strategy to do better than random assignment, assuming it is any good, Figure \ref{fig:plot_individual_random} show the results of random decisions for comparison. Notice that rich individuals tend to be lucky several times, rather than the steady growth shown in Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25}.
+Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show the growth of wealth for a few of the richest individuals (measured at the end of the run), a few of the poorest, and a few in the middle.  The rich are generally agents who showed promise early, and kept ahead. Since it seems reasonable to expect a good strategy to do better than random assignment, Figure \ref{fig:plot_individual_random} show the results of random decisions for comparison. Rich individuals tend to be lucky several times, rather than grawing steadily.
 
 ##Agent Behaviour
 
 Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} suggest that there is relatively little variation between the two main classes of agent, Linear Predictors and Conservatives. In contrast, variation within a class of agents is much greater. This is in accord with the weak form of the Efficient Market Hypothesis [@romero2014hedge, ch. 8]: "future asset prices \emph{cannot} be predicted using historical price and volume data".
 
-##Violate Assumptions: allow  agents to observe the performance and of other  agents\label{heading:violate-sssumptions}
+##Violate Assumptions: allow agents to spy on others\label{heading:violate-sssumptions}
 
 I decided to investigate _envy_: specifically to allow agents to look at the wealth of others and copy the choice made by one other agent that has more than a certain multiplier of its own wealth. In Figures \ref{fig:plot_individual_envy01} and \ref{fig:plot_individual_envy23}, we look at the behaviour if an agent copies the choices of agents with 1.5, 2.0 or 3 times its own wealth. My first impression is that the behaviour is much less orderly. For a low _envy factor_ the linear predictrs are most affected, but for higher values the Conservatives are more affected. NB. A higher the envy factor, means that relatively few high flyers are used as models, so there is more consistency in the intelligence that they provide. 
 
-##Meta-Agents
+##Meta-Agents\label{heading:meta-agents}
 
 I implemented a _cartel_, where some agents agree to monopolize one pool for their own benefit---see Figure \ref{fig:ui-cartel}. The cartel artificially increases the number of agents in one pool, to lead other agents to infer that the pool was crowded, and hence unattractive. It does not make sense for the cartel to jump from one pool to another, since they rould have to pay $\tau$, and wait for the second pool to clear out. While a very small cartel has little chance of influencing other agents, a large cartel reduces the payout per member; a cartel of 20 would do no better than someone who stayed in the stable pool. 
 
@@ -92,13 +91,12 @@ Figure \ref{fig:many_investors} shows the effect of varying the number of agents
 
 #Discussion and Further Work
 
-I wondered whether 100 steps were enough for the system to settle down, and for the intial conditions to be forgotten, so I needed an _operational definition_: the system can be considered ergodic, and the starting transients to be forgotten, if the moving average of $n$ values is within one standard deviation of the mean, calculated  over the entire trajectory. Figure \ref{fig:plot_ergodic} shows the results of taking $n=11$ and running the simulation for 250 steps, for different values of $\tau$, and varying initial allocations to the low and high risk pools. Notice that the transient has disappeared for most runs for $\tau=0$, but most runs are chaotic for $\tau>0$. In retrospect I believe that 100 steps are adequate if the tranjectory is not chaotic; if it is chaotic, increasing the number of steps is unlikely to help. 
+I wondered whether 100 steps were enough for the system to settle down, and for the intial conditions to be forgotten, so I needed an _operational definition_: the system can be considered ergodic, and the starting transients to be forgotten, if the moving average of $n$ values is within one standard deviation of the mean, calculated  over the entire trajectory. Figure \ref{fig:plot_ergodic} shows the results of taking $n=11$ and running the simulation for 250 steps, for different values of $\tau$, and varying initial allocations to the low and high risk pools. The transient has disappeared for most runs for $\tau=0$, but most runs are chaotic for $\tau>0$. I believe that 100 steps are adequate if the trajectory is not chaotic; if it is chaotic, increasing the number of steps is unlikely to help. 
 
-Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show that some Investors are better at acquiring wealth than others, as the plots diverge as time goes on; however, they don't indicate whether they are merely better at competing with their companions _in the same simulation_. It would be interesting to construct my own version of the Tournament, sample some of the best agents, and see whether some genius strategies that have emerged; it is possible that one agent is better than another only in the sense that Scissors is stronger than Paper[@wiki:roshambo]. 
+Figures \ref{fig:plot_individual01} and \ref{fig:plot_individual25} show that some Investors are better at acquiring wealth than others, as the plots diverge as time goes on; however, they don't indicate whether they are merely better at competing with their companions _in the same simulation_. It would be interesting to construct my own version of the Tournament, sample some of the best agents, and see whether some genius strategies that have emerged; maybe one agent is better than another only in the sense that Scissors is stronger than Paper[@wiki:roshambo]. 
 
-#Acknowledgements
+The agents have no knowledge of their own mortality. I considered whether I could develop a theory of stopping [@hill2009knowing], but decided that the Challenge would needed to be embedded in a larger problem first. For instance, an agent might plan to retire at age $x$, but other things might force an earlier retirement, which would mean that his savings might need to last longer. Given some assumptions about the distribution of retirement ages and life expectancy, what is the best strategy? 
 
-I wish to thank the SFI staff and mentors, and my fellow students for friendly and helpful discussions and recommended reading.
 
 ```{r echo=FALSE,fig.cap="Investors are linked to Pools: a happy face represents a pool that has paid out, colours represent risk in a natural way (traffic lights), and the size of each fish correlates to the wealth of an investor.\\label{fig:ui}",warning=FALSE, out.width='.9\\linewidth', fig.width=8, fig.height=8,fig.show='hold',fig.align='center',fig.pos = 'p'}
 knitr::include_graphics('view.jpg')
