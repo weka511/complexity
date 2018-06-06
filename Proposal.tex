@@ -1,0 +1,92 @@
+\documentclass[]{article}
+\usepackage{float,url,multirow}
+\usepackage[nottoc,numbib]{tocbibind}
+
+%opening
+\title{Sheep of Wall Street\\Proposal}
+\author{Simon Crase}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+
+ 
+\section{What part of phenomenon would you like to model?}
+
+\begin{enumerate}
+	\item Investors deciding whether or not to change investments\cite{Challenge:2018}
+	\item Investors deciding whether or not to change their investing strategies.
+	\item Criteria for assessing the above.
+	
+	The challenge designers have intentionally left that a little vague at the start. For the challenge itself (the mandatory write-up and video part of this challenge), it would be good to explore different meanings of “winning” … median and/or mean of rank over multiple rounds, median and/or mean of earnings over multiple rounds, and any other outcomes you can think of. For the tournament (the optional part of this challenge), the instructors are leaning towards using the median rank over a small number of rounds, but this is still under discussion. If that changes, we will let you know. (Rank is placing in a given round without regard to gross earnings, rank 1 being assigned to the agent with the highest earnings in a given round of 100 steps, rank 2 to the agent with the second highest earning, etc. Ties receive the same ranking in a given round.)
+\end{enumerate}
+\section{What are the principal types of agents involved in this phenomenon?}
+
+\begin{tabular}{|l|l|} \hline
+	Agent&Goal\\ \hline
+	Investor & these are the Agents in the Problem Statement\\ \hline
+	Pools & can be patches\\ \hline
+	Predictors &these are function closures, not Turtles \\ \hline
+\end{tabular}
+
+\section{What properties do these agents have?}
+
+\begin{center}
+	\begin{tabular}{ |l|l|l| } 
+		\hline
+		Agent & Property & Remarks \\
+		\hline
+		\multirow{5}{4em}{Investor} & wealth & accumulated payout, allowing for tau \\ 
+		& favourite-predictor & tell Investor what course to follow \\ 
+		& alternative-predictor & switch if favourite not doing well \\ 
+		& payoffs & list of payouts, most recent first, before tau subtracted \\ 
+		& choices & list of choices made by turtle, most recent first \\ 
+		\hline
+		\multirow{3}{4em}{Pool} & Total & cell3 \\ 
+		& probability & cell6 \\ 
+		\hline
+		\multirow{3}{4em}{Predictor} & action & cell3 \\ 
+		& history & cell6 \\ 
+		& parameters & cell9 \\ 
+		\hline
+	\end{tabular}
+\end{center}
+
+
+
+\section{What actions (or behaviours) can these agents take?}
+
+\begin{tabular}{|l|l|l|} \hline
+	Agent&Goal&\\ \hline
+	\multirow{2}{4em}{Investor} & Switch pools & Has a cost $\tau$ \\ \cline{2-3}
+	&Switch strategies &See \cite{arthur1994inductive} and \cite{fogel1999inductive}\\ \hline
+
+	Pools && \\ \hline
+	Predictors && \\ \hline
+\end{tabular}
+
+
+\section{If the agents have goals, what are their goals?}
+
+\begin{tabular}{|l|l|} \hline
+	Agent&Goal\\ \hline
+	Investor & Accumulate wealth\\ \hline
+	Pools & \\ \hline
+	Predictors & \\ \hline
+\end{tabular}
+
+
+\section{Agents operate in what kind of environment?}
+\section{How do agents interact with environment?}
+
+\medskip
+
+\bibliographystyle{unsrt}
+\bibliography{201804}
+
+\end{document}
