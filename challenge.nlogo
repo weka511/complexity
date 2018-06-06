@@ -213,7 +213,7 @@ to go
       let predicted-returns (runresult (first predictors) PREDICT low-payoff high-payoff low-number high-number)
       let current-pool first my-choices
       ;; If we need to change to another pool to have benefit of prediction, we need to make allowance for tau
-      let returns-allowing-for-tau (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element - tau-weight * tau))]] predicted-returns range 3)
+      let returns-allowing-for-tau (map [[element i] -> ifelse-value (i = current-pool) [element][max (list 0 (element -  tau))]] predicted-returns range 3)
       let recommended-return max returns-allowing-for-tau
       ;; Benefit of changing is the return - benefit of staying put
       let predicted-benefit recommended-return - item current-pool returns-allowing-for-tau
@@ -295,7 +295,7 @@ to-report advice-is-credible [recommended-pool predicted-benefit]
     ifelse length filter [choice -> choice = recommended-pool] my-choices > 0 [ ;; do we have any history of trying this choice?
       let payoff-historical outgoings recommended-pool
       ;; Accept or not, in proportion to payoff-historical : tau-weight * tau
-      report random-float (payoff-historical + tau-weight * tau) < payoff-historical
+      report random-float (payoff-historical +  tau) < payoff-historical
     ][ ;; no history, so try with probability epsilon
       report random-float 1.0 < epsilon
     ]
@@ -932,9 +932,9 @@ SLIDER
 tau
 tau
 0
-20
-5.0
 1
+0.0
+0.05
 1
 NIL
 HORIZONTAL
@@ -988,7 +988,7 @@ n-coefficients
 n-coefficients
 1
 25
-10.0
+4.0
 1
 1
 NIL
@@ -1082,21 +1082,6 @@ PENS
 "Stable" 1.0 0 -10899396 true "" "plot census POOL-STABLE"
 "Low Risk" 1.0 0 -1184463 true "" "plot census POOL-LOW"
 "High Risk" 1.0 0 -2674135 true "" "plot census POOL-HIGH"
-
-SLIDER
-5
-250
-110
-283
-tau-weight
-tau-weight
-0.05
-2
-0.5
-0.05
-1
-NIL
-HORIZONTAL
 
 SLIDER
 3
@@ -1234,7 +1219,7 @@ p-experiencers
 p-experiencers
 0
 1
-0.5
+0.0
 0.05
 1
 NIL
