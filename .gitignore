@@ -55,3 +55,22 @@ docs/_build/
 
 # PyBuilder
 target/
+
+
+# Tex stuff
+*.aux
+*.bbl
+*.blg
+*.synctex.gz
+challenge.pdf
+
+# Netlogo stuff
+.*.tmp.nlogo
+out.csv
+
+# R stuff
+.RData
+.Rhistory
+*.pdf
+
+.Rproj.user

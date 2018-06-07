@@ -22,8 +22,6 @@
         <File name="get-data.r" />
     </Project>
     <Project name="git">
-        <File name="LICENSE" />
         <File name="README.md" />
-        <File name=".gitignore" />
     </Project>
 </NotepadPlus>
