@@ -40,7 +40,7 @@ fix.column.names<-function(my.df){
 
 # Extract data from a Netlogo BehaviourSpace experiment
 read.nlogo.experiment <-
-  function(path.name = "C:/Users/Weka/201804/Experiments",
+  function(path.name = "C:/Users/Weka/complexity/201804/Experiments",
            file.name = "take2 experiment-table.csv") {
     return (fix.column.names(
       read.table(
@@ -57,7 +57,7 @@ get.last.step.data <- function(my.df){
 } 
 
 get.tau <-
-  function (path.name="C:/Users/Weka/201804/Experiments",file.name="take2 experiment-table.csv") {
+  function (path.name="C:/Users/Weka/complexity/201804/Experiments",file.name="take2 experiment-table.csv") {
     return (get.last.step.data( read.nlogo.experiment(path.name,file.name)))
   }
   
@@ -198,7 +198,7 @@ plot.individuals<-function(my.details,n=3,my.strategy=0,col=c('blue','black','re
   legend('topleft',c("Lowest","Median","Best"),col=col,lty=1)
 }
 
-read.cartel <- function(path.name = "C:/Users/Weka/201804/Experiments", file.name = 'challenge-cartel-table.csv') {
+read.cartel <- function(path.name = "C:/Users/Weka/complexity/201804/Experiments", file.name = 'challenge-cartel-table.csv') {
   cartel.data<-fix.column.names( read.nlogo.experiment(path.name,file.name))
   return(cartel.data[cartel.data$X_step_ == max(cartel.data$X_step_), ])
 }
