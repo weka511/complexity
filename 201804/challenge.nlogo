@@ -98,9 +98,9 @@ to initialize-pool [next-pool]
   fd 1
   set shape "face neutral"
   set pool-number next-pool
-  if pool-number = POOL-STABLE [set-pool-characteristics green 1 1]
-  if pool-number = POOL-LOW    [set-pool-characteristics yellow max-payoff-low p-payoff-low]
-  if pool-number = POOL-HIGH   [set-pool-characteristics red max-payoff-high p-payoff-high]
+  if pool-number = POOL-STABLE [set-pool-characteristics green  1               1]
+  if pool-number = POOL-LOW    [set-pool-characteristics yellow max-payoff-low  p-payoff-low]
+  if pool-number = POOL-HIGH   [set-pool-characteristics red    max-payoff-high p-payoff-high]
   set payoffs []
   set numbers []
   set total-payoff 0
@@ -111,8 +111,8 @@ end
 ;; Setup those variables that distinguish one pool from another
 to set-pool-characteristics [colour payoff p-payoff]
   set color colour
-  set max-payoff max-payoff-high
-  set probability-payoff p-payoff-high
+  set max-payoff payoff
+  set probability-payoff p-payoff
 end
 
 ;; initialize-investor
@@ -153,21 +153,23 @@ to go
     ;; Decide whether to pay
     let selection random-float 1
     let mypayoff ifelse-value (selection < probability-payoff) [max-payoff][0]
-    set shape ifelse-value (selection < probability-payoff) ["face happy"]["face sad"]
+    set shape ifelse-value    (selection < probability-payoff) ["face happy"]["face sad"]
 
     ;; Apportion payout between subscribers
     let n-members count link-neighbors
     if n-members > 0 and probability-payoff < 1 [set mypayoff mypayoff / n-members]
+
+    ;; Update history
     set numbers fput n-members numbers
     set payoffs fput mypayoff payoffs
 
     if pool-number = POOL-LOW [
-      set low-payoff  payoffs
+      set low-payoff payoffs
       set low-number numbers
       set low-return estimate-return payoffs numbers
     ]
     if pool-number = POOL-HIGH [
-      set high-payoff  payoffs
+      set high-payoff payoffs
       set high-number numbers
       set high-return estimate-return payoffs numbers
     ]
@@ -873,7 +875,7 @@ p-start-low
 p-start-low
 0
 1
-0.1
+0.45
 .05
 1
 NIL
@@ -888,7 +890,7 @@ p-start-high
 p-start-high
 0
 1
-0.1
+0.35
 0.05
 1
 NIL
@@ -903,7 +905,7 @@ n-investors
 n-investors
 0
 200
-100.0
+50.0
 25
 1
 NIL
@@ -933,7 +935,7 @@ tau
 tau
 0
 1
-0.0
+0.25
 0.05
 1
 NIL
