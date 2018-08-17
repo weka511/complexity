@@ -142,10 +142,10 @@ plot.errors(netlogo.data,tau=1,n_coefficients = 9,n_predictors  = 9)
 ```
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_individual01}Growth of wealth for $\\tau \\in \\{0,1\\}$. Results are shown for a few of the richest individuals (judged at the end of the simulation), a few of the poorest, and a few in the middle. The figures on the left use linear predictors, those on the right are conservative.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/details-tau0.csv')
+my.individual.details<-read.csv('./Experiments/details-tau0.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/details-tau1.csv')
+my.individual.details<-read.csv('./Experiments/details-tau1.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
 ```
@@ -153,18 +153,18 @@ plot.individuals(my.individual.details,my.strategy=0,n=5)
 
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_individual25}Growth of wealth for $\\tau \\in \\{2,5\\}$. The figures on the left use linear predictors, those on the right are conservative.",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/details-tau2.csv')
+my.individual.details<-read.csv('./Experiments/details-tau2.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/details-tau5.csv')
+my.individual.details<-read.csv('./Experiments/details-tau5.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
 ```
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_random}Growth of wealth for random assignments. Notice that some of the richest investors start lucky, and continue to be rich despite mediocre performance (the Trump effect).",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/random-tau0.csv')
+my.individual.details<-read.csv('./Experiments/random-tau0.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/random-tau1.csv')
+my.individual.details<-read.csv('./Experiments/random-tau1.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 ```
 
@@ -249,19 +249,19 @@ plot.many.investors.pools(many.investors.means,tau=1,p_experiencers=0)
 ```
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_envy01}The effects of allowing agents to spy on each other--see Section \\ref{heading:violate-sssumptions}. The top two plots form a control. The lower two show the effect of envy: if an agent is not in the upper stratum, as defined by the envy factor, it copies the behaviour of a randomly selected top player. See also remarks on Figure \\ref{fig:plot_individual01}",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/envy1.csv')
+my.individual.details<-read.csv('./Experiments/envy1.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5)
 plot.individuals(my.individual.details,my.strategy=0,n=5)
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/envy1_5.csv')
+my.individual.details<-read.csv('./Experiments/envy1_5.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5,sub=sprintf("Envy factor 1.5"))
 plot.individuals(my.individual.details,my.strategy=0,n=5,sub=sprintf("Envy factor 1.5"))
 ```
 
 ```{r echo=FALSE,fig.cap="\\label{fig:plot_individual_envy23}The effects of allowing agents to spy on each other (continued).",warning=FALSE, out.width='.49\\linewidth', fig.width=4, fig.height=4,fig.show='hold',fig.align='center',fig.pos = 'p'}
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/envy2.csv')
+my.individual.details<-read.csv('./Experiments/envy2.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5,sub=sprintf("Envy factor 2.0"))
 plot.individuals(my.individual.details,my.strategy=0,n=5,sub=sprintf("Envy factor 2.0"))
-my.individual.details<-read.csv('C:/Users/Weka/complexity/201804/Experiments/envy3.csv')
+my.individual.details<-read.csv('./Experiments/envy3.csv')
 plot.individuals(my.individual.details,my.strategy=1,n=5,sub=sprintf("Envy factor 3.0"))
 plot.individuals(my.individual.details,my.strategy=0,n=5,sub=sprintf("Envy factor 3,0"))
 ```
