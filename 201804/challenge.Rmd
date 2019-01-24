@@ -10,7 +10,7 @@ output:
     fig_caption: yes
     number_sections: true
     keep_tex: true
-bibliography: 201804.bib
+bibliography: ../complexity.bib
 csl: ieee-with-url.csl
 geometry: margin=3cm
 ---
