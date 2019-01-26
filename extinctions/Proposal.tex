@@ -1,11 +1,10 @@
 \documentclass[]{article}
-\usepackage{float,url,multirow}
+\usepackage{float,url,multirow,amsmath,graphicx}
 \usepackage[nottoc,numbib]{tocbibind}
-\usepackage{graphicx} 
 \graphicspath{{./figs/}}
 
 %opening
-\title{Extinctions}
+\title{An Agent Based Model to study stability of Ecosystems: Proposal}
 \author{Simon Crase}
 
 \begin{document}
@@ -13,58 +12,88 @@
 \maketitle
 
 \begin{abstract}
-I found that \cite{Wilensky:1997} exhibits behaviour that I did not expect: it appears stable, but when I increased the speed at which grass regrows slightly, regrowth time=20, the model ran for some 1,200,000 generations, then the wolves become extinct suddenly--Figure \ref{fig:wsg}. I started wondering whether there is some link between diversity and stability.
+The Grass/Sheep/Wolves model \cite{Wilensky:1997} exhibits behaviour that I did not expect: it appeared stable with the default values of parameters, but when I increased the speed at which grass regrows slightly, regrowth time=20, the model ran for some 1,200,000 generations, the wolves become extinct suddenly--Figure \ref{fig:wsg}. It is not clear whether this is a limitation of the simple model.  The proposed model seeks to establish whether the well known link between diversity and stability emerges from simple dynamics.
 \end{abstract}
 
 \begin{figure}[b]
 	\centering
 	\includegraphics[width=0.5\linewidth]{wsg20.jpg}
-	\caption{Wolves Sheep Grass. This run crashes after a couple of hundres thousand generations, but I have observed over 1,200,000. Notice that the crash is very sudden.}
+	\caption{Wolves Sheep Grass. This run crashes after a couple of hundres thousand generations, but I have observed over 1,200,000. Notice that the crash is very sudden, and that the grass, and presumably the sheep, move through a smaller range after the crash.}
 	\label{fig:wsg}
 \end{figure}
 
 \section{What part of phenomenon would you like to model?}
 
-\begin{enumerate}
-	\item Natural Selection
-	\item Stability/Extinction
-\end{enumerate}
+I would like to understand the relationship between species diversity and stability in a simulated ecology with Natural Selection. Although it is well accpeted that diversity is correlated with stability, e.g. \cite{cleland:2011}, I would like to see whether this emerges directly from a simulation of behaviour of individuals. I plan to make the simulation asexual initially, to avoid the complexities of Mendelian inheritance.
 
 \section{What are the principal types of agents involved in this phenomenon?}
 
 \begin{enumerate}
-	\item Plants
-	\item Primary, Secondary, and Tertiary Consumers
+	\item Primary producers
+	\item Consumers. There may be multiple species in each level.
+	\begin{enumerate}
+		\item Primary
+		\item Secondary
+		\item Tertiary 
+	\end{enumerate}
 \end{enumerate}
 
 \section{What properties do these agents have?}
 
 \begin{enumerate}
-	\item Energy
+	\item Primary producers
+	\begin{enumerate}
+		\item Energy
+	\end{enumerate}
+	\item Consumers
+	\begin{enumerate}
+		\item Energy
+		\item speed
+		
+	\end{enumerate}
 \end{enumerate}
 
 \section{What actions (or behaviours) can these agents take?}
 
 \begin{enumerate}
-	\item Plants
+	\item Primary producers
 	\begin{enumerate}
-		\item Grow
+		\item Grow--acquire energy at a uniform rate
+		\item Be eaten--lose energy to a Consumer
 	\end{enumerate}	
-	\item Primary, Secondary, and Tertiary Consumers
+	\item Consumers
 	\begin{enumerate}
-		\item Breed
-		\item Feed
-		\item Die
+		\item Breed--transfer some energy to offspring; this is less than 100\% efficient, so the cost of breeding exceeds the total energy transferred. 
+		\item Wander/pursue--expend energy in source of food.
+		\item Feed--acquire energy from a producer or lower level consumer; energy gained is less than that lost by the food source.
+		\item Die--when energy is depleted, or after a certain number of generations.
+		\item Mutate--when offspring are created, some parameters may be changed, e.g. pursuit speed, number of offspring, energy per offspring. I expect this to optimize the parameters to maximize inclusive fitness \cite{wiki:inclusive}.
 	\end{enumerate}
 \end{enumerate}
 
 
 \section{If the agents have goals, what are their goals?}
 
-Make as many copies of itself as possible
+\begin{enumerate}
+	\item Live as long as possible
+	\item Make as many copies of itself as possible
+\end{enumerate}
 
 \section{Agents operate in what kind of environment?}
+
+I envisage a collection of patches that represent primary producers; consumers move around, either randomly or purposefully moving towards food.   
+
 \section{How do agents interact with environment?}
+
+\begin{enumerate}
+	\item Consumers move around, which costs energy, and drive energy from the environment (primary consumers), or from lower level consumers.
+	\item Consumers can breed if they have enough energy to pay the cost; children get a portion of the parent's energy. We'll make it asexual to start with.
+	
+\end{enumerate}
+
+\section{What do I hope to observe}
+
+Some evidence that more species at start $\implies$ a longer time before population crashes.
 
 \medskip
 
