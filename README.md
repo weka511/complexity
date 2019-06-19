@@ -27,4 +27,9 @@ Complexity Challenge from April 2018
 
 ## Extinctions
 
-Models build to explore mass ectinctions
+Models built to explore mass extinctions
+
+## origins
+
+Code for [Origins of Life](https://www.complexityexplorer.org/courses/95-origins-of-life)
+
