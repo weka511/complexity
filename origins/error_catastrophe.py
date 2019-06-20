@@ -43,21 +43,28 @@ def evolve(A,s=0.01,nu=0.01, rtol=1e-05, atol=1e-08,N=100):
     
 if __name__=='__main__':
     import matplotlib.pyplot as plt
+    from argparse import ArgumentParser
     
-    L       = 10
-    w       = 0.2
-    nu      = 0.01
+    parser = ArgumentParser('Plot error catastrophe')
+    parser.add_argument('-L','--Length',default=10,type=int,help='Length of genome in bits')
+    parser.add_argument('-n','--nu',default=0.01,type=float,help='Mutation rate per bit')
+    parser.add_argument('-s','--advantage',default=[0.3,0.2,0.1,0.09,0.07],
+                        nargs='+',type=float,help='Advantage for optimal genome')
+    args    = parser.parse_args()
+   
     index   = 0
     colours = ['r','g','b','y','c','m','k']
-    
+    Ss      = sorted(args.advantage,reverse=True)
     plt.figure(figsize=(20,20))
-    for s in [0.3,0.2,0.1,0.09,0.07]:
-        A = evolve([1] + L * [0],s=s,nu=nu,N=10000)
-        x = [i + w*index for i in range(len(A))]
-        plt.bar(x,A,width=w,color=colours[index%len(colours)],label='{0:.2f}'.format(s))
+    
+    for s in Ss:
+        A = evolve([1] + args.Length * [0],s=s,nu=args.nu,N=10000)
+        x = [i + index/len(Ss) for i in range(len(A))]
+        plt.bar(x,A,width=1/len(Ss),color=colours[index%len(colours)],label='{0:.2f}'.format(s))
         index += 1
         
-    plt.title('L={0}, nu={1:.2}'.format(L,nu)) 
+    plt.title('L={0}, nu={1:.2}'.format(args.Length,args.nu))
+    plt.xlim(0,len(A))
     plt.xlabel('Hamming Distance from optimum')
     plt.ylabel('Population')
     plt.legend(title='s')
