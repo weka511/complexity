@@ -48,24 +48,42 @@ if __name__=='__main__':
     parser = ArgumentParser('Plot error catastrophe')
     parser.add_argument('-L','--Length',default=10,type=int,help='Length of genome in bits')
     parser.add_argument('-n','--nu',default=0.01,type=float,help='Mutation rate per bit')
-    parser.add_argument('-s','--advantage',default=[0.3,0.2,0.1,0.09,0.07],
+    parser.add_argument('-s','--advantage',default=[0.8,0.6,0.4, 0.3,0.2,0.1,0.09,0.07,0.0],
                         nargs='+',type=float,help='Advantage for optimal genome')
     args    = parser.parse_args()
    
     index   = 0
-    colours = ['r','g','b','y','c','m','k']
+    colours = ['r','g','b','y','c','m']
+    patterns = ['','/'] 
+    line_styles = ['-','--','-.',':']
     Ss      = sorted(args.advantage,reverse=True)
     plt.figure(figsize=(20,20))
     
+    Populations =[[] for i in range(args.Length+1)]
+    
     for s in Ss:
         A = evolve([1] + args.Length * [0],s=s,nu=args.nu,N=10000)
+        for i in range(len(Populations)):
+            Populations[i].append(A[i])
         x = [i + index/len(Ss) for i in range(len(A))]
-        plt.bar(x,A,width=1/len(Ss),color=colours[index%len(colours)],label='{0:.2f}'.format(s))
+        plt.bar(x,A,width=1/len(Ss),color=colours[index%len(colours)],ecolor='face',
+                hatch=patterns[index//len(colours)],label='{0:.2f}'.format(s))
         index += 1
         
     plt.title('L={0}, nu={1:.2}'.format(args.Length,args.nu))
     plt.xlim(0,len(A))
     plt.xlabel('Hamming Distance from optimum')
-    plt.ylabel('Population')
+    plt.ylabel('Frequency')
     plt.legend(title='s')
+    
+    plt.figure(figsize=(20,20))
+    for i in range(len(Populations)):
+        plt.plot(Ss,Populations[i],color=colours[i%len(colours)],
+                ls=line_styles[i//len(colours)],label='{0}'.format(i))
+    
+    plt.legend(title='Length') 
+    plt.xlim(min(Ss),max(Ss))
+    plt.xlabel('s')
+    plt.ylabel('Frequency')
+    plt.title('Error catastrophe')
     plt.show()
