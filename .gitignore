@@ -56,9 +56,13 @@ docs/_build/
 # PyBuilder
 target/
 
+# Jabref
+*.bib.bak
+*.bib.sav
 
 # Tex stuff
 *.aux
+*.fff
 *.bbl
 *.blg
 *.synctex.gz
