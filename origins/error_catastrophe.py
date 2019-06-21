@@ -13,7 +13,23 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
+# This program plots the rates at which a genome changes as the results
+# of mutation, and illustrates the error catastrophe.
+
 from numpy import isclose
+
+# step
+#
+# Carry out one breeding step
+#
+# Inputs:
+#        A   Population: A[0} is count of master sequence
+#                        A[i] is count of sequences with 1 base fiffernt from master, etc.
+#        s   Advantage of master sequence, which has 1+s copies made, compared to other
+#            sequences that have 1 copy 
+#        nu  Mutation rate per bit
+#
+# Returns: new population following 1 step
 
 def step(A,s=0.01,nu=0.01):
     
@@ -33,36 +49,61 @@ def step(A,s=0.01,nu=0.01):
     total = sum(A2)
     return [a/total for a in A2]
 
+# evolve
+#
+# Evolve population
+
+# Inputs:#
+#        A   Population: A[0} is count of master sequence
+#                        A[i] is count of sequences with 1 base fiffernt from master, etc.
+#        s   Advantage of master sequence, which has 1+s copies made, compared to other
+#            sequences that have 1 copy 
+#        nu  Mutation rate per bit
+#        rtol
+#        atol
+#        N
+#
+# Returns: new population following 1 step
+
 def evolve(A,s=0.01,nu=0.01, rtol=1e-05, atol=1e-08,N=100):
     for i in range(N):
         A1 = step(A,s=s,nu=nu)
         if all(isclose(A,A1,rtol=rtol,atol=atol)):
             return A1
         A = [a for a in A1]
+    raise Exception('Did not converge within {0} steps, rtol={1},atol={2}'.format(N,rtol,atol))
  
     
 if __name__=='__main__':
     import matplotlib.pyplot as plt
     from argparse import ArgumentParser
+
+    # Parse command line arguments
     
     parser = ArgumentParser('Plot error catastrophe')
     parser.add_argument('-L','--Length',default=10,type=int,help='Length of genome in bits')
     parser.add_argument('-n','--nu',default=0.01,type=float,help='Mutation rate per bit')
     parser.add_argument('-s','--advantage',default=[0.8,0.6,0.4, 0.3,0.2,0.1,0.09,0.07,0.0],
                         nargs='+',type=float,help='Advantage for optimal genome')
+    parser.add_argument('--N',default=1000,type=int,help='Maximum number of cycles for convergence')
+    parser.add_argument('--rtol',default=1e-5,type=float,help='Relative tolerance for convergence')
+    parser.add_argument('--atol',default=1e-8,type=float,help='Absolute tolerance for convergence')
     args    = parser.parse_args()
    
-    index   = 0
-    colours = ['r','g','b','y','c','m']
-    patterns = ['','/'] 
+    # Initialize variables used for plotting
+    
+    index       = 0
+    colours     = ['r','g','b','y','c','m']
+    patterns    = ['','/'] 
     line_styles = ['-','--','-.',':']
-    Ss      = sorted(args.advantage,reverse=True)
+    Ss          = sorted(args.advantage,reverse=True)
+    Populations = [[] for i in range(args.Length+1)]
+    
+    # Plot distribution for each value of s
     plt.figure(figsize=(20,20))
     
-    Populations =[[] for i in range(args.Length+1)]
-    
     for s in Ss:
-        A = evolve([1] + args.Length * [0],s=s,nu=args.nu,N=10000)
+        A = evolve([1] + args.Length * [0],s=s,nu=args.nu,N=args.N,rtol=args.rtol,atol=args.atol)
         for i in range(len(Populations)):
             Populations[i].append(A[i])
         x = [i + index/len(Ss) for i in range(len(A))]
@@ -76,14 +117,17 @@ if __name__=='__main__':
     plt.ylabel('Frequency')
     plt.legend(title='s')
     
+    # Plot dependency on s for each Hamming Distance 
+    
     plt.figure(figsize=(20,20))
     for i in range(len(Populations)):
         plt.plot(Ss,Populations[i],color=colours[i%len(colours)],
                 ls=line_styles[i//len(colours)],label='{0}'.format(i))
     
-    plt.legend(title='Length') 
+    plt.legend(title='Hamming Distance',loc=6) 
     plt.xlim(min(Ss),max(Ss))
     plt.xlabel('s')
     plt.ylabel('Frequency')
     plt.title('Error catastrophe')
+    
     plt.show()
