@@ -67,6 +67,7 @@ target/
 *.blg
 *.synctex.gz
 challenge.tex
+*.toc
 
 # Netlogo stuff
 .*.tmp.nlogo
