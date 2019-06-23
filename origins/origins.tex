@@ -1,5 +1,5 @@
 \documentclass[]{article}
-\usepackage{graphicx}
+\usepackage{caption,subcaption,graphicx,float}
 \graphicspath{{figs/}} 
 %opening
 \title{Notes from Origins of Life}
@@ -12,20 +12,6 @@
 
 \begin{abstract}
     This course aims to push the field of Origins of Life research forward by bringing new and synthetic thinking to the question of how life emerged from an abiotic world.
-
-This course begins by examining the chemical, geological, physical, and biological principles that give us insight into origins of life research. We look at the chemical and geological environment of early Earth from the perspective of likely environments for life to originate.
-
-Taking a look at modern life we ask what it can tell us about the origin of life by winding the clock backwards. We explore what elements of modern life are absolutely essential for life, and ask what is arbitrary? We ponder how life arose from the huge chemical space and what this early 'living chemistry' may have looked like.
-
-We examine phenomena, that may seem particularly life like, but are in fact likely to arise given physical dynamics alone. We analyze what physical concepts and laws bound the possibilities for life and its formation.
-
-Insights gained from modern evolutionary theory will be applied to proto-life. Once life emerges, we consider how living systems impact the geosphere and evolve complexity. 
-
-The study of Origins of Life is highly interdisciplinary - touching on concepts and principles from earth science, biology, chemistry, and physics.  With this we hope that the course can bring students interested in a broad range of fields to explore how life originated. 
-
-The course will make use of basic algebra, chemistry, and biology but potentially difficult topics will be reviewed, and help is available in the course discussion forum and instructor email. There will be pointers to additional resources for those who want to dig deeper.
-
-This course is Complexity Explorer's first Frontiers Course.  A Frontiers Course gives students a tour of an active interdisciplinary research area. The goals of a Frontiers Course are to share the excitement and uncertainty of a scientific area, inspire curiosity, and possibly draw new people into the research community who can help this research area take shape!
 
 \end{abstract}
 
@@ -83,11 +69,184 @@ Chemical reactions mixed by a variety of processes.
 \end{itemize}
   
   
-\subsubsection{Mixing processes between chemical reactors}
-Reactions would have been mixed by different processes.\cite{stueken2013did}
+\subsubsection{Geothermal systems}
+\begin{figure}[h!]
+	\caption{Geothermal systems \cite{damer2016field}}
+	\includegraphics[width=0.9\textwidth]{GeothermalSystems}
+\end{figure}
+
+\begin{itemize}
+	\item Provide high 	temperature, high
+	pressure, reduced	reaction products
+	\item Fresh water from 	precipitation
+	\item Diversity of mineral	surfaces for ”nutrients” and catalysis
+\end{itemize}
+
+\subsubsection{Energy Sources}
+\begin{itemize}
+	\item Chemical Energy
+	\begin{itemize}
+		\item Reducing gases
+		\item Radiation
+		\item Minerals
+	\end{itemize}
+	\item Other Energy Sources
+	\begin{itemize}
+		\item Volcanic lightning
+		\item UV-light
+		\item High temperature
+		\item Pressure
+		\item Impacts
+	\end{itemize}
+\end{itemize}
+Miller Urey. Maybe no methane, but CO2 to dive different mixture.
+
+\begin{figure}[h!]
+	\caption{Miller Urey \cite{miller1959organic}}
+	\includegraphics[width=0.45\textwidth]{MillerUrey1}
+	\includegraphics[width=0.45\textwidth]{MillerUrey2}
+\end{figure}
+
+Each meteorite has different chemical library
+
+Enough material to jump start life
+
+Bombardment
+
+Samples and surface are (mostly) undisturbed
+• Samples can be dated ( 40 Ar/ 39 Ar, 87 Rb/ 87 Sr, etc.)
+• Craters can be counted
+Lunar cratering rate anchors
+the impact chronology for the
+entire (inner) Solar System
+
+Late Heavy Bombardment
+
 \subsection{Likely Environments for Studying Origins of Life}
+
+\begin{figure}[h!]
+	\caption{Life probably started between 4.4 to 3.8 billion years ago (Ga) \cite{domagal2016astrobiology}}
+	\includegraphics[width=0.9\textwidth]{LifeProbablyStarted}
+\end{figure}
+
+\begin{figure}[h!]
+	\caption{Earth during the Hadean Eon was probably very inhospitable for life} 
+	\includegraphics[width=0.9\textwidth]{HadeanInhospitable}
+\end{figure}
+ Magma Oceans formed because of:
+\begin{itemize}
+	\item Comets and meteorite impacts
+	\item Tidal heating (moon/Earth)
+	\item Core formation (plate tectonics)
+\end{itemize}
+
+Plate tectonics helped make the early Earth environment favorable for life
+
+Global oceans probably covered the surface of the Earth by the Archean Eon
+
+
+
+\begin{figure}[h!]
+	\caption{Life took hold on Earth during the Archean Eon} 
+		\includegraphics[width=0.9\textwidth]{Chemolithoautotrophs}
+	\end{figure}
+
+The first likely signs of life in the rock record dates back to 3.5 to 3.3 Ga
+
 \subsection{Chemistry and The Origins of Life}
+
+Tar problem: Biomolecules plus heat and time = black sludge.
+
+\begin{itemize}
+	\item What molecules can be and are created without life?
+	\item How can these molecules be made to react in a life like manner?
+	\item How can formation of wasteful byproducts like	tars be prevented?
+\end{itemize}
 \subsection{Why Nature Chose Phosphates}
+
+\begin{itemize}
+	\item Structural
+	\begin{itemize}
+		\item Nucleic Acid Backbones (Figure \ref{fig:PhosphoDiesterBond}-\ref{fig:PhosphoDiesterBond3})
+		\item Phospholipid Bilayers (Figure \ref{fig:PhosphoLipid1}-\ref{fig:PhosphoLipid3})
+	\end{itemize}
+
+	\item Physical\begin{itemize}
+		\item Compartmentalization
+		\item Signaling
+	\end{itemize}
+	\item Chemical
+	\begin{itemize}
+		\item Energy
+		\item Activation
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{Nucleic Acid Backbones}
+	\label{fig:three graphs}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Phospho Diester Bond}\label{fig:PhosphoDiesterBond} 
+		\includegraphics[width=\textwidth]{PhosphoDiesterBond}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Repels negatively charged nucleophiles which might break bond, so very stable}\label{fig:PhosphoDiesterBond1} 
+		\includegraphics[width=\textwidth]{PhosphoDiesterBond1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Bond is tunable if we need to react}\label{fig:PhosphoDiesterBond2} 
+		\includegraphics[width=\textwidth]{PhosphoDiesterBond2}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Repulsion keeps DNA soluble and prevents collapse}\label{fig:PhosphoDiesterBond3} 
+		\includegraphics[width=\textwidth]{PhosphoDiesterBond3}
+	\end{subfigure}
+	
+\end{figure}
+\begin{figure}[H]
+	\caption{Phospholipids}\label{fig:PhosphoLipids}
+	
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Phospho Diester Bond}\label{fig:PhosphoLipid1} 
+		\includegraphics[width=\textwidth]{PhosphoLipid1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Repels negatively charged nucleophiles which might break bond, so very stable}\label{fig:PhosphoLipid2} 
+		\includegraphics[width=\textwidth]{PhosphoLipid2}
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Repulsion keeps DNA soluble and prevents collapse}\label{fig:PhosphoLipid3} 
+		\includegraphics[width=\textwidth]{PhosphoLipid3}
+	\end{subfigure}
+	
+\end{figure}
+
+Why wouldn't you use phosphate?
+
+\begin{itemize}
+	\item Scarce
+	\item Insoluble, unreactive
+	\item No polyphosphate minerals
+	\item One pyrophosphate mineral
+	\item Limited geochemical production of reactive forms
+\end{itemize}
+Open Questions
+
+\begin{itemize}
+	\item When did life begin to use 	phosphate?
+	\item If not at the very beginning, what 	came before?
+	\item Where did early phosphate come 	from?
+\end{itemize}
+Backbone of nucleic acids: strong bond, tunable
+
 \subsection{Why Water, Why Carbon}
 \subsection{Macromolecules}
 \subsection{Chemical Cycles and Chaos}
