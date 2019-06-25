@@ -1,5 +1,5 @@
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb}
 \graphicspath{{figs/}} 
 %opening
 \title{Notes from Origins of Life}
@@ -310,12 +310,9 @@ What is the source of our understanding of conditions when we thought life origi
 	\includegraphics[width=0.9\textwidth]{AnotherLevelDown}
 \end{figure}
 
-Only direct record for events
-that sow chaos and processes of prolonged
-gradual change
+Only direct record for events that sow chaos and processes of prolonged gradual change
 
-What does this mean for
-origins of life research?
+What does this mean for origins of life research?
 \begin{itemize}
 	\item Limited direct rock data
 	\begin{itemize}
@@ -340,6 +337,52 @@ origins of life research?
 	\end{itemize}
 \end{itemize}
 \subsection{Pattern Formation in Chemical Systems}
+Chris Kempes
+
+\begin{itemize}
+	\item What properties and processes are easy to obtain through physical dynamics alone?
+	
+	\item How might this make it easy for lifelike things to begin?
+	
+	\item Reaction Diffusion Equations\cite{sfi_grayscott2018}
+\end{itemize}
+
+Describe reaction of $U$ everywhere in space.
+\begin{align*}
+\frac{\partial U}{\partial t} =&   \underbrace{\overbrace{D_V}^\text{diffusivity} \underbrace{ \nabla^2 U }_\text{difference in fluxes}}_\text{diffusion term} + \underbrace{ F(U)}_\text{reaction term}
+\end{align*}
+
+With two chemicals...
+\begin{align*}
+\frac{\partial U}{\partial t} =&   D_U \nabla^2 U + F(U,V)\\
+\frac{\partial V}{\partial t} =&   D_V \nabla^2 V + G(U,V)
+\end{align*}
+
+Consider two reacting species, $U$ and $V$, and an inert product $P$.
+\begin{align*}
+U + 2V \Longrightarrow& 3V\\
+V \Longrightarrow& P\\
+\frac{\partial U}{\partial t} =& -U V^2 + \overbrace{F}^\text{Fixed flow into system (chemostat)} (1 - U) + D_u \nabla^2 U \\
+\frac{\partial V}{\partial t} =& U V^2 - (F +\underbrace{f}_\text{loss to make $P$}) V + D_v \nabla^2 V 
+\end{align*}
+
+\begin{figure}[H]
+	\caption{Grey Scott Reaction}
+	
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Starting configuration}
+		\includegraphics[width=\textwidth]{GreyScottInitial}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Evolves toward steady state,  where high concentration close to low concentration. Segregation.}
+		\includegraphics[width=\textwidth]{GreyScottFinal}
+	\end{subfigure}
+\end{figure}
+
+Other starting values give cell-like behaviour (including division), so maybe get some ''lifelike" behaviour from physics and simple chemistry.
+
 \subsection{The Central Dogma of Biology}
 \cite{crick1958biological} \cite{crick1970central}
 \subsection{Biological Similarity}
