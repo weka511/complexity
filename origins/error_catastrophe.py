@@ -116,6 +116,7 @@ if __name__=='__main__':
     plt.xlabel('Hamming Distance from optimum')
     plt.ylabel('Frequency')
     plt.legend(title='s')
+    plt.savefig('figs/ErrorCatastrophe1')
     
     # Plot dependency on s for each Hamming Distance 
     
@@ -129,5 +130,6 @@ if __name__=='__main__':
     plt.xlabel('s')
     plt.ylabel('Frequency')
     plt.title('Error catastrophe')
+    plt.savefig('figs/ErrorCatastrophe2')
     
     plt.show()
