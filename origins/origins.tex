@@ -535,6 +535,38 @@ The Error Threshold is the \emph{maximum mutation rate that allows for adaptive 
 
 \subsubsection{Quasispecies and Error Catastrophe}
 
+Michael Lachmann
+
+We look at growth of types, e.g.:
+\begin{itemize}
+	\item Genome in population
+	\item Molecule in test-tube.
+\end{itemize}
+
+\begin{align*}
+\vec{x}^{\,t} =& W M \vec{x}\text{, where M represents mutations, W growth, e.g.}\\
+M =& \begin{bmatrix}
+1-\mu & 0\\
+\mu& 1
+\end{bmatrix}&
+\end{align*}
+Let us diagonalize WM
+\begin{align*}
+WM =& VDV^{-1}\\
+(WM)^t =& V D^t V^{-1}
+\end{align*}
+Do $D^t$ is dominated by its largest eigenvalue.
+\begin{figure}[H]
+	\caption{Hamming Distance.}\label{fig:ErrorCatastrophe1} 
+	\includegraphics[width=0.9\textwidth]{ErrorCatastrophe1}
+\end{figure}
+\begin{figure}[H]
+	\caption{Error Catastrophe.}\label{fig:ErrorCatastrophe2} 
+	\includegraphics[width=0.9\textwidth]{ErrorCatastrophe2}
+\end{figure}
+
+
+
 \cite{eigen1978hypercycle} \cite{eigen1988molecular} \cite{eigen2002error} \cite{crotty2001rna} \cite{stadtler2002fitness_landscapes}
 \section{Chemical Origins}
 \subsection{Introduction}
