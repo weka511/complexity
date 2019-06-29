@@ -1018,7 +1018,72 @@ Sarah Maurer
 
 \cite[19.S, Nucleic Acids (Summary)]{brown2009chemistry}
 \subsection{Chemical Cycles and Chaos}
+
+Chris Kempes
+
+What properties and processes are “easy” to obtain
+through physical dynamics alone?
+\begin{itemize}
+	\item Limit cycle
+	\item Chaotic Dynamics
+\end{itemize}
+
+
+\textit{Brusselator} has this abstract set of chemical reactions.
+
+\begin{align*}
+A \rightarrow& X\\
+B + X \rightarrow& Y + D\\
+2X + Y \rightarrow& 3X \\
+X \rightarrow& E
+\end{align*}
+
+These can be described by differential equations:
+
+\begin{align*}
+\dot X =& k_1 A - k_2 B X + k_3 X^2 Y -k_4 X\\
+\dot Y =& k_2 B X -k_3 X^2 Y\text{, assuming that we hold concentrations of $A$ and $B$ constant in system.}  
+\end{align*}
+
+We can non-dimensionalize:
+\begin{align*}
+\dot x =& a - b x +x^2 y -x\\
+\dot y =& bx - x^2 y\text{, which has steady state}\\
+x^* =& a\\
+y^* =& \frac{b}{a}
+\end{align*}
+
+Steady state is unstable for $b>a^2+1$. 
+
+\begin{figure}[H]
+	\caption{Brusselator Stability}\label{fig:BrusselatorStability}
+	
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\caption{ $b\ll a^2+1$}\label{fig:BrusselatorSteadyState1} 
+		\includegraphics[width=\textwidth]{BrusselatorSteadyState1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\caption{$b<a^2+1$, but close!}\label{fig:BrusselatorSteadyState2} 
+		\includegraphics[width=\textwidth]{BrusselatorSteadyState2}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+	\centering
+	\caption{$b>a^2+1$}\label{fig:BrusselatorChaos} 
+	\includegraphics[width=\textwidth]{BrusselatorChaos}
+\end{subfigure}
+	
+	
+\end{figure}
+
+See also \cite{ault2003dynamics}.
+
+
+
+
 \subsection{Fossil or Not?}
+
 
 \section{Chemical Commonalities}
 
