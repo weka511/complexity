@@ -1,6 +1,6 @@
 \documentclass[]{article}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb}
-\usepackage[toc]{glossaries}
+\usepackage[toc,acronym]{glossaries}
 
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
@@ -11,42 +11,7 @@
 
 \makeglossaries
 
-\newacronym{gls:ATP}{ATP}{Adenosine triphosphate}
-
-\newacronym{gls:DNA}{RNA}{Deoxyribonucleinc Acid}
-
-\newacronym{gls:LAWKI}{LAWKI}{Life as we know it}
-
-\newacronym{gls:RNA}{RNA}{Ribonucleinc Acid}
-
-\newacronym{gls:SFI}{SFI}{Santa Fe Institute}
-
-\newglossaryentry{gls:aldose}
-{
-	name=aldose,
-	description={An aldose is a monosaccharide (a simple sugar) with a carbon backbone chain with a carbonyl group on the endmost carbon atom, making it an aldehyde, and hydroxyl groups connected to all the other carbon atoms. Aldoses can be distinguished from \glspl{gls:ketose}, which have the carbonyl group away from the end of the molecule, and are therefore ketones--\cite{wiki:main-page}.}
-}
-
-
-
-\newglossaryentry{gls:furan}{
-	name={furan},
-	description={Furan is a heterocyclic organic compound, consisting of a five-membered aromatic ring with four carbon atoms and one oxygen. Chemical compounds containing such rings are also referred to as furans--\cite{wiki:main-page}. }
-}
-
-\newglossaryentry{gls:ketose}
-{	name={ketose},
-	description={A ketose is a monosaccharide containing one ketone group per molecule. The simplest ketose is dihydroxyacetone, which has only three carbon atoms, and it is the only one with no optical activity. All monosaccharide ketoses are reducing sugars, because they can tautomerize into \glspl{gls:aldose} via an aldol intermediate, and the resulting aldehyde group can be oxidised, for example in the Tollens' test or Benedict's test. Ketoses that are bound into glycosides, for example in the case of the fructose moiety of sucrose, are nonreducing sugars--\cite{wiki:main-page}.}
-}
-
-
-
-
-\newglossaryentry{gls:pyran}
-{name={pyran},
-	description={In chemistry, pyran, or oxine, is a six-membered heterocyclic, non-aromatic ring, consisting of five carbon atoms and one oxygen atom and containing two double bonds. The molecular formula is C5H6O. There are two isomers of pyran that differ by the location of the double bonds. In 2H-pyran, the saturated carbon is at position 2, whereas, in 4H-pyran, the saturated carbon is at position 4--\cite{wiki:main-page}. }
-}
-
+\loadglsentries{glossary}
 
 
 \begin{document}
@@ -82,7 +47,7 @@ The extremes:
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{Life is hard: All life we know of traces back to a single 		ancestor}\label{fig:luca} 
+	\caption{Life is hard: All life we know of traces back to a single 		ancestor--\gls{gls:LUCA}}\label{fig:luca} 
 	\includegraphics[width=0.9\textwidth]{Luca}
 \end{figure}
 
@@ -125,7 +90,7 @@ The extremes:
 	\end{subfigure}
 \end{figure}
 
-Life is a self-propagating chemical system capable of undergoing adaptive evolution--adapted from \cite{deamer1994origins}
+\gls{gls:life} is a self-propagating chemical system capable of undergoing adaptive evolution--adapted from \cite{deamer1994origins}
 \begin{itemize}
 	\item ''Self-propagating'' includes growth and cellular reproduction 
 	\item ''Adaptive evolution'' entails the potential to complexify and become more out-of-equilibrium--Figure \ref{fig:AdaptiveEvolution}
@@ -139,9 +104,8 @@ Life is a self-propagating chemical system capable of undergoing adaptive evolut
 
 \subsection{Nonequilibrium Physics}
 
- Eric Smith, External Professor, Santa Fe Institute
-
-
+Lecturer: Eric Smith, External Professor, Santa Fe Institute.\\
+\\
 Topics covered:
 \begin{itemize}
 	\item The equilibrium concept of phase transition
@@ -476,7 +440,7 @@ Landauer Bound: ''any logically irreversible manipulation of information, such a
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{For small cell, DNA and proteins take up (nearly) entire volume; for large cells, Ribosome does same thing! So we have bounds on allowable volume.\cite{kempes2016evolutionary}}\label{fig:RibosomeTradeoffs} 
+	\caption{For small cell, \gls{gls:DNA} and proteins take up (nearly) entire volume; for large cells, Ribosome does same thing! So we have bounds on allowable volume.\cite{kempes2016evolutionary}}\label{fig:RibosomeTradeoffs} 
 	\includegraphics[width=0.9\textwidth]{RibosomeTradeoffs}
 \end{figure}
 
@@ -798,7 +762,7 @@ Tar problem: Biomolecules plus heat and time = black sludge.
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\caption{Repulsion keeps DNA soluble and prevents collapse}\label{fig:PhosphoDiesterBond3} 
+		\caption{Repulsion keeps  soluble and prevents collapse}\label{fig:PhosphoDiesterBond3} 
 		\includegraphics[width=\textwidth]{PhosphoDiesterBond3}
 	\end{subfigure}
 	
@@ -819,7 +783,7 @@ Tar problem: Biomolecules plus heat and time = black sludge.
 	
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\caption{Repulsion keeps DNA soluble and prevents collapse}\label{fig:PhosphoLipid3} 
+		\caption{Repulsion keeps \gls{gls:DNA} soluble and prevents collapse}\label{fig:PhosphoLipid3} 
 		\includegraphics[width=\textwidth]{PhosphoLipid3}
 	\end{subfigure}
 	
@@ -1028,7 +992,7 @@ Sarah Maurer
 
 \begin{figure}[H]
 	\caption{A-T (2 H-bonds) and G-C (3 H-bonds) are the base pairs in the Watson–
-		Crick model of DNA.}\label{fig:BasePairs} 
+		Crick model of \gls{gls:DNA}.}\label{fig:BasePairs} 
 	\includegraphics[width=0.9\textwidth]{BasePairs}
 \end{figure}
 
@@ -1038,7 +1002,7 @@ Sarah Maurer
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Nucleotide Structure. RNA loses OH group, so it can't hydrogen bind into complex structures the way DNA does. Ribose and phosphate make up backbone. Bases on outside, so can basepair.}\label{fig:NucleotideStructure} 
+	\caption{Nucleotide Structure. RNA loses OH group, so it can't hydrogen bind into complex structures the way \gls{gls:DNA} does. Ribose and phosphate make up backbone. Bases on outside, so can basepair.}\label{fig:NucleotideStructure} 
 	\includegraphics[width=0.9\textwidth]{NucleotideStructure}
 \end{figure}
 
@@ -1128,8 +1092,6 @@ Steady state is unstable for $b>a^2+1$.
 See also \cite{ault2003dynamics}.
 
 
-
-
 \subsection{Fossil or Not?}
 
 
@@ -1141,10 +1103,13 @@ See also \cite{ault2003dynamics}.
 
 \section{Astrobiology \& General Theories of Life}
 
-% end of text -- glossary and bibliography go here
+% end of text 
 
+% glossary
 \printunsrtglossaries
 
+% bibliography go here
+ 
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{section}{Bibliography}
 \bibliography{origins}
