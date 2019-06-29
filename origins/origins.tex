@@ -1,8 +1,9 @@
 \documentclass[]{article}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb}
 \usepackage[toc]{glossaries}
-\usepackage{glossaries-extra}
 
+\setacronymstyle{long-short}
+\usepackage{glossaries-extra}
 \graphicspath{{figs/}} 
 %opening
 \title{Notes from Origins of Life}
@@ -10,33 +11,42 @@
 
 \makeglossaries
 
+\newacronym{gls:ATP}{ATP}{Adenosine triphosphate}
+
+\newacronym{gls:DNA}{RNA}{Deoxyribonucleinc Acid}
+
 \newacronym{gls:LAWKI}{LAWKI}{Life as we know it}
 
 \newacronym{gls:RNA}{RNA}{Ribonucleinc Acid}
 
-\newacronym{gls:DNA}{RNA}{Deoxyribonucleinc Acid}
+\newacronym{gls:SFI}{SFI}{Santa Fe Institute}
 
 \newglossaryentry{gls:aldose}
 {
 	name=aldose,
-	description={An aldose is a monosaccharide (a simple sugar) with a carbon backbone chain with a carbonyl group on the endmost carbon atom, making it an aldehyde, and hydroxyl groups connected to all the other carbon atoms. Aldoses can be distinguished from \gls{gls:ketose}s, which have the carbonyl group away from the end of the molecule, and are therefore ketones.}
+	description={An aldose is a monosaccharide (a simple sugar) with a carbon backbone chain with a carbonyl group on the endmost carbon atom, making it an aldehyde, and hydroxyl groups connected to all the other carbon atoms. Aldoses can be distinguished from \glspl{gls:ketose}, which have the carbonyl group away from the end of the molecule, and are therefore ketones--\cite{wiki:main-page}.}
 }
+
+
 
 \newglossaryentry{gls:furan}{
 	name={furan},
-	description={Furan is a heterocyclic organic compound, consisting of a five-membered aromatic ring with four carbon atoms and one oxygen. Chemical compounds containing such rings are also referred to as furans. }
+	description={Furan is a heterocyclic organic compound, consisting of a five-membered aromatic ring with four carbon atoms and one oxygen. Chemical compounds containing such rings are also referred to as furans--\cite{wiki:main-page}. }
 }
-
 
 \newglossaryentry{gls:ketose}
 {	name={ketose},
-	description={A ketose is a monosaccharide containing one ketone group per molecule. The simplest ketose is dihydroxyacetone, which has only three carbon atoms, and it is the only one with no optical activity. All monosaccharide ketoses are reducing sugars, because they can tautomerize into \gls{gls:aldose}s via an aldol intermediate, and the resulting aldehyde group can be oxidised, for example in the Tollens' test or Benedict's test. Ketoses that are bound into glycosides, for example in the case of the fructose moiety of sucrose, are nonreducing sugars.}
+	description={A ketose is a monosaccharide containing one ketone group per molecule. The simplest ketose is dihydroxyacetone, which has only three carbon atoms, and it is the only one with no optical activity. All monosaccharide ketoses are reducing sugars, because they can tautomerize into \glspl{gls:aldose} via an aldol intermediate, and the resulting aldehyde group can be oxidised, for example in the Tollens' test or Benedict's test. Ketoses that are bound into glycosides, for example in the case of the fructose moiety of sucrose, are nonreducing sugars--\cite{wiki:main-page}.}
 }
 
+
+
+
 \newglossaryentry{gls:pyran}
-	{name={pyran},
-		description={In chemistry, pyran, or oxine, is a six-membered heterocyclic, non-aromatic ring, consisting of five carbon atoms and one oxygen atom and containing two double bonds. The molecular formula is C5H6O. There are two isomers of pyran that differ by the location of the double bonds. In 2H-pyran, the saturated carbon is at position 2, whereas, in 4H-pyran, the saturated carbon is at position 4. }
-	}
+{name={pyran},
+	description={In chemistry, pyran, or oxine, is a six-membered heterocyclic, non-aromatic ring, consisting of five carbon atoms and one oxygen atom and containing two double bonds. The molecular formula is C5H6O. There are two isomers of pyran that differ by the location of the double bonds. In 2H-pyran, the saturated carbon is at position 2, whereas, in 4H-pyran, the saturated carbon is at position 4--\cite{wiki:main-page}. }
+}
+
 
 
 \begin{document}
@@ -44,7 +54,7 @@
 \maketitle
 
 \begin{abstract}
-    These are my notes from the SFI Origins of Life Course\cite{sfi2019}. The course aims to push the field of Origins of Life research forward by bringing new and synthetic thinking to the question of how life emerged from an abiotic world.
+    These are my notes from the \gls{gls:SFI} Origins of Life Course\cite{sfi2019}. The course aims to push the field of Origins of Life research forward by bringing new and synthetic thinking to the question of how life emerged from an abiotic world.
 
 \end{abstract}
 
@@ -53,6 +63,7 @@
 
 
 \section{Introduction}
+
 \subsection{Welcome To The Course}
 \begin{itemize}
 	\item Dr. Sarah Maurer, Co-creator, video lecturer, and live instructor
@@ -89,13 +100,13 @@ The extremes:
 \end{itemize}
 
 \subsubsection{The meaning of ''life''}
-\acrlong{gls:LAWKI} (''\acrshort{gls:LAWKI}'') shares many features
+\gls{gls:LAWKI} shares many features
 \begin{itemize}
-	\item DNA/RNA (A,T/U,C, G)
+	\item \gls{gls:DNA}/\gls{gls:RNA} (A,T/U,C, G)
 	\item Proteins with the same 20 L amino acids
 	\item Genetic Code
 	\item Ribosomes
-	\item Biochemistry (e.g. ATP)
+	\item Biochemistry (e.g. \gls{gls:ATP})
 	\item Particular genes
 \end{itemize}
 
@@ -983,7 +994,7 @@ Sarah Maurer
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Variety of D-aldoses}\label{fig:SugarsStructure} 
+	\caption{Variety of D-\glspl{gls:aldose}}\label{fig:SugarsStructure} 
 	\includegraphics[width=0.9\textwidth]{SugarsStructure}
 \end{figure}
 
@@ -1130,9 +1141,9 @@ See also \cite{ault2003dynamics}.
 
 \section{Astrobiology \& General Theories of Life}
 
-%\printnoidxglossary
+% end of text -- glossary and bibliography go here
+
 \printunsrtglossaries
-%\printglossaries
 
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{section}{Bibliography}

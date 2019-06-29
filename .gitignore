@@ -71,6 +71,7 @@ challenge.tex
 *.lof
 *.glo
 *.ist
+*.out
 
 # Netlogo stuff
 .*.tmp.nlogo
