@@ -1,9 +1,37 @@
 \documentclass[]{article}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb}
+\usepackage[toc]{glossaries}
+\usepackage{glossaries-extra}
+
 \graphicspath{{figs/}} 
 %opening
 \title{Notes from Origins of Life}
 \author{Simon Crase}
+
+\makeglossaries
+
+\newglossaryentry{gls:aldose}
+{
+	name=aldose,
+	description={An aldose is a monosaccharide (a simple sugar) with a carbon backbone chain with a carbonyl group on the endmost carbon atom, making it an aldehyde, and hydroxyl groups connected to all the other carbon atoms. Aldoses can be distinguished from \gls{gls:ketose}s, which have the carbonyl group away from the end of the molecule, and are therefore ketones.}
+}
+
+\newglossaryentry{gls:furan}{
+	name={furan},
+	description={Furan is a heterocyclic organic compound, consisting of a five-membered aromatic ring with four carbon atoms and one oxygen. Chemical compounds containing such rings are also referred to as furans. }
+}
+
+
+\newglossaryentry{gls:ketose}
+{	name={ketose},
+	description={A ketose is a monosaccharide containing one ketone group per molecule. The simplest ketose is dihydroxyacetone, which has only three carbon atoms, and it is the only one with no optical activity. All monosaccharide ketoses are reducing sugars, because they can tautomerize into \gls{gls:aldose}s via an aldol intermediate, and the resulting aldehyde group can be oxidised, for example in the Tollens' test or Benedict's test. Ketoses that are bound into glycosides, for example in the case of the fructose moiety of sucrose, are nonreducing sugars.}
+}
+
+\newglossaryentry{gls:pyran}
+	{name={pyran},
+		description={In chemistry, pyran, or oxine, is a six-membered heterocyclic, non-aromatic ring, consisting of five carbon atoms and one oxygen atom and containing two double bonds. The molecular formula is C5H6O. There are two isomers of pyran that differ by the location of the double bonds. In 2H-pyran, the saturated carbon is at position 2, whereas, in 4H-pyran, the saturated carbon is at position 4. }
+	}
+
 
 \begin{document}
 
@@ -631,6 +659,9 @@ Chemical reactions mixed by a variety of processes.
 \end{itemize}
 
 \subsubsection{Energy Sources}
+
+See \cite{kitadai2018origins}, \cite{stueken2013did}, \cite{damer2016field}, \cite{miller1959organic}, \cite{ehrenfreund2002astrophysical},\cite{dalai2016incubating}, and \cite{chyba1997comets}.
+
 \begin{itemize}
 	\item Chemical Energy
 	\begin{itemize}
@@ -647,7 +678,7 @@ Chemical reactions mixed by a variety of processes.
 		\item Impacts
 	\end{itemize}
 \end{itemize}
-Miller Urey. Maybe no methane, but CO2 to deive different mixture.
+Miller Urey. Maybe no methane, but CO2 to derive different mixture.
 
 \begin{figure}[h!]
 	\caption{Miller Urey \cite{miller1959organic}}
@@ -957,7 +988,7 @@ Sarah Maurer
 
 
 \begin{itemize}
-	\item Ribose is usuaaly rolled up into pyran (6 member ring) or furan(5)
+	\item Ribose is usually rolled up into \gls{gls:pyran} (6 member ring) or \gls{gls:furan}(5)
 	\item Reactive OH group (green in Figure \ref{fig:SugarTautomers}), anomeric Oxygen, can be at bottom ($alpha$) or top($beta$). This is where polymerization happens. RNA uses $\beta-furanose$, so we need enzymes to make this type.
 \end{itemize}
 \begin{figure}[H]
@@ -1093,7 +1124,12 @@ See also \cite{ault2003dynamics}.
 
 \section{Astrobiology \& General Theories of Life}
 
+%\printnoidxglossary
+\printunsrtglossaries
+%\printglossaries
+
 \bibliographystyle{unsrt}
+\addcontentsline{toc}{section}{Bibliography}
 \bibliography{origins}
 
 \end{document}

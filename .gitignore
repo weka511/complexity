@@ -69,6 +69,8 @@ target/
 challenge.tex
 *.toc
 *.lof
+*.glo
+*.ist
 
 # Netlogo stuff
 .*.tmp.nlogo
