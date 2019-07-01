@@ -1,5 +1,6 @@
 \documentclass[]{article}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym]{glossaries}
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
@@ -12,6 +13,7 @@
 
 \loadglsentries{glossary}
 
+\renewcommand{\glstextformat}[1]{\textbf{\em #1}}
 
 \begin{document}
 
@@ -712,7 +714,7 @@ The first likely signs of life in the rock record dates back to 3.5 to 3.3 Ga
 
 \subsubsection{Cuatro Ci\'enegas Special Feature}
 
-This is a short film about the people and places of the Cuatro Ci\'enegas Basin in Coahuila, M\'exico.\footnote{This is the transcript from the video} The Cuatro Ci\'enegas Basin - its water and microbial, plant and animal communities -
+This is a short film about the people and places of the Cuatro Ci\'enegas Basin in Coahuila, M\'exico.\footnote{This is the transcript from the video, with a few small edits.} The Cuatro Ci\'enegas Basin - its water and microbial, plant and animal communities -
 are a treasure of M\'exico. All of this unique life has been uncovered through the work of Mexican scientists with international collaborations. This work makes possible a deeper understanding of the history of all of life on earth.
 
 \begin{figure}[h!]
@@ -740,9 +742,7 @@ skewed stoichiometry. Most of life now cannot live in a skewed stoichiometry -- 
 So, how they can make basic things, such as ribosomes or DNA, is because they are really good at stealing phosphorus from anybody else, including rocks. So, they have an amazing array of strategies to deal with the lack of phosphorus, and they did that since the Archean.
 
 So, here we have stromatolites and microbial mats, whose ancestry goes back
-to the Precambrian in some cases. And, we are going to a site where we think we have the boundary between the Archean and the Precambrian.
-
-Since this is a blue pool, we are talking about the moment where animals turned the planet blue, and that was in the Ediacaran in the late Precambrian.
+to the Precambrian in some cases. And, we are going to a site where we think we have the boundary between the Archean and the Precambrian\footnote{Should this be Proterozoic?}. Since this is a blue pool, we are talking about the moment where animals turned the planet blue, and that was in the Ediacaran in the late Precambrian.
 
 My name is Maria Kalambokidis, and I'm an intern for a year, working in Valeria's lab in UNAM, in the Department of Evolutionary Ecology. And, right now, we're at Pozas Azules, at the site of the Archaean domes. 
 
@@ -797,7 +797,7 @@ But if we walk just a few meters away, maybe just 200 meters, we'll find a very 
 
 In the system called ''Pozas Rojas'', because these ponds are fluctuating environments, they get very saline in the summer because the water evaporates. It is deep water, not rain water, so each one becomes a more vivid color than in winter, where water doesn't evaporate as much -- so they get like the juiciness concentrated in the summer.
 
-The life that lives here is very diverse - there's microbial mass that we have sequenced. There's a very large biodiversity and there are like islands. There are nine small islands of these tiny pozas and a big lagoon. So, you can compare the diversity in each one of them separately and then the big poza in the middle. But, this was perturbed by a hurricane in 2010 and it became a complete lake, all of its... It kind of drained all the nutrients and all the water from the... east side of the valley. The biology changed because the pozas became connected 
+The life that lives here is very diverse - there's microbial mass that we have sequenced. There's a very large biodiversity and there are like islands. There are nine small islands of these tiny \gls{gls:poza}s and a big lagoon. So, you can compare the diversity in each one of them separately and then the big \gls{gls:poza} in the middle. But, this was perturbed by a hurricane in 2010 and it became a complete lake, all of its... It kind of drained all the nutrients and all the water from the... east side of the valley. The biology changed because the \gls{gls:poza}s became connected 
 with the lake water, and also the nutrients changed. It was - before the hurricane - it was the site with less phosphorus. Now, it is a site that nearly has a balance of stoichiometry. So, it is very interesting how the life got habituated to this richer environment. What is even more interesting is that what was a very primitive site it became a more Holocene site.
 \begin{figure}[h!]
 	\caption{The life that lives here is very diverse - there's microbial mass that we have sequenced.} 
@@ -805,7 +805,7 @@ with the lake water, and also the nutrients changed. It was - before the hurrica
 \end{figure}
 
 \begin{figure}[h!]
-	\caption{There are nine small islands of these tiny pozas and a big lagoon.} 
+	\caption{There are nine small islands of these tiny \gls{gls:poza}s and a big lagoon.} 
 	\includegraphics[width=0.9\textwidth]{CuatroCienegas7}
 \end{figure}
 
@@ -814,6 +814,10 @@ For example, the Vibrio that lives here, they didn't radiate since the Holocene 
 What makes Cuatro  Ci\'enegas unique is precisely the lack of nutrients. Maybe they are going to become - each time that we sample - more and more imbalanced and return to their ancient selves. But, it will take time.
 
 My name is Jorge Valdivia, and I am a full-time professor at the Universidad Nacional Aut\'onoma de M\'exico. [...] of my doctoral studies in the Cuatro  Ci\'enegas valley. I was working with the genus Bacillus and the project was focused on knowing the relationship that existed between the number of copies of the ribosomal operon and with the available phosphorus.
+\begin{figure}[h!]
+	\caption{Variability of the rRNA operon copy number in the Bacillus diversity from the Cuatro  Ci\'enegas basin} 
+	\includegraphics[width=0.9\textwidth]{CuatroCienegas8}
+\end{figure}
 
 It is known that the valley of Cuatro  Ci\'enegas is an extremely \gls{gls:oligotroph}ic site. With these conditions...they are homologous to what... the conditions in the past [...] origin of life. Then, the interesting thing to find out was how a genus that is characterized by having many copies of the ribosomal operon can adapt to these conditions of extreme oligotrophy.
 
@@ -828,13 +832,25 @@ They are so beautiful because they have so many colors - red, pink, and like a..
 Maybe because it's in a place where the whole ecosystem, and the whole habitat is 
 it's not in another place, you know... you cannot find... the species that are in here. So, it's very... interesting because the microorganisms or the prokaryotes are living here. There's just living here and that's it. You cannot find them in another place in the world. So, that's what we're doing and we're so happy to do it.
 
-Here we are in Poza Azul Two, that is one of the most beautiful pozas in all the valley. What we can see behind us is a very big stromatolite shelf. So, these blue pozas take us back to 600 million years ago when the animals changed the chemistry of the ocean and the ocean turned blue --and that's called the Ediacaran Era. So, in Cuatro  Ci\'enegas, we have kind of different timeframes - different moments in geology that got preserved. And, that's really interesting because it's not just a metaphor, it's not just that it looks like...the Ediacaran, and when the ocean turned blue. and still the stromatolite shelf were being eaten by the first [embryos??]
+\begin{figure}[h!]
+	\caption{\Gls{gls:poza} Azul Two} 
+	\includegraphics[width=0.9\textwidth]{CuatroCienegas9}
+\end{figure}
 
-[that was their due?]
+Here we are in \Gls{gls:poza} Azul Two, that is one of the most beautiful \gls{gls:poza}s in all the valley. What we can see behind us is a very big stromatolite shelf. So, these blue \gls{gls:poza}s take us back to 600 million years ago when the animals changed the chemistry of the ocean and the ocean turned blue --and that's called the Ediacaran Era. So, in Cuatro  Ci\'enegas, we have kind of different timeframes - different moments in geology that got preserved. And, that's really interesting because it's not just a metaphor, it's not just that it looks like the Ediacaran, and when the ocean turned blue, and still the stromatolite shelf were being eaten by the first herbivores -- that was their doom.
 
+\begin{figure}[h!]
+	\caption{In the Archaean domes that are 50 metres over there} 
+	\includegraphics[width=0.9\textwidth]{CuatroCienegas10}
+\end{figure}
 But also, it's that this lineage has survived - survived for the longest time. In the Archaean domes that are 50 metres over there, we have evidence that the Archaean - a world of methane and CO2 - is preserved inside domes that are built by bacteria that protect the ancient anaerobic bacteria from the oxygen input, while they are doing photosynthesis. This kind of cooperation and construction of the whole niche is pretty unique. We know that stromatolite were world-builders - they made the ocean blue, they transformed every element that came from the start and made life complex. For the fact is that, here in Cuatro  Ci\'enegas, we have a window - a true window - of those lost worlds is really incredible.
 
 Because you walk... meters and you find three billion years... of time. And, you can have lineages that are very, very divergent from the ones we know now, how they assemble their nutrients and how they work. We can cultivate them, we can study them using metagenomics. But, for them to be studied, we need water. And, this water here is precious -it's not just any water. So, water that comes from that mountain that has a magmatic heart, that magmatic heart is responsible for the Jurassic. So, what happened is - humans - we are really silly, and we think we can manage nature. When there's agriculture in the desert... where the water comes comes from -the deep aquifer. And, it is not just any aquifer - it's an aquifer that has stored the conditions of the early sea, and we are losing it.
+
+\begin{figure}[h!]
+	\caption{Then we have the tragedy of Churince where there's no longer water} 
+	\includegraphics[width=0.9\textwidth]{CuatroCienegas11}
+\end{figure}
 
 Then we have the tragedy of Churince where there's no longer water. It only looks like that. And now, it's a field of dead turtles and dead fishes. Maybe there's some hope that we can recover it if we close all the channels that are taking out the water from this ecosystem.
 
