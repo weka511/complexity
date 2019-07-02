@@ -1,0 +1,46 @@
+\documentclass[]{article}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage[toc,acronym]{glossaries}
+\setacronymstyle{long-short}
+\usepackage{glossaries-extra}
+\graphicspath{{figs/}} 
+%opening
+\title{
+	Notes from Origins of Life\\
+	Evolution}
+\author{Simon Crase}
+
+\makeglossaries
+
+\loadglsentries{glossary}
+
+\renewcommand{\glstextformat}[1]{\textbf{\em #1}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    These are my notes from the \gls{gls:SFI} Origins of Life Course\cite{sfi2019}. The course aims to push the field of Origins of Life research forward by bringing new and synthetic thinking to the question of how life emerged from an abiotic world.
+
+\end{abstract}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+
+
+
+% end of text 
+
+% glossary
+\printunsrtglossaries
+
+% bibliography go here
+ 
+\bibliographystyle{unsrt}
+\addcontentsline{toc}{section}{Bibliography}
+\bibliography{origins}
+
+\end{document}
