@@ -73,6 +73,10 @@ challenge.tex
 *.ist
 *.out
 *.acn
+*.acr
+*.alg
+*.glg
+*.gls
 
 # Netlogo stuff
 .*.tmp.nlogo
