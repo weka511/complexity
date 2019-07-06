@@ -43,10 +43,7 @@ This week is a more detailed look at biochemistry: biological information encode
 \section{DNA as Information}
 Lecturer: Michael Lachmann, \gls{gls:SFI}
 
-In this section we see that DN is noisier than we think. Error rate $10^{-10}$ errors per (replication*bas pair)
-\subsection{DNA as Information - I}
-
-
+\subsection{DNA Modification}
 
 \begin{figure}[H]
 	\caption{The 4 Nucleotides in DNA}\label{fig:Nucleotides} 
@@ -58,13 +55,16 @@ In this section we see that DN is noisier than we think. Error rate $10^{-10}$ e
 	\includegraphics[width=0.9\textwidth]{NucleotideAdenine}
 \end{figure}
 
+Figure \ref{fig:NucleotideDNARNA} shows the only chemical difference between DNA and RNA: the extra OH group in RNA, which makes the molecule more active. DNA is more stable.
 \begin{figure}[H]
-	\caption{The only chemical difference between DNA and RNA is the extra OH group in RNA, which makes the molecule more active. DNA is more stable. }\label{fig:NucleotideDNARNA} 
+	\caption{The only chemical difference between DNA and RNA }\label{fig:NucleotideDNARNA} 
 	\includegraphics[width=0.9\textwidth]{NucleotideDNARNA}
 \end{figure}
 
+RNA uses Uracil instead of Thymine--Figure \ref{fig:NucleotideDNARNAThymineUracil}. Note that Thymine is Uracil with an extra methyl group, hence the alternative name $5-methyluracil$. The $5$ comes from the numbering of carbon atoms--see \ref{fig:NucleotidesCounting}
+	
 \begin{figure}[H]
-	\caption{RNA used Uracil instead of Thymine. Note that Thymine is Uracil with an extra methyl group, hence the alternative name $5-methyluracil$. The $5$ comes from the numbering of carbon atoms--see \ref{fig:NucleotidesCounting} }\label{fig:NucleotideDNARNAThymineUracil} 
+	\caption{RNA uses Uracil instead of Thymine.} \label{fig:NucleotideDNARNAThymineUracil} 
 	\includegraphics[width=0.9\textwidth]{NucleotideDNARNAThymineUracil}
 \end{figure}
 
@@ -80,8 +80,10 @@ In this section we see that DN is noisier than we think. Error rate $10^{-10}$ e
 
 \gls{gls:deamination}
 
+Fugre \ref{fig:ModifiedDNA_Nucleobases} shows the 44 Modified DNA nucleobases that have actually been observed.\cite{sood2019dnamod},\cite{sood2019dnamod_website}
+
 \begin{figure}[H]
-	\caption{44 Modified DNA nucleobases have actually been observed.\cite{sood2019dnamod},\cite{sood2019dnamod_website} } \label{fig:ModifiedDNA_Nucleobases} 
+	\caption{Modified DNA nucleobases } \label{fig:ModifiedDNA_Nucleobases} 
 	\includegraphics[width=0.9\textwidth]{ModifiedDNA_Nucleobases}
 \end{figure}
 
@@ -106,8 +108,10 @@ Methylation tends to occur when C is followed by G. The methylated versions are 
 	\includegraphics[width=0.9\textwidth]{6-Methyladenine}
 \end{figure}
 
+The values in Figure \ref{fig:ModifiedRNAdatabase} have been taken from the Modified RNA database \cite{agriss2019RNA}.
+
 \begin{figure}[H]
-	\caption{ModifiedRNAdatabase \cite{agriss2019RNA}} \label{fig:ModifiedRNAdatabase} 
+	\caption{Modified RNA database} \label{fig:ModifiedRNAdatabase} 
 	\includegraphics[width=0.9\textwidth]{ModifiedRNAdatabase}
 \end{figure}
 
@@ -129,17 +133,125 @@ Methylation tends to occur when C is followed by G. The methylated versions are 
 
 Where did the modifications come from? They could be fairly new, and we use them in various ways; or maybe they tell us something about the origin of DNA. Maybe there are many enzymes left over from before we had sophisticated machinery for DNA replication.
 
-\subsection{DNA as Information - II}\label{section:DNAasInfo2}
+\subsection{DNA base pairing}\label{section:DNAasInfo2}
 
+What generates and maintains the pairing rules?  How does DNA keep Error rate down to  $10^{-10}$ errors per (replication*base pair)?
+
+Different pairing proceed at different rates--Figures \ref{fig:RightWrong} and \ref{fig:BindingDifference}, but this won't explain error rate of $10^{-10}$. At best it gives a factor of 60.
+\begin{figure}[H]
+	\caption{Different pairing proceed at different rates} \label{fig:RightWrong} 
+	\includegraphics[width=0.9\textwidth]{RightWrong}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Difference in Binding Energies for different pairings} \label{fig:BindingDifference} 
+	\includegraphics[width=0.9\textwidth]{BindingDifference}
+\end{figure}
+ Kinetic proofreading?
+ 
+ 
+\textbf{Bases encountered by DNA polymerase}
+	
+\begin{itemize}
+	\item Watson Crick pairs (CATG)
+\begin{itemize}
+	\item  Only ~50 fold enrichment from pairing
+	\item  Right base at 3-fold disadvantage
+	\item  4 shapes valid
+\end{itemize}
+	\item  “Valid” W-C extra bases (C*,6mA)
+	\begin{itemize}
+		\item Additional shapes valid
+	\end{itemize}
+	\item NTP from RNA
+	\begin{itemize}
+		\item Frequent
+		\item Shape recognition
+	\end{itemize}
+	\item “Nonstandard” bases
+	\begin{itemize}
+		\item Rare, probably shape recognition
+	\end{itemize}
+\end{itemize}
+
+
+Summary – it isn’t in the bases
+\begin{itemize}
+	\item Many bases exist in DNA/RNA
+	\begin{itemize}
+		\item Damage, modification, insertion
+	\end{itemize}
+	\item dNTP concentration is controlled
+	\item DNA polymerase controls	pairing
+	\item Large number of specific/general repair enzymes
+\end{itemize}
 \cite{kunkel2004dna}
 
 \section{Water as a Driving Force for Organization}
+
+Sarah Maurer
+
+\begin{figure}[H]
+	\caption{Chemical Energetics} \label{fig:ChemicalEnergetics} 
+	\includegraphics[width=0.9\textwidth]{ChemicalEnergetics}
+\end{figure}
+
+ Relevance to origins of life?
+\begin{itemize}
+	\item Are proteins necessary in first life?
+	\item Membranes?
+	\item Is water necessary for life?
+\end{itemize}
 
 \cite{ball2017water}
 
 \section{Kinetic vs. Thermodynamics – Assembly Constraints}
 
-\cite{pross2017and},\cite{semenov2016autocatalytic},\cite{pross2008can}, \cite{dee2016comparing},\cite{pross2005emergence}
+Lecturer: Chris Butch
+
+\begin{itemize}
+	\item \gls{gls:kinetics}  \glsdesc{gls:kinetics}
+	\item \gls{gls:thermodynamics} \glsdesc{gls:thermodynamics}
+\end{itemize}
+
+Biomacromolecules are Kinetic Assemblies
+\begin{itemize}
+	\item Chemically: Amino Acids and Nucleic Acids are
+	polymerized using energy from polyphosphates
+	\item Structurally: Many nucleic acid structures, and most
+	protein structures are kinetic minima, but not
+	thermodynamic minima
+	\begin{itemize}
+		\item  Prion diseases involve an autocatalytic transition
+		from the native kinetic state to a (more)stable
+		thermodynamic state.
+	\end{itemize}
+\end{itemize}
+
+Figure \ref{fig:prions} shows the PrP protein. Some energy is released by folding into the normal state, which is kinetically stable, but not thermodynamically stable--\cite{dee2016comparing}. Plaques are the lowest energy state. It is difficult to fight disease as this is uphill.
+
+\begin{figure}[H]
+	\caption{The PrP protein is stable kinetically , but not thermodynamically.} \label{fig:prions} 
+	\includegraphics[width=0.9\textwidth]{prions}
+\end{figure}
+
+This is also a question for origins of life--Figure \ref {fig:EnergyForOrigin}--\cite{mast2013escalation}
+\begin{figure}[H]
+	\caption{How do we drive reaction to kinetic state?} \label{fig:EnergyForOrigin} 
+	\includegraphics[width=0.9\textwidth]{EnergyForOrigin}
+\end{figure}
+
+\textbf{Open Questions}
+\begin{itemize}
+	\item Do environments exist where biological building
+	blocks such as amino acids are
+	thermodynamically favored, but exploration of
+	their sequence space is kinetically favored?
+	\item How do chemical systems utilize environmental
+	energy to form kinetic assemblies?
+\end{itemize}
+
+See \cite{pross2017and},\cite{semenov2016autocatalytic},\cite{pross2008can}, \cite{pross2005emergence}.
 
 \section{Chemical Configurations: Proteins and DNA}
 
