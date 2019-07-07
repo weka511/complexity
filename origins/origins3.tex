@@ -5,19 +5,20 @@
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
 \graphicspath{{figs/}} 
-\renewcommand{\thesection}{3.\arabic{section}}
 
 %opening
 \title{
 	Notes from Origins of Life\\
 	Week 3: Chemical Commonalities
 }
+
 \author{Simon Crase}
 
 \makeglossaries
 
 \loadglsentries{glossary}
 
+\renewcommand{\thesection}{3.\arabic{section}}
 \renewcommand{\glstextformat}[1]{\textbf{\em #1}}
 
 \begin{document}
@@ -132,11 +133,11 @@ The values in Figure \ref{fig:ModifiedRNAdatabase} have been taken from the Modi
 		\item It is likely there are more, since this is a fairly new field.
 	\end{itemize}
 	\item How are they generated?
-\begin{itemize}
-	\item Enzyme activity
-	\item Damage
-	\item Misincorporation
-\end{itemize}
+	\begin{itemize}
+		\item Enzyme activity
+		\item Damage
+		\item Misincorporation
+	\end{itemize}
 \end{itemize}
 
 Where did the modifications come from? They could be fairly new, and we use them in various ways; or maybe they tell us something about the origin of DNA. Maybe there are many enzymes left over from before we had sophisticated machinery for DNA replication.
@@ -162,11 +163,11 @@ Different pairing proceed at different rates--Figures \ref{fig:RightWrong} and \
 	
 \begin{itemize}
 	\item Watson Crick pairs (CATG)
-\begin{itemize}
-	\item  Only ~50 fold enrichment from pairing
-	\item  Right base at 3-fold disadvantage
-	\item  4 shapes valid
-\end{itemize}
+	\begin{itemize}
+		\item  Only ~50 fold enrichment from pairing
+		\item  Right base at 3-fold disadvantage
+		\item  4 shapes valid
+	\end{itemize}
 	\item  “Valid” W-C extra bases (C*,6mA)
 	\begin{itemize}
 		\item Additional shapes valid
@@ -269,8 +270,42 @@ See \cite{pross2017and},\cite{semenov2016autocatalytic},\cite{pross2008can}, \ci
 
 Lecturer: Kate Adamala
 
+All life comes from a starting population of cells--\gls{gls:LUCA}. These cells were the ancestors of all subsequent life, their metabolism shared similarities. We know that the earliest metabolism shared certain features(Figure \ref {fig:LUCA_cell}):
+\begin{itemize}
+	\item Lipid synthesis--building membranes isolating cells from their surroundings;
+	\item Energy: metabolism had to produce \gls{gls:ATP};
+	\item LUCA had to produce proteins based on genetic code.
+\end{itemize}
+\begin{figure}[H]
+	\caption{All life comes from a starting population of cells LUCA} \label{fig:LUCA_cell} 
+	\includegraphics[width=0.9\textwidth]{LUCA_cell}
+\end{figure}
 
-\cite{bar2011survey}, \cite{fuchs2011alternative}, \cite{weiss2016physiology}
+Figure \ref{fig:LUCA_Environment} depicts a \textit{proposed} reconstruction of the metabolism of \gls{gls:LUCA}\cite{weiss2016physiology}. Since early Earth was anoxic, pathways do not use oxygen directly.
+\begin{figure}[H]
+	\caption{Proposed main metabolic pathways of LUCA, near hydrothermal vent. } \label{fig:LUCA_Environment} 
+	\includegraphics[width=0.9\textwidth]{LUCA_Environment}
+\end{figure}
+
+The process of taking inorganic carbon and converting it into origanic carbon building blocks is the key metabolic process of life--Figure \ref{fig:CarbonRules}. Carbon fixation must have been present in \gls{gls:LUCA}, but would have been simpler--fewer and less complex enzymes.
+\begin{figure}[H]
+	\caption{Carbon fixation} \label{fig:CarbonRules} 
+	\includegraphics[width=0.9\textwidth]{CarbonRules}
+\end{figure}
+
+Synthesis of Membrane Lipids is another very important metabolic process. Modern cells have two families of Membrane Lipids--Figure \ref{fig:SynthsisMembraneLipids}--the difference is in how a glycerol molecule is attached. Synthesis of Membrane Lipids was still evolving at the time of LUCA. \cite{glansdorff2008last}.
+\begin{figure}[H]
+	\caption{Modern cells have two families of Membrane Lipids} \label{fig:SynthsisMembraneLipids} 
+	\includegraphics[width=0.9\textwidth]{SynthsisMembraneLipids}
+\end{figure}
+
+We can use this Lipid Synthesis Metabolism Comparison--\ref {fig:LipidSynthesisComparison}--as an example of evolution from earliest ancestors \cite{lombard2012early}. For some steps there is phylogenetic evidence that homologous mechanisms carried out a particular step or that the enzymes cannot be excluded. Differences between the modern domains of life have to have evolved from the simpler pathways of \gls{gls:LUCA}.
+\begin{figure}[H]
+	\caption{Lipid Synthesis Metabolism Comparison} \label{fig:LipidSynthesisComparison} 
+	\includegraphics[width=0.9\textwidth]{LipidSynthesisComparison}
+\end{figure}
+
+See also \cite{bar2011survey}, \cite{fuchs2011alternative}.
 
 \subsection{Energetics}
 
