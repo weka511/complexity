@@ -147,6 +147,10 @@ Where did the modifications come from? They could be fairly new, and we use them
 
 \subsection{DNA base pairing}\label{section:DNAasInfo2}
 
+Sarah added (forum):\begin{quote}
+	The idea of Information part2 is that the thermodynamics alone cannot explain our high fidelity replication, and that our system of replicating DNA uses several compounding mechanisms to generate robust replication. While the first organisms likely lacked this process as the machinery to do this is very sophisticated, it is interesting to consider how early organisms would have survived with less controlled replication. Perhaps indicating that early organisms relied on gene products that had lower specificity?
+\end{quote}
+
 What generates and maintains the pairing rules?  How does DNA keep Error rate down to  $10^{-10}$ errors per (replication*base pair)?
 
 Different pairing proceed at different rates--Figures \ref{fig:RightWrong} and \ref{fig:BindingDifference}, but this won't explain error rate of $10^{-10}$. At best it gives a factor of 60.
@@ -389,17 +393,21 @@ Figure \ref{fig:PrebioticMix} shows the chemicals observed in a Miller-Urey type
 	\includegraphics[width=0.9\textwidth]{PrebioticMix}
 \end{figure}
 
-Life used L amino acids and D sugars \& nucleotides. How did this come about?
+\begin{itemize}
+	\item How did life select from the list of Figure \ref{fig:PrebioticMix}? E.g. we don't use hydroxybuteric acid.
+	\item Life uses L amino acids and D sugars \& nucleotides. How did this come about?
+\end{itemize}
 
 \begin{figure}[H]
 	\caption{Chirality} \label{fig:Chirality1} 
 	\includegraphics[width=0.9\textwidth]{Chirality1}
 \end{figure}
 
-At one time it was thought that chirality was a marker for life, but we now know that meteorites are enriched for L--Figure \ref{fig:Chirality2}  \cite{pizzarello2012large}.
+How does chirality arise? Most chemical processes produce equal amounts. At one time it was thought that chirality was a marker for life, but we now know that meteorites are enriched for L--Figure \ref{fig:Chirality2}  \cite{pizzarello2012large}.
 \begin{itemize}
-	\item L-amino acids – enriched by meteorites
-	\item D - sugars (also in nucleotides)--enriched by L - amino acids
+	\item L-amino acids – enriched by meteorites--somehow?
+	\item D - sugars (also in nucleotides)--enriched by L - amino acids.
+	\item So it is enough if we can explain L-amino acids.
 \end{itemize}
 \begin{figure}[H]
 	\caption{Meteorites are enriched for L} \label{fig:Chirality2} 
@@ -417,16 +425,104 @@ Sarah has added (Forum):
 	
 	I often refer to chirality as ''the rabbit's hole'' (Alice in Wonderland reference) as we have many mechanisms to chase, but it is not obvious if they will get us any closer to understanding origins of life. Or perhaps it is the key to understanding it?
 \end{quotation}
-
-\begin{tabular}{l| l } \hline
-	Biological& Alternatives\\ \hline
-	Amino acid&	hydroxy acids, thio acids, amino sulfonic- or amino phosphinic acids\\ \hline
-	Residues at the $\alpha$ carbon& $\beta$-, $\gamma$-, or $\delta$-amino acids, or other derivatives\\ \hline
-	20 exactly& More or less than 20\\ \hline
-	Our specific set of 20 &Other amino acids that were available prebiotically\\ \hline
+\newlength\mylength
+\setlength\mylength{\dimexpr.33\columnwidth-2\tabcolsep-0.33\arrayrulewidth\relax}
+\begin{tabular}{|p{\mylength}| p{\mylength}|p{\mylength}| } \hline
+	Biological& Alternatives&Remarks\\ \hline
+	Amino acid&	hydroxy acids, thio acids, amino sulfonic- or amino phosphinic acids&Peptide is a very strong bond compared to others. Also amine can hydrogen bond with carboxyl, which is useful for secondary structures. \\ \hline
+	Residues at the $\alpha$ carbon& $\beta$-, $\gamma$-, or $\delta$-amino acids, or other derivatives&Maybe $\alpha$ more available; also products more stable\\ \hline
+	20 exactly& More or less than 20&\\ \hline
+	Our specific set of 20 &Other amino acids that were available prebiotically; e.g. why valine and not norvaline?&\\ \hline
 \end{tabular}
 
 
+Figure \ref{fig:PrebioticAminoAcids} \cite{cleaves2010origin} shows amino acids found in the Murchison meteorite and spark discharges. Why were black ones selected? Maybe they are more stable, or maybe they were incorporated, but later selected against.
+
+\begin{figure}[H]
+	\caption{Amino acids found in the Murchison meteorite and spark discharges} \label{fig:PrebioticAminoAcids} 
+	\includegraphics[width=0.9\textwidth]{PrebioticAminoAcids}
+\end{figure}
+
+Figure \ref{fig:ReducedAlphabet} attempts to reconstruct alphabet at origin; red asterisks are proteins that are not found in prebiotic experiments. The amino acids that have low abundances are the ones that are less likely to be formed. So maybe we started with just a few amino acids and later figured how to synthesize more, and this gave more functionality. 
+\begin{figure}[H]
+	\caption{Deconstructed Alphabet at time of origin of life} \label{fig:ReducedAlphabet} 
+	\includegraphics[width=0.9\textwidth]{ReducedAlphabet}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\caption{DNA/RNA much larger than proteins} \label{fig:NucleicAcidStructure} 
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{NucleicAcidStructure1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{NucleicAcidStructure2}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{There are natural modified DNAs} \label{fig:NaturalxNA} 
+	\includegraphics[width=0.9\textwidth]{NaturalxNA}
+\end{figure}
+
+Figure \ref{fig:WhyRibose} depicts the 4 forms of ribose\cite{wei2009permeation}.
+\begin{itemize}
+	\item Furanoses have $CH_2OH$, needed for polymerization
+	\item Need a $beta$ to attach base
+	\item Ribose is the only pentose that has plenty of $\beta$ furanose. 
+\end{itemize}
+\begin{figure}[H]
+	\caption{Why Ribose?} \label{fig:WhyRibose} 
+	\includegraphics[width=0.9\textwidth]{WhyRibose}
+\end{figure}
+
+\begin{itemize}
+	\item 5-carbon easier to synthesize than 6-, 7-, etc;
+	\item shorted sugars don't form ring structure;
+	\item so pentoses are cheapest sugar with ring structure.
+\end{itemize}
+
+Ribose has an almost unique permeability, so it can enter membrane, pick up phosphate, but cannot get out again! Maybe it was selected for speed?
+
+\begin{figure}[H]
+	\caption{These sugars have been tested and can replace Ribose} \label{fig:AlternativeSugars} 
+	\includegraphics[width=0.9\textwidth]{AlternativeSugars}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Can add a third type of base pair} \label{fig:ExpandGeneticCode} 
+	\includegraphics[width=0.9\textwidth]{ExpandGeneticCode}
+\end{figure}
+
+Can also modifiy phosphate, as shown in Figure \ref{fig:PhosphateModification}. Oxygen-substitution generates chirality
+\begin{itemize}
+	\item Boron
+	\item Sulfur
+	\item Selenium
+	\item Hydrogen
+\end{itemize}
+
+Improves stability in vivo--useful for gene therapy.
+
+\begin{figure}[H]
+	\caption{Phosphate Modification} \label{fig:PhosphateModification} 
+	\includegraphics[width=0.9\textwidth]{PhosphateModification}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Possible Modifications} \label{fig:PossibleModifications} 
+	\includegraphics[width=0.9\textwidth]{PossibleModifications}
+\end{figure}
+
+ More complex amino acids were likely selected based on other criteria (not 
+availability), possibly with later adaptation into biochemistry
+\begin{itemize}
+	\item  Sulfur containing
+	\item Aromatics
+	\item Nitrogen containing
+\end{itemize}
 Constraints on origin of amino acids:
 
 \begin{itemize}
