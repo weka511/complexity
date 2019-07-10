@@ -597,7 +597,7 @@ See also \cite{bar2011survey}, \cite{fuchs2011alternative}.
 Lecturer: Sarah Maurer
 
 We look at early metabolisms, and how they evolved into those we see today. 
-Figure \ref{fig:ClassificationEnergyGeneration} shows various mechanisms for generating organisms. Chemoautotrophs convert $CO_2$ to reduced carbon; this lecture at the evolution of chemoautotrophy. We need to discuss redox reactions, as chemoautotrops need to move electrons around.
+Figure \ref{fig:ClassificationEnergyGeneration} shows various mechanisms for generating organisms. Chemoautotrophs convert $CO_2$ to reduced carbon; this lecture at the evolution of chemoautotrophy. We need to discuss redox reactions, as chemoautotrophs need to move electrons around.
 
 \begin{figure}[H]
 	\caption{Classification of energy generation in organisms} \label{fig:ClassificationEnergyGeneration} 
@@ -636,29 +636,91 @@ How do electrons move when we have reduced carbon? Figure \ref{fig:ModernRedox} 
 	\includegraphics[width=0.9\textwidth]{ModernRedox}
 \end{figure}
 
-So what might our early redox chemistries have looked like? Figure \ref{fig:PrimordialRedox} \cite{sojo2016origin} depicts one proposal.
+So what might our early redox chemistries have looked like? Figure \ref{fig:PrimordialRedox} \cite{sojo2016origin} depicts one proposal. At a hydrothermal group we could have a very fine layer of minerals that could act as a porous membrane or electron transfer membrane between alkaline hydrothermal vent and an acidic ocean. So there is already a proton gradient with a pH of 6. Electrons are transferred to $FeS$ and then onto $CO^2$. 
 
 \begin{figure}[H]
 	\caption{Primordial Redox Chemistry?} \label{fig:PrimordialRedox} 
 	\includegraphics[width=0.9\textwidth]{PrimordialRedox}
 \end{figure}
 
+Other mechanisms have been proposed:
+\begin{align*}
+H_2 \rightarrow & 2H^+ + 2 e^- \text{, then electrons pushed to $CO^2$ to make formaldehyde}\\
+FeS + H_2 S \rightarrow &Fe S_2 +H2\\
+4H_2 +CO2 \rightarrow & CH_4 + 2H_2 O\\
+4H_2 + 2HCO^-_3 + sH^+\rightarrow & CH_3OO^- + 2H_2O\\
+H_2 + Fd_{ox} \rightarrow & Fd^{2-}_{red} + 2H^+ 
+\end{align*}
+
 \begin{figure}[H]
-	\caption{PrimordialRedox2} \label{fig:PrimordialRedox2} 
+	\caption{Evolution of Redox Reactions} \label{fig:PrimordialRedox2} 
 	\includegraphics[width=0.9\textwidth]{PrimordialRedox2}
 \end{figure}
 
 \section{Energy Harvesting}
 
+Lecturer: Shawn McGlynn
+
+\begin{itemize}
+	\item Chemical reactions occur when concentrations change to accommodate energy differences between molecules.
+	
+	\item Equilibrium occurs at some mixture of A and B when energy is equalized. The final concentrations are achieved at equilibrium.
+	
+	\item At constant temperature and 	pressure, we refer 	to the energy that is available to do work as \textit{Gibbs Energy}, after J. Willard Gibbs.
+	
+	\item $\Delta G$ is the change in energy as a reaction tends towards equilibrium.
+	
+	\item Biology chains reactions, so one reaction that is energetically unfavourable ( $\Delta G > 0$) may become favourable if coupled to another with  $\Delta G < 0$. 
+\end{itemize}
+
+
+\begin{figure}[H]
+	\caption{The cellular membrane 	can separate charge} \label{fig:EnergyHarvesting1} 
+	\includegraphics[width=0.9\textwidth]{EnergyHarvesting1}
+\end{figure}
+
+
 \cite{simon2008organisation}
 
 \section{Systematics and Limits of Metabolic Rates}
+
+Lectrure: Chris Kempes
+
 
 All present day life is encapsulated: bacteria are simple cells; eukaryotes have organelles, within cells, within multicellular organisms.
 \begin{itemize}
 	\item Which aspects of extant life are general and 	which are arbitrary?
 	\item What can be said about encapsulation in general?
 \end{itemize}
+
+How do nutreints cross cell boundary to drive metabolism--Figure \ref{fig:Encapsulation1}?
+\begin{figure}[H]
+	\caption{Metabolism in Cells} \label{fig:Encapsulation1} 
+	\includegraphics[width=0.9\textwidth]{Encapsulation1}
+\end{figure}
+
+We model this by the diffusion equation:
+\begin{align*}
+\frac{\partial C}{\partial t} =& \frac{D}{r^2} \frac{\partial}{\partial r}\big(r^2 \frac{\partial C}{\partial R} \big) \\
+\frac{\partial C}{\partial t} =& 0 \text{, in the steady state.}\\
+ \frac{D}{r^2} \frac{\partial}{\partial r}\big(r^2 \frac{\partial C}{\partial R} \big) =& 0 \text{, in the steady state.}\\
+ r^2 \frac{\partial C}{\partial R} =& A {, say}\\
+ C =& B - \frac{A}{r}\\
+ \text{assume}& \\
+ C =& C_{\infty}\text{, when $r=\infty$, then}\\
+ C =& C_{\infty} - \frac{A}{r}
+ \text{Further, assume}&\\
+ C =& 0\text{, when $r=a$, then we have}\\
+ C =& c_{\infty}\big(1 - \frac{a}{r}\big) 
+\end{align*}
+
+\begin{align*}
+J \triangleq& -D \frac{\partial C}{\partial R}\text{, definition of Flux}\\
+=& D C_\infty \frac{a}{r^2}\\
+4 \pi a^2 J =& 4 \pi D a C_{\infty} \text{, total flux}
+\end{align*}
+
+This gives a limit on the reaction rate of reactions within cells, and shows it dependence on the cell size. 
 % end of text 
 
 % glossary
