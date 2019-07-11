@@ -1,18 +1,22 @@
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
-\graphicspath{{figs/}} 
+\graphicspath{{figs/}}
+\setlength{\cftsubsecindent}{0em}
+\setlength{\cftsecnumwidth}{3em}
+\setlength{\cftsubsecnumwidth}{3em} 
 %opening
 \title{Notes from Origins of \gls{gls:life}\\Week4: Early Life}
 \author{Simon Crase}
 
 \makeglossaries
 
-\loadglsentries{glossary}
+\loadglsentries{glossary-entries}
 
+\renewcommand{\thesection}{4.\arabic{section}}
 \renewcommand{\glstextformat}[1]{\textbf{\em #1}}
 
 \begin{document}
@@ -20,19 +24,42 @@
 \maketitle
 
 \begin{abstract}
-      These are my notes from Week 4 of the \gls{gls:SFI} Origins of Life Course\cite{sfi2019}. The course aims to push the field of Origins of Life research forward by bringing new and synthetic thinking to the question of how life emerged from an abiotic world.\\
+   These are my notes from Week 4 of the \gls{gls:SFI} Origins of Life Course\cite{sfi2019}. The course aims to push the field of Origins of Life research forward by bringing new and synthetic thinking to the question of how life emerged from an abiotic world.\\
    The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
    These notes are distributed in the hope that they will be useful,
    but without any warranty, and without even the implied warranty of
    merchantability or fitness for a particular purpose. All feedback is welcome,
    but I don't necessarily undertake to do anything with it.
-
 \end{abstract}
 
 \setcounter{tocdepth}{2}
 \tableofcontents
 
+\section{Introduction}
 
+\section{Protocells}
+
+\section{LUCA}
+
+\section{Chemical signatures for identifying life in the geological record }
+
+\section{RNA}
+
+\section{Autocatalysis}
+
+\subsection{Autocatalytic Sets: A Cooperative Origin of Life}
+
+\subsection{Reaction Networks and Autocatalysis}
+
+\section{Evolutionary Theory}
+
+\subsection{An Introduction}
+
+\subsection{A Recipe for Adaptation}
+
+\subsection{Chance \& Change}
+
+\section{Niche Construction}
 
 % end of text 
 
