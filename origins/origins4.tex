@@ -34,12 +34,147 @@
 
 \setcounter{tocdepth}{2}
 \tableofcontents
-
+\listoffigures
 \section{Introduction}
+
+Lecturer: Chris Kempes
+
+
+We'll discuss evolution in a pre-cellular world, chemical signatures of early life, protocells, and what the \gls{gls:LUCA} might have looked like.
 
 \section{Protocells}
 
-See  \cite{deamer2017role},\cite{maurer2011primitive}, \cite{segre2001lipid}, \cite{sojo2016origin}, \cite{adamala2016programmable}, \cite{monnard2015current}, \cite{zhu2012photochemically},   \cite{chen2004emergence}
+Lecturer: Sarah Mauer
+
+We'll look at Protocells as a model for the origins of life. Aggregates are important for the origins of life--Figure \ref{fig:ImportanceOfAggregation}.
+
+\begin{itemize}
+	\item  Co-localize metabolic/genetic components
+	\item   Define the individual to allow for 	selection
+	\item   Direct involvement in metabolism
+	\begin{itemize}
+		\item 	Chemical gradients
+		\item   Electron transfer reactions
+		\item   Catalytic
+	\end{itemize}
+	\item   Protect metabolic/genetic 	components
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{Importance of aggregates to origins of life}\label{fig:ImportanceOfAggregation}
+	\includegraphics[width=0.9\textwidth]{ImportanceOfAggregation}
+\end{figure}
+
+See  \cite{deamer2017role},\cite{maurer2011primitive}, \cite{segre2001lipid}
+
+Self-assembled structures
+
+Controlled by the hydrophobic effect (entropy) and non-bonding interactions (e.g., hydrogen bonds)
+
+\begin{table}[H]
+	\caption{Aggregates that are used to model the origins of life}
+	\begin{tabular}{l|p{4cm}|p{3cm}} \hline
+		Type & Definition &Biological example\\ \hline
+		Vesicle (Liposome)& Bilayer-enclosed aqueous compartment& Cells, membrane bound organelles,\\ \hline
+		Oil droplet&
+		Nonpolar bulk phase often stabilized by
+		amphiphiles&
+		Lipoproteins (LDL)\\ \hline
+		Coacervate&
+		\glsdesc{gls:coacervate}&
+		P-bodies, membrane-less organelles\\ \hline
+		Inorganic&&Thin films or crystals\\ \hline
+	\end{tabular}
+\end{table}
+
+
+\begin{figure}[H]
+	\centering
+	\caption{Self-assembled structures}
+	\label{fig:self-assembled-structures}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SelfAssembled1}
+		\caption{Water}
+		\label{fig:water}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SelfAssembled2}
+		\caption{Not water}
+		\label{fig:not-water}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SelfAssembled3}
+		\caption{Proton Gradient across thin inorganic barrier}
+		\label{fig:proton-gradient}
+	\end{subfigure}
+
+\end{figure}
+
+See \cite{sojo2016origin}
+
+Factors that affect aggregation:
+\begin{itemize}
+	\item concentration;
+	\item temperature;
+	\item ionic strength;
+	\item pH.
+\end{itemize}
+
+What chemistries do protocells harbour? Figure \ref{fig:ProtocellsAndReactions1} shows several possibilities:
+\begin{itemize}
+	\item A molecules interact with surface of aggregate through electrostatic interactions or hydrogen bonding;
+	\item B hydrophobic effect sequestering non-polar molecule;
+	\item C amphiphillic molecule anchored in membrane; 
+	\item D molecule sequestered but still in water phase.
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{Aggregates interacting with molecules that are going to start life}\label{fig:ProtocellsAndReactions1}
+	\includegraphics[width=0.9\textwidth]{ProtocellsAndReactions1}
+\end{figure}
+
+Figure \ref{fig:ProtocellsAndReactions2} depicts two locations for reactions.
+\begin{itemize}
+	\item A Surface associated reaction. Substrate becomes Product + Waste, and Waster drifts away. 
+	\item B Catalytic network inside membrane, so we need to get rid of Waste.
+\end{itemize}
+\begin{figure}[H]
+	\caption{Two locations for reactions}\label{fig:ProtocellsAndReactions2}
+	\includegraphics[width=0.9\textwidth]{ProtocellsAndReactions2}
+\end{figure}
+
+Figure \ref{fig:ProtocellsAndReactions3} shows an example of a reaction:  the Hammerhead ribosome can self cleave at the red arrow. On the right we see that the reaction is not as fast when it is enclosed in a vesicle, because the waste products can't drain away.
+
+
+\begin{figure}[H]
+	\caption{Example of reaction: the Hammerhead ribosome}\label{fig:ProtocellsAndReactions3}
+	\includegraphics[width=0.9\textwidth]{ProtocellsAndReactions3}
+\end{figure}
+
+
+
+See \cite{adamala2016programmable} and \cite{monnard2015current}.
+
+See movie, where we see growing vesicle stealing material from neighbour. 
+Figure \ref{fig:ProtocellGrowthDivision} illustrates Protocell Growth and division.  
+
+\begin{figure}[H]
+	\caption{Protocell Growth and division}\label{fig:ProtocellGrowthDivision}
+	\includegraphics[width=0.9\textwidth]{ProtocellGrowthDivision}
+\end{figure}
+
+See  \cite{zhu2012photochemically} and   \cite{chen2004emergence}.
+
+In Figure \ref{fig:TowardsLUCA} we see a prebiotic soup, aggregating, decreasing molecular diversity and increasing functional complexity, and moving towards first life. First life can undergo Darwinian evolution towards \gls{gls:LUCA}.
+\begin{figure}[H]
+	\caption{Towards LUCA}\label{fig:TowardsLUCA}
+	\includegraphics[width=0.9\textwidth]{TowardsLUCA}
+\end{figure}
 
 \section{LUCA}
 
@@ -61,6 +196,7 @@ See \cite{sharp2017principles}, \cite{bell2015potentially}, \cite{rosing199913c}
 \section{Autocatalysis}
 
 \subsection{Autocatalytic Sets: A Cooperative Origin of Life}
+\cite{wim2017origin}, \cite{hordijk2017chasing}, \cite{wim2019wandering}, \cite{patzke2007self}, \cite{vaidya2012spontaneous}, \cite{ashkenasy2004design}, \cite{hordijk2012structure}, \cite{sousa2015autocatalytic}
 
 \subsection{Reaction Networks and Autocatalysis}
 
