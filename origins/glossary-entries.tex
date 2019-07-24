@@ -14,6 +14,10 @@
 
 \newacronym{gls:TOL}{TOL}{Tree of Life}
 
+\newglossaryentry{gls:16S-ribosomal-RNA}{
+	name={16S ribosomal RNA},
+	description={16S ribosomal RNA (or 16S rRNA) is the component of the 30S small subunit of a prokaryotic ribosome that binds to the Shine-Dalgarno sequence. The genes coding for it are referred to as 16S rRNA gene and are used in reconstructing phylogenies, due to the slow rates of evolution of this region of the gene. Carl Woese and George E. Fox were two of the people who pioneered the use of 16S rRNA in phylogenetics in 1977--\cite{wiki:16SrRNA}.}}
+
 \newglossaryentry{gls:aldose} {
 	name=aldose,
 	description={An aldose is a monosaccharide (a simple sugar) with a carbon backbone chain with a carbonyl group on the endmost carbon atom, making it an aldehyde, and hydroxyl groups connected to all the other carbon atoms. Aldoses can be distinguished from \glspl{gls:ketose}, which have the carbonyl group away from the end of the molecule, and are therefore ketones--\cite{ wiki:aldose}}
@@ -78,27 +82,45 @@
 	name={Gibbs free energy},
 	description={A thermodynamic potential that can be used to calculate the maximum of reversible work that may be performed by a thermodynamic system at a constant temperature and pressure (isothermal, isobaric). The Gibbs free energy is the maximum amount of non-expansion work that can be extracted from a thermodynamically closed system (one that can exchange heat and work with its surroundings, but not matter); this maximum can be attained only in a completely reversible process--\cite{wiki:gibbs-free}}}
 
+\newglossaryentry{gls:hydrogenosome }{
+	name={hydrogenosome },
+	description={A hydrogenosome is a membrane-enclosed organelle of some anaerobic ciliates, trichomonads, fungi, and animals. The hydrogenosomes of trichomonads (the most studied of the hydrogenosome-containing microorganisms) produce molecular hydrogen, acetate, carbon dioxide and ATP by the combined actions of pyruvate:ferredoxin oxido-reductase, hydrogenase, acetate:succinate CoA transferase and succinate thiokinase. Superoxide dismutase, malate dehydrogenase (decarboxylating), ferredoxin, adenylate kinase and NADH:ferredoxin oxido-reductase are also localized in the hydrogenosome. It is nearly universally accepted that hydrogenosomes evolved from mitochondria--\cite{wiki:hydrogenosome}.}}
+
 \newglossaryentry{gls:ketose}{
 	name={ketose},
 	description={A ketose is a monosaccharide containing one ketone group per molecule. The simplest ketose is dihydroxyacetone, which has only three carbon atoms, and it is the only one with no optical activity. All monosaccharide ketoses are reducing sugars, because they can tautomerize into \glspl{gls:aldose} via an aldol intermediate, and the resulting aldehyde group can be oxidised, for example in the Tollens' test or Benedict's test. Ketoses that are bound into glycosides, for example in the case of the fructose moiety of sucrose, are nonreducing sugars--\cite{wiki:ketose}}
 }
+
+\newglossaryentry{gls:kinetic:isotope:effect}{
+	name={kinetic isotope effect},
+	description={In physical organic chemistry, a kinetic isotope effect (KIE) is the change in the reaction rate of a chemical reaction when one of the atoms in the reactants is replaced by one of its isotopes. Formally, it is the ratio of rate constants for the reactions involving the light $k_L$ and the heavy $k_H$ (isotopically substituted reactants (isotopologues) $\frac{k_L}{k_H}$\cite{wiki:kinetic:isotope:effect}}}
+
 
 \newglossaryentry{gls:kinetics}{
 	name={kinetics},
 	description={Concerning the rate of transitioning between states.
     Kinetic stability refers to being in a state which transitions slowly.}}
 
+\newglossaryentry{gls:landauer_bound}{
+	name={Landauer Bound},
+	description={Landauer Bound: any logically irreversible manipulation of information, such as the erasure of a bit or the merging of two computation paths, must be accompanied by a corresponding entropy increase in non-information-bearing degrees of freedom of the information-processing apparatus or its environment--$kT(H_i - H_f)$, where $H_i$ represents the entropy of the initial state, $H_i$ of the final\cite{wiki:landauer}}}
+
 \newglossaryentry{gls:life}{
 	name={Life},
 	description={Life is a self-propagating chemical system capable of undergoing adaptive evolution--adapted from \cite{deamer1994origins}}}
 
-\newglossaryentry{gls:r-K-selection}{
-	name={r/K selection},
-	description={In ecology, r/K selection theory relates to the selection of combinations of traits in an organism that trade off between quantity and quality of offspring. The focus on either an increased quantity of offspring at the expense of individual parental investment of r-strategists, or on a reduced quantity of offspring with a corresponding increased parental investment of K-strategists, varies widely, seemingly to promote success in particular environments--\cite{wiki:k-r-selection}}}
+\newglossaryentry{gls:mitosome}{
+	name={mitosome},
+	description={A mitosome is an organelle found in some unicellular eukaryotic organisms. The mitosome has only recently been found and named,[1] and its function has not yet been well characterized. It was termed a crypton by one group, but that name is no longer in use--\cite{wiki:mitosome}}}
+
 
 \newglossaryentry{gls:oligotroph}{
 	name={oligotroph},
 	description={An oligotroph is an organism that can live in an environment that offers very low levels of nutrients. They may be contrasted with copiotrophs, which prefer nutritionally rich environments. Oligotrophs are characterized by slow growth, low rates of metabolism, and generally low population density --\cite{wiki:oligotroph}}}
+
+\newglossaryentry{gls:orthology}{
+	name={orthology},
+	description={Homologous sequences are orthologous if they are inferred to be descended from the same ancestral sequence separated by a speciation event: when a species diverges into two separate species, the copies of a single gene in the two resulting species are said to be orthologous. Orthologs, or orthologous genes, are genes in different species that originated by vertical descent from a single gene of the last common ancestor. The term "ortholog" was coined in 1970 by the molecular evolutionist Walter Fitch--cite{wiki:homology}e}}
 
 \newglossaryentry{gls:poza}{
 	name={poza},
@@ -109,17 +131,27 @@
 	description={In chemistry, pyran, or oxine, is a six-membered heterocyclic, non-aromatic ring, consisting of five carbon atoms and one oxygen atom and containing two double bonds. The molecular formula is C5H6O. There are two isomers of pyran that differ by the location of the double bonds. In 2H-pyran, the saturated carbon is at position 2, whereas, in 4H-pyran, the saturated carbon is at position 4--\cite{wiki:pyran} }
 }
 
+\newglossaryentry{gls:r-K-selection}{
+	name={r/K selection},
+	description={In ecology, r/K selection theory relates to the selection of combinations of traits in an organism that trade off between quantity and quality of offspring. The focus on either an increased quantity of offspring at the expense of individual parental investment of r-strategists, or on a reduced quantity of offspring with a corresponding increased parental investment of K-strategists, varies widely, seemingly to promote success in particular environments--\cite{wiki:k-r-selection}}}
+
+
 \newglossaryentry{gls:reaction-network}{
 	name={reaction network},
 	description={multiple chemical reactions that interact}}
 
 \newglossaryentry{gls:ribozyme}{
 	name={ribozyme},
-	description={Ribozymes (ribonucleic acid enzymes) are RNA molecules that are capable of catalyzing specific biochemical reactions, similar to the action of protein enzymes. The 1982 discovery of ribozymes demonstrated that RNA can be both genetic material (like DNA) and a biological catalyst (like protein enzymes), and contributed to the RNA world hypothesis, which suggests that RNA may have been important in the evolution of prebiotic self-replicating systems.[1] The most common activities of natural or in vitro-evolved ribozymes are the cleavage or ligation of RNA and DNA and peptide bond formation.[2] Within the ribosome, ribozymes function as part of the large subunit ribosomal RNA to link amino acids during protein synthesis. They also participate in a variety of RNA processing reactions, including RNA splicing, viral replication, and transfer RNA biosynthesis. Examples of ribozymes include the hammerhead ribozyme, the VS ribozyme, Leadzyme and the hairpin ribozyme--\cite{wiki:ribozyme} }}
+	description={Ribozymes (ribonucleic acid enzymes) are RNA molecules that are capable of catalyzing specific biochemical reactions, similar to the action of protein enzymes. The 1982 discovery of ribozymes demonstrated that RNA can be both genetic material (like DNA) and a biological catalyst (like protein enzymes), and contributed to the RNA world hypothesis, which suggests that RNA may have been important in the evolution of prebiotic self-replicating systems. The most common activities of natural or in vitro-evolved ribozymes are the cleavage or ligation of RNA and DNA and peptide bond formation. Within the ribosome, ribozymes function as part of the large subunit ribosomal RNA to link amino acids during protein synthesis. They also participate in a variety of RNA processing reactions, including RNA splicing, viral replication, and transfer RNA biosynthesis. Examples of ribozymes include the hammerhead ribozyme, the VS ribozyme, Leadzyme and the hairpin ribozyme--\cite{wiki:ribozyme} }}
+
 \newglossaryentry{gls:serpentinization}{
 	name={serpentinization},
 	description={A hydration and metamorphic transformation of ultramafic rock from the Earth's mantle--\cite{wiki:serpentinization}}
 }
+
+\newglossaryentry{gls:sympatric-speciation}{
+	name={sympatric speciation},
+	description={the evolution of a new species from a surviving ancestral species while both continue to inhabit the same geographic region--\cite{wiki:Sympatric:speciation}}}
 
 \newglossaryentry{gls:thermodynamics}{
 	name={thermodynamics},
