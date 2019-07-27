@@ -277,7 +277,56 @@ Lecturer: Andy Rominger
 
 \section{Macroscopic Theories in Biology}
 
-\cite{white2005allometric}, \cite{west1997general}, \cite{kempes2011predicting}, \cite{kempes2016evolutionary}
+Lecturer: Chris Kempes
+
+\begin{itemize}
+	\item Which aspects of extant life are general, and which are arbitrary?
+	\item How much of what we see is peculiar to the trajectory of life on our own planet?
+	\item How much would be true of life anywhere?
+\end{itemize}
+
+This matters not just for exobiology, but also for understanding early life and the origin of life in general.
+
+In this course we have covered:
+\begin{itemize}
+	\item Laws of chemistry
+	\item General processes of natural selection
+	\item Laws of physics
+	\item Laws of Life?
+\end{itemize}
+
+As an example of Laws of Life, Figure \ref{fig:allometric:scaling} shows the Relationship between peak postfeeding resting metabolic rate and body mass for mammals\cite{white2005allometric}--an approximate power law with an exponent of $\frac{3}{4}$. West, Brown and Enquist have shown how this law follows from the fractal vascular structure of mammals \cite{west1997general}. Optimize so it fills space and bring nutrients to all cells, taking into account hydrodynamics, then wh get the $\frac{3}{4}$ exponent. The same thing works for plants. So Body Plan + Constraints$\rightarrow$Law of Life.
+
+\begin{figure}[H]
+	\caption{Relationship between peak postfeeding resting metabolic rate and body mass.}\label{fig:allometric:scaling}
+	\includegraphics[width=0.9\textwidth]{WhiteSeymour}
+\end{figure}
+
+
+Example of a Fundamental Constraint: diffusion to a simple spherical cell drifting passively. Cell is living in a still fluid filled with nutrients, and we want to know how nutrients diffuse to cell. If we assume that cell uses all of nutrient, so concentration at surface is held at zero.
+
+\begin{align*}
+C(r) =& C_{\infty}\big(1 - \frac{r_C}{r}\big)\text{, where}\\
+C_{\infty} =& \text{ concentartion at infinity}\\
+C(r) =& \text{ concentration at distance r}\\
+J(r) =& D\frac{\partial C}{\partial R} \text{ flux}\\
+  =& D C_{\infty} \frac{r_c}{r^2}\\
+U =& 4 \pi r_C^2 J(r_C) \text{ total uptake of nutrient}\\
+=&4 \pi D C_{\infty} r_C 
+\end{align*}
+
+No rate process within the cell can use the nutrient more quickly than $U$, so all processes must scale with $r$ at this rate or more slowly. If process want to go faster than $U$, the fluid needs to be disturbed, or the cell needs to move.
+
+Figure \ref{fig:BacterialPhysiology} shows the variation of component size with cell size\cite{kempes2016evolutionary}, and bounds the cell size: at the large end and small end the cell runs out of space for components.
+
+\begin{figure}[H]
+	\caption{BacterialPhysiology}\label{fig:BacterialPhysiology}
+	\includegraphics[width=0.9\textwidth]{BacterialPhysiology}
+\end{figure}
+
+We could see how the fundamental physiological constraint change for other conceivable forms of life.
+
+See also \cite{kempes2011predicting}.
 
 \section{Selection}
 
@@ -319,7 +368,12 @@ W \Delta Z =& \underbrace{Cov(Z,W)}_\text{selection} + \underbrace{E(W \Delta Z)
 \end{align*}
 
 How species acquire that perfection of structure? Because traits increase in value if they help individuals who have them survive, compared to those they don't.
+
+
 \section{Artificial Life Theory}
+
+Lecturer: Sara Imari Walker
+
 
 \cite{neumann1966theory}, \cite{neumann1958computer}, \cite{janzing2010there}, \cite{schaeffer2014physicallyuniversal}
 
