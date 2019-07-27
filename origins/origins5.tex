@@ -21,6 +21,10 @@
 
 \renewcommand{\thesection}{5.\arabic{section}}
 \renewcommand{\glstextformat}[1]{\textbf{\em #1}}
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}} 
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 \begin{document}
 
@@ -238,6 +242,10 @@ Tree Thinking and phylogeny
 	\includegraphics[width=0.9\textwidth]{PhylogenicTree}
 \end{figure}
 
+\begin{figure}[H]
+	\caption{Molecular Phylogenetics Protocol}\label{fig:MolecularPhylogeneticsProtocol}
+	\includegraphics[width=0.9\textwidth]{MolecularPhylogeneticsProtocol}
+\end{figure}
 Some other applications of phylogenetics
 \begin{itemize}
 	\item Classification and taxonomy of genes, proteins and species
@@ -258,15 +266,59 @@ See \cite{hillis1996molecular}, \cite{zuckerkandl1965molecules}, \cite{williams2
 
 \subsection{A Deeper Dive into Phylogenetics}
 
+Lecturer: Andy Rominger
+\begin{itemize}
+	\item How to Infer a Phylogeny
+	\item Why the Deep Past is so difficult to Infer
+\end{itemize}
+
+
 \cite{huelsenbeck2001mrbayes}, \cite{huelsenbeck1997phylogeny}, \cite{hug2016new}, \cite{philippe2005heterotachy}, \cite{quast2012silva}, \cite{sanderson2003r8s}, \cite{smit2007evolutionary}
 
 \section{Macroscopic Theories in Biology}
 
 \cite{white2005allometric}, \cite{west1997general}, \cite{kempes2011predicting}, \cite{kempes2016evolutionary}
+
 \section{Selection}
 
-\cite{darwin1859origin}
+Lecturer: Michael Lachmann
 
+''A naturalist, reflecting on the mutual affinities of organic beings, on their embryological relations, their geographical distribution, geological succession, and other such facts, might come to the conclusion that each species had not been independently created, but had descended, like varieties, from other  species''--Charles Darwin\cite{darwin1859origin}.
+
+Darwin\cite{darwin1859origin} presented a phylogenetic Tree--\ref{fig:TOL:Darwin}. A modern view, Figure \ref{fig:TOL:Modern} is more like a web.
+
+\begin{figure}[H]
+	\caption{Two views of the Tree of Life}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{After Darwin}\label{fig:TOL:Darwin}
+		\includegraphics[width=\textwidth]{TOL_Darwin}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Modern TOL}\label{fig:TOL:Modern}
+		\includegraphics[width=\textwidth]{TOL-5-6}
+	\end{subfigure}
+\end{figure}
+
+''Nevertheless, such a conclusion, even if well founded, would be unsatisfactory, until it could be shown how the innumerable species inhabiting this world have been modified, so as to acquire that perfection of structure and coadaptation which most justly excites our admiration''--\textit{ibid}.
+
+How species acquire that perfection of structure:
+\begin{itemize}
+	\item Variation
+	\item Inheritance
+	\item Selection
+\end{itemize}
+
+\gls{gls:price:equation}--(\ref{eq:price:equation})
+
+\begin{align*}
+\Delta Z =& \frac{Cov(Z,W) + E(W \Delta Z)}{W}\text{, where} \numberthis \label{eq:price:equation}\\
+Z=& \text{ some property, e.g. colour,}\\
+W=& \text{ survival.}\\
+ & \textit{Rearranging, }\\
+W \Delta Z =& \underbrace{Cov(Z,W)}_\text{selection} + \underbrace{E(W \Delta Z)}_\text{transformation}
+\end{align*}
+
+How species acquire that perfection of structure? Because traits increase in value if they help individuals who have them survive, compared to those they don't.
 \section{Artificial Life Theory}
 
 \cite{neumann1966theory}, \cite{neumann1958computer}, \cite{janzing2010there}, \cite{schaeffer2014physicallyuniversal}
