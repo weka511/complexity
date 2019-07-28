@@ -269,11 +269,58 @@ See \cite{hillis1996molecular}, \cite{zuckerkandl1965molecules}, \cite{williams2
 Lecturer: Andy Rominger
 \begin{itemize}
 	\item How to Infer a Phylogeny
-	\item Why the Deep Past is so difficult to Infer
+	\item Why the Deep Past is so difficult to Infer?
 \end{itemize}
 
+We are going to focus on step 3 of Figure \ref{fig:MolecularPhylogeneticsProtocol}, finding the evolutionary process leading to the data we have. We start with homologous sequences, and we want to infer the speciation, extinction, and passing genes on to daughter lineages.
 
-\cite{huelsenbeck2001mrbayes}, \cite{huelsenbeck1997phylogeny}, \cite{hug2016new}, \cite{philippe2005heterotachy}, \cite{quast2012silva}, \cite{sanderson2003r8s}, \cite{smit2007evolutionary}
+We have transition rates, topology, and sequence data.
+Likelihood: P(sequence|Transiton rates, topology), and we want to choose transition rates and a topology to \textit{maximize the likelihood.}
+
+\begin{itemize}
+	\item Maximum Likelihood Inference\cite{huelsenbeck1997phylogeny}
+	\item Bayesian Inference\cite{huelsenbeck2001mrbayes}
+\end{itemize}
+
+Two other means have been used historically:
+\begin{itemize}
+	\item Parsimony
+	\item Distance based inference
+\end{itemize}
+
+Caveats.
+\begin{itemize}
+	\item Rooting the Tree with an Outgoup
+	\item Time Calibration
+	\item Long branch attraction
+	\item What genetic information goes back to LUCA?
+\end{itemize}
+
+Caveat: inferring the past it hard. Unrooted phylogeny arises because mutation process is reversible in our models. This is why the Banfield Tree of Life--Figure \ref{fig:banfield:tol}\cite{hug2016new},--has no root.
+
+\begin{figure}[H]
+	\caption{Banfield Tree of Life}\label{fig:banfield:tol}
+	\includegraphics[width=0.9\textwidth]{TOL4}
+\end{figure}
+
+The best method for finding a root is to use an \gls{gls:outgroup}--Figure \ref{fig:bird:outgroup}--which then gives a temporal direction to the tree: the tree flows away from the hypothetical common ancestor. But the Tree of [all] Life, by definition, has no outgroup!
+
+\begin{figure}[H]
+	\caption{Using a Bird as an Outgroup for the Tree of Mammals}\label{fig:bird:outgroup}
+	\includegraphics[width=0.9\textwidth]{Outgroup}
+\end{figure}
+
+Another problem is that rate heterogeneity means that mutations are not clock like. Time in a phylogeny is measured in substitutions, not in years. Since the rate of mutation varies across lineages and across Earth's history, mutation events don't tell us the time on each branch. So species in the Banfield Tree of Life--Figure \ref{fig:banfield:tol}-- don't line up.
+\begin{itemize}
+	\item We may be able to assign times from the fossil record.
+	\item In some cases we \textit{do} know the muation rate and can use it like a clock.
+\end{itemize}
+
+Caveat: long branches overlap. \cite{philippe2005heterotachy},
+
+ What genetic information goes back to LUCA? Ribosomal RNA and protein genes.
+ 
+   \cite{quast2012silva}, \cite{sanderson2003r8s}, \cite{smit2007evolutionary}
 
 \section{Macroscopic Theories in Biology}
 
