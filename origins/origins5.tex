@@ -52,9 +52,9 @@ We discuss Selection, Phylogenetics, Macroscopic Regularities across all of life
 Lecturer: David Baum
 
 Cellular life began prokaryotic: metabolic and genetic systems enclosed in a single
-boundary
+boundary.
 
-Eukaryotic cells evolved once
+Eukaryotic cells evolved once; we don't have intermediate steps.
 
 \begin{itemize}
 	\item Many internal membrane-bound structures
@@ -97,8 +97,13 @@ Why eukaryotes? There are three ideas at present.
 	
 	\item Flexible membranes allow phagocytosis and generation of internal vesicles. So eukaryotes can do things that prokaryotes can't, such as engulfing food prey--Figure \ref{fig:engulf}.
 	
-	\item Nucleus and endomembrane system allow for finer gene
-	regulation--Figure \ref{fig:finer:gene:regulation}\cite{paez2016endocytosis}. Multicellular organization requires different cells to express different parts of the genome. The different layers of regulation may explain why eurkaryotes, and not prokaryotos, have evolved multicellularity.
+	\item Nucleus and \gls{gls:endomembrane} system allow for finer gene
+	regulation--Figure \ref{fig:finer:gene:regulation}\cite{paez2016endocytosis}. 
+	\begin{itemize}
+		\item Multicellular organization requires communications between different cells, which express different genes and proteins.
+		\item The extra layers of regulation that eukaryotes have may explain why they, and not prokaryotos, have evolved complex multicellular organisms. These layers deal with the genetic control by separating the transcription of a DNA sequence from the reading of the message--there are many steps where regulation can be imposed. 
+		\item Additionally the \gls{gls:endomembrane} system can affect the secretion, degradation and recycling of proteins
+	\end{itemize}
 \end{itemize}
 
 \begin{figure}[H]
@@ -123,7 +128,7 @@ Easier to study than the
 origin of life
 
 \begin{itemize}
-	\item We can use phylogenetic methods to infer the features of \gls{gls:LECA}--Figure \ref {fig:LECA}. We can study both ends of the \gls{gls:LECA} branch, since we have procaryotes. Cannot do this with \gls{gls:LUCA}.
+	\item We can use phylogenetic methods to infer the features of \gls{gls:LECA}--Figure \ref {fig:LECA}. We can study both ends of the \gls{gls:LECA} branch, since we have procaryotes; we cannot do this with \gls{gls:LUCA}.
 	\begin{itemize}
 		\item Mitochondria are endosymbiotic bacteria\cite{germot1996presence}
 		\item Host was an archaeon\cite{spang2015complex}
@@ -143,13 +148,13 @@ origin of life
 	\includegraphics[width=0.9\textwidth]{MitochondriaEndosymbiotic}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 	\caption{Host was an archaeon}
 	\label{fig:host:archaeon}
 	\includegraphics[width=0.9\textwidth]{HostArchaeon}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 	\caption{Can distinguish genes of archaeal or bacterial ancestry}
 	\label{fig:distinguish:genes:archaeal:bacterial}
 	\includegraphics[width=0.9\textwidth]{thiergart2012}
@@ -230,10 +235,8 @@ Tree Thinking and phylogeny
 	\item The evolutionary history of extant organisms can
 	be understood in terms of their shared inheritance
 	\begin{itemize}
-		\item which extant species evolved from the same
-		ancestor?
-		\item how were ancestral traits modified in different
-		lineages?
+		\item which extant species evolved from the same ancestor?
+		\item how were ancestral traits modified in different lineages?
 	\end{itemize}
 \end{itemize}
 
@@ -269,18 +272,35 @@ See \cite{hillis1996molecular}, \cite{zuckerkandl1965molecules}, \cite{williams2
 Lecturer: Andy Rominger
 \begin{itemize}
 	\item How to Infer a Phylogeny
-	\item Why the Deep Past is so difficult to Infer?
+	\item Why is the Deep Past so difficult to Infer?
 \end{itemize}
 
+\subsubsection{How to Infer a Phylogeny}
 We are going to focus on step 3 of Figure \ref{fig:MolecularPhylogeneticsProtocol}, finding the evolutionary process leading to the data we have. We start with homologous sequences, and we want to infer the speciation, extinction, and passing genes on to daughter lineages.
 
-We have transition rates, topology, and sequence data.
-Likelihood: P(sequence|Transiton rates, topology), and we want to choose transition rates and a topology to \textit{maximize the likelihood.}
+We have transition rates, topology, and sequence data--Figures \ref{fig:InferringPhylogeny} \& \ref{fig:InferringPhylogeny1}, and we want to choose transition rates and a topology to \textit{maximize the likelihood}--Figures \ref{fig:InferringPhylogeny2}. 
+
+\begin{figure}[H]
+	\caption{Inferring a phylogeny}\label{fig:InferringPhylogeny}
+	\includegraphics[width=0.9\textwidth]{InferringPhylogeny}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Goal: find the process leading to the data}\label{fig:InferringPhylogeny1}
+	\includegraphics[width=0.9\textwidth]{InferringPhylogeny1}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Maximize Likelihood}\label{fig:InferringPhylogeny2}
+	\includegraphics[width=0.9\textwidth]{InferringPhylogeny2}
+\end{figure}
 
 \begin{itemize}
 	\item Maximum Likelihood Inference\cite{huelsenbeck1997phylogeny}
-	\item Bayesian Inference\cite{huelsenbeck2001mrbayes}
+	\item Bayesian inference: traversing the complex topology and
+	rate matrix space lends itself to Bayesian algorithms\cite{huelsenbeck2001mrbayes,huelsenbeck2001introduction}
 \end{itemize}
+
 
 Two other means have been used historically:
 \begin{itemize}
@@ -288,19 +308,31 @@ Two other means have been used historically:
 	\item Distance based inference
 \end{itemize}
 
+\subsubsection{Why is the Deep Past so difficult to infer?}
 Caveats.
 \begin{itemize}
+	\item Inferring the past it hard. Unrooted phylogeny arises because mutation process is reversible in our models--Figure \ref{fig:unrooted:phylogeny}. This is why the Banfield Tree of Life\cite{hug2016new}--Figure \ref{fig:banfield:tol}--has no root.
 	\item Rooting the Tree with an Outgoup
 	\item Time Calibration
 	\item Long branch attraction
 	\item What genetic information goes back to LUCA?
 \end{itemize}
 
-Caveat: inferring the past it hard. Unrooted phylogeny arises because mutation process is reversible in our models. This is why the Banfield Tree of Life--Figure \ref{fig:banfield:tol}\cite{hug2016new},--has no root.
+
 
 \begin{figure}[H]
 	\caption{Banfield Tree of Life}\label{fig:banfield:tol}
 	\includegraphics[width=0.9\textwidth]{TOL4}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Unrooted phylogeny arises because mutation process is reversible in our models}\label{fig:unrooted:phylogeny}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{InferringPastHard1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{InferringPastHard2}
+	\end{subfigure}
 \end{figure}
 
 The best method for finding a root is to use an \gls{gls:outgroup}--Figure \ref{fig:bird:outgroup}--which then gives a temporal direction to the tree: the tree flows away from the hypothetical common ancestor. But the Tree of [all] Life, by definition, has no outgroup!
@@ -313,7 +345,7 @@ The best method for finding a root is to use an \gls{gls:outgroup}--Figure \ref{
 Another problem is that rate heterogeneity means that mutations are not clock like. Time in a phylogeny is measured in substitutions, not in years. Since the rate of mutation varies across lineages and across Earth's history, mutation events don't tell us the time on each branch. So species in the Banfield Tree of Life--Figure \ref{fig:banfield:tol}-- don't line up.
 \begin{itemize}
 	\item We may be able to assign times from the fossil record.
-	\item In some cases we \textit{do} know the muation rate and can use it like a clock.
+	\item In some cases we \textit{do} know the mutation rate and can use it like a clock.
 \end{itemize}
 
 Caveat: long branches overlap. \cite{philippe2005heterotachy},
