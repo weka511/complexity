@@ -5,7 +5,7 @@ Code for [Origins of Life](https://www.complexityexplorer.org/courses/95-origins
 |#|File|Description|
 |---|--------------------|-----------------------------------------------------------|
 |   |bibliography.tex|Origins of Life Bibliography - |uses _origins.bib_ and _wikipedia.bib_|
-|   |figs| Figures used by text files |
+|   |figs| Figures used by tex files |
 |   |glossary.tex|Origins of Life Glossary|
 |   |glossary-entries.tex|Glossary entries used by _glossary.tex_|
 |   |origins.bib|Origins of Life Bibliography entries|
