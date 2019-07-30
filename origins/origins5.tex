@@ -314,7 +314,7 @@ Caveats.
 	\item Inferring the past it hard. Unrooted phylogeny arises because mutation process is reversible in our models--Figure \ref{fig:unrooted:phylogeny}. This is why the Banfield Tree of Life\cite{hug2016new}--Figure \ref{fig:banfield:tol}--has no root.
 	\item Rooting the Tree with an Outgoup
 	\item Time Calibration
-	\item Long branch attraction
+	\item \Gls{gls:long:branch:attraction}
 	\item What genetic information goes back to LUCA?
 \end{itemize}
 
@@ -342,17 +342,36 @@ The best method for finding a root is to use an \gls{gls:outgroup}--Figure \ref{
 	\includegraphics[width=0.9\textwidth]{Outgroup}
 \end{figure}
 
-Another problem is that rate heterogeneity means that mutations are not clock like. Time in a phylogeny is measured in substitutions, not in years. Since the rate of mutation varies across lineages and across Earth's history, mutation events don't tell us the time on each branch. So species in the Banfield Tree of Life--Figure \ref{fig:banfield:tol}-- don't line up.
+Another problem is that rate heterogeneity means that mutations are not clock like\cite{sanderson2003r8s,smit2007evolutionary}. Time in a phylogeny is measured in substitutions, not in years. Since the rate of mutation varies across lineages and across Earth's history, mutation events don't tell us the time on each branch. So species in the Banfield Tree of Life--Figure \ref{fig:banfield:tol}-- don't line up.
 \begin{itemize}
 	\item We may be able to assign times from the fossil record.
 	\item In some cases we \textit{do} know the mutation rate and can use it like a clock.
 \end{itemize}
 
-Caveat: long branches overlap. \cite{philippe2005heterotachy},
+Long branches attract each other\cite{philippe2005heterotachy}--Figure \ref{fig:long:branches}.
 
- What genetic information goes back to LUCA? Ribosomal RNA and protein genes.
+\begin{figure}[H]
+	\caption{Long branches attract each other}\label{fig:long:branches}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{LongBranchAttraction1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{LongBranchAttraction2}
+	\end{subfigure}
+\end{figure}
+
+ What genetic information goes back to LUCA--Figure \ref{fig:back_to_LUCA}? Ribosomal RNA and protein genes\cite{quast2012silva} and Figure \ref{fig:Ribosome-5-3-2}.
  
-   \cite{quast2012silva}, \cite{sanderson2003r8s}, \cite{smit2007evolutionary}
+ \begin{figure}[H]
+ 	\caption{What genetic information goes back to LUCA? }\label{fig:back_to_LUCA}
+ 	\includegraphics[width=0.9\textwidth]{LUCA_what_goes_back}
+ \end{figure}
+
+\begin{figure}[H]
+	\caption{What genetic information goes back to LUCA? Ribosomal RNA and protein genes}\label{fig:Ribosome-5-3-2}
+	\includegraphics[width=0.9\textwidth]{Ribosome-5-3-2}
+\end{figure}
+
 
 \section{Macroscopic Theories in Biology}
 
@@ -374,13 +393,17 @@ In this course we have covered:
 	\item Laws of Life?
 \end{itemize}
 
-As an example of Laws of Life, Figure \ref{fig:allometric:scaling} shows the Relationship between peak postfeeding resting metabolic rate and body mass for mammals\cite{white2005allometric}--an approximate power law with an exponent of $\frac{3}{4}$. West, Brown and Enquist have shown how this law follows from the fractal vascular structure of mammals \cite{west1997general}. Optimize so it fills space and bring nutrients to all cells, taking into account hydrodynamics, then wh get the $\frac{3}{4}$ exponent. The same thing works for plants. So Body Plan + Constraints$\rightarrow$Law of Life.
+As an example of Laws of Life, Figure \ref{fig:allometric:scaling} shows the Relationship between peak postfeeding resting metabolic rate and body mass for mammals\cite{white2005allometric}--an approximate power law with an exponent of $\frac{3}{4}$. West, Brown and Enquist\cite{west1997general} have shown how this law follows from the fractal vascular structure of mammals--Figure \ref{fig:FractalBranching}. Optimize so it fills space and bring nutrients to all cells, taking into account hydrodynamics, then wh get the $\frac{3}{4}$ exponent. The same thing works for plants. So Body Plan + Constraints$\rightarrow$Law of Life.
 
 \begin{figure}[H]
 	\caption{Relationship between peak postfeeding resting metabolic rate and body mass.}\label{fig:allometric:scaling}
 	\includegraphics[width=0.9\textwidth]{WhiteSeymour}
 \end{figure}
 
+\begin{figure}[H]
+	\caption{Power Law follows from the fractal vascular structure of mammals.}\label{fig:FractalBranching}
+	\includegraphics[width=0.9\textwidth]{FractalBranching}
+\end{figure}
 
 Example of a Fundamental Constraint: diffusion to a simple spherical cell drifting passively. Cell is living in a still fluid filled with nutrients, and we want to know how nutrients diffuse to cell. If we assume that cell uses all of nutrient, so concentration at surface is held at zero.
 
@@ -396,7 +419,7 @@ U =& 4 \pi r_C^2 J(r_C) \text{ total uptake of nutrient}\\
 
 No rate process within the cell can use the nutrient more quickly than $U$, so all processes must scale with $r$ at this rate or more slowly. If process want to go faster than $U$, the fluid needs to be disturbed, or the cell needs to move.
 
-Figure \ref{fig:BacterialPhysiology} shows the variation of component size with cell size\cite{kempes2016evolutionary}, and bounds the cell size: at the large end and small end the cell runs out of space for components.
+Figure \ref{fig:BacterialPhysiology} shows the variation of component size with cell size\cite{kempes2016evolutionary}; it \textit{bounds} the cell size: at the large end and small end the cell runs out of space for components.
 
 \begin{figure}[H]
 	\caption{BacterialPhysiology}\label{fig:BacterialPhysiology}
@@ -488,6 +511,6 @@ Are the ’laws of life’  the laws of information?
  
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{section}{Bibliography}
-\bibliography{origins}
+\bibliography{origins,wikipedia}
 
 \end{document}
