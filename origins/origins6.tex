@@ -8,6 +8,7 @@
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 %opening
 \title{
@@ -562,22 +563,115 @@ See also \cite{mitchell1998introduction}, \cite{eiben2003introduction}, \cite{fo
 
 \section{Scaling}
 
-\cite{anderson2013altered}
-\cite{damuth1981population}
-\cite{enquist1998allometric}
-\cite{enquist2012land}
-\cite{marquet2005scaling}
-\cite{schmidt1984scaling}
-\cite{tucker2014evolutionary}
-\cite{west1997general}
+Lecturer: Pablo Marquet
+
+Why is scaling important?
+
+\begin{itemize}
+	\item Provides a way to deal with the diversity of scales and
+	organisms found in ecological systems
+	\item Makes apparent the fundamental similarity that
+	underlies diversity in nature and how this has been
+	molded by evolution
+	\item Provides a benchmark against which species,
+	populations and ecosystems can be compared
+\end{itemize}
+
+Many ecological attributes scale with size--(\ref{eq:PowerLawScaling}) and Figure \ref{fig:PowerLawScaling}.
+\begin{align*}
+	y \propto& M^{\alpha}\text{, where $M$ represents mass, size, etc.}\numberthis\label{eq:PowerLawScaling}\\
+	=& c M^{\alpha}\\
+	\implies&\\
+	\log(y)=&\log(c) + \alpha \log(M)
+\end{align*}
+
+\begin{figure}[H]
+	\caption{Many ecological attributes scale with size}\label{fig:PowerLawScaling}
+	\includegraphics[width=0.9\textwidth]{PowerLawScaling}
+\end{figure}
+
+Figure \ref{fig:ScalingExamples} shows some examples, after \cite{sibly2012metabolic}. Mammals are in grey, marsupials in red. We can use this as a basis for investigating why mammals deviate.
+\begin{figure}[H]
+	\caption{Scaling of life-history events: mammals are in grey, marsupials in red.}\label{fig:ScalingExamples}
+	\includegraphics[width=0.9\textwidth]{ScalingExamples}
+\end{figure}
+
+
+Figure \ref{fig:Scaling:individuals:ecosystems}	depicts Mean Carnivore Mass-- Figure \ref{fig:mcm} \cite{tucker2014evolutionary}; Carbon Turnover--Figure \ref {fig:ct} \cite{anderson2013altered}; and Primary Production--Figure \ref{fig:npp} \cite{enquist2012land}.
+
+\begin{figure}[H]
+	\caption{Scaling in individuals and	ecosystems}\label{fig:Scaling:individuals:ecosystems}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Mean Carnivore Mass}\label{fig:mcm}
+		\includegraphics[width=\textwidth]{Scaling1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Carbon Turnover}\label{fig:ct}
+		\includegraphics[width=\textwidth]{Scaling2}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Primary Production}\label{fig:npp}
+		\includegraphics[width=\textwidth]{Scaling3}
+	\end{subfigure}
+\end{figure}
+
+The central role of energy: the size ($M$) of an individual affects the amount
+of energy it requires to maintain itself (basal metabolism $B$)--Figure \ref{fig:Kleiber} \cite{schmidt1984scaling}.
+
+\begin{figure}[H]
+	\caption{Kleiber's Law: $B \propto M^\frac{3}{4}$}\label{fig:Kleiber}
+	\includegraphics[width=0.9\textwidth]{Kleiber}
+\end{figure}
+
+Figure \ref{fig:Kleiber} suggest that somehow an elephant is just a large mouse! Natural Selection is not acting randomly, but is subject to constraints. The West, Brown \& Enquist developed a general model for the origin of allometric scaling laws in biology\cite{west1997general}.
+\begin{itemize}
+	\item The properties of resource delivery networks determine
+	the properties of whole-organism metabolic rate.
+	\item  Biological systems have evolved under natural
+	selection to optimize performance (delivery networks
+	minimize energy loss)
+\end{itemize}
+
+Some implications 
+
+\begin{itemize}
+	\item What is the maximum number of individuals that can be found in a given area--(\ref{eq:max}) and Figure \ref{fig:MammalianHerbivores} \cite{damuth1981population}?
+	\begin{align*}
+	R=& \text{Energy or resources per unit area}\\
+	B=&\text{Individual resource requirements}\\
+	N_{max}\propto& R M^{-\frac{3}{4}}\label{eq:max}\numberthis
+	\end{align*}
+	\begin{figure}[H]
+		\caption{Mammalian Herbivores--$N_{max}\propto R M^{-\frac{3}{4}}$}\label{fig:MammalianHerbivores}
+		\includegraphics[width=0.9\textwidth]{MammalianHerbivores}
+	\end{figure}	
+	\item Populations of different organisms tend to use the same amount of energy--(\ref{eq:const}), Figure \ref{fig:PopulationEnergyUse} \cite{enquist1998allometric} 
+	\begin{align*}
+	E_{pop}\propto&N B\text{, Energy use for population}\\
+	\propto& M^{-\frac{3}{4}} M^{\frac{3}{4}}\\
+	\propto& 1\label{eq:const}\numberthis
+	\end{align*}
+	\begin{figure}[H]
+		\caption{Population Energy Use}\label{fig:PopulationEnergyUse}
+		\includegraphics[width=0.9\textwidth]{PopulationEnergyUse}
+	\end{figure}
+	\item Humans--the hyper-dense species--Figure \ref{fig:Hyperdense}
+	\begin{figure}[H]
+		\caption{Humans--the hyper-dense species}\label{fig:Hyperdense}
+		\includegraphics[width=0.9\textwidth]{Hyperdense}
+	\end{figure}
+\end{itemize}
+
+See also \cite{marquet2005scaling}
 
 \section{Energy}
+
+Lecturer: Van Savage
 
 \cite{odum1976energy}
 \cite{odum1983systems}
 \cite{schmidt1997animal}
 \cite{brown2004toward}
-\cite{sibly2012metabolic}
 \cite{ernest2003thermodynamic}
 \cite{savage2004predominance}
 \cite{dell2011systematic}
