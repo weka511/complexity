@@ -3,7 +3,7 @@
 Code for [Origins of Life](https://www.complexityexplorer.org/courses/95-origins-of-life)
 
 |#|File|Description|
-|---|--------------------|-----------------------------------------------------------|
+|---|------------------------------|-----------------------------------------------------------|
 |   |bibliography.tex|Origins of Life Bibliography - |uses _origins.bib_ and _wikipedia.bib_|
 |   |figs| Figures used by tex files |
 |   |glossary.tex|Origins of Life Glossary|
@@ -17,3 +17,5 @@ Code for [Origins of Life](https://www.complexityexplorer.org/courses/95-origins
 | 4  |origins4.tex|My Lecture Notes - Early Life|
 | 5  |origins5.tex|My Lecture Notes - Evolution|
 | 6  |origins6.tex|My Lecture Notes - Astrobiology & General Theories of Life|
+| |evolve_allometric_scaling.py| Evolve West et al|
+
