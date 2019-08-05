@@ -17,5 +17,5 @@ Code for [Origins of Life](https://www.complexityexplorer.org/courses/95-origins
 | 4  |origins4.tex|My Lecture Notes - Early Life|
 | 5  |origins5.tex|My Lecture Notes - Evolution|
 | 6  |origins6.tex|My Lecture Notes - Astrobiology & General Theories of Life|
-| |evolve_allometric_scaling.py| Evolve West et al|
+| |evolve_allometric_scaling.py| Genetic algorithm to evolve solution for  [West et al--A General Model for the Origin of Allometric Scaling Laws in Biology](http://hermes.ffn.ub.es/oscar/Biologia/Escala/Science_276_122_1997.pdf)|
 
