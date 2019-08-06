@@ -13,19 +13,31 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
+# Optimize flow through a branching network, after West et al--
+# A General Model for the Origin of Allometric Scaling Laws in Biology
+# http://hermes.ffn.ub.es/oscar/Biologia/Escala/Science_276_122_1997.pdf
+
 from random import random, seed
 from ga import evolve
 
-def create():
-    pass
+
+def create_branching_network(c=10):
+    beta  = [random() for i in range(c)]
+    gamma = [random() for i in range(c)]
+    return (beta,gamma)
  
-def evaluate(individual):
-    return 0.5
+def evaluate_branching_network(individual):
+    beta, gamma = individual
+    return random()
 
-
-def mutate(individual,probability=0.1):
+def mutate_branching_network(individual,probability=0.1):
     return individual
 
 if __name__=='__main__':
     seed(1)
-    evolve()
+    
+    population,statistics = evolve(
+        create   = lambda :create_branching_network(c=10),
+        evaluate = evaluate_branching_network,
+        mutate   = lambda individual:mutate_branching_network(individual,probability=0.1))
+    
