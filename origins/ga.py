@@ -17,7 +17,7 @@
 
 from numpy import mean,std,argsort
 from random import random,choice
-from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title
+from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, figure, savefig
 
 def roulette(population,fitness):
     def f():
@@ -70,7 +70,7 @@ def evolve(N         = 100,
     statistics.append((max(fitness),mean(fitness),std(fitness)))        
     return (population,statistics)
 
-def plot_fitnesse(statistics,name='Exercise 1'):
+def plot_fitness(statistics,name='Exercise 1'):
     maxs = [a for a,_,_ in statistics]
     plot(maxs,'r', label='Maximum Fitness')
     plot([b for _,b,_ in statistics],'g', label='Mean Fitness')
@@ -83,11 +83,22 @@ def plot_fitnesse(statistics,name='Exercise 1'):
    
 
 if __name__=='__main__':
-    population,statistics = evolve(
-        N         = 10000,
-        create    = lambda : [choice([0,1]) for i in range(20)],
-        evaluate  = lambda individual:sum(individual)
-    )
-    plot_fitnesse(statistics)
     
+    p_mutations = [0.001, 0.0005, 0.002]
+    p_crossovers = [0, 0.1, 0.3, 0.7]
+    
+    index = 0
+    for p1 in p_mutations:
+        for p2 in p_crossovers:
+            population,statistics = evolve(
+                N         = 1000,
+                create    = lambda : [choice([0,1]) for i in range(20)],
+                evaluate  = lambda individual:sum(individual),
+                mutate    = lambda individual: mutate_bit_string(individual,p=p1),
+                crossover = lambda population: simple_crossover(population,p=p2)        
+            )
+            figure(figsize=(20,10)) 
+            plot_fitness(statistics,name='P(mutation)={0}, P(crossover)={1}'.format(p1,p2))
+            index += 1
+            savefig('{0}'.format(index))
     show() 
