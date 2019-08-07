@@ -19,8 +19,8 @@
 # [1]  Melanie Mitchell. An introduction to genetic algorithms. MIT press, 1998.
 # [2]  Werner Krauth. Statistical mechanics: algorithms and computations. OUP Oxford, 2006.
 
-from numpy import mean,std,argsort,searchsorted
-from random import random,choice
+from numpy import mean, std, argsort, searchsorted
+from random import random, choice, sample
 from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, figure, savefig
 
 # roulette
@@ -66,18 +66,21 @@ def mutate_bit_string(genome,p=0.001):
     
     return [flip(bit) for bit in genome]
 
-# simple_crossover
+# single_point_crossover
 #
-# Perform crossover on a genome consisting of a list
+# Perform Single point crossover on a genome consisting of a list.
+# Randomly choose pairs of parents (without replacement) and crossover
+# both members of the pair.
 #
 #      Parameters:
-#          population
-#          p           Probability of crossover
-def simple_crossover(population,p=0.7):
-    if random() < p:
-        i       = choice(range(len(population)))                         # first element to crossover
-        j       = (i + choice(range(1,len(population))))%len(population) # second element to crossover
-        k       = choice(range(1,len(population[i])-1))                  # point where crossover occurs
+#          population  Collection of genomes
+#          p           Probability of a genome being slected as a parent
+def single_point_crossover(population,p=0.7):
+    parents = sample(range(len(population)),int(p*len(population)))
+    ii = iter(parents)
+    for i in ii:
+        j       = next(ii)
+        k       = choice(range(1,len(population[i])-1))
         #  Split the two genomes that have been selected
         pi_head = population[i][0:k]
         pi_tail = population[i][k:]
@@ -107,7 +110,7 @@ def evolve(N         = 100,
            evaluate  = lambda individual:0.5,
            select    = roulette,
            mutate    = mutate_bit_string,
-           crossover = simple_crossover):
+           crossover = single_point_crossover):
     population = [create() for i in range(M)]
     statistics = []
     
@@ -141,8 +144,8 @@ def plot_fitness(statistics,name='Exercise 1'):
 
 if __name__=='__main__':    # Test harness
     
-    p_mutations  = [0.0001, 0.0005, 0.001,  0.002]
-    p_crossovers = [ 0, 0.1, 0.3, 0.7] 
+    p_mutations  = [0.0001, 0.0005, 0.001,  0.002] 
+    p_crossovers = [0, 0.1, 0.3,0.7]  
     
     index        = 0
     for p1 in p_mutations:
@@ -152,7 +155,7 @@ if __name__=='__main__':    # Test harness
                 create    = lambda : [choice([0,1]) for i in range(20)],
                 evaluate  = lambda individual:sum(individual),
                 mutate    = lambda individual: mutate_bit_string(individual,p=p1),
-                crossover = lambda population: simple_crossover(population,p=p2)        
+                crossover = lambda population: single_point_crossover(population,p=p2)        
             )
             figure(figsize=(20,10)) 
             plot_fitness(statistics,name='P(mutation)={0}, P(crossover)={1}'.format(p1,p2))
