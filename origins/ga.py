@@ -76,10 +76,9 @@ def mutate_bit_string(genome,p=0.001):
 #          population  Collection of genomes
 #          p           Probability of a genome being slected as a parent
 def single_point_crossover(population,p=0.7):
-    parents = sample(range(len(population)),int(p*len(population)))
-    ii = iter(parents)
-    for i in ii:
-        j       = next(ii)
+    parents  = iter(sample(range(len(population)),int(p*len(population))))
+    for i in parents:
+        j       = next(parents)
         k       = choice(range(1,len(population[i])-1))
         #  Split the two genomes that have been selected
         pi_head = population[i][0:k]
@@ -103,6 +102,13 @@ def single_point_crossover(population,p=0.7):
 #      select      Select elements for next generation 
 #      mutate      Used to mutate a genome
 #      crossover   Used to perform crossover
+#
+#    Returns:
+#         population  The population at the end of the evolution
+#         statistics  A list of stats for eact generation: maximum fitness,
+#                                                          average fitness, and standard deviation
+#         indices     A list of indices of the population, in ascending order of fitness
+#                     so population[indices[-1]] will be the most fit solution found
 
 def evolve(N         = 100,
            M         = 100,
@@ -111,6 +117,7 @@ def evolve(N         = 100,
            select    = roulette,
            mutate    = mutate_bit_string,
            crossover = single_point_crossover):
+    
     population = [create() for i in range(M)]
     statistics = []
     
@@ -121,7 +128,7 @@ def evolve(N         = 100,
         
     fitness = [evaluate(individual) for individual in population]
     statistics.append((max(fitness),mean(fitness),std(fitness)))        
-    return (population,statistics)
+    return (population,statistics,argsort(fitness))
 
 # plot_fitness
 #
@@ -142,7 +149,7 @@ def plot_fitness(statistics,name='Exercise 1'):
     legend(loc='center')
    
 
-if __name__=='__main__':    # Test harness
+if __name__=='__main__':    # Test, based on exercise 1 in [1]
     
     p_mutations  = [0.0001, 0.0005, 0.001,  0.002] 
     p_crossovers = [0, 0.1, 0.3,0.7]  
@@ -150,13 +157,14 @@ if __name__=='__main__':    # Test harness
     index        = 0
     for p1 in p_mutations:
         for p2 in p_crossovers:
-            _,statistics = evolve(
+            _,statistics,_ = evolve(
                 N         = 1000,
                 create    = lambda : [choice([0,1]) for i in range(20)],
                 evaluate  = lambda individual:sum(individual),
                 mutate    = lambda individual: mutate_bit_string(individual,p=p1),
                 crossover = lambda population: single_point_crossover(population,p=p2)        
             )
+
             figure(figsize=(20,10)) 
             plot_fitness(statistics,name='P(mutation)={0}, P(crossover)={1}'.format(p1,p2))
             index += 1
