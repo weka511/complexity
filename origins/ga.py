@@ -19,7 +19,7 @@
 # [1]  Melanie Mitchell. An introduction to genetic algorithms. MIT press, 1998.
 # [2]  Werner Krauth. Statistical mechanics: algorithms and computations. OUP Oxford, 2006.
 
-from numpy import mean,std,argsort
+from numpy import mean,std,argsort,searchsorted
 from random import random,choice
 from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, figure, savefig
 
@@ -27,32 +27,25 @@ from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, f
 #
 #  Implements fitness proportional selection as described in [1].
 #   Parameters:
-#      population
-#      fitness
+#      population   A collection of genomes
+#      fitness      Fitness values assigned to each genome
 
 def roulette(population,fitness):
     # Select one element from population using Tower Sampling [2]
     def select():
-        r       = T * random()
-        i   = 0
-        for i in range(len(breaks)-1):
-            if breaks[i] >= r:   # until sum >= r... [1]
-                return i
-        return -1
+        return indices[searchsorted(breaks,T * random())]
     
-    # Organize population in order of ascending fitness, and reorder fitnesses to
-    indices    = argsort(fitness)
-    population = [population[i] for i in indices]
-    fitness    = [fitness[i] for i in indices]
+    # Organize fitness in ascending order. We will save
+    # this permutation so we know which individual corresponds to
+    # a particlar value
+    indices = argsort(fitness)
+    fitness = [fitness[i] for i in indices]
+     
+    T       = sum(fitness) #Normalizing value, so we can treat fitnesses is probabilities
     
-    # Total fitness, used so we can treat fitnesses is proabilities
-    T       = sum(fitness)
+    breaks  = [sum(fitness[:i]) for i in range(1,len(fitness))] # Subtotals for use in tower sampling[2].
     
-    # Calculate subtotals for use in tower sampling.
-    breaks  = [sum(fitness[:i]) for i in range(1,len(fitness))]
-    
-    # Select new population
-    return [population[select()] for dummy in population]
+    return [population[select()] for _ in population]   # Select new population
 
 # mutate_bit_string
 #
@@ -155,7 +148,7 @@ if __name__=='__main__':    # Test harness
     for p1 in p_mutations:
         for p2 in p_crossovers:
             _,statistics = evolve(
-                N         = 2000,
+                N         = 1000,
                 create    = lambda : [choice([0,1]) for i in range(20)],
                 evaluate  = lambda individual:sum(individual),
                 mutate    = lambda individual: mutate_bit_string(individual,p=p1),
