@@ -117,7 +117,7 @@ def evolve(N         = 100,
     for i in range(N):
         fitness    = [evaluate(individual) for individual in population]
         statistics.append((max(fitness),mean(fitness),std(fitness)))
-        population = crossover([mutate(individual) for individual in select(population,fitness)])
+        population = [mutate(individual) for individual in crossover(select(population,fitness))]
         
     fitness = [evaluate(individual) for individual in population]
     statistics.append((max(fitness),mean(fitness),std(fitness)))        
