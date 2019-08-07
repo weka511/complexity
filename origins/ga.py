@@ -41,7 +41,7 @@ def roulette(population,fitness):
     indices = argsort(fitness)
     fitness = [fitness[i] for i in indices]
      
-    T       = sum(fitness) #Normalizing value, so we can treat fitnesses is probabilities
+    T       = sum(fitness) #Normalizing value, so we can treat fitnesses as probabilities
     
     breaks  = [sum(fitness[:i]) for i in range(1,len(fitness))] # Subtotals for use in tower sampling[2].
     
@@ -159,7 +159,7 @@ if __name__=='__main__':    # Test, based on exercise 1 in [1]
         for p2 in p_crossovers:
             _,statistics,_ = evolve(
                 N         = 1000,
-                create    = lambda : [choice([0,1]) for i in range(20)],
+                create    = lambda : [choice([0,1]) for _ in range(20)],
                 evaluate  = lambda individual:sum(individual),
                 mutate    = lambda individual: mutate_bit_string(individual,p=p1),
                 crossover = lambda population: single_point_crossover(population,p=p2)        
