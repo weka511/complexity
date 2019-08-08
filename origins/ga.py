@@ -151,22 +151,37 @@ def plot_fitness(statistics,name='Exercise 1'):
 
 if __name__=='__main__':    # Test, based on exercise 1 in [1]
     
-    p_mutations  = [0.0001, 0.0005, 0.001,  0.002] 
-    p_crossovers = [0, 0.1, 0.3,0.7]  
+    from argparse import ArgumentParser
     
-    index        = 0
-    for p1 in p_mutations:
-        for p2 in p_crossovers:
-            _,statistics,_ = evolve(
-                N         = 1000,
-                create    = lambda : [choice([0,1]) for _ in range(20)],
-                evaluate  = lambda individual:sum(individual),
-                mutate    = lambda individual: mutate_bit_string(individual,p=p1),
-                crossover = lambda population: single_point_crossover(population,p=p2)        
-            )
+    parser = ArgumentParser('Genetic Algorithm Demo')
+    parser.add_argument('--pc',default=0.7,type=float,nargs='+',help='Crossover rate')
+    parser.add_argument('--pm',default=0.001,type=float,nargs='+',help='Mutation probability')
+    parser.add_argument('-n', default=20,type=int,help='Number of Trials')
+    parser.add_argument('-N', default=1000,type=int,help='Number of generations')
+    args = parser.parse_args();
+    
+    pcs = args.pc if type(args.pc)==list else [args.pc]
+    pms = args.pm if type(args.pm)==list else [args.pm]
+    for pc in pcs:
+        for pm in pms:
+            firsts = []
+            for i in range(args.n):
+                _,statistics,_ = evolve(
+                    N         = args.N,
+                    create    = lambda : [choice([0,1]) for _ in range(20)],
+                    evaluate  = lambda individual:sum(individual),
+                    mutate    = lambda individual: mutate_bit_string(individual,p=pm),
+                    crossover = lambda population: single_point_crossover(population,p=pc)        
+                )
+                maxima = [a for a,_,_ in statistics]
+                try:
+                    firsts.append(maxima.index(20))
+                except ValueError:
+                    firsts.append(args.N+1)
+                    
+            print('{0}, {1}, {2}, {3}'.format(pc,pm,int(mean(firsts)),int(std(firsts))))
 
-            figure(figsize=(20,10)) 
-            plot_fitness(statistics,name='P(mutation)={0}, P(crossover)={1}'.format(p1,p2))
-            index += 1
-            savefig('{0}'.format(index))
-    show() 
+#   Pc       Pm       Mean         Std
+#   0.7      0.001    224         110
+#   0.0      0.001    235          62
+#   0.3      0.001    250         112
