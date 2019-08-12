@@ -20,18 +20,18 @@ import math
 def flux(c,yC,D=1):
     return 4*math.pi * c *yC /(c**3)
 
-def  plot_flux():
-    cell_sizes = np.linspace(0,1,21)
-    yCs        = np.linspace(0.1,10,21)
-    z = np.array([flux(c,yC) for yC in yCs for c in cell_sizes])
+def  plot_flux(M=21,N=25):
+    cell_sizes = np.linspace(0.1,1,M)
+    yCs        = np.linspace(1.0,10,N)
 
-    X, Y = np.meshgrid(cell_sizes, yCs)
-    Z = z.reshape(21, 21)
+    X, Y       = np.meshgrid(cell_sizes, yCs)
+    Z          = flux(X,Y)
     
     plt.contourf(X, Y, Z)
     plt.xlabel('Cell size')
     plt.ylabel('yCs')
     plt.title('Energy Yield')
+    plt.colorbar()
     plt.show()
     
 if __name__=='__main__':

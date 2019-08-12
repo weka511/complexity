@@ -20,4 +20,4 @@ Code for [Origins of Life](https://www.complexityexplorer.org/courses/95-origins
 | |evolve_allometric_scaling.py|Evolve solution for  [West et al--A General Model for the Origin of Allometric Scaling Laws in Biology](http://hermes.ffn.ub.es/oscar/Biologia/Escala/Science_276_122_1997.pdf)|
 | | ga.py|Genetic algorithm framework|
 |7|assignment.tex|Peer review assignment|
-||metaboloc.py|Diffusion equation code|
+||metabolic.py|Diffusion equation code|
