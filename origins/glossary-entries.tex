@@ -2,7 +2,7 @@
 
 \newacronym{gls:ATP}{ATP}{Adenosine triphosphate}
 
-\newacronym{gls:BLAST}{BLAST}{Basic Local Alignment Search Tool--\cite{altschul1990basic}\cite{ncbi2019blast}}
+\newacronym{gls:BLAST}{BLAST}{Basic Local Alignment Search Tool}
 
 \newacronym{gls:CPR}{CPR}{Candidate Phyla Radiation}
 
@@ -12,11 +12,14 @@
 
 \newacronym{gls:ESP}{ESP}{Eukaryotic Signature Protein}
 
+
+\newacronym{gls:GI}{GI}{GenInfo Number}
+
 \newacronym{gls:LAWKI}{LAWKI}{Life as we know it}
 
 \newacronym{gls:LBA}{LBA}{Long Branch Attraction}
 
-\newacronym{fls:LGT}{LGT}{Lateral Gene Transfer}
+\newacronym{gls:LGT}{LGT}{Lateral Gene Transfer}
 
 \newacronym{gls:LECA}{LECA}{Last Eukaryotic Common Ancestor}
 
@@ -65,6 +68,10 @@
 \newglossaryentry{gls:autocatalyst}{
 	name={autocatalyst},
 	description={Something that acts as a \gls{gls:catalyst} for its own production}}
+
+\newglossaryentry{gls:autotroph}{
+	name={autotroph},
+	description={An autotroph or primary producer, is an organism that produces complex organic compounds (such as carbohydrates, fats, and proteins) from simple substances present in its surroundings, generally using energy from light (photosynthesis) or inorganic chemical reactions (chemosynthesis). They are the producers in a food chain, such as plants on land or algae in water (in contrast to \glspl{gls:heterotroph} as consumers of autotrophs). They do not need a living source of energy or organic carbon. Autotrophs can reduce carbon dioxide to make organic compounds for biosynthesis and also create a store of chemical energy. Most autotrophs use water as the reducing agent, but some can use other hydrogen compounds such as hydrogen sulfide. Some autotrophs, such as green plants and algae, are phototrophs, meaning that they convert electromagnetic energy from sunlight into chemical energy in the form of reduced carbon--\cite{wiki:autotroph} }}
 
 \newglossaryentry{gls:Candidate:Phyla:Radiation}{
 	name={Candidate Phyla Radiation},
@@ -128,17 +135,19 @@
 	name={Gibbs free energy},
 	description={A thermodynamic potential that can be used to calculate the maximum of reversible work that may be performed by a thermodynamic system at a constant temperature and pressure (isothermal, isobaric). The Gibbs free energy is the maximum amount of non-expansion work that can be extracted from a thermodynamically closed system (one that can exchange heat and work with its surroundings, but not matter); this maximum can be attained only in a completely reversible process--\cite{wiki:gibbs-free}}}
 
-\newglossaryentry{gls:GI}{
-	name={GI},
-	description={A GI number (for GenInfo Identifier, sometimes written in lower case, " gi ") is a simple series of digits that are assigned consecutively to each sequence record processed by NCBI. The GI number bears no resemblance to the Version number of the sequence record. Each time a sequence record is changed, it is assigned a new GI number.}}
+
 
 \newglossaryentry{gls:heterotachy}{
 	name={heterotachy},
-	description={Heterotachy refers to variations in lineage-specific evolutionary rates over time. In the field of molecular evolution, the principle of heterotachy states that the substitution rate of sites in a gene can change through time. It has been proposed that the positions that show switches in substitution rate over time (that is, heterotachous sites) are good indicators of functional divergence. However, it appears that heterotachy is a much more general process, since most variable sites of homologous proteins with no evidence of functional shift are heterotachous--\cite{wiki:heterotachy}}}
+	description={Heterotachy refers to variations in lineage-specific evolutionary rates over time. In the field of molecular evolution, the principle of heterotachy states that the substitution rate of sites in a gene can change through time--\cite{lopez2002heterotachy}}}
+
+\newglossaryentry{gls:heterotroph}{
+	name={heterotroph},
+	description={A heterotroph is an organism that cannot produce its own food, relying instead on the intake of nutrition from other sources of organic carbon, mainly plant or animal matter. In the food chain, heterotrophs are primary, secondary and tertiary consumers, but not producers. Living organisms that are heterotrophic include all animals and fungi, some bacteria and protists, and parasitic plants. The term heterotroph arose in microbiology in 1946 as part of a classification of microorganisms based on their type of nutrition. The term is now used in many fields, such as ecology in describing the food chain--\cite{wiki:heterotroph} }}
 
 \newglossaryentry{gls:hydrogenosome }{
 	name={hydrogenosome },
-	description={A hydrogenosome is a membrane-enclosed organelle of some anaerobic ciliates, trichomonads, fungi, and animals. The hydrogenosomes of trichomonads (the most studied of the hydrogenosome-containing microorganisms) produce molecular hydrogen, acetate, carbon dioxide and ATP by the combined actions of pyruvate:ferredoxin oxido-reductase, hydrogenase, acetate:succinate CoA transferase and succinate thiokinase. Superoxide dismutase, malate dehydrogenase (decarboxylating), ferredoxin, adenylate kinase and NADH:ferredoxin oxido-reductase are also localized in the hydrogenosome. It is nearly universally accepted that hydrogenosomes evolved from mitochondria--\cite{wiki:hydrogenosome}.}}
+	description={A hydrogenosome is a membrane-enclosed organelle of some anaerobic ciliates, trichomonads, fungi, and animals. The hydrogenosomes of trichomonads (the most studied of the hydrogenosome-containing microorganisms) produce molecular hydrogen, acetate, carbon dioxide and ATP by the combined actions of pyruvate:ferredoxin oxido-reductase, hydrogenase, acetate:succinate CoA transferase and succinate thiokinase. Superoxide dismutase, malate dehydrogenase (decarboxylating), ferredoxin, adenylate kinase and NADH:ferredoxin oxido-reductase are also localized in the hydrogenosome. It is nearly universally accepted that hydrogenosomes evolved from mitochondria--\cite{wiki:hydrogenosome}}}
 
 \newglossaryentry{gls:isolated:representatives}{
 	name={isolated representatives},
@@ -177,8 +186,12 @@
 
 \newglossaryentry{gls:mitosome}{
 	name={mitosome},
-	description={A mitosome is an organelle found in some unicellular eukaryotic organisms. The mitosome has only recently been found and named,[1] and its function has not yet been well characterized. It was termed a crypton by one group, but that name is no longer in use--\cite{wiki:mitosome}}}
+	description={An organelle found in "amitochondrial" unicellular organisms which do not have the capability of gaining energy from oxidative phosphorylation. Mitosomes are almost certainly derived from mitochondria, they have a double membrane and most proteins are delivered to them by a targeting sequence. Unlike mitochondria, mitosomes do not contain any DNA. The mitosome functions in iron-sulphur cluster assembly--\cite{uniprot2009mitosome}}}
 
+\newglossaryentry{gls:nucleolus}{
+	name={nucleolus},
+	plural={nucleoli},
+	description={The nuclear site of rRNA transcription, processing, and ribosome assembly\cite{cooper2000sinauer}}}
 
 \newglossaryentry{gls:oligotroph}{
 	name={oligotroph},
@@ -186,7 +199,7 @@
 
 \newglossaryentry{gls:orthology}{
 	name={orthology},
-	description={Homologous sequences are orthologous if they are inferred to be descended from the same ancestral sequence separated by a speciation event: when a species diverges into two separate species, the copies of a single gene in the two resulting species are said to be orthologous. Orthologs, or orthologous genes, are genes in different species that originated by vertical descent from a single gene of the last common ancestor. The term "ortholog" was coined in 1970 by the molecular evolutionist Walter Fitch--cite{wiki:homology}e}}
+	description={Homologous sequences are orthologous if they are inferred to be descended from the same ancestral sequence separated by a speciation event: when a species diverges into two separate species, the copies of a single gene in the two resulting species are said to be orthologous. Orthologs, or orthologous genes, are genes in different species that originated by vertical descent from a single gene of the last common ancestor. The term "ortholog" was coined in 1970 by the molecular evolutionist Walter Fitch--\cite{wiki:homology}}}
 
 \newglossaryentry{gls:outgroup}{
 	name={outgroup},
@@ -227,10 +240,18 @@
 	name={ribozyme},
 	description={Ribozymes (ribonucleic acid enzymes) are RNA molecules that are capable of catalyzing specific biochemical reactions, similar to the action of protein enzymes. The 1982 discovery of ribozymes demonstrated that RNA can be both genetic material (like DNA) and a biological catalyst (like protein enzymes), and contributed to the RNA world hypothesis, which suggests that RNA may have been important in the evolution of prebiotic self-replicating systems. The most common activities of natural or in vitro-evolved ribozymes are the cleavage or ligation of RNA and DNA and peptide bond formation. Within the ribosome, ribozymes function as part of the large subunit ribosomal RNA to link amino acids during protein synthesis. They also participate in a variety of RNA processing reactions, including RNA splicing, viral replication, and transfer RNA biosynthesis. Examples of ribozymes include the hammerhead ribozyme, the VS ribozyme, Leadzyme and the hairpin ribozyme--\cite{wiki:ribozyme} }}
 
+\newglossaryentry{gls:saprotroph}{
+	name={saprotroph},
+	description={Saprotrophic nutrition  or lysotrophic nutrition is a process of chemoheterotrophic extracellular digestion involved in the processing of decayed (dead or waste) organic matter. It occurs in saprotrophs, and is most often associated with fungi (for example Mucor) and soil bacteria--\cite{wiki:saprotroph}}}
+
 \newglossaryentry{gls:serpentinization}{
 	name={serpentinization},
 	description={A hydration and metamorphic transformation of ultramafic rock from the Earth's mantle--\cite{wiki:serpentinization}}
 }
+
+\newglossaryentry{gls:spliceosome}{
+	name={spliceosome},
+	description={Large complex of snRNAs and proteins that catalyzes the splicing of pre-mRNAs--\cite{cooper2000sinauer}}}
 
 \newglossaryentry{gls:sympatric-speciation}{
 	name={sympatric speciation},
