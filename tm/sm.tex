@@ -1,26 +1,105 @@
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newtheorem{thm}{Theorem}
 
 %opening
 \title{Statistical Mechanics}
-\author{}
+\author{Simon Crase}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-
+These are my notes from the Statistical Mechanics lectures from Leonard Susskind's Theoretical Minimum series.
 \end{abstract}
 
 \tableofcontents
 
 \section{Entropy and conservation of information}
-\section{Temperature}
+This lecture focuses on the law of conservation of energy, the $-1$law of physics. Liouville's theorem.
+
+''In physics, Liouville's theorem, named after the French mathematician Joseph Liouville, is a key theorem in classical statistical and Hamiltonian mechanics. It asserts that the phase-space distribution function is constant along the trajectories of the system—that is that the density of system points in the vicinity of a given system point traveling through phase-space is constant with time. This time-independent density is in statistical mechanics known as the classical a priori probability.''
+
 \begin{align*}
-dE = T dS \numberthis \label{eq:T}
+S \triangleq \log(M) \numberthis \label{eq:entropy:simple}
 \end{align*}
+
+Proper laws of physics are reversible and therefore preserve the distinctions between states - i.e. information.  In this sense, the conservation of information is more fundamental that other physical quantities such as temperature or energy.  
+\begin{itemize}
+	\item $S$ conserved as long as we can follow in detail, e.g. if we can follow the motion of each molecule that is disturbed by Friction.
+	\item $S$ increases as our ignorance goes up;
+	\item $S$ depends on the system and our state of knowledge.
+\end{itemize}
+
+\begin{align*}
+S \triangleq - \sum_{i=1}^{N} p_i \log{p_i} \numberthis \label{eq:entropy}
+\end{align*}
+
+
+In (\ref{eq:entropy:simple}) and (\ref{eq:entropy}) we use the logarithm so that entropy adds, rather than multiplies.
+
+The First law of Thermodynamics is energy conservation. For a closed system:
+\begin{align*}
+\frac{dE}{dt} =& 0\\
+\sum \frac{dE_i}{dt} =& 0
+\end{align*}
+
+
+\section{Temperature}
+
+Temperature is really a measure of Energy. So the energy of one molecule of an Ideal Gas is given by:
+\begin{align*}
+E =& \frac{3}{2} k_B t\text{, where:}\\
+k_B =& \text{Boltzmann's constant}\\
+T =& \text{temperature in Kelvin}
+\end{align*}
+ In natural units we define a new unit of temperature, $T=k_Bt$, so $k_B=1$.
+ 
+ We want to redefine temperature in therms of Entropy and Energy, and then show that this new definition agrees with our everyday idea of temperature. Temperature is not a fundamental quantity, but is derived as the amount of energy required to add an incremental amount of entropy to a system.  As the energy of a system increases, the number of possible states of a system increases, which means that the entropy increases.  This is the concept behind the second law of thermodynamics, and implies that temperature is always positive.
+ 
+ Our definition reduces to:
+\begin{align*}
+\Delta E =& \underbrace{\frac{\partial E}{\partial S}}_\text{1 Degree of T} \Delta S\text{,or }\\
+dE =& T dS \numberthis \label{eq:T}
+\end{align*}
+
+Consider two systems, $A$ and $B$, joined by a narrow pipe. Theorem \ref{thm:heat:flow} shows that T captures our intuition about temperature: heat flows from a higher temperature to lower.
+
+\begin{thm}\label{thm:heat:flow}
+	Given:
+	\begin{align*}
+	dE_A + dE_B =& 0 \numberthis \label{eq:thm:dE}\\
+	dS_A + dS_B>& 0 \numberthis \label{eq:thm:eS} \\
+	dE_i =& T_i dS_i \numberthis \label{eq:thm:T} \\
+	T_A>&T_B \numberthis \label{eq:thm:Tgt}
+	\end{align*}
+	then energy flows from A to B, i.e.
+	\begin{align*}
+	dE_A<0
+	\end{align*}
+\end{thm}
+\begin{proof}
+	\begin{align*}
+	T_A dS_A =& dE_A \text{, from (\ref{eq:thm:T})}\\
+	=& - dE_B \text{, from (\ref{eq:thm:dE})}\\
+	=& - T_B dS_B  \text{, from (\ref{eq:thm:T})}\\
+	\implies&\\
+	T_A dS_A + T_A dS_B =& T_A dS_B -T_B dS_B\\
+	\implies&\\
+	T_A (dS_A + dS_B) =& (T_A  -T_B) dS_B\\
+	\implies& \text{, using (\ref{eq:thm:eS}) and (\ref{eq:thm:Tgt})}\\
+	dS_B >& 0\\
+	\implies& \text{using (\ref{eq:thm:T})}\\
+	dE_B >& 0\\
+	\implies& \text{, using (\ref{eq:thm:dE})}\\
+	dE_A<0
+	\end{align*}
+\end{proof}
+
+
+
 \section{Maximizing entropy}
 
 
@@ -48,7 +127,8 @@ C=&\frac{N!}{\prod_{i}n_i!}\\
 \approxeq& N \log(N) - \sum_{i=1}^{N} N p_i \log(N p_i)\\
 \approxeq& N \log(N) - \sum_{i=1}^{N} N p_i \big(\log(N) + \log(p_i))\big)\\
 \approxeq& N \log(N) -  N \log(N) \bcancel{\sum_{i=1}^{N} p_i}  - N \sum_{i=1}^{N}p_i \log(p_i)\tag*{using (\ref{eq:sum:probilities})}\\
-\approxeq& \bcancel{N \log(N)} - \bcancel{N \log(N)}  - N \sum_{i=1}^{N}p_i \log(p_i)\tag*{Entropy!}
+\approxeq& \bcancel{N \log(N)} - \bcancel{N \log(N)}  - N \sum_{i=1}^{N}p_i \log(p_i)\\
+\approxeq& NS \text{, using (\ref{eq:entropy})} \numberthis \label{eq:entropy:logC}
 \end{align*}
 
 \section{The Boltzmann distribution}
@@ -91,6 +171,26 @@ dS =& \beta dE + E d\beta + \frac{\partial \log(Z)}{\partial \beta} d\beta \text
 =& \beta dE \text{, using (\ref{eq:E:beta})}\\
 =& \frac{1}{T} dE \text{, using (\ref{eq:T})}\text{, whence}\\
 T =& \frac{1}{\beta}
+\end{align*}
+Ideal Gas: assume molecules don't interact.
+State: 3N coordinates $\{X_1,...X_{3N}\}$ and momenta $\{P_1,...P3N\}$
+\begin{align*}
+Z =& \int d^{3N}x d^{3N}p . e^{- \frac{\beta}{2m} \sum_{n=1}^{3N} p_n^2}\\
+=& \frac{V^N}{N!} \int d^{3N}p . e^{- \frac{\beta}{2m} \sum_{n=1}^{3N} p_n^2}\text{Factorial is controversial}\\
+=& \frac{V^N}{N!} \big[\int dp. e^{-\frac{\beta}{2m}p^2}\big]^{3N}\\
+=& \frac{V^N}{N!} \big[\frac{2 m \pi}{\beta}\big]^{\frac{3N}{2}}\numberthis\label{eq:Z_beta}
+\end{align*}
+We now use Stirling's formula (\ref{eq:stirling}).
+\begin{align*}
+\frac{V^N}{N!} \approxeq& \big(\frac{eN}{N}\big)^N \\
+=& \big(\frac{e}{\rho}\big)^N,\text{, and (\ref{eq:E:beta}) becomes}\\
+Z \approxeq& \big(\frac{e}{\rho}\big)^N .  \big[\frac{2 m \pi}{\beta}\big]^{\frac{3N}{2}}
+\end{align*}
+
+\begin{align*}
+\log(Z) =& - \frac{3N}{2} \log(\beta) + const\\
+E =& - \frac{\partial \log(Z)}{\partial \beta}\\
+=& \frac{3N}{2} T
 \end{align*}
 \section{Pressure of an ideal gas and fluctuations}
 \section{Weakly interacting gases, heat, and work}
