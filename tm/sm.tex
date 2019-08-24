@@ -2,6 +2,7 @@
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newtheorem{thm}{Theorem}
+\newtheorem{lemma}{Lemma}
 
 %opening
 \title{Statistical Mechanics}
@@ -102,38 +103,50 @@ Consider two systems, $A$ and $B$, joined by a narrow pipe. Theorem \ref{thm:hea
 
 \section{Maximizing entropy}
 
-
 Number of arrangements $\frac{N!}{\prod_{i}n_i!}$. We want to maximize this subject to two constraints:
 \begin{align*}
 \sum_{i=1}^{N} n_i =& N \numberthis\label{eq:sum:probilities}\\
 \sum_{i=1}^{N} E_i n_i =& E N \numberthis\label{eq:total:energy}
 \end{align*}
 
-We use Stirling's approximation
+We will find Lemma \ref{lemma:Stirling} useful.
+\begin{lemma}[Stirling's approximation]\label{lemma:Stirling}
+	\begin{align*}
+	N! \approxeq& N^N e^{-N}\numberthis\label{eq:stirling}
+	\end{align*}
+\end{lemma}
 
-\begin{align*}
-\log(N!) =& \sum_{i=1}^{N}\log (i)\\
-\approxeq &\int_{1}^{N} \log(x) dx\\
-\approxeq& \big[x \log(x) - x \big]_1^N\\
-\approxeq& N\log(N)-N\\
-N! \approxeq& N^N e^{-N}\numberthis\label{eq:stirling}
-\end{align*}
+\begin{proof}
+	\begin{align*}
+	\log(N!) =& \sum_{i=1}^{N}\log (i)\\
+	\approxeq &\int_{1}^{N} \log(x) dx\\
+	\approxeq& \big[x \log(x) - x \big]_1^N\\
+	\approxeq& N\log(N)-N\\
+	N! \approxeq& N^N e^{-N}
+	\end{align*}
+\end{proof}	
 
-\begin{align*}
-C=&\frac{N!}{\prod_{i}n_i!}\\
- \approxeq& \frac{N^N e^{-N}}{\prod_{i}n_i^{n_i} e^{-\sum_{i=1}^{N}n_i}}\tag*{from (\ref{eq:stirling})}\\
-\approxeq& \frac{N^N \bcancel{e^{-N}}}{\prod_{i}n_i^{n_i} \bcancel{e^{-N}}}\tag*{using (\ref{eq:sum:probilities})}\\
-\log(C) \approxeq & N \log(N) - \sum_{i=1}^{N} n_i \log(n_i)\\
-\approxeq& N \log(N) - \sum_{i=1}^{N} N p_i \log(N p_i)\\
-\approxeq& N \log(N) - \sum_{i=1}^{N} N p_i \big(\log(N) + \log(p_i))\big)\\
-\approxeq& N \log(N) -  N \log(N) \bcancel{\sum_{i=1}^{N} p_i}  - N \sum_{i=1}^{N}p_i \log(p_i)\tag*{using (\ref{eq:sum:probilities})}\\
-\approxeq& \bcancel{N \log(N)} - \bcancel{N \log(N)}  - N \sum_{i=1}^{N}p_i \log(p_i)\\
-\approxeq& NS \text{, using (\ref{eq:entropy})} \numberthis \label{eq:entropy:logC}
-\end{align*}
+\begin{thm}
+	To maximize the number of arrangements we need to maximize the entropy.
+\end{thm}
+
+\begin{proof}
+	\begin{align*}
+	C=&\frac{N!}{\prod_{i}n_i!}\\
+	\approxeq& \frac{N^N e^{-N}}{\prod_{i}n_i^{n_i} e^{-\sum_{i=1}^{N}n_i}}\tag*{from Lemma \ref{lemma:Stirling}}\\
+	\approxeq& \frac{N^N \bcancel{e^{-N}}}{\prod_{i}n_i^{n_i} \bcancel{e^{-N}}}\tag*{using (\ref{eq:sum:probilities})}\\
+	\log(C) \approxeq & N \log(N) - \sum_{i=1}^{N} n_i \log(n_i)\\
+	\approxeq& N \log(N) - \sum_{i=1}^{N} N p_i \log(N p_i)\\
+	\approxeq& N \log(N) - \sum_{i=1}^{N} N p_i \big(\log(N) + \log(p_i))\big)\\
+	\approxeq& N \log(N) -  N \log(N) \bcancel{\sum_{i=1}^{N} p_i}  - N \sum_{i=1}^{N}p_i \log(p_i)\tag*{using (\ref{eq:sum:probilities})}\\
+	\approxeq& \bcancel{N \log(N)} - \bcancel{N \log(N)}  - N \sum_{i=1}^{N}p_i \log(p_i)\\
+	\approxeq& NS \text{, using (\ref{eq:entropy})} \numberthis \label{eq:entropy:logC}
+	\end{align*}
+\end{proof}
 
 \section{The Boltzmann distribution}
 
-Minimize -S, using Lagrange Multipliers, i.e., minimize
+To maximize S subject to constraints (\ref{eq:sum:probilities}) and (\ref{eq:total:energy}), we minimize -S, using Lagrange Multipliers, i.e., minimize
 \begin{align*}
 \sum_{i=1}^{N}p_i \log(p_i) + \alpha(\sum_{i=1}^{N} p_i-1) + \beta(\sum_{i=1}^{N} E_i p_i-E)
 \end{align*}
@@ -150,28 +163,36 @@ From (\ref{eq:sum:probilities}) and (\ref{eq:maximize:entropy})
 1 =& \frac{1}{Z}  \sum_{i=1}^{N} e^-{\beta E_i}\\
 Z(\beta) =& \sum_{i=1}^{N} e^-{\beta E_i} \text{. $Z$ is known as the Partition Function.} \numberthis \label{eq:partition:function}
 \end{align*}
-We will see that $\beta$ is the inverse temperature.
 
-From (\ref{eq:total:energy}) and (\ref{eq:maximize:entropy})
-\begin{align*}
-E =& \frac{1}{Z}  \sum_{i=1}^{N} e^{-\beta E_i} E_i \numberthis \label{eq:E}\\
-\frac{\partial Z}{\partial \beta} =& - \sum_{i=1}^{N} e^{-\beta E_i} E_i \numberthis \label{eq:dZ}\\
-E(\beta) =& - \frac{1}{Z} \frac{\partial Z}{\partial \beta} = - \frac{\partial \log(Z)}{\partial \beta} \numberthis \label{eq:E:beta}
-\end{align*}
+\begin{thm}[$\beta$ is the inverse temperature]\label{thm:inverseT}
+	\begin{align*}
+		T =& \frac{1}{\beta}\numberthis\label{eq:inverseT}
+	\end{align*}
+\end{thm}
 
-\begin{align*}
-S =& -\sum_{i=1}^{N} p_i \log(p_i)\\
-=& - \sum_{i=1}^{N} \frac{1}{Z} e^{- \beta E_i}\big[- \beta E_i -\log(Z)\big]\\
-=& \beta E +  \bcancel{\frac{1}{Z}} \log(Z)  \bcancel{\sum_{i=1}^{N} e^{-\beta E_i}}\\
-=& \beta E +   \log(Z)  \numberthis \label{eq:S_Z}
-\end{align*}
+\begin{proof}
+	From (\ref{eq:total:energy}) and (\ref{eq:maximize:entropy})
+	\begin{align*}
+	E =& \frac{1}{Z}  \sum_{i=1}^{N} e^{-\beta E_i} E_i \numberthis \label{eq:E}\\
+	\frac{\partial Z}{\partial \beta} =& - \sum_{i=1}^{N} e^{-\beta E_i} E_i \numberthis \label{eq:dZ}\\
+	E(\beta) =& - \frac{1}{Z} \frac{\partial Z}{\partial \beta} = - \frac{\partial \log(Z)}{\partial \beta} \numberthis \label{eq:E:beta}
+	\end{align*}
+	
+	\begin{align*}
+	S =& -\sum_{i=1}^{N} p_i \log(p_i)\\
+	=& - \sum_{i=1}^{N} \frac{1}{Z} e^{- \beta E_i}\big[- \beta E_i -\log(Z)\big]\\
+	=& \beta E +  \bcancel{\frac{1}{Z}} \log(Z)  \bcancel{\sum_{i=1}^{N} e^{-\beta E_i}}\\
+	=& \beta E +   \log(Z)  \numberthis \label{eq:S_Z}
+	\end{align*}
+	
+	\begin{align*}
+	dS =& \beta dE + E d\beta + \frac{\partial \log(Z)}{\partial \beta} d\beta \text{, from (\ref{eq:S_Z})}\\
+	=& \beta dE \text{, using (\ref{eq:E:beta})}\\
+	=& \frac{1}{T} dE \text{, using (\ref{eq:T})}\text{, whence}\\
+	T =& \frac{1}{\beta}
+	\end{align*}
+\end{proof}
 
-\begin{align*}
-dS =& \beta dE + E d\beta + \frac{\partial \log(Z)}{\partial \beta} d\beta \text{, from (\ref{eq:S_Z})}\\
-=& \beta dE \text{, using (\ref{eq:E:beta})}\\
-=& \frac{1}{T} dE \text{, using (\ref{eq:T})}\text{, whence}\\
-T =& \frac{1}{\beta}
-\end{align*}
 Ideal Gas: assume molecules don't interact.
 State: 3N coordinates $\{X_1,...X_{3N}\}$ and momenta $\{P_1,...P3N\}$
 \begin{align*}
@@ -192,11 +213,70 @@ Z \approxeq& \big(\frac{e}{\rho}\big)^N .  \big[\frac{2 m \pi}{\beta}\big]^{\fra
 E =& - \frac{\partial \log(Z)}{\partial \beta}\\
 =& \frac{3N}{2} T
 \end{align*}
+
+
 \section{Pressure of an ideal gas and fluctuations}
+
+Motion is isotropic, even near wall. We know this from an honest use of statistical mechanics. Give up intuition because it might not be correct: ''ride the mathematics. All very great physicists are master of thermodynamics.''
+
+We want to determine the Equation of State.
+
+From (\ref{eq:S_Z}) and Theorem \ref{thm:inverseT}.
+\begin{align*}
+S =& \frac{E}{T} + \log(Z)\\
+\underbrace{E - TS}_{A\triangleq\text{Helmholz Free Energy}} =& -T \log(Z) 
+\end{align*}
+
+Variables come in pairs, e.g. (V,P):
+\begin{itemize}
+	\item Control Parameter (V);
+	\item Conjugate Thermodynamic Variable (V).
+\end{itemize}
+
+\begin{lemma}
+	Given two dependent variables, S and E, say, and two independent variables, T and V, say:
+	\begin{align*}
+		\frac{\partial E}{\partial V}\bigg|_S = \frac{\partial E}{\partial V}\bigg|_T - 	\frac{\partial E}{\partial S}\bigg|_V \frac{\partial S}{\partial V}\bigg|_T
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	Along a contour of fixed S:
+	\begin{align*}
+		\Delta E =& \frac{\partial E}{\partial V} \bigg|_T \Delta V + \frac{\partial E}{\partial T} \bigg|_V \Delta T\\
+		\frac{\partial E}{\partial V} \bigg|_S=& \frac{\partial E}{\partial V} \bigg|_T  + \frac{\partial S}{\partial T} \bigg|_V \frac{\partial E}{\partial S} \bigg|_V \frac{\Delta T}{\Delta V} \numberthis\label{eq:dEdV}\\
+		\text{Now }\Delta S =& \frac{\partial S}{\partial V} \bigg|_T \Delta V + \frac{\partial S}{\partial T} \bigg|_V \Delta T\\
+		=& 0\text{, along a contour of constant S, whence}\\
+		\frac{\Delta T}{\Delta V} =& - \Bigg[\frac{\frac{\partial S}{\partial V}\big|_T}{\frac{\partial S}{\partial T}\big|_V}\Bigg]\text{, along a contour of constant S, and (\ref{eq:dEdV}) becomes:}\\
+		\frac{\partial E}{\partial V} \bigg|_S=& \frac{\partial E}{\partial V} \bigg|_T  - \cancel{\frac{\partial S}{\partial T} \bigg|_V} \frac{\partial E}{\partial S} \bigg|_V \frac{\frac{\partial S}{\partial V}\big|_T}{\cancel{\frac{\partial S}{\partial T}\big|_V}}\\
+		=& \frac{\partial E}{\partial V} \bigg|_T  -  \frac{\partial E}{\partial S} \bigg|_V \frac{\partial S}{\partial V}\bigg|_T
+	\end{align*}
+\end{proof}
+
+NB. For most situations, S is a monotonic increasing function of E. As E increases, distribution gets broader, and S increases. 
+
+Imagine piston is vertical.
+\begin{itemize}
+	\item Move piston out, gas does work, which is paid for from energy.
+	\item Move piston in, we do work, which adds to energy.
+\end{itemize}
+
+Move piston slowly, and don't let energy in. Adiabtitic: slowly, and no heat in or out. $dE = - P dV$
+
+\begin{align*}
+\frac{\partial E}{\partial V} =& - P
+\end{align*}
 \section{Weakly interacting gases, heat, and work}
+
+
 \section{Entropy vs. reversibility}
+
+
 \section{Entropy, reversibility, and magnetism}
+
+
 \section{The Ising model}
+
+
 \section{Liquid-gas phase transition}
 
 \end{document}
