@@ -1,5 +1,5 @@
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newtheorem{thm}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -18,8 +18,10 @@ These are my notes from the Statistical Mechanics lectures from Leonard Susskind
 
 \tableofcontents
 
+\listoftheorems[ignoreall,onlynamed]
+
 \section{Entropy and conservation of information}
-This lecture focuses on the law of conservation of energy, the $-1$law of physics. Liouville's theorem.
+This lecture focuses on the law of conservation of energy, the $-1^{th}$ law of physics. Liouville's theorem.
 
 ''In physics, Liouville's theorem, named after the French mathematician Joseph Liouville, is a key theorem in classical statistical and Hamiltonian mechanics. It asserts that the phase-space distribution function is constant along the trajectories of the system—that is that the density of system points in the vicinity of a given system point traveling through phase-space is constant with time. This time-independent density is in statistical mechanics known as the classical a priori probability.''
 
@@ -68,7 +70,7 @@ dE =& T dS \numberthis \label{eq:T}
 
 Consider two systems, $A$ and $B$, joined by a narrow pipe. Theorem \ref{thm:heat:flow} shows that T captures our intuition about temperature: heat flows from a higher temperature to lower.
 
-\begin{thm}\label{thm:heat:flow}
+\begin{thm}[Heat Flow]\label{thm:heat:flow}
 	Given:
 	\begin{align*}
 	dE_A + dE_B =& 0 \numberthis \label{eq:thm:dE}\\
@@ -126,7 +128,7 @@ We will find Lemma \ref{lemma:Stirling} useful.
 	\end{align*}
 \end{proof}	
 
-\begin{thm}
+\begin{thm}[To maximize the number of arrangements we need to maximize the entropy.]
 	To maximize the number of arrangements we need to maximize the entropy.
 \end{thm}
 
@@ -210,12 +212,14 @@ Z \approxeq& \big(\frac{e}{\rho}\big)^N .  \big[\frac{2 m \pi}{\beta}\big]^{\fra
 
 \begin{align*}
 \log(Z) =& - \frac{3N}{2} \log(\beta) + const\\
-E =& - \frac{\partial \log(Z)}{\partial \beta}\\
+E =& - \frac{\partial \log(Z)}{\partial \beta}\numberthis \label{eq:E:Z}\\
 =& \frac{3N}{2} T
 \end{align*}
 
 
 \section{Pressure of an ideal gas and fluctuations}
+
+\subsection{Pressure of an ideal gas}
 
 Motion is isotropic, even near wall. We know this from an honest use of statistical mechanics. Give up intuition because it might not be correct: ''ride the mathematics. All very great physicists are master of thermodynamics.''
 
@@ -224,7 +228,7 @@ We want to determine the Equation of State.
 From (\ref{eq:S_Z}) and Theorem \ref{thm:inverseT}.
 \begin{align*}
 S =& \frac{E}{T} + \log(Z)\\
-\underbrace{E - TS}_{A\triangleq\text{Helmholz Free Energy}} =& -T \log(Z) 
+\underbrace{E - TS}_{A\triangleq\text{Helmholz Free Energy}} =& -T \log(Z) \numberthis \label{eq:helmholz}
 \end{align*}
 
 Variables come in pairs, e.g. (V,P):
@@ -233,7 +237,7 @@ Variables come in pairs, e.g. (V,P):
 	\item Conjugate Thermodynamic Variable (V).
 \end{itemize}
 
-\begin{lemma}
+\begin{lemma}[Derivatives along contour]\label{thm:derivative:contour}
 	Given two dependent variables, S and E, say, and two independent variables, T and V, say:
 	\begin{align*}
 		\frac{\partial E}{\partial V}\bigg|_S = \frac{\partial E}{\partial V}\bigg|_T - 	\frac{\partial E}{\partial S}\bigg|_V \frac{\partial S}{\partial V}\bigg|_T
@@ -260,11 +264,70 @@ Imagine piston is vertical.
 	\item Move piston in, we do work, which adds to energy.
 \end{itemize}
 
-Move piston slowly, and don't let energy in. Adiabtitic: slowly, and no heat in or out. $dE = - P dV$
+Move piston slowly, and don't let energy in. Adiabatic: slowly, and no heat in or out. $dE = - P dV$
 
 \begin{align*}
-\frac{\partial E}{\partial V} =& - P
+\frac{\partial E}{\partial V}\bigg|_S =& - P\numberthis \label{eq:defP}
 \end{align*}
+
+
+\begin{thm}[Adiabatic Theorem]\label{thm:adiabatic}
+	Change volume adiabatically, the system will ride along the energy level: it will change, but not jump.
+\end{thm}
+
+One consequence of Theorem \ref{thm:adiabatic} is that the $p_i$ are fixed.
+
+Isentropic is also adiabatic.
+
+Easier to use T as it appears in Bolzmann.
+
+\begin{align*}
+P =& - \frac{\partial E}{\partial V}\bigg|_S \\
+=& - \frac{\partial E}{\partial V}\bigg|_T + \frac{\partial S}{\partial V}\bigg|_T \frac{\partial E}{\partial S}\bigg|_V\text{, from Lemma \ref{thm:derivative:contour}}\\
+=& - \frac{\partial E}{\partial V}\bigg|_T + \frac{\partial S}{\partial V}\bigg|_T T\text{, from (\ref{eq:T})}\\
+=& - \frac{\partial(E-TS)}{\partial V}\bigg|_T \text{, from (\ref{eq:helmholz})}\\
+=& T \frac{\partial \log(Z)}{\partial V}\bigg|_T 
+\end{align*}
+
+\begin{itemize}
+	\item We haven't used assumption that we are dealing with a gas, so this is completely general.
+	\item could have used different conjugate pair.
+\end{itemize}
+
+The partition function is given by:
+\begin{align*}
+Z(\beta) =& \int dx dp e^{- \beta \frac{p^2}{2m}}\\
+=& \frac{V^N}{N!} f(\beta)\\
+\log(Z) =& N \log(V) + \log(f(\beta))\text{, so (\ref{eq:P})  becomes:}\\
+P =& \frac{NT}{V}\text{, or}\\
+P =& \rho T
+\end{align*}
+
+\subsection{Fluctuations}
+
+\begin{align*}
+	\langle E -  \langle E \rangle \rangle^2 =& \langle E^2 \rangle - \langle E \rangle^2\text{. Now, from (\ref{eq:E:beta})}\\
+	\langle E \rangle=& - \frac{\partial \log(Z)}{\partial \beta}\text{, and from (\ref{eq:dZ})}\\
+	 \langle E^2 \rangle =& \frac{1}{Z} \frac{\partial^2 Z}{\partial \beta^2} \text{, whence}\\
+	 \langle E^2 \rangle =& \frac{1}{Z} \frac{\partial^2 Z}{\partial \beta^2} - \frac{1}{Z^2} (\frac{\partial Z}{\partial \beta})^2 \numberthis \label{E2Z}
+\end{align*}
+All of statistical mechanics is about the power of the partition function.
+
+\begin{align*}
+	\frac{\partial^2 \log(Z)}{\partial \beta^2} =& \frac{\partial}{\partial \beta} \frac{1}{Z} \frac{\partial Z}{\partial \beta}\\
+	=& \frac{1}{Z} \frac{\partial^2 Z}{\partial \beta^2} - \frac{1}{Z^2} (\frac{\partial Z}{\partial \beta})^2\\
+	(\Delta E)^2 =& \frac{\partial}{\partial \beta} \frac{1}{Z} \frac{\partial Z}{\partial \beta}\text{, from (\ref{E2Z})}\\
+	=& - \frac{\partial}{\partial \beta} \langle E \rangle\\
+	=&  \underbrace{\frac{\partial}{\partial T} \langle E \rangle}_{C_V=^\text{ heat capacity}} T^2\\
+	=& C_V T^2
+\end{align*}
+
+\begin{itemize}
+	\item Einstein? Gibbs?
+	\item True for any system: we haven't assumed ideal gas.
+\end{itemize}
+
+
 \section{Weakly interacting gases, heat, and work}
 
 
