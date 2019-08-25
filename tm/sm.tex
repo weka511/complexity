@@ -1,6 +1,7 @@
 \documentclass[]{article}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
 \newtheorem{lemma}{Lemma}
 
@@ -14,6 +15,8 @@
 
 \begin{abstract}
 These are my notes from the Statistical Mechanics lectures from Leonard Susskind's Theoretical Minimum series.
+
+Statistical mechanics is a branch of physics that applies probability theory to the study of the thermodynamic behavior of systems composed of a large number of particles. Statistical mechanics provides a framework for relating the microscopic properties of individual atoms and molecules to the macroscopic bulk properties of materials that can be observed in everyday life. Thus it explains thermodynamics as a result of the classical and quantum-mechanical descriptions of statistics and mechanics at the microscopic level.
 \end{abstract}
 
 \tableofcontents
@@ -21,9 +24,16 @@ These are my notes from the Statistical Mechanics lectures from Leonard Susskind
 \listoftheorems[ignoreall,onlynamed]
 
 \section{Entropy and conservation of information}
-This lecture focuses on the law of conservation of energy, the $-1^{th}$ law of physics. Liouville's theorem.
 
-''In physics, Liouville's theorem, named after the French mathematician Joseph Liouville, is a key theorem in classical statistical and Hamiltonian mechanics. It asserts that the phase-space distribution function is constant along the trajectories of the system—that is that the density of system points in the vicinity of a given system point traveling through phase-space is constant with time. This time-independent density is in statistical mechanics known as the classical a priori probability.''
+Professor Susskind introduces statistical mechanics as one of the most universal subjects in modern physics in terms of it's ability to explain and predict natural phenomena.  He begins with a brief introduction to probability theory and then moves on to draw the connection between the concept of laws of motion as rules for updating states of a system, and the probability of being in a given state.  Proper laws of physics are reversible and therefore preserve the distinctions between states - i.e. information.  In this sense, the conservation of information is more fundamental that other physical quantities such as temperature or energy.
+
+Professor Susskind then moves on to continuous systems and phase space, and Liouville's theorem.  The lecture concludes with the presentation of formulas for computing entropy, and some examples.
+
+This lecture focuses on the law of conservation of energy, the $-1^{th}$ law of physics. 
+
+\begin{thm}[Liouville's theorem]
+	''In physics, Liouville's theorem, named after the French mathematician Joseph Liouville, is a key theorem in classical statistical and Hamiltonian mechanics. It asserts that the phase-space distribution function is constant along the trajectories of the system—that is that the density of system points in the vicinity of a given system point traveling through phase-space is constant with time. This time-independent density is in statistical mechanics known as the classical a priori probability.''
+\end{thm}
 
 \begin{align*}
 S \triangleq \log(M) \numberthis \label{eq:entropy:simple}
@@ -51,6 +61,8 @@ The First law of Thermodynamics is energy conservation. For a closed system:
 
 
 \section{Temperature}
+
+Professor Susskind presents the physics of temperature. Temperature is not a fundamental quantity, but is derived as the amount of energy required to add an incremental amount of entropy to a system.  As the energy of a system increases, the number of possible states of a system increases, which means that the entropy increases.  This is the concept behind the second law of thermodynamics, and implies that temperature is always positive.
 
 Temperature is really a measure of Energy. So the energy of one molecule of an Ideal Gas is given by:
 \begin{align*}
@@ -105,6 +117,10 @@ Consider two systems, $A$ and $B$, joined by a narrow pipe. Theorem \ref{thm:hea
 
 \section{Maximizing entropy}
 
+After reviewing the laws of thermodynamics, Professor Susskind begins the derivation of how energy states are distributed for a complex system system with many energy states.
+
+As the number of particles in a system grows, the distribution of states clumps more tightly around a mean. This is the Maxwell-Boltzmann distribution. The derivation requires Stirling's approximation and Lagrange multipliers.
+
 Number of arrangements $\frac{N!}{\prod_{i}n_i!}$. We want to maximize this subject to two constraints:
 \begin{align*}
 \sum_{i=1}^{N} n_i =& N \numberthis\label{eq:sum:probilities}\\
@@ -147,6 +163,8 @@ We will find Lemma \ref{lemma:Stirling} useful.
 \end{proof}
 
 \section{The Boltzmann distribution}
+
+Professor Susskind completes the derivation of the Boltzman distribution of states of a system. This distribution describes a system in equilibrium and with maximum entropy. He derives the formulas for energy, entropy, temperature, and the partition function for this distribution. He then applies these general formulas to the example of an ideal gas.
 
 To maximize S subject to constraints (\ref{eq:sum:probilities}) and (\ref{eq:total:energy}), we minimize -S, using Lagrange Multipliers, i.e., minimize
 \begin{align*}
@@ -219,6 +237,10 @@ E =& - \frac{\partial \log(Z)}{\partial \beta}\numberthis \label{eq:E:Z}\\
 
 \section{Pressure of an ideal gas and fluctuations}
 
+Professor Susskind derives the formula for the pressure of an ideal gas.  He begins by introducing the Helmholtz free energy, and the concept of adiabatic processes.  These concepts lead to the definition of pressure as the change of energy with volume at a fixed entropy, and then to the famous equation of state for an ideal gas:  $pV = NkT$.
+
+Professor Susskind then moves on to define the concept of fluctuations., and in the process demonstrates once again that the power in statistical mechanics lies in the partition function and is derivatives.  The fluctuation of energy in a system leads to the definition of the heat capacity of the system and the specific heat of a given material.
+
 \subsection{Pressure of an ideal gas}
 
 Motion is isotropic, even near wall. We know this from an honest use of statistical mechanics. Give up intuition because it might not be correct: ''ride the mathematics. All very great physicists are master of thermodynamics.''
@@ -286,7 +308,7 @@ P =& - \frac{\partial E}{\partial V}\bigg|_S \\
 =& - \frac{\partial E}{\partial V}\bigg|_T + \frac{\partial S}{\partial V}\bigg|_T \frac{\partial E}{\partial S}\bigg|_V\text{, from Lemma \ref{thm:derivative:contour}}\\
 =& - \frac{\partial E}{\partial V}\bigg|_T + \frac{\partial S}{\partial V}\bigg|_T T\text{, from (\ref{eq:T})}\\
 =& - \frac{\partial(E-TS)}{\partial V}\bigg|_T \text{, from (\ref{eq:helmholz})}\\
-=& T \frac{\partial \log(Z)}{\partial V}\bigg|_T 
+=& T \frac{\partial \log(Z)}{\partial V}\bigg|_T \numberthis \label{eq:P_Z_V}
 \end{align*}
 
 \begin{itemize}
@@ -330,16 +352,123 @@ All of statistical mechanics is about the power of the partition function.
 
 \section{Weakly interacting gases, heat, and work}
 
+Professor Susskind derives the equations for the energy and pressure of a gas of weakly interacting particles, and develops the concepts of heat and work which lead to the first law of thermodynamics.
+
+\subsection{Weakly interacting gases}
+
+We will assume:
+\begin{itemize}
+	\item dilute;
+	\item molecules on average far from each other;
+	\item range of forces small compared to distance between particles;
+	\item potential energy or forces small.
+\end{itemize}
+
+Then we will ask where this breaks down; where does correction becomes as large as uncorrected. 
+
+We calculate partition function for a system where total energy not equal to sum of kinetic energies.
+
+Assume energy has the following form:
+\begin{align*}
+E =& \sum_{n} \frac{p^2}{2M} + \underbrace{\sum_{n>m}u(\vert(x_m-x_n)\vert)}_{U(x)\text{, say}}
+\end{align*}
+, where $u$ is small compared to kinetic energy, and define:
+\begin{align*}
+U_0 \triangleq& \int d^3x x.u(\vert x \vert)\text{, then}\\
+\int d^3x_1 d^3s_2 u(\vert x_1 - x_2\vert) = & V U_0\text{, ignoring surface expects!}
+\end{align*}
+NB: $U$ factors in collisions!
+
+\begin{align*}
+Z =& \int \frac{dp dx}{N!} e^{- \beta \frac{p^2}{2M}} e^{-\beta U(x)}\\
+=&\underbrace{ \int \frac{dp}{N!} e^{- \beta \frac{p^2}{2M}}}_{\Big(\sqrt{\frac{2\pi m}{\beta}}\Big)^3} \int dx.e^{-\beta U(x)}\\
+=&\underbrace{ \int \frac{dp.V^N}{N!} e^{- \beta \frac{p^2}{2M}}}_{\text{Partition function for Ideal Gas}} \int dx.\frac{e^{-\beta U(x)}}{V^N}\\
+=&Z_0(\beta) \int dx.\frac{e^{-\beta U(x)}}{V^N}\text{ say.}\numberthis \label{eq:introducingZ0}\\
+\int dx.\frac{e^{-\beta U(x)}}{V^N}\approxeq& \int \frac{dx}{V^N} \Big(1 - \beta U(x)\Big)\text{, assuming U small}\\
+\approxeq & 1 - \beta \int \frac{dx}{V^N} U(x)\\
+\approxeq & 1 - \beta \int \frac{dx}{V^N} \sum_{n>m} u(\vert x_n - x_m\vert)\\
+\approxeq & 1 - \frac{N(N-1)\beta}{2} \int \frac{dx_1.dx_2}{V^N}  u(\vert x_1 - x_2\vert) V^{N-2}\\
+\approxeq& 1 - \frac{N^2}{2}\beta \frac{U_0}{V}\\
+Z \approxeq& Z_0(\beta) \Big[1 - \frac{\beta N^2}{2V} U_0\Big]
+\end{align*}
+
+\begin{align*}
+\log(Z) =& \log(Z_0) + \log\Big[1 - \frac{\beta N^2}{2V} U_0\Big] \\
+\approxeq & \log(Z_0) - \frac{\beta N^2}{2V} U_0\\
+E =& - \frac{\partial \log Z}{\partial \beta}\\
+=& \frac{3}{2}NT + \frac{N^2}{2V}U_0\\
+=& \Big[\frac{3}{2}T + \frac{ \rho}{2}U_0\Big] N
+\end{align*}
+
+Since E is difficult to measure, we'll also calculate P. From (\ref{eq:P_Z_V}).
+
+\begin{align*}
+P =& T \frac{\partial \log(Z)}{\partial V}\bigg|_T\\
+=& \rho T + \frac{\rho^2}{2} U_0\text{, provided $\rho U_0 \ll T$, i.e. potential energy much less than kinetic energy.}
+\end{align*}
+
+\subsection{Heat \& Work}
+
+Given $F(x,y)$
+\begin{align*}
+dF =& \frac{\partial F}{\partial x}dx + \frac{\partial F}{\partial y}dy\\
+=& F_x dx + F_y dy\text{, say}\numberthis \label{eg:dF}
+\end{align*}
+
+\begin{thm}[$\frac{\partial^2 F}{\partial x \partial y} = \frac{\partial^2 F}{\partial y \partial x}$]\label{thm:2partial}
+	\begin{align*}
+	\frac{\partial^2 F}{\partial x \partial y} = \frac{\partial^2 F}{\partial y \partial x}
+	\end{align*}
+\end{thm}
+
+From Theorem \ref{thm:2partial}, (\ref{eg:dF}) $\implies \frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$.
+
+\begin{defn}{Exact differential Form}
+	If $\frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$, we say that the differential form $dF = \frac{\partial F}{\partial x}dx + \frac{\partial F}{\partial y}dy$ is exact.
+\end{defn}
+
+Consider an adiabatic change to system of cylinder and piston.
+
+\begin{align*}
+dE =& -P dV \text{, change V only}\\
+=& T dS \text{, hold V, add heat}\\
+=& \underbrace{-P dV}_{dW} + \underbrace{T dS}_{dQ}\text {, change both. First Law of Thermodynamics}
+\end{align*}
+
+Is $dQ$ an exact differential?
+
+\begin{align*}
+dQ =& dE + P.dV\text{. If exact}\\
+\frac{\partial Q}{\partial E}=&1, \frac{\partial Q}{\partial V} = P\\
+\frac{\partial^2 Q}{\partial V \partial E} \ne& \frac{\partial^2 Q}{\partial E \partial V}\text{, so $dQ$ is not exact.}
+\end{align*}
 
 \section{Entropy vs. reversibility}
+
+Professor Susskind begins the lecture with 2 examples: (1) deriving the speed of sound in an ideal  gas; and (2) a single harmonic oscillator in a heat bath.  The harmonic oscillator example leads to a discrepancy with empirical observation that can only be resolved through quantum mechanics.  At low temperatures relative to the first excited state of the oscillator, quantum mechanics suppresses the energy of the harmonic oscillator.  Through this mechanism, certain modes of oscillation are "frozen out" until the system reaches higher temperatures.  Einstein proposed this quantized effect in 1907, which is one of the theories that led to the development of quantum mechanics.
+
+Professor Susskind then discusses the apparent contradiction between the second law of thermodynamics, and the reversibility of classical mechanics.  If entropy always increases, reversibility is violated.  The resolution of this conflict lies in the (lack of) precision of our observations.  Undetectable differences in initial conditions lead to large changes in results.  This is the foundation of chaos theory.
+
 
 
 \section{Entropy, reversibility, and magnetism}
 
 
+
+Professor Susskind develops the equation for the probability that all molecules of a gas will converge in one half of a room, and concludes that this event is possible, but that the time scale for it to occur is incredibly long.  This line of reasoning leads to the resolution of the paradox between the reversibility of classical mechanics and the apparent lack of time reversibility of the second law of thermodynamics by demonstrating that statistical mechanics processes are in fact time reversible if the system is known precisely enough and the observer waits long enough.
+
+He then moves on to magnetism and begins to introduce the concepts of ferromagnetic phase transitions and spontaneous symmetry breaking.  Spontaneous symmetry breaking occurs when magnets in a lattice begin to cool.  With no external magnetic field, they may end up in one of two symmetrical states - e.g. all up or all down.  But a very small magnetic field affecting just one of the magnets will break this symmetry and bias the system toward one of the ground states.
+
 \section{The Ising model}
 
+After reviewing the discussion of a single magnetic particle (or spin) in a heat bath, Professor Susskind continues with the development of the one-dimensional Ising model.  This model does not exhibit phase transitions.  He then moves on to the multi-dimensional Ising model.  For any number of dimensions above one, the Ising model exhibits phase transitions at specific temperatures.  This is due to the fact that, in multiple dimensions, each point in the lattice is affected by more than two neighboring lattice elements.
 
 \section{Liquid-gas phase transition}
+
+
+
+Professor Susskind continues the discussion of phase transitions beginning with a review of the Ising model and the mean field approximation, and then presents the temperature and magnetic field parameters of the phase transition of a magnetic material. He then moves to the physics of the liquid-gas phase transition and develops the mathematical analogy between this case that that for a magnetic material.
+
+Professor Susskind finishes the Theoretical Minimum series of courses by taking questions from the class, which leads to a discussion of the anthropic principle and fine tuning.
 
 \end{document}
