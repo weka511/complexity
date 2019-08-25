@@ -472,7 +472,7 @@ Energy =& \frac{m}{2} \dot{x}^ 2 + \frac{k}{2} x^2\tag{ Not Bolzmann!}\\
 Z(\beta) =& \int e^{-\beta \frac{1}{2m} p^ 2 } e^{-\beta \frac{k}{2} x^2} dp dx\\
 =& \int e^{-\beta \frac{1}{2m} p^ 2 } dp \int e^{-\beta \frac{k}{2} x^2} dx\\
 =& \sqrt{\frac{2m\pi}{\beta}}\sqrt{\frac{2 \pi}{\beta k}}\\
-=& \frac{2 \pi}{\omega}\frac{1}{\beta}\text{, where $\omega=$ frequency}\\
+=& \frac{2 \pi}{\omega}\frac{1}{\beta}\text{, where $\omega=$ frequency}\numberthis\label{eq:Z:classical:q}\\
 \log(Z) =& const - \log(\beta)\\
 E =& - \frac{\partial \log(Z)}{\partial \beta}\\
 =& \frac{1}{\beta}\\
@@ -495,7 +495,7 @@ This seems wrong (make $k$ very large). This was a big problem around the end of
 \begin{align*}
 	Z(\beta) =& \sum_{n} e^{- \beta n \hbar \omega}\\
 	 =& \sum_{n} \Big(e^{- \beta\hbar \omega}\Big)^n\\
-	 =& \frac{1}{1 - e^{- \beta\hbar \omega}}\\
+	 =& \frac{1}{1 - e^{- \beta\hbar \omega}}\numberthis\label{Z_quantum_shm}\\
 	 E =& - \frac{1}{Z} \frac{\partial Z}{\partial \beta}\\
 	 \frac{\partial Z}{\partial \beta}=& \frac{- \hbar \omega e^{- \beta\hbar \omega}}{(1 - e^{- \beta\hbar \omega})^2}\\
 	 E =& \frac{ \hbar \omega e^{- \beta\hbar \omega}}{(1 - e^{- \beta\hbar \omega})}
@@ -509,8 +509,56 @@ High temperature: $T\rightarrow\infty \implies \beta \rightarrow 0$
 	\rightarrow& T\text{, which agrees with classical physics.}
 \end{align*}
 
-Low temperature: $T\rightarrow 0 \implies \beta \rightarrow \infty$	
+Low temperature: $T\rightarrow 0 \implies \beta \rightarrow \infty$
+
+\begin{align*}
+\frac{ \hbar \omega e^{- \beta\hbar \omega}}{(1 - e^{- \beta\hbar \omega})}\rightarrow&\hbar \omega e^{- \beta\hbar \omega}\\
+\rightarrow&0
+\end{align*}
+
+So for low temperature, oscillation is suppressed.	Where is the crossover between classical and quantum behaviour? This occurs when exponential goes from large to small (and vice versa), i.e. when $\beta\hbar \omega \approx 1$.
+
+\begin{itemize}
+	\item $\beta\hbar \omega < 1$ Classical.
+	\item $\beta\hbar \omega > 1$ Quantum.
+	\item $\beta\hbar \omega = 1\equiv\hbar \omega=T$ Crossover. At this temperature, system has one quantum of energy; it doesn't want to have less!
+	\item For very low temperature, diatomic molecule behaves like monoatomic.
+	\item For a stiff molecule, $\omega$ is high, to crossover temperature is high.
+\end{itemize}
+
+c.f. Einstein specific heat.
+
+Can we derive classical partition function from quantum?
+
+\begin{align*}
+Z(\beta) =&  \frac{1}{1 - e^{- \beta\hbar \omega}} \text{, from (\ref {Z_quantum_shm})}\\
+\approxeq & \frac{1}{1 - 1 + \beta\hbar \omega}\text{, for high T}\\
+\approxeq & \frac{1}{\beta\hbar \omega}\text{, c.f. (\ref{eq:Z:classical:q})}
+\end{align*}
+
+\begin{itemize}
+	\item So the classical and quantum partition functions agree within a multiplicative constant, which disappears when we differentiate $\log(Z)$ to do anything useful.
+	\item Heat system: it unfreezes degrees of freedom and we discover complexity. Cool system: discover quantum behaviour.
+	\item Violin string: freeze out higher frequency states, so energy finite.
+\end{itemize}
+
 \subsection{Contradiction between the 2nd and reversibility}
+\begin{itemize}
+	\item Newton's laws reversible
+	\item 2nd law
+	\item Consider a small blob in phase space: according to Liouville's theorem, volume, and hence entropy, does not change! Correct view of microscopic system.
+	\item We need to coarse grain. Resolution is limited, both by QM, and by our instruments.
+	\item Imagine that blob turns into long thing snake (same volume), but we can't resolve, so we cover with blobs. We are now losing information. 
+	\item Chaos! Sensitive dependence on initial conditions. Imagine phase space filled with cotton!
+	
+	\item Phase space trajectory will eventually come back to starting point within specified tolerance: time depends on tolerance.
+	
+	\item Entropy probably increases -- Boltzmann. 
+\end{itemize}
+
+
+
+
 
 \section{Entropy, reversibility, and magnetism}
 
