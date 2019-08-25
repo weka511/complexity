@@ -449,7 +449,68 @@ Professor Susskind begins the lecture with 2 examples: (1) deriving the speed of
 
 Professor Susskind then discusses the apparent contradiction between the second law of thermodynamics, and the reversibility of classical mechanics.  If entropy always increases, reversibility is violated.  The resolution of this conflict lies in the (lack of) precision of our observations.  Undetectable differences in initial conditions lead to large changes in results.  This is the foundation of chaos theory.
 
+\subsection{The speed of sound in an ideal gas}
 
+Create a small overdense region. How fast does it move out? With the average velocity of molecules.
+
+In thermal equilibrium in a dilute gas, every molecule has velocity
+\begin{align*}
+\frac{3}{2} k_B T =& \frac{m}{2} v^2\text{ We'll use laboratory units, so $k_B$}\\
+v^2 =& \frac{3 k_B T}{m}\text{. A more detailed analysis gives:}\\
+c^2 =& \frac{\partial P}{m \partial \rho}\\
+P =& \rho k_B T\text{ Ideal gas law}\\
+\implies&\\
+c^2 =& \frac{k_B T}{m}\text{ Within order of magnitude!}
+\end{align*}
+
+
+\subsection{A single harmonic oscillator in a heat bath}
+
+\begin{align*}
+Energy =& \frac{m}{2} \dot{x}^ 2 + \frac{k}{2} x^2\tag{ Not Bolzmann!}\\
+=& \frac{1}{2m} p^ 2 + \frac{k}{2} x^2\\
+Z(\beta) =& \int e^{-\beta \frac{1}{2m} p^ 2 } e^{-\beta \frac{k}{2} x^2} dp dx\\
+=& \int e^{-\beta \frac{1}{2m} p^ 2 } dp \int e^{-\beta \frac{k}{2} x^2} dx\\
+=& \sqrt{\frac{2m\pi}{\beta}}\sqrt{\frac{2 \pi}{\beta k}}\\
+=& \frac{2 \pi}{\omega}\frac{1}{\beta}\text{, where $\omega=$ frequency}\\
+\log(Z) =& const - \log(\beta)\\
+E =& - \frac{\partial \log(Z)}{\partial \beta}\\
+=& \frac{1}{\beta}\\
+=& T
+\end{align*}
+
+\begin{itemize}
+	\item Why no 3? Because 1 dimensional.
+	\item Why not 2? Because 2 integrals.
+\end{itemize}
+
+Note:
+\begin{itemize}
+	\item Energy doesn't depend on $m$;
+	\item Energy doesn't depend on $k$.
+\end{itemize}
+
+This seems wrong (make $k$ very large). This was a big problem around the end of 19th century (what about diatomic molecules 3 becomes 5?) We have ignored quantum mechanics!
+
+\begin{align*}
+	Z(\beta) =& \sum_{n} e^{- \beta n \hbar \omega}\\
+	 =& \sum_{n} \Big(e^{- \beta\hbar \omega}\Big)^n\\
+	 =& \frac{1}{1 - e^{- \beta\hbar \omega}}\\
+	 E =& - \frac{1}{Z} \frac{\partial Z}{\partial \beta}\\
+	 \frac{\partial Z}{\partial \beta}=& \frac{- \hbar \omega e^{- \beta\hbar \omega}}{(1 - e^{- \beta\hbar \omega})^2}\\
+	 E =& \frac{ \hbar \omega e^{- \beta\hbar \omega}}{(1 - e^{- \beta\hbar \omega})}
+\end{align*}
+
+High temperature: $T\rightarrow\infty \implies \beta \rightarrow 0$
+\begin{align*}
+	\frac{ \hbar \omega e^{- \beta\hbar \omega}}{(1 - e^{- \beta\hbar \omega})}\rightarrow& \frac{\hbar \omega}{1 -(1 - \beta \hbar \omega...)}\\
+	\rightarrow& \frac{\hbar \omega}{\beta \hbar \omega}\\
+	\rightarrow& \frac{1}{\beta}\\
+	\rightarrow& T\text{, which agrees with classical physics.}
+\end{align*}
+
+Low temperature: $T\rightarrow 0 \implies \beta \rightarrow \infty$	
+\subsection{Contradiction between the 2nd and reversibility}
 
 \section{Entropy, reversibility, and magnetism}
 
