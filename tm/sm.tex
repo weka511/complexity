@@ -4,6 +4,7 @@
 \newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
 \newtheorem{lemma}{Lemma}
+\graphicspath{{figs/}}
 
 %opening
 \title{Statistical Mechanics}
@@ -576,11 +577,64 @@ Imagine room with all particles of air in one half. In 6N dimensional phase spac
 	Any dynamical system defined by an ordinary differential equation determines a flow map $f^t$ mapping phase space on itself. The system is said to be volume-preserving if the volume of a set in phase space is invariant under the flow. For instance, all Hamiltonian systems are volume-preserving because of Liouville's theorem. The theorem is then: If a flow preserves volume and has only bounded orbits, then for each open set there exist orbits that intersect the set infinitely often.
 \end{thm}
 
+\begin{proof}
+	The proof, speaking qualitatively, hinges on two premises:
+	
+	\begin{itemize}
+		\item 	A finite upper bound can be set on the total potentially accessible phase space volume. For a mechanical system, this bound can be provided by requiring that the system is contained in a bounded physical region of space (so that it cannot, for example, eject particles that never return) – combined with the conservation of energy, this locks the system into a finite region in phase space.
+		\item The phase volume of a finite element under dynamics is conserved. (for a mechanical system, this is ensured by Liouville's theorem)
+	\end{itemize}
+	
+	Imagine any finite starting volume of phase space and follow its path under dynamics of the system. The volume "sweeps" points of phase space as it evolves, and the "front" of this sweeping has a constant size. Over time the explored phase volume (known as a "phase tube") grows linearly, at least at first. But, because the accessible phase volume is finite, the phase tube volume must eventually saturate because it cannot grow larger than the accessible volume. This means that the phase tube must intersect itself. In order to intersect itself, however, it must do so by first passing through the starting volume. Therefore, at least a finite fraction of the starting volume is recurring.
+	
+	Now, consider the size of the non-returning portion of the starting phase volume – that portion that never returns to the starting volume. Using the principle just discussed in the last paragraph, we know that if the non-returning portion is finite, then a finite part of the non-returning portion must return. But that would be a contradiction, since any part of the non-returning portion that returns, also returns to the original starting volume. Thus, the non-returning portion of the starting volume cannot be finite and must be infinitely smaller than the starting volume itself.
+\end{proof}
 Boltzmann's Brain: most of the ways we could have gotten here are by random fluctuation, and they don't have coherent histories.
 
 
 \subsection{Magnetism}
 
+A normal magnet is made up of lots of little magnets (atoms). At a high enough temperature, orientation random. Cool it down, and we get small domains: same direction within domain. Domains start to grow, may have ferromagnetic transition.
+
+$N$ simple magnets, either up or down. Assume magnetic field, no interaction. Spin up, $\sigma(1).$
+
+\begin{align*}
+E=&(n-m)\mu H\text{, where n are up, m down, $m+n=N$}\\
+\text{number of states} =&\frac{N!}{n!m!}\\
+Z =&\sum_{mn\mid m+n=N} e^{- \beta \mu H(n-m)}\\
+=&\sum_{n}\frac{N!}{n!(N-n)}X^nY^{N-n}\text{, where $X=e^{-\beta\mu H},Y=e^{\beta\mu H}$}\\
+=&\big(X+Y\big)^N\\
+=&\big(e^{-\beta\mu H}+e^{\beta\mu H}\big)^N\\
+=&2^N \big(\cosh(\beta\mu H)\big)^N
+\end{align*}
+
+NB: biased by magnetic field!
+
+\begin{align*}
+	M =& \big< \frac{n-m}{N}\big>\text{, Magnetization} \\
+	E =& M N \mu H\\
+	=& \frac{\partial \log(Z)}{\partial \beta}\\
+	=& - N \frac{\sinh(\beta\mu H)}{\cosh(\beta\mu H)} \mu H\\
+	M=& \tanh(\beta\mu H)
+\end{align*}
+
+Figure \ref{fig:tanh} show that $M$ is zero for $\beta=0$ (high temperature) and one for large $\beta$ (small temperature).
+
+\begin{figure}[H]
+	\caption{Tanh}\label{fig:tanh}
+	\includegraphics[width=0.8\textwidth]{tanh}
+\end{figure}
+
+The Ising model
+\begin{align*}
+E =& - j \sum_{n} \sigma(n) \sigma(n+1)
+\end{align*}
+
+\begin{itemize}
+	\item Two ground states
+	\item tiniest external magnetic field will bias
+	\item spontaneous symmetry breaking
+\end{itemize}
 \section{The Ising model}
 
 After reviewing the discussion of a single magnetic particle (or spin) in a heat bath, Professor Susskind continues with the development of the one-dimensional Ising model.  This model does not exhibit phase transitions.  He then moves on to the multi-dimensional Ising model.  For any number of dimensions above one, the Ising model exhibits phase transitions at specific temperatures.  This is due to the fact that, in multiple dimensions, each point in the lattice is affected by more than two neighboring lattice elements.
