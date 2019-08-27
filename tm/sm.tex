@@ -22,6 +22,8 @@ Statistical mechanics is a branch of physics that applies probability theory to 
 
 \tableofcontents
 
+\listoffigures
+
 \listoftheorems[ignoreall,onlynamed]
 
 \section{Entropy and conservation of information}
@@ -145,7 +147,7 @@ We will find Lemma \ref{lemma:Stirling} useful.
 	\end{align*}
 \end{proof}	
 
-\begin{thm}[To maximize the number of arrangements we need to maximize the entropy.]
+\begin{thm}[Maximum entropy principle.]
 	To maximize the number of arrangements we need to maximize the entropy.
 \end{thm}
 
@@ -637,7 +639,54 @@ E =& - j \sum_{n} \sigma(n) \sigma(n+1)
 \end{itemize}
 \section{The Ising model}
 
-After reviewing the discussion of a single magnetic particle (or spin) in a heat bath, Professor Susskind continues with the development of the one-dimensional Ising model.  This model does not exhibit phase transitions.  He then moves on to the multi-dimensional Ising model.  For any number of dimensions above one, the Ising model exhibits phase transitions at specific temperatures.  This is due to the fact that, in multiple dimensions, each point in the lattice is affected by more than two neighboring lattice elements.
+\textit{After reviewing the discussion of a single magnetic particle (or spin) in a heat bath, Professor Susskind continues with the development of the one-dimensional Ising model.  This model does not exhibit phase transitions.  He then moves on to the multi-dimensional Ising model.  For any number of dimensions above one, the Ising model exhibits phase transitions at specific temperatures.  This is due to the fact that, in multiple dimensions, each point in the lattice is affected by more than two neighboring lattice elements.}
+
+\subsection{One-dimensional Ising model}
+
+Consider one spin in a heat bath, so we can focus on one at a time
+
+\begin{align*}
+E =& -j \sigma\\
+Z =& \sum e^{-\beta j \sigma}\\
+=& e^{\beta j}+ e^{- \beta j}\\
+=& 2 \cosh(\beta j)\\
+\big<E\big> =& - \frac{\partial \log(Z)}{\partial \beta}\\
+=& - j \tanh{\beta j}\\
+\big<\sigma\big> =& - \tanh{\beta j}
+\end{align*}
+
+Figure \ref{fig:tanh} shows that spin points up for $\beta\rightarrow\infty$, so spin parallel to j for low temperature; spin all over the place at high temperature.
+
+Now consider a line of spins. We will assume a specific spin is up, and ask about correlation with some other spin $\big<\sigma(i) \sigma(i+n)\big>$. Assume first spin is up, and focus on relationships, $\mu_i\triangleq\sigma_i\sigma_{i+1}$ (state of link).
+
+\begin{align*}
+E =& -j \sum \sigma_i \sigma_{i+1}\\
+=& -j \sum_{b} \mu_b\\
+Z =& \sum_{\sigma} e^{- j \beta\sum_i  \sigma_i \sigma_{i+1}}\\
+=& 2 \sum_{\mu} e^{- j \beta  \sum_b \mu_b} \text{, allowing for $\sigma_1$}\\
+=& \big(2 \cosh(\beta j)\big)^{N-1}\textit{, try this for 3 links}
+\end{align*}
+
+\begin{align*}
+\big< \mu \big> =& \big< \sigma_i \sigma_{i+1} \big>\\
+=& \tanh(\beta j) \textit{, prove this!}\text{ Correlation between neighbours}
+\end{align*}
+
+\begin{align*}
+\big < \sigma_i \sigma_{i+n} \big> =&  \big < \sigma_i \sigma_{i+1} \sigma_{i+1}... \sigma_{i+n} \big>\text{, since $\sigma_i^2 = 1$}\\
+=& \mu_1 \mu_2 ... \mu_{n-1}\\
+=& \big( \tanh(\beta j)\big)^{n-1}\text{, since $\mu_i$ independent}
+\end{align*}
+
+If $T=0(\beta=\inf)$, $\tanh(..)=\pm1$, otherwise $\lvert \tanh(..) \rvert<1$ and $\tanh(..)^n$ becomes arbitrarily small as $n$ increases.
+
+\begin{itemize}
+	\item Note the duality. We have found an equivalence between system of links and system of spins. 
+	\item We also see that there can be no magnetization in 1 dimensional system, except for $T=0$. C.f. "Chinese whispers". Likely to be long chains of agreement, then switch.
+\end{itemize}
+ 
+\subsection{Phase transitions in the Ising model}
+
 
 \section{Liquid-gas phase transition}
 
