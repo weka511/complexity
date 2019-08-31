@@ -10,6 +10,13 @@ pp = {
     'y': 0.02368643, 'z': 0.001745021
 }
 
+def coarse_grain(pp,coarsen=lambda l: True):
+    keys = list(set([coarsen(k) for k in pp.keys()]))
+    result = {k:0 for k in keys}
+    for k,p in pp.items():
+        result[coarsen(k)]+=p
+    return result
+
 def get_entropy(ps):
     def get_entropy_contribution(p):
         return - p * math.log2(p)
@@ -26,6 +33,7 @@ def restrict(ps,selector=lambda l: True):
 
 if __name__=='__main__':
     print (get_entropy(pp))
-    print (get_entropy(restrict(pp,selector=vowel)))
-    print (get_entropy(restrict(pp,selector=lambda l: not vowel(l))))
+    print (get_entropy(coarse_grain(pp,coarsen=vowel)))
+    #print (get_entropy(restrict(pp,selector=vowel)))
+    #print (get_entropy(restrict(pp,selector=lambda l: not vowel(l))))
     

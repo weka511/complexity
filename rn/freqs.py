@@ -15,7 +15,7 @@ def freqs(r):
 if __name__=='__main__':
     import requests   
     url = 'https://www.gutenberg.org/files/1342/1342-0.txt'
-    r = requests.get(url)
-    ps = freqs(r.text)
+    r   = requests.get(url)
+    ps  = freqs(r.text)
     for l in sorted(ps.keys()):
         print (l,ps[l])
