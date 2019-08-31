@@ -68,6 +68,7 @@ target/
 *.synctex.gz
 challenge.tex
 *.toc
+*.loe
 *.lof
 *.glo
 *.ist
