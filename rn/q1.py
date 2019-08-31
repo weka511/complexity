@@ -10,15 +10,22 @@ pp = {
     'y': 0.02368643, 'z': 0.001745021
 }
 
-def get_entropy(ps,coarse=lambda l: True):
+def get_entropy(ps):
     def get_entropy_contribution(p):
         return - p * math.log2(p)
     
-    return sum([get_entropy_contribution(ps[letter]) for letter in ps.keys() if coarse(letter)])
+    return sum([get_entropy_contribution(ps[letter]) for letter in ps.keys()])
 
 def vowel(c):
     return c in ['a','e','i','o','u']
 
+def restrict(ps,selector=lambda l: True):
+    subset_keys = [k for k in ps.keys() if selector(k)]
+    p_subset = sum(ps[k] for k in subset_keys)
+    return {k:ps[k]/p_subset for k in subset_keys}
+
 if __name__=='__main__':
     print (get_entropy(pp))
+    print (get_entropy(restrict(pp,selector=vowel)))
+    print (get_entropy(restrict(pp,selector=lambda l: not vowel(l))))
     
