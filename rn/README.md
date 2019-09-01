@@ -2,13 +2,14 @@
 
 |File|Description|
 |------------------------------|-----------------------------------------------------------|
-||1. An Introduction to Coarse-Graining|
+||An Introduction to Coarse-Graining|
 |freqs.py|Frequencies of letters in Pride and Prejudice|
 |entropy.py|Questions 1 & 2: entropy of Pride & Prejudice|
-||2. Renormalizing Markov Chains|
-||3. Renormalizing Cellular Automata|
-||4. Renormalizing the Ising Model|
-||5. Krohn-Rhodes Theorem|
+||Markov Chains|
+||Cellular Automata|
+|ca.py|Q1  renormalization of 105 to 150.|
+||Ising Model|
+||Krohn-Rhodes Theorem|
 ||Renormalizing the Creature (Krohn-Rhodes Theorem)|
 ||Renormalizing the Thermal Plasma|
 ||Rate-Distortion Theory: Keeping the Things that Matter|
