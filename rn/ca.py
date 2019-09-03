@@ -14,13 +14,37 @@
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
 def create_rule(N):
-    n = N
+    n    = N
     rule = []
     while len(rule)<8:
         n,r = divmod(n,2)
         rule.append(r)
     return rule
-    
+
+def execute_rule(state,rule):
+    extended_state = [0,0] + state + [0,0]
+    new_state      = []
+    for i in range(len(state)+2):
+        x     = extended_state[i:i+3]
+        input = 2*(2*x[0] + x[1]) + x[2]
+        new_state.append(rule[input])
+    return new_state
+
+def convert(state):
+    result = 0
+    for i in state:
+        result = 2 * result + i
+    return result
+
+def project(state,table=[0,1,1,0]):
+    return [table[2*state[i]+state[i+1]] for i in range(0,len(state),2)]
+        
 if __name__=='__main__':
-    print (create_rule(110))
-    print (create_rule(137))
+    print (create_rule(105))
+    #print (create_rule(110))
+    #print (create_rule(137))
+    #r = create_rule(28)
+    #state = [1]
+    #for i in range(25):
+        #state = execute_rule(state,r)
+        #print (convert(state))

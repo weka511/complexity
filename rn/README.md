@@ -7,7 +7,7 @@
 
 * [Tutorial](https://www.complexityexplorer.org/courses/67-introduction-to-renormalization)
 * [Problems](http://tuvalu.santafe.edu/~simon/MOOC_problems.pdf)
-* [Emergent Phenomena Practica](http://tuvalu.santafe.edu/~simon/practical.pdf)
+* [Emergent Phenomena Practical](http://tuvalu.santafe.edu/~simon/practical.pdf)
 
 ---
 
@@ -15,6 +15,8 @@
 
 |File|Description|
 |------------------------------|-----------------------------------------------------------|
+|renormalization.tex|Notes from course|
+|renormalization.wpr|Project file for Wing IDE|
 ||An Introduction to Coarse-Graining|
 |freqs.py|Frequencies of letters in Pride and Prejudice|
 |entropy.py|Questions 1 & 2: entropy of Pride & Prejudice|
