@@ -1,4 +1,5 @@
 \documentclass[]{article}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
 
 %opening
 \title{Introduction to Renormalization}
@@ -13,11 +14,34 @@
 \end{abstract}
 \tableofcontents
 \section{Introduction to Renormalization}
+
+\cite{dedeo2018information,dedeo2013bootstrap,dedeo201716}
+
 \section{Markov Chains}
+
+\cite{dedeo2016conflict}
+
 \section{Cellular Automata}
+
+\cite{israeli2004computational,israeli2006coarse,dedeo2018origin}
 \section{Ising Model}
+Effects of coarse graining in time:
+\begin{itemize}
+	\item Markov Chain--everything flows to lower dimensional subspace;
+	\item Cellular Automata--in order to stay within same model class, forced to coarse grain in space also.
+\end{itemize}
+
+\cite{kadanoff2000statistical,dedeo2012dynamics}
+
 \section{Krohn-Rhodes Theorem}
 \section{A Classical Analogy for Renormalization in Quantum Electrodynamics}
 \section{Conclusion: The Future of Renormalization \& Rate Distortion Theory}
+
+% bibliography go here
+
+\bibliographystyle{unsrt}
+\addcontentsline{toc}{section}{Bibliography}
+\bibliography{../complexity}
+
 
 \end{document}
