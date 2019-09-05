@@ -32,7 +32,7 @@ We'll be talking in this
 unit about "Renormalization". It's fair enough to say that since 1950 the most interesting thing, in fact, perhaps the only thing that has driven theoretical physics has been the problem of Renormalization. In pursuit of understanding 
 what on Earth that was, we developed an enormous amount of extremely complicated mathematics.
 
-When I came to work in the Cognitive 
+When I\footnote{i.e. Simon DeDeo} came to work in the Cognitive 
 Sciences, when I came to study social systems, and social behaviour, 
 what I realized is that the tools that we had developed in physics for Renormalization, and, in fact, not just the tools but the underlying 
 concepts, became incredibly useful for trying to understand a very different kind of problem.
@@ -1148,7 +1148,31 @@ This is a bad approximation. We can do better by ignoring coupling \ref{item:cou
 
 
 See also \cite[Chapter 14]{kadanoff2000statistical}
+
+
 \subsection{Finding Fixed Points}
+
+How does model flow as we continue to coarse-grain? This replaces lattice with another  $\beta\rightarrow\frac{3}{8} \log{e^{2\beta} }$. Figure \ref{fig:beta} shows the behaviour of the function $\frac{3}{8} \log{e^{2\beta} }$ and Figure \ref{fig:beta1} shows the evolution of the solution of  $\beta=\frac{3}{8} \log{e^{2\beta} }$. For small $\beta$ the solution evolves to $\beta=0$, and for large $\beta$ to $\beta=\infty$ ($T=0$).
+
+
+\begin{figure}[H]
+	\caption{Solving $\beta=\frac{3}{8} \log{e^{2\beta} }$}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{$\beta=\frac{3}{8} \log{e^{2\beta} }$}\label{fig:beta}
+		\includegraphics[width=\textwidth]{beta}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Evolution of solution}\label{fig:beta1}
+		\includegraphics[width=\textwidth]{beta1}
+\end{subfigure}
+\end{figure}
+
+The mapping $\beta\rightarrow\frac{3}{8} \log{e^{2\beta} }$ has three fixed points.
+\begin{enumerate}
+	\item $\beta=0$: as we zoom out, spins become random over a large area.
+	\item  $\beta=\infty$: as we zoom out, spins become aligned.
+	\item  $\beta=$ critical point
+\end{enumerate}
 \subsection{Ising Model Simulations}
 \cite{dedeo2012dynamics}
 
