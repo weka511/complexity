@@ -1,8 +1,10 @@
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,siunitx,thmtools,cancel}
 \graphicspath{{figs/}}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
-
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{lemma}{Lemma}
 
 %opening
 \title{Introduction to Renormalization}
@@ -18,6 +20,7 @@ My notes from SFI Renormalization Tutorial\cite{dedeo2017renormalization}.
 
 \tableofcontents
 \listoffigures
+\listoftheorems[ignoreall,onlynamed]
 
 \section{Introduction to Renormalization}
 
@@ -1098,18 +1101,56 @@ Comparing (\ref{eq:coarse_ising:P}) and (\ref{eq:coarse_ising:P2}), we see that 
 We find that (subject to a constant factor, which can be absorbed in partition function):
 \begin{align*}
 \sum_{\sigma_A=\pm 1} P(\{\sigma_i\}) =&e^{S_2 (\sigma_1\sigma_2 + \sigma_1\sigma_2+ \sigma_2\sigma_3 + \sigma_2 \sigma_4 + \sigma_3 \sigma_4 +\sigma_4 \sigma_1) + S4 \sigma_1 \sigma_2 \sigma_3 \sigma_4} \text{,where} \numberthis \label{eq:coupled:sigmas}\\
-S_2 =& \frac{1}{8} \ln{\cosh{4\beta}} \text{ pairwise interactions}\\
-S_4 =& \frac{1}{8} \ln{\cosh{4\beta}} - \frac{1}{2} \ln{\cosh{2\beta}} \text{ quartet interaction.}
+S_2 =& \frac{1}{8} \ln{\cosh{4\beta}} \tag*{pairwise interactions}\\
+S_4 =& S_2 - \frac{1}{2} \ln{\cosh{2\beta}} \tag*{quartet interaction.}
 \end{align*}
 
-Notice that (\ref{eq:coupled:sigmas}) couples $\sigma_1, \sigma_2, \sigma_3, \& \sigma_4$! This includes longer range couplings, such as $\sigma_2, \sigma_3$
+Notice that (\ref{eq:coupled:sigmas}) couples $\sigma_1, \sigma_2, \sigma_3, \& \sigma_4$! This includes longer range couplings, such as $\sigma_2, \sigma_3$, plus the quartet!
 
 \subsection{Coarse-graining the Lattice}
 
+This is just a summary of previous section.
+
 \subsection{Inducing Quartets \& Commutation Failure}
+
+Figure \ref{fig:ising-decimation}\cite{aoki2014domain} shows a decimation of the entire lattice. It exhibits 3 types of coupling:
+
+\begin{enumerate}
+	\item the survivors form a new lattice, rotated \ang{45}, with coupling $2S_2=\frac{1}{4} \log{\cosh{4 \beta}}$\label{item:coupling1}
+	\item long range couplings, over a deleted $S_A$,  $S_2=\frac{1}{8} \log{\cosh{4 \beta}}$\label{item:coupling2}
+	\item quartet couplings $S4=\frac{1}{2} \log{\cosh{2\beta}}$\label{item:coupling3}
+\end{enumerate}
+
+\begin{figure}[H]
+	\caption{Coarse-graining the Lattice}\label{fig:ising-decimation}
+	\includegraphics[width=0.9\textwidth]{isinng-decimation}
+\end{figure}
+
+If we can ignore couplings \ref{item:coupling2} \& \ref{item:coupling3} We have transformed original lattice with coupling $\beta$ into one with coupling \ref{item:coupling1}: $\frac{1}{4} \log{\cosh{4\beta}}$.
+
+\begin{thm}[Monotonicity of Ising Decimation]
+	$\beta > 0 \implies \frac{1}{4} \log{\cosh{4\beta}} < \beta$
+\end{thm}
+
+\begin{proof}
+	\begin{align*}
+	\frac{1}{4} \log{\cosh{4\beta}} =& \frac{1}{4} \log{\frac{e^{4\beta} + e^{- 4 \beta}}{2}}\\
+	<&  \frac{1}{4} \log{\frac{e^{4\beta} }{2}}\\
+	<& \frac{1}{4} \log{e^{2\beta} } \\
+	<& \frac{1}{2} \frac{1}{\cancel{2}} \cancel{2} \beta\\
+	<& \beta
+	\end{align*}
+\end{proof}
+
+Since coupling decreases as we zoom out, we are less and less likely to see big domains that are aligned the same way. NB: this is not the same as previous Markov and Cellular automata, where we performed exact renormalization; this is approximate.
+
+This is a bad approximation. We can do better by ignoring coupling \ref{item:coupling3} (quartet) and lumping \ref{item:coupling1} and \ref{item:coupling2}, new coupling $\frac{3}{8} \log{e^{2\beta} }$. This is a heuristic, but, apparently, doesn't work too badly.
+
+
+See also \cite[Chapter 14]{kadanoff2000statistical}
 \subsection{Finding Fixed Points}
 \subsection{Ising Model Simulations}
-\cite{kadanoff2000statistical,dedeo2012dynamics}
+\cite{dedeo2012dynamics}
 
 \section{Krohn-Rhodes Theorem}
 
