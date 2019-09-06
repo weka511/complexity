@@ -24,6 +24,7 @@
 ||Cellular Automata|
 |ca.py|Q1 renormalization of 105 to 150.|
 ||Ising Model|
+|cp.py|Critical temperature of Ising model|
 ||Krohn-Rhodes Theorem|
 ||Renormalizing the Creature (Krohn-Rhodes Theorem)|
 ||Renormalizing the Thermal Plasma|
