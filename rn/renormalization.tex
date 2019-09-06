@@ -1220,15 +1220,99 @@ See also \cite{dedeo2012dynamics}
 
 \subsection{Poking the Creature: An Introduction to Group Theory}
 
+Imagine a creature with a set of internal states, and there is a library of actions that we can perform. E.g. $S=\{[1,2,3],[2,3,1],[3,1,2],[1,3,2],[3,2,1],[2,1,3]\},A={Cycle,Swap}$.
+ Now course grain $\{\{[1,2,3],[2,3,1],[3,1,2]\},\{[1,3,2],[3,2,1],[2,1,3]\} \} \cong\{A,B\}$, where $Swap$ interchanges $A$ and $B$, and $Cycle$ leaves them unchanged. NB, not every partition gives equivalence classes!
+
+All sequences reversible; they form a \textit{group}. See Jordan–H\"older theorem
+
+ 
 \subsection{Irreversible Computations, Forgetful Computers and the Krohn-Rhodes Theorem }
 
+Krohn Rhodes Irreversible --semigroup
+
+See \cite{dedeo2011effective,malerkrohn,rhodes2009applications}
 \section{A Classical Analogy for Renormalization in Quantum Electrodynamics}
 \subsection{From Quantum Electrodynamics to Plasma Physics }
+
+Gell-Man \& Lo: charge of electron modified by virtual pairs. 
+
+Thermal fluctuations.
+
+Plasma - gas with electrons separated from nuclei, e.g. solar wind.
+
 \subsection{The Thermal Physics of Plasma}
+
+Figure \ref{fig:plasma} shows a plasma, coarse grained so each apace is roughly in electrical equilibrium. Moreover, it is in thermal equilibrium (\ref{eq:plasma_thermal}).
+\begin{figure}[H]
+	\caption{Plasma}\label{fig:plasma}
+	\includegraphics[width=0.9\textwidth]{plasma}
+\end{figure}
+
+\begin{align*}
+n_S(x)=&n_0 e^{- \frac{E(x)}{kT}} \text{ in thermal equilibrium} \numberthis \label{eq:plasma_thermal}\\
+E(x) =& e_S\Phi\text{, where $Phi$ represents the electirical field}\\
+n_S(x)=&n_0 e^{- \frac{e_S\Phi}{kT}}\\
+n_i(x)=&n_0 e^{- \frac{e\Phi}{kT}}\text{ +ve ions}\\
+n_e(x)=&n_0 e^{ \frac{e\Phi}{kT}}\text{ electrons}
+\end{align*}
+
+\begin{itemize}
+	\item at low temperature, more structured -- +ve balanced by -ve;
+	\item at high temperature, may often get transient areas with high charge (dissipate quickly).
+\end{itemize}
+
+Now introduce test particle: what happens?
+
 \subsection{How does a particle move the plasma?}
+
+\begin{align*}
+n_i(x)=&n_0 e^{- \frac{e\Phi}{kT}}\\
+n_e(x)=&n_0 e^{ \frac{e\Phi}{kT}}\\
+\nabla^2 \Phi=& -\frac{\rho}{\epsilon_0} \text{, electric field equation}\\
+\Phi =& \frac{q}{4 \pi \epsilon_0 r} \text{, if charge $q$ concentrated at a single point}
+\end{align*}
+
+Now imagine we introduce a small charge $\delta \rho$. If we allow for the movement of charges caused by introducing the extra charge:
+\begin{align*}
+\delta \rho =& \delta \rho_{ext} + e(\delta n_i - \delta n_e)\\
+n_i(x)=&n_0 e^{- \frac{e\Phi}{kT}}\\
+=& n_0\big(1 - \frac{e\Phi}{kT} +...\big)\\
+n_e(x)=&n_0 e^{ \frac{e\Phi}{kT}}\\
+=& n_0\big(1 + \frac{e\Phi}{kT} +...\big)\\
+\delta \rho =& \delta \rho_{ext} - \frac{2 e^2 n_0}{kT}\delta \Phi \numberthis \label{eq:delta:rho}\\
+\nabla^2 \Phi =& - \frac{1}{\epsilon_0} \big[\delta \rho_{ext} - \frac{2 e^2 n_0}{kT} \delta \Phi\big]\\
+\delta \Phi =& \frac{q}{4 \pi \epsilon_0 r} r^{- \sqrt{2} \frac{r}{\lambda_D}}\text{, where $\lambda_D$ is the Debye Length}\\
+\lambda_D =& \sqrt{\frac{kT}{w^2 n_0}}
+\end{align*}
+
+[Plot log ]
 \subsection{Charge Renormalization and Feedback}
 
+We can think of (\ref{eq:delta:rho}) as renormalizing the charge, which is aktered by the field. Think of sticking particle in, then asking how it behaves if we view it as surrounded by boxes of larger and larger scale. We view it as a theory or coarse-graining charge--Figure \ref{fig:coarse_grain_charge}.
+
+\begin{figure}[H]
+	\caption{Coarse-graining the Charge, which falls off past the Debye length}\label{fig:coarse_grain_charge}
+	\includegraphics[width=0.9\textwidth]{coarse_grain_charge}
+\end{figure}
+
+\begin{itemize}
+	\item What is the charge? Actually it depends on the resolution of equipment used to measure! 
+	\item At large distances charge disappears. 
+	\item Debye length is the scale at which electromagnetic field acts.
+	\item For the Solar wind, Debye length is on the scale of metres.
+	\item Keep theory the same, and talk about how parameters flow.
+	\item Gravitation non-renormalizable. Compare with Ising: higher order coupling get larger and larger.
+\end{itemize}
+
 \section{Conclusion: The Future of Renormalization \& Rate Distortion Theory}
+
+When we project, we have some idea what we want.
+
+Utility function.
+
+Rate Distortion Theory --how to balance the need for efficient representation and good representation. Let ${x}$ represent state of World, ${\tilde{x}}$ the state of the brain. The mutual information $I(x,\tilde{x})$ is a measure of how good a job the eye is doing. Coarse graining is $P(\tilde{x}\vert x)$ (soft clustering).
+
+Rate Distortion Theory is about choosing the "best" $P(\tilde{x}\vert x)$. We need a distorting=n measure $d(\tilde{x}\vert x)$, the personalty for thinking the world is in state $\vert x$ when it is actually in state $x$ (not symmetric).
 
 % bibliography go here
 
