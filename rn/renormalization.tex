@@ -1164,17 +1164,57 @@ How does model flow as we continue to coarse-grain? This replaces lattice with a
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Evolution of solution}\label{fig:beta1}
 		\includegraphics[width=\textwidth]{beta1}
-\end{subfigure}
+	\end{subfigure}
 \end{figure}
 
-The mapping $\beta\rightarrow\frac{3}{8} \log{e^{2\beta} }$ has three fixed points.
+Figure \ref{fig:beta1} shows that the mapping $\beta\rightarrow\frac{3}{8} \log{e^{2\beta} }$ has three fixed points.
 \begin{enumerate}
 	\item $\beta=0$: as we zoom out, spins become random over a large area.
 	\item  $\beta=\infty$: as we zoom out, spins become aligned.
-	\item  $\beta=$ critical point
+	\item  $\beta=$ critical point (unstable): as we zoom out, things stay the same.
 \end{enumerate}
+
+One objection is that this is only an approximation. However, in the exact solution (Onsager), critical point$\approx0.44069$; so we didn't do too bad--$\approx0.508$. Also $S_4\approxeq0.05$
+
+In (\ref{eq:coupled:sigmas}) we saw that the renormalization took us outside the Isong model, but we forced it back into that model class by approximation.
+
 \subsection{Ising Model Simulations}
-\cite{dedeo2012dynamics}
+
+Simon DeDeo demonstrated two simulations \cite{nottelmann2000ising,ashton2012renormalization}.
+
+\begin{itemize}
+	\item When beta is at the non-zero, but finite, fixed point, what happens when you coarse-grain:
+	
+	\begin{itemize}
+		\item 	A. the little islands where nodes all share the same value get smaller and smaller, and it looks like television snow.
+		
+		\item B. fluctuations away from a uniform +1 or uniform -1 state get smaller and smaller, and the system is dominated by one state or the other.
+		
+		\item C. little islands shrink, but there are larger islands of correlation that scale down to take their place. There are fluctuations on all scale, in a uniform "fractal" pattern.
+		
+		\item D. none of the above.
+	\end{itemize}
+	
+	Answer: (C). At this critical point, the system maintains the same level of correlation (beta value) no matter how far you zoom out. We'll see this in action in the final lecture of this unit.
+	
+
+	
+	\item The three models in Douglas Ashton's simulation look pretty similar in terms of their correlations at first. What happens to make them look different?
+	
+	\begin{itemize}
+		\item 	A. we evolve them forward dynamically, and they move to different configurations.
+		
+		\item B. they look the same in a little zoomed in patch, but if we zoom out and look on larger scales, we can see that they have very different large-scale properties
+		
+		\item C.  we alter them by hand, showing the effect of changing beta.
+		
+		\item D.  none of the above
+	\end{itemize}
+
+	Answer: (B). In each of the three cases, Douglas has run a simulation and just taken one image -- basically, sampling the joint probability distribution for each of the three models. There's no dynamical evolution shown here, and nobody is changing the models by hand to become more different. Locally, the models look very similar. But if we zoom out to larger scales -- i.e., if we repeatedly do a decimation transformation, dropping half of the points out and moving the others closer together (so more and more of the image can fit on the screen), we see that they're very different on large scales. The effective beta parameter goes either to zero (totally correlation), or to infinity (totally decorrelated), or (if precisely poised at the critical temperature) it remains the same, self-similar on all scales.
+\end{itemize}
+
+See also \cite{dedeo2012dynamics}
 
 \section{Krohn-Rhodes Theorem}
 
