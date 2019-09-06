@@ -1156,23 +1156,18 @@ How does model flow as we continue to coarse-grain? This replaces lattice with a
 
 
 \begin{figure}[H]
-	\caption{Solving $\beta=\frac{3}{8} \log{\cosh{4\beta} }$}
-	\begin{subfigure}[t]{0.45\textwidth}
-		\caption{$\beta=\frac{3}{8} \log{\cosh{4\beta} }$}\label{fig:beta}
-		\includegraphics[width=\textwidth]{beta}
-	\end{subfigure}
-	\begin{subfigure}[t]{0.45\textwidth}
-		\caption{Evolution of solution}\label{fig:beta1}
-		\includegraphics[width=\textwidth]{beta1}
-	\end{subfigure}
+	\caption{Solving $\beta=\frac{3}{8} \log{\cosh{4\beta} }$}\label{fig:beta}
+	\includegraphics[width=0.9\textwidth]{beta}
 \end{figure}
 
-Figure \ref{fig:beta1} shows that the mapping $\beta\rightarrow\frac{3}{8} \log{\cosh{4\beta} }$ has three fixed points.
+Figure \ref{fig:beta} shows that the mapping $\beta\rightarrow\frac{3}{8} \log{\cosh{4\beta} }$ has three fixed points.
 \begin{enumerate}
 	\item $\beta=0$: as we zoom out, spins become random over a large area.
 	\item  $\beta=\infty$: as we zoom out, spins become aligned.
 	\item  $\beta=$ critical point (unstable): as we zoom out, things stay the same.
 \end{enumerate}
+
+Since the derivative  $\frac{\partial}{\partial \beta}\big[\frac{3}{8} \log{\cosh{4\beta}}-\beta\big]=\frac{3}{2} \tanh(4\beta)-1$ is positive, the critical point is unstable; $\beta$ flows to $0$ or $\infty$, depending on whether it start below the critical point or above.
 
 One objection is that this is only an approximation. However, in the exact solution (Onsager), critical point$\approx0.44069$; so we didn't do too bad--$\approx0.508$. Also $S_4\approxeq0.05$
 

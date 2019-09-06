@@ -14,13 +14,45 @@
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
 import matplotlib.pyplot as plt, numpy as np,math
-from matplotlib import rc
 
-betas = np.linspace(0,1,50)
-Ss    = [3*math.log(math.cosh(4*beta))/8 for beta in betas]
+def S(beta):
+    return 3*math.log(math.cosh(4*beta))/8
 
-plt.plot(betas,Ss,'b',betas,betas,'r')
-plt.xlabel(r'$\beta$')
-plt.ylabel(r'$\frac{3}{8} \log{\cosh{4\beta}}$')
-plt.savefig('figs/beta.jpg')
-plt.show()
+def plot(beta,S_beta):
+    betas = np.linspace(0,1,50)
+    Ss    = [S(beta) for beta in betas]
+    Ds    = [3*math.tanh(4*beta)/2 - 1 for beta in betas]
+    plt.plot(betas,Ss,'b',label=r'$\frac{3}{8} \log(\cosh(4\beta))$')
+    plt.plot(betas,betas,'r',label=r'$\beta$')
+    plt.plot(betas,Ds,'k',ls='-.',label=r'Derivative: $\frac{3}{2} \tanh(4\beta)-1$')
+    plt.scatter(beta,S_beta)
+    plt.text(beta+0.01,S_beta+0.01,'Critical point {0:.4f}'.format(beta))
+    plt.xlabel(r'$\beta$')
+    plt.legend(loc='lower right')
+
+    plt.savefig('figs/beta.jpg')
+
+def solve(eps=0.1):
+    beta0  = 0
+    S0     = S(beta0)
+    beta1  = 1
+    S1     = S(beta1)
+    beta   = 0.5* (beta0+beta1)
+    S_beta = S(beta)    
+    while beta1-beta0>eps:
+        if S_beta<beta:
+            beta0 = beta
+            S0    = S_beta
+        else:
+            beta1 = beta
+            S1    = S_beta
+        beta   = 0.5* (beta0+beta1)
+        S_beta = S(beta)
+        
+    return (beta,S_beta)
+
+if __name__=='__main__':
+    beta,S_beta = solve(eps=0.00001)
+    plot(beta,S_beta)
+    
+    plt.show()
