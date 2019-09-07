@@ -5,7 +5,9 @@
 \newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
 \newtheorem{lemma}{Lemma}
-
+\setlength{\cftsubsecindent}{0em}
+\setlength{\cftsecnumwidth}{3em}
+\setlength{\cftsubsecnumwidth}{3em} 
 %opening
 \title{Introduction to Renormalization}
 \author{Simon Crase}
@@ -252,7 +254,6 @@ micro-level descriptions
 both map to the same final storing.
 The macroeconomist is much more certain
 about the world than the microeconomist.
-
 
 Let's try to get a more intuitive sense of coarse graining,
 and we'll give you a sense of how coarse graining plays out
@@ -896,11 +897,8 @@ of information theory:
 H \triangleq \sum p_i \log_2(p_i) \numberthis \label{eq:shannon:entropy}
 \end{align*}
 
-One of the questions you might have is:
-How did Shannon derive it?
-What he did was,
-he came up with a series of axioms
-that he wanted this function to satisfy.
+One of the questions you might have is: How did Shannon derive it?
+What he did was, he came up with a series of axioms that he wanted this function to satisfy.
 
 \begin{itemize}
 	\item First of all, the maximum uncertainty that this distribution can have
@@ -1023,15 +1021,1371 @@ References: \cite{dedeo2018information,dedeo2013bootstrap,dedeo201716}
 
 \section{Markov Chains}
 
+\textit{This section is largely taken from the transcript.}
+
 \subsection{Markov Chains}
+
+So in the first module we gave you a series of examples about how as
+scientists or indeed as engineers we try to simplify our observations. We don't
+keep records of everything that happens at the finest possible detail. Instead
+what we do very often is if we have some data at high resolution either out there
+to be gathered or already on our hard drives, what we're often interested in
+doing is simplifying it in some way and I give you a generic term for this which
+we call coarse-graining.
+
+In particular, what I did for the case of the etching
+of Alice and her kitten Dinah is show you different coarse-graining
+prescriptions, how you could take that image and strategically throw out
+information, reduce the amount of
+information you're keeping about the
+original image and still if the coarse-
+graining prescription is chosen well,
+still keep some kind of sense of what's
+happening in the system itself, what's
+happening in this image, and so ok, maybe
+you're not quite sure what kind of
+animal Alice is playing with at this
+point but at least you know that she's
+playing with some kind of animal. We in
+fact gave these three coarse-graining
+prescriptions. The first one was majority
+vote: I take a little square and I have
+all the pixels vote on what color, black
+or white, the output pixel should be and
+in particular in the example here I took
+a square that was 10 by 10 so I took a
+hundred data points and just in the
+majority vote assigned that either a 0
+or 1 and made the pixel in other words
+10 times larger and that's what happens
+when you do it here. You could also do
+something even simpler which is take
+that 10 by 10 grid and just have the
+pixel in the upper right-hand corner
+sort of dictate what the final coarse-
+grained pixel is going to be.
+
+The final example I gave you we only talked about
+it we didn't really show the mathematics
+for how this happens was the compression
+algorithm in actual use in the real
+world and that's the JPEG. What the JPEG
+does in fact is throw out information
+that tells you about the very
+fine scale oscillations in the data, the
+patterns on the back of the armchair for
+example and throw those out when it
+thinks those are going to be
+undetectable to the human eye while at
+the same time keeping the overall longer
+scale fluctuations in the image the
+difference between let's say where the
+light is and where the shadow is. It does
+that through a Fourier transform and
+essentially all it really does is just
+chop off the high frequency components
+in a way that engineers have decided is
+at least not entirely visually unpleasing.
+
+ So coarse-graining is
+essential part of renormalization but it's
+not the whole story in fact it's only
+half, because as scientists what we do is
+not just gather data and we don't just
+simplify it. Instead what we do is we
+tend to build models of that data so
+let's take the highest resolution that
+you can imagine for a particular system
+and take the model that you think best
+predicts or describes or explains the
+data at that high resolution level. Then
+we can ask the obvious question: What
+model best describes or predicts or
+explains the data at the coarse-grained
+level and what's the relationship
+between those two models the model that
+describes everything and the model that
+describes something. 
+
+The entire story of
+renormalization is the relationship
+between what happens when you
+coarse-grain the data and what happens
+when you look at the underlying
+structures of the models that that
+coarse-graining demands. Surprisingly as
+we'll see sometimes when you course-
+grain the data the models that you need
+get more complicated. Sometimes
+conversely they simplify and it'll be
+that kind of process that we'll study
+now. In order to describe the
+normalization you'll see of course that
+I have to tell you not just what is
+happening to the data but also what's
+happening to the model so I have to give
+you an example not just of some data
+that we're coarse-graining but of a model
+that describes it.
+
+The model that we'll use is the Markov
+chain. So how do Markov chains work, what
+do they operate on, what are they
+supposed to describe or explain or
+predict? In general Markov chains
+describe time series, a series of
+observations that unfold that
+evolve or unfold one moment after
+another. The simplest case is when each
+observation is a symbolic unit so you
+know an A or B or C, when the stock
+went up or the stock went down, that the
+person said this word or that word and
+More complicated story is that each of
+those observations could be a continuous
+number like a temperature or a field the
+value of let's say of the electric field
+at a certain point in time at a certain
+point in space. Here we'll just deal with
+symbolic time series because they're
+much easier to handle at least when the
+number of symbols is small. So that's our
+basic idea that's our fine-grained data
+and then we're going to imagine coarse-
+graining that to produce a lower
+resolution time series. Now of course
+that's not the only way to coarse-grain
+a time series. You could also imagine
+course-graining each symbol so let's say
+each point in time you chose from a set
+of 10 symbols. One way to coarse-grain
+that time series is instead of choosing
+from a set of 10 you map those 10
+symbols to either a symbol A or a symbol
+B that kind of course-graining something
+we'll see a little bit later you might
+think of it as a projection you're
+projecting down the state space. Here
+we'll do something a little simpler.
+Imagine for example the time series was
+gathered at intervals of one second.
+Now what we're going to imagine is that
+you know you didn't have expensive
+enough equipment or your hard drive got
+full so instead of keeping every second
+of the evolution instead what you did
+was let's say kept every other second or
+every third second. In other words you
+took a block of the time series and you
+decimated it. You just took the first
+observation within each block over time
+sort of a one-dimensional version of how
+we coarse-grained the sketch of Alice by
+John Tenniel. All right so that's the
+data we'll be operating on. The Markov
+chain provides you a model of how our
+time series is produced and then what
+we're going to see is what happens to
+those models as you ask them to describe
+or predict or explain
+the lower resolution version. We'll
+compare one model to another as they
+operate on different kinds of data.
+So, here's a Markov chain. On the left-hand
+side what I've shown you is a depiction
+of the model I'll tell you how to read
+the representation in a second. On the
+right hand side there's a sample bit of
+data that it might predict or explain. In
+this case what I did was I just ran the
+model itself because it's a nice way it's a
+generative one it will tell you what's
+going to happen next and so I can just
+start somewhere and allow the model to
+produce a simulated time series. Markov
+chains are stochastic so in any
+particular case it will produce
+generically a different sample run. On
+the right-hand side what you have is
+just one example of the kind of data a
+Markov chain could produce, conversely
+the kind of data that a Markov chain
+could describe or predict. So the
+left-hand side shows the Markov chain
+itself. What you see there are three
+nodes A, B and C and it's simple enough
+when the system is in state A it emits
+the symbol A when it's in state B it
+emits the symbol B and when it's the
+state C it emits the symbol C and then
+upon emitting that symbol it makes a
+transition. It jumps to one of the other
+states and the probability of jumping to
+each of those other states is dictated
+by the model itself and in fact I
+represented that here by the arrows. So
+let's say you begin in state A. With 90
+percent probability you jump to state B.
+Say you're in state C, with 30 percent
+probability you stay in state C, with 70
+percent probability you jump to state A.
+Specifying those transition
+probabilities corresponds to specifying
+the entire set of free parameters for
+the Markov chain. Once you tell me the
+transition probabilities you've told me
+everything I need to know about the
+underlying model. Markov chains are fun
+but it's also important to realize how
+limited they are. For example if I am at
+the B and then I'm at the C what happens
+next does not depend upon the fact that I
+emitted a B. When I'm in state C it
+doesn't matter how I got there. Similarly
+if I'm in state A it doesn't matter how
+I got there. Whatever I do is conditioned
+entirely upon what's happening at the
+current time step. There's no nonlocality
+in the Markov chain is another way to
+put it or you can think of it as a
+system with no memory. If I'm in state B
+that defines everything about what's
+going to happen next.
+And so you can see how to read this
+sample run. In the sample run I begin
+in state B and in fact deterministically
+I know it has to happen next and go to
+state C. In the sample run when I ran
+this Markov chain forward it chose
+randomly to stay in state C which will
+happen 30\% of the time so it emitted
+symbol B and C then it stayed in C and
+then in fact on the next time step to
+jump to A and you can see that system as
+it evolved from one moment to the next.
+So now let's take the observable data
+associated with that Markov chain or one
+instantiation of that data associated
+the Markov chain and coarse-grain it
+using this decimation transformation and
+in particular what I'm going to do is
+just take blocks of two observations in
+a row and take out the second one or
+conversely I'm going to coarse-grain
+that block of two observations to a
+single observation and I'll have it
+dictated by the value of the first point
+in that block. So in this case I've used
+blocks of size 2. I have coarse-grained the
+data at let's say a two-second time
+scale. It's easy enough to build the
+Markov chain associated with that
+coarse-grain run and in particular let's just
+walk through the image we have here to
+see that the arrows make sense. In the
+next section I'll tell you how to derive
+these mathematically but for now it's a
+useful exercise to see if we can
+understand the relationship between the
+one step in the two step model.
+Notice that in the one step model it's
+impossible for the system to jump from B
+to A. But in fact in the coarse grained
+system it's in fact very likely that if
+you see a B the next symbol you'll see
+will be an A. It happens 70 percent of
+the time and you can see if you look at
+the coarse-grained run it's pretty easy to
+find cases where you have B and then A.
+In fact, on the first line I see it once
+and on the second line I see it three
+times BA BA CB A. But in the sample right
+at the finer grain time scale that's
+impossible and of course that's
+impossible because when you're in state B
+you deterministically go to state C. At the
+coarse-grained timescale though it's
+pretty easy to go from B to A. You go by
+AC but that C step is of course
+unobservable. It's coarse-grained away.
+And in fact in that case if you start in
+state B 100\% of the time you go to state
+C. And so for it to show up as an A at
+the next time step all that has to
+happen is that when you're in state C
+you have to jump to A and that happens 70
+percent of the time. And so what I've
+done there in a sort of laborious way is
+tell you exactly why the arrow from B to
+A is labeled with a 70% probability. Of
+course that's just when you coarse-grade
+from the fine-grained time scale to
+blocks of two you can just as easily
+imagine coarse-graining that
+system from blocks up to two blocks of
+three, to blocks of four and so forth
+and so if we look here and how this
+model evolves over time we're basically
+telling the parallel story to how the
+data is being coarse-grained we coarse-
+grain in blocks of two steps or we coarse-
+grain in blocks of three steps. As you
+can see the model changes and it's a
+little bit hard if you look at it to see
+exactly the logic of that change. When
+you go from one step to two step in some
+senses the model maybe looks like it
+gets a bit more complicated. All I mean
+is that there are some transitions that
+now become possible that were impossible
+before. You become a little less certain
+about what's going to happen. Except then
+when I go to three steps some of those
+transitions go away again so in fact
+I become a little bit more certain
+now. So what is the limit of this process?
+What happens when we start coarse-
+graining not on the two step but with a
+three step time scale, when we continue
+this and coarse-grain on increasingly
+longer and longer time scales? It turns
+out that models tend to flow to what
+we'll call fixed points. In other words
+as you go from one coarse-graining level
+to the next, the corresponding model
+tends to change less and less, at least
+if you wait long enough. They tend to
+converge on a single model as the coarse-
+graining timescale gets longer and
+longer and longer. And in fact not only
+does every Markov chain converge to a
+particular sort of limit case
+Markov chain. In fact the Markov chains
+that the Markov chain that it
+converges to has a particularly simple
+structure. Here it is. Here's the limit
+point. If you take that one step Markov
+chain and ask what happens if you coarse-
+grain the data on really long time
+scales. If you look at the transition
+probabilities
+you'll notice that every state has
+incoming arrows all with the same weight.
+The chance of going to a C is
+independent upon which state you were in
+previously. It's always in this limit
+it's always 40\%. Similarly if
+you're transitioning to state A it
+doesn't matter where you come from. The
+probability is always the same
+31 percent. If you think about how many
+parameters you need to describe the
+model at the one-step case, well, you have
+three states, each state has three
+transition probabilities but since
+probabilities have to sum to one in fact
+for each state you only have two free
+parameters. So you have three states, two
+free parameters each. There's six
+parameters that describe an arbitrary
+Markov model on three states. However, if
+the pattern holds and it does for nearly
+every Markov chain that you can write
+down. Not everyone just nearly everyone.
+But if that pattern holds what that
+means is that when you coarse-grain on
+sufficiently long time scales you only
+in fact need two parameters. It's a
+remarkable compression. In other words
+not just of the data but of the model
+space. You begin in this sort of six
+dimensional manifold but if you coarse-
+grain the data enough the models
+corresponding to that coarse-graining all
+flow to this very low-dimensional, two-
+dimensional in fact, manifold,
+where the model is described simply by
+the incoming probabilities to each of
+those three states and since they all
+have to be the same the chance of you
+going to C is the same no matter where
+you begin and the chance of you going B
+be is the same no matter where you begin
+and since the probabilities outgoing
+from each state have to be one even
+though there are three probabilities to
+specify only two of them are needed. The
+third one is just one minus
+the sum of the other two.
+In the next module
+I'll show you how to make
+these computations exact
+but for now this is our first
+example of how theories change when the
+data you ask them to describe is
+coarse-grained.
 
 \subsection{Mathematics of coarse grained Markov chains}
 
+In the previous module,
+I gave you a cartoon example
+of how a Markov chain coarse-grains
+as you go to longer
+and longer time blocks.
+So, I gave you a Markov chain
+that worked, let’s say,
+at one second resolution,
+and then I showed you
+how to build a Markov chain
+that worked if your time
+resolution was poor.
+So, for example let’s say,
+you could only observe the first second
+of each two second block.
+That decimation coarse graining
+transforms the underlying model itself,
+and so, as you saw,
+when we went from the fine-grained model,
+Markov chain,
+and coarse-grained it
+on blocks of scale 2,
+that Markov chain seemed to get
+a little more complicated,
+and all I mean by that,
+it seemed to have more arrows –
+we don’t really have good way
+to judge the complexity of a Markov chain.
+But the model certainly changed,
+and it didn’t necessarily
+change for the better.
+Even though we simplified
+our observations,
+the model itself seemed to do something,
+well, not necessarily weird,
+but something that didn’t seem to have
+a particular structure to how it changed.
+But if we coarse-grained
+on sufficiently long timescales,
+it appeared that the Markov chain
+coarse-grained to a simpler case
+where the outgoing probabilities
+for each of the states were the same.
+So, each state had the same probability
+to go to state A, B, C, and D
+as the other states did.
+
+In this module, here, what I’m going to do
+is show you how to do
+a little bit of linear algebra
+to actually make that concept rigorous,
+to talk about how a Markov
+chain will, eventually,
+if you coarse-grain enough,
+simplify into a small into a smaller
+subspace of all possible models.
+This would be one of our first examples
+of a renormalization group transformation
+that takes you
+to what we call a fixed point.
+So, what I’m going to do
+is give you that example
+using a much simpler Markov chain
+which I’ve drawn on the board here.
+This Markov chain has two states, A and B.
+What I’ve done,
+instead of writing
+exact numerical probabilities
+for each of these transitions,
+I’ve just parameterized the system
+with one parameter $\epsilon$.
+
+So, in this case here,
+what we have is a system
+that can jump from A to B
+with probability $1-\epsilon$,
+or it can stay in state A
+with probability $\epsilon$.
+If we make $\epsilon$ small,
+that means that the probability
+to stay in state A is small,
+so the system will tend
+to oscillate back and forth –
+it will go ABABAB.
+As $\epsilon$ gets larger and larger,
+it will have a certain probability
+to stay in state A.
+So, it might it might, in fact,
+go AAABBBABAABB,
+it’s a kind of slippy counter
+as $\epsilon$ gets larger and larger.
+So, a simple way
+to write or describe this model
+is to imagine that we describe
+the state of the system
+using your column vector.
+In this case the column vector
+will have two entries:
+the first entry will be the probability
+that you’re in state A;
+the second entry will be the probability
+that you’re in state B.
+Now we can describe
+the evolution of that system over time
+using a two-by-two matrix
+where the entries of the matrix
+look like this.
+
+Each term here
+is a conditional probability
+that tells you how you move
+depending upon which state you’re in.
+So, for example, we can see
+if the matrix is written like this,
+where, for example, the first term
+in the top-left corner here of this matrix
+is the probability
+that given you’re in state A,
+what’s the probability
+that you transition to state A,
+stay in state A.
+Or here, for example,
+if you’re in the top-right corner,
+this is the probability that,
+given you’re in state B,
+you transition to state A.
+Notice that when you do
+the matrix multiplication here,
+and I’ll just do the top one
+to give you a sense of how this works,
+in case you haven’t seen it before,
+This top entry here now says
+that the probability
+that you’re in state A
+after one time step
+is the probability
+that you begin in state A
+and transition to the same state A,
+you stay in that state,
+the probability of A given A,
+plus the probability
+that if you begin in state B,
+the probability of state B,
+times the probability
+of transitioning from B to A.
+And then we’ll leave as a homework example
+for you to compute the second term here.
+So what we see is we can now
+evolve the system through time
+by multiplying using this matrix here,
+which is sometimes called
+stochastic matrix.
+One of the things
+that you can see right away
+that makes this matrix special
+compared to all two-by-two matrices
+is that all the columns here
+have to sum to 1.
+If you’re in state A,
+one of two things
+in this case must happen.
+You either stay in the state
+or you transition to another state.
+There’s no other possibilities,
+and the probabilities therefore exhaust
+the space and have to sum to 1.
+Another feature, of course,
+of a stochastic matrix
+is none of these entries can be negative.
+So stochastic matrices are
+an interesting sort of subspace
+of all the possible two-by-two matrices
+that you will encounter in your life.
+Once you’ve represented the Markov chain
+as a stochastic matrix,
+and I’ll write a particular Markov chain
+that we have here in this new form,
+it becomes a simple matter
+to talk about what happens
+if you skip observations.
+If the system jumps 2 time-steps
+before you see it again,
+all I do is take this evolution matrix T –
+sometimes we call it an evolution operator
+if we’re feeling a little punchy –
+all we do is take
+this evolution operator T
+and multiply it by itself.
+And now what we have
+is when this matrix
+acts on a probability vector
+it takes it one step in the future.
+You act on that matrix again
+on the results of that,
+and it takes you two steps in the future.
+And so the Markov chain corresponding
+to the observation series
+that’s been coarse-grained
+in blocks of two,
+and this is decimation course graining
+where we take the first observation,
+we can now write that very simply
+as the product of this matrix with itself.
+So I'll write that out for you,
+and just show you how the first term goes.
+The probability that if you’re in state A,
+and you stay in state A two steps later,
+is equal to this product here:
+$\epsilon*2 + (1-\epsilon)^2$
+And we’ll leave these other entries
+as an exercise, as you please.
+In words what this says
+is the probability
+that if you begin in state A,
+you’ll be in state A two steps later,
+is the sum of two possibilities:
+the first is, of course,
+if you stay in the state A –
+if you just stay in the state A
+on the second time-step,
+or on the first time-step
+and the second time-step.
+So the probability
+of that happening is $\epsilon^2$,
+the probability that you stay in A twice;
+or the other possibility
+is that you start in state A
+on the second time-step
+you jump to state B,
+and then you quickly jump back
+to state A before anybody notices.
+And that’s the second term here $(1-\epsilon)^2$.
+So now we can see that in some sense
+it’s a rather trivial problem
+to see what happens to this matrix
+as you continue to coarse-grain:
+if you take blocks of 3, 4, or 5,
+all you have to do
+to see the resulting model
+is raise T to the power
+that you’re interested in.
+Here n is now just the block size.
+
 \subsection{Mathematics of Coarse grained Markov Chains: The General Case }
+
+So, can we say anything
+general about that process?
+The answer turns out to be: Yes.
+And what we're going to do
+is represent this matrix
+not in the form
+that you're familiar with
+the $\epsilon$ and $1-\epsilon$ form
+where the column vector refers to
+the probability of being in state A
+or the probability of being in state B
+instead what we're going to do is
+diagonalize this matrix
+so if the matrix is T what we're
+going to do is find its eigenvectors
+and the eigenvectors
+of the matrix T are defined
+by T acting on let's say
+the first eigenvector
+gives you back the first eigenvector
+potentially times some constant $\lambda$,
+so this is the eigenvector
+of the transition matrix or
+the evolution operator T
+and this is the eigenvalue.
+
+A matrix like this generically has two
+eigenvectors
+and two
+eigenvalues
+and so we can write the eigenvectors
+as $v_1$ and $v_2$.
+
+And now what i'm going to do is for an arbitrary
+probability distribution over states
+A and B. I'm going to represent that
+as a sum,
+as a weighted sum over these two eigenvectors,
+so we'll call that $a_1v_1 + a_2v_2$.
+And so if I now make a column vector
+that represents that probability
+in eigenvector space
+what I'll have is an $a_1$ and $a_2$ like this.
+So if I have diagonalized
+that matrix now
+when it acts upon
+this transform space
+it looks it takes a very simple form,
+and in fact, I'll write out
+the exact form it takes here
+the matrix now become diagonal
+and when it acts
+on the diagonalized version
+of the probability vector
+as you would expect
+given the nature of
+the eigenvectors itself
+It turns into
+a scaled version of
+each of these two entries.
+So what I've done here is go from
+this way of representing
+the Markov chain
+to this diagonalized representation here
+which we can call T hat
+and T hat now acts not on the
+probability of being in states A and B
+but instead on the amount
+of probability that you have
+in the first eigenvector pattern
+and the amount of probability you have
+in the second eigenvector pattern.
+What you can see here is that this matrix,
+the two eigenvalues it has,
+one of these eigenvalues is equal to 1.
+And in fact it turns out from a theory
+that you can prove in linear algebra
+that any stochastic matrix
+will have as its largest eigenvalue
+something whose
+absolute value is equal to 1.
+
+In fact sometimes this eigenvalue here
+can be negative one.
+Sometimes it can even be imaginary.
+Generically for most ordinary
+stochastic matrices
+including the one we're going to look at here
+and the conditions on that
+are somewhat technical
+we have to have irreducibility [or] ergodicity,
+but in general what you'll have
+is that the largest eigenvalue
+for stochastic matrix is equal to unity.
+All the other eigenvalues
+will have absolute values
+that are smaller than 1.
+So notice here as long as $\epsilon$
+ is less than unity
+right, as long as there's some probability
+for a transition between A and B
+this term here will have
+an absolute value less than 1.
+Notice that if $\epsilon<\frac{1}{2}$ in fact
+the second eigenvalue will be negative,
+but it still in its absolute value
+will be less than 1.
+So now we've reduced the problem
+of taking $T^N$
+to the problem of taking $\widehat{T}^N$ to the N
+where $\widehat{T}$ is 1 on the diagonal
+and then $2\epsilon-1$ here
+and that is now acting
+on this transformed representation of the
+probabilities of being in state A and B.
+If we raise this here to the power of N
+this matrix takes a very simple form,
+this first diagonal term
+of course $1^n$ 1
+the off diagonal terms remain 0
+and now you have $(2\epsilon-1)^n$ 
+again acting on
+the transformed representation.
+As n gets very large this term here
+because it is less than 1 and
+absolute value
+will continue to get smaller and smaller
+so for example let's take
+the simple case 2
+where $\epsilon$ is equal to let's say $\frac{1}{den}$.
+
+In that case along the diagonal
+you'll have
+a 1 up here and a negative $\frac{1}{den}$ to the n here
+and when you act upon an
+arbitrary column vector $a_1 a_2$
+this will turn into $a_1$
+will remain unchanged
+but $a_2$ will be down by a very large factor
+so let's say if n is a thousand
+then $\frac{1}{2}^n$
+is down by a factor of a million or so.
+There will be this minus sign here
+So depending upon whether n is even or odd
+it will be a very tiny positive number
+or a very tiny negative number
+but in general as you take
+increasingly large powers of this T
+You will find that no matter what
+you put into the system,
+no matter what combination
+of $a_1 a_2$ you put into the system
+out the other side you will
+get a vector that is pure $a_1$.
+Another way to say this
+using the language of the probability
+of being in each of these states
+is that if you
+coarse-grain your data enough
+the corresponding model will take
+any probability distribution
+and map it directly to that first
+eigenvector of the system.
+That first eigenvector has a special name.
+It's called the stationary distribution.
+It's called the stationary distribution
+of the original stochastic matrix.
+And so now
+we know that no matter
+what you put in.
+Let's say if you begin entirely in state A
+if the system has been coarse-grained enough,
+after one coarse-grain time step
+using the evolution operator $T^2$
+or rather$T^n$ as n gets very large.
+At the next time step you will go to a unique
+probability distribution given by $v_1$
+and in fact if you begin in state B,
+you will also be taken
+to the identical
+probability distribution  $v_1$.
+And so in the end
+the matrix will take the following form.
+If you begin in state A
+you have some probability called P(A)
+of staying in state A.
+And you have some probability of ending up and state B
+called P(B) and then we know, of course,
+that that's equal to 1 - P(A)
+Similarly, if you're in state B
+you have some probability
+to stay in state B
+and you have some probability
+to end up back in state A
+and, again, we can write
+the probability of being in state B
+as 1 minus the probability
+of being in state A
+so
+What the simplification means
+is that no matter
+what probabilities
+for transitions you put in here
+and in particular we are free
+at short time scales to put arbitrary
+probabilities for the self loop
+for A and arbitrary probabilities
+for the self loop for B.
+If you begin with this description on short time scales,
+if you renormalize enough,
+if you coarse-grain the observations enough
+and ask what the corresponding model is
+you find in fact that every model can be
+described by a single parameter P(A).
+You move from models
+that exist in a 2-dimensional space
+where I have to tell you the self-loop
+probabilities for each of these individual states.
+If you coarse-grain enough that takes you
+to a set of models that can be described
+by a single probability, P(A)
+and so in fact one way to imagine the
+limit of this coarse-graining process
+how all of these different Markov chains
+flow is in a following diagram
+which we call, sometimes call,
+phase diagram for this system,
+which I can draw like this.
+On the X axis we have
+the self-loop probability for the A state
+and on the y-axis we have
+the self-loop probability for the B state
+So every point in this space
+refers to a distinct Markov chain model.
+All of these models actually flow
+to a single line on this plane.
+All the points on this line here
+have the potential to be fixed points
+that as you coarse-grain the system
+further and further
+they all end up on this line
+where the probability
+of the self-loop for the A state is equal
+to 1 minus the probability
+for the self-loop for the B state
+and the way to think about this is P(A) given A
+when you coarse-grain enough
+just becomes the stationary probability,
+the stationary distribution for that Markov chain P(A)
+the self-loop probability for B
+just becomes the probability for B.
+And we know that that now
+has to be equal to 1 - P(A)
+for that stationary distribution.
+So what we find is that as you
+continue to renormalize this system
+as you continue to coarse-grain
+and ask what the corresponding model is
+you get driven towards this line here
+and as you get driven to that line here
+you flow to some
+what we call fixed point
+where you get closer and closer
+to the limit of T to the n
+as n goes to infinity.
+So that's a more formal, still somewhat
+cartoonish story that I've told
+the reason I say it's cartoonish is that
+I haven't told you the exact conditions
+for this flow to work.
+Implicitly what you have to have
+is that first eigenvalue
+has to be equal to one and there
+can be no other eigenvalues
+that also have
+absolute value equal to one.
+So for example a model that does not flow
+model that does not flow
+to somewhere on this line
+is one where the system
+continually oscillates back and forth.
+In that case the self-loop probability for A is zero,
+the self-loop probability for B is zero.
+But no matter how many times
+you multiply the system by itself
+it never kind of blurs out
+and gives you a stationary distribution.
+I haven't told you the exact conditions
+that tell you that some
+of these models are ruled out
+sort of on the corners of this space.
+But basically if you're somewhere in the interior
+you always flow to a unique fixed point
+under the coarse-graining operation.
 
 \subsection{A puzzle: origin of the slippy counter}
 
+So, in the previous section of this module
+we delve a little bit deeper into the mathematics
+of how transition matrices like these
+renormalize when you coarse-grain the data,
+what does the accompanying model do.
+And what we found is a kind of phase diagram here
+for the transition matricies
+and in fact what I've done is produced a general phase diagram
+that's good for any two-state Markov chain.
+And what we find is that in general,
+modulo some slightly tricky
+things to do with the case
+where the first eigenvalue is imaginary,
+but modulo these kind of tricky cases,
+if you begin with a model anywhere in this space
+you eventually flow to some point on
+this diagonal line here
+and on that diagonal line every update you do
+no matter where you begin
+no matter what your initial distribution is
+one update will take you directly
+to the stationary distribution which is
+now defined not by two parameters,
+but in fact by only one,
+you go from a two-dimensional manifold
+down to a one-dimensional manifold
+and stay there.
+You don't flow once you hit this line.
+You don't kind of move back or forth.
+It's sort of a line of fixed points
+for this renormalization transformation.
+So, in this final section,
+somewhat optional,
+I'd like to ask kind of fun question.
+
+So, we begin at this point here
+and let's take this matrix here where
+the Epsilon's are equal to each other,
+they lie somewhere along that line,
+where the self-loop probability for A
+is equal to the self-loop probability for B.
+What happened or where
+did that matrix come from?
+Is it possible to find another matrix
+that works at a finer time scale
+than you thought could have
+been there in the first place?
+Another way to think of this is that
+you've gathered some data
+in order to get this model here.
+But what if you were gathering
+the data not rapidly enough
+to hit the actual sort of fundamental clock of the system.
+What if in fact your data was already
+coarse-grained and you could imagine this?
+Imagine that you built this model
+here off of some data,
+then your collaborator calls you up
+and say: I got great news,
+we have this new high resolution
+time-sensing device
+that enables us to actually measure not
+every 10 minutes, but in fact every minute
+Well great, okay, what kind of model
+could T have been generated by?
+The mathematical way to answer this
+question or to ask this question
+is to say can we find a transition matrix A
+such that when you square it you get the transition matrix T,
+and this is under the assumption that your collaborator has come up
+with a resolution device now that can split
+twice as fast as it originally could.
+So let's find it. Let's assume T
+is given by this matrix form here
+and then all we have to do is figure out
+All we have to do now is figure out
+what A and B are in this new transition matrix here.
+We have to square this matrix,
+set it equal to T and solve for A and B
+and in fact I'll write this
+in a slightly better fashion
+so that A and B become
+the self-loop probabilities
+for the two states.
+So, our challenge becomes
+find A and B.
+Okay, let's do it.
+Here is our problem. We're going to
+square A or multiply A by itself.
+And we're going to set that equal
+at the end to the transition matrix T.
+So if we do that multiplication
+we find in the top corner here
+we have $a^2_1-B(1-1)$
+And let's say down to the right
+we have "a" times "1 - b" plus "b" times "1 - b".
+Down here we have
+"a" times "1 - a" plus "b" times "1 - a"
+and in the far lower right-hand corner
+we have
+"1 - a" times "1 - b" plus "b" squared.
+This we're going to set equal to our original
+and much-beloved transition matrix T.
+
+So
+We'll leave the full solution
+to the homework,
+but I'll give you a little clue on how to do it
+which is that in fact A and B have to be equal.
+If A and B were not equal
+we wouldn't be able to satisfy
+this set of equations here.
+And so once I tell you that A and B
+are equal, then I can say
+
+Ok, let's try and solve
+part of this problem
+by setting that term there equal to $\epsilon$.
+So, what happens we have a squared
+plus 1 minus a squared
+because I've told you that "a" is equal to "b",
+you can prove it yourself if you're going
+to be distressed by what is about to happen.
+So I have $a^2 + (1-a)^2$ so that's
+$a^2_1-2a+a^2=\epsilon$
+
+Using my amazing algebra skills we have
+$2a^2-2a+(1-\epsilon)  = 0$
+
+And now we use our quadratic equation
+skills to solve for a.
+We have negative b plus or minus
+root b squared that's 4
+minus 4 times a times c
+which is one minus epsilon all over
+2 times the square term coefficient
+which is four.
+If I simplify that I get one half plus or minus
+And now I can pull out the factor of two here
+So we have one half square root one minus
+$2(1-\epsilon)$.
+Okay, so far so good.
+
+What I'd like you to notice is what
+happens when let's say $\epsilon=\frac{1}{4}$.
+In this case under the square root sign here
+we have the square root of one minus two
+times three over four which is equal to
+one minus three over two which is
+equal to minus one half
+in other words the only way to satisfy
+the equation $S^2=T$
+is if some of the components of this matrix here
+have imaginary or generally complex entries.
+But if A has complex entries then it
+corresponds or rather cannot correspond to any
+natural stochastic matrix because we
+interpret the entries of A
+in fact as transition probabilities, and now we're
+being asked to imagine
+that some of those transition probabilities are equal to things
+like $\frac{1}{2} \pm \frac{1}{2} \sqrt{-\frac{1}{2}}$
+So in fact what we found is that T is not
+or rather when epsilon is in fact as you can work out
+when epsilon is less than 1/2
+that matrix T could not have been generated by a
+coarse-graining of any finer scaled two-state system.
+So where did T come from?
+Well, one way to see where the problem is is the following.
+If we imagine that the state or the system
+is a good counter
+so that it oscillates ABABABAB
+and only very rarely slips and produces a BB
+or AA or even more rarely a
+triple A or triple B
+If it's a good counter meaning epsilon is small
+What would this look like if we expanded it
+at the finer timescale?
+In that case we'd have A ? B ? A ? B ? A
+and we'd have to fill in this gap here.
+But if we only had two states,
+if we only had the possibility of it filling in
+with either A or B
+let's imagine for example
+we filled that question mark at that point with A.
+In that case at time $t_1$
+the system was in state A
+and jumped directly to A
+and then at time t plus $\frac{1}{2}$
+the finer timescale, it jumped from state A
+directly to state B.
+But if it's doing this deterministically,
+then how can it know that at this time step
+it's in A and should jump to A
+and at this time step or at this time step here
+it's an A again,
+but this time it should jump to B?
+Markov chains are memoryless, the only thing that
+determines what a Markov chain will do next
+is the state that it happens to be in.
+And again, you can imagine filling this state in here with B.
+And now you have the same problem,
+because here the state goes from A
+jumps to B, very good.
+Okay, here the state goes to B,
+from B it jumps to B, okay good.
+Now if the state deterministically jumps from B to B,
+we know this one here has to be B.
+But then we have a problem because we have to explain
+how the system somehow knows that
+this B is different from the last B?
+How the system knows that okay, two ticks have gone
+by and now I have to jump to A?
+Something has gone wrong.
+In order to get T
+you have to derive it from an A with more memory.
+The clock is ticking back and forth,
+but now it stays for half a time step in one
+of the ticks and the system has to remember
+okay, now it's time to go
+If epsilon is too small this process here is too reliable
+and it can't do it just by sort of stochastically
+deciding to jump from B to A instead of B to B.
+Can we find another solution,
+can we find an A that will work for T?
+Well, we know the one thing we're
+going to probably have to do
+is give A more states than T.
+And so here is a solution that will allow you,
+I will show how a Markov chain can coarse-grain
+all the way down to the T matrix you originally saw.
+So it's going to be a little tricky here.
+I'm going to draw, instead of a two-state system
+i'm going to draw a four state system,
+and now there are states A, B, C and D.
+The transitions will look like this:
+A goes to B with probability 1 minus epsilon,
+B always goes to C,
+C can occasionally slip back to B,
+C usually goes to D,
+D goes deterministically to A,
+and A goes back to D
+with only some tiny probability.
+So, what do we have here?
+We have a hidden Markov model
+but now it's over 4 states and not just 2 states
+what I'm going to do is draw what happens
+if you take this where the matrix represented
+by this and square it
+and what we find is the following.
+The system actually splits up
+like so. In fact, if you're in state A
+after two time steps of this evolution
+by this A matrix operator here,
+you jump to see with probability one minus epsilon
+and you stay in A with probability epsilon.
+It's also true that if you happen to be in state D,
+you jump to B with probability one minus epsilon,
+you stay in D with probability epsilon.
+This is now equivalent to the original operator,
+the original Model T
+as long as we do the following coarse-graining of the states.
+If we say A and D are both equivalent to state A
+in the observations
+and C and B are both equivalent to state B
+in the coarse-grained observations,
+all of a sudden $A^2$, this matrix here, reduces down to the original
+evolution matrix we had
+for the slippy AB counter.
+The big lesson we get out of this
+is that sometimes in fact
+a matrix or a model in general
+could have been generated by something
+outside of the original model space.
+When you coarse-grain the data and get a new model
+the model that you get may be a different,
+fundamentally different kind of model
+than the one that you began with.
+In this case here it began with a 4-state model
+and coarse-grained it down to a two state model
+looking at it in reverse
+you say that the 2-state model, that T transition,
+the slippy AB counter,
+if the counter is reliable enough or
+epsilon is in fact less than a half
+then this construction here will work.
+But what you have to do is you have to assume
+that the finer-grained data was created
+by a process with more memory,
+right, four states
+instead of just two and you can see
+the deterministic transitions here
+allow you to count whether or not it's time
+to jump out of the A or the C state yet.
+
 \subsection{Where we are so far}
+
+So, what have we learned from this investigation?
+
+Our goal here was to give you
+a sense about how coarse-graining
+of data
+leads to transformations
+in the model
+and in fact
+we saw a couple things.
+
+One is is that when you simplify the data,
+when you coarse-grain you don't necessarily get a simpler model.
+Sometimes the relationship between
+the model and the transformed model
+once we do the coarse-graining
+can be somewhat hard to see.
+If you remember when we
+took that three-state
+Markov chain that we began with,
+when we coarse-grain the data and ask
+what the best fit model would be
+it actually had more
+non-zero transitions, for example.
+One of the big things that you learned
+or encountered for the first time
+was the idea of fixed points.
+A fixed point is a model such that
+when you coarse-grain the data
+and you ask how the model transformed
+you get back the original model.
+If you simplify the data,
+the model doesn't change.
+It kind of has a fractal feel to it.
+And in fact in the case of
+the Markov chains we found a
+continuum of fixed points.
+All of the Markov chains where
+they all go to the same states
+with the same probabilities,
+such that the input probability
+to state Q for example
+is equal for the transition
+from all the other states.
+
+Markov chains of that particular form
+that lie on that lower dimensional manifold
+in the space of all possible Markov
+Chain models with that number of states,
+those models act as fixed points
+and not only do they act as fixed points,
+they actually act as attractive fixed points,
+meaning as continue to coarse-grain the data
+and continue to transform the model,
+yeah, it kind of ??? for a while, maybe,
+but at the end it's going to end up
+somewhere on this lower-dimensional plane
+
+in the case of the two-state model that
+lower-dimensional plane is actually just a line.
+The final thing we got
+actually was a little fun point,
+which is that it's hard to take
+a square root of a stochastic matrix.
+But what that means for us is that
+sometimes you have a model
+and you say what fine-grained theory
+could this have coarse grained from.
+Where does that model come from
+what's the more fine-grained,
+the more detailed story
+that I could use to describe or to explain
+where the coarse-grained model came from.
+And if we go all the way back
+to the beginning of this module
+we talked about the relationship between
+microeconomics and macroeconomics
+In the macroeconomic case,
+in this case here when we ask what
+the square root of the T is what we're saying is
+what's the micro economic story that
+corresponds to the macroeconomic pattern?
+In that case the micro story is
+not just a different model,
+but an entirely different model class.
+You have to give that model
+greater sophistication
+then you had in the coarse-grained
+version.
+That's a wrinkle that we'll see
+over and over again
+the fact that when you do this sometimes
+you stay within the same model space.
+But other times things can go, well,
+not necessarily wrong
+but things can get interesting.
+And in fact in the next modules
+what we're going to see is
+the opposite case.
+what you're going to do is you're
+going to take some data,
+coarse-grain it,
+and the new model you're going
+to get out the other side
+is going to be a different class,
+a more complicated, richer class,
+than the one you began with.
+Here when we went from A to T, we simplified the world.
+It turned out by coarse graining
+we could forget things,
+we could forget details.
+The story we had to tell about the system
+got simpler.
+In other cases when we coarse-grain
+what we're going to find is that
+we have to enlarge our model space,
+that we have to make our models
+more sophisticated.
+In those cases, as we see,
+simplifying the data makes
+the model harder to do.
 
 \cite{dedeo2016conflict}
 
@@ -1152,7 +2506,7 @@ See also \cite[Chapter 14]{kadanoff2000statistical}
 
 \subsection{Finding Fixed Points}
 
-How does model flow as we continue to coarse-grain? This replaces lattice with another  $\beta\rightarrow\frac{3}{8} \log{\cosh{4\beta} }$. Figure \ref{fig:beta} shows the behaviour of the function $\frac{3}{8} \log{\cosh{4\beta} }$ and Figure \ref{fig:beta1} shows the evolution of the solution of  $\beta=\frac{3}{8} \log{\cosh{4\beta} }$. For small $\beta$ the solution evolves to $\beta=0$, and for large $\beta$ to $\beta=\infty$ ($T=0$).
+How does model flow as we continue to coarse-grain? This replaces lattice with another  $\beta\rightarrow\frac{3}{8} \log{\cosh{4\beta} }$. Figure \ref{fig:beta} shows the behaviour of the function $\frac{3}{8} \log{\cosh{4\beta} }$ shows the evolution of the solution of  $\beta=\frac{3}{8} \log{\cosh{4\beta} }$. For small $\beta$ the solution evolves to $\beta=0$, and for large $\beta$ to $\beta=\infty$ ($T=0$).
 
 
 \begin{figure}[H]
