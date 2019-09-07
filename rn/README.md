@@ -26,7 +26,6 @@
 ||Ising Model|
 |cp.py|Critical temperature of Ising model|
 ||Krohn-Rhodes Theorem|
-||Renormalizing the Creature (Krohn-Rhodes Theorem)|
 ||Renormalizing the Thermal Plasma|
 ||Rate-Distortion Theory: Keeping the Things that Matter|
 
