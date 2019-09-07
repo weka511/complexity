@@ -19,17 +19,14 @@ def S(beta):
     return 3*math.log(math.cosh(4*beta))/8
 
 def plot(beta,S_beta):
-    betas = np.linspace(0,1,50)
-    Ss    = [S(beta) for beta in betas]
-    Ds    = [3*math.tanh(4*beta)/2 - 1 for beta in betas]
-    plt.plot(betas,Ss,'b',label=r'$\frac{3}{8} \log(\cosh(4\beta))$')
+    betas = np.linspace(0,1,100)
+    plt.plot(betas,[S(beta) for beta in betas],'b',label=r'$\frac{3}{8} \log(\cosh(4\beta))$')
     plt.plot(betas,betas,'r',label=r'$\beta$')
-    plt.plot(betas,Ds,'k',ls='-.',label=r'Derivative: $\frac{3}{2} \tanh(4\beta)-1$')
+    plt.plot(betas,[3*math.tanh(4*beta)/2 for beta in betas],'k',ls='-.',label=r'Derivative: $\frac{3}{2} \tanh(4\beta)$')
     plt.scatter(beta,S_beta)
-    plt.text(beta+0.01,S_beta+0.01,'Critical point {0:.4f}'.format(beta))
+    plt.text(beta+0.01,S_beta+0.01,'Critical point {0:.6f}'.format(beta))
     plt.xlabel(r'$\beta$')
     plt.legend(loc='lower right')
-
     plt.savefig('figs/beta.jpg')
 
 def solve(eps=0.1):
@@ -52,7 +49,7 @@ def solve(eps=0.1):
     return (beta,S_beta)
 
 if __name__=='__main__':
-    beta,S_beta = solve(eps=0.00001)
+    beta,S_beta = solve(eps=1e-6)
     plot(beta,S_beta)
     
     plt.show()
