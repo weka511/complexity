@@ -1,10 +1,13 @@
 \documentclass[]{article}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools}
+\usepackage[toc,nonumberlist]{glossaries}
+\usepackage{glossaries-extra}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
 \newtheorem{lemma}[thm]{Lemma}
 \graphicspath{{figs/}}
+\makeglossaries
 
 %opening
 \title{
@@ -244,26 +247,35 @@ E =& - \frac{\partial \log(Z)}{\partial \beta}\numberthis \label{eq:E:Z}\\
 
 \section{Pressure of an ideal gas and fluctuations}
 
-\textit{Professor Susskind derives the formula for the pressure of an ideal gas.  He begins by introducing the Helmholtz free energy, and the concept of adiabatic processes.  These concepts lead to the definition of pressure as the change of energy with volume at a fixed entropy, and then to the famous equation of state for an ideal gas:  $pV = NkT$.}
-
-\textit{Professor Susskind then moves on to define the concept of fluctuations., and in the process demonstrates once again that the power in statistical mechanics lies in the partition function and is derivatives.  The fluctuation of energy in a system leads to the definition of the heat capacity of the system and the specific heat of a given material.}
-
 \subsection{Pressure of an ideal gas}
 
-Motion is isotropic, even near wall. We know this from an honest use of statistical mechanics. Give up intuition because it might not be correct: ''ride the mathematics. All very great physicists are master of thermodynamics.''
+\begin{itemize}
+	\item Motion is isotropic, even near wall. We know this from an honest use of statistical mechanics.
+	\item Give up intuition because it might not be correct ''ride the mathematics''.
+	\item Question : Once we have done the mathematics of a pro-
+	blem, can’t we check them with our intuition?
+	\item Answer : Yes we can, but what we are really doing is che-
+	cking our intuition not the mathematics.
+	\item All very great physicists are master of thermodynamics.''
+\end{itemize}
 
 We want to determine the Equation of State.
 
 From (\ref{eq:S_Z}) and Theorem \ref{thm:inverseT}.
 \begin{align*}
 S =& \frac{E}{T} + \log(Z)\\
-\underbrace{E - TS}_{A\triangleq\text{Helmholz Free Energy}} =& -T \log(Z) \numberthis \label{eq:helmholz}
+A\triangleq &E - TS\tag*{Helmholtz Free Energy} \\
+=& -T \log(Z) \numberthis \label{eq:helmholtz}
 \end{align*}
+
+\newglossaryentry{gls:helmholtz}{
+	name={Helmholtz Free Energy},
+	description={Thermodynamic potential that measures the useful work obtainable from a closed thermodynamic system at a constant temperature and volume $A\triangleq &E - TS$ }}
 
 Variables come in pairs, e.g. (V,P):
 \begin{itemize}
-	\item Control Parameter (V);
-	\item Conjugate Thermodynamic Variable (V).
+	\item Control Parameter--a parameters that w, as experimenters, can easily change. They are macroscopic parameters: we are not trying to change details of one molecule at a time. V is a control parameter;
+	\item Conjugate Thermodynamic Variable (P).
 \end{itemize}
 
 \begin{lemma}[Derivatives along contour]\label{thm:derivative:contour}
@@ -274,12 +286,17 @@ Variables come in pairs, e.g. (V,P):
 \end{lemma}
 \begin{proof}
 	Along a contour of fixed S:
+	\begin{figure}[H]
+		\caption{$E(B)-E(A) = \big[E(C)-E(A)\big]+\big[E(B)-E(C)\big]$}\label{fig:contour:of:fixed:S}
+		\includegraphics[width=0.9\textwidth]{partial-derivatives}
+	\end{figure}
 	\begin{align*}
-		\Delta E =& \frac{\partial E}{\partial V} \bigg|_T \Delta V + \frac{\partial E}{\partial T} \bigg|_V \Delta T\\
+		\Delta E =& \frac{\partial E}{\partial V} \bigg|_T \Delta V + \frac{\partial E}{\partial T} \bigg|_V \Delta T \text{, by inspecting Figure \ref{fig:contour:of:fixed:S}. The $2^{nd}$ term gives:}\\
+		\frac{\partial E}{\partial T} \bigg|_V \Delta T=& \frac{\partial S}{\partial T} \bigg|_V \frac{\partial E}{\partial S} \bigg|_V \Delta T\text{, whence:}\\
 		\frac{\partial E}{\partial V} \bigg|_S=& \frac{\partial E}{\partial V} \bigg|_T  + \frac{\partial S}{\partial T} \bigg|_V \frac{\partial E}{\partial S} \bigg|_V \frac{\Delta T}{\Delta V} \numberthis\label{eq:dEdV}\\
 		\text{Now }\Delta S =& \frac{\partial S}{\partial V} \bigg|_T \Delta V + \frac{\partial S}{\partial T} \bigg|_V \Delta T\\
 		=& 0\text{, along a contour of constant S, whence}\\
-		\frac{\Delta T}{\Delta V} =& - \Bigg[\frac{\frac{\partial S}{\partial V}\big|_T}{\frac{\partial S}{\partial T}\big|_V}\Bigg]\text{, along a contour of constant S, and (\ref{eq:dEdV}) becomes:}\\
+		\frac{\Delta T}{\Delta V} =& - \Bigg[\frac{\frac{\partial S}{\partial V}\big|_T}{\frac{\partial S}{\partial T}\big|_V}\Bigg]\text{, along a contour of constant S, so (\ref{eq:dEdV}) becomes:}\\
 		\frac{\partial E}{\partial V} \bigg|_S=& \frac{\partial E}{\partial V} \bigg|_T  - \cancel{\frac{\partial S}{\partial T} \bigg|_V} \frac{\partial E}{\partial S} \bigg|_V \frac{\frac{\partial S}{\partial V}\big|_T}{\cancel{\frac{\partial S}{\partial T}\big|_V}}\\
 		=& \frac{\partial E}{\partial V} \bigg|_T  -  \frac{\partial E}{\partial S} \bigg|_V \frac{\partial S}{\partial V}\bigg|_T
 	\end{align*}
@@ -287,34 +304,53 @@ Variables come in pairs, e.g. (V,P):
 
 NB. For most situations, S is a monotonic increasing function of E. As E increases, distribution gets broader, and S increases. 
 
+\begin{figure}[H]
+	\caption{Imagine piston is vertical}\label{fig:vertical:piston}
+	\includegraphics[width=0.9\textwidth]{vertical-piston}
+\end{figure}
+
 Imagine piston is vertical.
+
 \begin{itemize}
 	\item Move piston out, gas does work, which is paid for from energy.
 	\item Move piston in, we do work, which adds to energy.
 \end{itemize}
 
-Move piston slowly, and don't let energy in. Adiabatic: slowly, and no heat in or out. $dE = - P dV$
+Move piston slowly, and don't let energy in. Adiabatic: slowly, and no heat in or out. $dE = - P \mathcal{A}dx$, where $\mathcal{A}$ is the area of the piston in Figure \ref{fig:vertical:piston}. Since $\mathcal{A}dx = dV$, $dE = -P dV$. 
 
 \begin{align*}
 \frac{\partial E}{\partial V}\bigg|_S =& - P\numberthis \label{eq:defP}
 \end{align*}
 
+\begin{figure}[H]
+	\caption{Energy Levels as a function of volume}
+	\includegraphics[width=0.9\textwidth]{energy-levels-volume}
+\end{figure}
+
+\newglossaryentry{gls:adiabatic}{
+	name={adiabatic},
+	description={
+		An adiabatic process is a process in which the entropy doesn’t
+		change.}}
+
 
 \begin{thm}[Adiabatic Theorem]\label{thm:adiabatic}
-	Change volume adiabatically, the system will ride along the energy level: it will change, but not jump.
+	Change volume \gls{gls:adiabatic}ally, the system will ride along the energy level: it will change, but not jump.
 \end{thm}
 
-One consequence of Theorem \ref{thm:adiabatic} is that the $p_i$ are fixed.
-
-Isentropic is also adiabatic.
-
-Easier to use T as it appears in Bolzmann.
+\begin{itemize}
+	\item One consequence of Theorem \ref{thm:adiabatic} is that the $p_i$ are fixed.
+	
+	\item Isentropic is also adiabatic.
+	
+	\item Easier to use T as it appears in Bolzmann.
+\end{itemize}
 
 \begin{align*}
 P =& - \frac{\partial E}{\partial V}\bigg|_S \\
 =& - \frac{\partial E}{\partial V}\bigg|_T + \frac{\partial S}{\partial V}\bigg|_T \frac{\partial E}{\partial S}\bigg|_V\text{, from Lemma \ref{thm:derivative:contour}}\\
 =& - \frac{\partial E}{\partial V}\bigg|_T + \frac{\partial S}{\partial V}\bigg|_T T\text{, from (\ref{eq:T})}\\
-=& - \frac{\partial(E-TS)}{\partial V}\bigg|_T \text{, from (\ref{eq:helmholz})}\\
+=& - \frac{\partial(E-TS)}{\partial V}\bigg|_T \text{, from (\ref{eq:helmholtz})--\gls{gls:helmholtz}}\\
 =& T \frac{\partial \log(Z)}{\partial V}\bigg|_T \numberthis \label{eq:P_Z_V}
 \end{align*}
 
@@ -327,7 +363,7 @@ The partition function is given by:
 \begin{align*}
 Z(\beta) =& \int dx dp e^{- \beta \frac{p^2}{2m}}\\
 =& \frac{V^N}{N!} f(\beta)\\
-\log(Z) =& N \log(V) + \log(f(\beta))\text{, so (\ref{eq:P})  becomes:}\\
+\log(Z) =& N \log(V) + \log(f(\beta))\text{, so (\ref{eq:P_Z_V})  becomes:}\\
 P =& \frac{NT}{V}\text{, or}\\
 P =& \rho T
 \end{align*}
@@ -359,7 +395,6 @@ All of statistical mechanics is about the power of the partition function.
 
 \section{Weakly interacting gases, heat, and work}
 
-\textit{Professor Susskind derives the equations for the energy and pressure of a gas of weakly interacting particles, and develops the concepts of heat and work which lead to the first law of thermodynamics.}
 
 \subsection{Weakly interacting gases}
 
@@ -451,10 +486,6 @@ dQ =& dE + P.dV\text{. If exact}\\
 \end{align*}
 
 \section{Entropy vs. reversibility}
-
-\textit{Professor Susskind begins the lecture with 2 examples: (1) deriving the speed of sound in an ideal  gas; and (2) a single harmonic oscillator in a heat bath.  The harmonic oscillator example leads to a discrepancy with empirical observation that can only be resolved through quantum mechanics.  At low temperatures relative to the first excited state of the oscillator, quantum mechanics suppresses the energy of the harmonic oscillator.  Through this mechanism, certain modes of oscillation are "frozen out" until the system reaches higher temperatures.  Einstein proposed this quantized effect in 1907, which is one of the theories that led to the development of quantum mechanics.}
-
-\textit{Professor Susskind then discusses the apparent contradiction between the second law of thermodynamics, and the reversibility of classical mechanics.  If entropy always increases, reversibility is violated.  The resolution of this conflict lies in the (lack of) precision of our observations.  Undetectable differences in initial conditions lead to large changes in results.  This is the foundation of chaos theory.}
 
 \subsection{The speed of sound in an ideal gas}
 
@@ -566,10 +597,6 @@ Z(\beta) =&  \frac{1}{1 - e^{- \beta\hbar \omega}} \text{, from (\ref {Z_quantum
 
 \section{Entropy, reversibility, and magnetism}
 
-\textit{Professor Susskind develops the equation for the probability that all molecules of a gas will converge in one half of a room, and concludes that this event is possible, but that the time scale for it to occur is incredibly long.  This line of reasoning leads to the resolution of the paradox between the reversibility of classical mechanics and the apparent lack of time reversibility of the second law of thermodynamics by demonstrating that statistical mechanics processes are in fact time reversible if the system is known precisely enough and the observer waits long enough.}
-
-\textit{He then moves on to magnetism and begins to introduce the concepts of ferromagnetic phase transitions and spontaneous symmetry breaking.  Spontaneous symmetry breaking occurs when magnets in a lattice begin to cool.  With no external magnetic field, they may end up in one of two symmetrical states - e.g. all up or all down.  But a very small magnetic field affecting just one of the magnets will break this symmetry and bias the system toward one of the ground states.}
-
 \subsection{2nd Law and Poincar\'e Recurrences}
 
 Imagine room with all particles of air in one half. In 6N dimensional phase space, momentum is bounded because we have finite energy. Phase point moves chaotically. Phase point $\frac{1}{2^N}$. Or, imagine configuration space has N dimensions, and is of volume $V^N$; what is probability of finding system in smaller volume $v^N$? $\frac{v^N}{V^N}$. 
@@ -636,9 +663,9 @@ E =& - j \sum_{n} \sigma(n) \sigma(n+1)
 	\item tiniest external magnetic field will bias
 	\item spontaneous symmetry breaking
 \end{itemize}
-\section{The Ising model}
 
-\textit{After reviewing the discussion of a single magnetic particle (or spin) in a heat bath, Professor Susskind continues with the development of the one-dimensional Ising model.  This model does not exhibit phase transitions.  He then moves on to the multi-dimensional Ising model.  For any number of dimensions above one, the Ising model exhibits phase transitions at specific temperatures.  This is due to the fact that, in multiple dimensions, each point in the lattice is affected by more than two neighboring lattice elements.}
+
+\section{The Ising model}
 
 \subsection{One-dimensional Ising model}
 
@@ -735,5 +762,8 @@ $T_{crit} = 2 d J$ is poor for $d=2$, good for $d=3$.
 \subsection{Liquid-gas phase transition}
 
 https://youtu.be/IWtcFAP3ju4?t=2423
+
+
+\printglossaries
 
 \end{document}
