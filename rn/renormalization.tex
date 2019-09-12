@@ -1107,8 +1107,13 @@ between those two models the model that
 describes everything and the model that
 describes something. 
 
+\begin{figure}[H]
+	\caption{Commutation Diagram}\label{fig:commutation}
+	\includegraphics[width=0.9\textwidth]{commutation}
+\end{figure}
+
 The entire story of
-renormalization is the relationship
+renormalization, Figure \ref{fig:commutation}, is the relationship
 between what happens when you
 coarse-grain the data and what happens
 when you look at the underlying
@@ -1140,8 +1145,9 @@ another. The simplest case is when each
 observation is a symbolic unit so you
 know an A or B or C, when the stock
 went up or the stock went down, that the
-person said this word or that word and
-More complicated story is that each of
+person said this word or that word.
+
+A more complicated story is that each of
 those observations could be a continuous
 number like a temperature or a field the
 value of let's say of the electric field
@@ -1165,8 +1171,9 @@ symbols to either a symbol A or a symbol
 B that kind of course-graining something
 we'll see a little bit later you might
 think of it as a projection you're
-projecting down the state space. Here
-we'll do something a little simpler.
+projecting down the state space.
+
+Here we'll do something a little simpler.
 Imagine for example the time series was
 gathered at intervals of one second.
 Now what we're going to imagine is that
@@ -1191,19 +1198,21 @@ or predict or explain
 the lower resolution version. We'll
 compare one model to another as they
 operate on different kinds of data.
-So, here's a Markov chain. On the left-hand
-side what I've shown you is a depiction
-of the model I'll tell you how to read
-the representation in a second. On the
-right hand side there's a sample bit of
-data that it might predict or explain. In
-this case what I did was I just ran the
-model itself because it's a nice way it's a
-generative one it will tell you what's
-going to happen next and so I can just
-start somewhere and allow the model to
-produce a simulated time series. Markov
-chains are stochastic so in any
+
+Figure \ref{fig:markov1} represents a Markov chain. On the left-hand
+side what I've shown you is a depiction of the model I'll tell you how to read
+the representation in a second. On the right hand side there's a sample bit of
+data that it might predict or explain. In this case what I did was I just ran the
+model itself because it's a nice way it's a generative one it will tell you what's
+going to happen next and so I can just start somewhere and allow the model to
+produce a simulated time series.
+
+\begin{figure}[H]
+	\caption{Markov Chain: deterministic emission of symbols}\label{fig:markov1}
+	\includegraphics[width=0.9\textwidth]{markov1}
+\end{figure}
+
+Markov chains are stochastic so in any
 particular case it will produce
 generically a different sample run. On
 the right-hand side what you have is
@@ -1235,7 +1244,9 @@ the entire set of free parameters for
 the Markov chain. Once you tell me the
 transition probabilities you've told me
 everything I need to know about the
-underlying model. Markov chains are fun
+underlying model.
+
+Markov chains are fun
 but it's also important to realize how
 limited they are. For example if I am at
 the B and then I'm at the C what happens
@@ -1263,6 +1274,7 @@ symbol B and C then it stayed in C and
 then in fact on the next time step to
 jump to A and you can see that system as
 it evolved from one moment to the next.
+
 So now let's take the observable data
 associated with that Markov chain or one
 instantiation of that data associated
@@ -1281,8 +1293,15 @@ data at let's say a two-second time
 scale. It's easy enough to build the
 Markov chain associated with that
 coarse-grain run and in particular let's just
-walk through the image we have here to
-see that the arrows make sense. In the
+walk through Figure \ref{fig:markov2} to
+see that the arrows make sense.
+
+\begin{figure}[H]
+	\caption{Coarse-grained Markov Chain}\label{fig:markov2}
+	\includegraphics[width=0.9\textwidth]{markov2}
+\end{figure}
+
+ In the
 next section I'll tell you how to derive
 these mathematically but for now it's a
 useful exercise to see if we can
@@ -1317,7 +1336,7 @@ you have to jump to A and that happens 70
 percent of the time. And so what I've
 done there in a sort of laborious way is
 tell you exactly why the arrow from B to
-A is labeled with a 70% probability. Of
+A is labeled with a 70\% probability. Of
 course that's just when you coarse-grade
 from the fine-grained time scale to
 blocks of two you can just as easily
@@ -1340,10 +1359,17 @@ is that there are some transitions that
 now become possible that were impossible
 before. You become a little less certain
 about what's going to happen. Except then
-when I go to three steps some of those
+when I go to three steps, Figure \ref{fig:markov3}, some of those
 transitions go away again so in fact
 I become a little bit more certain
-now. So what is the limit of this process?
+now. 
+
+\begin{figure}[H]
+	\caption{Even more coarse-grained Markov Chain}\label{fig:markov3}
+	\includegraphics[width=0.9\textwidth]{markov3}
+\end{figure}
+
+So what is the limit of this process?
 What happens when we start coarse-
 graining not on the two step but with a
 three step time scale, when we continue
@@ -1417,6 +1443,7 @@ though there are three probabilities to
 specify only two of them are needed. The
 third one is just one minus
 the sum of the other two.
+
 In the next module
 I'll show you how to make
 these computations exact
@@ -1456,13 +1483,13 @@ it seemed to have more arrows –
 we don’t really have good way
 to judge the complexity of a Markov chain.
 But the model certainly changed,
-and it didn’t necessarily
+and it didn't necessarily
 change for the better.
 Even though we simplified
 our observations,
 the model itself seemed to do something,
 well, not necessarily weird,
-but something that didn’t seem to have
+but something that didn't seem to have
 a particular structure to how it changed.
 But if we coarse-grained
 on sufficiently long timescales,
