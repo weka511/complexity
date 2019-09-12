@@ -3,7 +3,7 @@
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
-\newtheorem{lemma}{Lemma}
+\newtheorem{lemma}[thm]{Lemma}
 \graphicspath{{figs/}}
 
 %opening
@@ -32,25 +32,18 @@ These are my notes from the Statistical Mechanics lectures from Leonard Susskind
 
 \section{Entropy and conservation of information}
 
-\textit{
-	Professor Susskind introduces statistical mechanics as one of the most universal subjects in modern physics in terms of it's ability to explain and predict natural phenomena.  He begins with a brief introduction to probability theory and then moves on to draw the connection between the concept of laws of motion as rules for updating states of a system, and the probability of being in a given state.  Proper laws of physics are reversible and therefore preserve the distinctions between states - i.e. information.  In this sense, the conservation of information is more fundamental that other physical quantities such as temperature or energy.
-}
-
-\textit{	
-	Professor Susskind then moves on to continuous systems and phase space, and Liouville's theorem.  The lecture concludes with the presentation of formulas for computing entropy, and some examples.
-}
 
 This lecture focuses on the law of conservation of energy, the $-1^{th}$ law of physics. 
 
 \begin{thm}[Liouville's theorem]
-	''In physics, Liouville's theorem, named after the French mathematician Joseph Liouville, is a key theorem in classical statistical and Hamiltonian mechanics. It asserts that the phase-space distribution function is constant along the trajectories of the system—that is that the density of system points in the vicinity of a given system point traveling through phase-space is constant with time. This time-independent density is in statistical mechanics known as the classical a priori probability.''
+	The phase-space distribution function is constant along the trajectories of the system—-that is that the density of system points in the vicinity of a given system point travelling through phase-space is constant with time.
 \end{thm}
 
 \begin{align*}
 S \triangleq \log(M) \numberthis \label{eq:entropy:simple}
 \end{align*}
 
-Proper laws of physics are reversible and therefore preserve the distinctions between states - i.e. information.  In this sense, the conservation of information is more fundamental that other physical quantities such as temperature or energy.  
+Proper laws of physics are reversible and therefore preserve the distinctions between states - i.e. information.  In this sense, the conservation of information is more fundamental than other physical quantities such as temperature or energy.  
 \begin{itemize}
 	\item $S$ conserved as long as we can follow in detail, e.g. if we can follow the motion of each molecule that is disturbed by Friction.
 	\item $S$ increases as our ignorance goes up;
@@ -62,7 +55,7 @@ S \triangleq - \sum_{i=1}^{N} p_i \log{p_i} \numberthis \label{eq:entropy}
 \end{align*}
 
 
-In (\ref{eq:entropy:simple}) and (\ref{eq:entropy}) we use the logarithm so that entropy adds, rather than multiplies.
+In (\ref{eq:entropy:simple}) and (\ref{eq:entropy}) we use the logarithm, so that entropy adds rather than multiplies.
 
 The First law of Thermodynamics is energy conservation. For a closed system:
 \begin{align*}
@@ -73,17 +66,16 @@ The First law of Thermodynamics is energy conservation. For a closed system:
 
 \section{Temperature}
 
-\textit{Professor Susskind presents the physics of temperature. Temperature is not a fundamental quantity, but is derived as the amount of energy required to add an incremental amount of entropy to a system.  As the energy of a system increases, the number of possible states of a system increases, which means that the entropy increases.  This is the concept behind the second law of thermodynamics, and implies that temperature is always positive.}
 
 Temperature is really a measure of Energy. So the energy of one molecule of an Ideal Gas is given by:
 \begin{align*}
 E =& \frac{3}{2} k_B t\text{, where:}\\
-k_B =& \text{Boltzmann's constant}\\
-T =& \text{temperature in Kelvin}
+k_B =& \text{ Boltzmann's constant}\\
+T =& \text{ temperature in Kelvin}
 \end{align*}
  In natural units we define a new unit of temperature, $T=k_Bt$, so $k_B=1$.
  
- We want to redefine temperature in therms of Entropy and Energy, and then show that this new definition agrees with our everyday idea of temperature. Temperature is not a fundamental quantity, but is derived as the amount of energy required to add an incremental amount of entropy to a system.  As the energy of a system increases, the number of possible states of a system increases, which means that the entropy increases.  This is the concept behind the second law of thermodynamics, and implies that temperature is always positive.
+ We want to redefine temperature in terms of Entropy and Energy, and then show that this new definition agrees with our everyday idea of temperature. Temperature is not a fundamental quantity, but is derived as the amount of energy required to add an incremental amount of entropy to a system.  As the energy of a system increases, the number of possible states of a system increases, which means that the entropy increases.  This is the concept behind the second law of thermodynamics; it implies that temperature is always positive.
  
  Our definition reduces to:
 \begin{align*}
@@ -93,17 +85,17 @@ dE =& T dS \numberthis \label{eq:T}
 
 Consider two systems, $A$ and $B$, joined by a narrow pipe. Theorem \ref{thm:heat:flow} shows that T captures our intuition about temperature: heat flows from a higher temperature to lower.
 
-\begin{thm}[Heat Flow]\label{thm:heat:flow}
+\begin{thm}[Heat flows from higher temperature to lower]\label{thm:heat:flow}
 	Given:
 	\begin{align*}
-	dE_A + dE_B =& 0 \numberthis \label{eq:thm:dE}\\
-	dS_A + dS_B>& 0 \numberthis \label{eq:thm:eS} \\
-	dE_i =& T_i dS_i \numberthis \label{eq:thm:T} \\
-	T_A>&T_B \numberthis \label{eq:thm:Tgt}
+	dE_A + dE_B =& 0 \text{, first law of thermodyamics}\numberthis \label{eq:thm:dE}\\
+	dS_A + dS_B>& 0 \text{, second law of thermodynamics}\numberthis \label{eq:thm:eS} \\
+	dE_i =& T_i dS_i \text{, from (\ref {eq:T})} \numberthis \label{eq:thm:T} \\
+	T_A>&T_B \text{, Assumption.}\numberthis \label{eq:thm:Tgt}
 	\end{align*}
 	then energy flows from A to B, i.e.
 	\begin{align*}
-	dE_A<0
+	dE_A<0\numberthis \label{eq:heat:flow:demonstrandum}
 	\end{align*}
 \end{thm}
 \begin{proof}
@@ -116,11 +108,11 @@ Consider two systems, $A$ and $B$, joined by a narrow pipe. Theorem \ref{thm:hea
 	\implies&\\
 	T_A (dS_A + dS_B) =& (T_A  -T_B) dS_B\\
 	\implies& \text{, using (\ref{eq:thm:eS}) and (\ref{eq:thm:Tgt})}\\
-	dS_B >& 0\\
+	dS_B >& 0\text{, since temperature positive.}\\
 	\implies& \text{using (\ref{eq:thm:T})}\\
 	dE_B >& 0\\
 	\implies& \text{, using (\ref{eq:thm:dE})}\\
-	dE_A<0
+	dE_A<&0\text{, which is (\ref{eq:heat:flow:demonstrandum})}
 	\end{align*}
 \end{proof}
 
@@ -128,14 +120,17 @@ Consider two systems, $A$ and $B$, joined by a narrow pipe. Theorem \ref{thm:hea
 
 \section{Maximizing entropy}
 
-\textit{After reviewing the laws of thermodynamics, Professor Susskind begins the derivation of how energy states are distributed for a complex system system with many energy states.}
 
 As the number of particles in a system grows, the distribution of states clumps more tightly around a mean. This is the Maxwell-Boltzmann distribution. The derivation requires Stirling's approximation and Lagrange multipliers.
 
-Number of arrangements $\frac{N!}{\prod_{i}n_i!}$. We want to maximize this subject to two constraints:
+Assume that we have N particles, and that there are $n_i$ particles in the $i^{th}$ energy level. Then the number of arrangements is given by
 \begin{align*}
-\sum_{i=1}^{N} n_i =& N \numberthis\label{eq:sum:probilities}\\
-\sum_{i=1}^{N} E_i n_i =& E N \numberthis\label{eq:total:energy}
+C\triangleq\frac{N!}{\prod_{i}n_i!} \numberthis \label{eq:number:combinations}
+\end{align*}
+ We want to maximize this subject to two constraints:
+\begin{align*}
+\sum_{i=1}^{N} n_i =& N \text{, total number of particles} \numberthis\label{eq:sum:probilities}\\
+\sum_{i=1}^{N} E_i n_i =& E N \text{, average energt.}\numberthis\label{eq:total:energy}
 \end{align*}
 
 We will find Lemma \ref{lemma:Stirling} useful.
@@ -150,7 +145,7 @@ We will find Lemma \ref{lemma:Stirling} useful.
 	\log(N!) =& \sum_{i=1}^{N}\log (i)\\
 	\approxeq &\int_{1}^{N} \log(x) dx\\
 	\approxeq& \big[x \log(x) - x \big]_1^N\\
-	\approxeq& N\log(N)-N\\
+	\approxeq& N\log(N)-N\text{, whence} \\
 	N! \approxeq& N^N e^{-N}
 	\end{align*}
 \end{proof}	
@@ -161,7 +156,7 @@ We will find Lemma \ref{lemma:Stirling} useful.
 
 \begin{proof}
 	\begin{align*}
-	C=&\frac{N!}{\prod_{i}n_i!}\\
+	C=&\frac{N!}{\prod_{i}n_i!} \tag*{from (\ref{eq:number:combinations})}\\
 	\approxeq& \frac{N^N e^{-N}}{\prod_{i}n_i^{n_i} e^{-\sum_{i=1}^{N}n_i}}\tag*{from Lemma \ref{lemma:Stirling}}\\
 	\approxeq& \frac{N^N \bcancel{e^{-N}}}{\prod_{i}n_i^{n_i} \bcancel{e^{-N}}}\tag*{using (\ref{eq:sum:probilities})}\\
 	\log(C) \approxeq & N \log(N) - \sum_{i=1}^{N} n_i \log(n_i)\\
@@ -175,11 +170,11 @@ We will find Lemma \ref{lemma:Stirling} useful.
 
 \section{The Boltzmann distribution}
 
-\textit{Professor Susskind completes the derivation of the Boltzman distribution of states of a system. This distribution describes a system in equilibrium and with maximum entropy. He derives the formulas for energy, entropy, temperature, and the partition function for this distribution. He then applies these general formulas to the example of an ideal gas.}
+\subsection{The Boltzmann distribution}
 
 To maximize S subject to constraints (\ref{eq:sum:probilities}) and (\ref{eq:total:energy}), we minimize -S, using Lagrange Multipliers, i.e., minimize
 \begin{align*}
-\sum_{i=1}^{N}p_i \log(p_i) + \alpha(\sum_{i=1}^{N} p_i-1) + \beta(\sum_{i=1}^{N} E_i p_i-E)
+\sum_{i=1}^{N}p_i \log(p_i) + \alpha(\sum_{i=1}^{N} p_i-1) + \beta(\sum_{i=1}^{N} E_i p_i-E)\text{, where $\alpha$ and $\beta$ are parameters to be determined.}
 \end{align*}
 
 Differentiating with respect to $p_i$:
@@ -204,14 +199,14 @@ Z(\beta) =& \sum_{i=1}^{N} e^-{\beta E_i} \text{. $Z$ is known as the Partition 
 \begin{proof}
 	From (\ref{eq:total:energy}) and (\ref{eq:maximize:entropy})
 	\begin{align*}
-	E =& \frac{1}{Z}  \sum_{i=1}^{N} e^{-\beta E_i} E_i \numberthis \label{eq:E}\\
-	\frac{\partial Z}{\partial \beta} =& - \sum_{i=1}^{N} e^{-\beta E_i} E_i \numberthis \label{eq:dZ}\\
+	E =& \frac{1}{Z}  \sum_{i=1}^{N} e^{-\beta E_i} E_i \text{\, and}\numberthis \label{eq:E}\\
+	\frac{\partial Z}{\partial \beta} =& - \sum_{i=1}^{N} e^{-\beta E_i} E_i \text{, from (\ref{eq:partition:function}), whence} \numberthis \label{eq:dZ}\\
 	E(\beta) =& - \frac{1}{Z} \frac{\partial Z}{\partial \beta} = - \frac{\partial \log(Z)}{\partial \beta} \numberthis \label{eq:E:beta}
 	\end{align*}
 	
 	\begin{align*}
-	S =& -\sum_{i=1}^{N} p_i \log(p_i)\\
-	=& - \sum_{i=1}^{N} \frac{1}{Z} e^{- \beta E_i}\big[- \beta E_i -\log(Z)\big]\\
+	S =& -\sum_{i=1}^{N} p_i \log(p_i) \text{, from (\ref{eq:entropy})}\\
+	=& - \sum_{i=1}^{N} \frac{1}{Z} e^{- \beta E_i}\big[- \beta E_i -\log(Z)\big]\text{, from (\ref{eq:maximize:entropy})}\\
 	=& \beta E +  \bcancel{\frac{1}{Z}} \log(Z)  \bcancel{\sum_{i=1}^{N} e^{-\beta E_i}}\\
 	=& \beta E +   \log(Z)  \numberthis \label{eq:S_Z}
 	\end{align*}
@@ -224,11 +219,12 @@ Z(\beta) =& \sum_{i=1}^{N} e^-{\beta E_i} \text{. $Z$ is known as the Partition 
 	\end{align*}
 \end{proof}
 
-Ideal Gas: assume molecules don't interact.
-State: 3N coordinates $\{X_1,...X_{3N}\}$ and momenta $\{P_1,...P3N\}$
+\subsection{Ideal Gas}.
+
+Assume molecules don't interact. State consists of 6N coordinates,  $\{X_1,...X_{3N}\}$ and momenta $\{P_1,...P_{3N}\}$. From (\ref{eq:partition:function})
 \begin{align*}
 Z =& \int d^{3N}x d^{3N}p . e^{- \frac{\beta}{2m} \sum_{n=1}^{3N} p_n^2}\\
-=& \frac{V^N}{N!} \int d^{3N}p . e^{- \frac{\beta}{2m} \sum_{n=1}^{3N} p_n^2}\text{Factorial is controversial}\\
+=& \frac{V^N}{N!} \int d^{3N}p . e^{- \frac{\beta}{2m} \sum_{n=1}^{3N} p_n^2}\textit{--Factorial is controversial}\\
 =& \frac{V^N}{N!} \big[\int dp. e^{-\frac{\beta}{2m}p^2}\big]^{3N}\\
 =& \frac{V^N}{N!} \big[\frac{2 m \pi}{\beta}\big]^{\frac{3N}{2}}\numberthis\label{eq:Z_beta}
 \end{align*}
@@ -423,7 +419,7 @@ P =& T \frac{\partial \log(Z)}{\partial V}\bigg|_T\\
 Given $F(x,y)$
 \begin{align*}
 dF =& \frac{\partial F}{\partial x}dx + \frac{\partial F}{\partial y}dy\\
-=& F_x dx + F_y dy\text{, say}\numberthis \label{eg:dF}
+=& F_x dx + F_y dy\text{, say}\numberthis \label{eq:dF}
 \end{align*}
 
 \begin{thm}[$\frac{\partial^2 F}{\partial x \partial y} = \frac{\partial^2 F}{\partial y \partial x}$]\label{thm:2partial}
@@ -432,7 +428,7 @@ dF =& \frac{\partial F}{\partial x}dx + \frac{\partial F}{\partial y}dy\\
 	\end{align*}
 \end{thm}
 
-From Theorem \ref{thm:2partial}, (\ref{eg:dF}) $\implies \frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$.
+From Theorem \ref{thm:2partial}, (\ref{eq:dF}) $\implies \frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$.
 
 \begin{defn}{Exact differential Form}
 	If $\frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$, we say that the differential form $dF = \frac{\partial F}{\partial x}dx + \frac{\partial F}{\partial y}dy$ is exact.
