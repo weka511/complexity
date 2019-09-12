@@ -270,7 +270,7 @@ A\triangleq &E - TS\tag*{Helmholtz Free Energy} \\
 
 \newglossaryentry{gls:helmholtz}{
 	name={Helmholtz Free Energy},
-	description={Thermodynamic potential that measures the useful work obtainable from a closed thermodynamic system at a constant temperature and volume $A\triangleq &E - TS$ }}
+	description={Thermodynamic potential that measures the useful work obtainable from a closed thermodynamic system at a constant temperature and volume $A\triangleq E - TS$ }}
 
 Variables come in pairs, e.g. (V,P):
 \begin{itemize}
@@ -374,21 +374,28 @@ P =& \rho T
 	\langle E -  \langle E \rangle \rangle^2 =& \langle E^2 \rangle - \langle E \rangle^2\text{. Now, from (\ref{eq:E:beta})}\\
 	\langle E \rangle=& - \frac{\partial \log(Z)}{\partial \beta}\text{, and from (\ref{eq:dZ})}\\
 	 \langle E^2 \rangle =& \frac{1}{Z} \frac{\partial^2 Z}{\partial \beta^2} \text{, whence}\\
-	 \langle E^2 \rangle =& \frac{1}{Z} \frac{\partial^2 Z}{\partial \beta^2} - \frac{1}{Z^2} (\frac{\partial Z}{\partial \beta})^2 \numberthis \label{E2Z}
+	 \langle E^2 \rangle =& \frac{1}{Z} \frac{\partial^2 Z}{\partial \beta^2} - \frac{1}{Z^2} \bigg(\frac{\partial Z}{\partial \beta}\bigg)^2 \numberthis \label{E2Z}
 \end{align*}
 All of statistical mechanics is about the power of the partition function.
 
+\newglossaryentry{gls:heat_capacity}{
+	name={heat capacity},
+	description={$C_V \triangleq \frac{\partial}{\partial T} \langle E \rangle$}}
+
 \begin{align*}
 	\frac{\partial^2 \log(Z)}{\partial \beta^2} =& \frac{\partial}{\partial \beta} \frac{1}{Z} \frac{\partial Z}{\partial \beta}\\
-	=& \frac{1}{Z} \frac{\partial^2 Z}{\partial \beta^2} - \frac{1}{Z^2} (\frac{\partial Z}{\partial \beta})^2\\
+	=& \frac{1}{Z} \frac{\partial^2 Z}{\partial \beta^2} - \frac{1}{Z^2} \bigg(\frac{\partial Z}{\partial \beta}\bigg)^2\\
 	(\Delta E)^2 =& \frac{\partial}{\partial \beta} \frac{1}{Z} \frac{\partial Z}{\partial \beta}\text{, from (\ref{E2Z})}\\
 	=& - \frac{\partial}{\partial \beta} \langle E \rangle\\
-	=&  \underbrace{\frac{\partial}{\partial T} \langle E \rangle}_{C_V=^\text{ heat capacity}} T^2\\
-	=& C_V T^2
+	=&  \frac{\partial}{\partial T} \langle E \rangle T^2 \tag*{from (\ref{eq:inverseT})}\\
+	=& C_V T^2\text{, where} \numberthis \label{eq:einstein:gibbs}\\
+	C_V \triangleq& \frac{\partial}{\partial T} \langle E \rangle \text{, \Gls{gls:heat_capacity}}
 \end{align*}
 
+
+
 \begin{itemize}
-	\item Einstein? Gibbs?
+	\item (\ref{eq:einstein:gibbs}) is dues to Einstein and Gibbs.
 	\item True for any system: we haven't assumed ideal gas.
 \end{itemize}
 
