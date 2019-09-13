@@ -19,12 +19,31 @@
 
 \begin{document}
 
+\newglossaryentry{gls:adiabatic}{
+	name={adiabatic},
+	description={
+		An adiabatic process is a process in which the entropy doesn’t
+		change.}}
+
+\newglossaryentry{gls:exact}{
+	name={exact},
+	description={
+		If $\frac{\partial G}{\partial y} = \frac{\partial H}{\partial x}$, we say that the differential form $dF = G dx + H dy$ is exact.}}
+	
+\newglossaryentry{gls:heat_capacity}{
+	name={heat capacity},
+	description={$C_V \triangleq \frac{\partial}{\partial T} \langle E \rangle$},
+	symbol=\ensuremath{C_V}}
+	
+\newglossaryentry{gls:helmholtz}{
+	name={Helmholtz Free Energy},
+	description={Thermodynamic potential that measures the useful work obtainable from a closed thermodynamic system at a constant temperature and volume $A\triangleq E - TS$ },
+	symbol=A}
+
 \maketitle
 
 \begin{abstract}
 These are my notes from the Statistical Mechanics lectures from Leonard Susskind's Theoretical Minimum series.
-
-\textit{Statistical mechanics is a branch of physics that applies probability theory to the study of the thermodynamic behavior of systems composed of a large number of particles. Statistical mechanics provides a framework for relating the microscopic properties of individual atoms and molecules to the macroscopic bulk properties of materials that can be observed in everyday life. Thus it explains thermodynamics as a result of the classical and quantum-mechanical descriptions of statistics and mechanics at the microscopic level.}
 \end{abstract}
 
 \tableofcontents
@@ -268,9 +287,7 @@ A\triangleq &E - TS\tag*{Helmholtz Free Energy} \\
 =& -T \log(Z) \numberthis \label{eq:helmholtz}
 \end{align*}
 
-\newglossaryentry{gls:helmholtz}{
-	name={Helmholtz Free Energy},
-	description={Thermodynamic potential that measures the useful work obtainable from a closed thermodynamic system at a constant temperature and volume $A\triangleq E - TS$ }}
+
 
 Variables come in pairs, e.g. (V,P):
 \begin{itemize}
@@ -327,11 +344,7 @@ Move piston slowly, and don't let energy in. Adiabatic: slowly, and no heat in o
 	\includegraphics[width=0.9\textwidth]{energy-levels-volume}
 \end{figure}
 
-\newglossaryentry{gls:adiabatic}{
-	name={adiabatic},
-	description={
-		An adiabatic process is a process in which the entropy doesn’t
-		change.}}
+
 
 
 \begin{thm}[Adiabatic Theorem]\label{thm:adiabatic}
@@ -350,7 +363,7 @@ Move piston slowly, and don't let energy in. Adiabatic: slowly, and no heat in o
 P =& - \frac{\partial E}{\partial V}\bigg|_S \\
 =& - \frac{\partial E}{\partial V}\bigg|_T + \frac{\partial S}{\partial V}\bigg|_T \frac{\partial E}{\partial S}\bigg|_V\text{, from Lemma \ref{thm:derivative:contour}}\\
 =& - \frac{\partial E}{\partial V}\bigg|_T + \frac{\partial S}{\partial V}\bigg|_T T\text{, from (\ref{eq:T})}\\
-=& - \frac{\partial(E-TS)}{\partial V}\bigg|_T \text{, from (\ref{eq:helmholtz})--\gls{gls:helmholtz}}\\
+=& - \frac{\partial(E-TS)}{\partial V}\bigg|_T \text{, from (\ref{eq:helmholtz})--\gls{gls:helmholtz}} \glssymbol{gls:helmholtz}\\
 =& T \frac{\partial \log(Z)}{\partial V}\bigg|_T \numberthis \label{eq:P_Z_V}
 \end{align*}
 
@@ -378,9 +391,7 @@ P =& \rho T
 \end{align*}
 All of statistical mechanics is about the power of the partition function.
 
-\newglossaryentry{gls:heat_capacity}{
-	name={heat capacity},
-	description={$C_V \triangleq \frac{\partial}{\partial T} \langle E \rangle$}}
+
 
 \begin{align*}
 	\frac{\partial^2 \log(Z)}{\partial \beta^2} =& \frac{\partial}{\partial \beta} \frac{1}{Z} \frac{\partial Z}{\partial \beta}\\
@@ -395,7 +406,7 @@ All of statistical mechanics is about the power of the partition function.
 
 
 \begin{itemize}
-	\item (\ref{eq:einstein:gibbs}) is dues to Einstein and Gibbs.
+	\item (\ref{eq:einstein:gibbs}) is due to Einstein and Gibbs.
 	\item True for any system: we haven't assumed ideal gas.
 \end{itemize}
 
@@ -458,24 +469,28 @@ P =& T \frac{\partial \log(Z)}{\partial V}\bigg|_T\\
 
 \subsection{Heat \& Work}
 
-Given $F(x,y)$
-\begin{align*}
-dF =& \frac{\partial F}{\partial x}dx + \frac{\partial F}{\partial y}dy\\
-=& F_x dx + F_y dy\text{, say}\numberthis \label{eq:dF}
-\end{align*}
+We shall find the following theorem useful.
 
-\begin{thm}[$\frac{\partial^2 F}{\partial x \partial y} = \frac{\partial^2 F}{\partial y \partial x}$]\label{thm:2partial}
+\begin{thm}[Clairaut-Schwarz]\label{thm:2partial}
+	If $\frac{\partial^2 F}{\partial x \partial y}$ and $\frac{\partial^2 F}{\partial y \partial x}$ both exist and are continuous at some point $(x_0,y_0)$, then there exists a neighbourhood of $(x_0,y_0)$ where:
 	\begin{align*}
 	\frac{\partial^2 F}{\partial x \partial y} = \frac{\partial^2 F}{\partial y \partial x}
 	\end{align*}
 \end{thm}
 
-From Theorem \ref{thm:2partial}, (\ref{eq:dF}) $\implies \frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$.
+Given $F(x,y)$
+\begin{align*}
+dF =& \frac{\partial F}{\partial x}dx + \frac{\partial F}{\partial y}dy\\
+=& F_x dx + F_y dy\text{, say}\numberthis \label{eq:dF}\\
+\frac{\partial F_x}{\partial y} =& \frac{\partial F_y}{\partial x}\text{, using Theorem \ref{thm:2partial}}\numberthis \label{eq:exact}
+\end{align*}
 
-\begin{defn}{Exact differential Form}
-	If $\frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$, we say that the differential form $dF = \frac{\partial F}{\partial x}dx + \frac{\partial F}{\partial y}dy$ is exact.
-\end{defn}
 
+
+\glsdesc{gls:exact}
+
+
+So 
 Consider an adiabatic change to system of cylinder and piston.
 
 \begin{align*}
