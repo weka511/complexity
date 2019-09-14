@@ -7,6 +7,9 @@
 \newtheorem{thm}{Theorem}
 \newtheorem{lemma}[thm]{Lemma}
 \graphicspath{{figs/}}
+\widowpenalty10000
+\clubpenalty10000
+
 \makeglossaries
 
 %opening
@@ -40,6 +43,11 @@
 	description={Thermodynamic potential that measures the useful work obtainable from a closed thermodynamic system at a constant temperature and volume $A\triangleq E - TS$ },
 	symbol=A}
 
+\newglossaryentry{gls:phase:transition} {
+	name={phase transition},
+	description={
+		The term phase transition (or phase change) is most commonly used to describe transitions between solid, liquid, and gaseous states of matter, as well as plasma in rare cases. A phase of a thermodynamic system and the states of matter have uniform physical properties. During a phase transition of a given medium, certain properties of the medium change, often discontinuously, as a result of the change of external conditions, such as temperature, pressure, or others. For example, a liquid may become gas upon heating to the boiling point, resulting in an abrupt change in volume.}}
+	
 \maketitle
 
 \begin{abstract}
@@ -243,12 +251,36 @@ Z(\beta) =& \sum_{i=1}^{N} e^-{\beta E_i} \text{. $Z$ is known as the Partition 
 
 \subsection{Ideal Gas}.
 
+We will find the following theorem useful.
+
+\begin{thm}[Gaussian Integral]\label{thm:gaussian_integral}
+	\begin{align*}
+		\int_{-\infty}^{\infty} e^{-a^2 x^2} dx = \frac{\sqrt{\pi}}{a}
+	\end{align*}
+\end{thm}
+
+\begin{proof}
+	\begin{align*}
+		\int_{-\infty}^{\infty} e^{-a^2 x^2} dx =& \frac{1}{a} \int_{-\infty}^{\infty} e^{-(ax)^2} d(ax) \\
+		=& \frac{1}{a} \int_{-\infty}^{\infty} e^{-z^2} dz \numberthis \label{eq:gauss_a}\\
+		\int_{-\infty}^{\infty} e^{-x^2} dx \int_{-\infty}^{\infty} e^{-y^2} dy =& \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{-(x^2+y^2)}  dx dy\\
+		=& \int_0^{2\pi} \int_{0}^{\infty}e^{-r^2} r dr d\theta\\
+		=& \int_0^{2\pi}  d\theta  r dr\\
+		=& 2\pi \int_{0}^{\infty}e^{-(r^2)} \frac{1}{2} d(r^2)\\
+		=& \pi \int_{0}^{\infty} e^{-z} dz\\
+		=& - \pi  e^{-z}\bigg\vert_{z=0}^{\infty}\\
+		=& \pi\text{, whence}\\
+		\int_{-\infty}^{\infty} e^{-x^2} dx =& \sqrt{\pi}\text{. Using \ref{eq:gauss_a}}\\
+		\int_{-\infty}^{\infty} e^{-a^2 x^2} dx =& \frac{\sqrt{\pi}}{a}
+	\end{align*}
+\end{proof}
+
 Assume molecules don't interact. State consists of 6N coordinates,  $\{X_1,...X_{3N}\}$ and momenta $\{P_1,...P_{3N}\}$. From (\ref{eq:partition:function})
 \begin{align*}
 Z =& \int d^{3N}x d^{3N}p . e^{- \frac{\beta}{2m} \sum_{n=1}^{3N} p_n^2}\\
 =& \frac{V^N}{N!} \int d^{3N}p . e^{- \frac{\beta}{2m} \sum_{n=1}^{3N} p_n^2}\textit{--Factorial is controversial}\\
 =& \frac{V^N}{N!} \big[\int dp. e^{-\frac{\beta}{2m}p^2}\big]^{3N}\\
-=& \frac{V^N}{N!} \big[\frac{2 m \pi}{\beta}\big]^{\frac{3N}{2}}\numberthis\label{eq:Z_beta}
+=& \frac{V^N}{N!} \big[\frac{2 m \pi}{\beta}\big]^{\frac{3N}{2}}\numberthis\label{eq:Z_beta}\text{, from Theorem \ref{thm:gaussian_integral}}
 \end{align*}
 We now use Stirling's formula (\ref{eq:stirling}).
 \begin{align*}
@@ -478,19 +510,17 @@ We shall find the following theorem useful.
 	\end{align*}
 \end{thm}
 
+
 Given $F(x,y)$
 \begin{align*}
 dF =& \frac{\partial F}{\partial x}dx + \frac{\partial F}{\partial y}dy\\
-=& F_x dx + F_y dy\text{, say}\numberthis \label{eq:dF}\\
-\frac{\partial F_x}{\partial y} =& \frac{\partial F_y}{\partial x}\text{, using Theorem \ref{thm:2partial}}\numberthis \label{eq:exact}
+=& G dx + H dy\text{, say}\numberthis \label{eq:dF}\\
+\frac{\partial G}{\partial y} =& \frac{\partial H}{\partial x}\text{, using Theorem \ref{thm:2partial}}\numberthis \label{eq:exact}
 \end{align*}
-
-
 
 \glsdesc{gls:exact}
 
-
-So 
+ 
 Consider an adiabatic change to system of cylinder and piston.
 
 \begin{align*}
@@ -513,30 +543,31 @@ dQ =& dE + P.dV\text{. If exact}\\
 
 Create a small overdense region. How fast does it move out? With the average velocity of molecules.
 
-In thermal equilibrium in a dilute gas, every molecule has velocity
+In thermal equilibrium in a dilute gas, every molecule has velocity $v$
 \begin{align*}
 \frac{3}{2} k_B T =& \frac{m}{2} v^2\text{ We'll use laboratory units, so $k_B$}\\
-v^2 =& \frac{3 k_B T}{m}\text{. A more detailed analysis gives:}\\
-c^2 =& \frac{\partial P}{m \partial \rho}\\
+v^2 =& \frac{3 k_B T}{m}\text{. A more detailed analysis gives:} \numberthis \label{eq:c:rough}\\
+c^2 =& \frac{1}{m}\frac{\partial P}{\partial \rho} \text{, where $c$ represents speed of sound (not light)}\\
 P =& \rho k_B T\text{ Ideal gas law}\\
 \implies&\\
-c^2 =& \frac{k_B T}{m}\text{ Within order of magnitude!}
+c^2 =& \frac{k_B T}{m}\text{. (\ref{eq:c:rough}) is within order of magnitude!}
 \end{align*}
 
 
 \subsection{A single harmonic oscillator in a heat bath}
 
 \begin{align*}
-Energy =& \frac{m}{2} \dot{x}^ 2 + \frac{k}{2} x^2\tag{ Not Bolzmann!}\\
+Energy =& \frac{m}{2} \dot{x}^ 2 + \frac{k}{2} x^2\tag{ $k$ is not Boltzmann!}\\
 =& \frac{1}{2m} p^ 2 + \frac{k}{2} x^2\\
 Z(\beta) =& \int e^{-\beta \frac{1}{2m} p^ 2 } e^{-\beta \frac{k}{2} x^2} dp dx\\
 =& \int e^{-\beta \frac{1}{2m} p^ 2 } dp \int e^{-\beta \frac{k}{2} x^2} dx\\
-=& \sqrt{\frac{2m\pi}{\beta}}\sqrt{\frac{2 \pi}{\beta k}}\\
-=& \frac{2 \pi}{\omega}\frac{1}{\beta}\text{, where $\omega=$ frequency}\numberthis\label{eq:Z:classical:q}\\
-\log(Z) =& const - \log(\beta)\\
-E =& - \frac{\partial \log(Z)}{\partial \beta}\\
+=& \sqrt{\frac{2m\pi}{\beta}}\sqrt{\frac{2 \pi}{\beta k}} \text{, using Theorem \ref{thm:gaussian_integral}}\\
+=& \frac{2 \pi}{\omega}\frac{1}{\beta}\text{, where} \numberthis\label{eq:Z:classical:q}\\
+\omega =& \sqrt{\frac{k}{m}} \text{ represents the frequency. Now}\\
+\log(Z) =& \log(2\pi) -\log(\omega) - \log(\beta)\text{, whence }\\
+E =& - \frac{\partial \log(Z)}{\partial \beta}\text{, from (\ref{eq:E:Z})}\\
 =& \frac{1}{\beta}\\
-=& T
+=& T \text{, from Theorem \ref{thm:inverseT}}
 \end{align*}
 
 \begin{itemize}
@@ -547,10 +578,10 @@ E =& - \frac{\partial \log(Z)}{\partial \beta}\\
 Note:
 \begin{itemize}
 	\item Energy doesn't depend on $m$;
-	\item Energy doesn't depend on $k$.
+	\item Energy doesn't depend on $k$. This seems wrong (make $k$ very large). This was a big problem around the end of 19th century (what about diatomic molecules 3 becomes 5?) We have ignored quantum mechanics!
 \end{itemize}
 
-This seems wrong (make $k$ very large). This was a big problem around the end of 19th century (what about diatomic molecules 3 becomes 5?) We have ignored quantum mechanics!
+
 
 \begin{align*}
 	Z(\beta) =& \sum_{n} e^{- \beta n \hbar \omega}\\
@@ -583,7 +614,7 @@ So for low temperature, oscillation is suppressed.	Where is the crossover betwee
 	\item $\beta\hbar \omega > 1$ Quantum.
 	\item $\beta\hbar \omega = 1\equiv\hbar \omega=T$ Crossover. At this temperature, system has one quantum of energy; it doesn't want to have less!
 	\item For very low temperature, diatomic molecule behaves like monoatomic.
-	\item For a stiff molecule, $\omega$ is high, to crossover temperature is high.
+	\item For a stiff molecule, $\omega$ is high, so crossover temperature is high.
 \end{itemize}
 
 c.f. Einstein specific heat.
@@ -605,7 +636,7 @@ Z(\beta) =&  \frac{1}{1 - e^{- \beta\hbar \omega}} \text{, from (\ref {Z_quantum
 \subsection{Contradiction between the 2nd and reversibility}
 \begin{itemize}
 	\item Newton's laws reversible
-	\item 2nd law
+	\item 2nd law of thermodynamics is not reversible!
 	\item Consider a small blob in phase space: according to Liouville's theorem, volume, and hence entropy, does not change! Correct view of microscopic system.
 	\item We need to coarse grain. Resolution is limited, both by QM, and by our instruments.
 	\item Imagine that blob turns into long thing snake (same volume), but we can't resolve, so we cover with blobs. We are now losing information. 
@@ -644,7 +675,7 @@ Boltzmann's Brain: most of the ways we could have gotten here are by random fluc
 
 \subsection{Magnetism}
 
-A normal magnet is made up of lots of little magnets (atoms). At a high enough temperature, orientation random. Cool it down, and we get small domains: same direction within domain. Domains start to grow, may have ferromagnetic transition.
+A normal magnet is made up of lots of little magnets (atoms). At a high enough temperature, orientation is random. If we cool it down, we get small domains: same direction within domain. Domains start to grow, may have ferromagnetic transition.
 
 $N$ simple magnets, either up or down. Assume magnetic field, no interaction. Spin up, $\sigma(1).$
 
@@ -653,17 +684,17 @@ E=&(n-m)\mu H\text{, where n are up, m down, $m+n=N$}\\
 \text{number of states} =&\frac{N!}{n!m!}\\
 Z =&\sum_{mn\mid m+n=N} e^{- \beta \mu H(n-m)}\\
 =&\sum_{n}\frac{N!}{n!(N-n)}X^nY^{N-n}\text{, where $X=e^{-\beta\mu H},Y=e^{\beta\mu H}$}\\
-=&\big(X+Y\big)^N\\
+=&\big(X+Y\big)^N\tag*{from the Binomial Theorem}\\
 =&\big(e^{-\beta\mu H}+e^{\beta\mu H}\big)^N\\
-=&2^N \big(\cosh(\beta\mu H)\big)^N
+=&2^N \big(\cosh(\beta\mu H)\big)^N\tag*{Definition of cosh}
 \end{align*}
 
 NB: biased by magnetic field!
 
 \begin{align*}
-	M =& \big< \frac{n-m}{N}\big>\text{, Magnetization} \\
+	M \triangleq& \big< \frac{n-m}{N}\big>\text{, Magnetization} \\
 	E =& M N \mu H\\
-	=& \frac{\partial \log(Z)}{\partial \beta}\\
+	=& \frac{\partial \log(Z)}{\partial \beta} \text{, from (\ref{eq:E:beta})}\\
 	=& - N \frac{\sinh(\beta\mu H)}{\cosh(\beta\mu H)} \mu H\\
 	M=& \tanh(\beta\mu H)
 \end{align*}
@@ -694,36 +725,36 @@ E =& - j \sum_{n} \sigma(n) \sigma(n+1)
 Consider one spin in a heat bath, so we can focus on one at a time
 
 \begin{align*}
-E =& -j \sigma\\
-Z =& \sum e^{-\beta j \sigma}\\
+E =& -j \sigma \text{, where $j=\mu B$}\\
+Z =& \sum_{\sigma=\pm 1} e^{-\beta j \sigma}\\
 =& e^{\beta j}+ e^{- \beta j}\\
-=& 2 \cosh(\beta j)\\
-\big<E\big> =& - \frac{\partial \log(Z)}{\partial \beta}\\
+=& 2 \cosh(\beta j) \numberthis \label{eq:E:cosh:beta:j}\\
+\big<E\big> =& - \frac{\partial \log(Z)}{\partial \beta}\text{, from (\ref{eq:E:beta})}\\
 =& - j \tanh{\beta j}\\
 \big<\sigma\big> =& - \tanh{\beta j}
 \end{align*}
 
 Figure \ref{fig:tanh} shows that spin points up for $\beta\rightarrow\infty$, so spin parallel to j for low temperature; spin all over the place at high temperature.
 
-Now consider a line of spins. We will assume a specific spin is up, and ask about correlation with some other spin $\big<\sigma(i) \sigma(i+n)\big>$. Assume first spin is up, and focus on relationships, $\mu_i\triangleq\sigma_i\sigma_{i+1}$ (state of link).
+Now consider a line of spins. We will assume a specific spin is up, and ask about correlation with some other spin $\big<\sigma(i) \sigma(i+n)\big>$. Assume first spin is up, and focus on relationships, $\mu_i\triangleq\sigma_i\sigma_{i+1}$ (state of link).\footnote{NB: if we reverse the sign of $j$ and reverse the sign of every $2_{nd} \sigma_i$, we get the same problem. }
 
 \begin{align*}
-E =& -j \sum \sigma_i \sigma_{i+1}\\
+E =& -j \sum_i \sigma_i \sigma_{i+1}\\
 =& -j \sum_{b} \mu_b\\
-Z =& \sum_{\sigma} e^{- j \beta\sum_i  \sigma_i \sigma_{i+1}}\\
+Z =& \sum_{\sigma} e^{- j \beta\sum_i  \sigma_i \sigma_{i+1}} \text{, Partition function}\\
 =& 2 \sum_{\mu} e^{- j \beta  \sum_b \mu_b} \text{, allowing for $\sigma_1$}\\
-=& \big(2 \cosh(\beta j)\big)^{N-1}\textit{, try this for 3 links}
+=& \big(2 \cosh(\beta j)\big)^{N-1}\text{, by the same argument as (\ref{eq:E:cosh:beta:j})--}\numberthis \label{eq:Z:cosh} 
 \end{align*}
 
 \begin{align*}
 \big< \mu \big> =& \big< \sigma_i \sigma_{i+1} \big>\\
-=& \tanh(\beta j) \textit{, prove this!}\text{ Correlation between neighbours}
+=& \tanh(\beta j) \textit{, prove this!}\text{ Correlation between neighbours}\numberthis \label{eg:Z_cosh}
 \end{align*}
 
 \begin{align*}
 \big < \sigma_i \sigma_{i+n} \big> =&  \big < \sigma_i \sigma_{i+1} \sigma_{i+1}... \sigma_{i+n} \big>\text{, since $\sigma_i^2 = 1$}\\
 =& \mu_1 \mu_2 ... \mu_{n-1}\\
-=& \big( \tanh(\beta j)\big)^{n-1}\text{, since $\mu_i$ independent}
+=& \big( \tanh(\beta j)\big)^{n-1}\text{, from (\ref{eg:Z_cosh}), since $\mu_i$ independent}
 \end{align*}
 
 If $T=0(\beta=\inf)$, $\tanh(..)=\pm1$, otherwise $\lvert \tanh(..) \rvert<1$ and $\tanh(..)^n$ becomes arbitrarily small as $n$ increases.
@@ -733,32 +764,35 @@ If $T=0(\beta=\inf)$, $\tanh(..)=\pm1$, otherwise $\lvert \tanh(..) \rvert<1$ an
 	\item We also see that there can be no magnetization in 1 dimensional system, except for $T=0$. C.f. "Chinese whispers". Likely to be long chains of agreement, then switch.
 \end{itemize}
  
+
 \subsection{Phase transitions in the Ising model}
 
-For two or more dimensions, there are several paths along which information about one site can propagate. So "Chinese whispers" might not apply.
+There is no \gls{gls:phase:transition} in the 1D Ising model. For two or more dimensions, there are several paths along which information about one site can propagate, so "Chinese whispers" might not apply.
 
-We will use a "mean field" approximation. In $d$ dimensions, where $d$ is very large, each site has $2d$ neighbours. We expect fluctuations to me much smaller than actual value. Let us assume bias; average spin is $\bar{\sigma}$.
+We will use a "mean field" approximation. In $d$ dimensions, where $d$ is very large, each site has $2d$ neighbours. We expect fluctuations to be much smaller than actual value. Let us assume bias; average spin is $\bar{\sigma}$.
 
 \begin{align*}
-E =& -j \sigma \sum_{neighbours} \sigma_{neighbour}\\
-\approxeq &-2 d j \sigma \bar{\sigma}\text{, mean field approximation.}\\
-Z =&...\\
-\bar{\bar{\sigma}} =& \tanh\big(\underbrace{(2 \beta d j ) \bar{\sigma}}_\text{$=y$, say}\big)\\
-\bar{\bar{\sigma}} =& \bar{\sigma} \text{"self-consistent" approximation. We now solve:}\\
+E =& -j \sigma \sum_{neighbours} \sigma_{neighbour} \text{, for one spin.}\\
+=& -j \sigma \sum_{neighbours} \bar{\sigma}\text{, where $\bar{\sigma}$ is average: mean field approximation.}\\
+\approxeq &-2 d j \sigma \bar{\sigma}\text{. This gets more accurate as $d$ increases.}\\
+Z =& 2 \cosh(\beta 2 d j \bar{\sigma}) \text{--compare (\ref{eq:Z:cosh})}\\
+\bar{\bar{\sigma}} =& \tanh\big(\underbrace{2 \beta d j  \bar{\sigma}}_\text{$=y$, say}\big) \text{, where $\bar{\bar{\sigma}}$ is expected $\sigma$} \\
+\bar{\bar{\sigma}} =& \bar{\sigma} \text{, ''self-consistent'' approximation. We now solve:}\\
 \frac{T y}{2 d j} =& \tanh(y)\numberthis \label{eq:tanh_mean_field}
 \end{align*}  
 
 Figure \ref{fig:tanh_mean_field} exhibits a phase-transition at $T=2dj$; a non zero solution for $\bar{\sigma}$ appears.
+\begin{itemize}
+	\item If T is very large there is non solution other than $y=0\implies\bar{\bar{\sigma}}=0$
+	\item Reduce $T$ until $\frac{T}{2 d j}= 1$, then straight line is a tangent to $\tanh(y)$
+	\item If $\frac{T}{2 d j}< 1$, there a a non-zero solution to (\ref{eq:tanh_mean_field}): system has a global non-zero average spin. Zero is a solution, but tiniest outside magnetization will bias esult.
+\end{itemize}
 
 \begin{figure}[H]
 	\caption{Solutions to mean field equation (\ref{eq:tanh_mean_field})}\label{fig:tanh_mean_field}
 	\includegraphics[width=0.8\textwidth]{tanh_mean_field}
 \end{figure}
 \section{Liquid-gas phase transition}
-
-\textit{Professor Susskind continues the discussion of phase transitions beginning with a review of the Ising model and the mean field approximation, and then presents the temperature and magnetic field parameters of the phase transition of a magnetic material. He then moves to the physics of the liquid-gas phase transition and develops the mathematical analogy between this case that that for a magnetic material.}
-
-\textit{Professor Susskind finishes the Theoretical Minimum series of courses by taking questions from the class, which leads to a discussion of the anthropic principle and fine tuning.}
 
 \subsection{Ising model continued}
 
@@ -772,7 +806,7 @@ E =& -J \sum_{links} \sigma(i) \sigma(j) + \sum_{i}h\sigma(i)
 
 2D lattice has 2 links per site.
 
-Ground state energy not important; it is the difference bweeen energy levels that matters.
+Ground state energy not important; it is the difference between energy levels that matters.
 
 Our mean field equation (\ref{eq:tanh_mean_field}) becomes
 \begin{align*}
