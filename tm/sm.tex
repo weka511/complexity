@@ -774,7 +774,7 @@ We will use a "mean field" approximation. In $d$ dimensions, where $d$ is very l
 \begin{align*}
 E =& -j \sigma \sum_{neighbours} \sigma_{neighbour} \text{, for one spin.}\\
 =& -j \sigma \sum_{neighbours} \bar{\sigma}\text{, where $\bar{\sigma}$ is average: mean field approximation.}\\
-\approxeq &-2 d j \sigma \bar{\sigma}\text{. This gets more accurate as $d$ increases.}\\
+\approxeq &-2 d j \sigma \bar{\sigma}\text{. This gets more accurate as $d$ increases.} \numberthis \label{eq:E:sigma}\\
 Z =& 2 \cosh(\beta 2 d j \bar{\sigma}) \text{--compare (\ref{eq:Z:cosh})}\\
 \bar{\bar{\sigma}} =& \tanh\big(\underbrace{2 \beta d j  \bar{\sigma}}_\text{$=y$, say}\big) \text{, where $\bar{\bar{\sigma}}$ is expected $\sigma$} \\
 \bar{\bar{\sigma}} =& \bar{\sigma} \text{, ''self-consistent'' approximation. We now solve:}\\
@@ -792,6 +792,58 @@ Figure \ref{fig:tanh_mean_field} exhibits a phase-transition at $T=2dj$; a non z
 	\caption{Solutions to mean field equation (\ref{eq:tanh_mean_field})}\label{fig:tanh_mean_field}
 	\includegraphics[width=0.8\textwidth]{tanh_mean_field}
 \end{figure}
+
+Why doesn't this work for $d=1$?
+
+Start with T=0: everything aligned--Figure \ref{fig:T:zero:aligned}.
+
+\begin{figure}[H]
+	\centering
+	\caption{Ground State, 1D}\label{fig:T:zero:aligned}
+	\includegraphics[width=0.7\textwidth]{T_zero_aligned}
+\end{figure}
+
+ We will compute the partition function--(\ref{eq:partition:function}). Starting from $T=0$, Figure \ref{fig:T:zero:aligned} is the dominant configuration, or in 2D, Figure \ref{fig:2d:t0}.
+ 
+ If we flip one spin in Figure \ref{fig:2d:t0} we increase energy by 4; we can do this at any point in lattice. If we flip two spins, energy increases by 6 if the spins are adjacent--Figure \ref{fig:2d:adjacent}--or 8 if they are apart; once again, there are many ways to do this.
+  
+ \begin{figure}[H]
+ 	\caption{Two dimensional Ising Model}
+ 	\begin{subfigure}[b]{0.45\textwidth}
+ 		\centering
+ 		\caption{Ground State}
+ 		\includegraphics[width=\textwidth]{ising2D0}\label{fig:2d:t0}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.45\textwidth}
+ 		\centering
+ 		\caption{Flip two adjacent spins}\label{fig:2d:adjacent}
+ 		\includegraphics[width=\textwidth]{ising2D2a}
+ 	\end{subfigure}
+ \end{figure}
+
+Figure \ref{fig:1D:flip_adjacent} shows that we break only two bonds when any number of adjacent spins are flipped. There are therefore many states that are close to Ground State in 1d case: this is the bases of the reason why the mean field approximation doesn't work for 1D.
+ 
+\begin{figure}[H]
+	\center
+	\caption{1D flip adjacent spins}\label{fig:1D:flip_adjacent}
+	\includegraphics[width=0.7\textwidth]{T_zero_aligned_flip}
+\end{figure}
+
+Returning to 2D, lets apply a small magnetic field $B$ favouring up-spin. Then (\ref{eq:E:sigma}) becomes:
+\begin{align*}
+	E =& -2 d j \sigma \bar{\sigma} - B\sigma\\
+	=& 	\big[-2 d j  \bar{\sigma} - B\big] \sigma \text{, and (\ref{eq:tanh_mean_field}) becomes}\\
+	\frac{T y}{2 d j} =& \tanh(y +B\beta)\numberthis\label{eq:tanh_mean_field_B}
+\end{align*}
+
+Figure \ref{fig:tanh_mean_field_B} illustrates to solution to (\ref{eq:tanh_mean_field_B}). There is no longer a solution $\sigma=0$ for finite $T$.
+\begin{figure}[H]
+	\caption{Solving $\frac{T y}{2 d j} = \tanh(y +B\beta)$}\label{fig:tanh_mean_field_B}
+	\includegraphics[width=0.9\textwidth]{tanh_mean_field_B}
+\end{figure}
+
+
 \section{Liquid-gas phase transition}
 
 \subsection{Ising model continued}
