@@ -28,6 +28,12 @@
 		An adiabatic process is a process in which the entropy doesn’t
 		change.}}
 
+\newglossaryentry{gls:chemical_potential}{
+	name={chemical potential},
+	description={
+		 chemical potential of a species is energy that can be absorbed or released due to a change of the particle number of the given species, e.g. in a chemical reaction or phase transition. The chemical potential of a species in a mixture is defined as the rate of change of free energy of a thermodynamic system with respect to the change in the number of atoms or molecules of the species that are added to the system.},
+	 symbol=\ensuremath{\mu}}
+ 
 \newglossaryentry{gls:exact}{
 	name={exact},
 	description={
@@ -878,7 +884,7 @@ When $h=0$, Figure \ref{fig:tanh_mean_field} shows two solution for sufficiently
 Figures \ref{fig:TgtTcrit} and \ref{fig:TltTcrit} shows the difference in behaviour at the critical point as $h$ crosses the horizontal axis. NB, we can avid this jump if we heat, and go around $T_{crit}$.
 
 \begin{figure}[H]
-	\caption{Phase transition at $T_{crit}$}
+	\caption{Phase transition at $T_{crit}$}\label{fig:Phase:transition:magnetic}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\center
 		\caption{$T>T_{crit}$: as $h$ crosses from -ve to +ve, $\sigma$ changes continuously}\label{fig:TgtTcrit}
@@ -894,7 +900,7 @@ Figures \ref{fig:TgtTcrit} and \ref{fig:TltTcrit} shows the difference in behavi
 
 \subsection{Liquid-gas phase transition}
 
-We will apply Ising model to Liquid-gas phase transition; it won't work for solid-liquid. Imagine that a box, and that a particle inside the box has less energy than one outside--Figure \ref{fig:box1}; that energy is known as the chemical potential--$\mu$. In Figure \ref{fig:box2}, particles inside box have lower energy, so the Boltzmann distribution will favour them.
+We will apply Ising model to Liquid-gas phase transition; it won't work for solid-liquid. Imagine that a box, and that a particle inside the box has less energy than one outside--Figure \ref{fig:box1}; that energy is known as the \gls{gls:chemical_potential}--\glssymbol{gls:chemical_potential}. In Figure \ref{fig:box2}, particles inside box have lower energy, so the Boltzmann distribution will favour them.
 
 \begin{figure}[H]
 	\caption{Box of fluid}
@@ -938,7 +944,7 @@ this translates in the language of our particles of fluid which
 are hard core and have short range attraction.
 	
 \begin{figure}[H]
-	\caption{Fluid modeled as a lattice}\label{fig:lattice}
+	\caption{Fluid modelled as a lattice}\label{fig:lattice}
 	\begin{subfigure}[b]{0.3\textwidth}
 		\center
 		\caption{Ground State}\label{fig:lattice0}
@@ -960,6 +966,72 @@ are hard core and have short range attraction.
 	\end{subfigure}
 \end{figure}
 
+For an empty lattice, Figure \ref{fig:lattice0} we find:
+\begin{align*}
+	E =& -J \sum_{links} \sigma_i \sigma_j - \underbrace{2 j N_{links}}_\text{Ground state energy}\text{, but we can ingore constant term, giving}\\
+	=& -J \sum_{links} \sigma_i \sigma_j\numberthis \label{eq:empty_lattice}
+\end{align*}
+
+\begin{itemize}
+	\item If we add one particle, Figure \ref{fig:lattice1} we have four bonds, Figure \ref{fig:lattice2}, so we add energy $8J$.
+	\item Two particles that aren't adjacent give $16J$, even if they are diagonals
+	\item Two adjacent gives $12J$.
+\end{itemize} Note that there is a chemical potential, since on particle gives $8J$. But we want to be able to vary potential.
+
+
+\begin{align*}
+ 	E =& -J \sum_{links} \sigma_i \sigma_j + \underbrace{ h \sum_{sites}\sigma_i}_\text{adds $2h$ each time we add one particle} \text{, modifying (\ref{eq:empty_lattice})} \numberthis\label{eq:lattice:chem:potential}
+\end{align*}
+
+So the energy to introduce an isolated particles becomes $8J+2h$.
+
+Now we have everything we need to study the liquid-gas
+transition in a fluid of molecules. From our Ising magnet
+model we have built a system that is equivalent to a col-
+lection of particles on a lattice. It has the following three
+specifications:
+\begin{enumerate}
+	\item It has a variable chemical potential. Notice how we
+	vary it. We do it by varying the magnetic field. The
+	magnetic field gave us an energy per particle.
+	\item It has the hard core billiard ball potential which is
+	repulsive.
+	\item And it has a short-range attraction, the coefficient of
+	which is 4j (going from 16j when the two particles
+	are far apart, to 12j when they are separated by only
+	one link).
+\end{enumerate}
+
+We want to keep the molecular properties fixed, therefore
+we are not going to play with j. That has to do with the
+molecular properties. By design, it tells us what the potential energy between them is.
+
+All we can vary is the chemical potential. And that is the
+same thing in our model as varying h.
+So the problem of the behaviour of the molecules of a fluid,
+with the three specs listed above, has become exactly the
+same as the previous problem of a magnet plunged into an
+external field, which was summarized in Figure \ref{fig:Phase:transition:magnetic}. They
+obey precisely the same model.
+
+There is a temperature that we can vary. Particles are at
+some temperature. And there is a chemical potential that
+we can vary. Now $h$ is not exactly the chemical potential.
+There is an offset by an amount $8j$.
+
+What about the particle density? We haven’t discussed it
+yet. So let’s do it. How many particles are there, on the
+average, at a particular point? The answer is somewhere,
+first of all, between 0 and 1. Of course the number of particle is either 0 or 1, but we are talking about the average.
+
+The average number of particles at a site is $\frac{1+\bar{\sigma}}{2}$.
+
+\begin{itemize}
+	\item If $T>T_{crit}$, there is no jump as we vary chemical potential (by varying pressure);
+		\item If $T<Y_{crit}$, there is a jump as we vary chemical potential-- boiling or condensation.
+\end{itemize}
+
+https://youtu.be/IWtcFAP3ju4?t=4579
 
 \printglossaries
 
