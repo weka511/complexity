@@ -15,15 +15,24 @@
 
 import math
 
-def get_entropy(z):
+def get_probability(z):
     counts = {}
     for v in set(z):
         counts[v]=0
     for v in z:
         counts[v]+=1
     total = sum(counts.values())
-    P = {v:count/total for v,count in counts.items()}
+    return {v:count/total for v,count in counts.items()}
+    
+def get_entropy(P):
     return sum(- p * math.log(p,2) for p in P.values())
+
+def get_conditional_entropy(P_XY,P_Other,index=0):
+    total = 0
+    for (x,y),p_xy in P_XY.items():
+        p_other = P_Other[x if index==0 else y]
+        total += p_xy*math.log(p_other/p_xy,2)
+    return total
 
 if __name__=='__main__':
     with open('santafe-temps.csv') as f:
@@ -37,7 +46,19 @@ if __name__=='__main__':
             parts = line.strip().split(',')
             x_raw.append(int(parts[2]))
             y_raw.append(float(parts[1]))
-        x = [t>=80 for t in x_raw]
-        y = [p>0 for p in y_raw]
-        print ('I(X)={0:.3f}, I(Y)={1:.3f}'.format(get_entropy(x),get_entropy(y)))
+            
+        x    = [t>=80 for t in x_raw]
+        y    = [p>0 for p in y_raw]
+        xy   = [(t,p) for t in x for p in y]
+        
+        P_X  = get_probability(x)
+        P_Y  = get_probability(y)
+        P_XY = get_probability(xy)
+        
+        print ('I(X)={0:.3f}, I(Y)={1:.3f}, I(XY)={2:.3f}, I(Y_X)= {3:.3f}, I(X_Y)= {4:.3f}'.format(
+            get_entropy(P_X),
+            get_entropy(P_Y),
+            get_entropy(P_XY),
+            get_conditional_entropy(P_XY,P_X),
+            get_conditional_entropy(P_XY,P_Y,index=1)))
         
