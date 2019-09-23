@@ -55,10 +55,12 @@ if __name__=='__main__':
         P_Y  = get_probability(y)
         P_XY = get_probability(xy)
         
-        print ('I(X)={0:.3f}, I(Y)={1:.3f}, I(XY)={2:.3f}, I(Y_X)= {3:.3f}, I(X_Y)= {4:.3f}'.format(
+        print ('I(X)={0:.3f}, I(Y)={1:.3f}, I(XY)={2:.3f}, I(Y_X)= {3:.3f}, I(X_Y)= {4:.3f}, I(X:Y)= {5:.3f}'.format(
             get_entropy(P_X),
             get_entropy(P_Y),
             get_entropy(P_XY),
             get_conditional_entropy(P_XY,P_X),
-            get_conditional_entropy(P_XY,P_Y,index=1)))
+            get_conditional_entropy(P_XY,P_Y,index=1),
+            get_entropy(P_XY) - get_conditional_entropy(P_XY,P_X) - get_conditional_entropy(P_XY,P_Y,index=1)
+        ))
         
