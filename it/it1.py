@@ -47,20 +47,22 @@ if __name__=='__main__':
             x_raw.append(int(parts[2]))
             y_raw.append(float(parts[1]))
             
-        x    = [t>=80 for t in x_raw]
-        y    = [p>0 for p in y_raw]
-        xy   = [(t,p) for t in x for p in y]
+        x    =  [t>=80 for t in x_raw]
+        y    =  [p>0 for p in y_raw]
+        xy   =  [(t,p) for t in x for p in y]
         
-        P_X  = get_probability(x)
-        P_Y  = get_probability(y)
-        P_XY = get_probability(xy)
+        P_X  =  get_probability(x)
+        P_Y  =  get_probability(y)
+        P_XY =  get_probability(xy)
         
-        print ('I(X)={0:.3f}, I(Y)={1:.3f}, I(XY)={2:.3f}, I(Y_X)= {3:.3f}, I(X_Y)= {4:.3f}, I(X:Y)= {5:.3f}'.format(
-            get_entropy(P_X),
-            get_entropy(P_Y),
-            get_entropy(P_XY),
-            get_conditional_entropy(P_XY,P_X),
-            get_conditional_entropy(P_XY,P_Y,index=1),
-            get_entropy(P_XY) - get_conditional_entropy(P_XY,P_X) - get_conditional_entropy(P_XY,P_Y,index=1)
-        ))
+        I_X  =  get_entropy(P_X)
+        I_Y  =  get_entropy(P_Y)
+        I_XY =  get_entropy(P_XY)
+        I_Y_X = get_conditional_entropy(P_XY,P_X)
+        I_X_Y = get_conditional_entropy(P_XY,P_Y,index=1)        
+        print ('I(X)={0:.3f}, I(Y)={1:.3f}, I(XY)={2:.3f}, I(X_Y)= {3:.3f}, I(Y_X)= {4:.3f}'.format(
+            I_X, I_Y, I_XY, I_X_Y, I_Y_X))
+ 
+        # Calculate mutual information 3 different ways       
+        print (('I(X:Y)= {0:.5f}, {1:.5f}, {2:.5f}').format(I_X-I_X_Y, I_Y-I_Y_X, I_XY-I_X_Y-I_Y_X))
         
