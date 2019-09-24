@@ -13,6 +13,15 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
+# Download daily Santa Fe, NM weather data for August 2016 from 
+# https://figshare.com/s/de109f378939dfc0ed0b(santafe-temps.csv).
+# Define X as a random variable that indicates whether it is hot on any given date
+# (let X=hot when the MaxTemp for the day is greater than or equal to 80 degrees Fahrenheit and 
+# X=not-hot otherwise). Define Y as a random variable that indicates whether there is rain on a given date
+# (let Y=rain when Precipitation is greater than 0 and Y=no-rain otherwise).
+# Compute the following information theoretic quantities: 
+# I(X), I(Y), I(XY), I(X|Y), I(Y|X), and the mutual information I(X:Y)
+
 import math
 
 def get_probability(z):
