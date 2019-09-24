@@ -28,11 +28,7 @@ def get_entropy(P):
     return sum(- p * math.log(p,2) for p in P.values())
 
 def get_conditional_entropy(P_XY,P_Other,index=0):
-    total = 0
-    for (x,y),p_xy in P_XY.items():
-        p_other = P_Other[x if index==0 else y]
-        total += p_xy*math.log(p_other/p_xy,2)
-    return total
+    return sum([p_xy*math.log(P_Other[x if index==0 else y]/p_xy,2) for (x,y),p_xy in P_XY.items()])
 
 if __name__=='__main__':
     with open('santafe-temps.csv') as f:
