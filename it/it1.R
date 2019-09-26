@@ -23,27 +23,32 @@
 # I(X), I(Y), I(XY), I(X|Y), I(Y|X), and the mutual information I(X:Y)
 
 rm (list=ls())
+
 if (!require('entropy')){
   install.packages('entropy')
   library('entropy')
 }
 
-my.path  <- '~/../complexity/it'
+# Find directory that we are executing from -
+# only works from source -
+# https://stackoverflow.com/questions/1815606/determine-path-of-the-executing-script
+
+script.dir <- dirname(sys.frame(1)$ofile)
 
 
-raw.data <- read.csv(file.path(my.path,'santafe-temps.csv'))
-X        <- unlist(lapply(raw.data$MaxTemp,function(t) {return (if (t>=80) 1 else 0)}))
-Y        <- unlist(lapply(raw.data$Precipation,function(p) {return (if(p>0) 1 else 0)}))
+raw.data   <- read.csv(file.path(script.dir,'santafe-temps.csv'))
+X          <- unlist(lapply(raw.data$MaxTemp,function(t) {return (if (t>=80) 1 else 0)}))
+Y          <- unlist(lapply(raw.data$Precipation,function(p) {return (if(p>0) 1 else 0)}))
 
-IX       <- entropy(discretize(X,numBins = 2),unit='log2')
-IY       <-entropy(discretize(Y,numBins = 2),unit='log2')
+IX         <- entropy(discretize(X,numBins = 2),unit='log2')
+IY         <- entropy(discretize(Y,numBins = 2),unit='log2')
 
-XY       <- discretize2d(X,Y,numBins1 = 2,numBins2 = 2)
-IXY      <- entropy(XY,unit='log2')
+XY         <- discretize2d(X,Y,numBins1 = 2,numBins2 = 2)
+IXY        <- entropy(XY,unit='log2')
 
-IX_Y     <- IXY - IY
-IY_X     <- IXY - IX
-I_XY     <- IX + IY - IXY
+IX_Y       <- IXY - IY
+IY_X       <- IXY - IX
+I_XY       <- IX + IY - IXY
 
 print (sprintf('I(X)=%.3f,I(Y)=%.3f,I(XY)=%.3f',IX,IY,IXY))
 print (sprintf('I(X|Y)=%.3f,I(Y|X)=%.3f,I(X:Y)=%.3f',IX_Y,IY_X,I_XY))
