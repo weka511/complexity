@@ -25,49 +25,34 @@ These are my notes from the Advanced Quantum Mechanics lectures from Leonard Sus
 
 \tableofcontents
 
-\section{Review of quantum mechanics}
+\section{Review and Introduction to Symmetry}
 
-Classical Mechanics concepts:
+\subsection{Review of Quantum Mechanics}
+
 \begin{itemize}
-	\item System
-	\item State of System (labelled)
-	\item Laws of Motion/Updating State
+	\item States: $\ket{\Psi}$ and $\bra{\Psi}$
+	\item Observables: $A=A^{\dag}$
+	\item Eigenvalues represent values that can be measured: $A\ket{\alpha} = \alpha\ket{\alpha}$
+	\item Inner product $\braket{\phi|\psi}$	
+	\item Orthogonal $\braket{\phi|\psi}=0$
+	\item Independent values $\braket{x|x^{\prime}}=0$
+	\item Wave function $\braket{x|\psi} = \psi(x)$
+	\item Probability $P(x)=\psi^*(x)\psi(x)$
+	\item Momentum $p\psi(x)=- i \hslash \frac{\partial \Psi}{\partial x}$
+	\item Evolution $U(t)-- \ket{\psi(0)} = \ket{\psi(t)}$
+	\item $\braket{\phi|\psi}=\braket{\phi|U^{\dagger}U|\psi}$ i.e. $U^{\dagger}U=I$
+	\item $U(\epsilon)= I + \epsilon G$, so $G=-G^{\dagger}$, $G=- i H$
+	\item For general $t$, $U(t)=e^{- i H t}$
 \end{itemize}
-
-Once we move outside the range of parameters that we are familiar with from ordinary experience, we run into things that we cannot visualize. Nobody can visualize the motion of an electron: we aren't wired for it. We aren't wired to visualize 4-dimensional space-time. Confusion comes from trying to visualize things that we aren't wired for. There is no substitute for using mathematics to abstract things. We can't even visualize 2D, just a surface embedded in 3D. 
-
-Quantum mechanics concepts:
-\begin{itemize}
-	\item System (undefined quantity)
-	\item Closed system (not interacting with anything else)
-	\item Logic is different from classical
-\end{itemize}
-
-Introduce qbit: $\sigma=\pm1$ or $\uparrow\downarrow$
-
-An experiment involves two systems - the second is the apparatus, which senses qbit. Initially apparatus blank: after measurement $\pm1$. If measurement is $+1$, it prepares system in state $+1$. A device that measures is a device that prepares. Turn detector upside down, we get $-1$: qbit has a sense of directionality. Is it a vector?
-
-Now turn detector on its side. Now our $\uparrow$ becomes  $\pm1$. Repeat and always get same $+1$ or $-1$. Random first time, then same! So, when we rotate:
-\begin{itemize}
-	\item $180\degree$: $+1\rightarrow-1$;
-	\item $90\degree$: $+1\rightarrow\pm1$, average is zero;
-	\item $\theta$: $+1\rightarrow\pm1$, average $\cos \theta$.
-\end{itemize}
-
-We are treating detector as classical system, but eventually we must treat it as quantum also.
-
-Review vectors as used in quantum mechanics.
 
 \begin{align*}
-\ket{a}+\ket{b}=&\ket{c}\text{, addition}\\
-z\ket{a} =& \ket{a^{\prime}} \text{, multiplication by a complex number}\\
-\ket{a} \longleftrightarrow & \bra{a} \text {, dual space}\\
-\ket{a}+\ket{b}\longleftrightarrow & \bra{a} + \bra{b}\text{, addition}\\
-z\ket{a} \longleftrightarrow & \bra{a}z^*\\
-\braket{b|a} =& \braket{a|b}^*\\
-\braket{a|a} \ge& 0 \text{, squared length}\\
-\text{If }\braket{a|b}=& 0 \text{, we say vectors orthogonal}
-\end{align*}
+=& e^{-i \hslash \epsilon} \ket{\psi(t)}\\
+=& (1- i \hslash \epsilon)\ket{\psi(t)}\\
+\frac{\ket{\psi(t+\epsilon)} -\ket{\psi(t)} }{\epsilon}&= -i \hslash \ket{\psi(t)}\\
+\frac{\partial \ket{\psi}}{\partial t} =& -i H \ket{\psi(t)} \text{, Time dependent Schr\"odinger Equation}\\
+H \ket{\psi} =& E \ket{\psi}\text{, Time independent Schr\"odinger Equation}
+\end{align*} 
+\subsection{Introduction to Symmetry}
 
 \section{Symmetry groups and degeneracy}
 
@@ -77,7 +62,7 @@ z\ket{a} \longleftrightarrow & \bra{a}z^*\\
 
 \section{Fermions: a tale of two minus signs}
 
-	Professor Susskind presents the quantum mechanics of multi-particle systems, and demonstrates that fermions and bosons are distinguished by the two possible solutions to the wave function equation when two particles are swapped.  When two particles... [more] 
+
 
 \section{Quantum Field Theory}
 
