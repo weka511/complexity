@@ -1,6 +1,6 @@
 \documentclass[]{article}
 
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket}
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
@@ -25,9 +25,7 @@ These are my notes from the Advanced Quantum Mechanics lectures from Leonard Sus
 
 \tableofcontents
 
-\section{Review and Introduction to symmetry}
-
-\subsection{Review of quantum mechanics}
+\section{Review of quantum mechanics}
 
 Classical Mechanics concepts:
 \begin{itemize}
@@ -42,8 +40,34 @@ Quantum mechanics concepts:
 \begin{itemize}
 	\item System (undefined quantity)
 	\item Closed system (not interacting with anything else)
+	\item Logic is different from classical
 \end{itemize}
-\subsection{Introduction to symmetry}
+
+Introduce qbit: $\sigma=\pm1$ or $\uparrow\downarrow$
+
+An experiment involves two systems - the second is the apparatus, which senses qbit. Initially apparatus blank: after measurement $\pm1$. If measurement is $+1$, it prepares system in state $+1$. A device that measures is a device that prepares. Turn detector upside down, we get $-1$: qbit has a sense of directionality. Is it a vector?
+
+Now turn detector on its side. Now our $\uparrow$ becomes  $\pm1$. Repeat and always get same $+1$ or $-1$. Random first time, then same! So, when we rotate:
+\begin{itemize}
+	\item $180\degree$: $+1\rightarrow-1$;
+	\item $90\degree$: $+1\rightarrow\pm1$, average is zero;
+	\item $\theta$: $+1\rightarrow\pm1$, average $\cos \theta$.
+\end{itemize}
+
+We are treating detector as classical system, but eventually we must treat it as quantum also.
+
+Review vectors as used in quantum mechanics.
+
+\begin{align*}
+\ket{a}+\ket{b}=&\ket{c}\text{, addition}\\
+z\ket{a} =& \ket{a^{\prime}} \text{, multiplication by a complex number}\\
+\ket{a} \longleftrightarrow & \bra{a} \text {, dual space}\\
+\ket{a}+\ket{b}\longleftrightarrow & \bra{a} + \bra{b}\text{, addition}\\
+z\ket{a} \longleftrightarrow & \bra{a}z^*\\
+\braket{b|a} =& \braket{a|b}^*\\
+\braket{a|a} \ge& 0 \text{, squared length}\\
+\text{If }\braket{a|b}=& 0 \text{, we say vectors orthogonal}
+\end{align*}
 
 \section{Symmetry groups and degeneracy}
 
