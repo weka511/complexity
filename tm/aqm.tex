@@ -94,7 +94,81 @@ V =& I -  \epsilon \frac{\partial }{\partial x}\\
 =& I - \frac{i \epsilon}{\hslash}P\\
 G =& \frac{P_x}{\hslash}\text{, Generator of $x$ translation}
 \end{align*}
+
+
 \section{Symmetry groups and degeneracy}
+
+Crystal symmetry: translate one lattice spacing.
+
+Degeneracy of energy levels: more than one state with given energy. Only happens when there is a symmetry.
+
+Rotation.
+
+\begin{align*}
+\psi(\theta) \rightarrow & \psi(\theta - \epsilon)\\
+\delta\psi =& - \epsilon \frac{\partial \psi}{\partial \theta}\\
+=& -i \epsilon \big(-i \frac{\partial \psi}{\partial \theta}\big).\text{ Now defining the Angular Momentum operator $L$}\\
+- i \frac{\partial}{\partial \theta} =&\hslash L \\
+\delta\psi =& - \frac{i \epsilon}{\hslash} L \psi \text{, generator of rotation}
+\end{align*}
+
+Eigenvalues and Eigenvectors.
+
+\begin{align*}
+L\ket{\psi} =& l \ket{\psi}\\
+-i \hslash \frac{\partial \psi}{\partial \theta} =& \psi\\
+\psi(\theta) =& e^{\frac{i m \theta}{\hslash}}\text{Now, we want $\psi$ single valued, so}\\
+\frac{m}{\hslash}=&k\text{, some integer. But, by convention, redefine $m$}\\
+L=& m \hslash
+\end{align*}
+This is the quantization of angular momentum.
+
+$n\ne 0 \implies E(m)=E(-m)$, so we have degeneracy. A magnetic field breaks this; symmetry isn't enough for degeneracy, but adding reflection symmetry is sufficient (but need two non-commuting symmetries).
+
+\begin{thm}[Reflection and rotation don't commute]
+	If $M\psi(\theta) = \psi(-theta)$, $ML \ne LM$
+\end{thm}
+\begin{proof}
+	\begin{align*}
+	MLe^{i m \theta} =& M m e^{i m \theta}\\
+	=&m e^{- i m \theta}\\
+	LMe^{i m \theta} =& L e^{- i m \theta}\\
+	=& -m e^{- i m \theta}
+	\end{align*}
+\end{proof}
+
+\begin{align*}
+[L,H]=& 0\\
+[L_x,L_y] =& L_z\\
+[L_y,L_z] =& L_x\\
+[L_z,L_x] =& L_y\\
+L_{\pm} \triangleq& L_x \pm i L_y\\
+[L_{\pm},L_Z] =& \mp L_{\pm}
+\end{align*}
+Suppose we have found one eigenvector:
+\begin{align*}
+L_z \ket{m} =& m \ket{m}\\
+[L_+,L_z] \ket{m} =& \big(L_+L_z - L_z,L_+\big) \ket{m}\\
+=&- L_+ \ket{m}\\
+ m L_+\ket{m} + L_+\ket{m} =& L_z L_+ \ket{m} \text{, whence}\\
+ \big(m + 1 \big)L_+\ket{m}  =& L_z L_+ \ket{m} \text{, i.e. $L_+ \ket{m}$ is an eigenvector, eigenvalue $m+1$.}
+\end{align*}
+
+Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. This terminates if  $L_{\pm} \ket{m}=0$. From symmetry we can show $m$ integral of half integral.
+
+\begin{thm}[Eigenvectors have same energy.]
+	 $H \ket{m} = E \ket{m} \implies H \ket{m \pm 1} = E \ket{m \pm 1}$
+\end{thm} 
+\begin{proof}
+	\begin{align*}
+	H \ket{m} =& E \ket{m}\\
+	H L_+ \ket{m} =& L_+ H \ket{m}\\
+	=& L_+ E \ket{m}\\
+	H \ket{m+1} =& E \ket{m+1}
+	\end{align*}
+\end{proof}
+
+Since symmetries don't commute, we have degeneracy.
 
 \section{Atomic orbits and harmonic oscillators}
 
