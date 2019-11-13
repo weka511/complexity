@@ -205,7 +205,7 @@ L^2\ket{l}=&l (l+1) \ket{l}
 
 Classically:
 \begin{align*}
-H =& \frac{p^2}{2m} + V(r) \text{, conserved}\\
+H =& \frac{p^2}{2m} + V(r) \text{, conserved} \numberthis \label{eq:classical:Hamiltonian}\\
 L =& r \times P  \text{, conserved, so use xy plane}\\
 H =& \frac{p_r^2+p_{\theta}^2}{2m} +V(r)\\
 =& \frac{P_r^2}{2m} + \frac{L^2}{2m r^2} + V(r) 
@@ -213,14 +213,55 @@ H =& \frac{p_r^2+p_{\theta}^2}{2m} +V(r)\\
 
 Schr\"odinger Equation:
 \begin{align*}
--\frac{\hslash^2}{2m}\frac{\partial^2 \psi(r)}{\partial r^2} + \frac{l(l+1)\hslash^2}{r^2}\psi(r)+V(r)\psi(r) =& E\psi(r)
+-\frac{\hslash^2}{2m}\frac{\partial^2 \psi(r)}{\partial r^2} + \frac{l(l+1)\hslash^2}{r^2}\psi(r)+V(r)\psi(r) =& E\psi(r)\numberthis \label{eq:schroedinger:central}
 \end{align*}
 
 Number of nodes (zeroes) characterize energy levels.
 
-\url{https://youtu.be/LKYs_xwWKY4?t=4606}
+Classical mechanics inspires choice of Hamiltonian(\ref{eq:classical:Hamiltonian}), but Schr\"odinger equation (\ref{eq:schroedinger:central}) is quantum.
+
 \subsection{Harmonic oscillators}
 
+Everything in physic that disturbs equilibrium by a small amount can be approximated by a simple harmonic oscillator. 
+
+Start with suspended mass $(m=1)$, spring constant $(k=\omega^2)$
+
+\begin{align*}
+H =& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2}\\
+=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) - \frac{i \omega}{2} [x,P] \text{, Dirac!}\\
+=& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2}\\
+=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) + \underbrace{\frac{\hslash \omega}{2}}_\text{ground state energy}\\
+=&\omega \frac{\big(P + i \omega x \big)}{\sqrt{2 \omega}}\frac{\big(P - i \omega x \big)}{\sqrt{2 \omega}}\text{, we'll drop the ground state energy fot the time being}
+\end{align*}
+
+We'll introduce raising and lowering operators:
+
+\begin{align*}
+a^+ \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \\
+a^- \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, Hermitean conjugate} \\
+H =& \omega a^+ a^-\text{. We'll take the commutator:}\numberthis \label{eq:shM}\\
+[a^-,a^+] =& \frac{1}{2\omega}\big[P - i \omega x,P + i \omega x\big]\\
+=& 1\text{. We also define} \numberthis \label{eq:a:comm}\\
+N \triangleq& a^+a^-\text{, so (\ref{eq:shM}) becomes}\\
+H =& \omega N
+\end{align*}
+$N$ is Hermitean, so it has a complete set of eigenvalues and eigenvectors.
+
+\begin{align*}
+N\ket{n} =& n\ket{n}\\
+a^+a^-\ket{n} =& n\ket{n}\\
+a^+(a^-a^+ - a^+a^-)\ket{n} =& a^+\ket{n}\text{, using (\ref{eq:a:comm})}\\
+a^+a^-a^+ \ket{n} =& a^+a^+a^-\ket{n} + a^+\ket{n}\\
+N a^+ \ket{n} =& (n+1) a^+ \ket{n}
+\end{align*}
+
+So $a^+$ acts as raising operator, and we can show $a^-$ is lowering. Also $a^-$ eventually leads to $0$.
+
+\begin{align*}
+a^+\ket{n} =& \sqrt{n+1}\ket{n+1}\\
+a^-\ket{n} =& \sqrt{n}\ket{n-1}
+\end{align*}
+ 
 \section{Spin}
 
 
