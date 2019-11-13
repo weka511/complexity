@@ -151,10 +151,10 @@ L_z \ket{m} =& m \ket{m}\\
 [L_+,L_z] \ket{m} =& \big(L_+L_z - L_z,L_+\big) \ket{m}\\
 =&- L_+ \ket{m}\\
  m L_+\ket{m} + L_+\ket{m} =& L_z L_+ \ket{m} \text{, whence}\\
- \big(m + 1 \big)L_+\ket{m}  =& L_z L_+ \ket{m} \text{, i.e. $L_+ \ket{m}$ is an eigenvector, eigenvalue $m+1$.}
+ \big(m + 1 \big)L_+\ket{m}  =& L_z L_+ \ket{m} \text{, i.e. $L_+ \ket{m}$ is an eigenvector, eigenvalue $m+1$.}\numberthis \label{eq:create_m}
 \end{align*}
 
-Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. This terminates if  $L_{\pm} \ket{m}=0$. From symmetry we can show $m$ integral of half integral.
+Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. This terminates if  $L_{\pm} \ket{m}=0$. From symmetry we can show $m$ integral or half integral.
 
 \begin{thm}[Eigenvectors have same energy.]
 	 $H \ket{m} = E \ket{m} \implies H \ket{m \pm 1} = E \ket{m \pm 1}$
@@ -168,11 +168,61 @@ Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. This terminates if
 	\end{align*}
 \end{proof}
 
-Since symmetries don't commute, we have degeneracy.
+Since symmetries commute, we have degeneracy.
 
 \section{Atomic orbits and harmonic oscillators}
 
+\subsection{Atomic orbits}
+
+A particle moving in a central force field: angular momentum and orbital plane preserved. State is $\psi(r,\theta,\phi)= \psi(r,\theta)$, and $L = -i \frac{\partial}{\partial \theta}$.
+
+\begin{align*}
+-i \frac{\partial \psi(r,\theta)}{\partial \theta} =& l \psi(r,\theta) \text{, eigenvector}\\
+\psi(r,\theta) =& e^{i l \theta} \chi(r) \text{, for some $\chi$}
+\end{align*}
+More generally, $\psi(r,\theta,\phi)= Y(\theta,\phi) \chi(r)$
+
+
+From (\ref{eq:create_m}) we have a spectrum of angular momenta, integral or half integral, say $\set{-l,...,l:L_+\ket{l}=0}$. There are $2l+1$ states with constant $L^2 = L_x^2 + L_y^2 + L_x^2$. Classically $L^2 = L_z^2 +(L_x-iL_y)(L_x+iL_y)$, but this fails in quantum mechanics as they operators don't commute.
+
+\begin{align*}
+L^2 =& L_z^2 +(L_x-iL_y)(L_x+iL_y) -i [L_x,L_y]\\
+=& L_z^2 + L_z + L^-L^+\\
+L^2\ket{l}=& L_z^2\ket{l} + L_z\ket{l} + L^-L^+\ket{l}\\
+=& l^2\ket{l} + l\ket{l} + 0\\
+L^2\ket{l}=&l (l+1) \ket{l}
+\end{align*}
+
+\begin{thm}[All eigenvectors of $L_z$ are degenerate eigenvectors of $L^2$]
+	\begin{enumerate}
+		\item $[L^2, L_i] =0$
+		\item All eigenvectors of $L_z$ are eigenvectors of $L^2$, eigenvalue $l(L+1)$
+	\end{enumerate}
+\end{thm}
+\begin{proof}
+	Exercise
+\end{proof}
+
+Classically:
+\begin{align*}
+H =& \frac{p^2}{2m} + V(r) \text{, conserved}\\
+L =& r \times P  \text{, conserved, so use xy plane}\\
+H =& \frac{p_r^2+p_{\theta}^2}{2m} +V(r)\\
+=& \frac{P_r^2}{2m} + \frac{L^2}{2m r^2} + V(r) 
+\end{align*}
+
+Schr\"odinger Equation:
+\begin{align*}
+-\frac{\hslash^2}{2m}\frac{\partial^2 \psi(r)}{\partial r^2} + \frac{l(l+1)\hslash^2}{r^2}\psi(r)+V(r)\psi(r) =& E\psi(r)
+\end{align*}
+
+Number of nodes (zeroes) characterize energy levels.
+
+\url{https://youtu.be/LKYs_xwWKY4?t=4606}
+\subsection{Harmonic oscillators}
+
 \section{Spin}
+
 
 \section{Fermions: a tale of two minus signs}
 
