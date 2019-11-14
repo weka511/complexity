@@ -24,6 +24,7 @@ These are my notes from the Advanced Quantum Mechanics lectures from Leonard Sus
 \end{abstract}
 
 \tableofcontents
+\listoffigures
 
 \section{Review and Introduction to Symmetry}
 
@@ -139,9 +140,9 @@ $n\ne 0 \implies E(m)=E(-m)$, so we have degeneracy. A magnetic field breaks thi
 
 \begin{align*}
 [L,H]=& 0\\
-[L_x,L_y] =& L_z\\
-[L_y,L_z] =& L_x\\
-[L_z,L_x] =& L_y\\
+[L_x,L_y] =& i L_z \numberthis \label{eq:lx_ly}\\
+[L_y,L_z] =& i L_x\numberthis \label{eq:ly_lz}\\
+[L_z,L_x] =& i L_y\numberthis \label{eq:lz_lx}\\
 L_{\pm} \triangleq& L_x \pm i L_y\\
 [L_{\pm},L_Z] =& \mp L_{\pm}
 \end{align*}
@@ -203,6 +204,10 @@ L^2\ket{l}=&l (l+1) \ket{l}
 	Exercise
 \end{proof}
 
+\begin{figure}[H]
+	\caption{Degeneracy of Energy Levels in Hydrogen Atom}\label{fig:degeneracy:hydrogen}
+	\includegraphics[width=0.9\textwidth]{hydrogen-degeneracy}
+\end{figure}
 Classically:
 \begin{align*}
 H =& \frac{p^2}{2m} + V(r) \text{, conserved} \numberthis \label{eq:classical:Hamiltonian}\\
@@ -281,14 +286,64 @@ a^-\ket{0}=& 0\\
 \psi_0(x) =& e^{-\frac{\omega x^2}{2}} \text{, not normalized.}
 \end{align*}
 
-We can then use $a^+$  to generate excited states. Time dependent looks like classical oscillator, especially at high energy (energy larger that ground state). See Figure \ref{fig:wave:harmonic}.
+We can then use $a^+$  to generate excited states. Time dependent looks like classical oscillator, especially at high energy (energy larger that ground state). Figure \ref{fig:wave:harmonic} shows how higher levels are awat from 0 most of time.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\caption{Wave functions for harmonic oscillator}\label{fig:wave:harmonic}
 	\includegraphics[width=0.9\textwidth]{harmonic_wavefunction}
 \end{figure}
+
 \subsection{Spin}
 
+Half-integral spin, e.g. electron or proton. At rest has no orbital rotation, only spin. Spin is angular momentum attached to particle - see (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). We introduce the Pauli matrices:
+
+$$
+\sigma_z = \begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}
+\quad
+\sigma_x = \begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\quad
+\sigma_z = \begin{pmatrix}
+0 & -i \\
+i & 0
+\end{pmatrix}
+$$
+
+and show they satisfy (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). Actually need $s_i=\frac{\sigma_i}{2}$.
+
+\begin{align*}
+[s_x,s_y] =& i s_z \\
+[s_y,s_z] =& i s_x\\
+[s_z,s_x] =& i s_y\\
+J=&L+s\text{, where $J$ is total angular momentum.}
+\end{align*}
+
+Eigenvalues of $s_z$ are $\pm \frac{1}{2}$.
+
+Notice that we have integral and half integral spins.
+
+See Figure \ref{fig:degeneracy:hydrogen}. Number of states for each n, 1, 4, 9, 16, ...
+
+For Helium, we can put 2 electrons into ground state; if we try to create an ion with 3 electrons, one goes into next state! Pauli exclusion principle. New property with two values, up and down. Checked with magnetic field.
+
+Two kinds of particles: ones that satisfy Pauli, and those that don't.
+
+Identical quantum particles are indistinguishable.
+
+\begin{align*}
+\psi(x) =& \braket{x|psi}\\
+\psi(x_1,x_2) =& \braket{x_1x_2|psi}\text{, two particles}\\
+\psi(x_1,x_2) \rightarrow & \psi(x_2,x_1)\text{, swap using operator $S$}\\
+S\ket{x1,x2} =& \ket{x2,x1}\\
+S^2 =& 1\text{, and it is unitary.}
+\end{align*}
+
+Eigenvalues are $\pm1$.
 
 \section{Fermions: a tale of two minus signs}
 
