@@ -331,6 +331,8 @@ See Figure \ref{fig:degeneracy:hydrogen}. Number of states for each n, 1, 4, 9, 
 
 For Helium, we can put 2 electrons into ground state; if we try to create an ion with 3 electrons, one goes into next state! Pauli exclusion principle. New property with two values, up and down. Checked with magnetic field.
 
+Pauli's exclusion is a postulate of non-relativistic QM, but a consequence of relativistic QM.
+
 Two kinds of particles: ones that satisfy Pauli, and those that don't.
 
 Identical quantum particles are indistinguishable.
@@ -347,7 +349,30 @@ Eigenvalues are $\pm1$.
 
 \section{Fermions: a tale of two minus signs}
 
+Fermions: spin $\frac{1}{2}$ particles, which satisfy Pauli exclusion principle. NB, the 2 electrons in Helium are \textit{entangled}.
 
+Photons don't have an exclusion principle; in fact they have a tendency to congregate.
+ 
+Can we have spin $\frac{1}{2}$ particles that don't obey Pauli exclusion principle? No. Can show this from quantum field theory?
+
+Consider wave function of positions for multiple particles, e.g. $\ket{x_1,x_2,x_3}$. Then $\braket{x_1,...x_n|\psi}=\psi(x_1,...x_n)$
+
+\begin{align*}
+\ket{x_1, x_2}=&\ket{x_2, x_1}e^{i\phi}\text{, interchange twice--there are two possibilities}\\
+\ket{x_1, x_2}=&+\ket{x_2, x_1}\text{ Bosons}\\
+\ket{x_1, x_2}=&-\ket{x_2, x_1}\text{ Fermions}
+\end{align*}
+
+NB: sign is not observable.
+
+\begin{align*}
+\psi(x_1,x_2)=&-\psi(x_2,x_1) \text{, Fermions}\\
+\psi(x_1,x_2)=&-\psi(x_2,x_1) \text{, Bosons}\\
+\psi_0(x_1)\psi_0(x_2)& \text{--OK for Bosons but not Fermions}\\
+\psi_0(x_1)\psi_1(x_2)& \text{--not OK for Bosons, or Fermions}\\
+\psi_0(x_1)\psi_1(x_2)+\psi_0(x_2)\psi_1(x_1)& \text{--OK for Bosons}\\
+\psi_0(x_1)\psi_1(x_2)-\psi_0(x_2)\psi_1(x_1)& \text{--OK for Fermions}
+\end{align*}
 
 \section{Quantum Field Theory}
 
