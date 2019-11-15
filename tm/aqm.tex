@@ -389,9 +389,10 @@ David Finkelstein. Belt, Deep topological connection between rotation and interc
 
 \section{Quantum Field Theory}
 
-All natural phenomena except gravity.
+In principle covers all natural phenomena except gravity.
 
-Harmonic Oscillator reprise.  Imagine many (possibly infinite number) harmonic oscillators.
+\subsection{Review of Harmonic Oscillator}
+Imagine many (possibly infinite number) harmonic oscillators.
 
 From (\ref{eq:creation:operator}) and (\ref{eq:annihilation:operator}):
 \begin{align*}
@@ -430,7 +431,91 @@ One basis of states is $\ket{n_1,n_2,n_3,...}$.
 	$a^-\ket{n}=\sqrt{n}\ket{n-1}$
 \end{cor}
 
+
+$a_i^+\ket{n_1,n_2,.....}=\sqrt{n_i+1}\ket{n_1,n_2,...n_i+1,...}$
+
+\subsection{Quantum Field Theory of Bosons}
+
+Fields are functions of position. $\psi(x)$ not observable; we observe position, momentum, etc, but not $\psi$. $psi(x_1,x_2,...x_15)$ function of many positions.
+
+\begin{itemize}
+	\item $\Psi$ is an observable, e.g. magnetic field, so an operator.
+	\item $Psi$ function of one position
+	\item $Psi$ describes any number of particles.
+\end{itemize}
+
+
+Consider one particle in a box, and think about energy eigenstates. Wave function $\psi_1(x)$ is sine (lowest energy level). Next $\psi_2(x)$ has one node, with higher energy.
+
+Now many particles (bosons), some in first energy level, some in second,...$\ket{n1,n2,n3,...}$> Now we invent operators as in (\ref{eq:a:comm_i_plus}) - (\ref{eq:a:comm_i}) to create and remove particles. NB $\set{1,2,3,...}$ are states $\set{n_i}$ occupation numbers.
+
+\begin{align*}
+(a^+a^-)\ket{n}=&(a^-a^+-1)\ket{n}\\
+=&\sqrt(n+1)a^-\ket{n+1}-\ket{n}\\
+=&(n+1)\ket{n}-\ket{n}\\
+=&n\ket{n}
+\end{align*}
+
+NB: we are \text{ defining} creation and annihilation operators. Don't ask why for a definition, ask why it is useful. E.g. creation lets us create a photon. We want to study system with variable number of photons.
+
+Vacuum is state that is annihilated by $a^-$ -- $\ket{0,0,0,....}$.
+
+Denote energy by $\omega_i$ for state $i$. 
+
+\begin{align*}
+E =& \sum_{i} n_i \omega_i\\
+=& \sum_{i} \omega_a a^+_i a^-_i 
+\end{align*}
+
+We'll consider free particles--no interactions.
+
+Whey can we ignore ground-state energy? Because constants commute with everything. 
+
+Quantum fields theory is a book-keeping device for particles.
+
+$\Psi(x)$ -- an operator that is a function of position--Fock Space
+
+\begin{align*}
+\Psi(x)\triangleq&\sum_{i}a^-_i\psi_i(x)\text{, not Hermitean, so conjugate is}\\
+\Psi^\dagger(x)=&\sum_{i}a^+_i\psi_i^*(x)\\
+\Psi(x)+\Psi^\dagger \text{ is}&\text{ Hermitean}
+\end{align*}
+
+What if we apply to vacuum? $\Psi(x)$ annihilates it--what about $\Psi(x)^\dagger$.
+
+\begin{align*}
+\sum_{i} \ket{i} \bra{i} =& I \text{, sum over states with $\psi_i$}\\
+\sum_{i} \ket{i} \braket{i|X} =& \ket{X}\\
+\psi^*_i(x)\underbrace{\ket{i}}_\text{one particle with state $i$} =& \ket{X}\text{, but}\\
+\ket{i} =& a^+_i\ket{0} \text{, whence}\\
+\psi^*_i(x) a^+_i\ket{0}=&\ket{x}\\
+\Psi^\dagger(x) \ket{0} =& \ket{x}\text{ so $\Psi^\dagger(x)$ creates a particle at $x$.}
+\end{align*}
+
+\begin{itemize}
+	\item $a^+_i$ creates a particle in state $i$.
+	\item $\Psi^\dagger(x)$  creates a particle at position $x$.
+	\item $a^-_i$ annihilates a particle in state $i$, or gives zero.
+	\item $\Psi(x)$  annihilates a particle at position $x$, or gives zero.
+\end{itemize}
+
+There is a separate field for each Boson.
+
+Add vacuum to a state, we get probability of 0.5 of vacuum. It is not the same as zero. Vacuum has length of 1!
+
+Let's add two particles, at $x$ and $y$. 
+ 
+\begin{align*}
+\Psi(y)\Psi(x)\ket{0} =& \ket{y,x}\\
+\Psi(x)\Psi(y)\ket{0} =& \ket{x,y} \text{, but from (\ref {eq:a:comm_i_plus})}\\
+\Psi(y)\Psi(x) =& \Psi(x)\Psi(y) \text{, so}\\
+\ket{x,y} =& \ket{y,x} \text{, which is what we expect for Bosons.} 
+\end{align*}
+
+We can handle situation where number of particles is a random variable: a laser wave is a superposition.
+
 \section{Quantum Field Theory II}
+
 
 \section {Second Quantization}
 
