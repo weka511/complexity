@@ -6,6 +6,7 @@
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
 \newtheorem{lemma}[thm]{Lemma}
 \graphicspath{{figs/}}
 \widowpenalty10000
@@ -242,12 +243,12 @@ H =& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2}\\
 We'll introduce raising and lowering operators:
 
 \begin{align*}
-a^+ \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \\
-a^- \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, Hermitean conjugate} \\
+a^+ \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \numberthis \label{eq:creation:operator}\\
+a^- \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, Hermitean conjugate} \numberthis \label{eq:annihilation:operator}\\
 H =& \omega a^+ a^-\text{. We'll take the commutator:}\numberthis \label{eq:shM}\\
 [a^-,a^+] =& \frac{1}{2\omega}\big[P - i \omega x,P + i \omega x\big]\\
 =& 1\text{. We also define} \numberthis \label{eq:a:comm}\\
-N \triangleq& a^+a^-\text{, so (\ref{eq:shM}) becomes}\\
+N \triangleq& a^+a^-\text{, so (\ref{eq:shM}) becomes} \numberthis \label{eq:number:operator}\\
 H =& \omega N
 \end{align*}
 $N$ is Hermitean, so it has a complete set of eigenvalues and eigenvectors.
@@ -374,7 +375,60 @@ NB: sign is not observable.
 \psi_0(x_1)\psi_1(x_2)-\psi_0(x_2)\psi_1(x_1)& \text{--OK for Fermions}
 \end{align*}
 
+Rotate system by $2\pi$: is there a phase?
+
+\begin{align*}
+J_z\ket{\psi} =& -i \frac{\partial \ket{\psi}}{\partial \theta}\\
+=& m\ket{\psi} \text{, if eigenvector}\\
+\ket{\psi(\theta)} =& e^{im\theta}\ket{\psi(0)}\text{, so $m$ integral or half integral.}
+\end{align*}
+
+What if $m$ half integral and we rotate by $2\pi$? We have phase of $-1$, so $\psi$ changes sign.
+
+David Finkelstein. Belt, Deep topological connection between rotation and interchange.
+
 \section{Quantum Field Theory}
+
+All natural phenomena except gravity.
+
+Harmonic Oscillator reprise.  Imagine many (possibly infinite number) harmonic oscillators.
+
+From (\ref{eq:creation:operator}) and (\ref{eq:annihilation:operator}):
+\begin{align*}
+a^+_i \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \text{, creation operator} \numberthis \label{eq:creation:operator:i}\\
+a^-_i \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, annihilation operator} \numberthis \label{eq:annihilation:operator_i}\\
+\end{align*}
+
+Think as each oscillator  as an independent system of degrees of freedom, so operators commute. Using  (\ref{eq:a:comm}), and (\ref{eq:number:operator})
+
+\begin{align*}
+[a^+_i,a^+_j] =& 0 \numberthis \label{eq:a:comm_i_plus}\\
+[a^-_i,a^-_j] =& 0 \numberthis \label{eq:a:comm_i_minus}\\
+[a^-_i,a^+_i] =& \delta_{i,j} \numberthis \label{eq:a:comm_i}\\
+H =& \hslash \sum_{i}  \omega_i N_i\text{, where $N_i$ are known as occupation numbers.}
+\end{align*}
+We're ignoring ground state energy.
+
+One basis of states is $\ket{n_1,n_2,n_3,...}$.
+
+\begin{thm}
+	$a^+\ket{n}=\sqrt{n+1}\ket{n+1}$
+\end{thm} 
+
+\begin{proof}
+	\begin{align*}
+	a^+\ket{n}=&c_n\ket{n+1}\\
+	\bra{n}a^-=&c_n\bra{n+1}\text{, assume real}\\
+	\braket{n|a^-a^+|n}=&c_n^2\text{, normalization!}\\
+	=& \braket{n|a^+a^-+1|n}\text{, using commutator}\\
+	=& \braket{n|N+1|n}\\
+	=&n+1
+	\end{align*}
+\end{proof}
+
+\begin{cor}
+	$a^-\ket{n}=\sqrt{n}\ket{n-1}$
+\end{cor}
 
 \section{Quantum Field Theory II}
 
