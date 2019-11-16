@@ -305,15 +305,18 @@ Since $H$ is positive, there can be no negative eigenvalues.
 
 \begin{align*}
 a^-\ket{0}=&0\\
-N\ket{0}=& 0\text{NB $\ket{0} \ne 0$}\\
--\frac{1}{2}\frac{d^2 \psi(x)}{dx^2} + \omega^2 x^2 \psi(x)=& E\psi(x)\\
+N\ket{0}=& 0
+\end{align*}
+NB $\ket{0} \ne 0$. $\ket{0}$ is a vector which can be normalized; $0$ is a vector of length 0.
+\begin{align*}
+-\frac{1}{2}\frac{d^2 \psi(x)}{dx^2} + \omega^2 x^2 \psi(x)=& E\psi(x)\text{, Schr\"odinger}\\
 \int_{-\infty}^{\infty} dx \psi^*(x) \psi(x) =& 1\\
 a^-\ket{0}=& 0\\
 \big(-i \frac{d}{dx} - i \omega x \big)\psi_0(x) =& 0\\
 \psi_0(x) =& e^{-\frac{\omega x^2}{2}} \text{, not normalized.}
 \end{align*}
 
-We can then use $a^+$  to generate excited states. Time dependent looks like classical oscillator, especially at high energy (energy larger that ground state). Figure \ref{fig:wave:harmonic} shows how higher levels are awat from 0 most of time.
+We can then use $a^+$  to generate excited states. Time dependent looks like classical oscillator, especially at high energy (energy larger that ground state). Figure \ref{fig:wave:harmonic} shows how higher levels are away from 0 most of time.
 
 \begin{figure}[H]
 	\caption{Wave functions for harmonic oscillator}\label{fig:wave:harmonic}
@@ -322,7 +325,7 @@ We can then use $a^+$  to generate excited states. Time dependent looks like cla
 
 \subsection{Spin}
 
-Half-integral spin, e.g. electron or proton. At rest has no orbital rotation, only spin. Spin is angular momentum attached to particle - see (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). We introduce the Pauli matrices:
+Some particles have half-integral spin, e.g. electron or proton. At rest has no orbital rotation, only spin. Spin is angular momentum attached to particle - see (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). We introduce the Pauli matrices:
 
 $$
 \sigma_z = \begin{pmatrix}
@@ -365,14 +368,14 @@ Two kinds of particles: ones that satisfy Pauli, and those that don't.
 Identical quantum particles are indistinguishable.
 
 \begin{align*}
-\psi(x) =& \braket{x|psi}\\
-\psi(x_1,x_2) =& \braket{x_1x_2|psi}\text{, two particles}\\
+\psi(x) =& \braket{x|\psi}\\
+\psi(x_1,x_2) =& \braket{x_1x_2|\psi}\text{, two particles}\\
 \psi(x_1,x_2) \rightarrow & \psi(x_2,x_1)\text{, swap using operator $S$}\\
 S\ket{x1,x2} =& \ket{x2,x1}\\
-S^2 =& 1\text{, and it is unitary.}
+S^2 =& 1
 \end{align*}
 
-Eigenvalues are $\pm1$.
+$S$ is unitary, so eigenvalues are $\pm1$.
 
 \section{Fermions: a tale of two minus signs}
 
