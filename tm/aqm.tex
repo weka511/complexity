@@ -539,7 +539,7 @@ What if we apply to vacuum? $\Psi(x)$ annihilates it--what about $\Psi(x)^\dagge
 
 There is a separate field for each Boson.
 
-Add vacuum to a state, we get probability of 0.5 of vacuum. It is not the same as zero. Vacuum has length of 1!
+Add vacuum to a state, we get probability of 0.5 of vacuum, 0.5 of original state. It is not the same as zero. Vacuum has length of 1!
 
 Let's add two particles, at $x$ and $y$. 
  
@@ -554,7 +554,7 @@ We can handle situation where number of particles is a random variable: a laser 
 
 \section{Quantum Field Theory II}
 
-Can start with particles and see why they can be described by fields, or start with fields and quantize. Starting with particles we can use fields to handle variable numbers. Normalization $\int \psi^*(x) \psi(x) dx=1$ gives \textit{number of particles}.
+Can start with particles and see why they can be described by fields, or start with fields and quantize. Starting with particles we can use fields to handle variable numbers of particles. Normalization $\int \psi^*(x) \psi(x) dx=1$ gives \textit{number of particles}.
 
 Given an orthonormal basis:
 \begin{align*}
@@ -624,6 +624,35 @@ Behaves like classical theory if the number of particles is very large. E.g. exp
 If we don't split too many hairs, density from electromagnetic field is density of photons.
 
 \section {Second Quantization}
+
+\subsection{Digression on neutrinos}
+
+If neutrinos have mass, do they have the same mass? No.
+
+How to reconcile with conservation of energy?
+
+Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of eigenstates of something else, the type of neutrino. Eigenstates of energy don't mix with each other. Imagine a particle trapped in the potential of Figure \ref{fig:double:well}, and assume middle barrier very high. What is ground state?
+
+\begin{figure}[H]
+	\caption{Particle trapped in double well}\label{fig:double:well}
+	\includegraphics[width=0.8\textwidth]{particle_mixed}
+\end{figure}
+
+\begin{thm}[If $V$ symmetric,$psi$ either symmetric or anti-symmetric.]
+	If $V$ symmetric,$psi$ either symmetric or anti-symmetric.
+\end{thm}
+
+But neither LHS or RHS wave function symmetric or antisymmetric. Can make symmetric or antisymmetric combinations. Figure \ref{fig:double:well:symmetrized} has lower energy, and Figure {fig:double:well:1st} shows first excited state.
+
+\begin{figure}[H]
+	\caption{Particle symmetrized}\label{fig:double:well:symmetrized}
+	\includegraphics[width=0.8\textwidth]{particle_mixed_symmetrized}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{First excited state}\label{fig:double:well:1st}
+	\includegraphics[width=0.8\textwidth]{particle_mixed_1st_excited}
+\end{figure}
 
 \section{Quantum field Hamiltonian}
 
