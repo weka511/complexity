@@ -202,7 +202,7 @@ Since symmetries commute, we have degeneracy.
 
 \subsection{Atomic orbits}
 
-A particle moving in a central force field: angular momentum and orbital plane preserved. State is $\psi(r,\theta,\phi)= \psi(r,\theta)$, and $L = -i \frac{\partial}{\partial \theta}$.
+If a particle moves in a central force field, angular momentum and orbital plane are preserved. State is $\psi(r,\theta,\phi)= \psi(r,\theta)$, and $L = -i \frac{\partial}{\partial \theta}$.
 
 \begin{align*}
 -i \frac{\partial \psi(r,\theta)}{\partial \theta} =& l \psi(r,\theta) \text{, eigenvector}\\
@@ -217,7 +217,7 @@ From (\ref{eq:create_m}) we have a spectrum of angular momenta, integral or half
 L^2 =& L_z^2 +(L_x-iL_y)(L_x+iL_y) -i [L_x,L_y]\\
 =& L_z^2 + L_z + L^-L^+\\
 L^2\ket{l}=& L_z^2\ket{l} + L_z\ket{l} + L^-L^+\ket{l}\\
-=& l^2\ket{l} + l\ket{l} + 0\\
+=& l^2\ket{l} + l\ket{l} + 0\text{, because eigenvectors.}\\
 L^2\ket{l}=&l (l+1) \ket{l}
 \end{align*}
 
@@ -261,9 +261,8 @@ Start with suspended mass $(m=1)$, spring constant $(k=\omega^2)$
 \begin{align*}
 H =& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2}\\
 =& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) - \frac{i \omega}{2} [x,P] \text{, Dirac!}\\
-=& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2}\\
 =& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) + \underbrace{\frac{\hslash \omega}{2}}_\text{ground state energy}\\
-=&\omega \frac{\big(P + i \omega x \big)}{\sqrt{2 \omega}}\frac{\big(P - i \omega x \big)}{\sqrt{2 \omega}}\text{, we'll drop the ground state energy fot the time being}
+=&\omega \frac{\big(P + i \omega x \big)}{\sqrt{2 \omega}}\frac{\big(P - i \omega x \big)}{\sqrt{2 \omega}}\text{, we'll drop the ground state energy fot the time being.}
 \end{align*}
 
 We'll introduce raising and lowering operators:
@@ -289,6 +288,7 @@ N a^+ \ket{n} =& (n+1) a^+ \ket{n}
 
 So $a^+$ acts as raising operator, and we can show $a^-$ is lowering. Also $a^-$ eventually leads to $0$.
 
+We will see (Theorem \ref{thm:norm:harmonic}) the appropriate normalization:
 \begin{align*}
 a^+\ket{n} =& \sqrt{n+1}\ket{n+1}\\
 a^-\ket{n} =& \sqrt{n}\ket{n-1}
@@ -438,7 +438,7 @@ We're ignoring ground state energy.
 
 One basis of states is $\ket{n_1,n_2,n_3,...}$.
 
-\begin{thm}[Normalization of harmonic oscillator state (creation)]
+\begin{thm}[Normalization of harmonic oscillator state (creation)]\label{thm:norm:harmonic}
 	$a^+\ket{n}=\sqrt{n+1}\ket{n+1}$
 \end{thm} 
 
