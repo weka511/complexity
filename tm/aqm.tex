@@ -418,7 +418,7 @@ David Finkelstein. Belt, Deep topological connection between rotation and interc
 
 \section{Quantum Field Theory}
 
-In principle covers all natural phenomena except gravity.
+The description of nature as we know it, with the exception of gravity. In principle we believe that we could explain everything, except gravity, if we only had enough computational power.
 
 \subsection{Review of Harmonic Oscillator}
 Imagine many (possibly infinite number) harmonic oscillators.
@@ -441,23 +441,30 @@ We're ignoring ground state energy.
 
 One basis of states is $\ket{n_1,n_2,n_3,...}$.
 
-\begin{thm}[Normalization of harmonic oscillator state (creation)]\label{thm:norm:harmonic}
-	$a^+\ket{n}=\sqrt{n+1}\ket{n+1}$
+\begin{thm}[Normalization of harmonic oscillator state--creation]\label{thm:norm:harmonic}
+	\begin{align*}
+	|\ket{n}|=&1\\
+	\implies&\\
+	a^+\ket{n}=&\sqrt{n+1}\ket{n+1}
+	\end{align*}
 \end{thm} 
 
 \begin{proof}
 	\begin{align*}
-	a^+\ket{n}=&c_n\ket{n+1}\\
+	a^+\ket{n}=&c_n\ket{n+1} \text{, assumption}\\
 	\bra{n}a^-=&c_n\bra{n+1}\text{, assume real}\\
 	\braket{n|a^-a^+|n}=&c_n^2\text{, normalization!}\\
 	=& \braket{n|a^+a^-+1|n}\text{, using commutator}\\
 	=& \braket{n|N+1|n}\\
-	=&n+1
+	=&n+1 \text{, whence}\\
+	c_n=&\sqrt{n+1}
 	\end{align*}
 \end{proof}
 
-\begin{cor}[Normalization of harmonic oscillator state (annihilation)]
-	$a^-\ket{n}=\sqrt{n}\ket{n-1}$
+\begin{cor}[Normalization of harmonic oscillator state--annihilation]
+	\begin{align*}
+	a^-\ket{n}=\sqrt{n}\ket{n-1}
+	\end{align*}
 \end{cor}
 
 
@@ -465,16 +472,16 @@ $a_i^+\ket{n_1,n_2,.....}=\sqrt{n_i+1}\ket{n_1,n_2,...n_i+1,...}$
 
 \subsection{Quantum Field Theory of Bosons}
 
-Fields are functions of position. $\psi(x)$ not observable; we observe position, momentum, etc, but not $\psi$. $psi(x_1,x_2,...x_15)$ function of many positions.
+Fields are functions of position. $\psi(x)$ not observable; we observe position, momentum, etc, but not $\psi$. $\psi(x_1,x_2,...x_{15})$ function of many positions.
 
 \begin{itemize}
 	\item $\Psi$ is an observable, e.g. magnetic field, so an operator.
-	\item $Psi$ function of one position
-	\item $Psi$ describes any number of particles.
+	\item $\Psi$ function of one position
+	\item $\Psi$ describes any number of particles.
 \end{itemize}
 
 
-Consider one particle in a box, and think about energy eigenstates. Wave function $\psi_1(x)$ is sine (lowest energy level). Next $\psi_2(x)$ has one node, with higher energy.
+Consider one particle in a box, and think about energy eigenstates. Wave function $\psi_1(x)$ is sine (lowest energy level). Next $\psi_2(x)$ has one node, with higher energy, $\psi_3(x)$ two nodes,...
 
 Now many particles (bosons), some in first energy level, some in second,...$\ket{n1,n2,n3,...}$> Now we invent operators as in (\ref{eq:a:comm_i_plus}) - (\ref{eq:a:comm_i}) to create and remove particles. NB $\set{1,2,3,...}$ are states $\set{n_i}$ occupation numbers.
 
@@ -485,9 +492,11 @@ Now many particles (bosons), some in first energy level, some in second,...$\ket
 =&n\ket{n}
 \end{align*}
 
-NB: we are \text{ defining} creation and annihilation operators. Don't ask why for a definition, ask why it is useful. E.g. creation lets us create a photon. We want to study system with variable number of photons.
+NB: we are \text{ defining} creation and annihilation operators. Don't ask \emph{why} for a definition, \emph{ask why it is useful}. E.g. creation lets us create a photon. We want to study system with variable number of photons.
 
-Vacuum is state that is annihilated by $a^-$ -- $\ket{0,0,0,....}$.
+\begin{defn}[Vacuum]
+	Vacuum is state that is annihilated by $a^-$ -- $\ket{0,0,0,....}$.
+\end{defn}
 
 Denote energy by $\omega_i$ for state $i$. 
 
@@ -498,11 +507,11 @@ E =& \sum_{i} n_i \omega_i\\
 
 We'll consider free particles--no interactions.
 
-Whey can we ignore ground-state energy? Because constants commute with everything. 
+Why can we ignore ground-state energy? Because constants commute with everything. 
 
 Quantum fields theory is a book-keeping device for particles.
 
-$\Psi(x)$ -- an operator that is a function of position--Fock Space
+$\Psi(x)$ -- an operator that is a function of position--\emph{Fock Space}.
 
 \begin{align*}
 \Psi(x)\triangleq&\sum_{i}a^-_i\psi_i(x)\text{, not Hermitean, so conjugate is}\\
