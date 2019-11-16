@@ -4,8 +4,9 @@
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
-\newtheorem{defn}{Definition}
+
 \newtheorem{thm}{Theorem}
+\newtheorem{defn}[thm]{Definition}
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem{lemma}[thm]{Lemma}
 \graphicspath{{figs/}}
@@ -27,6 +28,7 @@ These are my notes from the Advanced Quantum Mechanics lectures from Leonard Sus
 \tableofcontents
 \listoffigures
 \listoftheorems
+
 
 \section{Review and Introduction to Symmetry}
 
@@ -119,8 +121,10 @@ G =& \frac{P_x}{\hslash}\text{, Generator of $x$ translation}
 
 Crystal symmetry: translate one lattice spacing.
 
-Degeneracy of energy levels: more than one state with given energy. Only happens when there is a symmetry.
-
+\begin{defn}[Degeneracy of energy levels]
+	If there is more than one state with given energy level, that energy level is called degenerate. We will see that it only happens when there is a symmetry: symmetries sometimes imply degeneracy, but not always.
+\end{defn}
+ 
 Rotation.
 
 \begin{align*}
@@ -142,10 +146,10 @@ L=& m \hslash
 \end{align*}
 This is the quantization of angular momentum.
 
-$n\ne 0 \implies E(m)=E(-m)$, so we have degeneracy. A magnetic field breaks this; symmetry isn't enough for degeneracy, but adding reflection symmetry is sufficient (but need two non-commuting symmetries).
+$m\ne 0 \implies E(m)=E(-m)$, so we have degeneracy. A magnetic field breaks this; symmetry isn't enough for degeneracy, but adding reflection symmetry is sufficient (but need two non-commuting symmetries).
 
 \begin{thm}[Reflection and rotation don't commute]
-	If $M\psi(\theta) = \psi(-theta)$, $ML \ne LM$
+	If $M\psi(\theta) = \psi(-\theta)$, $ML \ne LM$
 \end{thm}
 \begin{proof}
 	\begin{align*}
@@ -162,28 +166,33 @@ $n\ne 0 \implies E(m)=E(-m)$, so we have degeneracy. A magnetic field breaks thi
 [L_y,L_z] =& i L_x\numberthis \label{eq:ly_lz}\\
 [L_z,L_x] =& i L_y\numberthis \label{eq:lz_lx}\\
 L_{\pm} \triangleq& L_x \pm i L_y\\
-[L_{\pm},L_Z] =& \mp L_{\pm}
+[L_{\pm},L_Z] =& \mp L_{\pm} \numberthis \label{eq:comm:LpmLz}
 \end{align*}
 Suppose we have found one eigenvector:
 \begin{align*}
-L_z \ket{m} =& m \ket{m}\\
-[L_+,L_z] \ket{m} =& \big(L_+L_z - L_z,L_+\big) \ket{m}\\
-=&- L_+ \ket{m}\\
+L_z \ket{m} =& m \ket{m} \numberthis \label{eq:ev:Lz}\\
+[L_+,L_z] \ket{m} =& \big(L_+L_z - L_zL_+\big) \ket{m}\\
+=&- L_+ \ket{m} \text{, from (\ref{eq:comm:LpmLz}). Rearranging  and using (\ref{eq:ev:Lz})}\\
  m L_+\ket{m} + L_+\ket{m} =& L_z L_+ \ket{m} \text{, whence}\\
- \big(m + 1 \big)L_+\ket{m}  =& L_z L_+ \ket{m} \text{, i.e. $L_+ \ket{m}$ is an eigenvector, eigenvalue $m+1$.}\numberthis \label{eq:create_m}
+ \big(m + 1 \big)L_+\ket{m}  =& L_z L_+ \ket{m} \text{; $L_+ \ket{m}$ is an eigenvector, eigenvalue $m+1$}\numberthis \label{eq:create_m}
 \end{align*}
 
 Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. This terminates if  $L_{\pm} \ket{m}=0$. From symmetry we can show $m$ integral or half integral.
 
-\begin{thm}[Eigenvectors have same energy.]
-	 $H \ket{m} = E \ket{m} \implies H \ket{m \pm 1} = E \ket{m \pm 1}$
+\begin{thm}[Eigenvectors of $L_z$ are degenerate eigenvectors of $H$]
+	\begin{align*}
+	L_z \ket{m} = m \ket{m} \land& H \ket{m} = E \ket{m}\\
+	 \implies&\\
+	  H \ket{m \pm 1} =& E \ket{m \pm 1}
+	\end{align*}
 \end{thm} 
 \begin{proof}
 	\begin{align*}
-	H \ket{m} =& E \ket{m}\\
+	H \ket{m} =& E \ket{m} \numberthis \label{eq:assume_ev}\\
 	H L_+ \ket{m} =& L_+ H \ket{m}\\
-	=& L_+ E \ket{m}\\
-	H \ket{m+1} =& E \ket{m+1}
+	=& L_+ E \ket{m} \text{, from (\ref{eq:assume_ev})}\\
+	=& E L_+  \ket{m}\\
+	H \ket{m+1} =& E \ket{m+1} \text{, from (\ref{eq:create_m})}
 	\end{align*}
 \end{proof}
 
