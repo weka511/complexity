@@ -516,6 +516,73 @@ We can handle situation where number of particles is a random variable: a laser 
 
 \section{Quantum Field Theory II}
 
+Can start with particles and see why they can be described by fields, or start with fields and quantize. Starting with particles we can use fields to handle variable numbers. Normalization $\int \psi^*(x) \psi(x) dx=1$ gives \textit{number of particles}.
+
+Given an orthonormal basis:
+\begin{align*}
+\sum_{i} \ket{i} \bra{i} =& I \text{, "Resolution of the Identity"}\numberthis \label{eq:resolution:identity}\\
+\braket{y|x}=& \sum_{i} \braket{y|i} \braket{i|x}\\
+\delta(x-y)=& \sum_{i} \psi_i(y) \psi^*_i(x)\text{, for any set of eigenvectors of Hermitan operator.}
+\end{align*}
+
+Can characterize multi-particle system by $\ket{n_1, n_2,...n_i,...}$. We want to increase and decrease occupation numbers, so introduce creation and annihilation operators.
+
+\begin{itemize}
+	\item $a^+_i=a^\dagger_i$
+	\item $a^-_i=a_i$
+\end{itemize} 
+
+Introduce field operator
+\begin{align*}
+\Psi(x) \triangleq & \sum_{i} a_i \psi_i(x) \text{, would be Fourier if sine/cosine waves}\\
+\Psi^\dagger(x) =& \sum_{i} a^\dagger \psi^*_i(x)\\
+\Psi(x) + \Psi^\dagger(x) \text{ is}& \text{ Hermitean (observable)}\\
+\frac{\Psi(x) - \Psi^\dagger(x)}{i} \text{ is}& \text{ Hermitean (observable)}
+\end{align*}
+
+Vacuum: $\ket{0} = \ket{0,0,0,.....}$.
+
+\begin{align*}
+\ket{x}=&\sum_{i}\ket{i}\braket{i|x}\text{, from (\ref{eq:resolution:identity})}\\
+=& \sum_i \psi^*_i(x)a^\dagger_i\ket{0}\\
+=& \Psi^\dagger(x) \ket{0}\text{, creation operator at a point.}
+\end{align*} 
+
+Consider the following operator:
+\begin{align*}
+\int dx \Psi^\dagger(x) \Psi(x)=&\int dx \sum_{i,j}a^+_i\psi_i^*(x) a_j\psi_j(x)\\
+=&\sum_{i,j} a^+_i a_j \int dx \psi_i^*(x) \psi_j(x)\\
+=&\sum_{i,j} a^+_i a_j \delta_{i,j}\\
+=&\sum_i a^+_i a_i\\
+=&\sum_i N_i\text{, operator representing total number of particles.}
+\end{align*}
+
+To make energy finite, total number of particles must be finite. $\Psi^\dagger(x) \Psi(x)$ represents particle density.
+
+We now calculate the total energy.
+
+\begin{align*}
+E =& \sum_{i} N_i \omega_i\\
+=& \sum_{i} a^\dagger_i a_i \omega_i
+\end{align*}
+
+We determine $\omega_i$ from eigenvalues of Schr\"odinger equation (ignoring interactions):
+\begin{align*}
+H \psi_i =& \omega_i \psi_i\\
+\big[\frac{p^2}{2m} + V(x)\big]\psi_i(x)=& \omega_i \psi_i(x)\\
+\big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_i(x)=& \omega_i \psi_i(x)
+\end{align*}
+
+Guess solution
+\begin{align*}
+E=&\int dx \underbrace{\Psi^\dagger(x) \big[-\frac{\nabla^2}{2m} + V(x)\big] \Psi(x)}_\text{energy density} \\
+=& \int dx \sum_{i,j}a^+_i\psi_i^*(x)\big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_j(x)a^-_j\\
+=& \int dx \sum_{i,j} a^+_i a^-_j \psi_i^*(x) \omega_j \psi_j(x)\\
+=&  \sum_{i,j} a^+_i a^-_j \delta_{i,j} \omega_j
+\end{align*}
+
+Behaves like classical theory if the number of particles is very large.
+
 
 \section {Second Quantization}
 
