@@ -627,25 +627,40 @@ If we don't split too many hairs, density from electromagnetic field is density 
 
 \subsection{Digression on neutrinos}
 
-If neutrinos have mass, do they have the same mass? No.
+If neutrinos have mass, and they mix, do they have the same mass? No.
 
-How to reconcile with conservation of energy?
+How to mix and conserve energy?
 
-Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of eigenstates of something else, the type of neutrino. Eigenstates of energy don't mix with each other. Imagine a particle trapped in the potential of Figure \ref{fig:double:well}, and assume middle barrier very high. What is ground state?
+Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of eigenstates of something else, the type of neutrino. Eigenstates of energy don't mix with each other. Here is an analogous situation. Imagine a particle trapped in the potential of Figure \ref{fig:particle_mixed_left}, and assume middle barrier very high, so particle is trapped on one side or t'other (ignore tunnelling). What is ground state? But there must be a second ground state, from symmetry--Figure \ref{fig:double:well}.
+
+\begin{figure}[H]
+	\caption{Double well potential}\label{fig:particle_mixed_left}
+	\includegraphics[width=0.8\textwidth]{particle_mixed_left}
+\end{figure}
 
 \begin{figure}[H]
 	\caption{Particle trapped in double well}\label{fig:double:well}
 	\includegraphics[width=0.8\textwidth]{particle_mixed}
 \end{figure}
 
-\begin{thm}[If $V$ symmetric,$psi$ either symmetric or anti-symmetric.]
-	If $V$ symmetric,$psi$ either symmetric or anti-symmetric.
+\begin{thm}[If $V$ symmetric,$\psi$ either symmetric or anti-symmetric]
+	\begin{align*}
+	\text{If  $\psi$ satisfies the time independent Schr\"odinger equation}\\
+	-\frac{\hslash^2}{2m}\frac{\partial^2 \psi(x)}{\partial x^2} + V(x)\psi(x) =& E\psi(x) \text{ and}\numberthis \label{eq:ti:schroedinger}\\
+	\forall x V(-x) =& V(x)\text{, then either}\\
+	\psi(x) =& \psi(x)\text{ or}\\
+	\psi(x) =& \psi(-x)
+	\end{align*}
 \end{thm}
 
-But neither LHS or RHS wave function symmetric or antisymmetric. Can make symmetric or antisymmetric combinations. Figure \ref{fig:double:well:symmetrized} has lower energy, and Figure {fig:double:well:1st} shows first excited state.
+\begin{proof}
+	TBP
+\end{proof}
+
+But neither LHS or RHS wave function of Figure \ref{fig:double:well} symmetric or antisymmetric. Can make symmetric or antisymmetric combinations. Figure \ref{fig:double:well:symmetrized} has slightly lower energy than Figure \ref{fig:double:well}. Figure \ref{fig:double:well:1st} shows first excited state.
 
 \begin{figure}[H]
-	\caption{Particle symmetrized}\label{fig:double:well:symmetrized}
+	\caption[Wave function symmetrized]{[Wave function symmetrized(minimum in middle is slightly greater than zero-allow tunnelling)}\label{fig:double:well:symmetrized}
 	\includegraphics[width=0.8\textwidth]{particle_mixed_symmetrized}
 \end{figure}
 
@@ -654,6 +669,34 @@ But neither LHS or RHS wave function symmetric or antisymmetric. Can make symmet
 	\includegraphics[width=0.8\textwidth]{particle_mixed_1st_excited}
 \end{figure}
 
+So we mix the pure states from Figures \ref{fig:double:well:symmetrized} and \ref{fig:double:well:1st}. Let's start with electron on left, and evolve.
+\begin{align*}
+\frac{\psi_L+\psi_R}{\sqrt{2}}& \text{--symmetric, with energy }& E_1-\epsilon\\
+\frac{\psi_L-\psi_R}{\sqrt{2}}& \text{--antisymmetric, with energy }& E_1+\epsilon
+\end{align*}
+Each is an eigenvector, so they evolve as follows:
+\begin{align*}
+\frac{\psi_L+\psi_R}{\sqrt{2}} e^{(E_1-\epsilon)t}=&\psi^+ \text{, say}\\
+\frac{\psi_L-\psi_R}{\sqrt{2}}e^{(E_1+\epsilon)t}=&\psi^-
+\end{align*}
+
+Now what if we start with pure $\psi_L$?
+\begin{align*}
+	\psi_L =& \frac{\psi^+ + \psi^-}{\sqrt{2}}\text{, then the denominator evolves to}\\
+	\psi_L^\prime =&\psi^+ e^{(E_1-\epsilon)t} + \psi^- e^{(E_1+\epsilon)t}\\
+	=&e^{E_1 t}\big[\psi^+ e^{-\epsilon t} + \psi^- e^{+\epsilon t}\big]
+\end{align*}
+Signs change with time, so eventually they will be opposite.
+\begin{align*}
+e^{-\epsilon t} =& - e^{\epsilon t}\\
+e^{2 \epsilon t}=&-1\\
+2 \epsilon t = \pi \text{, so $\psi_L$ becomes $\psi_R$!}
+\end{align*}
+
+Mixing goes with oscillation. Neutrinos go like that--electron neutrino changes to muon neutrino. 
+
+\url{https://youtu.be/7G4C7scQX3A?t=1027}
+\url{https://youtu.be/7G4C7scQX3A?t=1467}
 \section{Quantum field Hamiltonian}
 
 \section{Fermions and the Dirac equation}
