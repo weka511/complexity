@@ -693,10 +693,57 @@ e^{2 \epsilon t}=&-1\\
 2 \epsilon t = \pi \text{, so $\psi_L$ becomes $\psi_R$!}
 \end{align*}
 
-Mixing goes with oscillation. Neutrinos go like that--electron neutrino changes to muon neutrino. 
+Mixing goes with oscillation. Neutrinos go like that--electron neutrino changes to muon neutrino. Masses are energy levels. Coupling in Hamiltonian.
+
+Ammonia - $N$ tunnels through $H_3$ plane. 
+
+Spins.
 
 \url{https://youtu.be/7G4C7scQX3A?t=1027}
 \url{https://youtu.be/7G4C7scQX3A?t=1467}
+
+\subsection{Second Quantization}
+
+Fourier transforms let us move between the position and momentum representations.
+
+\begin{align*}
+\psi(x) \rightarrow& \psi^*(x)\psi(x)=&P(x) \text{ in position representation}\\
+\widetilde{\psi}(p) \rightarrow& \widetilde{\psi}^*(p) \widetilde{\psi}(p) =&P(p) \text{ in momentum representation, where}\\
+\widetilde{\psi}(p) =& \int \frac{dx}{\sqrt{2\pi}} \psi(x) e^{-i p x}\\
+\psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\psi}(p) e^{+i p x}
+\end{align*}
+
+Now consider this in field theory.
+
+\begin{align*}
+\Psi(x) =& \sum_{i} a^-_i \psi_i(x)\\
+\psi_i(x) =& e^{ipx} \text{ for a free particle (different $i$!), so} \\
+\Psi(x)=& \int \frac{dp}{\underbrace{\sqrt{2\pi}}_\text{by convention}} a^-(p) e^{ipx} \text{, where annihilation operator}\\
+a^-(p)& \text{ removes 1 particle with momentum p: plays same role as $\widetilde{\psi}(p)$ }\\
+\Psi^\dagger(x)=& \int \frac{dp}{\sqrt{2\pi}} a^+(p) e^{ipx} \text{ creates particle at position $x$}
+\end{align*}
+
+There is a similarity between wave functions in position and momentum space and creation and annihilation operators for particles and given position or momentum.
+\begin{align*}
+a^-(p) = \int \frac{dx}{\sqrt{2\pi}} \Psi(x) e^{-ipx}\\
+a^+(p) = \int \frac{dx}{\sqrt{2\pi}} \Psi^\dagger(x) e^{ipx}
+\end{align*}
+
+Remember there is a field operator for each kind of particle.
+
+Can prove following.
+ 
+\begin{align*}
+[\Psi^+(x),\Psi^-(y)] =& \delta(x-y) \text{, introduces Heisenberg uncertainty!}\\
+[\Psi^+(x),\Psi^+(y)] =&0\\
+[\Psi^-(x),\Psi^-(y)] =&0\\
+[\Psi^+_R(x),\Psi^-_I(y)] =& \delta(x-y) \text{, can not measure simultaneously at same point!}
+\end{align*}
+
+Makes sense in relativity: would violate causality. Spacelike! Can measure at different points.
+
+Fermions don't work like this!
+
 \section{Quantum field Hamiltonian}
 
 \section{Fermions and the Dirac equation}
