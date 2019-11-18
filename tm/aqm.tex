@@ -766,13 +766,21 @@ What would it mean to say momentum is conserved? It means Hamiltonian doesn't ch
 
 \begin{align*}
 \Psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi}(p) e^{ipx}\\
-\Psi^\dagger (x) =& \int \frac{dq}{\sqrt{2\pi}} \widetilde{\Psi^\dagger}(q) e^{-iqx}\\
+\Psi^\dagger (x) =& \int \frac{dq}{\sqrt{2\pi}} \widetilde{\Psi^\dagger}(q) e^{-iqx} \numberthis \label{eq:psi:dagger}\\
 \int dx mc^2 \Psi^\dagger(x) \Psi(x) =& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(q) \widetilde{\Psi}(p) e^{i(p-q)x} dx dq dp\\
 =& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(q) \widetilde{\Psi}(p) \delta(p-q) dq dp\\
 =& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp
 \end{align*}
-This just removes a particle with momentum $p$ and puts it back; momentum isn't changed.
+This just removes a particle with momentum $p$ and puts it back; momentum isn't changed. Let's repeat with the 1st term of (\ref{eq:psi_mc2}.)
 
+(Digression: calculation with multiple particles shows momentum still conserved.)
+
+\begin{align*}
+- \nabla^2 \Psi^\dagger (x) =& \int \frac{dq}{\sqrt{2\pi}} q^2 \widetilde{\Psi^\dagger}(q) e^{-iqx}\text{, from (\ref{eq:psi:dagger}), so}\\
+\int dx \Psi^\dagger(x) \frac{- \nabla^2}{2m} \Psi(x)=& \int \frac{ p^2}{2m} \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp \text{, adds up kinetic energy.}
+\end{align*}
+
+\url{https://youtu.be/7a1hon7NJ1M?t=1605}
 
 \subsection{The Dirac Equation}
 
