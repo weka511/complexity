@@ -646,7 +646,7 @@ Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of e
 \begin{thm}[If $V$ symmetric,$\psi$ either symmetric or anti-symmetric]
 	\begin{align*}
 	\text{If  $\psi$ satisfies the time independent Schr\"odinger equation}\\
-	-\frac{\hslash^2}{2m}\frac{\partial^2 \psi(x)}{\partial x^2} + V(x)\psi(x) =& E\psi(x) \text{ and}\numberthis \label{eq:ti:schroedinger}\\
+	-\frac{\hslash^2}{2m}\frac{d^2 \psi(x)}{d x^2} + V(x)\psi(x) =& E\psi(x) \text{ and}\numberthis \label{eq:ti:schroedinger}\\
 	\forall x V(-x) =& V(x)\text{, then either}\\
 	\psi(x) =& \psi(x)\text{ or}\\
 	\psi(x) =& \psi(-x)
@@ -701,8 +701,9 @@ Spins.
 
 \url{https://youtu.be/7G4C7scQX3A?t=1027}
 \url{https://youtu.be/7G4C7scQX3A?t=1467}
+\url{https://youtu.be/7G4C7scQX3A?t=1961}
 
-\subsection{Second Quantization}
+\subsection{Second Quantization of Bosons}
 
 Fourier transforms let us move between the position and momentum representations.
 
@@ -742,9 +743,38 @@ Can prove following.
 
 Makes sense in relativity: would violate causality. Spacelike! Can measure at different points.
 
-Fermions don't work like this!
+Fermions don't work like this! One measurement can kick another arbitrarily far away.
 
 \section{Quantum field Hamiltonian}
+
+\subsection{Particle Field Interactions}
+
+Hamiltonian for very simple quantum field,  particles satisfying Schr\"odinger equation.
+\begin{align*}
+H =& \int dx \big[ \Psi^\dagger(x) \frac{- \nabla^2}{2m} \Psi(x) + V(x) \Psi^\dagger(x) \Psi(x) \big] \text{, count particles; give each energy V(x)}\\
+=&\int dx \big[\Psi^\dagger(x) \frac{- \nabla^2}{2m} \Psi(x) + mc^2 \Psi^\dagger(x) \Psi(x)\big] \text{, special case of constant potential energy} \numberthis\label{eq:psi_mc2}
+\end{align*}
+
+Hamiltonian updates state.
+
+\begin{align*}
+\ket{\phi(t+\epsilon)} =& (1-i \epsilon H) \ket{\phi(t)} \text{State}\\
+=& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)}
+\end{align*}
+
+What would it mean to say momentum is conserved? It means Hamiltonian doesn't change momentum. Let's see how this works with (\ref{eq:psi_mc2}.) Rewrite 2nd term  using momentum variables
+
+\begin{align*}
+\Psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi}(p) e^{ipx}\\
+\Psi^\dagger (x) =& \int \frac{dq}{\sqrt{2\pi}} \widetilde{\Psi^\dagger}(q) e^{-iqx}\\
+\int dx mc^2 \Psi^\dagger(x) \Psi(x) =& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(q) \widetilde{\Psi}(p) e^{i(p-q)x} dx dq dp\\
+=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(q) \widetilde{\Psi}(p) \delta(p-q) dq dp\\
+=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp
+\end{align*}
+This just removes a particle with momentum $p$ and puts it back; momentum isn't changed.
+
+
+\subsection{The Dirac Equation}
 
 \section{Fermions and the Dirac equation}
 
