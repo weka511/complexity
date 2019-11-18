@@ -12,6 +12,7 @@
 \graphicspath{{figs/}}
 \widowpenalty10000
 \clubpenalty10000
+\setcounter{tocdepth}{1}
 
 %opening
 \title{Theoretical Minimum\\Advanced Quantum Mechanics}
@@ -759,7 +760,7 @@ Hamiltonian updates state.
 
 \begin{align*}
 \ket{\phi(t+\epsilon)} =& (1-i \epsilon H) \ket{\phi(t)} \text{State}\\
-=& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)}
+=& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)} \numberthis \label{eq:update:state}
 \end{align*}
 
 What would it mean to say momentum is conserved? It means Hamiltonian doesn't change momentum. Let's see how this works with (\ref{eq:psi_mc2}.) Rewrite 2nd term  using momentum variables
@@ -781,6 +782,68 @@ This just removes a particle with momentum $p$ and puts it back; momentum isn't 
 \end{align*}
 
 \url{https://youtu.be/7a1hon7NJ1M?t=1605}
+
+Imagine two species of particles: fake electrons and protons that happen to be protons.
+
+\begin{align*}
+H =& \int dx  \Psi^\dagger_e(x) \frac{- \nabla^2}{2m_e} \Psi_e(x) + \int dx \Psi^\dagger_p(x) \frac{- \nabla^2}{2m_p} \Psi_p(x)  + g \int dx \underbrace{\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)}_\text{Figure \ref{fig:scatter:e:p}} \text{, where}\\
+g=& \textit{ coupling constant--proportional to probability of interaction.}
+\end{align*}
+
+\begin{figure}[H]
+	\caption[$\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)$--scattering]{$\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)$: annihilate and create an electron and proton if they are at the same place, then create again --i.e. scatter}\label{fig:scatter:e:p}
+	\includegraphics[width=0.8\textwidth]{scatter_e_p}
+\end{figure}
+
+\begin{itemize}
+	\item Total momentum is conserved, not that of individual particles.
+	\item Coulomb potential has been ignored.
+	\item If experiment shows that particles interact, then there must be a term in the Hamiltonian.
+\end{itemize}
+
+Imagine particle decay, as shown in Figure \ref{fig:particle:decay}. We might try a term: $\Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x)$. Since space it isotropic, the interaction can happen anywhere: $g \int \Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x) dx$. We can show that momentum is conserved.
+
+\begin{figure}[H]
+	\caption{Particle Decay: $\Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x)$}\label{fig:particle:decay}
+	\includegraphics[width=0.8\textwidth]{particle_decay}
+\end{figure}
+
+Now what goes in the Hamiltonian must be Hermitian, so we need:
+\begin{align*}
+g \int \Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x) dx + g \int \Psi^\dagger_a(x) \Psi_c(x) \Psi_a(x)
+\end{align*}
+which reverses the process of  Figure \ref{fig:particle:decay}: $b+c\rightarrow a$.
+We now have a simple version of quantum field theory:
+\begin{itemize}
+	\item Creation and annihilation operators;
+	\item Fields made out of Creation and annihilation operators;
+	\item Fields are functions of position;
+	\item Each type of particle has its own field;
+	\item Write down Hamiltonian with kinetic energies of particles and other concoctions. 
+\end{itemize}
+
+Imagine that we made $\epsilon$ a little larger in (\ref{eq:update:state}):
+
+\begin{align*}
+\ket{\phi(t+\epsilon)} =& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)} - \frac{\epsilon^2}{2} H^2 \ket{\phi(t)}
+\end{align*}
+
+What is the effect of $H^2$? E.g., Figure \ref{fig:particle:decay} becomes a scatter: $b+c \rightarrow a \rightarrow b + c$. Or Figure \ref{fig:scatter:annihilate} shows a more complex situation. You can have a forest of interactions that are mediated by a single term in the Hamiltonian.
+
+\begin{figure}[H]
+	\caption{Exchange diagram}\label{fig:scatter:annihilate}
+	\includegraphics[width=0.8\textwidth]{scatter_annihilate}
+\end{figure}
+
+Figure \ref{fig:scatter:annihilate} has a coupling constant $g^2$.
+
+
+\begin{figure}[H]
+	\caption[Scatter electron and emit photon(field $A$):$A\Psi^+_e\Psi^-_e$]{Scatter electron and emit photon(field $A$):$A\Psi^+_e\Psi^-_e$. Sometimes what you thought was an electron behaves like an electron + photon. Low probability: think of as correction to electron, not a new process. If we look, we will screw up electron! Superposition.}
+	\includegraphics[width=0.8\textwidth]{electron_scattering}
+\end{figure}
+
+\url{https://youtu.be/7a1hon7NJ1M?t=3923}
 
 \subsection{The Dirac Equation}
 
