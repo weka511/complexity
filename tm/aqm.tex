@@ -655,7 +655,20 @@ Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of e
 \end{thm}
 
 \begin{proof}
-	TBP
+	Define an operator $R$ (reflection in time) such that:
+	\begin{align*}
+		R \ket{\psi} =& \ket{\psi^{\prime}} \text{, where} \numberthis \label{eq:reflection}\\
+		\psi^{\prime}(x) =& \psi(x)\text{. Clearly $\psi^{\prime}$ satisfies (\ref{eq:ti:schroedinger}), whence}\\
+		\psi^{\prime}(x) =& \rho \psi^(x) \text{, for some constant $\rho$.} \numberthis \label{eq:R:rho}
+	\end{align*}
+	WLOG we can assume that $\psi$ and $\psi^{\prime}$ are both normalized, whence:
+	\begin{align*}
+		\lvert \rho \rvert = 1& \text{, so (\ref{eq:reflection},\ref{eq:R:rho}) give:}\\
+		R \ket{\psi} =& \rho \ket{\psi} \text{. But (\ref{eq:reflection}) implies}\\
+		R^2    =& I \text{, whence}\\
+		\rho^2 =& 1 \text{, i.e.}\\
+		\rho \pm& 1
+	\end{align*}
 \end{proof}
 
 But neither LHS or RHS wave function of Figure \ref{fig:double:well} symmetric or antisymmetric. Can make symmetric or antisymmetric combinations. Figure \ref{fig:double:well:symmetrized} has slightly lower energy than Figure \ref{fig:double:well}. Figure \ref{fig:double:well:1st} shows first excited state.
@@ -947,5 +960,9 @@ i\frac{\partial \psi_2}{\partial t} - i\frac{\partial \psi_2}{\partial x}=&m \ps
 So the mass term couples the two equations, and makes particle move slower then light. Dirac knew that mass is coupled to ability to move left or right.
 
 \section{Fermions and the Dirac equation}
+
+\subsection{Quantum Field Theory and Fermions}
+
+\subsection{The Dirac equation in 3 dimensions}
 
 \end{document}
