@@ -847,6 +847,105 @@ Figure \ref{fig:scatter:annihilate} has a coupling constant $g^2$.
 
 \subsection{The Dirac Equation}
 
+We will study the relativistic electron. We will start with an electron that moves in 1 direction along a line. Electrons in at atom move at a significant proportion of the speed of light.  
+
+\begin{align*}
+E =& \frac{p^2}{2m} \text {, classical}\\
+P =& -i \frac{\partial}{\partial x} \text{, quantum}\\
+H = & \frac{\partial}{\partial t}\\
+E^2 =& p^2 + m^2 \text{, relativistic($c^2=1$). This becomes:}\\
+-\frac{\partial^2}{\partial t^2} \phi(x) =& -\frac{\partial^2}{\partial x^2}\phi(x) + m^2 \phi(x) \text{, Klein-Gordon equation. But Dirac wanted this:}\\
+i \frac{\partial psi}{\partial t} =& H\psi\\
+=& \sqrt{- \frac{\partial}{\partial x} + m^2} \psi \text{. What could this mean?}  
+\end{align*}
+
+Dirac decided to start again. Imagine a particle moving along the x axis with the speed of light.
+
+\begin{align*}
+P =& E \text{, moving to right}\\
+i \frac{\partial \psi}{\partial t} =& -i \frac{\partial \psi}{\partial x}\\
+\implies&\\
+\frac{\partial \psi}{\partial t} + \frac{\partial \psi}{\partial x}=&0\text{. Any function of x-t will satisfy equation}
+\end{align*}
+
+Two things are wrong with this equation:
+\begin{enumerate}
+	\item Allows particles with negative energy with negative momentum.
+	\item Only has particles that move to the right.
+	\item Electron has no mass: speed of light.
+\end{enumerate}
+
+Dirac solved second problem by imagining two species of electrons, one moving to the right, t'other to the left, labelled $\psi_1$ and $\psi_2$. Or a particles can be one or t-other, or a superposition.
+
+\begin{align*}
+\frac{\partial \psi_1}{\partial t} + \frac{\partial \psi_1}{\partial x}=&0\\
+\frac{\partial \psi_2}{\partial t} - \frac{\partial \psi_2}{\partial x}=&0
+\end{align*}
+
+Imagine particle with two degrees of freedom, $x$ and $1/2$. Make second degree into matrix index. Introduce an observable to tell is whether particle is 1 or 2.
+
+\begin{align*}
+\underbrace{
+	\begin{pmatrix}
+		1 & 0\\
+		0 & -1
+	\end{pmatrix}
+}_\text{Dirac's $\alpha$}
+\begin{pmatrix}
+	\psi_1\\
+	\psi_2
+\end{pmatrix}\\
+H =& \alpha P\\
+i\frac{\partial \psi}{\partial t} =& -i \alpha \frac{\partial \psi}{\partial x} \text{, matrix equation!}
+\end{align*}
+
+Dirac added a term to give electron mass.
+
+\begin{align*}
+H =& \alpha P + \beta m \text{, where $\beta$ is some matrix. Now}\\
+E^2 =& P^2 + m^2 \text{, so}\\
+E^2 =& \big(\alpha P + \beta m \big) \big(\alpha P + \beta m \big)\\
+=& \underbrace{\alpha^2 P^2}_\text{(=1)} + \underbrace{\beta^2 m^2}_\text{set  $=1$} + (\alpha \beta + \beta \alpha) P m\\
+=&  P^2 + m^2 + (\alpha \beta + \beta \alpha) P m \text{, so we want $\alpha \beta + \beta \alpha=0$}
+\end{align*}
+
+Now $\alpha$ is a Pauli matrix, so we can use any other Pauli matrix for $\beta$. We will use
+$
+\begin{pmatrix}
+0&1\\
+1&0
+\end {pmatrix}
+$.
+
+We have the 1-dimensional version of Dirac's equation.
+\begin{align*}
+i \frac{\partial \psi}{\partial t}=& a p \psi + \beta m \psi \text{, where $\psi$ is a two component spinor.}\\
+i \frac{\partial}{\partial t}\begin{pmatrix}
+\psi_1\\
+\psi_2
+\end{pmatrix}=&-i \begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix} \frac{\partial}{\partial x}\begin{pmatrix}
+\psi_1\\
+\psi_2
+\end{pmatrix} + \begin{pmatrix}
+0&m\\
+m&0
+\end{pmatrix}\begin{pmatrix}
+\psi_1\\
+\psi_2
+\end{pmatrix}
+\end{align*}
+
+So
+\begin{align*}
+i\frac{\partial \psi_1}{\partial t} + i\frac{\partial \psi_1}{\partial x}=&m \psi_2\\
+i\frac{\partial \psi_2}{\partial t} - i\frac{\partial \psi_2}{\partial x}=&m \psi_1
+\end{align*}
+
+So the mass term couples the two equations, and makes particle move slower then light. Dirac knew that mass is coupled to ability to move left or right.
+
 \section{Fermions and the Dirac equation}
 
 \end{document}
