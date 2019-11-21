@@ -1074,9 +1074,28 @@ Ground state has lowest energy (not fewest particles). With negative energy can 
 Dirac defined vacuum to have lowest energy. Dirac filled with negative energies (Fermions!) --only one in each state. Vacuum must have every negative state occupied. Cap add positive energy electron, or move a negative energy electron to positive--Figure \ref{fig:dirac:sea}.
 
 \begin{figure}[H]
-	\caption{Dirac Sea}\label{fig:dirac:sea}
-	\includegraphics[width=0.4\textwidth]{DiracSea}
+	\begin{center}
+		\caption[Dirac Sea]{Dirac Sea. Pluck out negative energy electron and get +ve charge and +ve energy hole (positron)}\label{fig:dirac:sea}
+		\includegraphics[width=0.4\textwidth]{DiracSea}
+	\end{center}
 \end{figure}
 
+Imagine photon coming along and hitting -ve energy electron in vacuum: we get an electron and a hole--Figure \ref{photon:dirac}.
+
+\begin{figure}
+	\begin{center}
+		\caption[Photon$\rightarrow$ electons + hole]{Photon$\rightarrow$ electons + hole. By convention positron points down. Can slice in time: upwards electron, down positrons.}\label{photon:dirac}
+		\includegraphics[width=0.5\textwidth]{photon-electrons}
+	\end{center}
+\end{figure}
+
+The wave function needs fermion operators, which anticommute.
+\begin{align*}
+\Psi =& \int_{-\infty}^{\infty} dp a^-(p) e^{-ipx}\\
+=& \underbrace{\int_{-\infty}^0 dp a^-(p) e^{-ipx}}_\text{negative energies}+ \underbrace{\int_0^{\infty} dp a^-(p) e^{-ipx}}_\text{positive energies}\\
+=& \int_{-\infty}^0 dp a^-(p) e^{-ipx}+ \underbrace{\int_0^{\infty} dp b^+(p) e^{-ipx}}_\text{Creation operator for positron}
+\end{align*}
+
+Since Fermion creation and annihilation operators the same.
 
 \end{document}
