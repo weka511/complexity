@@ -645,8 +645,8 @@ Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of e
 \end{figure}
 
 \begin{thm}[If $V$ symmetric,$\psi$ either symmetric or anti-symmetric]
+	If  $\psi$  is a continuously differentiable solution to the time independent Schr\"odinger equation
 	\begin{align*}
-	\text{If  $\psi$ satisfies the time independent Schr\"odinger equation}\\
 	-\frac{\hslash^2}{2m}\frac{d^2 \psi(x)}{d x^2} + V(x)\psi(x) =& E\psi(x) \text{ and}\numberthis \label{eq:ti:schroedinger}\\
 	\forall x V(-x) =& V(x)\text{, then either}\\
 	\psi(x) =& \psi(x)\text{ or}\\
@@ -658,7 +658,7 @@ Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of e
 	Define an operator $R$ (reflection in time) such that:
 	\begin{align*}
 		R \ket{\psi} =& \ket{\psi^{\prime}} \text{, where} \numberthis \label{eq:reflection}\\
-		\psi^{\prime}(x) =& \psi(x)\text{. Clearly $\psi^{\prime}$ satisfies (\ref{eq:ti:schroedinger}), whence}\\
+		\psi^{\prime}(x) =& \psi(x)\text{. Since $V(x) = V(-x)$, $RV=V$, and $\psi^{\prime}$ satisfies (\ref{eq:ti:schroedinger}), whence}\\
 		\psi^{\prime}(x) =& \rho \psi^(x) \text{, for some constant $\rho$.} \numberthis \label{eq:R:rho}
 	\end{align*}
 	WLOG we can assume that $\psi$ and $\psi^{\prime}$ are both normalized, whence:
@@ -667,14 +667,17 @@ Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of e
 		R \ket{\psi} =& \rho \ket{\psi} \text{. But (\ref{eq:reflection}) implies}\\
 		R^2    =& I \text{, whence}\\
 		\rho^2 =& 1 \text{, i.e.}\\
-		\rho \pm& 1
+		\rho \pm& 1 \text{, so, in any interval where $\psi(x)\ne 0$ \emph{either}}\\
+		\psi(x) =& \psi(-x) \text{\emph{or}}\\
+		\psi(x) =& -\psi(-x)
 	\end{align*}
+	We still need to rule out the possibility that $\rho$ changes sign. Let $x_0$ be a point such that $\psi(x_0)=0$, and, WLOG, assume that $\psi(x)=\psi^{\prime}(x)$ in some interval up to $x_0-$ and $\psi(x)=-\psi^{\prime}(x)$ in some interval starting $x_0+$. Since $\psi$ is continuously differentiable: then $\frac{\psi^{\prime}(x_0-)}{dx}=\frac{\psi^(x_0-)}{dx}$. Now $\psi^{\prime\prime}=\big(\psi^{\prime}-\psi\big)$ satisfies (\ref{eq:ti:schroedinger}), $\psi^{\prime\prime}(x_0)=0$, and $\frac{\psi^{\prime\prime}(x_0-)}{dx}=0$, whence $\psi^{\prime\prime}=0 \forall x$. 
 \end{proof}
 
 But neither LHS or RHS wave function of Figure \ref{fig:double:well} symmetric or antisymmetric. Can make symmetric or antisymmetric combinations. Figure \ref{fig:double:well:symmetrized} has slightly lower energy than Figure \ref{fig:double:well}. Figure \ref{fig:double:well:1st} shows first excited state.
 
 \begin{figure}[H]
-	\caption[Wave function symmetrized]{[Wave function symmetrized(minimum in middle is slightly greater than zero-allow tunnelling)}\label{fig:double:well:symmetrized}
+	\caption[Wave function symmetrized]{Wave function symmetrized(minimum in middle is slightly greater than zero-allow tunnelling)}\label{fig:double:well:symmetrized}
 	\includegraphics[width=0.8\textwidth]{particle_mixed_symmetrized}
 \end{figure}
 
