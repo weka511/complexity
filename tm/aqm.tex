@@ -970,15 +970,113 @@ If you have two bosons, can out them into same state, and creation an annihilati
  
 \begin{align*}
 \Psi^\dagger(x)\Psi^\dagger(y)+\Psi^\dagger(y)\Psi^\dagger(x)=&0 \text{ for Fermions. This is usually written:}\\
-\{\Psi^\dagger(x)\Psi^\dagger(y)\}=&0, \text{, where}\\
+\{\Psi^\dagger(x)\Psi^\dagger(y)\}=&0 \text{, where}\\
 \{A,B\}\triangleq& AB + BA \text{, the anticommutator.}
 \end{align*}
 
 NB  $\Psi^\dagger(x)\Psi^\dagger(x)=0$,  so we can't have two identical particles at same position.
 
-We can't confuse Boson creation and annihilation operators, since $[a,a^\dagger]=1$, and $[a^\dagger,a]=-1$.
+We can't confuse Boson creation and annihilation operators, since $[a,a^\dagger]=1$, and $[a^\dagger,a]=-1$. Spectrum of energies from $0$ to $\infty$ can't be turned upside down. For Fermions $\{a\dagger,a\}= \{a,a\dagger\}=1$: from the algebra there is no difference between creation and annihilation operators.
 
-\url{https://youtu.be/DQUJpT_iz8U?t=678}
+Consider occupation numbers of Fermion with only one state: creation operator takes $0$ to $1$, then annihilates, leaving 0. Complete symmetry between empty and filled, creation and annihilation (mathematically!). $a^2=(a^\dagger)^2=0$.
+
 \subsection{The Dirac Equation in 3 dimensions}
+
+Returning to the 1D Dirac equation for zero mass:
+\begin{align*}
+i \frac{\partial \psi}{\partial t}=& -i \frac{\partial \psi}{\partial x} \\
+H \Psi =& i \Psi \text{, this was a failure as a theory of 1D electrons.}
+\end{align*}
+
+We want a 2nd species that propagates to the left.
+\begin{align*}
+i \frac{\partial \psi_1}{\partial t}=& -i \frac{\partial \psi_1}{\partial x} \\
+H \Psi_1 =& i \Psi_1\\
+i \frac{\partial \psi_2}{\partial t}=& i \frac{\partial \psi_2}{\partial x} \\
+H \Psi_2 =& -i \Psi_2
+\end{align*}
+We combined into a vector, adding handedness, $\begin{pmatrix} \psi_1\\ \psi_2 \end{pmatrix}$, and defining the matrix $\alpha = \begin{pmatrix}
+1&0\\
+0&-11
+\end{pmatrix}$
+
+\begin{align*}
+H \psi =& \alpha P \psi
+\end{align*}
+
+That didn't get us a mass, but it got stuff moving in both directions. We then invented another matrix $\beta=\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}$ and then wrote $H = \alpha P + \beta m$. Note $\alpha^2=\beta^2=2$, and $\alpha\beta + \beta\alpha=1$, whence $H^2=P^2+m^2$. Combined left moving and right moving, then added coupling to give mass. How do we do this in 3D?
+ Let's  drop $m$ temporarily, make $\alpha$ a vector, so we can dot product with P.
+\begin{align*}
+H =& \alpha \boldsymbol{\cdot} P\\
+=& \alpha_x P_x + \alpha_y P_y + \alpha_z P_z \text{, we want}\\
+H^2 =& P_x^2 + P_y^2 + P_z^2 \text{, whence}\\
+\alpha_x^2 =&1\\
+\alpha_y^2 = &1\\
+\alpha_z^2 =& 1 \\
+\alpha_y\alpha_x + \alpha_x\alpha_y=&1\\
+\alpha_z\alpha_x + \alpha_x\alpha_z=&1\\
+\alpha_x\alpha_y + \alpha_y\alpha_z=&1
+\end{align*}
+
+\begin{align*}
+	\alpha =& \begin{pmatrix}
+		\sigma&0 \\
+		0&\sigma
+	\end{pmatrix} \text{, spin}\\ 
+	\alpha_x =& \begin{pmatrix}
+		\sigma_x&0\\
+		0&\sigma_x
+	\end{pmatrix}=&\begin{pmatrix}
+		0&1&0&0\\
+		1&0&0&0\\
+		0&0&0&-1\\
+		0&0&-1&0
+	\end{pmatrix}\\
+	\beta =& \begin{pmatrix}
+		0&1\\
+		1&0
+	\end{pmatrix} =& \begin{pmatrix}
+	0&0&1&0\\
+	0&0&1&0\\
+	1&0&0&0\\
+	0&1&0&0
+	\end{pmatrix}
+\end{align*}
+
+In Dirac theory, mass couple left handed chirality with right handed. Massless particles conserve chirality.
+
+\begin{align*}
+\dot L =& i [H,L] \text{, for any L. We'll consider}\\
+\dot X =& i[\alpha P + \beta m,X]\\
+=& i \alpha [P,X]\\
+=&\alpha_x \text{, velocity of particle!}
+\end{align*}
+
+\begin{align*}
+[H,\alpha_x] \ne 0 \text{, so $\alpha_x$ is not conserved.}
+\end{align*}
+
+\url{https://youtu.be/DQUJpT_iz8U?t=3239}
+
+Multiple states --chirality and spin.
+
+Dirac equation can have negative energy, even in 1 D case.
+
+\begin{align*}
+H=P \text{, right moving electron, What if $P<0$?}
+\end{align*} 
+
+Ground state has lowest energy (not fewest particles). With negative energy can lower indefinitely! What does -ve energy mean?
+
+Dirac defined vacuum to have lowest energy. Dirac filled with negative energies (Fermions!) --only one in each state. Vacuum must have every negative state occupied. Cap add positive energy electron, or move a negative energy electron to positive--Figure \ref{fig:dirac:sea}.
+
+\begin{figure}[H]
+	\caption{Dirac Sea}\label{fig:dirac:sea}
+	\includegraphics[width=0.4\textwidth]{DiracSea}
+\end{figure}
+
 
 \end{document}
