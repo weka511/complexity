@@ -635,14 +635,18 @@ How to mix and conserve energy?
 Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of eigenstates of something else, the type of neutrino. Eigenstates of energy don't mix with each other. Here is an analogous situation. Imagine a particle trapped in the potential of Figure \ref{fig:particle_mixed_left}, and assume middle barrier very high, so particle is trapped on one side or t'other (ignore tunnelling). What is ground state? But there must be a second ground state, from symmetry--Figure \ref{fig:double:well}.
 
 \begin{figure}[H]
-	\caption{Double well potential}\label{fig:particle_mixed_left}
-	\includegraphics[width=0.8\textwidth]{particle_mixed_left}
+	\caption{Double well potential}
+	\begin{subfigure}{0.5\textwidth}
+		\caption{Double well potential}\label{fig:particle_mixed_left}
+		\includegraphics[width=0.8\textwidth]{particle_mixed_left}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\caption{Particle trapped in double well}\label{fig:double:well}
+		\includegraphics[width=0.8\textwidth]{particle_mixed}
+	\end{subfigure}
 \end{figure}
 
-\begin{figure}[H]
-	\caption{Particle trapped in double well}\label{fig:double:well}
-	\includegraphics[width=0.8\textwidth]{particle_mixed}
-\end{figure}
+
 
 \begin{thm}[If $V$ symmetric,$\psi$ either symmetric or anti-symmetric]
 	If  $\psi$  is a continuously differentiable solution to the time independent Schr\"odinger equation
@@ -677,14 +681,17 @@ Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of e
 But neither LHS or RHS wave function of Figure \ref{fig:double:well} symmetric or antisymmetric. Can make symmetric or antisymmetric combinations. Figure \ref{fig:double:well:symmetrized} has slightly lower energy than Figure \ref{fig:double:well}. Figure \ref{fig:double:well:1st} shows first excited state.
 
 \begin{figure}[H]
-	\caption[Wave function symmetrized]{Wave function symmetrized(minimum in middle is slightly greater than zero-allow tunnelling)}\label{fig:double:well:symmetrized}
-	\includegraphics[width=0.8\textwidth]{particle_mixed_symmetrized}
+	\caption{Wave functions for Figure \ref{fig:double:well}}
+	\begin{subfigure}{0.45\textwidth}
+			\caption{Wave function symmetrized(minimum in middle is slightly greater than zero-allow tunnelling)}\label{fig:double:well:symmetrized}
+			\includegraphics[width=0.8\textwidth]{particle_mixed_symmetrized}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{First excited state}\label{fig:double:well:1st}
+		\includegraphics[width=0.8\textwidth]{particle_mixed_1st_excited}
+	\end{subfigure}
 \end{figure}
 
-\begin{figure}[H]
-	\caption{First excited state}\label{fig:double:well:1st}
-	\includegraphics[width=0.8\textwidth]{particle_mixed_1st_excited}
-\end{figure}
 
 So we mix the pure states from Figures \ref{fig:double:well:symmetrized} and \ref{fig:double:well:1st}. Let's start with electron on left, and evolve.
 \begin{align*}
