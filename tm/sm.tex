@@ -53,7 +53,10 @@
 	name={phase transition},
 	description={
 		The term phase transition (or phase change) is most commonly used to describe transitions between solid, liquid, and gaseous states of matter, as well as plasma in rare cases. A phase of a thermodynamic system and the states of matter have uniform physical properties. During a phase transition of a given medium, certain properties of the medium change, often discontinuously, as a result of the change of external conditions, such as temperature, pressure, or others. For example, a liquid may become gas upon heating to the boiling point, resulting in an abrupt change in volume.}}
-	
+
+\newglossaryentry{gls:closed:system}{
+	name={closed systsm},
+	description={A system which is \emph{either} everything \emph{or} it is sufficiently isolated from everything else that the other things don't influence it.}}	
 \maketitle
 
 \begin{abstract}
@@ -68,6 +71,9 @@ These are my notes from the Statistical Mechanics lectures from Leonard Susskind
 
 \section{Entropy and conservation of information}
 
+Statistical Mechanics is pre-modern physics, modern physics, and post-modern physics. The 2nd law of thermodynamics will probably outlast anything. Statistical mechanics and thermodynamics may not be as sexy as the Higgs Boson, but it is deeper.
+
+Classical and quantum mechanics are about perfect predictability. If you know initial point of a \gls{gls:closed:system} and the laws of motion, you know its future (in principle).
 
 This lecture focuses on the law of conservation of energy, the $-1^{th}$ law of physics. 
 
@@ -95,8 +101,8 @@ In (\ref{eq:entropy:simple}) and (\ref{eq:entropy}) we use the logarithm, so tha
 
 The First law of Thermodynamics is energy conservation. For a closed system:
 \begin{align*}
-\frac{dE}{dt} =& 0\\
-\sum \frac{dE_i}{dt} =& 0
+\frac{dE}{dt} =& 0, \text{}\\
+\sum_i \frac{dE_i}{dt} =& 0
 \end{align*}
 
 
@@ -705,7 +711,7 @@ NB: biased by magnetic field!
 	M=& \tanh(\beta\mu H)
 \end{align*}
 
-Figure \ref{fig:tanh} show that $M$ is zero for $\beta=0$ (high temperature) and one for large $\beta$ (small temperature).
+Figure \ref{fig:tanh} shows that $M$ is zero for $\beta=0$ (high temperature) and one for large $\beta$ (small temperature).
 
 \begin{figure}[H]
 	\caption{Graph of $\tanh$}\label{fig:tanh}
@@ -843,9 +849,9 @@ Returning to 2D, lets apply a small magnetic field $B$ favouring up-spin. Then (
 	\frac{T y}{2 d j} =& \tanh(y +B\beta)\numberthis\label{eq:tanh_mean_field_B}
 \end{align*}
 
-Figure \ref{fig:tanh_mean_field_B} illustrates to solution to (\ref{eq:tanh_mean_field_B}). There is no longer a solution $\sigma=0$ for finite $T$.
+Figure \ref{fig:tanh_mean_field_B} illustrates the solution to (\ref{eq:tanh_mean_field_B}). There is no longer a solution $\sigma=0$ for finite $T$.
 \begin{figure}[H]
-	\caption{Solving $\frac{T y}{2 d j} = \tanh(y +B\beta)$}\label{fig:tanh_mean_field_B}
+	\caption[Solving Mean Field equation]{Solving $\frac{T y}{2 d j} = \tanh(y +B\beta)$}\label{fig:tanh_mean_field_B}
 	\includegraphics[width=0.9\textwidth]{tanh_mean_field_B}
 \end{figure}
 
@@ -1031,7 +1037,7 @@ The average number of particles at a site is $\frac{1+\bar{\sigma}}{2}$.
 		\item If $T<T_{crit}$, there is a jump as we vary chemical potential-- boiling or condensation.
 \end{itemize}
 
-
+\appendix
 \printglossaries
 
 \end{document}
