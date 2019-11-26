@@ -28,6 +28,7 @@ These are my notes from the Advanced Quantum Mechanics lectures from Leonard Sus
 
 \tableofcontents
 \listoffigures
+\listoftables
 \listoftheorems
 
 
@@ -62,7 +63,10 @@ H \ket{\psi} =& E \ket{\psi}\text{, Time independent Schr\"odinger Equation}
 
 \subsection{Introduction to Symmetry}
 
-Rotational symmetry is one of the most important symmetries. So is translational symmetry. A symmetry is a transformation  that doesn't change equations.
+\begin{defn}[Symmetry]
+	A symmetry is a transformation that doesn't change equations. 
+\end{defn}
+Rotational symmetry is one of the most important symmetries, as is translational symmetry.
 
 \begin{thm}[A symmetry is a unitary operator that commutes with Hamiltonian]
 	\begin{align*}
@@ -81,10 +85,9 @@ Rotational symmetry is one of the most important symmetries. So is translational
 	\psi_2^{\prime} =& U \psi_1^{\prime} \text{, so from (\ref{eq:symmetry}):}\\
 	V\ket{\psi_2} =& U V \ket{\psi_1} \text{, or, using (\ref{eq:psi_1})}\\
 	V U\ket {\psi_1} =& U V \ket{\psi_1} \text{. But $\ket{\psi_1}$ is an arbitrary state, so} \\
-	V U =& U V \text{ i.e. so small time}\\
+	V U =& U V \text{ i.e. so for small time $\epsilon$}\\
 	V (I - i \epsilon H) =& (I - i \epsilon H) V \text{, whence}\\
-	V H =& H V \text{, or}\\
-	[H,V] =& 0 \text{, which is (\ref{eq:symmetry:commute})}
+	V H =& H V \text{, which is (\ref{eq:symmetry:commute})}
 	\end{align*}
 	Moreover the symmetry $V$ should transform mutually exclusive states into mutually exclusive states, whence it should preserve orthogonality, hence $V$ should be unitary. 
 \end{proof}
@@ -345,26 +348,22 @@ i & 0
 \end{pmatrix}
 $$
 
-and show they satisfy (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). Actually need $s_i=\frac{\sigma_i}{2}$.
-
+then define:
 \begin{align*}
+s_i =& \frac{\sigma_i}{2} \text{. We can show the $s_i$ satisfy (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx})}\\
 [s_x,s_y] =& i s_z \\
 [s_y,s_z] =& i s_x\\
-[s_z,s_x] =& i s_y\\
-J=&L+s\text{, where $J$ is total angular momentum.}
+[s_z,s_x] =& i s_y \text{. We define $J$, the total angular momentum}\\
+J=&L+s
 \end{align*}
 
-Eigenvalues of $s_z$ are $\pm \frac{1}{2}$.
-
-Notice that we have integral and half integral spins.
+Eigenvalues of $s_z$ are $\pm \frac{1}{2}$: notice that we have integral and half integral spins.
 
 See Figure \ref{fig:degeneracy:hydrogen}. Number of states for each n, 1, 4, 9, 16, ...
 
 For Helium, we can put 2 electrons into ground state; if we try to create an ion with 3 electrons, one goes into next state! Pauli exclusion principle. New property with two values, up and down. Checked with magnetic field.
 
-Pauli's exclusion is a postulate of non-relativistic QM, but a consequence of relativistic QM.
-
-Two kinds of particles: ones that satisfy Pauli, and those that don't.
+Pauli's Exclusion Principle is a\emph{ postulate} of non-relativistic QM, but a \emph{consequence} of relativistic QM. There are two kinds of particles: ones that satisfy Pauli, and those that don't.
 
 Identical quantum particles are indistinguishable.
 
@@ -396,14 +395,22 @@ Consider wave function of positions for multiple particles, e.g. $\ket{x_1,x_2,x
 
 NB: sign is not observable.
 
-\begin{align*}
-\psi(x_1,x_2)=&-\psi(x_2,x_1) \text{, Fermions}\\
-\psi(x_1,x_2)=&\psi(x_2,x_1) \text{, Bosons}\\
-\psi_0(x_1)\psi_0(x_2)& \text{--OK for Bosons but not Fermions}\\
-\psi_0(x_1)\psi_1(x_2)& \text{--not OK for Bosons, or Fermions}\\
-\psi_0(x_1)\psi_1(x_2)+\psi_0(x_2)\psi_1(x_1)& \text{--OK for Bosons}\\
-\psi_0(x_1)\psi_1(x_2)-\psi_0(x_2)\psi_1(x_1)& \text{--OK for Fermions}
-\end{align*}
+\begin{table}[H]
+	\begin{center}
+		\caption{Wave functions for Fermions and Bosons}
+			\begin{tabular}{|l| l| l|} \hline 
+				-&Fermions&Bosons \\ \hline 
+				$\psi(x_1,x_2)=-\psi(x_2,x_1)$&Fermions&-\\ \hline
+				$\psi(x_1,x_2)=\psi(x_2,x_1)$&-& Bosons\\ \hline
+				$\psi_0(x_1)\psi_0(x_2)$&not OK& OK\\ \hline
+				$\psi_0(x_1)\psi_1(x_2)$&not OK& not OK\\ \hline
+				$\psi_0(x_1)\psi_1(x_2)+\psi_0(x_2)\psi_1(x_1)$&not OK& OK\\ \hline
+				$\psi_0(x_1)\psi_1(x_2)-\psi_0(x_2)\psi_1(x_1)$&OK&not OK \\ \hline
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
 
 Rotate system by $2\pi$: is there a phase?
 
