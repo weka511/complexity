@@ -342,7 +342,7 @@ $$
 1 & 0
 \end{pmatrix}
 \quad
-\sigma_z = \begin{pmatrix}
+\sigma_y = \begin{pmatrix}
 0 & -i \\
 i & 0
 \end{pmatrix}
@@ -437,7 +437,7 @@ a^+_i \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \text{, creation ope
 a^-_i \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, annihilation operator} \numberthis \label{eq:annihilation:operator_i}\\
 \end{align*}
 
-Think as each oscillator  as an independent system of degrees of freedom, so operators commute. Using  (\ref{eq:a:comm}), and (\ref{eq:number:operator})
+Think of each oscillator  as an independent system of degrees of freedom, so operators commute. Using  (\ref{eq:a:comm}), and (\ref{eq:number:operator})
 
 \begin{align*}
 [a^+_i,a^+_j] =& 0 \numberthis \label{eq:a:comm_i_plus}\\
@@ -451,7 +451,7 @@ One basis of states is $\ket{n_1,n_2,n_3,...}$.
 
 \begin{thm}[Normalization of harmonic oscillator state--creation]\label{thm:norm:harmonic}
 	\begin{align*}
-	|\ket{n}|=&1\\
+	\left|\ket{n}\right|=&1\\
 	\implies&\\
 	a^+\ket{n}=&\sqrt{n+1}\ket{n+1}
 	\end{align*}
@@ -459,11 +459,11 @@ One basis of states is $\ket{n_1,n_2,n_3,...}$.
 
 \begin{proof}
 	\begin{align*}
-	a^+\ket{n}=&c_n\ket{n+1} \text{, assumption}\\
+	a^+\ket{n}=&c_n\ket{n+1} \text{, fot the eigenvalue $c_n$}\\
 	\bra{n}a^-=&c_n\bra{n+1}\text{, assume real}\\
 	\braket{n|a^-a^+|n}=&c_n^2\text{, normalization!}\\
-	=& \braket{n|a^+a^-+1|n}\text{, using commutator}\\
-	=& \braket{n|N+1|n}\\
+	=& \braket{n|a^+a^-+1|n}\text{, using (\ref{eq:a:comm_i})}\\
+	=& \braket{n|N+1|n} \text{, from (\ref{eq:number:operator})}\\
 	=&n+1 \text{, whence}\\
 	c_n=&\sqrt{n+1}
 	\end{align*}
@@ -480,7 +480,7 @@ $a_i^+\ket{n_1,n_2,.....}=\sqrt{n_i+1}\ket{n_1,n_2,...n_i+1,...}$
 
 \subsection{Quantum Field Theory of Bosons}
 
-Fields are functions of position. $\psi(x)$ not observable; we observe position, momentum, etc, but not $\psi$. $\psi(x_1,x_2,...x_{15})$ function of many positions.
+Fields are functions of position. $\psi(x)$ not Hermitian, hence not an observable; we observe position, momentum, etc, but not $\psi$. $\psi(x_1,x_2,...x_{15})$ function of many positions. We want a quantity $\Psi$ such that:
 
 \begin{itemize}
 	\item $\Psi$ is an observable, e.g. magnetic field, so an operator.
@@ -491,7 +491,7 @@ Fields are functions of position. $\psi(x)$ not observable; we observe position,
 
 Consider one particle in a box, and think about energy eigenstates. Wave function $\psi_1(x)$ is sine (lowest energy level). Next $\psi_2(x)$ has one node, with higher energy, $\psi_3(x)$ two nodes,...
 
-Now many particles (bosons), some in first energy level, some in second,...$\ket{n1,n2,n3,...}$> Now we invent operators as in (\ref{eq:a:comm_i_plus}) - (\ref{eq:a:comm_i}) to create and remove particles. NB $\set{1,2,3,...}$ are states $\set{n_i}$ occupation numbers.
+Now many particles (bosons), some in first energy level, some in second,...$\ket{n1,n2,n3,...}$;  we invent operators as in (\ref{eq:a:comm_i_plus}) - (\ref{eq:a:comm_i}) to create and remove particles. NB $\set{1,2,3,...}$ are states $\set{n_i}$ occupation numbers.
 
 \begin{align*}
 (a^+a^-)\ket{n}=&(a^-a^+-1)\ket{n}\\
@@ -510,14 +510,14 @@ Denote energy by $\omega_i$ for state $i$.
 
 \begin{align*}
 E =& \sum_{i} n_i \omega_i\\
-=& \sum_{i} \omega_a a^+_i a^-_i 
+=& \sum_{i} \omega_i a^+_i a^-_i 
 \end{align*}
 
 We'll consider free particles--no interactions.
 
 Why can we ignore ground-state energy? Because constants commute with everything. 
 
-Quantum fields theory is a book-keeping device for particles.
+Quantum field theory is a book-keeping device for particles.
 
 $\Psi(x)$ -- an operator that is a function of position--\emph{Fock Space}.
 
@@ -655,12 +655,13 @@ Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of e
 
 
 
-\begin{thm}[If $V$ symmetric,$\psi$ either symmetric or anti-symmetric]
+\begin{thm}[If $V$ is an even function, $\psi$ is either even or odd.]
 	If  $\psi$  is a continuously differentiable solution to the time independent Schr\"odinger equation
 	\begin{align*}
 	-\frac{\hslash^2}{2m}\frac{d^2 \psi(x)}{d x^2} + V(x)\psi(x) =& E\psi(x) \text{ and}\numberthis \label{eq:ti:schroedinger}\\
-	\forall x V(-x) =& V(x)\text{, then either}\\
-	\psi(x) =& \psi(x)\text{ or}\\
+	\forall x V(-x) =& V(x) \numberthis \label{eq:even_V}\\
+	\text{then}&\text{ either}\\
+	\psi(x) =& \psi(x)\text{, or}\\
 	\psi(x) =& \psi(-x)
 	\end{align*}
 \end{thm}
@@ -669,12 +670,17 @@ Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of e
 	Define an operator $R$ (reflection in time) such that:
 	\begin{align*}
 		R \ket{\psi} =& \ket{\psi^{\prime}} \text{, where} \numberthis \label{eq:reflection}\\
-		\psi^{\prime}(x) =& \psi(x)\text{. Since $V(x) = V(-x)$, $RV=V$, and $\psi^{\prime}$ satisfies (\ref{eq:ti:schroedinger}), whence}\\
-		\psi^{\prime}(x) =& \rho \psi^(x) \text{, for some constant $\rho$.} \numberthis \label{eq:R:rho}
+		\psi^{\prime}(x) =& \psi(-x)
+	\end{align*}
+	
+	(\ref{eq:even_V}) $\implies RV=V$, and $\psi^{\prime}$ satisfies (\ref{eq:ti:schroedinger}), whence:
+	
+	\begin{align*}
+	\psi^{\prime}(x) =& \rho \psi(x) \text{, for some constant $\rho$.} \numberthis \label{eq:R:rho}
 	\end{align*}
 	WLOG we can assume that $\psi$ and $\psi^{\prime}$ are both normalized, whence:
 	\begin{align*}
-		\lvert \rho \rvert = 1& \text{, so (\ref{eq:reflection},\ref{eq:R:rho}) give:}\\
+		\lvert \rho \rvert = 1& \text{, so (\ref{eq:reflection}) and (\ref{eq:R:rho}) give:}\\
 		R \ket{\psi} =& \rho \ket{\psi} \text{. But (\ref{eq:reflection}) implies}\\
 		R^2    =& I \text{, whence}\\
 		\rho^2 =& 1 \text{, i.e.}\\
@@ -682,7 +688,7 @@ Neutrinos - mass is energy. Eigenstates of energy are linear superpositions of e
 		\psi(x) =& \psi(-x) \text{\emph{or}}\\
 		\psi(x) =& -\psi(-x)
 	\end{align*}
-	We still need to rule out the possibility that $\rho$ changes sign. Let $x_0$ be a point such that $\psi(x_0)=0$, and, WLOG, assume that $\psi(x)=\psi^{\prime}(x)$ in some interval up to $x_0-$ and $\psi(x)=-\psi^{\prime}(x)$ in some interval starting $x_0+$. Since $\psi$ is continuously differentiable: then $\frac{\psi^{\prime}(x_0-)}{dx}=\frac{\psi^(x_0-)}{dx}$. Now $\psi^{\prime\prime}=\big(\psi^{\prime}-\psi\big)$ satisfies (\ref{eq:ti:schroedinger}), $\psi^{\prime\prime}(x_0)=0$, and $\frac{\psi^{\prime\prime}(x_0-)}{dx}=0$, whence $\psi^{\prime\prime}=0 \forall x$. 
+	We still need to rule out the possibility that $\rho$ changes sign at a zero. Let $x_0$ be a point such that $\psi(x_0)=0$, and, WLOG, assume that $\psi(x)=\psi^{\prime}(x)$ in some interval up to $x_0-$ and $\psi(x)=-\psi^{\prime}(x)$ in some interval starting $x_0+$. Since $\psi$ is continuously differentiable: then $\frac{\psi^{\prime}(x_0-)}{dx}=\frac{\psi^(x_0-)}{dx}$. Now define $\psi^{\prime\prime} \triangleq \big(\psi^{\prime}-\psi\big)$: $\psi^{\prime\prime}$ satisfies (\ref{eq:ti:schroedinger}), $\psi^{\prime\prime}(x_0)=0$, and $\frac{\psi^{\prime\prime}(x_0-)}{dx}=0$, whence $\psi^{\prime\prime}=0 \forall x$. 
 \end{proof}
 
 But neither LHS or RHS wave function of Figure \ref{fig:double:well} symmetric or antisymmetric. Can make symmetric or antisymmetric combinations. Figure \ref{fig:double:well:symmetrized} has slightly lower energy than Figure \ref{fig:double:well}. Figure \ref{fig:double:well:1st} shows first excited state.
@@ -713,7 +719,7 @@ Each is an eigenvector, so they evolve as follows:
 
 Now what if we start with pure $\psi_L$?
 \begin{align*}
-	\psi_L =& \frac{\psi^+ + \psi^-}{\sqrt{2}}\text{, then the denominator evolves to}\\
+	\psi_L =& \frac{\psi^+ + \psi^-}{\sqrt{2}}\text{, then the denominator evolves as}\\
 	\psi_L^\prime =&\psi^+ e^{(E_1-\epsilon)t} + \psi^- e^{(E_1+\epsilon)t}\\
 	=&e^{E_1 t}\big[\psi^+ e^{-\epsilon t} + \psi^- e^{+\epsilon t}\big]
 \end{align*}
@@ -726,13 +732,11 @@ e^{2 \epsilon t}=&-1\\
 
 Mixing goes with oscillation. Neutrinos go like that--electron neutrino changes to muon neutrino. Masses are energy levels. Coupling in Hamiltonian.
 
-Ammonia - $N$ tunnels through $H_3$ plane. 
+Ammonia is analogous: $N$ tunnels through $H_3$ plane. 
 
 Spins.
 
-\url{https://youtu.be/7G4C7scQX3A?t=1027}
-\url{https://youtu.be/7G4C7scQX3A?t=1467}
-\url{https://youtu.be/7G4C7scQX3A?t=1961}
+
 
 \subsection{Second Quantization of Bosons}
 
@@ -776,30 +780,31 @@ Makes sense in relativity: would violate causality. Spacelike! Can measure at di
 
 Fermions don't work like this! One measurement can kick another arbitrarily far away.
 
-\section{Quantum field Hamiltonian}
+\section{Quantum Field Hamiltonian}
 
 \subsection{Particle Field Interactions}
 
-Hamiltonian for very simple quantum field,  particles satisfying Schr\"odinger equation.
+Hamiltonian for very simple quantum field--particles satisfying Schr\"odinger equation. The second term counts particles, giving each energy $V(x)$.
 \begin{align*}
-H =& \int dx \big[ \Psi^\dagger(x) \frac{- \nabla^2}{2m} \Psi(x) + V(x) \Psi^\dagger(x) \Psi(x) \big] \text{, count particles; give each energy V(x)}\\
-=&\int dx \big[\Psi^\dagger(x) \frac{- \nabla^2}{2m} \Psi(x) + mc^2 \Psi^\dagger(x) \Psi(x)\big] \text{, special case of constant potential energy} \numberthis\label{eq:psi_mc2}
+H =& \int dx \big[ \Psi^\dagger(x) \big[\frac{- \nabla^2}{2m} \Psi(x) \big]+ V(x) \Psi^\dagger(x) \Psi(x) \big] \\
+&\text{We restrict to the special case of constant potential energy}\\
+H=&\int dx \big[\Psi^\dagger(x) \big(\frac{- \nabla^2}{2m} \Psi(x)\big) + mc^2 \Psi^\dagger(x) \Psi(x)\big]  \numberthis\label{eq:psi_mc2}
 \end{align*}
 
-Hamiltonian updates state.
+The Hamiltonian updates state.
 
 \begin{align*}
 \ket{\phi(t+\epsilon)} =& (1-i \epsilon H) \ket{\phi(t)} \text{State}\\
 =& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)} \numberthis \label{eq:update:state}
 \end{align*}
 
-What would it mean to say momentum is conserved? It means Hamiltonian doesn't change momentum. Let's see how this works with (\ref{eq:psi_mc2}.) Rewrite 2nd term  using momentum variables
+What would it mean to say momentum is conserved? It means Hamiltonian doesn't change momentum. Let's see how this works with (\ref{eq:psi_mc2}). Rewrite 2nd term  using momentum variables
 
 \begin{align*}
 \Psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi}(p) e^{ipx}\\
-\Psi^\dagger (x) =& \int \frac{dq}{\sqrt{2\pi}} \widetilde{\Psi^\dagger}(q) e^{-iqx} \numberthis \label{eq:psi:dagger}\\
-\int dx mc^2 \Psi^\dagger(x) \Psi(x) =& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(q) \widetilde{\Psi}(p) e^{i(p-q)x} dx dq dp\\
-=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(q) \widetilde{\Psi}(p) \delta(p-q) dq dp\\
+\Psi^\dagger (x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi^\dagger}(p) e^{-ipx} \numberthis \label{eq:psi:dagger}\\
+\int dx \big(mc^2\big) \Psi^\dagger(x) \Psi(x) =& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p_2) \widetilde{\Psi}(p_1) e^{i(p_1-p_2)x} dx dp_2 dp_1\\
+=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p_2) \widetilde{\Psi}(p_1) \delta(p_1-p_2) dp_2 dp_1\\
 =& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp
 \end{align*}
 This just removes a particle with momentum $p$ and puts it back; momentum isn't changed. Let's repeat with the 1st term of (\ref{eq:psi_mc2}.)
@@ -811,9 +816,7 @@ This just removes a particle with momentum $p$ and puts it back; momentum isn't 
 \int dx \Psi^\dagger(x) \frac{- \nabla^2}{2m} \Psi(x)=& \int \frac{ p^2}{2m} \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp \text{, adds up kinetic energy.}
 \end{align*}
 
-\url{https://youtu.be/7a1hon7NJ1M?t=1605}
-
-Imagine two species of particles: fake electrons and protons that happen to be protons.
+Imagine two species of particles: fake electrons and protons that happen to be bosons.
 
 \begin{align*}
 H =& \int dx  \Psi^\dagger_e(x) \frac{- \nabla^2}{2m_e} \Psi_e(x) + \int dx \Psi^\dagger_p(x) \frac{- \nabla^2}{2m_p} \Psi_p(x)  + g \int dx \underbrace{\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)}_\text{Figure \ref{fig:scatter:e:p}} \text{, where}\\
@@ -846,7 +849,7 @@ which reverses the process of  Figure \ref{fig:particle:decay}: $b+c\rightarrow 
 We now have a simple version of quantum field theory:
 \begin{itemize}
 	\item Creation and annihilation operators;
-	\item Fields made out of Creation and annihilation operators;
+	\item Fields made out of creation and annihilation operators;
 	\item Fields are functions of position;
 	\item Each type of particle has its own field;
 	\item Write down Hamiltonian with kinetic energies of particles and other concoctions. 
@@ -873,11 +876,9 @@ Figure \ref{fig:scatter:annihilate} has a coupling constant $g^2$.
 	\includegraphics[width=0.8\textwidth]{electron_scattering}
 \end{figure}
 
-\url{https://youtu.be/7a1hon7NJ1M?t=3923}
-
 \subsection{The Dirac Equation}
 
-We will study the relativistic electron. We will start with an electron that moves in 1 direction along a line. Electrons in at atom move at a significant proportion of the speed of light.  
+We will study the relativistic electron. We will start with an electron that moves in 1 direction along a line. Why did Dirac want to handle the relativistic case? Electrons in at atom move at a significant proportion of the speed of light.  
 
 \begin{align*}
 E =& \frac{p^2}{2m} \text {, classical}\\
@@ -898,21 +899,21 @@ i \frac{\partial \psi}{\partial t} =& -i \frac{\partial \psi}{\partial x}\\
 \frac{\partial \psi}{\partial t} + \frac{\partial \psi}{\partial x}=&0\text{. Any function of x-t will satisfy equation}
 \end{align*}
 
-Two things are wrong with this equation:
+Three things are wrong with this equation:
 \begin{enumerate}
 	\item Allows particles with negative energy with negative momentum.
 	\item Only has particles that move to the right.
 	\item Electron has no mass: speed of light.
 \end{enumerate}
 
-Dirac solved second problem by imagining two species of electrons, one moving to the right, t'other to the left, labelled $\psi_1$ and $\psi_2$. Or a particles can be one or t-other, or a superposition.
+Dirac solved second problem by imagining two species of electrons, one moving to the right, t'other to the left, labelled $\psi_1$ and $\psi_2$. Or a particle can be one or t-other, or a superposition.
 
 \begin{align*}
 \frac{\partial \psi_1}{\partial t} + \frac{\partial \psi_1}{\partial x}=&0\\
 \frac{\partial \psi_2}{\partial t} - \frac{\partial \psi_2}{\partial x}=&0
 \end{align*}
 
-Imagine particle with two degrees of freedom, $x$ and $1/2$. Make second degree into matrix index. Introduce an observable to tell is whether particle is 1 or 2.
+Imagine particle with two degrees of freedom, $x$ and $1/2$. Make second degree into matrix index. Introduce an observable, $\alpha$, to tell is whether particle is 1 or 2.
 
 \begin{align*}
 \underbrace{
@@ -929,7 +930,7 @@ H =& \alpha P\\
 i\frac{\partial \psi}{\partial t} =& -i \alpha \frac{\partial \psi}{\partial x} \text{, matrix equation!}
 \end{align*}
 
-Dirac added a term to give electron mass.
+Dirac added a term to give electron mass. Then:
 
 \begin{align*}
 H =& \alpha P + \beta m \text{, where $\beta$ is some matrix. Now}\\
@@ -980,7 +981,7 @@ So the mass term couples the two equations, and makes particle move slower then 
 
 \subsection{Second Quantization of Fermions}
 
-If you have two bosons, can out them into same state, and creation an annihilation operators commute. Now, imagine two particles whose wave function changes sign when we interchange. Let $\ket{x,y}$ represent particles at x and y. $\Psi^\dagger(x)\Psi^\dagger(y)\ket{0}$ will create. If operators commute $\ket{x,y}=\ket{y,x}$. For Fermions, $\ket{x,y}=-\ket{y,x}$, so we need  $\Psi^\dagger(x)\Psi^\dagger(y)= -\Psi^\dagger(y)\Psi^\dagger(x)$
+If you have two bosons, can put them into same state, and creation an annihilation operators commute. Now, imagine two particles whose wave function changes sign when we interchange. Let $\ket{x,y}$ represent particles at x and y. $\Psi^\dagger(x)\Psi^\dagger(y)\ket{0}$ will create. If operators commute $\ket{x,y}=\ket{y,x}$. For Fermions, $\ket{x,y}=-\ket{y,x}$, so we need  $\Psi^\dagger(x)\Psi^\dagger(y)= -\Psi^\dagger(y)\Psi^\dagger(x)$
  
 \begin{align*}
 \Psi^\dagger(x)\Psi^\dagger(y)+\Psi^\dagger(y)\Psi^\dagger(x)=&0 \text{ for Fermions. This is usually written:}\\
@@ -990,7 +991,7 @@ If you have two bosons, can out them into same state, and creation an annihilati
 
 NB  $\Psi^\dagger(x)\Psi^\dagger(x)=0$,  so we can't have two identical particles at same position.
 
-We can't confuse Boson creation and annihilation operators, since $[a,a^\dagger]=1$, and $[a^\dagger,a]=-1$. Spectrum of energies from $0$ to $\infty$ can't be turned upside down. For Fermions $\{a\dagger,a\}= \{a,a\dagger\}=1$: from the algebra there is no difference between creation and annihilation operators.
+We can't confuse Boson creation and annihilation operators, since $[a,a^\dagger]=1$ (\ref{eq:a:comm_i}), and $[a^\dagger,a]=-1$. Spectrum of energies from $0$ to $\infty$ can't be turned upside down. For Fermions $\{a\dagger,a\}= \{a,a\dagger\}=1$: from the algebra there is no difference between creation and annihilation operators.
 
 Consider occupation numbers of Fermion with only one state: creation operator takes $0$ to $1$, then annihilates, leaving 0. Complete symmetry between empty and filled, creation and annihilation (mathematically!). $a^2=(a^\dagger)^2=0$.
 
@@ -1009,9 +1010,9 @@ H \Psi_1 =& i \Psi_1\\
 i \frac{\partial \psi_2}{\partial t}=& i \frac{\partial \psi_2}{\partial x} \\
 H \Psi_2 =& -i \Psi_2
 \end{align*}
-We combined into a vector, adding handedness, $\begin{pmatrix} \psi_1\\ \psi_2 \end{pmatrix}$, and defining the matrix $\alpha = \begin{pmatrix}
+We combined into a vector, adding handedness, $\begin{pmatrix} \psi_1\\ \psi_2 \end{pmatrix}$, and defined the matrix $\alpha = \begin{pmatrix}
 1&0\\
-0&-11
+0&-1
 \end{pmatrix}$
 
 \begin{align*}
@@ -1021,7 +1022,7 @@ H \psi =& \alpha P \psi
 That didn't get us a mass, but it got stuff moving in both directions. We then invented another matrix $\beta=\begin{pmatrix}
 0&1\\
 1&0
-\end{pmatrix}$ and then wrote $H = \alpha P + \beta m$. Note $\alpha^2=\beta^2=2$, and $\alpha\beta + \beta\alpha=1$, whence $H^2=P^2+m^2$. Combined left moving and right moving, then added coupling to give mass. How do we do this in 3D?
+\end{pmatrix}$ and then wrote $H = \alpha P + \beta m$. Note $\alpha^2=\beta^2=1$, and $\alpha\beta + \beta\alpha=1$, whence $H^2=P^2+m^2$. We combined left moving and right moving, then added coupling to give mass. How do we do this in 3D?
  Let's  drop $m$ temporarily, make $\alpha$ a vector, so we can dot product with P.
 \begin{align*}
 H =& \alpha \boldsymbol{\cdot} P\\
@@ -1038,16 +1039,34 @@ H^2 =& P_x^2 + P_y^2 + P_z^2 \text{, whence}\\
 \begin{align*}
 	\alpha =& \begin{pmatrix}
 		\sigma&0 \\
-		0&\sigma
+		0&-\sigma
 	\end{pmatrix} \text{, spin}\\ 
 	\alpha_x =& \begin{pmatrix}
 		\sigma_x&0\\
-		0&\sigma_x
+		0&-\sigma_x
 	\end{pmatrix}=&\begin{pmatrix}
 		0&1&0&0\\
 		1&0&0&0\\
 		0&0&0&-1\\
 		0&0&-1&0
+	\end{pmatrix}\\
+	\alpha_y =& \begin{pmatrix}
+	\sigma_y&0\\
+	0&-\sigma_y
+	\end{pmatrix}=&\begin{pmatrix}
+	0&i&0&0\\
+	-i&0&0&0\\
+	0&0&0&-i\\
+	0&0&i&0
+	\end{pmatrix}\\
+	\alpha_z =& \begin{pmatrix}
+	\sigma_z&0\\
+	0&-\sigma_z
+	\end{pmatrix}=&\begin{pmatrix}
+	1&0&0&0\\
+	0&-1&0&0\\
+	0&0&-1&0\\
+	0&0&0&1
 	\end{pmatrix}\\
 	\beta =& \begin{pmatrix}
 		0&1\\
@@ -1060,10 +1079,10 @@ H^2 =& P_x^2 + P_y^2 + P_z^2 \text{, whence}\\
 	\end{pmatrix}
 \end{align*}
 
-In Dirac theory, mass couple left handed chirality with right handed. Massless particles conserve chirality.
+In Dirac theory, mass couples left handed chirality with right handed. Massless particles conserve chirality.
 
 \begin{align*}
-\dot L =& i [H,L] \text{, for any L. We'll consider}\\
+\dot L =& i [H,L] \text{, for any operator L. We'll consider}\\
 \dot X =& i[\alpha P + \beta m,X]\\
 =& i \alpha [P,X]\\
 =&\alpha_x \text{, velocity of particle!}
@@ -1073,7 +1092,6 @@ In Dirac theory, mass couple left handed chirality with right handed. Massless p
 [H,\alpha_x] \ne 0 \text{, so $\alpha_x$ is not conserved.}
 \end{align*}
 
-\url{https://youtu.be/DQUJpT_iz8U?t=3239}
 
 Multiple states --chirality and spin.
 
