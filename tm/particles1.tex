@@ -30,6 +30,8 @@ These are my notes for Particle Physics 1 lectures from Leonard Susskind's Theor
 
 \section{Particles and Light}
 
+This lecture contains  facts from other courses, which will be used on later lectures.
+
 Particle physics is about the question: is matter discrete? If so we will call the smallest things "particles". If matter forms a continuum, we have fields.
 
 Which is correct? Both and neither.
@@ -43,8 +45,8 @@ We have
 \frac{\lambda}{T}=&c\\
 f=&\frac{1}{T} \text{, so}\\
 \lambda f =& c\text{. Physicists tend to measure frequency in radians per second:}\\
-\omega =& 2 \pi f \text{, so}\\
-\omega =& \frac{2 \pi c}{\lambda}
+\omega =& 2 \pi f \text{, so} \\
+\omega =& \frac{2 \pi c}{\lambda} \numberthis \label{eq:omega:lambda}
 \end{align*}
 
 \begin{figure}[H]
@@ -54,13 +56,30 @@ f=&\frac{1}{T} \text{, so}\\
 
 Wave/particle duality.
 
-A photon has energy: $E=\hslash \omega$. Energy of ray is $n \hslash \omega$
+A photon has energy:
+\begin{align*}
+E=&\hslash \omega \text{. Energy of single photon.} \numberthis\label{eq:E_omega}\\
+E_{ray}=&n \hslash \omega \text{. Energy of ray.}
+\end{align*}
+ 
 
 In modern usage, mass is what used to be called rest mass. $E = m c^2$ only for stationary object.
 
-In particle physics we choose units to set $c=1$ and $\hslash=1$. 
+In particle physics we choose units to set $c=1$ and $\hslash=1$. In this lecture $c$ and $\hslash$ will appear explicitly only when Prof. Susskind wants to show the magnitude of some quantity.
 
-\url{https://youtu.be/2eFvVzNF24g?t=4939}
+Energy depends on the motion of the object as seen by the observer: it isn't a universal thing that everyone will agree on.
+
+Light has energy and momentum (not mass): 
+
+\begin{align*}
+\left|P\right|=&\frac{E}{c} \\
+=&\frac{\hslash \omega}{c} \text{, from (\ref{eq:E_omega})}\\
+=& \frac{2 \pi \hslash}{\lambda} \text{, from (\ref{eq:omega:lambda})}
+\end{align*}
+
+This is why we need larger and larger instruments to observe smaller particles!
+To see really small things, we need particles with high energy and momentum.
+
 
 \section{Quantum field theory}
 
