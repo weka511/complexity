@@ -70,6 +70,7 @@ target/
 *.toc
 *.loe
 *.lof
+*.lot
 *.glo
 *.ist
 *.out
