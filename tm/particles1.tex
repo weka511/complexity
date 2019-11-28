@@ -126,8 +126,8 @@ Start with harmonic oscillator: a wave is a collection of harmonic oscillators. 
 Introduce operators:
 
 \begin{align*}
-a^+ \ket{n} =& \sqrt{n+1} \ket{n+1} \text{, creation operator}\\
-a^- \ket{n} =& \sqrt{n} \ket{n-1} \text{, annihilation operator}\\
+a^+ \ket{n} =& \sqrt{n+1} \ket{n+1} \text{, creation operator} \numberthis \label{eq:creation}\\
+a^- \ket{n} =& \sqrt{n} \ket{n-1} \text{, annihilation operator} \numberthis \label{eq:annihilation} \\
 a^+ a^- \ket{n} =& n \ket{n} \text{, or}\\
 a^+ a^-  =& n \text{, similarly}\\
 a^- a^+  =& n+1\\
@@ -243,7 +243,11 @@ Stimulated emission: higher probability of generating particles that are already
 
 \section{More quantum field theory}
 
-How is this related to energy and momentum conservation.
+How is this related to energy and momentum conservation?
+
+\subsection{Mathematical Preliminaries}
+
+\subsubsection{Dirac Delta function}
 
 \begin{align*}
 \text{For } k =& \frac{2 \pi n}{L}\\
@@ -252,7 +256,77 @@ How is this related to energy and momentum conservation.
 \rightarrow& 2 \pi \delta(k) \text{ as $k \rightarrow \inf$}
 \end{align*}
 
-\url{https://youtu.be/eA8X8IU_fWY?t=844}
+We will use ket vectors for initial states, bra for final. This will help with bookkeeping.
+
+\subsubsection{Creation and annihilation operators operating on bra vectors}
+
+\begin{align*}
+\braket{n|m} =& \delta_{n,m}\numberthis \label{eq:orthogonal} \text{. We want the following}\\
+\braket{n|(a^+|m)} =& \braket{(n|a^+)|m} \text{ from (\ref{eq:creation})} \numberthis \label{eq:consistency}\\
+\braket{n|(a^+|m)} =& \sqrt{m+1} \braket{n|m+1}\\
+=& \sqrt{m+1} \delta_{n,m+1} \text{ from (\ref{eq:orthogonal})} \text{, so we define}\\
+\bra{n} a^+ \triangleq & \sqrt{n} \bra{n-1} \text{ to satisfy (\ref{eq:consistency}), and} \numberthis \label{eq:bra:create}\\
+\bra{n} a^= \triangleq & \sqrt{n+a} \bra{n-1} \numberthis \label{eq:bra:annihilate}
+\end{align*}
+Example: calculate an expression two different ways.
+\begin{align*}
+\braket{n|(a^+a^-|n)} =& \sqrt{n}\braket{n|(a^+|n-1)}\\
+=& n \braket{n|n} \text{ from (\ref{eq:bra:create})}\\
+=& n\\
+\braket{(n|a^+a^-)|n} =& \sqrt{n} \braket{(n-1|a^-)|n}\\
+=& n \braket{n|n} \text{ from (\ref{eq:bra:annihilate})}
+\end{align*}
+
+\subsection{Quantum Fields}
+
+The only way we can study particles is to collide them; quantum field theory is the mathematical tool.
+
+We will set $\hslash=1$, so $P=k$, and we will take $X$ and $P$ to be 3 dimensional.
+\begin{align*}
+\Psi^\dagger(X)(X,t) \triangleq& \sum_k a^+(k) e^{-ikX} e^{i \omega(k) t} \text{, but}\\
+\omega =& E \text{ and}\\
+E =& \frac{P^2}{2m} \text{, whence}\\
+\omega =& \frac{k^2}{2m} \numberthis \label{eq:omega:k}\\
+\Psi \triangleq& \sum_k a^-(k) e^{ikX} e^{- i \omega(k) t}
+\end{align*}
+We want to determine the differential equation satisfied by $\Psi^\dagger(X)$.
+
+\begin{align*}
+\dot{\Psi^\dagger(X)} =&  \sum_k i \omega(k) a^+(k) e^{-ikX} e^{i \omega(k) t}\\
+\frac{\partial^2 \Psi^\dagger(X)}{\partial X^2} =& \sum_k -k^2 a^+(k) e^{-ikX} e^{i \omega(k) t} \numberthis \label{eq:omega:dot}\\
+ =& - \sum_k 2m \omega a^+(k) e^{-ikX} e^{i \omega(k) t} \text{ from (\ref{eq:omega:k})}\\
+ \frac{1}{2m} \frac{\partial^2 \Psi^\dagger(X)}{\partial X^2} =& - \sum_k \omega a^+(k) e^{-ikX} e^{i \omega(k) t}\\
+  i \dot{\Psi^\dagger(X)} =&  \frac{1}{2m} \frac{\partial^2 \Psi^\dagger(X)}{\partial X^2} \text{ From (\ref{eq:omega:dot})--Schr\"odinger for field!}
+\end{align*}
+
+Consider particle scattering from heavy target; conserves energy, but not momentum--Figure \ref{fig:particle:heavy:target}. Assume scattering probability independent of time.
+
+\begin{figure}[H]
+	\caption{Particle being absorbed and then re-emitted}\label{fig:particle:heavy:target}
+	\includegraphics[width=0.8\textwidth]{particle-heavy-target}
+\end{figure}
+
+We want the probability of emitting one particle in final state (Introduce coupling constant $g$)--$\big| \bra{k_f} g \int dt \Psi^\dagger(0,t)\Psi(0,t)\ket{k_i} \big|^2$
+
+\begin{align*}
+&\bra{k_f} g \int dt \sum_l \underbrace{a^+(l) e^{i \omega_l t}}_\text{contributes iff $l==k_f$} \sum_k \underbrace{a^-(k) e^{-i \omega_k t} \ket{k_i}}_\text{contributes iff $k==k_i$}\\
+=&\bra{k_f} g \int dt a^+(k_f) e^{i \omega_{k_f} t}  a^-(k_i) e^{-i \omega_{k_i} t} \ket{k_i}\\
+=& g \int dt e^{i(\omega_{k_f}-\omega_{k_i})}\cancel{<0|0>}\\
+=& 2 \pi g \delta(\omega_{k_f}-\omega_{k_i}) \text{--conservation of energy.}
+\end{align*}
+
+Conservation of energy works only because of time symmetry!
+
+Probability $\propto g^2$.
+
+Prof. Susskind has shown:
+\begin{itemize}
+	\item Definition of coupling constant;
+	\item Integration over time is the thing that ensures energy conservation;
+	\item Scattering amplitude.
+\end{itemize}
+
+\url{https://youtu.be/eA8X8IU_fWY?t=5129}
 
 \section{Energy conservation and waves}
 
