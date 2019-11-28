@@ -27,6 +27,7 @@ These are my notes for Particle Physics 1 lectures from Leonard Susskind's Theor
 
 \tableofcontents
 \listoffigures
+\listoftheorems
 
 \section{Particles and Light}
 
@@ -83,6 +84,8 @@ To see really small things, we need particles with high energy and momentum.
 
 \section{Quantum field theory}
 
+\subsection{Mathematical Preliminaries}
+
 Consider a classical wave $A \sin(kx)$. Energy is $A^2$, but it is also proportional to number of photons, $n$: $E \propto n \hslash \omega$, $A \propto \sqrt(n)$.
 
 Generally, equations containing $c$ apply for photons only. For non-relativistic particles:
@@ -100,7 +103,41 @@ For light waves, phase and group velocities the same, but this isn't true for mo
 
 Space is infinite. But physics is the art of getting problems into a shape that computers can solve, so we need to remove infinities.
 
-\url{https://youtu.be/oT7bTr5YEO4?t=2936}
+Let's look at 1 dimensional waves. We can restrict to fixed length $L$: reflecting boundary condition at ends. But this violates conservation of momentum. Instead use a topological "circle" circumference $L$--periodic boundary conditions. As a consequence momentum is quantized: 
+
+\begin{align*}
+\lambda =& \frac{L}{N}\\
+P =& \frac{h}{\lambda}\\
+=& \frac{h N}{L}
+\end{align*}
+
+Now make into a real circle, radius $R$, and redefine $L$ to be \emph{angular momentum}.
+
+\begin{align*}
+P =& \frac{h N}{2 \pi R}\\
+L =& N \frac{h}{2 \pi}\\
+=& N \hslash \text{ independent of $R$.}
+\end{align*}
+
+\subsection{Quantum field theory}
+
+Start with harmonic oscillator: a wave is a collection of harmonic oscillators. Energy is quantized: 0, $\hslash \omega$, $2\hslash \omega$...
+
+Introduce operators:
+
+\begin{align*}
+a^+ \ket{n} =& \sqrt{n+1} \ket{n+1} \text{, creation operator}\\
+a^- \ket{n} =& \sqrt{n} \ket{n-1} \text{, annihilation operator}\\
+a^+ a^- \ket{n} =& n \ket{n} \text{, or}\\
+a^+ a^-  =& n \text{, similarly}\\
+a^- a^+  =& n+1\\
+[a^-, a^+] =& 1
+\end{align*}
+
+Return to world on a circle--$\omega_N$--equivalent to oscillator. State is $\ket{n_1,n_2, n_3,...}$--occupation numbers. 
+\begin{defn}[quantum field]
+	A quantum field is a collection of harmonic oscillators, togther with annihilation operators and creation operators.
+\end{defn}
 
 \section{Quantum fields and particles}
 
