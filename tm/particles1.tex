@@ -22,7 +22,7 @@
 \maketitle
 
 \begin{abstract}
-These are my notes for Particle Physics 1 lectures from Leonard Susskind's Theoretical Minimum series.
+These are my notes for \emph{New Revolutions in Particle Physics 1} lectures from Leonard Susskind's Theoretical Minimum series.
 \end{abstract}
 
 \tableofcontents
@@ -146,7 +146,96 @@ Return to world on a circle--$\omega_N$--equivalent to oscillator. State is $\ke
 P=&\hslash k\\
 n(k) =& \text{ occupation number.}
 \end{align*}
-\url{https://youtu.be/UgPBUJRrYz8?t=502}
+
+We represent the state of a 1D circular system by occupation numbers, $\ket{...n(-1), n(0), n(1), n(2)...}$, and introduce operators $a^+(k)$, $a^-(k)$. 
+\begin{align*}
+a^+(1)\ket{...n(-1), n(0), n(1), n(2)...}=& \sqrt{n(1)+1}\ket{...n(-1), n(0), n(1)+1, n(2)...}
+\end{align*}
+$a^+(k)$, $a^-(k)$ are quantum mechanical versions of the Fourier coefficients of a field $\Psi$.
+
+Here is a classical wave:
+\begin{align*}
+\Psi(x) =& \sum_k \alpha(k) e^{ikx}\\
+\Psi^*(x) =& \sum_k \alpha^*(k) e^{-ikx}
+\end{align*}
+
+We quantize as shown in (\ref{eq:q:1}) and (\ref{eq:q:2}) to produce a quantum field:
+\begin{align*}
+\alpha(k) \rightarrow& a^-(k) \numberthis \label{eq:q:1}\\
+\alpha^*(k) \rightarrow& a^+(k) \numberthis \label{eq:q:2}\\
+\Psi(x) =& \sum_k a^-(k) e^{ikx} \numberthis \label{eq:Psi}\\
+\Psi^\dagger(x) =& \sum_k a^+(k) e^{-ikx} \numberthis \label{eq:Psi:dagger}
+\end{align*}
+
+We need to justify (\ref{eq:q:1}) and (\ref{eq:q:2}) in some appropriate limit.
+
+How can we describe scattering? Imagine scattering so a particle with momentum $k_7$ becomes a particle with momentum $k_9$: $a^+(k_9)a^-(k_7)\ket{0,0,..1,0,0}$.
+
+What if laws of physics allows number of particles to change? $a^+(k_{16})a^+(k_9)a^-(k_7)\ket{0,0,..1,0,0}$. We can't do this in regular quantum mechanics.
+
+What does $\Psi^\dagger$ do? Start with the vacuum $\ket{0}$.
+
+\begin{align*}
+\Psi^\dagger(x)\ket{0} =& \sum_k a^+(k) e^{-ikx} \ket{0} \text{ from (\ref{eq:Psi:dagger})}\\
+=& \sum_k e^{-ikx} \underbrace{a^+(k) \ket{0}}_\text{One particle state with momentum $k$} \\
+=& \sum_k e^{-ikx} \ket{k} \text{. Superposition gives particle at definite position.}
+\end{align*}
+
+If we make the circle larger and larger, $\sum \rightarrow \int$.
+
+What does $\Psi$ do? It annihilates a particle at $x$.
+
+Locality: when something happens, it happens at one spot. Figure \ref{fig:ex:locality} is an example of one particle being replaced by two.
+
+\begin{figure}[H]
+	\caption{Example of locality: $\Psi^\dagger(x)\Psi^\dagger(x)\Psi(x)\ket{...}$}\label{fig:ex:locality}
+	\includegraphics[width=0.8\textwidth]{split-particle}
+\end{figure}
+
+Start with state $\ket{0,...\underbrace{1}_\text{particle with momentum $k$},0,000}$.
+
+We assume that $k_i$ denotes the index of the only momentum with a non-zero index.
+\begin{align*}
+\Psi^\dagger(x)\Psi^\dagger(x)\Psi(x)\ket{0,...1,0,000}=&\sum_m a^+(m) e^{-imx} \sum_l a^+(l) e^{-ilx} \sum_k a^-(k) e^{ikx} \ket{...}\\
+=&\sum_m a^+(m) e^{-imx} \sum_l a^+(l) e^{-ilx} a^-(k_i) e^{ik_ix} \ket{...}\\
+=&\sum_m a^+(m) e^{-imx} \sum_l a^+(l) e^{-ilx}  e^{ik_ix} \ket{0}\\
+=&\sum_{l,m}  e^{-imx}  e^{-ilx}  e^{ik_ix} \underbrace{\ket{001001...}}_\text{$l$ and $m$ are indices of $1s$.}\\
+\triangleq &\sum_{l,m}   e^{i(i_k-l-m)x} \ket{l,m}
+\end{align*}
+
+This isn't true if $l=m$! We have two application of $a^+(m)$, so vacuum becomes $\sqrt{2}\ket{...2...}$. Probability of two particles coming out in same state is twice probability of them being in different states.
+
+Ignore conservation laws!
+
+Consider generating photon at a position where there is a pre-existing photon with momentum $l$--Figure \ref{fig:simple:decay}.
+\begin{figure}[H]
+	\caption{Generating photon at a position where there is a pre-existing photon with momentum $l$.}\label{fig:simple:decay}
+	\includegraphics[width=0.8\textwidth]{decay}
+\end{figure}
+
+\begin{align*}
+\Psi(x)\ket{l} =& \sum_k a^+(k) e^{-ikx} \ket{l}\\
+=& \sum_{k\ne l} e^{-ikx} \ket{k,l} + \sqrt{2} e^{-ilx} \ket{l,l}
+\end{align*}
+
+Stimulated emission: higher probability of generating particles that are already there (c.f. spontaneous emission). This is true for Bosons, but not Fermions.
+ 
+ Laws for Bosons
+ \begin{align*}
+ [a^+(k),a^+(l)] =& 0\\
+ [a^-(k),a^-(l)] =& 0\\
+ [a^-(k),a^+(l)] =& \delta_{k,j}\\
+ \Psi(x) =& \sum_k a^-(k) e^{ikx} \\
+ \Psi^\dagger(x) =& \sum_k a^+(k) e^{-ikx}
+ \end{align*}
+ 
+ \begin{align*}
+ \frac{1}{L}\int dx \Psi^\dagger(x) \Psi(x) =& \int  \sum_k a^+(k) e^{-ikx} \sum_l a^-(l) e^{ilx}\\
+ =&  \sum_k \underbrace{a^+(k) a^-(k)}_\text{Occupation number}\\
+ =& N \text{, total number of particles.}\\
+ \Psi^\dagger(x) \Psi(x) =& \text{ density of particles at $x$}.
+ \end{align*}
+\url{https://youtu.be/UgPBUJRrYz8?t=5689}
 
 \section{More quantum field theory}
 
