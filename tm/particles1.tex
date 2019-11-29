@@ -360,6 +360,31 @@ NB, this isn't a real electron, as $\Psi$ is for Bosons. A negative pion would b
 
 \section{Energy conservation and waves}\label{sec:energy:conservation}
 
+Generally phase velocity doesn't have anything to do with measurable things in quantum mechanics. Group velocity is what counts.
+
+Consider $\sin(kx-\omega t)$. The wave moves so that $kx-\omega t$ remains constant.
+\begin{align*}
+x =& \underbrace{\frac{\omega}{k}}_\text{phase velocity} t\\
+\omega =& \frac{2 \pi}{T}\\
+k =& \frac{2 \pi}{\lambda}
+\end{align*}
+
+This is connected with Schr\"odinger equation, since $\omega$ is energy, and $k$ momentum, so:
+\begin{align*}
+\omega=&\frac{k^2}{2m} \text{, whence}\\
+\frac{\omega}{k}=&\frac{k}{2m} \text{, phase velocity.}\\
+=& \frac{v}{2}  \text{, where $v$ is velocity of classical particle. Let's add a constant energy:}\\
+\omega=&\frac{k^2}{2m}+c \text{, changes phase velocity--but changing $E$ has no physical effect!}
+\end{align*}
+Now we write:
+\begin{align*}
+	\Psi =& \sum_k a^-(k) e^{ikx}e^{- i \omega(k) t} e^{-i c t}
+\end{align*}
+Given solution to Schr\"odinger equation, adding constant to phase just multiplies $\Psi$ by $e^{-i c t}$. Now all physical quantities depend on $\Psi\Psi^\dagger$--$e^{-i c t}$ cancels. So the phase velocity isn't physical.
+
+We will try to follow where the constructive interference takes place between two waves.
+
+\url{https://youtu.be/TshXa3lGqQ8?t=701}
 \section{Dirac equation and Higgs particles}
 
 \section{Angular momentum}
