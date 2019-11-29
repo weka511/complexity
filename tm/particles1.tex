@@ -27,6 +27,7 @@ These are my notes for \emph{New Revolutions in Particle Physics 1} lectures fro
 
 \tableofcontents
 \listoffigures
+\listoftables
 \listoftheorems
 
 \section{Particles and Light}
@@ -312,7 +313,7 @@ We want the probability of emitting one particle in final state (Introduce coupl
 &\bra{k_f} g \int dt \sum_l \underbrace{a^+(l) e^{i \omega_l t}}_\text{contributes iff $l==k_f$} \sum_k \underbrace{a^-(k) e^{-i \omega_k t} \ket{k_i}}_\text{contributes iff $k==k_i$}\\
 =&\bra{k_f} g \int dt a^+(k_f) e^{i \omega_{k_f} t}  a^-(k_i) e^{-i \omega_{k_i} t} \ket{k_i}\\
 =& g \int dt e^{i(\omega_{k_f}-\omega_{k_i})}\cancel{<0|0>}\\
-=& 2 \pi g \delta(\omega_{k_f}-\omega_{k_i}) \text{--conservation of energy.}
+=& 2 \pi g \delta(\omega_{k_f}-\omega_{k_i}) \text{--conservation of energy.} \numberthis \label{eq:conservation:energy}
 \end{align*}
 
 Conservation of energy works only because of time symmetry!
@@ -326,9 +327,38 @@ Prof. Susskind has shown:
 	\item Scattering amplitude.
 \end{itemize}
 
-\url{https://youtu.be/eA8X8IU_fWY?t=5129}
+NB.\begin{itemize}
+	\item  If X not zero (say $X_s$), then amplitude gets a phase of $e^{i(k_f-k_i)S_s}$, which doesn't affect probability.
+	\item if $g$ is a function of time, it generally means that we are ignoring something.
+\end{itemize}
 
-\section{Energy conservation and waves}
+To reiterate: $\Psi$ and $\Psi^\dagger$ are the tools that let us discuss particle interactions.
+
+What if we are dealing with an electron? Each particle has its own $\Psi$. What if one electron goes in but two come out-- $\Psi^\dagger(0,t)\Psi^\dagger(0,t)\Psi(0,t)$? Or two in, two out--$\Psi^\dagger(0,t)\Psi^\dagger(0,t)\Psi(0,t)\Psi(0,t)$? Which are allowed? One rule is that thee must be the same number of $\Psi^\dagger$s and $\Psi$s. Imagine multiplying by a phase:
+
+\begin{align*}
+\Psi \rightarrow & e^{i\alpha} \Psi \numberthis \label{eq:conservation:charge1}\\
+\Psi^\dagger \rightarrow & e^{-i\alpha} \Psi^\dagger \numberthis \label{eq:conservation:charge2}
+\end{align*}
+
+Allowable combinations are invariant under multiplication by $e^{i\alpha}$--charge is conserved. Table \ref{table:conserve} shows some pairs of symmetries and conservation laws.
+
+\begin{table}[H]
+	\caption{Invariance and Conservation Laws}\label{table:conserve}
+	\begin{center}
+			\begin{tabular}{|l|l|l|}  \hline
+				Invariance&Conservation&Ref\\ \hline
+				Time& Energy&(\ref{eq:conservation:energy})\\  \hline
+				Space&Momentum&(\ref{eq:conservation:charge1}), (\ref{eq:conservation:charge2})\\ \hline
+				Phase&Charge&Section \ref{sec:energy:conservation}\\ \hline
+			\end{tabular}
+	\end{center}
+\end{table}
+
+NB, this isn't a real electron, as $\Psi$ is for Bosons. A negative pion would be OK.
+
+
+\section{Energy conservation and waves}\label{sec:energy:conservation}
 
 \section{Dirac equation and Higgs particles}
 
