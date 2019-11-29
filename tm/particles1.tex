@@ -442,7 +442,63 @@ Another possible symmetry: $\Psi \rightarrow e^{i \lambda} \Psi$: no change to p
 
 \subsection{Fermions}
 
-\url{https://youtu.be/TshXa3lGqQ8?t=2272}
+\begin{itemize}
+	\item Can have any number of Bosons in same state (same place);
+	\item They have a tendency to be in same state. E.g. particles decays and emits photon. If lots of other photons already on some state, decay will preferentially favour that state.
+\end{itemize}
+
+Fermions cannot be in same state (Pauli Exclusion Principle).
+
+\begin{align*}
+\Psi(x) =& \sum_k a^-(k) e^{ikx}\\
+State:& \ket{001...01010...} \text{, ones and zeroes only!}\\
+\Psi^\dagger(x) =& \sum_k a^+(k) e^{-ikx}
+\end{align*}
+
+Focus on one state, either full $(\ket{1})$ or empty $(\ket{0})$: those are only two possibilities. What are the algebraic rules for creation and annihilation operators?
+
+\begin{align*}
+c^+\ket{0} =& \ket{1} \text{ for Fermions used $c$ rather than $a$}\\
+c^+\ket{1} =& 0 \text{, i.e. $\psi(x) \equiv 0$}\\
+c^-\ket{1} =& \ket{0}\\
+c^-\ket{0} =& 0\\
+\end{align*}
+
+We deduce:
+\begin{align*}
+c^+c^-\ket{0} =& 0\\
+c^-c^+\ket{0} =& \ket{0}\\
+(c^+c^-+c^-c^+)\ket{0} =& \ket{0}\\
+c^+c^-\ket{1} =& \ket{1} \\
+c^-c^+\ket{1} =&0 \\
+(c^+c^-+c^-c^+)\ket{1} =& \ket{1}\\
+\{c^+,c^-\} =& 1 \text{, where anticommutator is defined}\\
+\{c^+,c^-\} \triangleq(c^+c^-+c^-c^+)& \text{. We can also show}\\
+\{c^+,c^+\} =&0 \text{ and}\\
+\{c^-,c^-\} =&0
+\end{align*}
+
+So Fermions have parallel mathematics: $[,] \leftrightarrow \{,\}$. Cannot put two particles into same state, as $c^+c^+=0$.
+
+What about different momenta? We can show that:
+\begin{align*}
+\{c^+_k,c^-_{k^\prime} \} =& \delta_{k,k^\prime} \\
+\{c^+_k,c^+_{k^\prime} \} =&0 \\
+\{c^-_k,c^-_{k^\prime} \} =&0
+\end{align*}
+
+Can we have two Fermions at the same position? Let's try to create them at the origin.
+
+\begin{align*}
+\Psi^\dagger(0) \Psi^\dagger(0) \ket{0} =& \sum_{k,k^\prime} c^+_k c^+_{k^\prime} \ket{0}\\
+=& 0
+\end{align*}
+
+So the answer is no: we can't have two Fermions at the same position. So we can't have an electron laser.
+
+We now compare the ground state of a system of Bosons with the ground state of a system of Fermions. 
+
+\url{https://youtu.be/TshXa3lGqQ8?t=4683}
 
 
 \section{Dirac equation and Higgs particles}
