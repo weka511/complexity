@@ -510,6 +510,9 @@ Allowable values form a lattice.
 	\item Have to assign different momentum to electrons--Figure \ref{fig:adding:more:fermions}. Many Fermion configuration has much more energy that corresponding Boson configuration. 
 \end{itemize}
 
+\begin{defn}[Bose condensate]
+	Many Bosons in the lowest energy  state.
+\end{defn}
 
 \begin{figure}[H]
 	\caption{Adding more Fermions}\label{fig:adding:more:fermions}
@@ -730,9 +733,75 @@ Partitioning, and using the Pauli matrices:
 \end{align*}
 
 
-\url{https://youtu.be/wUySvFEwmj8?t=4388}
-
 \section{Angular momentum}
+
+Angular momentum is a vector, which points along the direction of rotation and follows height hand rule: fingers follow rotation, thumb points along vector.
+
+There are two kinds:
+\begin{itemize}
+	\item orbital angular momentum--motion of centre of mass;
+	\item spin angular momentum--angular momentum in frame where momentum is zero.
+\end{itemize}
+
+Is rotating nucleus the same object as non-rotating? Note that angular momentum is quantized, so it takes a discrete amount of energy to start rotation. Now an atom with too much rotation will fly apart--definitely different. 
+
+What about electron? Is it too small for us to rotate? The smaller the object, the more energy to rotate with given amount of angular momentum.Maybe electron too small.
+
+Angular momentum for small object like electron characterizes object.
+
+Let us invent a particle with definite angular momentum, a "spintron". Can it point in any direction? Yes, since laws of physics are rotationally invariant. It is quantized.
+
+Theory is mathematical: it seems abstract, but corresponds to experiment.
+
+Classically:
+\begin{align*}
+mr^2=&I\\
+E=&\frac{L^2}{2I}\\
+=&\frac{L^2}{2mr^2}\\
+\rightarrow &\inf \text{ as } r \rightarrow 0 \text{ for discrete $L$}
+\end{align*}
+
+Figure \ref{fig:two:particles:rotating} depicts two particles rotating.
+\begin{figure}[H]
+	\caption[Two particles rotating]{Two particles rotating. Total momentum is zero, but there is angular momentum.}\label{fig:two:particles:rotating}
+	\includegraphics[width=0.8\textwidth]{two-particles-rotating}
+\end{figure}
+
+Orbital angular momentum of a point particle moving about origin. 
+\begin{align*}
+\vec{L} =& \vec{R} \times \vec{p} \text{ accordng to convention -- c.f. right hand rule.}\\
+L_x =& y P_z - z P_y\\
+L_y =& z P_x - x P_z\\
+L_z =& x P_y - y P_x
+\end{align*}
+
+We will determine commutation relations of angular momentum operators.
+
+We have:
+\begin{align*}
+	[X_i,X_j] =& 0\\
+	[P_i,P_j]=& 0\\
+	[X_i,P_j]=& i \hslash \delta_{i,j}`
+\end{align*}
+
+\begin{align*}
+	[L_x,L_y]=& [y P_z - z P_y,z P_x - x P_z]\\
+	=&[y P_z, z P_x] + [z P_y,x P_z] \text{, since other two terms vanish}\\
+	=& y P_x[P_z,z] + P_y x[z,P_z]\\
+	=& -i \hslash y P_x + i \hslash P_y x\\
+	=& i \hslash L_z \text{. Similarly}\\
+	[L_y,L_x]=& i \hslash L_x\\
+	[L_z,L_x]	=& i \hslash L_y	
+\end{align*}
+
+ These relationships:
+\begin{itemize}
+	\item remain true if we add angular moment for many particles;
+	\item are true for spin
+	 \item are relationally invariant.
+\end{itemize}
+
+\url{https://youtu.be/e22G9U7OlOc?t=2382} 
 
 \section{Spin}
 
