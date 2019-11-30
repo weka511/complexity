@@ -838,7 +838,51 @@ We focus on the $z$-axis ("quantization axis") and introduce two new quantities-
 	\end{align*}	
 \end{cor}
 
-\url{https://youtu.be/e22G9U7OlOc?t=3036} 
+Angular momentum spectrum is spaced by integers. How far can we bump it up before the object changes? Imagine a classical object with fixed $L^2$. We can maximize $L_z$  by pointing it upward.
+
+Our theorem ignore possibility that $L^+m_{max}=0$ and $L^-m_{min}=0$. (c.f. harmonic oscillator). By relational invariance, $m_{min}=-m_{max}$. Must be symmetric about zero.
+
+\begin{itemize}
+	\item $-m_{max},...,-1,0,1,...m_{max}$
+	\item $-m_{max},...,-\frac{1}{2},\frac{1}{2},...m_{max}$
+\end{itemize}
+
+\begin{defn}[Spin]
+	$\frac{1}{2}$ is known as the spin. It can be 0. There are no elementary particles known with spin 3, but there are atoms. Similarly no half-spin particle over $\frac{3}{2}$.
+\end{defn}
+
+What about $L^2$? If you know $L_z$ at maximum, there will be uncertainty in other two components, so $L^2$ is not quite $m_{max}^2$.
+
+\begin{align*}
+	L^2 =& L_- L_+ + L_z^2 \text{, classically, but not quantum because of commutator}\\
+	L^2 =& L_- L_+ + L_z^2 +L_z {, quantum}\\
+	L^2 \ket{m_{max}}=& L_- L_+ \ket{m_{max}} + L_z^2 \ket{m_{max}} +L_z \ket{m_{max}}\\
+	=& (0 +m_{max}^2 + m_{max})\ket{m_{max}} \\
+	=& m_{max} (m_{max}+1)\ket{m_{max}}
+\end{align*}
+
+All states have same value of $\braket{L^2}$. Show $[L^2,L_i]=0$.
+
+Consider spin $\frac{1}{2}$--call them $\ket{+}$ and  $\ket{-}$.
+
+\begin{align*}
+e^{i\theta} \alpha \ket{+} + e^{i\theta}\beta \ket{-} \text{, has probability $\alpha^2$ of being in $\ket{+}$}
+\end{align*}
+So can ignore 1 degree of freedom. $\alpha$ and $\beta$ have 2 degrees of freedom each. Phase eliminates one, and $alpha^2+\beta^2=1$ eliminates one other, leaving two. This is the same a number of degrees of freedom in direction.
+
+Measured value is always $\pm \frac{1}{2}$; average may be zero; it behaves like a classical variable.
+
+\begin{thm}[Spin statistics]
+		All particles with half integral spin are Fermions;
+		All particles with  integral spin are Bosons.
+\end{thm}
+
+\begin{proof}
+	TBP
+\end{proof}
+Take two half spin particles: composite behaves like a Boson--e.g. Hydrogen atom; deuteron is Boson, deuterium is Fermion.
+
+
 
 \section{Spin}
 
