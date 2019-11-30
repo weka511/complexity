@@ -244,8 +244,6 @@ Stimulated emission: higher probability of generating particles that are already
 
 \section{More quantum field theory}
 
-How is this related to energy and momentum conservation?
-
 \subsection{Mathematical Preliminaries}
 
 \subsubsection{Dirac Delta function}
@@ -562,10 +560,10 @@ Electrons that are deep in Fermi Sea can't be excited by low energy photons. Onl
 We consider the 1-dimensional case. Imagine a wave propagating to the tight with speed $c$.
 \begin{align*}
 \omega =& k\\
-\frac{\partial \psi}{\partial t} =& - \frac{\partial \psi}{\partial x} \text{, would not make sense for Bosons.}\\
-\psi =& e^{i(kx-\omega t)}
+\frac{\partial \psi}{\partial t} =& - \frac{\partial \psi}{\partial x}  \numberthis \label{eq:rh:dirac}\\
+\psi =& e^{i(kx-\omega t)} \numberthis \label{eq:rh:dirac:wave}
 \end{align*}
-What if $k$ negative? Then we have negative energy. But if we had arbitrarily negative energies, we could keep emitting photons all the way down.
+What if $k$ negative? Then we have negative energy. But if we had arbitrarily negative energies, we could keep emitting photons all the way down. So (\ref{eq:rh:dirac}) would not make sense for Bosons.
 
 Dirac said to fill all negative energy states: so lowest energy state has all negative energies filled. Now we can take an electron out, leaving hole. Now we have two positive energy objects, electron and positron.
 
@@ -573,6 +571,72 @@ Dirac said to fill all negative energy states: so lowest energy state has all ne
 
 
 \section{Dirac equation and Higgs particles}
+
+\subsection{Dirac equation}
+
+The right-handed Dirac equation (\ref{eq:rh:dirac}) has the following solution:
+\begin{align*}
+\psi =& e^{i(kx-\omega t)} \text{, from (\ref{eq:rh:dirac:wave}), whence:}\\
+V_g =& \frac{\omega}{k} \text{, from which}\\
+\frac{\partial \psi_R}{\partial t} + \frac{\partial \psi_R}{\partial x} =&0
+\end{align*}
+
+If $k<0$, {$\omega$<0}--negative energy, which is not a good thing. So we fill up the Dirac Sea. Then we can remove one electron, creating a hole in the Dirac Sea; particle and hole both have positive momentum and positive energy.
+
+We now introduce left moving electrons.
+
+\begin{align*}
+\frac{\partial \psi_L}{\partial t} =& \frac{\partial \psi_L}{\partial x} \numberthis \label{eq:lh:dirac:wave}\\
+\frac{\omega}{k} =& -1
+\end{align*}
+Fill sea with left moving negative energy.
+
+Define $\psi=\begin{pmatrix}
+	\psi_R\\
+	\psi_L
+\end{pmatrix}$, and write (\ref{eq:rh:dirac:wave}) and (\ref{eq:lh:dirac:wave}):
+
+\begin{align*}
+	\frac{\partial \psi}{\partial t} =& - \alpha \frac{\partial \psi}{\partial x} \text{, where}\\
+	\alpha =& \begin{pmatrix}
+		1&0\\
+		0&-1
+	\end{pmatrix} \text{ we will find the following useful:} \numberthis\label{eq:alpha}\\
+	\omega = \alpha k \numberthis \label{eq:dirac:1}
+\end{align*}
+
+Now we give the particles mass $m$.
+
+\begin{align*}
+	\omega^2 =& k^2 + m^2 \text{. Now we generalize (\ref{eq:dirac:1})}\\
+	\omega =& \alpha k + m \beta \text{. This is the 1D Dirac equation.} \numberthis \label{eq:Dirac:1D}\\
+	\omega^2 =& \alpha^2 k^2 + m^2 \beta^2 + m k (\alpha \beta + \beta \alpha) \text{, so we want:}\\
+	\alpha^2 =& 1 \text{, satsfied by (\ref{eq:alpha})}\\
+	\beta^2 =& 1 \numberthis \label{eq:beta2}\\ 
+	\{\alpha,\beta\} =& 0 \numberthis \label{eq:alpha:beta}\\
+	\beta =& \begin{pmatrix}
+	0 & 1\\
+	1 & 0
+	\end{pmatrix} \text{ satisfies (\ref{eq:beta2}) and (\ref{eq:alpha:beta}).}
+\end{align*}
+
+Mass term couples equations for $\Psi_L$ and $\Psi_R$. Dirac equation is Lorentz covariant.
+
+Let us make particle stand still, i.e. $k=0 \implies \omega = \beta m$.
+
+\begin{align*}
+	i \frac{\partial \psi}{\partial t} =& \beta m \Psi\\
+	i \dot{\psi_R} =& m \psi_L\\
+	i \dot{\psi_L} =&  m \psi_R \\
+	i \dot{\psi_+} =&  m \psi_+ \text{, where $\psi_+\triangleq\psi_R + \psi_L$--corresponds to $\omega=m$}\\
+	i \dot{\psi_-} =&  m \psi_- \text{, where $\psi_-\triangleq\psi_R - \psi_L$--corresponds to $\omega=-m$}
+\end{align*}
+
+So particle at rest still has positive and negative energies: throw latter in Dirac Sea.
+
+\url{https://youtu.be/wUySvFEwmj8?t=2871}
+
+\subsection{Higgs particles}
 
 \section{Angular momentum}
 
