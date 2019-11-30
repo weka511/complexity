@@ -789,19 +789,56 @@ We have:
 	=&[y P_z, z P_x] + [z P_y,x P_z] \text{, since other two terms vanish}\\
 	=& y P_x[P_z,z] + P_y x[z,P_z]\\
 	=& -i \hslash y P_x + i \hslash P_y x\\
-	=& i \hslash L_z \text{. Similarly}\\
-	[L_y,L_x]=& i \hslash L_x\\
-	[L_z,L_x]	=& i \hslash L_y	
+	=& i \hslash L_z \text{. Similarly} \numberthis \label{eq:lx:ly}\\
+	[L_y,L_x]=& i \hslash L_x \numberthis \label{eq:ly:lz}\\
+	[L_z,L_x]	=& i \hslash L_y \numberthis \label{eq:lz:lx}	
 \end{align*}
 
  These relationships:
 \begin{itemize}
-	\item remain true if we add angular moment for many particles;
+	\item remain true if we add angular momenta for many particles;
 	\item are true for spin
 	 \item are relationally invariant.
 \end{itemize}
 
-\url{https://youtu.be/e22G9U7OlOc?t=2382} 
+We focus on the $z$-axis ("quantization axis") and introduce two new quantities--raising and lowering operators. Choosing units where $\hslash-1$:
+
+\begin{align*}
+	L_\pm =& L_x \pm i L_y \numberthis \label{eq:L_pm} \\
+	[L_+,L_z] =& [Lx+i L_y,L_z]\\
+	=& -iL_y + i^2 L_x \text{, from (\ref{eq:lz:lx}) and (\ref{eq:lx:ly})}\\
+	=& -L_+ \text{ from (\ref{eq:L_pm}). Similarly} \numberthis \label{eq:L+:Lz}\\
+	[L_-,L_z] =& + L_- \numberthis \label{eq:L-:Lz}
+\end{align*}
+
+\begin{thm}[$L_+$ is a creation operator for $L_z$]
+	\begin{align*}
+		L_z \ket{m} =& m \ket{m} \numberthis \label{eq:L:eigen}\\
+		\implies&\\
+		L_z (L_+ \ket{m}) =& (m+1) (L_+ \ket{m})
+	\end{align*}	
+\end{thm}
+
+\begin{proof}
+	\begin{align*}
+		L_+L_z-L_zL_+ =& -L_+ \text{ from (\ref{eq:L+:Lz}), whence:}\\
+		L_zL_+ =& L_+L_z + L_+\ \text{ and}\\
+		L_z L_+ \ket{m} =& (L_+L_z + L_+)\ket{m}\\
+		=& L_+ (L_z + I)\ket{m}\\
+		=& L_+ (m + 1) \ket{m} \text{ from (\ref{eq:L:eigen})}\\
+		=&  (m + 1) (L_+ \ket{m})
+	\end{align*}
+\end{proof}
+
+\begin{cor}[$L_-$ is an annihilation  operator for $L_z$]
+	\begin{align*}
+	L_z \ket{m} =& m \ket{m} \\
+	\implies&\\
+	L_z (L_- \ket{m}) =& (m-1) (L_+ \ket{m})
+	\end{align*}	
+\end{cor}
+
+\url{https://youtu.be/e22G9U7OlOc?t=3036} 
 
 \section{Spin}
 
