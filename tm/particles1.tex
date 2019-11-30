@@ -442,6 +442,8 @@ Another possible symmetry: $\Psi \rightarrow e^{i \lambda} \Psi$: no change to p
 
 \subsection{Fermions}
 
+\subsubsection{Introduction to Fermions}
+
 \begin{itemize}
 	\item Can have any number of Bosons in same state (same place);
 	\item They have a tendency to be in same state. E.g. particles decays and emits photon. If lots of other photons already on some state, decay will preferentially favour that state.
@@ -496,6 +498,7 @@ Can we have two Fermions at the same position? Let's try to create them at the o
 
 So the answer is no: we can't have two Fermions at the same position. So we can't have an electron laser.
 
+\subsubsection{Ground State}
 We now compare the ground state of a system of Bosons with the ground state of a system of Fermions. In Figure \ref{fig:electons:confined:momentum} we have some particles confined in momentum space.
 
 \begin{figure}[H]
@@ -530,7 +533,43 @@ Allowable values form a lattice.
 	Electrons fill a sphere in momentum space, whose radius depends on number of electrons. This is called the Fermi Sphere.
 \end{defn}
 
-\url{https://youtu.be/TshXa3lGqQ8?t=5252}
+We can move Bosons and Fermions out of the ground state, as shown in Figures \ref{fig:bosons:move:ground:state} and \ref{fig:fermions:move:ground:state}.
+\begin{figure}[H]
+	\caption{Moving Bosons and Fermions from lowest state}
+	\begin{subfigure}{0.5\textwidth}
+		\caption{Bosons in Ground State}\label{fig:bosons:move:ground:state}
+		\includegraphics[width=0.9\textwidth]{bosons-ground-state}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\caption{Moving Fermions. Take from surface of Fermi Sphere to minimize energy required. Leaves hole behind.}\label{fig:fermions:move:ground:state}
+		\includegraphics[width=0.9\textwidth]{moving-outside-fermi}
+	\end{subfigure}
+\end{figure}
+
+In Figure \ref{fig:fermions:move:ground:state} a charged hole is left behind.
+If an electron drops into hole, a photon is emitted.
+
+Consider atom, al electrons in their ground state. Low energy electron is struck by photon, which takes electron to excited state.
+
+\begin{defn}[Fermi Sea]
+	Electrons in Fermi Sphere are said to be in Fermi Sea.
+\end{defn}
+
+Electrons that are deep in Fermi Sea can't be excited by low energy photons. Only shallow electrons are accessible.
+
+\subsubsection{Dirac and antiparticles}
+
+We consider the 1-dimensional case. Imagine a wave propagating to the tight with speed $c$.
+\begin{align*}
+\omega =& k\\
+\frac{\partial \psi}{\partial t} =& - \frac{\partial \psi}{\partial x} \text{, would not make sense for Bosons.}\\
+\psi =& e^{i(kx-\omega t)}
+\end{align*}
+What if $k$ negative? Then we have negative energy. But if we had arbitrarily negative energies, we could keep emitting photons all the way down.
+
+Dirac said to fill all negative energy states: so lowest energy state has all negative energies filled. Now we can take an electron out, leaving hole. Now we have two positive energy objects, electron and positron.
+
+
 
 
 \section{Dirac equation and Higgs particles}
