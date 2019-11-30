@@ -648,7 +648,7 @@ Higgs field is a Bosonic field, which has an energy from a potential, $V(\phi)$.
 \begin{figure}[H]
 	\caption[Higgs potential]{Higgs potential: reason for shape not fully understood at time of lecture.}
 	\begin{subfigure}{0.5\textwidth}
-		\caption{Higgs potential, showing two minima. Either one gives rise to mass of $g\phi$}
+		\caption{Higgs potential, showing two minima. Either one gives rise to mass of $g\phi$}\label{fig:higgs:potential}
 		\includegraphics[width=0.8\textwidth]{higgs-potential}
 	\end{subfigure}
 	\begin{subfigure}{0.5\textwidth}
@@ -658,6 +658,77 @@ Higgs field is a Bosonic field, which has an energy from a potential, $V(\phi)$.
 \end{figure}
 
 If Higgs field is coupled in an interesting way to Fermions, Higgs will respond to collisions of Fermions and create Higgs particles. In the Standard Model there is only one Higgs, Supersymmetry has two.
+
+If vacuum were symmetric--Figure \ref{fig:higgs:potential}-- $\phi$ would be zero: it is the breaking of the symmetry which gives electron its mass. All particles except photon get their mass through the Higgs Mechanism. Except for Higgs particle: it gets its mass from a different mechanism.
+
+\subsection{3+1 Dimensional Dirac Equation}
+
+Dirac started with generalization.
+
+\begin{align*}
+\omega =& \underbrace{\alpha . k}_{\alpha_1 k_1 + \alpha_2 k_2 + \alpha_3 k_3} +\beta m\\
+\omega =& \alpha_1 k_1 + \alpha_2 k_2 + \alpha_3 k_3 +\beta m\\
+\omega^2 =& k_1^2 + k_2^2 +k_3^2 +m^2\\
+\omega^2 =& (\alpha_1 k_1 + \alpha_2 k_2 + \alpha_3 k_3 +\beta m)(\alpha_1 k_1 + \alpha_2 k_2 + \alpha_3 k_3 +\beta m) \text{, whence}\\
+\alpha_i^2 =& 1  \text{ and}\\
+\beta^2 =& 1 \text{ and}\\
+\{\alpha_i,\alpha_j]\} =& 2 \delta_{i,j}\\
+\{\alpha_i,\beta\} =& 0
+\end{align*}
+
+Cannot satisfy these equations for 2 dimensional matrices. $4 \times 4$ are the first case.
+
+Here are the Dirac Matrices (not unique, but equivalent).
+
+\begin{align*}
+	\beta =& \begin{pmatrix}
+		1&0&0&0\\
+		0&1&0&0\\
+		0&0&-1&0\\
+		0&0&0&-1
+	\end{pmatrix}\\
+	\alpha_1 =& \begin{pmatrix}
+		0&0&0&1\\
+		0&0&1&0\\
+		0&1&0&0\\
+		1&0&0&0
+	\end{pmatrix}\\
+	\alpha_2 =& \begin{pmatrix}
+		0&0&0&-i\\
+		0&0&i&0\\
+		0&-i&0&0\\
+		i&0&0&0
+	\end{pmatrix}\\
+	\alpha_3 =& \begin{pmatrix}
+		0&0&1&0\\
+		0&0&0&-1\\
+		1&0&0&0\\
+		0&-1&0&0
+	\end{pmatrix}
+\end{align*}
+
+Partitioning, and using the Pauli matrices:
+\begin{align*}
+	\beta = \begin{pmatrix}
+		I&0\\
+		0&I
+	\end{pmatrix}\\
+	\alpha = \begin{pmatrix}
+		0&\sigma\\
+		-\sigma&0
+	\end{pmatrix}
+\end{align*}
+
+\begin{align*}
+	\psi =& \begin{pmatrix}
+		\psi_1\\
+		\psi_2\\
+		\psi_3\\
+		\psi_4
+	\end{pmatrix} \text{ spinor--left/right and spin up/down}\\
+	i \frac{\partial \psi}{\partial t} =& -i \alpha_i \frac{\partial \psi}{\partial x^i} + \beta m \psi \text{, the famous Dirac equation} \numberthis \label{eq:famous:dirac}
+\end{align*}
+
 
 \url{https://youtu.be/wUySvFEwmj8?t=4388}
 
