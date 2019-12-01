@@ -1083,9 +1083,80 @@ Equations of motion of fields that describe  particles. The fields all come from
 
 If $\mathcal{L}$ depends on several fields, there will be a version of (\ref{eq:lagrange})  for each field.
 
-\url{https://youtu.be/D7yXoNAg3J8?t=320}
+Example.
+
+\begin{align*}
+	\mathcal{L} =& \frac{1}{2} (\frac{\partial \phi}{\partial t})^2 - \frac{1}{2} (\frac{\partial \phi}{\partial x})^2 - \frac{1}{2} (\frac{\partial \phi}{\partial y})^2 - \frac{1}{2} (\frac{\partial \phi}{\partial z})^2 - V(\phi)
+\end{align*}
+
+Substituting in (\ref{eq:lagrange}):
+\begin{align*}
+	\ddot{\phi} - \frac{\partial^2 \phi}{\partial x^2}  - \frac{\partial^2 \phi}{\partial y^2}  - \frac{\partial^2 \phi}{\partial z^2} =& - \frac{\partial V}{\partial \phi} \text{. The simplest interesting case is:}\\
+	V(\phi) =& \frac{m^2 \phi^2}{2}\\
+	\ddot{\phi} - \frac{\partial^2 \phi}{\partial x^2}  - \frac{\partial^2 \phi}{\partial y^2}  - \frac{\partial^2 \phi}{\partial z^2} =& - m^2 \phi \numberthis \label{eq:simplest:non:trivial}
+\end{align*}
+
+
+
+
+Differentiating a wave function $e^{-i \omega t} e^{-i k x}$ twice gives a factor $-\omega^2$. Substituting in (\ref{eq:simplest:non:trivial}):
+\begin{align*}
+-\omega^2 \cancel{\phi} + (k_x^2+k_y^2+k_z^s)\cancel{\phi} =& -m^2 \cancel{\phi}\\
+-\omega^2  + (k_x^2+k_y^2+k_z^s) =& -m^2 \\
+\omega^2 + P^2 = m^2
+\end{align*}
+
+If $\mathcal{L}$ is a scalar, equations of momentum will be Lorentz Invariant.
+
+What about a more complex $V(\phi)$?
+\begin{align*}
+	V(\phi) =& \frac{m^2 \phi^2}{2} + g \phi^3\\
+	\ddot{\phi} - \frac{\partial^2 \phi}{\partial x^2}  =& - m^2 \phi - 3 g \phi^2
+\end{align*}
+
+Quadratic terms in Lagrangian lead to linear equations; higher powers lead to non-linearities--cannot superpose. May scatter.
+
+Consider two fields:
+\begin{align*}
+	\mathcal{L} =& \frac{1}{2}(\partial_{\mu} \phi)^2 + \frac{1}{2}(\partial_{\mu} \rho)^2 - \frac{m^2 \phi^2}{2} - \frac{M^2 \rho^2}{2} - \rho \phi^2\\
+	\ddot{\phi]} - \partial_x^2 \phi =& -m^2 \phi - \rho \phi
+	\\
+	\ddot{\rho]} - \partial_x^2 \rho =& -m^2 \rho -phi^2
+\end{align*}
+
+These are non-linear and coupled, so the particles scatter each other.
+
+Consider the Dirac equation.
+
+\begin{align*}
+\dot{\psi} =& i \alpha \frac{\partial \psi}{\partial x} + m \beta \psi\\
+\mathcal{L} =& i \big( \psi^\dagger \partial_t \psi +  \psi^\dagger \alpha \partial_x \psi + \psi^\dagger \beta \psi m \big)
+\end{align*}
+
+Suppose there is another field: can add scalar field to Dirac field and get scattering, and generate equations of motion for both fields.
+
+\begin{align*}
+\mathcal{L} =& i \big( \psi^\dagger \partial_t \psi +  \psi^\dagger \alpha \partial_x \psi + \psi^\dagger \beta \psi m \big) - \psi^\dagger \beta \psi \phi
+\end{align*}
+
+Lagrangian is what specifies a field theory.
 
 \subsection{Quantum Fields}
+
+Imagine Lagrangian containing $\phi^3$, where $\phi = (a_+ + a_-)$.
+Figure \ref{fig:phi:3:x} shows the kinds of interaction that may occur. Quadratic terms in Lagrangian give rise to motion, higher powers to interactions: 1 particle $\rightarrow$ 2, 2 particle3 $\rightarrow$ 1, 0 particles $\rightarrow$ 3, 3 particles $\rightarrow$ 0.
+ 
+\begin{figure}[H]
+	\caption{$\phi^3(x)$ gives rise to many possible interactions.}\label{fig:phi:3:x}
+	\includegraphics[width=0.8\textwidth]{phi-3-x}
+\end{figure}
+
+\begin{align*}
+(\frac{\partial \phi}{\partial x})^2 =& \big( \phi(x) - \phi(x^\prime)\big)^2\\
+=& \phi(x)^2 + \phi(x^\prime)^2 - 2 \underbrace{ \phi(x) \phi(x^\prime)}_\text{absorbs particle at $x$, reemits at $x^\prime$--i.e. move particle}
+\end{align*}
+\url{https://youtu.be/D7yXoNAg3J8?t=2134}
+
 
 \section{Field Lagrangians and path integrals}
 
