@@ -689,25 +689,25 @@ Here are the Dirac Matrices (not unique, but equivalent).
 		0&1&0&0\\
 		0&0&-1&0\\
 		0&0&0&-1
-	\end{pmatrix}\\
+	\end{pmatrix} \numberthis \label{eq:beta:1}\\
 	\alpha_1 =& \begin{pmatrix}
 		0&0&0&1\\
 		0&0&1&0\\
 		0&1&0&0\\
 		1&0&0&0
-	\end{pmatrix}\\
+	\end{pmatrix}\numberthis \label{eq:alpha1:1}\\ 
 	\alpha_2 =& \begin{pmatrix}
 		0&0&0&-i\\
 		0&0&i&0\\
 		0&-i&0&0\\
 		i&0&0&0
-	\end{pmatrix}\\
+	\end{pmatrix} \numberthis \label{eq:alpha2:1} \\ 
 	\alpha_3 =& \begin{pmatrix}
 		0&0&1&0\\
 		0&0&0&-1\\
 		1&0&0&0\\
-		0&-1&0&0
-	\end{pmatrix}
+		0&-1&0&0 
+	\end{pmatrix} \numberthis \label{eq:alpha3:1}
 \end{align*}
 
 Partitioning, and using the Pauli matrices:
@@ -1029,11 +1029,46 @@ i \frac{\partial \psi}{\partial t} =& - i \alpha_i \frac{\partial \psi}{\partial
 Where the $\alpha_i$ and $\beta$ satisfy (\ref{eq:dirac:ac1}), (\ref{eq:dirac:ac2}), (\ref{eq:dirac:ac3}), and (\ref{eq:dirac:ac4}).
 
 
-\begin{thm}[Dirac anticommutaion relations.] 
+\begin{thm}[Dirac anticommutation relations.] 
 	Equations (\ref{eq:dirac:ac1}), (\ref{eq:dirac:ac2}), (\ref{eq:dirac:ac3}), and (\ref{eq:dirac:ac4}) can be satisfied by suitably chosen $2\times4$ matrices, and they cannot be satisfies by $n \times n$ for $n<4$.
 \end{thm}
 
-\url{https://youtu.be/Xt09jVssi7k?t=4576}
+One set of solutions, which is not the same as (\ref{eq:beta:1}), (\ref{eq:alpha1:1}), (\ref{eq:alpha2:1}), and (\ref{eq:alpha3:1}):
+\begin{align*}
+	\alpha_i=&\begin{pmatrix}
+		\sigma_1&0\\
+		0&-\sigma_i
+	\end{pmatrix}\\
+	\beta =& \begin{pmatrix}
+		0&I\\
+		I&0
+	\end{pmatrix}
+\end{align*}
+
+Two kinds of $2\times2$: 2 blocks of $2\times2$ matrices. This corresponds to the physic - there are two energies, positive and negative, and two spins.
+The 4 components are not a relativistic 4-vector! The easiest way to see this is to set momentum to zero, then $\alpha$s drop out.
+
+\begin{align*}
+i \frac{\partial \psi}{\partial t} =&  \beta m \psi \text{ for particle at rest.}\\
+i \frac{\partial}{\partial t}\begin{pmatrix}
+\psi_+\\
+\psi_-
+\end{pmatrix}=&m \begin{pmatrix}
+0&I\\
+I&0
+\end{pmatrix}\begin{pmatrix}
+\psi_+\\
+\psi_-
+\end{pmatrix}\\
+i \frac{\partial \psi_+}{\partial t} =&   m \psi_-\\
+i \frac{\partial \psi_-}{\partial t} =&   m \psi_+ \\
+i \frac{\partial (\psi_++\psi_-)}{\partial t} =&   m (\psi_++\psi_-) \text{ positive energy--$\omega=m$}\\
+i \frac{\partial (\psi_+-\psi_-)}{\partial t} =&   -m (\psi_+-\psi_-) \text{ negative energy--$\omega=-m$}
+\end{align*}
+
+So we end up with two uncoupled equations! $2\times2$ is connected to positive and negative energies. $2\times2$ of $\psi_+$ arises from spin.
+
+
 
 \section{Equations of motion of particles and fields}
 
