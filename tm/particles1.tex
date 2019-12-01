@@ -673,10 +673,10 @@ Dirac started with generalization.
 \omega =& \alpha_1 k_1 + \alpha_2 k_2 + \alpha_3 k_3 +\beta m\\
 \omega^2 =& k_1^2 + k_2^2 +k_3^2 +m^2\\
 \omega^2 =& (\alpha_1 k_1 + \alpha_2 k_2 + \alpha_3 k_3 +\beta m)(\alpha_1 k_1 + \alpha_2 k_2 + \alpha_3 k_3 +\beta m) \text{, whence}\\
-\alpha_i^2 =& 1  \text{ and}\\
-\beta^2 =& 1 \text{ and}\\
-\{\alpha_i,\alpha_j]\} =& 2 \delta_{i,j}\\
-\{\alpha_i,\beta\} =& 0
+\alpha_i^2 =& 1  \text{ and} \numberthis \label{eq:dirac:ac1}\\
+\beta^2 =& 1 \text{ and} \numberthis \label{eq:dirac:ac2}\\
+\{\alpha_i,\alpha_j]\} =& 2 \delta_{i,j} \numberthis \label{eq:dirac:ac3}\\
+\{\alpha_i,\beta\} =& 0 \numberthis \label{eq:dirac:ac4}
 \end{align*}
 
 Cannot satisfy these equations for 2 dimensional matrices. $4 \times 4$ are the first case.
@@ -964,12 +964,76 @@ Components are 2D matrices satisfying algebra (\ref{eq:sx:sy}), (\ref{eq:sy:sz})
 	\end{pmatrix}
 \end{align*}
 
+\subsubsection{Spin 1}
+
+Three states $\{-1,0,1\}$, a Boson. Are there $3\times3$ matrices satisfying (\ref{eq:sx:sy}), (\ref{eq:sy:sz}), and (\ref{eq:sz:sx})?
+
+\begin{align*}
+	S_z = i \begin{pmatrix}
+		0&1&0\\
+		-1&0&0\\
+		0&0&0
+	\end{pmatrix}\\
+	S_y = i \begin{pmatrix}
+		0&0&1\\
+		0&0&0\\
+		-1&0&0
+	\end{pmatrix}\\
+	S_x = i \begin{pmatrix}
+		0&0&0\\
+		0&0&1\\
+		0&-1&0
+	\end{pmatrix}
+\end{align*}
+
+Find eigenstates of $S_z$:
+\begin{align*}
+	i \begin{pmatrix}
+		0&1&0\\
+		-1&0&0\\
+		0&0&0
+	\end{pmatrix}\begin{pmatrix}
+		\alpha\\
+		\beta\\
+		\gamma
+	\end{pmatrix}=&\begin{pmatrix}
+		\alpha\\
+		\beta\\
+		\gamma
+	\end{pmatrix}\\
+	=&i\begin{pmatrix}
+		\beta\\
+		-\alpha\\
+		0
+	\end{pmatrix}
+\end{align*}
+
+Return to real electron that can move in space. We turn the 2D spinors into functions of position: $\begin{pmatrix}
+\psi_u(x)\\
+\psi_d(x)
+\end{pmatrix}$.
+
+For spin 1: $\begin{pmatrix}
+\phi_1(x)\\
+\phi_2(x)\\
+\phi_3(x)
+\end{pmatrix}$.
+
+\subsection{Dirac Equation: connection with Spin}
+
+\begin{align*}
+i \frac{\partial \psi}{\partial t} =& - i \alpha_i \frac{\partial \psi}{\partial x^i} + \beta m \psi\\
+\omega =& \sum_i \alpha_i k_i + \beta m\\
+\omega^2 =& k^2 + m^2
+\end{align*}
+Where the $\alpha_i$ and $\beta$ satisfy (\ref{eq:dirac:ac1}), (\ref{eq:dirac:ac2}), (\ref{eq:dirac:ac3}), and (\ref{eq:dirac:ac4}).
 
 
+\begin{thm}[Dirac anticommutaion relations.] 
+	Equations (\ref{eq:dirac:ac1}), (\ref{eq:dirac:ac2}), (\ref{eq:dirac:ac3}), and (\ref{eq:dirac:ac4}) can be satisfied by suitably chosen $2\times4$ matrices, and they cannot be satisfies by $n \times n$ for $n<4$.
+\end{thm}
 
-
-
-\url{https://youtu.be/Xt09jVssi7k?t=927}
+\url{https://youtu.be/Xt09jVssi7k?t=4576}
 
 \section{Equations of motion of particles and fields}
 
