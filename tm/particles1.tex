@@ -883,8 +883,9 @@ Measured value is always $\pm \frac{1}{2}$; average may be zero; it behaves like
 Take two half spin particles: composite behaves like a Boson--e.g. Hydrogen atom; deuteron is Boson, deuterium is Fermion.
 
 
-
 \section{Spin}
+
+\subsection{Combining Fermions to make Bosons}
 
 Paradox: if two Fermions make a Boson, can we have two of these Bosons in the same state.
 
@@ -919,7 +920,53 @@ If we antisymmetrize:
 	1 \leftrightarrow& 2 \text { preserves sign.}
 \end{align*}
 
-What if both atoms have same wave function?
+What if both atoms have same wave function? Ignoring a factor of $2$:
+
+\begin{align*}
+	\psi(x_1,y_1) \psi(x_2,y_2) -& \psi(x_2,y_1) \psi(x_1,y_2) 
+\end{align*}
+
+Both atoms can be in same place, but we can't find 2 electrons in same place.
+
+\subsection{Mathematics of Spin}
+
+Mathematics of Spin needed for Colour, Isospin, etc.
+
+\subsubsection{Half spin}
+
+We have two values along the z axis: $S_z = m \hslash$. We will use $S$ for spin, $L$ for orbital angular momentum.
+
+\begin{align*}
+	[S_x,S_y] =& i S_z \numberthis \label{eq:sx:sy}\\
+	[S_y,S_z] =& i S_x  \numberthis \label{eq:sy:sz}\\
+	[S_z,S_x] =& i S_y  \numberthis \label{eq:sz:sx}\\
+	S_\pm =& S_x \pm S_y
+\end{align*}
+
+Can express spin as $\begin{pmatrix}
+\alpha\\
+\beta
+\end{pmatrix}$ or $\alpha\ket{+} + \beta\ket{-}$ 
+
+Components are 2D matrices satisfying algebra (\ref{eq:sx:sy}), (\ref{eq:sy:sz}), and (\ref{eq:sz:sx}). They are not unique, but equivalent. We will use the Pauli spin\footnote{Without $\frac{1}{2}$ they are known as Pauli matrices.} matrices:
+\begin{align*}
+	S_x =& \frac{1}{2}\begin{pmatrix}
+		0&1\\
+		1&0
+	\end{pmatrix}\\
+	S_y =& \frac{1}{2}\begin{pmatrix}
+		0&-i\\
+		i&0
+	\end{pmatrix}\\
+	S_z =& \frac{1}{2}\begin{pmatrix}
+		1&0\\
+		0&-1
+	\end{pmatrix}
+\end{align*}
+
+
+
+
 
 
 \url{https://youtu.be/Xt09jVssi7k?t=927}
