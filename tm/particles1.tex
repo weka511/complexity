@@ -1236,7 +1236,22 @@ Lagrangian describes things that happen at a point, or a pair of neighbouring po
 	\caption[Proton photon electron interaction]{Proton photon electron interaction--product of two separate terms in Lagrangian}\label{fig:proton:electron:photon}
 	\includegraphics[width=0.8\textwidth]{proton-electron-photon}
 \end{figure}
-\url{https://youtu.be/D7yXoNAg3J8?t=4492}
+
+NB: creation operators are functions of P or X, never both (uncertainty principle). They are related through Fourier transforms, which are the essence of the uncertainty principle.
+
+$\bra{0}\psi^\dagger\psi^\dagger\psi^\dagger...\mathcal{L}\mathcal{L}\mathcal{L}...\psi\psi\psi\ket{0}$
+
+\begin{align*}
+	\Pi_i& \big(1+\mathcal{L}_{interaction}(x_i)\big)\\
+	=&1 + \sum_i \underbrace{ \mathcal{L}(x_i)}_\text{one vertex}  +\sum_{i,j}\underbrace{\mathcal{L}(x_i)\mathcal{L}(x_j)}_\text{two vertices} +...
+\end{align*}
+
+We get an infinite number of places where 1 thing, 2 things, etc, happen.
+
+The art form is figuring out the Lagrangian; then QFT becomes a precise tool.
+
+Often can ignore parts of Lagrangian: e.g. quarks don't have much to do with electrons. QFT may be a coarse grained description of something else.
+ 
 
 \section{Field Lagrangians and path integrals}
 
