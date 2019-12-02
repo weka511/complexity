@@ -1286,13 +1286,34 @@ There is a duality between fields and particles. What if we specify field quanta
 \end{align*}
 
 \begin{align*}
-\sum e^{-\frac{i}{\hslash} \int dx dy dz dt\mathcal{L}(\phi,\partial \phi) }=&\sum e^{-\frac{i}{\hslash} A_i } \text{, where $A_i$ is action in $i$th cell}\\
-=&\sum \Pi_i e^{-\frac{i}{\hslash} A_i }
+\sum_{histories} e^{-\frac{i}{\hslash} \int dx dy dz dt\mathcal{L}(\phi,\partial \phi) }=&\sum_{histories} e^{-\frac{i}{\hslash} A_i } \text{, where $A_i$ is action in $i$th cell}\\
+=&\sum_{histories} \Pi_i e^{-\frac{i}{\hslash} A_i }
 \end{align*}
 \begin{figure}[H]
-	\caption{Space partitioned into cells}\label{fig:path-integral2}
+	\caption[Space partitioned into cells]{Space partitioned into cells. Initial conditions in bottom row, final in top. We consider all possible histories that match initial and final conditions. NB: functions aren't necessarily analytic or even continuous.}\label{fig:path-integral2}
 	\includegraphics[width=0.8\textwidth]{path-integral2}
 \end{figure}
 
-\url{https://youtu.be/q-QaaKCvDUs?t=1860}
+Our question is now: if initial condition matches our initial configuration of particles, and final condition matches desired configuration, what is the amplitude? Figure (\ref{fig:path-integral3}) depicts a particle moving in one history.
+
+[Look up Lattice Gauge Theory]
+
+\begin{figure}[H]
+	\caption[Particle moving]{Creation operator in one cell, annihilation in neighbour:movement}\label{fig:path-integral3}
+	\includegraphics[width=0.8\textwidth]{path-integral3}
+\end{figure}
+
+There are terms in the Lagrangian associated with pairs of boxes--derivatives:
+\begin{align*}
+	\frac{1}{2}(\partial_t \phi)^2 \rightarrow& \frac{1}{2}(\phi(t,x)-\phi(t^\prime,x))^2\\
+	\frac{1}{2}(\partial_x \phi)^2 \rightarrow& \frac{1}{2}(\phi(t,x)-\phi(t,x^\prime))^2 \text{ gives rise to terms like:}\\
+	&e^{- i \sum_{neighbours} \phi(x) \phi(x^\prime)}\\
+	=& 1 - i \sum_{neighbours} \phi(x) \phi(x^\prime) - \frac{1}{2!}\sum_{neighbours} \phi(x) \phi(x^\prime)\sum_{neighbours} \phi(x^{\prime\prime}) \phi(x^{\prime\prime\prime})+...
+\end{align*}
+
+\begin{figure}[H]
+		\caption[Particle moving]{Creation operator in one cell, annihilation in neighbour:movement}\label{fig:path-integral4}
+	\includegraphics[width=0.4\textwidth]{path-integral4}
+\end{figure}
+\url{https://youtu.be/q-QaaKCvDUs?t=3017}
 \end{document}
