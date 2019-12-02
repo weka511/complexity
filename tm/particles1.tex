@@ -1270,5 +1270,29 @@ Feynman's rule: $\sum e^{-\frac{i}{\hslash} \int \mathcal{L} dt}$, where the sum
 	\includegraphics[width=0.8\textwidth]{sum-histories}
 \end{figure}
 
-\url{https://youtu.be/q-QaaKCvDUs?t=902}
+Imagine starting systems with field $\phi(x)$, and asking for probability of $\phi^\prime(x)$ at some later time--Figure \ref{fig:path-integral1}. Again this is determined by an amplitude $\sum e^{-\frac{i}{\hslash} \int dx dy dz dt\mathcal{L}(\phi,\partial \phi) }$, summed over all possible histories between $\phi(x)$ and $\phi^\prime(x)$.
+
+
+\begin{figure}[H]
+	\caption{Initial and final conditions}\label{fig:path-integral1}
+	\includegraphics[width=0.8\textwidth]{path-integral1}
+\end{figure}
+
+There is a duality between fields and particles. What if we specify field quanta (particles)? Answer involve path integral. Start by partitioning space into cells--Figure \ref{fig:path-integral2}--then compute $\Pi(1-i\mathcal{L}a^4)$, where $a^4$ is volume of a cell.
+
+\begin{align*}
+	1 + \epsilon \approx &e^\epsilon\\
+	\approx& 1 + \epsilon + \frac{\epsilon^2}{2!} +...\\
+\end{align*}
+
+\begin{align*}
+\sum e^{-\frac{i}{\hslash} \int dx dy dz dt\mathcal{L}(\phi,\partial \phi) }=&\sum e^{-\frac{i}{\hslash} A_i } \text{, where $A_i$ is action in $i$th cell}\\
+=&\sum \Pi_i e^{-\frac{i}{\hslash} A_i }
+\end{align*}
+\begin{figure}[H]
+	\caption{Space partitioned into cells}\label{fig:path-integral2}
+	\includegraphics[width=0.8\textwidth]{path-integral2}
+\end{figure}
+
+\url{https://youtu.be/q-QaaKCvDUs?t=1860}
 \end{document}
