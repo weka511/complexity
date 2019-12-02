@@ -1188,21 +1188,55 @@ Basic interaction of electrodynamics.
 		\caption{Photon absorbed, electron and positron created.}
 		\includegraphics[width=0.7\textwidth]{em-dirac4}
 	\end{subfigure}
+	\begin{subfigure}{0.48\textwidth}
+		\caption{Photon, electron and positron absorbed (energy and momentum not conserved!).}\label{fig:em:dirac5}
+		\includegraphics[width=0.7\textwidth]{em-dirac5}
+	\end{subfigure}
 \end{figure}
 
 $e$ is strength of interaction, probability of interaction $e^2$.
 
+Remember that energy conservation arose from integrating over all time, and momentum conservation from integrating over space. If we integrate (\ref{eq:basic:interaction}) over all space and all time,  energy and momentum will both be conserved, which rules out the process depicted in Figure \ref{fig:em:dirac5}.
+
 Protons, Neutrons, Pi mesons. Pions are scalar particles, and they come in 3 types, $\pi_+$, $\pi_-$, $\pi_0$. Protons are $\psi_p$, neutrons $\psi_n$.
 
-\begin{itemize}
-	\item $\psi^\dagger_p \psi_n \pi_+$
-	\item $\psi^\dagger_n \psi_p \pi_-$
-	\item $\psi^\dagger_p \psi_p \pi_0$
-	\item $\psi^\dagger_n \psi_n \pi_0$
-\end{itemize}
+\begin{table}[H]
+	\begin{center}
+		\caption{Protons, Neutrons, Pi mesons}
+		\begin{tabular}{|l|l|} \hline
+			Operators &Description\\ \hline
+			$\psi_p$, $\psi^\dagger_p$& create and annihilate proton\\ \hline
+		    $\psi_n$, $\psi^\dagger_n$& create and annihilate neutron\\ \hline
+			$\pi_+$& annihilate pion\\ \hline
+			$\pi_+$&annihilate pion\\ \hline
+			$\pi_+$&annihilate pion\\ \hline
+			$\psi^\dagger_p \psi_n \pi_+$&Absorb pion and neutron, emit proton\\ \hline
+			$\psi^\dagger_n \psi_p \pi_-$&Absorb pion and proton, emit neutron\\ \hline
+			$\psi^\dagger_p \psi_p \pi_0$&Absorb pion and proton, emit proton\\ \hline
+			$\psi^\dagger_n \psi_n \pi_0$&Absorb pion and neutron, emit neutron \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+The fundamental process of course involve quarks; if energy is high enough to break up protons, cannot use proton fields..
 
-\url{https://youtu.be/D7yXoNAg3J8?t=2912}
+\begin{figure}[H]
+	\caption{Two processes from the same interaction.}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Proton $\rightarrow$ neutron + pion}
+		\includegraphics[width=0.8\textwidth]{pion1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Proton + antineutron $\rightarrow$ pion}
+		\includegraphics[width=0.8\textwidth]{pion2}
+	\end{subfigure}
+\end{figure}
 
+Lagrangian describes things that happen at a point, or a pair of neighbouring points. Figure \ref{fig:proton:electron:photon} shows an interaction arising from a product of terms. There is no action at a distance.
+\begin{figure}[H]
+	\caption[Proton photon electron interaction]{Proton photon electron interaction--product of two separate terms in Lagrangian}\label{fig:proton:electron:photon}
+	\includegraphics[width=0.8\textwidth]{proton-electron-photon}
+\end{figure}
+\url{https://youtu.be/D7yXoNAg3J8?t=4492}
 
 \section{Field Lagrangians and path integrals}
 
