@@ -1255,5 +1255,20 @@ Often can ignore parts of Lagrangian: e.g. quarks don't have much to do with ele
 
 \section{Field Lagrangians and path integrals}
 
+\subsection{Path Integral}
 
+This is the quantum mechanical version of the Principle of Least Action: minimize $\int \mathcal{L}(\dot{X},X) dt$. In a field theory $\mathcal{L}=\mathcal{L}(\phi,phi_\mu)$. Must be a scalar.
+
+Action: $\mathcal{A}=\int dx^4 \mathcal{L}$. Integrate from initial to final.
+
+Imagine that particle is injected at $(x,t)$: what is amplitude, it will be found at $(x^\prime,t^\prime)$?
+
+Feynman's rule: $\sum e^{-\frac{i}{\hslash} \int \mathcal{L} dt}$, where the sum is taken over all classically possible histories--Figure \ref{fig:sum:histories}--i.e. they can not go back in time for non-relativistic QM. This gives amplitude, which needs to be squared for probabilities.
+
+\begin{figure}[H]
+	\caption{Sum over histories}\label{fig:sum:histories}
+	\includegraphics[width=0.8\textwidth]{sum-histories}
+\end{figure}
+
+\url{https://youtu.be/q-QaaKCvDUs?t=902}
 \end{document}
