@@ -1299,21 +1299,67 @@ Our question is now: if initial condition matches our initial configuration of p
 [Look up Lattice Gauge Theory]
 
 \begin{figure}[H]
-	\caption[Particle moving]{Creation operator in one cell, annihilation in neighbour:movement}\label{fig:path-integral3}
+	\caption[Particle moving]{Creation operator in one cell, annihilation in neighbour amounts to movement}\label{fig:path-integral3}
 	\includegraphics[width=0.8\textwidth]{path-integral3}
 \end{figure}
 
-There are terms in the Lagrangian associated with pairs of boxes--derivatives:
+There are terms in the Lagrangian associated with pairs of boxes--the derivatives:
 \begin{align*}
 	\frac{1}{2}(\partial_t \phi)^2 \rightarrow& \frac{1}{2}(\phi(t,x)-\phi(t^\prime,x))^2\\
-	\frac{1}{2}(\partial_x \phi)^2 \rightarrow& \frac{1}{2}(\phi(t,x)-\phi(t,x^\prime))^2 \text{ gives rise to terms like:}\\
-	&e^{- i \sum_{neighbours} \phi(x) \phi(x^\prime)}\\
-	=& 1 - i \sum_{neighbours} \phi(x) \phi(x^\prime) - \frac{1}{2!}\sum_{neighbours} \phi(x) \phi(x^\prime)\sum_{neighbours} \phi(x^{\prime\prime}) \phi(x^{\prime\prime\prime})+...
+	\frac{1}{2}(\partial_x \phi)^2 \rightarrow& \frac{1}{2}(\phi(t,x)-\phi(t,x^\prime))^2 \numberthis \label{eq:phi:phi}
 \end{align*}
+(\ref{eq:phi:phi}) gives rise to terms like:
+\begin{alignat*}{2}
+	e^{- i \sum_{neighbours} \phi(x) \phi(x^\prime)}=1& -&& i \sum_{neighbours} \underbrace{\phi(x) \phi(x^\prime)}_\text{Figure \ref{fig:path-integral5}}\\
+&-&& \frac{1}{2!}\underbrace{\sum_{neighbours} \phi(x) \phi(x^\prime)\sum_{neighbours} \phi(x^{\prime\prime}) \phi(x^{\prime\prime\prime})}_\text{Figure \ref{fig:path-integral7}}\\
+&+&&\underbrace{i\frac{1}{3!}\sum_{neighbours}\phi(..)\phi(..)\sum_{neighbours}\phi(..)\phi(..)\sum_{neighbours}\phi(..)\phi(..)}_\text{Figure \ref{fig:path-integral9}}\\
+&+&& ... \numberthis \label{eq:path:integral:expanded}
+\end{alignat*}
+
+
 
 \begin{figure}[H]
-		\caption[Particle moving]{Creation operator in one cell, annihilation in neighbour:movement}\label{fig:path-integral4}
-	\includegraphics[width=0.4\textwidth]{path-integral4}
+	\caption{Rules for Path Integrals}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Create at one point, annihilate at neighbour}\label{fig:path-integral5}
+		\includegraphics[width=1.0\textwidth]{path-integral5}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{A dangling endpoint is illegal unless one endpoint creates, other annihilates: since we are only putting particles in from initial state and removing from final, this is illegal.}\label{fig:path-integral4}
+		\includegraphics[width=1.0\textwidth]{path-integral4}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{The only way Figure \ref{fig:path-integral5} can contribute is if space is only two layers thick.}\label{fig:path-integral6}
+		\includegraphics[width=1.0\textwidth]{path-integral6}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{What about thicker space? How to we get from \ref{fig:path-integral6} to here? We need the quadratic term in (\ref{eq:path:integral:expanded})}\label{fig:path-integral7}
+		\includegraphics[width=1.0\textwidth]{path-integral7}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{How to avoid dangling ends in \ref{fig:path-integral7}? Restrict to 3 layers. This allows us to find $x^\prime=x^{\prime\prime}$ in (\ref{eq:path:integral:expanded})}\label{fig:path-integral8}
+		\includegraphics[width=1.0\textwidth]{path-integral8}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Including the cubic term in (\ref{eq:path:integral:expanded}) allows us to find two 3-step paths in (\ref{eq:path:integral:expanded}).}\label{fig:path-integral9}
+		\includegraphics[width=1.0\textwidth]{path-integral9}
+	\end{subfigure}
 \end{figure}
-\url{https://youtu.be/q-QaaKCvDUs?t=3017}
+
+So we can sum up contributions $\frac{i^n}{n !}$ in (\ref{eq:path:integral:expanded}) to determine complex amplitude. We include backward paths from special relativity--Figure \ref{fig:path:backward:time}.
+
+\begin{figure}[H]
+	\caption{Path going backwards in Time. We can think of it in two ways.}\label{fig:path:backward:time}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{New rule allows particle to go back in time}
+		\includegraphics[width=0.8\textwidth]{path-backward-time}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Particle anti-particle pair used instead.}
+		\includegraphics[width=0.8\textwidth]{path-backward-time1}
+	\end{subfigure}
+\end{figure}
+
+
+\url{https://youtu.be/q-QaaKCvDUs?t=3649}
 \end{document}
