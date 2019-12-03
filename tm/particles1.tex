@@ -38,7 +38,7 @@ Particle physics is about the question: is matter discrete? If so we will call t
 
 Which is correct? Both and neither.
 
-First evidence for atoms came from chemistry. John Dalton looked at mass mole: each substance was an integer multiple of mass of a mole of hydrogen; it suggested that there are building blocks. We now know that mass of molecule is mass of protons, electrons (very small), and neutrons, which have nearly the same mass as protons. 
+First evidence for atoms came from chemistry. John Dalton looked at mass of mole: each substance was an integer multiple of mass of a mole of hydrogen; it suggested that there are building blocks. We now know that mass of molecule is mass of protons, electrons (very small), and neutrons, which have nearly the same mass as protons. 
  
 Figure \ref{fig:em:wave} illustrates an electromagnetic wave. We need the concepts of wavelength, $\lambda$, and period, $T$.
 
@@ -100,7 +100,7 @@ f =& \frac{h}{2 m \lambda^2} \text{. c.f. Schr\"odinger equation!}
 	\item Group velocity: velocity of troughs and peaks--identified with particle velocity.
 \end{itemize}
 
-For light waves, phase and group velocities the same, but this isn't true for most particles. Phase velocity can exceed $c$, but can't transmit information.
+For light waves, phase and group velocities the same, but this isn't true for most particles. Phase velocity can exceed $c$, but it can't transmit information--Section \ref{section:phase:group:velocities}.
 
 Space is infinite. But physics is the art of getting problems into a shape that computers can solve, so we need to remove infinities.
 
@@ -137,12 +137,10 @@ a^- a^+  =& n+1\\
 
 Return to world on a circle--$\omega_N$--equivalent to oscillator. State is $\ket{n_1,n_2, n_3,...}$--occupation numbers. 
 \begin{defn}[quantum field]
-	A quantum field is a collection of harmonic oscillators, togther with annihilation operators and creation operators.
+	A quantum field is a collection of harmonic oscillators, together with annihilation operators and creation operators.
 \end{defn}
 
 \section{Quantum fields and particles}
-
-
 
 \begin{align*}
 \text{Wave} =& e^{i k x} \text{, $k$ is wave number}\\
@@ -152,7 +150,7 @@ n(k) =& \text{ occupation number.}
 
 We represent the state of a 1D circular system by occupation numbers, $\ket{...n(-1), n(0), n(1), n(2)...}$, and introduce operators $a^+(k)$, $a^-(k)$. 
 \begin{align*}
-a^+(1)\ket{...n(-1), n(0), n(1), n(2)...}=& \sqrt{n(1)+1}\ket{...n(-1), n(0), n(1)+1, n(2)...}
+a^+(1)\ket{...n(-1), n(0), \underbrace{n(1)}_\text{target of $a^+(1)$}, n(2)...}=& \sqrt{n(1)+1}\ket{...n(-1), n(0), n(1)+1, n(2)...}
 \end{align*}
 $a^+(k)$, $a^-(k)$ are quantum mechanical versions of the Fourier coefficients of a field $\Psi$.
 
@@ -191,11 +189,11 @@ What does $\Psi$ do? It annihilates a particle at $x$.
 Locality: when something happens, it happens at one spot. Figure \ref{fig:ex:locality} is an example of one particle being replaced by two.
 
 \begin{figure}[H]
-	\caption{Example of locality: $\Psi^\dagger(x)\Psi^\dagger(x)\Psi(x)\ket{...}$}\label{fig:ex:locality}
+	\caption[Example of locality: one particle is replaced by two]{Example of locality: one particle is replaced by two. $\Psi^\dagger(x)\Psi^\dagger(x)\Psi(x)\ket{...}$}\label{fig:ex:locality}
 	\includegraphics[width=0.8\textwidth]{split-particle}
 \end{figure}
 
-Start with state $\ket{0,...\underbrace{1}_\text{particle with momentum $k$},0,000}$.
+Start with state $\ket{0,...\underbrace{1}_\text{$k_i$},0,000}$.
 
 We assume that $k_i$ denotes the index of the only momentum with a non-zero index.
 \begin{align*}
@@ -203,12 +201,12 @@ We assume that $k_i$ denotes the index of the only momentum with a non-zero inde
 =&\sum_m a^+(m) e^{-imx} \sum_l a^+(l) e^{-ilx} a^-(k_i) e^{ik_ix} \ket{...}\\
 =&\sum_m a^+(m) e^{-imx} \sum_l a^+(l) e^{-ilx}  e^{ik_ix} \ket{0}\\
 =&\sum_{l,m}  e^{-imx}  e^{-ilx}  e^{ik_ix} \underbrace{\ket{001001...}}_\text{$l$ and $m$ are indices of $1s$.}\\
-\triangleq &\sum_{l,m}   e^{i(i_k-l-m)x} \ket{l,m}
+\triangleq &\sum_{l,m}   e^{i(k-l-m)x} \ket{l,m}
 \end{align*}
 
 This isn't true if $l=m$! We have two application of $a^+(m)$, so vacuum becomes $\sqrt{2}\ket{...2...}$. Probability of two particles coming out in same state is twice probability of them being in different states.
 
-Ignore conservation laws!
+For the time being we ignore conservation laws!
 
 Consider generating photon at a position where there is a pre-existing photon with momentum $l$--Figure \ref{fig:simple:decay}.
 \begin{figure}[H]
@@ -217,7 +215,7 @@ Consider generating photon at a position where there is a pre-existing photon wi
 \end{figure}
 
 \begin{align*}
-\Psi(x)\ket{l} =& \sum_k a^+(k) e^{-ikx} \ket{l}\\
+\Psi(x)^\dagger\ket{l} =& \sum_k a^+(k) e^{-ikx} \ket{l}\\
 =& \sum_{k\ne l} e^{-ikx} \ket{k,l} + \sqrt{2} e^{-ilx} \ket{l,l}
 \end{align*}
 
@@ -238,8 +236,6 @@ Stimulated emission: higher probability of generating particles that are already
  =& N \text{, total number of particles.}\\
  \Psi^\dagger(x) \Psi(x) =& \text{ density of particles at $x$}.
  \end{align*}
-
-\url{https://youtu.be/UgPBUJRrYz8?t=5689}
 
 
 \section{More quantum field theory}
@@ -358,7 +354,7 @@ NB, this isn't a real electron, as $\Psi$ is for Bosons. A negative pion would b
 
 \section{Energy conservation and waves}\label{sec:energy:conservation}
 
-\subsection{Phase Velocity and Group Velocity}
+\subsection{Phase Velocity and Group Velocity}\label{section:phase:group:velocities}
 
 \subsubsection{Phase Velocity and Group Velocity of non-relativistic particles}
 Generally phase velocity doesn't have anything to do with measurable things in quantum mechanics. Group velocity is what counts.
