@@ -22,7 +22,7 @@
 \maketitle
 
 \begin{abstract}
-These are my notes for \emph{New Revolutions in Particle Physics 1} lectures from Leonard Susskind's Theoretical Minimum series.
+These are my notes for the \emph{New Revolutions in Particle Physics 1} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind:particles2009:1}.
 \end{abstract}
 
 \tableofcontents
@@ -32,13 +32,13 @@ These are my notes for \emph{New Revolutions in Particle Physics 1} lectures fro
 
 \section{Particles and Light}
 
-This lecture contains  facts from other courses, which will be used on later lectures.
+This lecture contains  facts from other courses, which will be used in later lectures.
 
 Particle physics is about the question: is matter discrete? If so we will call the smallest things "particles". If matter forms a continuum, we have fields.
 
 Which is correct? Both and neither.
 
-First evidence for atoms came from chemistry. John Dalton looked at mass of mole: each substance was an integer multiple of mass of a mole of hydrogen; it suggested that there are building blocks. We now know that mass of molecule is mass of protons, electrons (very small), and neutrons, which have nearly the same mass as protons. 
+The first evidence for atoms came from chemistry. John Dalton found that the mass of one mole of each substance was an integer multiple of the mass of a mole of hydrogen; this suggested that there are building blocks. We now know that mass of molecule is mass of protons, electrons (very small), and neutrons, which have nearly the same mass as protons. 
  
 Figure \ref{fig:em:wave} illustrates an electromagnetic wave. We need the concepts of wavelength, $\lambda$, and period, $T$.
 
@@ -67,7 +67,7 @@ E_{ray}=&n \hslash \omega \text{. Energy of ray.}
 
 In modern usage, mass is what used to be called rest mass. $E = m c^2$ only for stationary object.
 
-In particle physics we choose units to set $c=1$ and $\hslash=1$. In this lecture $c$ and $\hslash$ will appear explicitly only when Prof. Susskind wants to show the magnitude of some quantity.
+In particle physics we choose units such that $c=1$ and $\hslash=1$. In this course, $c$ and $\hslash$ will appear explicitly only when Prof. Susskind wants to show the magnitude of some quantity.
 
 Energy depends on the motion of the object as seen by the observer: it isn't a universal thing that everyone will agree on.
 
@@ -87,7 +87,7 @@ To see really small things, we need particles with high energy and momentum.
 
 \subsection{Mathematical Preliminaries}
 
-Consider a classical wave $A \sin(kx)$. Energy is $A^2$, but it is also proportional to number of photons, $n$: $E \propto n \hslash \omega$, $A \propto \sqrt(n)$.
+Consider a classical wave $A \sin(kx)$. Energy is proportional to $A^2$, but also to the number of photons, $n$: $E \propto n \hslash \omega$, $A \propto \sqrt(n)$.
 
 Generally, equations containing $c$ apply for photons only. For non-relativistic particles:
 \begin{align*}
@@ -102,7 +102,7 @@ f =& \frac{h}{2 m \lambda^2} \text{. c.f. Schr\"odinger equation!}
 
 For light waves, phase and group velocities the same, but this isn't true for most particles. Phase velocity can exceed $c$, but it can't transmit information--Section \ref{section:phase:group:velocities}.
 
-Space is infinite. But physics is the art of getting problems into a shape that computers can solve, so we need to remove infinities.
+Space is infinite. If physics is the art of getting problems into a shape that computers can solve, we need to remove infinities.
 
 Let's look at 1 dimensional waves. We can restrict to fixed length $L$: reflecting boundary condition at ends. But this violates conservation of momentum. Instead use a topological "circle" circumference $L$--periodic boundary conditions. As a consequence momentum is quantized: 
 
@@ -130,7 +130,7 @@ Introduce operators:
 a^+ \ket{n} =& \sqrt{n+1} \ket{n+1} \text{, creation operator} \numberthis \label{eq:creation}\\
 a^- \ket{n} =& \sqrt{n} \ket{n-1} \text{, annihilation operator} \numberthis \label{eq:annihilation} \\
 a^+ a^- \ket{n} =& n \ket{n} \text{, or}\\
-a^+ a^-  =& n \text{, similarly}\\
+a^+ a^-  =& n \text{. Similarly}\\
 a^- a^+  =& n+1\\
 [a^-, a^+] =& 1
 \end{align*}
@@ -225,13 +225,16 @@ Stimulated emission: higher probability of generating particles that are already
  \begin{align*}
  [a^+(k),a^+(l)] =& 0\\
  [a^-(k),a^-(l)] =& 0\\
- [a^-(k),a^+(l)] =& \delta_{k,j}\\
+ [a^-(k),a^+(l)] =& \delta_{k,l}\\
  \Psi(x) =& \sum_k a^-(k) e^{ikx} \\
  \Psi^\dagger(x) =& \sum_k a^+(k) e^{-ikx}
  \end{align*}
  
  \begin{align*}
- \frac{1}{L}\int dx \Psi^\dagger(x) \Psi(x) =& \int  \sum_k a^+(k) e^{-ikx} \sum_l a^-(l) e^{ilx}\\
+ \frac{1}{L}\int_\frac{-L}{2}^\frac{L}{2} dx \Psi^\dagger(x) \Psi(x) =& \frac{1}{L} \int_\frac{-L}{2}^\frac{L}{2} dx \sum_k a^+(k) e^{-ikx} \sum_l a^-(l) e^{ilx}\\
+ =& \sum_k a^+(k) \sum_l a^-(l) \frac{1}{L} \int_\frac{-L}{2}^\frac{L}{2} e^{-ikx} e^{ilx} dx\\
+ =& \sum_k a^+(k) \sum_l a^-(l) \frac{1}{L} \int_\frac{-L}{2}^\frac{L}{2} e^{-i(k-l)x} dx\\
+  =& \sum_k a^+(k) \sum_l a^-(l) \delta_{k,l}\\
  =&  \sum_k \underbrace{a^+(k) a^-(k)}_\text{Occupation number}\\
  =& N \text{, total number of particles.}\\
  \Psi^\dagger(x) \Psi(x) =& \text{ density of particles at $x$}.
@@ -248,25 +251,25 @@ Stimulated emission: higher probability of generating particles that are already
 \text{For } k =& \frac{2 \pi n}{L}\\
 \int_{-\frac{L}{2}}^{\frac{L}{2}} e^{ikx} dx =& L \text{, if $k =0$}\\
 =& 0 \text{, otherwise}\\
-\rightarrow& 2 \pi \delta(k) \text{ as $k \rightarrow \inf$}
+\rightarrow& 2 \pi \delta(k) \text{ as $k \rightarrow \infty$}
 \end{align*}
 
-We will use ket vectors for initial states, bra for final. This will help with bookkeeping.
+We will use \emph{ket} vectors for initial states, \emph{bra} for final. This will help with bookkeeping.
 
 \subsubsection{Creation and annihilation operators operating on bra vectors}
 
 \begin{align*}
 \braket{n|m} =& \delta_{n,m}\numberthis \label{eq:orthogonal} \text{. We want the following}\\
-\braket{n|(a^+|m)} =& \braket{(n|a^+)|m} \text{ from (\ref{eq:creation})} \numberthis \label{eq:consistency}\\
-\braket{n|(a^+|m)} =& \sqrt{m+1} \braket{n|m+1}\\
-=& \sqrt{m+1} \delta_{n,m+1} \text{ from (\ref{eq:orthogonal})} \text{, so we define}\\
+\braket{n|(a^+|m)} =& \braket{(n|a^+)|m}  \numberthis \label{eq:consistency}\\
+=& \sqrt{m+1} \braket{n|m+1} \text{, from (\ref{eq:creation})}\\
+=& \sqrt{m+1} \delta_{n,m+1} \text{, from (\ref{eq:orthogonal})} \text{, so we define}\\
 \bra{n} a^+ \triangleq & \sqrt{n} \bra{n-1} \text{ to satisfy (\ref{eq:consistency}), and} \numberthis \label{eq:bra:create}\\
-\bra{n} a^= \triangleq & \sqrt{n+a} \bra{n-1} \numberthis \label{eq:bra:annihilate}
+\bra{n} a^= \triangleq & \sqrt{n+1} \bra{n-1} \numberthis \label{eq:bra:annihilate}
 \end{align*}
 Example: calculate an expression two different ways.
 \begin{align*}
 \braket{n|(a^+a^-|n)} =& \sqrt{n}\braket{n|(a^+|n-1)}\\
-=& n \braket{n|n} \text{ from (\ref{eq:bra:create})}\\
+=& (\sqrt{n})^2 \braket{n|n} \text{ from (\ref{eq:bra:create})}\\
 =& n\\
 \braket{(n|a^+a^-)|n} =& \sqrt{n} \braket{(n-1|a^-)|n}\\
 =& n \braket{n|n} \text{ from (\ref{eq:bra:annihilate})}
@@ -278,20 +281,24 @@ The only way we can study particles is to collide them; quantum field theory is 
 
 We will set $\hslash=1$, so $P=k$, and we will take $X$ and $P$ to be 3 dimensional.
 \begin{align*}
-\Psi^\dagger(X)(X,t) \triangleq& \sum_k a^+(k) e^{-ikX} e^{i \omega(k) t} \text{, but}\\
+\Psi^\dagger(X)(X,t) \triangleq& \sum_k a^+(k) e^{-ikX} e^{i \omega(k) t} \\
+\Psi(X)(X,t) \triangleq& \sum_k a^-(k) e^{ikX} e^{- i \omega(k) t}
+\end{align*}
+
+\begin{align*}
 \omega =& E \text{ and}\\
 E =& \frac{P^2}{2m} \text{, whence}\\
-\omega =& \frac{k^2}{2m} \numberthis \label{eq:omega:k}\\
-\Psi \triangleq& \sum_k a^-(k) e^{ikX} e^{- i \omega(k) t}
+\omega =& \frac{k^2}{2m} \numberthis \label{eq:omega:k}
 \end{align*}
-We want to determine the differential equation satisfied by $\Psi^\dagger(X)$.
+We  determine the differential equation satisfied by $\Psi^\dagger(X)$.
 
 \begin{align*}
 \dot{\Psi^\dagger(X)} =&  \sum_k i \omega(k) a^+(k) e^{-ikX} e^{i \omega(k) t}\\
 \frac{\partial^2 \Psi^\dagger(X)}{\partial X^2} =& \sum_k -k^2 a^+(k) e^{-ikX} e^{i \omega(k) t} \numberthis \label{eq:omega:dot}\\
  =& - \sum_k 2m \omega a^+(k) e^{-ikX} e^{i \omega(k) t} \text{ from (\ref{eq:omega:k})}\\
  \frac{1}{2m} \frac{\partial^2 \Psi^\dagger(X)}{\partial X^2} =& - \sum_k \omega a^+(k) e^{-ikX} e^{i \omega(k) t}\\
-  i \dot{\Psi^\dagger(X)} =&  \frac{1}{2m} \frac{\partial^2 \Psi^\dagger(X)}{\partial X^2} \text{ From (\ref{eq:omega:dot})--Schr\"odinger for field!}
+ =& -\frac{1}{i} \frac{\Psi^\dagger(X)}{\partial t}\\
+  i \frac{\Psi^\dagger(X)}{\partial t} =&  \frac{1}{2m} \frac{\partial^2 \Psi^\dagger(X)}{\partial X^2} \text{ From (\ref{eq:omega:dot}). This is Schr\"odinger's equation for field!}
 \end{align*}
 
 Consider particle scattering from heavy target; conserves energy, but not momentum--Figure \ref{fig:particle:heavy:target}. Assume scattering probability independent of time.
@@ -1401,5 +1408,8 @@ How come answer not infinite? Powers of coefficients from Lagrangian $(g)$ appea
 
 Feynman diagrams and Lagrangians are complementary.
 
+\bibliographystyle{unsrt}
+\addcontentsline{toc}{section}{Bibliography}
+\bibliography{tm}
 
 \end{document}
