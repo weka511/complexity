@@ -1255,7 +1255,6 @@ Often can ignore parts of Lagrangian: e.g. quarks don't have much to do with ele
 
 \section{Field Lagrangians and path integrals}
 
-\subsection{Path Integral}
 
 This is the quantum mechanical version of the Principle of Least Action: minimize $\int \mathcal{L}(\dot{X},X) dt$. In a field theory $\mathcal{L}=\mathcal{L}(\phi,phi_\mu)$. Must be a scalar.
 
@@ -1360,6 +1359,51 @@ So we can sum up contributions $\frac{i^n}{n !}$ in (\ref{eq:path:integral:expan
 	\end{subfigure}
 \end{figure}
 
+Two particles.
 
-\url{https://youtu.be/q-QaaKCvDUs?t=3649}
+\begin{figure}[H]
+	\caption{Two particles}\label{fig:path:integral:2particles:1}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Quadratic term in (\ref{eq:path:integral:expanded}) used to advance two particles by one box}
+		\includegraphics[width=0.8\textwidth]{path-integral-2particles-1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Weight particle by $m^2$ from $\frac{m}{2}\phi^2$}\label{fig:path:integral:mass}
+		\includegraphics[width=0.8\textwidth]{path-integral-mass}
+	\end{subfigure}
+\end{figure}
+
+What goes in Lagrangian?
+
+\begin{align*}
+\mathcal{L}=& \frac{1}{2} (\partial_t \phi)^2 - \frac{1}{2} (\partial_x \phi)^2 + \underbrace{\frac{m}{2}\phi^2}_\text{ absorb and emit at same point} +\underbrace{g \phi^3}_\text{Figure \ref{fig:path:integral:cubic}}
+\end{align*}
+
+This weights path by $m^2$--Figure \ref{fig:path:integral:mass}. If not used we have theory of massless particles.
+
+\begin{figure}[H]
+	\caption{Some possibilities from $\phi^3$}
+	\begin{subfigure}{0.4\textwidth}
+	\caption{Particle absorbed and two new particles created.}\label{fig:path:integral:cubic}
+		\includegraphics[width=0.8\textwidth]{path-integral-cubic}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\caption{Particle emitted and later reabsorbed.}\label{fig:path:integral:cubic:split}
+		\includegraphics[width=0.8\textwidth]{path-integral-cubic-split}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\caption{Electron emits and absorbs photon.}\label{fig:path:integral:cubic:split1}
+		\includegraphics[width=0.5\textwidth]{path-integral-cubic-split1}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\caption{More complex version of Figure \ref{fig:path:integral:cubic:split1}.}\label{fig:path:integral:cubic:split2}
+		\includegraphics[width=0.5\textwidth]{path-integral-cubic-split2}
+	\end{subfigure}
+\end{figure}
+
+How come answer not infinite? Powers of coefficients from Lagrangian $(g)$ appear with different powers; hope they are small enough.
+
+Feynman diagrams and Lagrangians are complementary.
+
+
 \end{document}
