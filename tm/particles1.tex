@@ -1242,7 +1242,7 @@ $e$ is strength of interaction, probability of interaction $e^2$.
 
 Remember that energy conservation arose from integrating over all time, and momentum conservation from integrating over space. If we integrate (\ref{eq:basic:interaction}) over all space and all time,  energy and momentum will both be conserved, which rules out the process depicted in Figure \ref{fig:em:dirac5}.
 
-Protons, Neutrons, Pi mesons. Pions are scalar particles, and they come in 3 types, $\pi_+$, $\pi_-$, $\pi_0$. Protons are $\psi_p$, neutrons $\psi_n$.
+Protons, Neutrons, Pi mesons. Pions are scalar particles, and they come in 3 types, $\pi_+$, $\pi_-$, $\pi_0$.
 
 \begin{table}[H]
 	\begin{center}
@@ -1252,8 +1252,8 @@ Protons, Neutrons, Pi mesons. Pions are scalar particles, and they come in 3 typ
 			$\psi_p$, $\psi^\dagger_p$& create and annihilate proton\\ \hline
 		    $\psi_n$, $\psi^\dagger_n$& create and annihilate neutron\\ \hline
 			$\pi_+$& annihilate pion\\ \hline
-			$\pi_+$&annihilate pion\\ \hline
-			$\pi_+$&annihilate pion\\ \hline
+			$\pi_-$&annihilate pion\\ \hline
+			$\pi_0$&annihilate pion\\ \hline
 			$\psi^\dagger_p \psi_n \pi_+$&Absorb pion and neutron, emit proton\\ \hline
 			$\psi^\dagger_n \psi_p \pi_-$&Absorb pion and proton, emit neutron\\ \hline
 			$\psi^\dagger_p \psi_p \pi_0$&Absorb pion and proton, emit proton\\ \hline
@@ -1275,7 +1275,7 @@ The fundamental process of course involve quarks; if energy is high enough to br
 	\end{subfigure}
 \end{figure}
 
-Lagrangian describes things that happen at a point, or a pair of neighbouring points. Figure \ref{fig:proton:electron:photon} shows an interaction arising from a product of terms. There is no action at a distance.
+The Lagrangian describes things that happen at a point, or a pair of neighbouring points. Figure \ref{fig:proton:electron:photon} shows an interaction arising from a product of terms. There is no action at a distance.
 \begin{figure}[H]
 	\caption[Proton photon electron interaction]{Proton photon electron interaction--product of two separate terms in Lagrangian}\label{fig:proton:electron:photon}
 	\includegraphics[width=0.8\textwidth]{proton-electron-photon}
@@ -1304,7 +1304,7 @@ This is the quantum mechanical version of the Principle of Least Action: minimiz
 
 Action: $\mathcal{A}=\int dx^4 \mathcal{L}$. Integrate from initial to final.
 
-Imagine that particle is injected at $(x,t)$: what is amplitude, it will be found at $(x^\prime,t^\prime)$?
+Imagine that particle is injected at $(x,t)$: what is amplitude that particle will be found at $(x^\prime,t^\prime)$?
 
 Feynman's rule: $\sum e^{-\frac{i}{\hslash} \int \mathcal{L} dt}$, where the sum is taken over all classically possible histories--Figure \ref{fig:sum:histories}--i.e. they can not go back in time for non-relativistic QM. This gives amplitude, which needs to be squared for probabilities.
 
@@ -1321,7 +1321,7 @@ Imagine starting systems with field $\phi(x)$, and asking for probability of $\p
 	\includegraphics[width=0.8\textwidth]{path-integral1}
 \end{figure}
 
-There is a duality between fields and particles. What if we specify field quanta (particles)? Answer involve path integral. Start by partitioning space into cells--Figure \ref{fig:path-integral2}--then compute $\Pi(1-i\mathcal{L}a^4)$, where $a^4$ is volume of a cell.
+There is a duality between fields and particles. What if we specify field quanta (particles)? The answer involves a path integral. Start by partitioning space into cells--Figure \ref{fig:path-integral2}--then compute $\Pi(1-i\mathcal{L}a^4)$, where $a^4$ is volume of a cell.
 
 \begin{align*}
 	1 + \epsilon \approx &e^\epsilon\\
@@ -1337,9 +1337,7 @@ There is a duality between fields and particles. What if we specify field quanta
 	\includegraphics[width=0.8\textwidth]{path-integral2}
 \end{figure}
 
-Our question is now: if initial condition matches our initial configuration of particles, and final condition matches desired configuration, what is the amplitude? Figure (\ref{fig:path-integral3}) depicts a particle moving in one history.
-
-[Look up Lattice Gauge Theory]
+Our question is now: if initial condition matches our initial configuration of particles, and final condition matches desired configuration, what is the amplitude? Figure \ref{fig:path-integral3} depicts a particle moving in one history.
 
 \begin{figure}[H]
 	\caption[Particle moving]{Creation operator in one cell, annihilation in neighbour amounts to movement}\label{fig:path-integral3}
@@ -1348,10 +1346,10 @@ Our question is now: if initial condition matches our initial configuration of p
 
 There are terms in the Lagrangian associated with pairs of boxes--the derivatives:
 \begin{align*}
-	\frac{1}{2}(\partial_t \phi)^2 \rightarrow& \frac{1}{2}(\phi(t,x)-\phi(t^\prime,x))^2\\
-	\frac{1}{2}(\partial_x \phi)^2 \rightarrow& \frac{1}{2}(\phi(t,x)-\phi(t,x^\prime))^2 \numberthis \label{eq:phi:phi}
+	\frac{1}{2}(\partial_t \phi)^2 \rightarrow& \frac{1}{2}\frac{(\phi(t,x)-\phi(t^\prime,x))^2}{...}\\
+	\frac{1}{2}(\partial_x \phi)^2 \rightarrow& \frac{1}{2}\frac{(\phi(t,x)-\phi(t,x^\prime))^2}{...} \numberthis \label{eq:phi:phi}
 \end{align*}
-(\ref{eq:phi:phi}) gives rise to terms like:
+(\ref{eq:phi:phi}) gives rise to terms such as:
 \begin{alignat*}{2}
 	e^{- i \sum_{neighbours} \phi(x) \phi(x^\prime)}=1& -&& i \sum_{neighbours} \underbrace{\phi(x) \phi(x^\prime)}_\text{Figure \ref{fig:path-integral5}}\\
 &-&& \frac{1}{2!}\underbrace{\sum_{neighbours} \phi(x) \phi(x^\prime)\sum_{neighbours} \phi(x^{\prime\prime}) \phi(x^{\prime\prime\prime})}_\text{Figure \ref{fig:path-integral7}}\\
