@@ -22,7 +22,7 @@
 \maketitle
 
 \begin{abstract}
-These are my notes for the \emph{New Revolutions in Particle Physics 1} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind:particles2009:1}.
+These are my notes for the \emph{New Revolutions in Particle Physics 1} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind2009particles}.
 \end{abstract}
 
 \tableofcontents
@@ -573,21 +573,18 @@ What if $k$ negative? Then we have negative energy. But if we had arbitrarily ne
 
 Dirac said to fill all negative energy states: so lowest energy state has all negative energies filled. Now we can take an electron out, leaving hole. Now we have two positive energy objects, electron and positron.
 
-
-
-
 \section{Dirac equation and Higgs particles}
 
 \subsection{Dirac equation}
 
 The right-handed Dirac equation (\ref{eq:rh:dirac}) has the following solution:
 \begin{align*}
-\psi =& e^{i(kx-\omega t)} \text{, from (\ref{eq:rh:dirac:wave}), whence:}\\
+\psi_R =& e^{i(kx-\omega t)} \text{, from (\ref{eq:rh:dirac:wave}), whence:}\\
 V_g =& \frac{\omega}{k} \text{, from which}\\
 \frac{\partial \psi_R}{\partial t} + \frac{\partial \psi_R}{\partial x} =&0
 \end{align*}
 
-If $k<0$, {$\omega$<0}--negative energy, which is not a good thing. So we fill up the Dirac Sea. Then we can remove one electron, creating a hole in the Dirac Sea; particle and hole both have positive momentum and positive energy.
+If $k<0$, $\omega<0$, i.e. negative energy, which is not a good thing. So we fill up the Dirac Sea. Then we can remove one electron, creating a hole in the Dirac Sea; particle and hole both have positive momentum and positive energy.
 
 We now introduce left moving electrons.
 
@@ -607,8 +604,8 @@ Define $\psi=\begin{pmatrix}
 	\alpha =& \begin{pmatrix}
 		1&0\\
 		0&-1
-	\end{pmatrix} \text{ we will find the following useful:} \numberthis\label{eq:alpha}\\
-	\omega = \alpha k \numberthis \label{eq:dirac:1}
+	\end{pmatrix} \text{. We will find the following useful:} \numberthis\label{eq:alpha}\\
+	\omega =& \alpha k \numberthis \label{eq:dirac:1}
 \end{align*}
 
 Now we give the particles mass $m$.
@@ -626,7 +623,7 @@ Now we give the particles mass $m$.
 	\end{pmatrix} \text{ satisfies (\ref{eq:beta2}) and (\ref{eq:alpha:beta}).}
 \end{align*}
 
-Mass term couples equations for $\Psi_L$ and $\Psi_R$. Dirac equation is Lorentz covariant.
+The mass term couples equations for $\Psi_L$ and $\Psi_R$. Dirac equation is Lorentz covariant.
 
 Let us make particle stand still, i.e. $k=0 \implies \omega = \beta m$.
 
@@ -647,9 +644,9 @@ In the presence of the Higgs field, $\phi(x)$, the Dirac equation becomes:
 i \dot{\psi_R} =& -i \partial_x \psi_R + g \phi \psi_L\\
 i \dot{\psi_L} =& i \partial_x \psi_L + g \phi \psi_R \text{, which gives massless electron if $\phi=0$}
 \end{align*}
-What if lowest energy of Higgs favours a non-zero value, $\phi(x)=\phi$? The $m=g\phi$. This could come about as the result of non-lienar interactions between Boson and Fermions.
+What if the lowest energy of Higgs favours a non-zero value, $\phi(x)=\phi$? The $m=g\phi$. This could come about as the result of non-lienar interactions between Boson and Fermions.
 
-Higgs field is a Bosonic field, which has an energy from a potential, $V(\phi)$. There is a symmetry so $V(\phi)=V(-\phi)$.
+The Higgs field is a Bosonic field, which has an energy from a potential, $V(\phi)$. There is a symmetry so $V(\phi)=V(-\phi)$.
 
 \begin{figure}[H]
 	\caption[Higgs potential]{Higgs potential: reason for shape not fully understood at time of lecture.}
@@ -678,13 +675,13 @@ Dirac started with generalization.
 \omega^2 =& (\alpha_1 k_1 + \alpha_2 k_2 + \alpha_3 k_3 +\beta m)(\alpha_1 k_1 + \alpha_2 k_2 + \alpha_3 k_3 +\beta m) \text{, whence}\\
 \alpha_i^2 =& 1  \text{ and} \numberthis \label{eq:dirac:ac1}\\
 \beta^2 =& 1 \text{ and} \numberthis \label{eq:dirac:ac2}\\
-\{\alpha_i,\alpha_j]\} =& 2 \delta_{i,j} \numberthis \label{eq:dirac:ac3}\\
+\{\alpha_i,\alpha_j\} =& 2 \delta_{i,j} \numberthis \label{eq:dirac:ac3}\\
 \{\alpha_i,\beta\} =& 0 \numberthis \label{eq:dirac:ac4}
 \end{align*}
 
-Cannot satisfy these equations for 2 dimensional matrices. $4 \times 4$ are the first case.
+Theorem \ref{thm:dirac:anticommutation} shows 2 or 3 dimensional matrices cannot satisfy these equations; $4 \times 4$ is the first case.
 
-Here are the Dirac Matrices (not unique, but equivalent).
+Here is a set of Dirac Matrices (not unique, but equivalent--Theorem \ref{thm:dirac:anticommutation} presents a different set).
 
 \begin{align*}
 	\beta =& \begin{pmatrix}
@@ -713,7 +710,7 @@ Here are the Dirac Matrices (not unique, but equivalent).
 	\end{pmatrix} \numberthis \label{eq:alpha3:1}
 \end{align*}
 
-Partitioning, and using the Pauli matrices:
+Partitioning, and using the Pauli matrices (\ref{eq:pauli:x}), (\ref{eq:pauli:y}), and (\ref{eq:pauli:z}):
 \begin{align*}
 	\beta = \begin{pmatrix}
 		I&0\\
@@ -738,7 +735,7 @@ Partitioning, and using the Pauli matrices:
 
 \section{Angular momentum}
 
-Angular momentum is a vector, which points along the direction of rotation and follows height hand rule: fingers follow rotation, thumb points along vector.
+Angular momentum is a vector, which points along the direction of rotation and follows right hand rule: fingers follow rotation, thumb points along vector.
 
 There are two kinds:
 \begin{itemize}
@@ -746,28 +743,28 @@ There are two kinds:
 	\item spin angular momentum--angular momentum in frame where momentum is zero.
 \end{itemize}
 
-Is rotating nucleus the same object as non-rotating? Note that angular momentum is quantized, so it takes a discrete amount of energy to start rotation. Now an atom with too much rotation will fly apart--definitely different. 
+Is a rotating nucleus the same object as a non-rotating nucleus? Note that angular momentum is quantized, so it takes a discrete amount of energy to start rotation. Now an atom with too much rotation will fly apart, which is definitely different. 
 
-What about electron? Is it too small for us to rotate? The smaller the object, the more energy to rotate with given amount of angular momentum.Maybe electron too small.
+What about electron? Is it too small for us to rotate? The smaller the object, the more energy it needs to rotate with given amount of angular momentum.Maybe electron too small.
 
-Angular momentum for small object like electron characterizes object.
+Angular momentum for small object like electron \emph{characterizes} object.
 
-Let us invent a particle with definite angular momentum, a "spintron". Can it point in any direction? Yes, since laws of physics are rotationally invariant. It is quantized.
+Let us invent a particle with definite angular momentum, a "spintron". Can it point in any direction? Yes, since laws of physics are rotationally invariant. Angular momentum is quantized.
 
 Theory is mathematical: it seems abstract, but corresponds to experiment.
 
 Classically:
 \begin{align*}
-mr^2=&I\\
+I\triangleq&mr^2 \text{, moment of inertia}\\
 E=&\frac{L^2}{2I}\\
 =&\frac{L^2}{2mr^2}\\
-\rightarrow &\inf \text{ as } r \rightarrow 0 \text{ for discrete $L$}
+\rightarrow &\infty \text{ as } r \rightarrow 0 \text{ for discrete $L$}
 \end{align*}
 
-Figure \ref{fig:two:particles:rotating} depicts two particles rotating.
+Figure \ref{fig:two:particles:rotating} depicts two particles rotating: total momentum is zero, but there is angular momentum.
 \begin{figure}[H]
-	\caption[Two particles rotating]{Two particles rotating. Total momentum is zero, but there is angular momentum.}\label{fig:two:particles:rotating}
-	\includegraphics[width=0.8\textwidth]{two-particles-rotating}
+	\caption{Two particles rotating.}\label{fig:two:particles:rotating}
+	\includegraphics[width=0.6\textwidth]{two-particles-rotating}
 \end{figure}
 
 Orbital angular momentum of a point particle moving about origin. 
@@ -780,22 +777,30 @@ L_z =& x P_y - y P_x
 
 We will determine commutation relations of angular momentum operators.
 
-We have:
+We have \cite{susskind2014quantum}:
 \begin{align*}
 	[X_i,X_j] =& 0\\
 	[P_i,P_j]=& 0\\
 	[X_i,P_j]=& i \hslash \delta_{i,j}`
 \end{align*}
 
-\begin{align*}
+\begin{thm}[Commutators for angular momentum]
+	\begin{align*}
+	[L_x,L_y]=& i \hslash L_z \numberthis \label{eq:lx:ly}\\
+	[L_y,L_x]=& i \hslash L_x \numberthis \label{eq:ly:lz}\\
+	[L_z,L_x]=& i \hslash L_y \numberthis \label{eq:lz:lx}	
+	\end{align*}
+\end{thm}
+\begin{proof}
+	\begin{align*}
 	[L_x,L_y]=& [y P_z - z P_y,z P_x - x P_z]\\
-	=&[y P_z, z P_x] + [z P_y,x P_z] \text{, since other two terms vanish}\\
+	=&[y P_z, z P_x] -\cancel{[yP_z,xP_z]} -\bcancel{[zP_y,zP_x]} + [z P_y,x P_z] \\
 	=& y P_x[P_z,z] + P_y x[z,P_z]\\
 	=& -i \hslash y P_x + i \hslash P_y x\\
-	=& i \hslash L_z \text{. Similarly} \numberthis \label{eq:lx:ly}\\
-	[L_y,L_x]=& i \hslash L_x \numberthis \label{eq:ly:lz}\\
-	[L_z,L_x]	=& i \hslash L_y \numberthis \label{eq:lz:lx}	
-\end{align*}
+	=& i \hslash L_z \text{, which is (\ref{eq:lx:ly})} 
+	\end{align*}
+	The other two equations, (\ref{eq:ly:lz}) and (\ref{eq:lz:lx}) follow by cyclically permuting indices.
+\end{proof}
 
  These relationships:
 \begin{itemize}
@@ -807,14 +812,14 @@ We have:
 We focus on the $z$-axis ("quantization axis") and introduce two new quantities--raising and lowering operators. Choosing units where $\hslash-1$:
 
 \begin{align*}
-	L_\pm =& L_x \pm i L_y \numberthis \label{eq:L_pm} \\
+	L_\pm \triangleq& L_x \pm i L_y \numberthis \label{eq:L_pm} \\
 	[L_+,L_z] =& [Lx+i L_y,L_z]\\
 	=& -iL_y + i^2 L_x \text{, from (\ref{eq:lz:lx}) and (\ref{eq:lx:ly})}\\
 	=& -L_+ \text{ from (\ref{eq:L_pm}). Similarly} \numberthis \label{eq:L+:Lz}\\
 	[L_-,L_z] =& + L_- \numberthis \label{eq:L-:Lz}
 \end{align*}
 
-\begin{thm}[$L_+$ is a creation operator for $L_z$]
+\begin{thm}[$L_+$ is a creation operator for $L_z$]\label{thm:angular:momentum:creation}
 	\begin{align*}
 		L_z \ket{m} =& m \ket{m} \numberthis \label{eq:L:eigen}\\
 		\implies&\\
@@ -824,7 +829,8 @@ We focus on the $z$-axis ("quantization axis") and introduce two new quantities-
 
 \begin{proof}
 	\begin{align*}
-		L_+L_z-L_zL_+ =& -L_+ \text{ from (\ref{eq:L+:Lz}), whence:}\\
+		(\ref{eq:L+:Lz})\implies\\
+		L_+L_z-L_zL_+ =& -L_+ \text{, whence:}\\
 		L_zL_+ =& L_+L_z + L_+\ \text{ and}\\
 		L_z L_+ \ket{m} =& (L_+L_z + L_+)\ket{m}\\
 		=& L_+ (L_z + I)\ket{m}\\
@@ -837,41 +843,76 @@ We focus on the $z$-axis ("quantization axis") and introduce two new quantities-
 	\begin{align*}
 	L_z \ket{m} =& m \ket{m} \\
 	\implies&\\
-	L_z (L_- \ket{m}) =& (m-1) (L_+ \ket{m})
+	L_z (L_- \ket{m}) =& (m-1) (L_- \ket{m})
 	\end{align*}	
 \end{cor}
 
-Angular momentum spectrum is spaced by integers. How far can we bump it up before the object changes? Imagine a classical object with fixed $L^2$. We can maximize $L_z$  by pointing it upward.
+The angular momentum spectrum is spaced by integers. How far can we bump it up before the object changes? Imagine a classical object with fixed $L^2$. We can maximize $L_z$  by pointing it upward.
 
-Our theorem ignore possibility that $L^+m_{max}=0$ and $L^-m_{min}=0$. (c.f. harmonic oscillator). By relational invariance, $m_{min}=-m_{max}$. Must be symmetric about zero.
+Theorem \ref{thm:angular:momentum:creation} ignores the possibility that $L^+m_{max}=0$ and $L^-m_{min}=0$. (c.f. harmonic oscillator). By relational invariance, $m_{min}=-m_{max}$: Spectrum must be symmetric about zero.
 
+There are two possibilities for the spectrum:
 \begin{itemize}
 	\item $-m_{max},...,-1,0,1,...m_{max}$
 	\item $-m_{max},...,-\frac{1}{2},\frac{1}{2},...m_{max}$
 \end{itemize}
 
 \begin{defn}[Spin]
-	$\frac{1}{2}$ is known as the spin. It can be 0. There are no elementary particles known with spin 3, but there are atoms. Similarly no half-spin particle over $\frac{3}{2}$.
+	$m_max$ is known as the spin. It can be 0. There are no elementary particles known with spin 3, but there are atoms. Similarly no half-spin particle over $\frac{3}{2}$.
 \end{defn}
 
 What about $L^2$? If you know $L_z$ at maximum, there will be uncertainty in other two components, so $L^2$ is not quite $m_{max}^2$.
 
 \begin{align*}
-	L^2 =& L_- L_+ + L_z^2 \text{, classically, but not quantum because of commutator}\\
-	L^2 =& L_- L_+ + L_z^2 +L_z {, quantum}\\
+	L_- L_+ =& (L_x-iL_y)(L_x+iL_y)\\
+	=& L_x^2 +i L_x L_y -i L_y L_x + L_y^2\\
+	=& L_x^2 + L_y^2 + i[L_x,L_y]\\
+	=& L^2 - L_z^2 + i[Lx,Ly] \numberthis \label{eq:L-:L+}\text{, hence}\\
+	L^2 =& L_- L_+ + L_z^2 \text{, classically, but this is not true for quantum world. }\\
+	(\ref{eq:L-:L+}) \implies& \\
+	 L^2 =& L_- L_+ + L_z^2 -\underbrace{i[Lx,Ly]}_\text{$i^2L_z$ from (\ref{eq:lx:ly})}\text{, in the quantum world}\\
+	 =& L_- L_+ + L_z^2 +L_z\\
 	L^2 \ket{m_{max}}=& L_- L_+ \ket{m_{max}} + L_z^2 \ket{m_{max}} +L_z \ket{m_{max}}\\
 	=& (0 +m_{max}^2 + m_{max})\ket{m_{max}} \\
 	=& m_{max} (m_{max}+1)\ket{m_{max}}
 \end{align*}
 
-All states have same value of $\braket{L^2}$. Show $[L^2,L_i]=0$.
+All states have same value of $\braket{L^2}$. 
 
+\begin{thm}[$L^2$ commutes with all its components.]
+	 \begin{align*}
+	 [L^2,L_i]=0  \;\forall i \in {x,y,z}
+	 \end{align*}
+\end{thm}
+\begin{proof}
+	\begin{lemma}\label{lemma:comm:sq}[Commutator with square]
+		\begin{align*}
+			[A^2,B] =& A[A,B] + [A,B]A
+		\end{align*}
+	\end{lemma}
+	\begin{proof}[Proof of lemma]
+		\begin{align*}
+			[A^2,B] =& AAB - BAA\\
+			=& AAB - ABA +ABA -BAA\\
+			=& A[A,B] + [A,B]A
+		\end{align*}
+	\end{proof}
+	\begin{align*}
+	[L^2,L_x]=&[L_x^2,L_x] + [L_y^2,L_x] + [L_z^2,L_x] \numberthis \label{eq:L2lx}\\
+	[L_y^2,L_x] =&L_y[L_y,L_x] + [L_y,L_x]L_y \text{, using Lemma \ref{lemma:comm:sq}}\\
+	=& -i L_y L_z -i L_z L_y \text{ from (\ref{eq:ly:lz}). Similarly}\\
+	[L_z^2,L_x] = &L_z [L_z,L_x] + [L_z,L_x] L_z\\
+	=& i L_z L_y  + i L_y L_z \text{ from (\ref{eq:lz:lx}), whence (\ref{eq:L2lx}) yields}\\
+	[L^2,L_x]=&\cancel{[L_x^2,L_x] }+\bcancel{ [L_y^2,L_x]} + \bcancel{[L_z^2,L_x]}
+	=& 0
+	\end{align*}
+\end{proof}
 Consider spin $\frac{1}{2}$--call them $\ket{+}$ and  $\ket{-}$.
 
 \begin{align*}
 e^{i\theta} \alpha \ket{+} + e^{i\theta}\beta \ket{-} \text{, has probability $\alpha^2$ of being in $\ket{+}$}
 \end{align*}
-So can ignore 1 degree of freedom. $\alpha$ and $\beta$ have 2 degrees of freedom each. Phase eliminates one, and $alpha^2+\beta^2=1$ eliminates one other, leaving two. This is the same a number of degrees of freedom in direction.
+So can ignore 1 degree of freedom. $\alpha$ and $\beta$ have 2 degrees of freedom each. Phase eliminates one, and $\alpha^2+\beta^2=1$ eliminates one other, leaving two. This is the same as number of degrees of freedom in direction.
 
 Measured value is always $\pm \frac{1}{2}$; average may be zero; it behaves like a classical variable.
 
@@ -890,17 +931,17 @@ Take two half spin particles: composite behaves like a Boson--e.g. Hydrogen atom
 
 \subsection{Combining Fermions to make Bosons}
 
-Paradox: if two Fermions make a Boson, can we have two of these Bosons in the same state.
+Paradox: if two Fermions make a Boson, can we have two of these composite Bosons in the same state?
 
 Wave function of Boson is supposed to be symmetric:
 
 \begin{align*}
-	\psi(x,y) =&\psi(y,x) \text{e.g. }\\
+	\psi(x,y) =&\psi(y,x) \text{ e.g. }\\
 	\psi(x,y) =& \phi(x)\phi(y)\\
 	\psi(x,y) =&-\psi(y,x) \text{ for Fermions}
 \end{align*}
 
-Now imagine a wave function,$\psi$ , that isn't symmetric:
+Now imagine a wave function, $\psi(x,y)$, that isn't symmetric:
 \begin{align*}
 \psi(x,y)+& \psi(y,x) \text{ symmetric}\\
 \psi(x,y)-& \psi(y,x) \text{ antisymmetric}
@@ -909,7 +950,7 @@ Now imagine a wave function,$\psi$ , that isn't symmetric:
 Now imagine 4 Fermions--2 electons(X) and 2 protons(Y).
 
 \begin{align*}
-\psi(x_1,x_2,y_1,y_2) = &-\psi(x_2,x_2,y_1,y_2)\\
+\psi(x_1,x_2,y_1,y_2) = &-\psi(x_2,x_1,y_1,y_2)\\
 =& \psi(x_1,x_2,y_2,y_1)
 \end{align*} 
 
@@ -933,7 +974,7 @@ Both atoms can be in same place, but we can't find 2 electrons in same place.
 
 \subsection{Mathematics of Spin}
 
-Mathematics of Spin needed for Colour, Isospin, etc.
+Mathematics of Spin is needed for Colour, Isospin, etc.
 
 \subsubsection{Half spin}
 
@@ -945,6 +986,7 @@ We have two values along the z axis: $S_z = m \hslash$. We will use $S$ for spin
 	[S_z,S_x] =& i S_y  \numberthis \label{eq:sz:sx}\\
 	S_\pm =& S_x \pm S_y
 \end{align*}
+Compare with (\ref{eq:lx:ly}),  (\ref{eq:ly:lz}), and  (\ref{eq:lz:lx}).
 
 Can express spin as $\begin{pmatrix}
 \alpha\\
@@ -953,15 +995,15 @@ Can express spin as $\begin{pmatrix}
 
 Components are 2D matrices satisfying algebra (\ref{eq:sx:sy}), (\ref{eq:sy:sz}), and (\ref{eq:sz:sx}). They are not unique, but equivalent. We will use the Pauli spin\footnote{Without $\frac{1}{2}$ they are known as Pauli matrices.} matrices:
 \begin{align*}
-	S_x =& \frac{1}{2}\begin{pmatrix}
+	S_x =& \frac{1}{2}\begin{pmatrix} \numberthis \label{eq:pauli:x}
 		0&1\\
 		1&0
 	\end{pmatrix}\\
-	S_y =& \frac{1}{2}\begin{pmatrix}
+	S_y =& \frac{1}{2}\begin{pmatrix} \numberthis \label{eq:pauli:y}
 		0&-i\\
 		i&0
 	\end{pmatrix}\\
-	S_z =& \frac{1}{2}\begin{pmatrix}
+	S_z =& \frac{1}{2}\begin{pmatrix} \numberthis \label{eq:pauli:z}
 		1&0\\
 		0&-1
 	\end{pmatrix}
@@ -969,7 +1011,7 @@ Components are 2D matrices satisfying algebra (\ref{eq:sx:sy}), (\ref{eq:sy:sz})
 
 \subsubsection{Spin 1}
 
-Three states $\{-1,0,1\}$, a Boson. Are there $3\times3$ matrices satisfying (\ref{eq:sx:sy}), (\ref{eq:sy:sz}), and (\ref{eq:sz:sx})?
+We have three states $\{-1,0,1\}$, a Boson. Are there $3\times3$ matrices satisfying (\ref{eq:sx:sy}), (\ref{eq:sy:sz}), and (\ref{eq:sz:sx})?
 
 \begin{align*}
 	S_z = i \begin{pmatrix}
@@ -1032,14 +1074,14 @@ i \frac{\partial \psi}{\partial t} =& - i \alpha_i \frac{\partial \psi}{\partial
 Where the $\alpha_i$ and $\beta$ satisfy (\ref{eq:dirac:ac1}), (\ref{eq:dirac:ac2}), (\ref{eq:dirac:ac3}), and (\ref{eq:dirac:ac4}).
 
 
-\begin{thm}[Dirac anticommutation relations.] 
-	Equations (\ref{eq:dirac:ac1}), (\ref{eq:dirac:ac2}), (\ref{eq:dirac:ac3}), and (\ref{eq:dirac:ac4}) can be satisfied by suitably chosen $2\times4$ matrices, and they cannot be satisfies by $n \times n$ for $n<4$.
+\begin{thm}[Dirac anticommutation relations.]\label{thm:dirac:anticommutation} 
+	Equations (\ref{eq:dirac:ac1}), (\ref{eq:dirac:ac2}), (\ref{eq:dirac:ac3}), and (\ref{eq:dirac:ac4}) can be satisfied by suitably chosen $2\times4$ matrices, and they cannot be satisfied by $n \times n$ for $n<4$.
 \end{thm}
 
 One set of solutions, which is not the same as (\ref{eq:beta:1}), (\ref{eq:alpha1:1}), (\ref{eq:alpha2:1}), and (\ref{eq:alpha3:1}):
 \begin{align*}
 	\alpha_i=&\begin{pmatrix}
-		\sigma_1&0\\
+		\sigma_i&0\\
 		0&-\sigma_i
 	\end{pmatrix}\\
 	\beta =& \begin{pmatrix}
@@ -1048,8 +1090,8 @@ One set of solutions, which is not the same as (\ref{eq:beta:1}), (\ref{eq:alpha
 	\end{pmatrix}
 \end{align*}
 
-Two kinds of $2\times2$: 2 blocks of $2\times2$ matrices. This corresponds to the physic - there are two energies, positive and negative, and two spins.
-The 4 components are not a relativistic 4-vector! The easiest way to see this is to set momentum to zero, then $\alpha$s drop out.
+There are two kinds of $2\times2$: 2 blocks of $2\times2$ matrices. This corresponds to the physics - there are two energies, positive and negative, and two spins.
+The 4 components are not a relativistic 4-vector! The easiest way to see this is to set momentum to zero, then the $\alpha_i$ drop out.
 
 \begin{align*}
 i \frac{\partial \psi}{\partial t} =&  \beta m \psi \text{ for particle at rest.}\\
@@ -1074,19 +1116,19 @@ So we end up with two uncoupled equations! $2\times2$ is connected to positive a
 
 \section{Equations of motion of particles and fields}
 
-Equations of motion of fields that describe  particles. The fields all come from a Lagrangian. In quantum field theory, Lagrangian describes everything.
+The equations of motion of fields that describe  particles all come from a Lagrangian. In quantum field theory, Lagrangian describes everything.
 
 \subsection{Review of classical fields}
 
 \begin{align*}
 \mathcal{L}=& \mathcal{L}(\phi,\partial_t \phi, \partial_x \phi)\\
-=&\mathcal{L}(\phi,\partial_{\mu} \phi)\\
-\frac{\partial}{\partial t} \frac{\partial \mathcal{L}}{\partial \frac{\partial \phi}{\partial t}}+\sum_i \frac{\partial}{\partial x_i} \frac{\partial \mathcal{L}}{\partial \frac{\partial \phi}{\partial x_i}}=&\frac{\partial \mathcal{L}}{\partial \phi} \text{, equation of motion} \numberthis \label{eq:lagrange}
+=&\mathcal{L}(\phi,\partial_{\mu} \phi) \text{ in Minkowski space}\\
+\frac{\partial}{\partial t} \frac{\partial \mathcal{L}}{\partial \big(\frac{\partial \phi}{\partial t}\big)}+\sum_i \frac{\partial}{\partial x_i} \frac{\partial \mathcal{L}}{\partial \big(\frac{\partial \phi}{\partial x_i}\big)}=&\frac{\partial \mathcal{L}}{\partial \phi} \text{, equation of motion} \numberthis \label{eq:lagrange}
 \end{align*}
 
-If $\mathcal{L}$ depends on several fields, there will be a version of (\ref{eq:lagrange})  for each field.
+(If $\mathcal{L}$ depends on several fields, there will be a version of (\ref{eq:lagrange})  for each field.)
 
-Example.
+Example of $\mathcal{L}$.
 
 \begin{align*}
 	\mathcal{L} =& \frac{1}{2} (\frac{\partial \phi}{\partial t})^2 - \frac{1}{2} (\frac{\partial \phi}{\partial x})^2 - \frac{1}{2} (\frac{\partial \phi}{\partial y})^2 - \frac{1}{2} (\frac{\partial \phi}{\partial z})^2 - V(\phi)
@@ -1099,13 +1141,10 @@ Substituting in (\ref{eq:lagrange}):
 	\ddot{\phi} - \frac{\partial^2 \phi}{\partial x^2}  - \frac{\partial^2 \phi}{\partial y^2}  - \frac{\partial^2 \phi}{\partial z^2} =& - m^2 \phi \numberthis \label{eq:simplest:non:trivial}
 \end{align*}
 
-
-
-
-Differentiating a wave function $e^{-i \omega t} e^{-i k x}$ twice gives a factor $-\omega^2$. Substituting in (\ref{eq:simplest:non:trivial}):
+Differentiating a wave function $e^{-i \omega t} e^{-i k x}$ twice by $t$ gives a factor $-\omega^2$. Substituting in (\ref{eq:simplest:non:trivial}):
 \begin{align*}
--\omega^2 \cancel{\phi} + (k_x^2+k_y^2+k_z^s)\cancel{\phi} =& -m^2 \cancel{\phi}\\
--\omega^2  + (k_x^2+k_y^2+k_z^s) =& -m^2 \\
+-\omega^2 \cancel{\phi} - (k_x^2+k_y^2+k_z^2)\cancel{\phi} =& -m^2 \cancel{\phi}\\
+-\omega^2  - (k_x^2+k_y^2+k_z^2) =& -m^2 \\
 \omega^2 + P^2 = m^2
 \end{align*}
 
@@ -1117,14 +1156,14 @@ What about a more complex $V(\phi)$?
 	\ddot{\phi} - \frac{\partial^2 \phi}{\partial x^2}  =& - m^2 \phi - 3 g \phi^2
 \end{align*}
 
-Quadratic terms in Lagrangian lead to linear equations; higher powers lead to non-linearities--cannot superpose. May scatter.
+Quadratic terms in Lagrangian lead to linear equations; higher powers lead to non-linearities, so cannot superpose. May scatter.
 
 Consider two fields:
 \begin{align*}
 	\mathcal{L} =& \frac{1}{2}(\partial_{\mu} \phi)^2 + \frac{1}{2}(\partial_{\mu} \rho)^2 - \frac{m^2 \phi^2}{2} - \frac{M^2 \rho^2}{2} - \rho \phi^2\\
-	\ddot{\phi]} - \partial_x^2 \phi =& -m^2 \phi - \rho \phi
+	\ddot{\phi} - \partial_x^2 \phi =& -m^2 \phi - \rho \phi
 	\\
-	\ddot{\rho]} - \partial_x^2 \rho =& -m^2 \rho -phi^2
+	\ddot{\rho} - \partial_x^2 \rho =& -m^2 \rho -phi^2
 \end{align*}
 
 These are non-linear and coupled, so the particles scatter each other.
@@ -1147,16 +1186,18 @@ Lagrangian is what specifies a field theory.
 \subsection{Quantum Fields}
 
 Imagine Lagrangian containing $\phi^3$, where $\phi = (a_+ + a_-)$.
-Figure \ref{fig:phi:3:x} shows the kinds of interaction that may occur. Quadratic terms in Lagrangian give rise to motion, higher powers to interactions: 1 particle $\rightarrow$ 2, 2 particle3 $\rightarrow$ 1, 0 particles $\rightarrow$ 3, 3 particles $\rightarrow$ 0.
+Figure \ref{fig:phi:3:x} shows the kinds of interaction that may occur. Quadratic terms in Lagrangian give rise to motion, higher powers to interactions: 1 particle $\rightarrow$ 2, 2 particles $\rightarrow$ 1, 0 particles $\rightarrow$ 3, 3 particles $\rightarrow$ 0.
  
 \begin{figure}[H]
 	\caption{$\phi^3(x)$ gives rise to many possible interactions.}\label{fig:phi:3:x}
 	\includegraphics[width=0.8\textwidth]{phi-3-x}
 \end{figure}
 
+How to change position of particle. We need a pair of operators $\phi(x) \phi(x^\prime)$ to absorb particle at $x$, and re-emit at $x^\prime$--i.e. move particle
+
 \begin{align*}
-(\frac{\partial \phi}{\partial x})^2 =& \big( \phi(x) - \phi(x^\prime)\big)^2\\
-=& \phi(x)^2 + \phi(x^\prime)^2 - 2 \underbrace{ \phi(x) \phi(x^\prime)}_\text{absorbs particle at $x$, reemits at $x^\prime$--i.e. move particle}
+(\frac{\partial \phi}{\partial x})^2 =& \frac{\big( \phi(x) - \phi(x^\prime)\big)^2}{...}\\
+=& \frac{\phi(x)^2 + \phi(x^\prime)^2 - 2  \phi(x) \phi(x^\prime)}{...}
 \end{align*}
 
 Electromagnetic field and Dirac electron.
