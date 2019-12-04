@@ -60,7 +60,7 @@
 \maketitle
 
 \begin{abstract}
-These are my notes from the Statistical Mechanics lectures from Leonard Susskind's Theoretical Minimum series.
+These are my notes for the Statistical Mechanics lectures from Leonard Susskind's Theoretical Minimum series.
 \end{abstract}
 
 \tableofcontents
@@ -71,14 +71,14 @@ These are my notes from the Statistical Mechanics lectures from Leonard Susskind
 
 \section{Entropy and conservation of information}
 
-Statistical Mechanics is pre-modern physics, modern physics, and post-modern physics. The 2nd law of thermodynamics will probably outlast anything. Statistical mechanics and thermodynamics may not be as sexy as the Higgs Boson, but it is deeper.
+Statistical Mechanics is pre-modern physics, modern physics, and post-modern physics. The 2nd law of thermodynamics will probably outlast anything. Statistical mechanics and thermodynamics may not be as sexy as the Higgs Boson, but they are deeper.
 
 Classical and quantum mechanics are about perfect predictability. If you know initial point of a \gls{gls:closed:system} and the laws of motion, you know its future (in principle).
 
 This lecture focuses on the law of conservation of energy, the $-1^{th}$ law of physics. 
 
 \begin{thm}[Liouville's theorem]
-	The phase-space distribution function is constant along the trajectories of the system—-that is that the density of system points in the vicinity of a given system point travelling through phase-space is constant with time.
+	The phase-space distribution function is constant along the trajectories of the system—i.e. the density of system points in the vicinity of a given system point travelling through phase-space is constant with time.
 \end{thm}
 
 \begin{align*}
@@ -107,7 +107,6 @@ The First law of Thermodynamics is energy conservation. For a closed system:
 
 
 \section{Temperature}
-
 
 Temperature is really a measure of Energy. So the energy of one molecule of an Ideal Gas is given by:
 \begin{align*}
@@ -159,9 +158,7 @@ Consider two systems, $A$ and $B$, joined by a narrow pipe. Theorem \ref{thm:hea
 \end{proof}
 
 
-
 \section{Maximizing entropy}
-
 
 As the number of particles in a system grows, the distribution of states clumps more tightly around a mean. This is the Maxwell-Boltzmann distribution. The derivation requires Stirling's approximation and Lagrange multipliers.
 
@@ -172,7 +169,7 @@ C\triangleq\frac{N!}{\prod_{i}n_i!} \numberthis \label{eq:number:combinations}
  We want to maximize this subject to two constraints:
 \begin{align*}
 \sum_{i=1}^{N} n_i =& N \text{, total number of particles} \numberthis\label{eq:sum:probilities}\\
-\sum_{i=1}^{N} E_i n_i =& E N \text{, average energt.}\numberthis\label{eq:total:energy}
+\sum_{i=1}^{N} E_i n_i =& E N \text{, average energy.}\numberthis\label{eq:total:energy}
 \end{align*}
 
 We will find Lemma \ref{lemma:Stirling} useful.
@@ -228,8 +225,8 @@ p_i =& e^{-(1+\alpha)} e^{-\beta E_i}\\
 
 From (\ref{eq:sum:probilities}) and (\ref{eq:maximize:entropy})
 \begin{align*}
-1 =& \frac{1}{Z}  \sum_{i=1}^{N} e^-{\beta E_i}\\
-Z(\beta) =& \sum_{i=1}^{N} e^-{\beta E_i} \text{. $Z$ is known as the Partition Function.} \numberthis \label{eq:partition:function}
+1 =& \frac{1}{Z}  \sum_{i=1}^{N} e^{-\beta E_i}\\
+Z(\beta) =& \sum_{i=1}^{N} e^{-\beta E_i} \text{. $Z$ is known as the Partition Function.} \numberthis \label{eq:partition:function}
 \end{align*}
 
 \begin{thm}[$\beta$ is the inverse temperature]\label{thm:inverseT}
@@ -282,7 +279,7 @@ We will find the following theorem useful.
 		=& \pi \int_{0}^{\infty} e^{-z} dz\\
 		=& - \pi  e^{-z}\bigg\vert_{z=0}^{\infty}\\
 		=& \pi\text{, whence}\\
-		\int_{-\infty}^{\infty} e^{-x^2} dx =& \sqrt{\pi}\text{. Using \ref{eq:gauss_a}}\\
+		\int_{-\infty}^{\infty} e^{-x^2} dx =& \sqrt{\pi}\text{, from (\ref{eq:gauss_a})}\\
 		\int_{-\infty}^{\infty} e^{-a^2 x^2} dx =& \frac{\sqrt{\pi}}{a}
 	\end{align*}
 \end{proof}
@@ -315,11 +312,9 @@ E =& - \frac{\partial \log(Z)}{\partial \beta}\numberthis \label{eq:E:Z}\\
 \begin{itemize}
 	\item Motion is isotropic, even near wall. We know this from an honest use of statistical mechanics.
 	\item Give up intuition because it might not be correct ''ride the mathematics''.
-	\item Question : Once we have done the mathematics of a pro-
-	blem, can’t we check them with our intuition?
-	\item Answer : Yes we can, but what we are really doing is che-
-	cking our intuition not the mathematics.
-	\item All very great physicists are master of thermodynamics.''
+	\item Question: Once we have done the mathematics of a problem, can’t we check it with our intuition?
+	\item Answer: Yes we can, but what we are really doing is checking our intuition not the mathematics.
+	\item ''All very great physicists are master of thermodynamics.''
 \end{itemize}
 
 We want to determine the Equation of State.
@@ -366,8 +361,10 @@ Variables come in pairs, e.g. (V,P):
 NB. For most situations, S is a monotonic increasing function of E. As E increases, distribution gets broader, and S increases. 
 
 \begin{figure}[H]
-	\caption{Imagine piston is vertical}\label{fig:vertical:piston}
-	\includegraphics[width=0.9\textwidth]{vertical-piston}
+	\begin{center}
+		\caption{Imagine piston is vertical}\label{fig:vertical:piston}
+		\includegraphics[width=0.5\textwidth]{vertical-piston}
+	\end{center}
 \end{figure}
 
 Imagine piston is vertical.
@@ -395,6 +392,9 @@ Move piston slowly, and don't let energy in. Adiabatic: slowly, and no heat in o
 	Change volume \gls{gls:adiabatic}ally, the system will ride along the energy level: it will change, but not jump.
 \end{thm}
 
+\begin{proof}
+	TBP
+\end{proof}
 \begin{itemize}
 	\item One consequence of Theorem \ref{thm:adiabatic} is that the $p_i$ are fixed.
 	
