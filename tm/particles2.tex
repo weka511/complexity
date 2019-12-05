@@ -27,7 +27,7 @@ These are my notes for the \emph{New Revolutions in Particle Physics 2} lectures
 
 \tableofcontents
 \listoffigures
-
+\listoftables
 \section{Particles fields and forces}
 
 There is a triangle of concepts:
@@ -95,15 +95,86 @@ Add 2nd electron, then total charge is zero, giving nett attraction.
 	\item So classically, add 2nd charge, lower energy (creates force) by distorting wave function.
 	\item In QM, possibility of swapping between states lowers energy.
 \end{itemize}
-Can we think of Coulumb force in QM terms?
+Can we think of Coulumb force in QM terms? Consider single proton and electron: proton interacts with electromagnetic field, whose quanta are photons.
 
-\url{https://youtu.be/Igl8hE3Eac0?t=1769}
+\begin{itemize}
+	\item Classically we solve field equations;
+	\item In QM we think of emission and absorption of photons; this is what the Lagrangian tells us. One way to think of this is that the electron is a QM superposition of states: no photons, one with photon emitted,  one with two photons emitted, photon reabsorbed--Figure \ref{fig:2-1-electron-photons}. In Figure \ref{fig:2-1-electron-photons}, when electrons very far apart, energies just add. When they get closer, fields interact, or, in the language of Feynman diagrams, one electron absorbs electron emitted by the other--Figure \ref{fig:2-1-electron-photons-feynmann}.  Energy is no longer sum of energies of individual electrons, which gives rise to Coulomb force.
+\end{itemize}
 
-\subsection{Renormalization}
+\begin{figure}[H]
+	\caption{Emission and absorption of photons}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Electron absorbing and reabsorbing photons.}
+		\includegraphics[width=0.9\textwidth]{2-1-electron-photons0}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{The electron is a QM superposition of states}\label{fig:2-1-electron-photons}
+		\includegraphics[width=0.9\textwidth]{2-1-electron-photons}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Two Electrons absorbing and reabsorbing photons.}\label{fig:2-1-second-electron-photons}
+		\includegraphics[width=0.9\textwidth]{2-1-second-electron-photons}
+	\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+		\caption{Feynman diagram of Electrons absorbing and reabsorbing photons. Sometimes one electron absorbs photon emitted to other.}\label{fig:2-1-electron-photons-feynmann}
+		\includegraphics[width=0.9\textwidth]{2-1-second-electron-photons-feynman}
+	\end{subfigure}
+\end{figure}
 
-\subsection{The equivalence of particles, fields, and forces}
+In summary we have three ways of looking at forces:
 
-\subsection{The particle zoo}
+\begin{itemize}
+	\item Laws such as Coulomb;
+	\item Classical fields theory;
+	\item exchange of particles. Every particle can be exchanged, so every particle produces a force. Not just 4 forces! 
+\end{itemize}
+
+Standard Model is a mess. We don't understand why the particles are as they are. We understand some relationships. More types of particles than known relationships.
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Particles (Field symbol)}
+		\begin{tabular}{|l|l|l|r|l|r|}\hline
+			Name&Symbol&Type&Charge&B\#&Mass\\ \hline
+			photon&$\gamma$ A&B&0&0&0 \\ \hline
+			electron&$e+\pm \Psi_e\}$&F&-1&0&$0.15MeV$\\ \hline
+			Quark&q&F&&$\frac{1}{3}$&\\ \hline
+			d&q(Q) $\Psi_q$&F&$-\frac{1}{3}$&$\frac{1}{3}$&10meV\\ \hline
+			u&&F&$\frac{2}{3}$&$\frac{1}{3}$&5meV\\ \hline
+			s&&F&$-\frac{1}{3}$&$\frac{1}{3}$&100meV\\ \hline
+			c&&F&$\frac{2}{3}$&$\frac{1}{3}$&1GeV\\ \hline
+			b&&F&$-\frac{1}{3}$&$\frac{1}{3}$&5Gev\\ \hline
+			t&&F&$\frac{2}{3}$&$\frac{1}{3}$&170Gev\\ \hline
+			&&&&&\\ \hline
+			&&&&&\\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{enumerate}
+	\item Particle and Field usually have the same name
+	\item charge--electron is unit
+	\item eV
+	\item Proton has Baryon number 1.
+	\item 3 families of quarks. Why?
+\end{enumerate}
+
+\begin{figure}[H]
+	\caption{$\mathcal{L}$: $e \Psi_e^\dagger \Psi_e A$}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Fundamental electromagnetic process. Can rearrange.}
+		\includegraphics[width=0.9\textwidth]{2-1-em-process}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Fundamental electromagnetic process--exchange of particle.}
+		\includegraphics[width=0.9\textwidth]{2-1-em-process-feynman}
+	\end{subfigure}
+\end{figure}
+
+\url{https://youtu.be/Igl8hE3Eac0?t=4146}
+
+
 
 \section{Quantum chromodynamics}
 
