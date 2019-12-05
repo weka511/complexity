@@ -2,6 +2,8 @@
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket}
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
+\usepackage[toc,page]{appendix}
+
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 \newtheorem{thm}{Theorem}
@@ -22,7 +24,7 @@
 \maketitle
 
 \begin{abstract}
-These are my notes for the \emph{New Revolutions in Particle Physics 2} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind2009standard}.
+These are my notes for the \emph{New Revolutions in Particle Physics 2} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind2009standard}. Since this material predates the discovery of the Higgs Boson, there is an appendix \emph{Demystifying the Higgs Boson} \cite{susskind2010demystifing}.
 \end{abstract}
 
 \tableofcontents
@@ -32,7 +34,7 @@ These are my notes for the \emph{New Revolutions in Particle Physics 2} lectures
 
 There is a triangle of concepts:
 \begin{itemize}
-	\item particles (quanta of fundamental fields)\footnote{We are going to have to think very hard about what is an elementary particles and what is composite always be frustrated, always find some slipper region why your definition did not work.}
+	\item particles (quanta of fundamental fields)\footnote{We are going to have to think very hard about what is an elementary particles and what is composite always be frustrated, always find some slippery region why your definition did not work.}
 	\item Fields
 	\item Forces
 \end{itemize}
@@ -140,12 +142,12 @@ Standard Model is a mess. We don't understand why the particles are as they are.
 			photon&$\gamma$ A&B&0&0&0 \\ \hline
 			electron&$e+\pm \Psi_e\}$&F&-1&0&$0.15MeV$\\ \hline
 			Quark&q&F&&$\frac{1}{3}$&\\ \hline
-			d&q(Q) $\Psi_q$&F&$-\frac{1}{3}$&$\frac{1}{3}$&10meV\\ \hline
-			u&&F&$\frac{2}{3}$&$\frac{1}{3}$&5meV\\ \hline
-			s&&F&$-\frac{1}{3}$&$\frac{1}{3}$&100meV\\ \hline
-			c&&F&$\frac{2}{3}$&$\frac{1}{3}$&1GeV\\ \hline
-			b&&F&$-\frac{1}{3}$&$\frac{1}{3}$&5Gev\\ \hline
-			t&&F&$\frac{2}{3}$&$\frac{1}{3}$&170Gev\\ \hline
+			down&q(Q) $\Psi_q$&F&$-\frac{1}{3}$&$\frac{1}{3}$&10meV\\ \hline
+			up&&F&$\frac{2}{3}$&$\frac{1}{3}$&5meV\\ \hline
+			strange&&F&$-\frac{1}{3}$&$\frac{1}{3}$&100meV\\ \hline
+			charm&&F&$\frac{2}{3}$&$\frac{1}{3}$&1GeV\\ \hline
+			bottom&&F&$-\frac{1}{3}$&$\frac{1}{3}$&5Gev\\ \hline
+			top&&F&$\frac{2}{3}$&$\frac{1}{3}$&170Gev\\ \hline
 			&&&&&\\ \hline
 			&&&&&\\ \hline
 		\end{tabular}
@@ -160,8 +162,10 @@ Standard Model is a mess. We don't understand why the particles are as they are.
 	\item 3 families of quarks. Why?
 \end{enumerate}
 
+Figure \ref{table:mesons} depicts the way that electromagnetic processes emerge from a Lagrangian.
+
 \begin{figure}[H]
-	\caption{$\mathcal{L}$: $e \Psi_e^\dagger \Psi_e A$}
+	\caption{$\mathcal{L}$: $e \Psi_e^\dagger \Psi_e A$}\label{fig:fep}
 	\begin{subfigure}{0.45\textwidth}
 		\caption{Fundamental electromagnetic process. Can rearrange.}
 		\includegraphics[width=0.9\textwidth]{2-1-em-process}
@@ -172,8 +176,34 @@ Standard Model is a mess. We don't understand why the particles are as they are.
 	\end{subfigure}
 \end{figure}
 
-\url{https://youtu.be/Igl8hE3Eac0?t=4146}
+Three quarks build baryons, two mesons--Table \ref{table:mesons}.
+\begin{itemize}
+	\item neutron: ddu (slightly heavier)
+	\item proton: uud (self energy of energy partially offsets difference in quark masses)
+\end{itemize}
 
+Can we make an analogue of proton/neutron with strange quarks? Yes. E.g. sdu, ssu, uus -- Strange baryons.
+
+
+\begin{table}[H]
+	\begin{center}
+		\caption[Mesons: baryon number 0 - quark + anti-quark]{Mesons: baryon number 0 - quark + anti-quark. Note the two entangled pairs: $\frac{1}{\sqrt{2}}\big(\ket{\bar{u}u}\pm\ket{\bar{d}d}\big)$}\label{table:mesons}
+		\begin{tabular}{|l|l|l|r|} \hline
+			&Quarks&Charge&Mass\\ \hline
+			$\pi^-$&$\bar{u}d$&-1&$\approx140 meV$ \\ \hline
+			$\pi^+$&$u\bar{d}$&+1&$\approx140 meV$  \\ \hline
+			$\pi^0$&$\frac{1}{\sqrt{2}}\big(\ket{\bar{u}u}+\ket{\bar{d}d}\big)$&0&$\approx140 meV$  \\ \hline
+			$\eta$&$\frac{1}{\sqrt{2}}\big(\ket{\bar{u}u}-\ket{\bar{d}d}\big)$& 0&$\approx500 meV$ \\ \hline
+			&$\bar{u}s$&-1& \\ \hline
+			&$u\bar{s}$&+1& \\ \hline
+			&$\bar{d}s$&0& \\ \hline
+			&$d\bar{s}$&0& \\ \hline
+			&$\bar{s}s$&0& \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+We also have strange mesons ($K-mesans$).
 
 
 \section{Quantum chromodynamics}
@@ -214,7 +244,10 @@ Standard Model is a mess. We don't understand why the particles are as they are.
 \section{Renormalization and the running of coupling constants}
 
 
-
+\begin{appendices}
+	\section{Demystifying the Higgs Boson}
+	\cite{susskind2010demystifing}
+\end{appendices}
 
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{section}{Bibliography}
