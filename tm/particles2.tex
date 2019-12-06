@@ -169,11 +169,11 @@ Figure \ref{table:mesons} depicts the way that electromagnetic processes emerge 
 \begin{figure}[H]
 	\caption{$\mathcal{L}$: $e \Psi_e^\dagger \Psi_e A$}\label{fig:fep}
 	\begin{subfigure}{0.45\textwidth}
-		\caption{Fundamental electromagnetic process. Can rearrange.}
+		\caption{Fundamental electromagnetic process. Can rearrange.}\label{fig:fep1}
 		\includegraphics[width=0.9\textwidth]{2-1-em-process}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\caption{Fundamental electromagnetic process--exchange of particle.}
+		\caption{Fundamental electromagnetic process--exchange of particle.}\label{fig:fep2}
 		\includegraphics[width=0.9\textwidth]{2-1-em-process-feynman}
 	\end{subfigure}
 \end{figure}
@@ -283,7 +283,7 @@ In \cite{susskind2009particles}:
 	\end{center}
 \end{table}
 
-Isospin
+\subsection{Isospin}
 
 Natural energy of nucleus is a few hundred meV: up and down quarks. To a first approximation, masses are closer to each other, so they are analogous to spin. Thinking of up and down quarks as isomorphic to up and down spins, we invent the concept of iso spin.
 
@@ -300,7 +300,7 @@ Simplest object we can study is 3 quarks. We can make an object of isotopic spin
 	\item Assume that we can label quarks--${1,2,3}$
 	\item Quarks are Fermions, so we need to anti-symmetrize. For example the proton should be: $\underbrace{d_1}_\text{isospin $\frac{1}{2}$}\underbrace{(u_2u_3-u_3u_2)}_\text{isospin 0}$.
 	\item $\frac{1}{2}$: two states (isotopic spin doublet)
-	\item $\frac{3}{2}$. $uuu$ and $ddd$, $\uparrow\uparrow\uparrow$, $\downarrow\downarrow\downarrow$. There are 4 states for isospin $\frac{3}{2}$. NB, this $\Delta_\frac{3}{2}$ differs from the nucleon, as all spins are aligned.
+	\item $\frac{3}{2}$. $uuu$ and $ddd$, $\uparrow\uparrow\uparrow$, $\downarrow\downarrow\downarrow$. There are 4 states for isospin $\frac{3}{2}$--an isospin multiplet. NB, this $\Delta_\frac{3}{2}$ differs from the nucleon, as all spins are aligned. The $uud$ and $uud$ have an isospin component of $\frac{1}{2}$, even though total isotopic spin is $\frac{3}{2}$.
 \end{itemize}
 
 \begin{table}[H]
@@ -310,7 +310,7 @@ Simplest object we can study is 3 quarks. We can make an object of isotopic spin
 			Isospin&Quarks&Spin&Name&Charge&Mass\\ \hline
 			$\frac{1}{2}$&-$d_1u_2u_3$&$\frac{1}{2}$&proton&$+1$&940meV\\ \hline
 			$\frac{1}{2}$&$u(dd)$&$\frac{1}{2}$&neutron&0&940meV\\ \hline
-			$\frac{3}{2}$&uuu&$\frac{3}{2}$&$\Delta_\frac{3}{2}$&2&1200meV\\ \hline
+			$\frac{3}{2}$&uuu&$\frac{3}{2}$&$\Delta_\frac{3}{2}$&$+2$&1200meV\\ \hline
 			$\frac{3}{2}$&ddd&$\frac{3}{2}$&$\Delta_\frac{3}{2}$&-1&1200meV\\ \hline
 			$\frac{3}{2}$&uud&$\frac{3}{2}$&$\Delta_\frac{3}{2}$&+1&1200meV\\ \hline
 			$\frac{3}{2}$&udd&$\frac{3}{2}$&$\Delta_\frac{3}{2}$&0&1200meV\\ \hline
@@ -318,11 +318,95 @@ Simplest object we can study is 3 quarks. We can make an object of isotopic spin
 	\end{center}
 \end{table}
 
+Figure \ref{fig:decay:dalta} shows that $\Delta_\frac{3}{2}$ decays.
 
+\begin{figure}[H]
+	\begin{center}
+		\caption{Decay of a $\Delta_\frac{3}{2}$. Quarks can't go off on their own, so we need a quark-antiquark pair to balance. $\Delta_\frac{3}{2}\rightarrow p +\pi^+$: there is enough energy left.}\label{fig:decay:dalta}
+		\includegraphics[width=0.6\textwidth]{2-2-Delta-decay}
+	\end{center}
+\end{figure}
 
-\url{https://youtu.be/yy989li6xgY?t=1171}
+\subsection{Quantum chromodynamics}
 
-\url{https://youtu.be/yy989li6xgY?t=1755}
+We have a problem: $uuu$ represents three Fermions shose spins are all in the same direction! This violates the Pauli Exclusion Principle. Quarks must have another property, so the three quarks must have a label which is hidden from view and not apparent in experiments. This is called "colour", a totally arbitrary name which has nothing to do with ordinary colour: it is just a name. Values are Red, Blue, and Green. The important thing is that they have precisely 3 different values. The  $\Delta_\frac{3}{2}$ is important because of having 3 u or d. For proton we need to symmetrize:$\ket{d_R u_G u_B}+...$
+
+What holds quarks together? Electrons use protons / electromagnet field. Quarks use gluons: spin 1, so same polarization states, massless, but one big difference(later), and they jump back and forth. Quarks emit and absorb gluons.
+
+The fundamental electromagnetic process is depicted in Figure \ref{fig:fep1}. A photon is similar to electron and positron, e.g. it has the same properties: a sufficiently energetic photon can decay into an electron and positron pair.
+
+\begin{figure}[H]
+	\caption{Gluons}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Introducing the gluon}
+		\includegraphics[width=0.9\textwidth]{2-2-gluon1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{A gluon behaves a bit like a quark-antiquark pair: this the gluon as a fictitious quark-antiquark pair}
+		\includegraphics[width=0.9\textwidth]{2-2-gluon2}
+	\end{subfigure}
+
+\end{figure}
+
+There are 9 possible gluons (we will see later that there are actually only 8):
+\begin{align*}
+\begin{pmatrix}
+R\bar{R}&R\bar{G}&R\bar{B}\\
+G\bar{R}&G\bar{G}&G\bar{B}\\
+B\bar{R}&B\bar{G}&B\bar{B}
+\end{pmatrix}
+\end{align*}
+
+Gluons can interact with each other--Figure \ref{2-2-gluon6}.
+\begin{figure}[H]
+	\caption{The basic vertices of QCD}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Red quark changes to green: analogous to process with photon.}
+		\includegraphics[width=0.9\textwidth]{2-2-gluon3}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Red quark changes to green, using fictitious quark-antiquark pair}
+		\includegraphics[width=0.9\textwidth]{2-2-gluon4}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Second basic vertex, which has no analogue for photons. Fictitious quark-antiquark pairs represent gluons. This process makes QCD more complex and more interesting.}\label{2-2-gluon5}
+		\includegraphics[width=0.9\textwidth]{2-2-gluon5}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Second basic vertex, redrawn with gluons, instead of fictitious quark-antiquark pairs. Use Figure \ref{2-2-gluon5} to determine which combinations don't break any lines.}\label{2-2-gluon6}
+		\includegraphics[width=0.9\textwidth]{2-2-gluon6}
+	\end{subfigure}
+\end{figure}
+
+Forces. Photons cannot exchange photons, but gluons can exchange gluons, which means that there are forces between gluons--Figure \ref{fig:quarks:gluons:forces}. Two waves of gluons can deform each other; different parts of one wave of gluons can deform each other. Dynamics is non-linear.
+
+\begin{figure}[H]
+	\caption{Photons cannot exchange photons, but gluons can exchange gluons.}\label{fig:quarks:gluons:forces}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Force between quarks}
+		\includegraphics[width=0.9\textwidth]{2-2-gluon7}
+	\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+		\caption{Force between gluons}
+		\includegraphics[width=0.9\textwidth]{2-2-gluon8}
+	\end{subfigure}
+\end{figure}
+
+The only rule is: follow the lines and, if the line turn around, change to antiparticle.
+
+\begin{itemize}
+	\item Move gradually - whole thing
+	\item Move at high frequency, m only
+\end{itemize}
+
+Figure \ref{fig:2-2-mass1} shows that masses of objects are frequency dependent. In the same sense, masses of quarks depend on frequency. Move slowly and we drag gluons. High frequency get mass of quark. Concept of mass of quark is ambiguous: normally use high frequency mass
+\begin{figure}[H]
+	\caption[Mass with squishy thing attached]{Mass with squishy thing attached. If we move slowly we drag attachment, fast we just move mass.}\label{fig:2-2-mass1}
+	\includegraphics[width=0.8\textwidth]{2-2-mass1}
+\end{figure}
+
+\url{https://youtu.be/yy989li6xgY?t=3828}
+
 
 \section{Group theory – part 1}
 
