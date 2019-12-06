@@ -228,7 +228,49 @@ This is the theory of Quarks and gluons, and the things that they make.
 	Electrically neutral stuff than holds quarks and antiquarks together.
 \end{defn}
 
-\url{https://youtu.be/yy989li6xgY?t=176}
+Spin without group theory. We start with the basic commutation relations:\cite{susskind2009particles}
+\begin{align*}
+	[L_x,L_y] =& i \hslash L_z\\
+	[L_y,L_z] =& i \hslash L_x\\
+	[L_z,L_x] =& i \hslash L_y
+\end{align*}
+
+In \cite{susskind2009particles}:
+
+\begin{itemize}
+	\item We broke the symmetry by focusing on $L_z$.
+	\item We can measure only one $L_i$ at a time.
+	\item $L_i$ is quantized--$\hslash$.
+\end{itemize}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Spin multiplets: Spin $l$ denotes highest $L_z$.}
+		\begin{tabular}{|c|c|l|} \hline
+		$l$&Range of $L_z (Number=2l+1)$&Statistics\\ \hline
+		$0$&$0$& Boson\\ \hline
+		$\frac{1}{2}$&$\{-\frac{1}{2},\frac{1}{2}\}$& Fermion\\ \hline
+		$1$&$\{-1,0,1\}$&Boson \\ \hline
+		$\frac{3}{2}$&$\{-\frac{3}{2},-\frac{1}{2},\frac{1}{2},\frac{3}{2}\}$&Fermion \\ \hline
+		$2$&$\{-2,-1,0,1,2\}$&Boson \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\caption[Ways to put two spin $\frac{1}{2}$ particles together]{Ways to put two spin $\frac{1}{2}$ particles together. Consider whether particles could disappera with violating conservation of angular momentum.}
+		\begin{tabular}{|l|l|l|l|}\hline
+			&$l$&$L_z$&Could disappear?\\ \hline
+			$\ket{\uparrow\uparrow}$ &1&1&no--has $L_z$\\ \hline
+			$\ket{\downarrow\downarrow}$&1&-1&no--has $L_z$ \\ \hline
+			$\frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow}+\ket{\downarrow\uparrow})$ &1&0&no--has $L_x$\\ \hline
+			$\frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow}-\ket{\downarrow\uparrow})$ &0&0&yes\\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\url{https://youtu.be/yy989li6xgY?t=1171}
 
 \section{Group theory – part 1}
 
