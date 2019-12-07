@@ -34,7 +34,7 @@ These are my notes for the \emph{New Revolutions in Particle Physics 2} lectures
 
 \section{Particles fields and forces}
 
-There is a triangle of concepts:
+Figure \ref{fig:particles:fields:forces} shows a triangle of concepts:
 \begin{itemize}
 	\item particles (quanta of fundamental fields)\footnote{We are going to have to think very hard about what is an elementary particles and what is composite always be frustrated, always find some slippery region why your definition did not work.}
 	\item Fields
@@ -43,7 +43,7 @@ There is a triangle of concepts:
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Triangle of concepts: particles, fields, and forces}
+		\caption{Triangle of concepts: particles, fields, and forces}\label{fig:particles:fields:forces}
 		\includegraphics[width=0.5\textwidth]{ParticlesFieldsForces}
 	\end{center}
 \end{figure}
@@ -322,7 +322,7 @@ Figure \ref{fig:decay:dalta} shows that $\Delta_\frac{3}{2}$ decays.
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Decay of a $\Delta_\frac{3}{2}$. Quarks can't go off on their own, so we need a quark-antiquark pair to balance. $\Delta_\frac{3}{2}\rightarrow p +\pi^+$: there is enough energy left.}\label{fig:decay:dalta}
+		\caption[Decay of a $\Delta_\frac{3}{2}$]{Decay of a $\Delta_\frac{3}{2}$. Quarks can't go off on their own, so we need a quark-antiquark pair to balance. $\Delta_\frac{3}{2}\rightarrow p +\pi^+$: there is enough energy left.}\label{fig:decay:dalta}
 		\includegraphics[width=0.6\textwidth]{2-2-Delta-decay}
 	\end{center}
 \end{figure}
@@ -405,12 +405,26 @@ Figure \ref{fig:2-2-mass1} shows that masses of objects are frequency dependent.
 	\includegraphics[width=0.8\textwidth]{2-2-mass1}
 \end{figure}
 
-\url{https://youtu.be/yy989li6xgY?t=3828}
-
 
 \section{Group theory – part 1}
 
-TBP
+Rotations in space act on vectors: they rotate one vector to another. Rotations can be combined: they form a non-Abelian group. Figure \ref{fig:2-3-paramerize-rotation} depicts one way to parametrize rotation--axis $\vec{n}$ and angle $\theta$. Since $\vec{n}$ can be parametrized by two angles, latitude and longitude, we need 3 angles in total.
+
+\begin{figure}[H]
+	\caption{Paramerize rotation: axis $\vec{n}$ and angle $\theta$}\label{fig:2-3-paramerize-rotation}
+	\includegraphics[width=0.8\textwidth]{2-3-paramerize-rotation}
+\end{figure}
+
+Representations. Colour is representation of the rotation group.
+
+How do we construct a matrix representation of rotations? WE consider the 3D representation of the 3D rotation group.
+\begin{align*}
+\sum_j R_{ij}(\theta,\vec{n})V_j=&V_i^\prime \\
+R \vec{V} =&\vec{V^\prime} \text{. Now if $R$ is a rotation, it doesn't change length}\\
+\forall \vec{V} \; \sum_i V_i^2 =& \sum_i (V_i^\prime)^2\\
+\sum_{i,j,k} R_{ij} R_{ik} V_j V_k =& \sum_i V_i V_i \text{, i.e.}\\
+\sum_{i} R_{ij} R_{ik} =& \delta_{j,k}
+\end{align*}
 
 \section{Group theory – part 2}
 
