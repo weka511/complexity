@@ -406,7 +406,7 @@ Figure \ref{fig:2-2-mass1} shows that masses of objects are frequency dependent.
 \end{figure}
 
 
-\section{Group theory – part 1}
+\section{Group theory I}
 
 Rotations in space act on vectors: they rotate one vector to another. Rotations can be combined: they form a non-Abelian group. Figure \ref{fig:2-3-paramerize-rotation} depicts one way to parametrize rotation--axis $\vec{n}$ and angle $\theta$. Since $\vec{n}$ can be parametrized by two angles, latitude and longitude, we need 3 angles in total.
 
@@ -517,9 +517,77 @@ State of quark can be Red, Green, or Blue.
 We can multiply by a member of $SU(3)$. These have $18-9-1=8$ degrees of freedom. Every term in Lagrangian needs to be invariant under $SU(3)$.  
 
 
-\section{Group theory – part 2}
+\section{Group theory – II}
 
-TBP
+$SU(2)$ is not exactly the same as 1D rotations: there is a $2\rightarrow1$ correspondence, not  $1\rightarrow1$, since $-U$ and $U$ correspond to the same rotation. This is why the electron wave function is called a doublet.
+
+Generators are closely connected to infinitesimal elements. If you know structure of generators you can work out the whole structure. Generators let us figure out conservation laws.
+
+\begin{align*}
+	U =& I + i \epsilon T\\
+	I =& U^\dagger U + 1\\
+	=& I + i\epsilon(T - T^\dagger) - \epsilon^2 T T^\dagger\\
+	T =& T^\dagger \text{. Hermitian -- observable}\\
+	\det(U) =& 1\\
+	\implies&\\
+	Tr(t)=&0
+\end{align*}
+
+Since the rotation group has three parameters, the Ts span a 3D space. See (\ref{eq:pauli:x}), (\ref{eq:pauli:y}), and (\ref{eq:pauli:z}). Can figure out generators from commutation rules.
+
+In SU(3) we have $3\times3$ matrices, so $3\times3\times2=18$ real components; the matrix being unitary imposes 9 constraints, and unimodularity imposes one more, whence there are $18-9-1=8$ degrees of freedom.
+
+Combining representations to form new representations. E.g. we might compose spins to make a composite. E.g. combine 2 spin $\frac{1}{2}$ objects. We have 4 possible states: a basis in that space can be thought of as a spin 0 object plus 3 spin 1 objects. We can make ${-1,0,+1}$, but the zero can be done in 2 ways: so one of the zero spins must not be part of the spin 1 multiplet, it can only be spin 0 (ortho- and para-hydrogen).
+
+Representations of $SU(3)$.
+
+Triplet: $3\times3$ matrix acting on RGB vector, mixing up states, transforming to a quantum superposition.
+
+There are 3 important representations:
+
+\subsubsection{3 ("the 3")}
+
+\begin{align*}
+	\begin{pmatrix}
+		q_r\\
+		q_g\\
+		q_b
+	\end{pmatrix} \text{ field operator--creation}
+\end{align*} 
+
+\subsubsection{$\bar{3}$}
+
+Antiquarks, represented by complex conjugates (not Hermitian conjugates)/
+
+\begin{align*}
+	U q =& q^\prime\\
+	U^* q^* = q^\prime& 
+\end{align*}
+
+Electron and positron are complex conjugate representations of $U(1)$. ($e^{i\theta}\psi_e \rightarrow e^{-i\theta}\psi_p$).
+
+Generators of $\bar{3}$ are negatives of generators of $3$, so they carry negative colour.
+
+\subsubsection{$3 \otimes 3$}
+
+Combine two quarks ${RR, RG, RB,...}$
+
+\begin{align*}
+	3 \otimes 3 =& \underbrace{\bar{3}}_\text{combine antisymmetrically} \oplus \underbrace{6}_\text{combine symmetrically}\\
+	3 \otimes \bar{3} =& \underbrace{1}_\text{singlet: $R\bar{R}+G\bar{G}+B\bar{B}$} \oplus \underbrace{8}_\text{8 dimensional representation--generators!}
+\end{align*}
+
+\begin{align*}
+3 \otimes 3 \otimes 3 =& (3 \otimes 3) \otimes 3\\
+=& \big(\bar{3} \oplus 6 \big) \otimes 3\\
+=& \bar{3}   \otimes 3 + 6 \otimes 3\\
+=& \underbrace{1}_\text{anti-symmetrized superposed R, B, B} \oplus 8 \oplus 8 \oplus 10
+\end{align*}
+
+Gluon behaves a quark-antiquark under colour symmetry: it transforms under the 8 (octet).
+
+\url{https://youtu.be/n88Qe-aAAYE?t=2883}
+
 
 \section{Gauge fields and symmetry}
 
