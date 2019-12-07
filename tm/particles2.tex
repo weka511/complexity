@@ -473,22 +473,50 @@ U has 8 degrees of freedom, but (\ref{eq:unitary:2}) imposes 4 constraints, yiel
 	The group of unitary $N\times N$ matrices with determinant 1.
 \end{defn}
 
+For small rotations:
 \begin{align*}
-	S_x =& \frac{1}{2}\begin{pmatrix} \numberthis \label{eq:pauli:x}
+	U =& I + i \epsilon M \\
+	I =&U U^\dagger\\
+	 =& (I + i \epsilon M)(I - i\epsilon M^\dagger)\\
+	 =& I + i \epsilon(M - M^\dagger) - \epsilon^2 M^\dagger \text{, whence, discarding $\epsilon^2$}\\
+	 M - M^\dagger =& 0 \text{. We also need U to be unimodular}\\
+	1=&\det(U)\\
+	 =& \det( I + i \epsilon M)\\
+	=& 1 + i\epsilon(Tr(M)) \text{, whence:}\\
+	Tr(M) =&0
+\end{align*}
+But any traceless Hermitian $2\times2$ matrix can be written as a linear combination of the Pauli  matrices $\sigma_i$:
+\begin{align*}
+	\sigma_x =& \begin{pmatrix} \numberthis \label{eq:pauli:x}
 		0&1\\
 		1&0
 	\end{pmatrix}\\
-	S_y =& \frac{1}{2}\begin{pmatrix} \numberthis \label{eq:pauli:y}
+	\sigma_y =& \begin{pmatrix} \numberthis \label{eq:pauli:y}
 		0&-i\\
 		i&0
 	\end{pmatrix}\\
-	S_z =& \frac{1}{2}\begin{pmatrix} \numberthis \label{eq:pauli:z}
+	\sigma_z =& \begin{pmatrix} \numberthis \label{eq:pauli:z}
 		1&0\\
 		0&-1
 	\end{pmatrix}
 \end{align*}
 
-\url{https://youtu.be/DIEDkY2Y49s?t=824}
+State of quark can be Red, Green, or Blue. 
+\begin{align*}
+	\begin{pmatrix}
+		\alpha_1\\
+		\alpha_2\\
+		\alpha_3
+	\end{pmatrix} \quad	\begin{pmatrix}
+	\Psi_r\\
+	\Psi_g\\
+	\Psi_b
+	\end{pmatrix}
+\end{align*}
+
+We can multiply by a member of $SU(3)$. These have $18-9-1=8$ degrees of freedom. Every term in Lagrangian needs to be invariant under $SU(3)$.  
+
+
 \section{Group theory – part 2}
 
 TBP
