@@ -423,9 +423,72 @@ How do we construct a matrix representation of rotations? WE consider the 3D rep
 R \vec{V} =&\vec{V^\prime} \text{. Now if $R$ is a rotation, it doesn't change length}\\
 \forall \vec{V} \; \sum_i V_i^2 =& \sum_i (V_i^\prime)^2\\
 \sum_{i,j,k} R_{ij} R_{ik} V_j V_k =& \sum_i V_i V_i \text{, i.e.}\\
-\sum_{i} R_{ij} R_{ik} =& \delta_{j,k}
+\sum_{i} R_{ij} R_{ik} =& \delta_{j,k} \text{, or}\\
+R^T R =& I
 \end{align*}
 
+There are 3D representations of the rotation group. Can we think of them being related to quantum states? Spin describes angular momentum. A spin 1 particle (vector boson) can be described by a column vector containing amplitudes for the various components of spin. What about spin $\frac{1}{2}$ particle?
+
+\begin{align*}
+	\begin{pmatrix}
+		1\\
+		0
+	\end{pmatrix}=& \ket{u}\\
+	\begin{pmatrix}
+		0\\
+		1
+	\end{pmatrix}=& \ket{d}\\
+	\begin{pmatrix}
+		\alpha_1\\
+		\alpha_2
+	\end{pmatrix}=& \alpha_1 \ket{u} + \alpha_2 \ket{v} \text{, where $\alpha_1^2+\alpha_2^2=1$}
+\end{align*}
+
+We can represent rotation by a $2\times2$ matrix acting on spinors.
+
+\begin{align*}
+	\begin{pmatrix}
+		U_{11}&U_{12}\\
+		U_{21}&U_{22}
+	\end{pmatrix} 	\begin{pmatrix}
+		\alpha_1\\
+		\alpha_2
+	\end{pmatrix} =& \begin{pmatrix}
+		\alpha^\prime_1\\
+		\alpha^\prime_2
+	\end{pmatrix} \text{{. Now if}}\\
+	\alpha^*_1 \alpha_1 + \alpha^*_2 \alpha_2 =& 1 \text{ we want}\\
+	(\alpha^\prime_1)^* (\alpha^\prime_1) + (\alpha^\prime_2)^* (\alpha^\prime_2) =& 1 {, which gives}\\
+	(U^T)^* U =& I \text{, which can be written} \\
+	U^\dagger U =& I \numberthis \label{eq:unitary:2}
+\end{align*}
+
+U has 8 degrees of freedom, but (\ref{eq:unitary:2}) imposes 4 constraints, yielding 4 degrees of freedom. But 3D rotations only have 3 degrees of freedom. We set $\det(U)=1$ to give a 3 parameter group, $SU(2)$
+
+\begin{defn}[$U(N)$]
+	The group of unitary $N\times N$ matrices.
+\end{defn}
+
+\begin{defn}[$SU(N)$]
+	The group of unitary $N\times N$ matrices with determinant 1.
+\end{defn}
+
+\begin{align*}
+	S_x =& \frac{1}{2}\begin{pmatrix} \numberthis \label{eq:pauli:x}
+		0&1\\
+		1&0
+	\end{pmatrix}\\
+	S_y =& \frac{1}{2}\begin{pmatrix} \numberthis \label{eq:pauli:y}
+		0&-i\\
+		i&0
+	\end{pmatrix}\\
+	S_z =& \frac{1}{2}\begin{pmatrix} \numberthis \label{eq:pauli:z}
+		1&0\\
+		0&-1
+	\end{pmatrix}
+\end{align*}
+
+\url{https://youtu.be/DIEDkY2Y49s?t=824}
 \section{Group theory – part 2}
 
 TBP
