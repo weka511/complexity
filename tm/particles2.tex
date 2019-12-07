@@ -519,6 +519,7 @@ We can multiply by a member of $SU(3)$. These have $18-9-1=8$ degrees of freedom
 
 \section{Group theory – II}
 
+\subsection{Group Theory}
 $SU(2)$ is not exactly the same as 1D rotations: there is a $2\rightarrow1$ correspondence, not  $1\rightarrow1$, since $-U$ and $U$ correspond to the same rotation. This is why the electron wave function is called a doublet.
 
 Generators are closely connected to infinitesimal elements. If you know structure of generators you can work out the whole structure. Generators let us figure out conservation laws.
@@ -539,7 +540,7 @@ In SU(3) we have $3\times3$ matrices, so $3\times3\times2=18$ real components; t
 
 Combining representations to form new representations. E.g. we might compose spins to make a composite. E.g. combine 2 spin $\frac{1}{2}$ objects. We have 4 possible states: a basis in that space can be thought of as a spin 0 object plus 3 spin 1 objects. We can make ${-1,0,+1}$, but the zero can be done in 2 ways: so one of the zero spins must not be part of the spin 1 multiplet, it can only be spin 0 (ortho- and para-hydrogen).
 
-Representations of $SU(3)$.
+\subsection{Representations of $SU(3)$.}
 
 Triplet: $3\times3$ matrix acting on RGB vector, mixing up states, transforming to a quantum superposition.
 
@@ -586,9 +587,98 @@ Combine two quarks ${RR, RG, RB,...}$
 
 Gluon behaves a quark-antiquark under colour symmetry: it transforms under the 8 (octet).
 
-\url{https://youtu.be/n88Qe-aAAYE?t=2883}
+\subsection{Quantum Chromodynamics (resumed)}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Postulates of QCD}
+		\begin{tabular}{|l|c|p{8cm}|} \hline
+			particle&group& \\ \hline
+			Quark&3& \\ \hline
+			Antiquark&$\bar{3}$& \\ \hline
+			qluon&8&$3\otimes3=1\oplus1$, but the 1 does not exist in nature. It also doesn't mix with other components, so it is consistent to throw it away \\ \hline
+			Free particles&1&All observable particles transform as singlets: quark+antiquark, or 3 quarks.\\ \hline
+			&&Qluons play the same role in QCD as photons in QED, sourced from the 8 generators--Figure \ref{fig:2-4-quark-gluon-field}. Just as electric field of two particles has lower energy if total charge zero, gluon fields have lowest energy if total colour zero. But coupling constant higher, which is why we don't see free quarks.\\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{defn}[Baryon]
+	An object made of 3 quarks is called a baryon: they always have spin $\frac{1}{2}$, $\frac{3}{2},...$.
+\end{defn}
+
+\begin{defn}[Meson]
+	An object made of quark plus antiquark is called a meson.
+\end{defn}
+
+What if we combine gluons together, or gluons with quarks?
 
 
+
+\begin{defn}[Glueball]
+	Combine two gluons. $8 \otimes 8 = 63 \oplus 1$ -- 2 gluons. The singlet is known as a glueball.
+\end{defn}
+
+Hadrons:
+\begin{itemize}
+	\item Baryons
+	\item Mesons
+	\item Glueballs
+\end{itemize}
+
+$SU(3)$ singlets also give integer charge, as phases cancel.
+
+Back to $SU(2)$. We have $\Psi_i$. To make two particles. act twice $\Psi_i\Psi_j$, or $\Psi_i\Phi_j$(two different particles). We have a tensor-like object, having repeated indices.
+
+\begin{align*}
+	\begin{pmatrix}
+		.&.&.&.\\
+		.&.&.&.\\
+		.&.&.&.\\
+		.&.&.&.
+	\end{pmatrix} 	\begin{pmatrix}
+\Psi_u\Phi_u\\
+\Psi_u\Phi_d\\
+\Psi_d\Phi_u\\
+\Psi_d\Phi_d
+\end{pmatrix} 
+\end{align*}
+ mixes things up, but we find
+\begin{align*}
+    \Psi_u\Phi_d-\Psi_d\Phi_u \text{, unchanged --singlet}	\\
+    \text{The next 3 mix among themselves and behave like a spin 1 object, the 3.}\\
+	\begin{cases}
+		 \Psi_u\Phi_d+\Psi_d\Phi_u\\
+		\Psi_u\Phi_u\\
+		\Psi_d\Phi_d
+	\end{cases}
+\end{align*}
+
+In the right basis:
+\begin{align*}
+	\begin{pmatrix}
+		1&0&0&0\\
+		0&.&.&.\\
+		0&.&.&.\\
+		0&.&.&.
+	\end{pmatrix}
+\end{align*}
+\url{https://youtu.be/n88Qe-aAAYE?t=3173}
+
+
+The 8 gluons aren't neutral, as they have colour. The carry large amounts of energy, and don't appear free. Gluons can interfere with each other, which is why QCD is more complicated than QED.
+ 
+\begin{figure}[H]
+	\caption{Why QCD is more complicated than QED}
+	\begin{subfigure}{0.45\textwidth}
+		\caption[Quark surrounded by Gluon Field]{Quark surrounded by Gluon Field: there are 8 such fields, which transform according to the 8.}\label{fig:2-4-quark-gluon-field}
+		\includegraphics[width=0.9\textwidth]{2-4-quark-gluon-field}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Since the fields of \ref{fig:2-4-quark-gluon-field} have colour, they attract and form tubes.}
+		\includegraphics[width=0.9\textwidth]{2-4-quark-gluon-field-tubes}
+	\end{subfigure}
+\end{figure}
 \section{Gauge fields and symmetry}
 
 TBP
