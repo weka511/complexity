@@ -407,25 +407,28 @@ Figure \ref{fig:2-2-mass1} shows that masses of objects are frequency dependent.
 \end{figure}
 
 
-\section{Group Theory I}
+\section{Group Theory I: Group Representations}
 
 Rotations in space act on vectors: they rotate one vector to another. Rotations can be combined: they form a non-Abelian group. Figure \ref{fig:2-3-paramerize-rotation} depicts one way to parametrize rotation--axis $\vec{n}$ and angle $\theta$. Since $\vec{n}$ can be parametrized by two angles, latitude and longitude, we need 3 angles in total.
 
 \begin{figure}[H]
-	\caption{Parametrize rotation: axis $\vec{n}$ and angle $\theta$}\label{fig:2-3-paramerize-rotation}
-	\includegraphics[width=0.8\textwidth]{2-3-paramerize-rotation}
+	\begin{center}
+		\caption{Parametrize rotation: axis $\vec{n}$ and angle $\theta$}\label{fig:2-3-paramerize-rotation}
+		\includegraphics[width=0.8\textwidth]{2-3-paramerize-rotation}
+	\end{center}
 \end{figure}
 
-Representations. Colour is representation of the rotation group.
+Colour is a representation of the rotation group.
 
-How do we construct a matrix representation of rotations? WE consider the 3D representation of the 3D rotation group.
+How do we construct a matrix representation of rotations? 
+
 \begin{align*}
-\sum_j R_{ij}(\theta,\vec{n})V_j=&V_i^\prime \\
-R \vec{V} =&\vec{V^\prime} \text{. Now if $R$ is a rotation, it doesn't change length}\\
-\forall \vec{V} \; \sum_i V_i^2 =& \sum_i (V_i^\prime)^2\\
-\sum_{i,j,k} R_{ij} R_{ik} V_j V_k =& \sum_i V_i V_i \text{, i.e.}\\
-\sum_{i} R_{ij} R_{ik} =& \delta_{j,k} \text{, or}\\
-R^T R =& I
+	\sum_j R_{ij}(\theta,\vec{n})V_j=&V_i^\prime \\
+	R \vec{V} =&\vec{V^\prime} \text{. Now if $R$ is a rotation, it doesn't change length}\\
+	\forall \vec{V} \; \sum_i V_i^2 =& \sum_i (V_i^\prime)^2\\
+	\sum_{i,j,k} R_{ij} R_{ik} V_j V_k =& \sum_i V_i V_i \text{, i.e.}\\
+	\sum_{i} R_{ij} R_{ik} =& \delta_{j,k} \text{, or}\\
+	R^T R =& I
 \end{align*}
 
 There are 3D representations of the rotation group. Can we think of them being related to quantum states? Spin describes angular momentum. A spin 1 particle (vector boson) can be described by a column vector containing amplitudes for the various components of spin. What about spin $\frac{1}{2}$ particle?
@@ -459,48 +462,77 @@ We can represent rotation by a $2\times2$ matrix acting on spinors.
 		\alpha^\prime_2
 	\end{pmatrix} \text{{. Now if}}\\
 	\alpha^*_1 \alpha_1 + \alpha^*_2 \alpha_2 =& 1 \text{ we want}\\
-	(\alpha^\prime_1)^* (\alpha^\prime_1) + (\alpha^\prime_2)^* (\alpha^\prime_2) =& 1 {, which gives}\\
+	(\alpha^\prime_1)^* (\alpha^\prime_1) + (\alpha^\prime_2)^* (\alpha^\prime_2) =& 1 \text{, which gives}\\
 	(U^T)^* U =& I \text{, which can be written} \\
 	U^\dagger U =& I \numberthis \label{eq:unitary:2}
 \end{align*}
 
-U has 8 degrees of freedom, but (\ref{eq:unitary:2}) imposes 4 constraints, yielding 4 degrees of freedom. But 3D rotations only have 3 degrees of freedom. We set $\det(U)=1$ to give a 3 parameter group, $SU(2)$
+$U$ has 8 degrees of freedom, but (\ref{eq:unitary:2}) imposes 4 constraints, yielding 4 degrees of freedom. But 3D rotations only have 3 degrees of freedom. We set $\det(U)=1$ to give a 2 parameter group, $SU(2)$
 
 \begin{defn}[$U(N)$]
 	The group of unitary $N\times N$ matrices.
 \end{defn}
 
 \begin{defn}[$SU(N)$]
-	The group of unitary $N\times N$ matrices with determinant 1.
+	The subgroup of $U(N)$ with determinant 1.
 \end{defn}
 
-For small rotations:
-\begin{align*}
-	U =& I + i \epsilon M \\
-	I =&U U^\dagger\\
-	 =& (I + i \epsilon M)(I - i\epsilon M^\dagger)\\
-	 =& I + i \epsilon(M - M^\dagger) - \epsilon^2 M^\dagger \text{, whence, discarding $\epsilon^2$}\\
-	 M - M^\dagger =& 0 \text{. We also need U to be unimodular}\\
-	1=&\det(U)\\
-	 =& \det( I + i \epsilon M)\\
-	=& 1 + i\epsilon(Tr(M)) \text{, whence:}\\
-	Tr(M) =&0
-\end{align*}
-But any traceless Hermitian $2\times2$ matrix can be written as a linear combination of the Pauli  matrices $\sigma_i$:
-\begin{align*}
-	\sigma_x =& \begin{pmatrix} \numberthis \label{eq:pauli:x}
+\begin{thm}[$SU(N)$]
+	Any small rotation in $SU(N)$ can be expressed as:
+	\begin{align*}
+		U =& I + i \epsilon M \text{, where $M$ is a linear combination of the Pauli matrices $\sigma_i$}\\
+		\sigma_x =& \begin{pmatrix} \numberthis \label{eq:pauli:x}
 		0&1\\
 		1&0
-	\end{pmatrix}\\
-	\sigma_y =& \begin{pmatrix} \numberthis \label{eq:pauli:y}
+		\end{pmatrix}\\
+		\sigma_y =& \begin{pmatrix} \numberthis \label{eq:pauli:y}
 		0&-i\\
 		i&0
-	\end{pmatrix}\\
-	\sigma_z =& \begin{pmatrix} \numberthis \label{eq:pauli:z}
+		\end{pmatrix}\\
+		\sigma_z =& \begin{pmatrix} \numberthis \label{eq:pauli:z}
 		1&0\\
 		0&-1
-	\end{pmatrix}
-\end{align*}
+		\end{pmatrix}
+	\end{align*}
+\end{thm}
+
+\begin{proof}
+	\begin{lemma}[Determinant and Trace]\label{lemma:det:Tr}
+		\begin{align*}
+		\det( I + i \epsilon M) =& 1 + i\epsilon(Tr(M)) + O(\epsilon^2)
+		\end{align*}
+	\end{lemma}
+	\begin{proof}
+		TBP
+	\end{proof}
+	\begin{lemma}[Traceless Hermitian $2\times2$ matrix]\label{lemma:traceless:22}
+		But any traceless Hermitian $2\times2$ matrix can be written as a linear combination of the Pauli  matrices.
+	\end{lemma}
+	\begin{proof}
+		content...
+	\end{proof}
+
+	For small rotations:
+	\begin{align*}
+	U =& I + i \epsilon M \text{. Now}\\
+	I =&U U^\dagger \text{ from (\ref{eq:unitary:2}), so}\\
+	=& (I + i \epsilon M)(I - i\epsilon M^\dagger) \text{, which expands to}\\
+	=& I + i \epsilon(M - M^\dagger) - \epsilon^2 M^\dagger \text{. If we discard $O(\epsilon^2)$}\\
+	M - M^\dagger =& 0 \text{, i.e. M is Hermitean.}
+	\end{align*}
+	We also need U to be unimodular:
+	\begin{align*}
+	1=&\det(U)\\
+	=& \det( I + i \epsilon M) \text{. Now, using Lemma \ref{lemma:det:Tr}}\\
+	=& 1 + i\epsilon(Tr(M)) \text{, whence:}\\
+	Tr(M) =&0
+	\end{align*}
+	
+	The result follows from Lemma \ref{lemma:traceless:22}.
+	
+\end{proof}
+
+
 
 State of quark can be Red, Green, or Blue. 
 \begin{align*}
