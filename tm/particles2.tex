@@ -36,7 +36,7 @@ These are my notes for the \emph{New Revolutions in Particle Physics 2} lectures
 
 Figure \ref{fig:particles:fields:forces} shows a triangle of concepts:
 \begin{itemize}
-	\item particles (quanta of fundamental fields)\footnote{We are going to have to think very hard about what is an elementary particles and what is composite always be frustrated, always find some slippery region why your definition did not work.}
+	\item particles (quanta of fundamental fields)\footnote{We are going to have to think very hard about what is an elementary particles and what is composite; we will always be frustrated, always find some slippery region why our definition did not work.}
 	\item Fields
 	\item Forces
 \end{itemize}
@@ -702,6 +702,8 @@ Charges linked to lines of force. In Figure \ref{fig:2-4-quark-gluon-field}, fie
 
 \section{Gauge Fields and Symmetry}
 
+\subsection{Gauge Fields and Symmetry}
+
 Just about all of nature is controlled by gauge theories.
 
 The first and simplest gauge theory is Maxwell's theory. This has six components, the electric and magnetic fields, which are generated from a potential $A_\mu=(A_0,\vec{A})$. $A_0$ is the electric potential: $F_i=e \frac{\partial A_0}{\partial x_i}$. Electric field = $\nabla A_0$, Magnetic field $\vec{B}=\nabla \times \vec{A}$
@@ -738,9 +740,13 @@ Colour is an example.
 	\end{subfigure}
 \end{figure}
 
+\subsection{Strong and Weak Interactions}
+
 A Gauge theory also needs a coupling constant, analogous to the charge of the electron (amplitude for emitting photon). EM is weak: probability of emission is $\frac{1}{137}$.
 
 Set $c=1$, $\hslash=1$, then energy is in units of $\frac{1}{T}$: $1eV^{-1}=10^{-7}M$.
+
+\subsubsection{Strong and Electromagnetic Interactions}
 
 \begin{table}[H]
 	\begin{center}
@@ -758,6 +764,8 @@ Set $c=1$, $\hslash=1$, then energy is in units of $\frac{1}{T}$: $1eV^{-1}=10^{
 
 Times for Hadrons less spread out: QCD version of $\alpha$ much closer to 1 ($\frac{1}{5}$). This is why strong interactions are called strong.
 
+\subsubsection{Weak Interactions}
+
 \begin{table}[H]
 	\begin{center}
 		\caption{Examples of Weak decay}
@@ -769,7 +777,72 @@ Times for Hadrons less spread out: QCD version of $\alpha$ much closer to 1 ($\f
 	\end{center}
 \end{table}
 
-These are very slow: clearly something else is going on!
+These are very slow: clearly something else is going on! Table \ref{tab:QCD:rows} is relevant. \begin{itemize}
+	\item Colour symmetry, $SU(3)$, operates on rows; a $u$ remains a $u.$
+	\item $SU(2)$, a gauge symmetry, operates horizontally: $u\leftrightarrow d$;  $c\leftrightarrow s$;  $t\leftrightarrow b$.
+\end{itemize}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Quarks: Colour symmetry operates on first three rows, not columns}\label{tab:QCD:rows}
+		\begin{tabular}{|c|c|c|c|} \hline
+			&u d&c s&t b \\ \hline
+			red&x x&x x&x x\\ \hline
+			green&x x&x x&x x\\ \hline
+			blue&x x&x x&x x\\ \hline
+			leptons&$\nu_e$ e&$\nu_\mu$ $\mu$&$\nu_\tau$ $\tau$\\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+Charge: $u-d=\nu_e-e$
+
+Let's see whether we can find a gauge boson that combines particle and anti, and boson,  apply it to leptons, e.g, $e \bar{\nu_e}$. We have a gauge boson, $W$:
+
+ \begin{itemize}
+ 	\item $e \bar{\nu_e}\rightarrow W^- \rightarrow d\bar{u}$
+ 	\item $e^+ \nu_e\rightarrow W^+ \rightarrow \bar{d}u$
+ \end{itemize}
+
+Imagine that W are like photons or gluons.
+
+\begin{figure}[H]
+	\caption{W are like photons or gluons}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{$e \rightarrow\nu + W^-$}\label{fig:2-5-W1}
+		\includegraphics[width=0.9\textwidth]{2-5-W1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{$d \rightarrow u + W^-$}
+		\includegraphics[width=0.9\textwidth]{2-5-W2}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{$s \rightarrow c + W^-$}
+		\includegraphics[width=0.9\textwidth]{2-5-W3}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{$W^+$ and $W^-$ are antiparticles, so we can redraw \ref{fig:2-5-W1}}
+		\includegraphics[width=0.9\textwidth]{2-5-W4}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Examples of W boson mediated decays}
+	\begin{subfigure}{0.30\textwidth}
+		\caption{Pion decay (electron, muon, tau, and associated neutrino)}
+		\includegraphics[width=0.9\textwidth]{2-5-pion-decay}
+	\end{subfigure}
+	\begin{subfigure}{0.30\textwidth}
+		\caption{Muon decay}
+		\includegraphics[width=0.9\textwidth]{2-5-muon-decay}
+	\end{subfigure}
+	\begin{subfigure}{0.30\textwidth}
+		\caption{Neutron decay. W doesn't have enough energy to muon, unless we hit neutron really hard.}
+		\includegraphics[width=0.9\textwidth]{2-5-neutron-decay}
+	\end{subfigure}
+\end{figure}
+
+NB: can violate conservation for a very short time.
 
 \url{https://youtu.be/3g6RtyGjX3o?t=3379}
 
