@@ -1,5 +1,5 @@
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm}
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
 \usepackage[toc,page]{appendix}
@@ -216,12 +216,14 @@ This is the theory of Quarks and gluons, and the things that they make.
 	The things that Quarks and gluons make are called hadrons.
 \end{defn}
 
+
+
 \begin{defn}[Baryon]
-	Things made from 3 quarks are called baryons.
+	An object made of 3 quarks is called a baryon: they always have spin $\frac{1}{2}$, $\frac{3}{2},...$.
 \end{defn}
 
 \begin{defn}[Meson]
-	Mesons are quark-anti-quark pairs.
+	An object made of quark plus antiquark is called a meson; mesons are quark-anti-quark pairs.
 \end{defn}
 
 \begin{defn}[Gluon]
@@ -506,7 +508,7 @@ $U$ has 8 degrees of freedom, but (\ref{eq:unitary:2}) imposes 4 constraints, yi
 		TBP
 	\end{proof}
 	\begin{lemma}[Traceless Hermitian $2\times2$ matrix]\label{lemma:traceless:22}
-		But any traceless Hermitian $2\times2$ matrix can be written as a linear combination of the Pauli  matrices.
+		Any traceless Hermitian $2\times2$ matrix can be written as a linear combination of the Pauli  matrices.
 	\end{lemma}
 	\begin{proof}
 		content...
@@ -531,8 +533,6 @@ $U$ has 8 degrees of freedom, but (\ref{eq:unitary:2}) imposes 4 constraints, yi
 	The result follows from Lemma \ref{lemma:traceless:22}.
 	
 \end{proof}
-
-
 
 State of quark can be Red, Green, or Blue. 
 \begin{align*}
@@ -567,7 +567,7 @@ Generators are closely connected to infinitesimal elements. If you know structur
 	Tr(t)=&0
 \end{align*}
 
-Since the rotation group has three parameters, the Ts span a 3D space. See (\ref{eq:pauli:x}), (\ref{eq:pauli:y}), and (\ref{eq:pauli:z}). Can figure out generators from commutation rules.
+Since the 3D rotation group has three parameters, the Ts span a 3D space. See (\ref{eq:pauli:x}), (\ref{eq:pauli:y}), and (\ref{eq:pauli:z}). Can figure out generators from commutation rules.
 
 In SU(3) we have $3\times3$ matrices, so $3\times3\times2=18$ real components; the matrix being unitary imposes 9 constraints, and unimodularity imposes one more, whence there are $18-9-1=8$ degrees of freedom.
 
@@ -577,9 +577,9 @@ Combining representations to form new representations. E.g. we might compose spi
 
 Triplet: $3\times3$ matrix acting on RGB vector, mixing up states, transforming to a quantum superposition.
 
-There are 3 important representations:
+There are 3 important representations: 
 
-\subsubsection{3 ("the 3")}
+\subsubsection{The \bfseries{3}}
 
 \begin{align*}
 	\begin{pmatrix}
@@ -591,7 +591,7 @@ There are 3 important representations:
 
 \subsubsection{$\bar{3}$}
 
-Antiquarks, represented by complex conjugates (not Hermitian conjugates)/
+Antiquarks, represented by complex conjugates (not Hermitian conjugates)
 
 \begin{align*}
 	U q =& q^\prime\\
@@ -600,7 +600,7 @@ Antiquarks, represented by complex conjugates (not Hermitian conjugates)/
 
 Electron and positron are complex conjugate representations of $U(1)$. ($e^{i\theta}\psi_e \rightarrow e^{-i\theta}\psi_p$).
 
-Generators of $\bar{3}$ are negatives of generators of $3$, so they carry negative colour.
+Generators of $\bm{\bar{3}}$ are negatives of generators of {\bfseries 3}, so they carry negative colour.
 
 \subsubsection{$3 \otimes 3$}\label{sec:3:3:8}
 
@@ -615,7 +615,7 @@ Combine two quarks ${RR, RG, RB,...}$
 3 \otimes 3 \otimes 3 =& (3 \otimes 3) \otimes 3\\
 =& \big(\bar{3} \oplus 6 \big) \otimes 3\\
 =& \bar{3}   \otimes 3 + 6 \otimes 3\\
-=& \underbrace{1}_\text{anti-symmetrized superposed R, B, B} \oplus 8 \oplus 8 \oplus 10
+=& \underbrace{1}_\text{anti-symmetrized superposed R, G, B} \oplus 8 \oplus 8 \oplus 10
 \end{align*}
 
 Gluon behaves a quark-antiquark under colour symmetry: it transforms under the 8 (octet).
@@ -624,35 +624,25 @@ Gluon behaves a quark-antiquark under colour symmetry: it transforms under the 8
 
 \begin{table}[H]
 	\begin{center}
-		\caption{Postulates of QCD}
+		\caption{Postulates of QCD.}\label{table:postulates:QCD}
 		\begin{tabular}{|l|c|p{8cm}|} \hline
-			particle&group& \\ \hline
-			Quark&3& \\ \hline
-			Antiquark&$\bar{3}$& \\ \hline
-			qluon&8&$3\otimes3=1\oplus1$, but the 1 does not exist in nature. It also doesn't mix with other components, so it is consistent to throw it away \\ \hline
-			Free particles&1&All observable particles transform as singlets: quark+antiquark, or 3 quarks.\\ \hline
-			&&Qluons play the same role in QCD as photons in QED, sourced from the 8 generators--Figure \ref{fig:2-4-quark-gluon-field}. Just as electric field of two particles has lower energy if total charge zero, gluon fields have lowest energy if total colour zero. But coupling constant higher, which is why we don't see free quarks.\\ \hline
+			Particle&Group&Remarks \\ \hline
+			Quark&{\bfseries 3}& \\ \hline
+			Antiquark&$\bm{\bar{3}}$& \\ \hline
+			qluon&{\bfseries 8}&$\bm{3}\otimes\bm{3}=\bm{8}\oplus\bm{1}$, but the $\bm{1}$ does not exist in nature. It also doesn't mix with other components, so it is consistent to throw it away \\ \hline
+			Free particles&{\bfseries 1}&All observable particles transform as singlets: quark+antiquark, or 3 quarks.\\ \hline
+			&&Gluons play the same role in QCD as photons in QED, sourced from the 8 generators--Figure \ref{fig:2-4-quark-gluon-field}. Just as electric field of two particles has lower energy if total charge zero, gluon fields have lowest energy if total colour zero. But coupling constant higher, which is why we don't see free quarks.\\ \hline
 		\end{tabular}
 	\end{center}
 \end{table}
 
-\begin{defn}[Baryon]
-	An object made of 3 quarks is called a baryon: they always have spin $\frac{1}{2}$, $\frac{3}{2},...$.
-\end{defn}
-
-\begin{defn}[Meson]
-	An object made of quark plus antiquark is called a meson.
-\end{defn}
-
 What if we combine gluons together, or gluons with quarks?
 
-
-
 \begin{defn}[Glueball]
-	Combine two gluons. $8 \otimes 8 = 63 \oplus 1$ -- 2 gluons. The singlet is known as a glueball.
+	Combine two gluons. $\bm{8} \otimes \bm{8} = \bm{63} \oplus \bm{1}$ -- 2 gluons. The singlet is known as a glueball.
 \end{defn}
 
-Hadrons:
+There are 3 kinds of Hadrons:
 \begin{itemize}
 	\item Baryons
 	\item Mesons
@@ -661,7 +651,7 @@ Hadrons:
 
 $SU(3)$ singlets also give integer charge, as phases cancel.
 
-Back to $SU(2)$. We have $\Psi_i$. To make two particles. act twice $\Psi_i\Psi_j$, or $\Psi_i\Phi_j$(two different particles). We have a tensor-like object, having repeated indices.
+Back to $SU(2)$. We have $\Psi_i$. To make two particles act twice: $\Psi_i\Psi_j$, or $\Psi_i\Phi_j$(two different particles). We have a tensor-like object, having repeated indices.
 
 \begin{align*}
 	\begin{pmatrix}
@@ -676,12 +666,14 @@ Back to $SU(2)$. We have $\Psi_i$. To make two particles. act twice $\Psi_i\Psi_
 \Psi_d\Phi_d
 \end{pmatrix} 
 \end{align*}
- mixes things up, but we find
+ The operator mixes things up, but we find
 \begin{align*}
-    \Psi_u\Phi_d-\Psi_d\Phi_u \text{, unchanged --singlet}	\\
-    \text{The next 3 mix among themselves and behave like a spin 1 object, the 3.}\\
+    \Psi_u\Phi_d-\Psi_d\Phi_u \text{, unchanged --singlet}	
+\end{align*}
+The next 3 mix among themselves and behave like a spin 1 object, the {\bfseries 3}.
+\begin{align*}
 	\begin{cases}
-		 \Psi_u\Phi_d+\Psi_d\Phi_u\\
+		\Psi_u\Phi_d+\Psi_d\Phi_u\\
 		\Psi_u\Phi_u\\
 		\Psi_d\Phi_d
 	\end{cases}
@@ -699,12 +691,12 @@ In the right basis:
 
 
 
-The 8 gluons aren't neutral, as they have colour. The carry large amounts of energy, and don't appear free. Gluons can interfere with each other, which is why QCD is more complicated than QED.
+The 8 gluons aren't neutral, as they have colour. The carry large amounts of energy, and don't appear as free particles. Gluons can interfere with each other, which is why QCD is more complicated than QED--see Figure \ref{fig:QCD:QED}.
  
 \begin{figure}[H]
-	\caption{Why QCD is more complicated than QED}
+	\caption{Why QCD is more complicated than QED}\label{fig:QCD:QED}
 	\begin{subfigure}{0.45\textwidth}
-		\caption[Quark surrounded by Gluon Field]{Quark surrounded by Gluon Field: there are 8 such fields, which transform according to the 8.}\label{fig:2-4-quark-gluon-field}
+		\caption[Quark surrounded by Gluon Field]{Quark surrounded by Gluon Field: there are 8 such fields, which transform according to the {\bfseries 8}.}\label{fig:2-4-quark-gluon-field}
 		\includegraphics[width=0.9\textwidth]{2-4-quark-gluon-field}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
