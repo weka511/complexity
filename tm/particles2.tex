@@ -901,21 +901,21 @@ In Figure \ref{tab:QCD:rows} we have three symmetries: $SU(3) \otimes SU(2) \oti
 
 
 \begin{figure}[H]
-	\caption{Possible fates for q W boson}
-	\begin{subfigure}{0.6\textwidth}
+	\caption{Possible fates of a W boson}
+	\begin{subfigure}{0.5\textwidth}
 		\caption{Decay of a neutron. The $W$ line is the \emph{propagator}}\label{fig:2-6-W1}
-		\includegraphics[width=0.8\textwidth]{2-6-W1}
+		\includegraphics[width=\textwidth]{2-6-W1}
 	\end{subfigure}
 	\begin{subfigure}{0.4\textwidth}
 		\caption{A different fate for a W Boson: re-absorption}\label{fig:absorption:W:boson}
-		\includegraphics[width=0.8\textwidth]{2-6-W2}
+		\includegraphics[width=\textwidth]{2-6-W2}
 	\end{subfigure}
 \end{figure}
 
-The Propagator is a function of proper time between two points: $\Delta(ds)$, the distance between the two points. $g_w^2 \Delta$
+The Propagator is a function of proper time between two points: $\Delta(ds)$. Figure \ref{fig:2-6-propagator} shows the dependence. For small distance $\Delta(ds)$ is independent of mass, but the values differ  after a certain distance: $\Delta(ds)$ falls sharply to zero.
 
 \begin{figure}[H]
-	\caption[Propagator $\Delta(ds)$ as a function of distance.]{Propagator $\Delta(ds)$ as a function of distance. Black line is for zero mass, $\frac{1}{ds}$, red for non-zero.}
+	\caption[Propagator $\Delta(ds)$ as a function of distance.]{Propagator $\Delta(ds)$ as a function of distance. Black line is for zero mass, $\frac{1}{ds}$, red for non-zero.}\label{fig:2-6-propagator}
 	\includegraphics[width=0.8\textwidth]{2-6-propagator}
 \end{figure}
 
@@ -936,7 +936,7 @@ In an experiment, we know the momenta. We can think of propagator as function of
 \end{align*}
  $\tilde{\Delta}(k_w)$ will have its biggest value when $k_w=0$, so the most likely thing is to emit a low momentum W, which costs an amplitude of $\frac{1}{m_w^2}$. Amplitude for emitting $W$ and converting to electron plus neutrino is $\frac{g_w^2}{m_w^2}$: weak interactions are made weak because the mass of the W is large--about 100 protons! Probability is $\frac{g_w^4}{m_w^4}$.
  
- W is produced virtually. From the energy-time uncertainty principle, energy conservation can be violated briefly: $\delta T \delta E<\hslash$. There is not enough energy in neutron to make W, but it can briefly make a W, which must be destroyed again.\footnote{I have left out a discussion where Prof Susskind shows that trying to watch the virtual particle is doomed to failure: briefly the photon we send in to observe the phenomenon, need very high energy, as the phenomenon is very short lived; the high energy photon upsets the applecart.}
+ W is a virtual particle. From the energy-time uncertainty principle, energy conservation can be violated briefly: $\delta T \delta E<\hslash$. There is not enough energy in neutron to make a real W, but it can briefly make a virtual W, which must be destroyed again.\footnote{I have left out a discussion where Prof Susskind shows that trying to watch the virtual particle is doomed to failure: briefly the photon we send in to observe the phenomenon, need very high energy, as the phenomenon is very short lived; the high energy photon upsets the apple-cart.}
  
  We can verify (\ref{eq:Delta}) by creating high momentum particles in an accelerator.
  
@@ -949,16 +949,18 @@ In an experiment, we know the momenta. We can think of propagator as function of
  	\includegraphics[width=0.8\textwidth]{2-6-photons}
  \end{figure}
 
-The up quark and down quark go into each other by emitting a W? What group are we talking about? SU(2). But SU(2) has 3 generators; we are missing a gauge boson, $Z$.
+The up quark and down quark go into each other by emitting a W? What group are we talking about? SU(2). But SU(2) has 3 generators; we are missing a gauge boson, $Z$. [Check that this is discussed in a later lecture.]
 
 \subsection{Spontaneous symmetry breaking}
  
- One example is a bunch of spins that can either be up or down, e.g. classical coins, with an interaction so that energy is a minimum if they are all up or all down. There are two states of lowest energy, both ground states. Figure \ref{fig:2-6-sponteneous} shows how one spin can break symmetry. This is not the same as explicit symmetry breaking--having a bias, where H has different different from tail.
+ One example is a bunch of spins that can either be up or down, e.g. classical coins, with an interaction so that energy is less if spins parallel. There are two states of lowest energy, both ground states. Figure \ref{fig:2-6-sponteneous} shows how one spin can break symmetry. This is not the same as explicit symmetry breaking--having a bias, where H has different energy from T.
  
  Spontaneous symmetry breaking is deficient from explicit symmetry breaking, as the former can introduce domain walls.
  \begin{figure}[H]
- 	\caption[Spontaneous symmetry breaking]{We have one coin, a long way from the other, in known state. This introduces a slight difference between two aligned states: it becomes expensive to add a Tail.}\label{fig:2-6-sponteneous}
- 	\includegraphics[width=0.8\textwidth]{2-6-sponteneous}
+ 	\begin{center}
+ 		\caption[Spontaneous symmetry breaking]{We have one coin, a long way from the other, in known state. This introduces a slight difference between two aligned states: it becomes expensive to add a Tail.}\label{fig:2-6-sponteneous}
+ 		\includegraphics[width=0.8\textwidth]{2-6-sponteneous}
+ 	\end{center}
  \end{figure}
 
 Spontaneous symmetry breaking has an instability that can let the system go one way or another.
