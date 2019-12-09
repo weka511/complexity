@@ -882,6 +882,8 @@ Why so slow? Coupling constant?(No)
 
 \section{The Weak Interaction}
 
+\subsection{Why is the weak interaction so slow?}
+
 In Figure \ref{tab:QCD:rows} we have three symmetries: $SU(3) \otimes SU(2) \otimes U(1)$. We say that the Standard Model is a gauge theory based on  $SU(3) \otimes SU(2) \otimes U(1)$.
 
 \begin{table}[H]
@@ -896,14 +898,21 @@ In Figure \ref{tab:QCD:rows} we have three symmetries: $SU(3) \otimes SU(2) \oti
 	\end{center}
 \end{table}
 
-Why is weak interaction so slow?
+
 
 \begin{figure}[H]
-	\caption{Decay of a neutron. The $W$ line is the \emph{propagator}}\label{fig:2-6-W1}
-	\includegraphics[width=0.8\textwidth]{2-6-W1}
+	\caption{Possible fates for q W boson}
+	\begin{subfigure}{0.6\textwidth}
+		\caption{Decay of a neutron. The $W$ line is the \emph{propagator}}\label{fig:2-6-W1}
+		\includegraphics[width=0.8\textwidth]{2-6-W1}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\caption{A different fate for a W Boson: re-absorption}\label{fig:absorption:W:boson}
+		\includegraphics[width=0.8\textwidth]{2-6-W2}
+	\end{subfigure}
 \end{figure}
 
-Propagator is a function of proper time between two points: $\Delta(ds)$, the distance between the two points. $g_w^2 \Delta$
+The Propagator is a function of proper time between two points: $\Delta(ds)$, the distance between the two points. $g_w^2 \Delta$
 
 \begin{figure}[H]
 	\caption[Propagator $\Delta(ds)$ as a function of distance.]{Propagator $\Delta(ds)$ as a function of distance. Black line is for zero mass, $\frac{1}{ds}$, red for non-zero.}
@@ -921,9 +930,28 @@ Where does $\Delta$ decrease suddenly? Choose units where $c=\hslash=1$:
 
 $\Delta^2$ is probability particle can get that far.
 
-In an experiment, we know the momenta. We can think of propagator as function of position, or momentum--using Fourier transform--$\tilde{\Delta}(k_w)=\frac{1}{k_w^2+m_w^2}$. This will have its biggest value when $k_w=0$, so the most likely thing is to emit a low momentum W, which costs an amplitude of $\frac{1}{m_w^2}$. Amplitude for emitting $W$ and converting to electron plus neutrino is $\frac{g_w^2}{m_w^2}$: weak interactions are made weak because the mass of the W is large--about 100 protons! Probability is $\frac{g_w^4}{m_w^4}$.
+In an experiment, we know the momenta. We can think of propagator as function of position, or momentum--using Fourier transform:
+\begin{align*}
+\tilde{\Delta}(k_w)=\frac{1}{k_w^2+m_w^2} \numberthis \label{eq:Delta}
+\end{align*}
+ $\tilde{\Delta}(k_w)$ will have its biggest value when $k_w=0$, so the most likely thing is to emit a low momentum W, which costs an amplitude of $\frac{1}{m_w^2}$. Amplitude for emitting $W$ and converting to electron plus neutrino is $\frac{g_w^2}{m_w^2}$: weak interactions are made weak because the mass of the W is large--about 100 protons! Probability is $\frac{g_w^4}{m_w^4}$.
  
-\url{https://youtu.be/5rytN74EOi0?t=1418}
+ W is produced virtually. From the energy-time uncertainty principle, energy conservation can be violated briefly: $\delta T \delta E<\hslash$. There is not enough energy in neutron to make W, but it can briefly make a W, which must be destroyed again.\footnote{I have left out a discussion where Prof Susskind shows that trying to watch the virtual particle is doomed to failure: briefly the photon we send in to observe the phenomenon, need very high energy, as the phenomenon is very short lived; the high energy photon upsets the applecart.}
+ 
+ We can verify (\ref{eq:Delta}) by creating high momentum particles in an accelerator.
+ 
+ Figure \ref{fig:absorption:W:boson} shows a different fate for a W-boson: re-absorption.
+ 
+ Figure \ref{fig:2-6-photons} shows a process where photons \emph{can} interact, via the creation of a virtual pair. Probability is proportional to inverse of energy required, so we don't see it in the lab. Same thing happens with W bosons.
+ 
+ \begin{figure}[H]
+ 	\caption[Photon interaction via the creation of a virtual pair]{Process where photons \emph{can} interact, via the creation of a virtual pair}\label{fig:2-6-photons}
+ 	\includegraphics[width=0.8\textwidth]{2-6-photons}
+ \end{figure}
+
+\subsection{Spontaneous symmetry breaking}
+ 
+\url{https://youtu.be/5rytN74EOi0?t=4824}
 
 \section{Spontaneous symmetry breaking and Goldstone bosons}
 
