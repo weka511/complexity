@@ -903,8 +903,27 @@ Why is weak interaction so slow?
 	\includegraphics[width=0.8\textwidth]{2-6-W1}
 \end{figure}
 
-Propagator is a function of $\Delta$, the distance between the two points.
-\url{https://youtu.be/5rytN74EOi0?t=506}
+Propagator is a function of proper time between two points: $\Delta(ds)$, the distance between the two points. $g_w^2 \Delta$
+
+\begin{figure}[H]
+	\caption[Propagator $\Delta(ds)$ as a function of distance.]{Propagator $\Delta(ds)$ as a function of distance. Black line is for zero mass, $\frac{1}{ds}$, red for non-zero.}
+	\includegraphics[width=0.8\textwidth]{2-6-propagator}
+\end{figure}
+
+Where does $\Delta$ decrease suddenly? Choose units where $c=\hslash=1$:
+\begin{align*}
+	[m] =& [E]\\
+	=& [L^{-1}]\\
+	=& [P]\\
+	distance \propto & \frac{1}{L} \text{, in fact:}\\
+	distance \approxeq & \frac{\hslash}{mc} \text {, Compton wavelength}
+\end{align*}
+
+$\Delta^2$ is probability particle can get that far.
+
+In an experiment, we know the momenta. We can think of propagator as function of position, or momentum--using Fourier transform--$\tilde{\Delta}(k_w)=\frac{1}{k_w^2+m_w^2}$. This will have its biggest value when $k_w=0$, so the most likely thing is to emit a low momentum W, which costs an amplitude of $\frac{1}{m_w^2}$. Amplitude for emitting $W$ and converting to electron plus neutrino is $\frac{g_w^2}{m_w^2}$: weak interactions are made weak because the mass of the W is large--about 100 protons! Probability is $\frac{g_w^4}{m_w^4}$.
+ 
+\url{https://youtu.be/5rytN74EOi0?t=1418}
 
 \section{Spontaneous symmetry breaking and Goldstone bosons}
 
