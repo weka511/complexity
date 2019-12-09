@@ -731,25 +731,28 @@ Charges linked to lines of force. In Figure \ref{fig:2-4-quark-gluon-field}, fie
 
 Just about all of nature is controlled by gauge theories.
 
-The first and simplest gauge theory is Maxwell's theory. This has six components, the electric and magnetic fields, which are generated from a potential $A_\mu=(A_0,\vec{A})$. $A_0$ is the electric potential: $F_i=e \frac{\partial A_0}{\partial x_i}$. Electric field = $\nabla A_0$, Magnetic field $\vec{B}=\nabla \times \vec{A}$
+The first and simplest gauge theory is Maxwell's theory. This has six components, the electric and magnetic fields, which are generated from a potential $A_\mu=(A_0,\vec{A})$.
+\begin{itemize}
+	\item  $A_0$ is the electric potential: $F_i=e \frac{\partial A_0}{\partial x_i}$.
+	\item Electric field $\vec{E}=\nabla A_0$.
+	\item Magnetic field $\vec{B}=\nabla \times \vec{A}$
+\end{itemize}
 
 \begin{figure}[H]
 	\caption[Electromagnetic waves, illustrating Polarization.]{Electromagnetic waves. Polarization is in direction of electric field.}
 	\includegraphics[width=0.8\textwidth]{2-5-EM-field}
 \end{figure}
 
-The essence of a gauge theory: Maxwell-like theories, with electric-like and magnetic-like fields, if gauge field is weakly coupled (interactions between parts don't interfere with each other), motion of a gauge field is exactly the same as a light wave, it moves at the speed of light unless something interferes.
+The essence of a gauge theory: in Maxwell-like theories, with electric-like and magnetic-like fields, if gauge field is weakly coupled (interactions between parts don't interfere with each other), motion of a gauge field is exactly the same as a light wave; it moves at the speed of light unless something interferes.
 
-Gauge theories  always have conserved quantities, hence symmetries.
-
-Colour is an example.
+Gauge theories  always have conserved quantities, hence symmetries. Colour is an example.
 \begin{itemize}
 	\item  We'll call the potential $A_{ij}$, which transforms under $SU(3)$.
 	\item Symmetry: $U_{ij} q_j = q^\prime_i$ (indexed over colour).
 	\item The $q_i$ form a representation of $SU(3)$, known as the fundamental representation.
-	\item The antiparticles are represented $U^*_{ij} q^*_j = q^(\prime_i*)$. WE have two distinct representations, 3 and $\bar{3}$.
+	\item The antiparticles are represented $U^*_{ij} q^*_j = q^(\prime_i*)$. We have two distinct representations, {\bfseries 3} and $\bm{\bar{3}}$.
 	\item  $A_{ij}$ has same structure as $\bar{q}_i q_j$.
-	\item $A_{ij}$ transforms like quark/antiquark, and vanishing trace (adjoint representation).
+	\item $A_{ij}$ transforms like quark/antiquark, and  trace vanished (adjoint representation).
 	\item $A_{ij}$ transforms according to $SU(3)$  (unlike photon--not charge).
 \end{itemize}
 
@@ -773,16 +776,18 @@ Set $c=1$, $\hslash=1$, then energy is in units of $\frac{1}{T}$: $1eV^{-1}=10^{
 
 \subsubsection{Strong and Electromagnetic Interactions}
 
+Table \ref{table:ems} compares various properties of the Strong and Electromagnetic Interactions.
+
 \begin{table}[H]
 	\begin{center}
-		\caption{Electromagnetic and strong}
+		\caption{Electromagnetic and strong}\label{table:ems}
 		\begin{tabular}{|l|r|r|} \hline
 			&Atom&Hadron \\ \hline
 			$\alpha$&$\frac{1}{137}$&\\ \hline	
 			Diameter atom&$10^{-10}M$&$10^{-15}M$ \\ \hline
 			Transit time &$10^{-18}S$&$10^{-23}S$\\ \hline
 			Orbital time &$10^{-18}S$&$10^{-23}S$\\ \hline
-			Decay time (from $1^{st excited state}$)&$10^{-9}S$&$10^{-23}S$\\ \hline
+			Decay time (from $1^{st}$ excited state)&$10^{-9}S$&$10^{-23}S$\\ \hline
 		\end{tabular}
 	\end{center}
 \end{table}
@@ -791,12 +796,14 @@ Times for Hadrons less spread out: QCD version of $\alpha$ much closer to 1 ($\f
 
 \subsubsection{Weak Interactions}
 
+There is another set of interactions that are characterized by being quite slow. Table \ref{table:ex:weak} gives examples.
+
 \begin{table}[H]
 	\begin{center}
-		\caption{Examples of Weak decay}
+		\caption{Examples of Weak decay}\label{table:ex:weak}
 		\begin{tabular}{|l|l|p{6cm}|}\hline
-			$n \rightarrow e + p +\bar{\nu}$&12 minutes&Barely enough energy: 940 $\rightarrow$ 939 + 0.5\\ \hline
-			$\pi^- \rightarrow e^- + \bar{\nu} $&$10nS$&Plenty of energy\\ \hline
+			$n \rightarrow e + p +\bar{\nu}$&12 minutes&Barely enough energy: 940meV $\rightarrow$ 939meV + 0.5meV, but this isn't enough to explain the slowness.\\ \hline
+			$\pi^- \rightarrow e^- + \bar{\nu} $&$10nS$&Plenty of energy, but still slow.\\ \hline
 			$\pi^+ \rightarrow e^+ + \nu $&&\\ \hline
 		\end{tabular}
 	\end{center}
@@ -804,12 +811,12 @@ Times for Hadrons less spread out: QCD version of $\alpha$ much closer to 1 ($\f
 
 These are very slow: clearly something else is going on! Table \ref{tab:QCD:rows} is relevant. \begin{itemize}
 	\item Colour symmetry, $SU(3)$, operates on rows; a $u$ remains a $u.$
-	\item $SU(2)$, a gauge symmetry, operates horizontally: $u\leftrightarrow d$;  $c\leftrightarrow s$;  $t\leftrightarrow b$.
+	\item We introduce a new gauge symmetry, $SU(2)$ operating horizontally: $u\leftrightarrow d$;  $c\leftrightarrow s$;  $t\leftrightarrow b$.
 \end{itemize}
 
 \begin{table}[H]
 	\begin{center}
-		\caption{Quarks: Colour symmetry operates on first three rows, not columns}\label{tab:QCD:rows}
+		\caption{Quarks: Colour symmetry operates on first three rows, not on columns}\label{tab:QCD:rows}
 		\begin{tabular}{|c|c|c|c|} \hline
 			&u d&c s&t b \\ \hline
 			red&x x&x x&x x\\ \hline
@@ -820,32 +827,32 @@ These are very slow: clearly something else is going on! Table \ref{tab:QCD:rows
 	\end{center}
 \end{table}
 
-Charge: $u-d=\nu_e-e$
+The last row deals with Leptons. They appear in an order that depends on the charge difference: $u-d=\nu_e-e$
 
-Let's see whether we can find a gauge boson that combines particle and anti, and boson,  apply it to leptons, e.g, $e \bar{\nu_e}$. We have a gauge boson, $W$:
+We postulate a gauge boson that combines particle and antiparticle, and apply it to leptons, e.g, $e \bar{\nu_e}$. We call this gauge boson, $W$:
 
  \begin{itemize}
- 	\item $e \bar{\nu_e}\rightarrow W^- \rightarrow d\bar{u}$
- 	\item $e^+ \nu_e\rightarrow W^+ \rightarrow \bar{d}u$
+ 	\item $e \bar{\nu_e}\leftrightarrow W^- \leftrightarrow d\bar{u}$
+ 	\item $e^+ \nu_e\leftrightarrow W^+ \leftrightarrow \bar{d}u$
  \end{itemize}
 
-Imagine that W are like photons or gluons.
+Imagine that W is like photons or gluons, so it behaves as shown in Figure \ref{fig:W:photon:fluon}.
 
 \begin{figure}[H]
-	\caption{W are like photons or gluons}
-	\begin{subfigure}{0.45\textwidth}
+	\caption{W are like photons or gluons}\label{fig:W:photon:fluon}
+	\begin{subfigure}{0.2\textwidth}
 		\caption{$e \rightarrow\nu + W^-$}\label{fig:2-5-W1}
 		\includegraphics[width=0.9\textwidth]{2-5-W1}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.2\textwidth}
 		\caption{$d \rightarrow u + W^-$}
 		\includegraphics[width=0.9\textwidth]{2-5-W2}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.2\textwidth}
 		\caption{$s \rightarrow c + W^-$}
 		\includegraphics[width=0.9\textwidth]{2-5-W3}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.2\textwidth}
 		\caption{$W^+$ and $W^-$ are antiparticles, so we can redraw \ref{fig:2-5-W1}}
 		\includegraphics[width=0.9\textwidth]{2-5-W4}
 	\end{subfigure}
@@ -862,7 +869,7 @@ Imagine that W are like photons or gluons.
 		\includegraphics[width=0.9\textwidth]{2-5-muon-decay}
 	\end{subfigure}
 	\begin{subfigure}{0.30\textwidth}
-		\caption{Neutron decay. W doesn't have enough energy to muon, unless we hit neutron really hard.}
+		\caption{Neutron decay. W doesn't have enough energy to make muon, unless we hit neutron really hard.}
 		\includegraphics[width=0.9\textwidth]{2-5-neutron-decay}
 	\end{subfigure}
 \end{figure}
@@ -870,8 +877,6 @@ Imagine that W are like photons or gluons.
 NB: can violate conservation for a very short time.
 
 Why so slow? Coupling constant?(No)
-
-\url{https://youtu.be/3g6RtyGjX3o?t=3379}
 
 \section{The Weak Interaction}
 
