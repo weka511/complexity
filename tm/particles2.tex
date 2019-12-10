@@ -979,32 +979,79 @@ There is no fundamental difference between up and down. Answer can be determined
 
 What if we find aligned system, how do we know whether or not it is spontaneous? Domain walls: set one boundary to one direction, other to the other, and see what happens. If there is bias, then our change should not propagate in very far. If spontaneous we expect a domain wall to emerge.
 
-We can imagine a scalar field, $\Phi$, which behaves the same way. It has a Lagrangian:
+We can imagine a real scalar field, $\Phi$, which behaves the same way. It has a Lagrangian:
 
 \begin{align*}
 \mathcal{L} =& \frac{1}{2} \partial_\mu \Phi \partial^\mu \Phi - V(Phi)\text{, where V has the form of Figure \ref{fig:2-7-V}} \numberthis \label{eq:spontaneous:symmetry:L}
 \end{align*}
 
-Since $V$ is completely symmetric, there will be two ground states. Why can't system jump from $-f$ to $f$? A jump would make $\frac{\partial \Phi}{\partial x}$ very large. Figure \ref{fig:2-7-V-simple} shows a different potential, which does not lead to spontaneous symmetry breaking. Figure \ref{fig:2-7-V-domain-wall} shows how we can force a domain wall for Figure \ref{fig:2-7-V}, but not Figure \ref{fig:2-7-V-simple}.
+Since $V$ is completely symmetric, there will be two ground states. Why can't system jump from $-f$ to $f$? A jump would make $\frac{\partial \Phi}{\partial x}$ very large. Figure \ref{fig:2-7-V-simple} shows a different potential, which does not lead to spontaneous symmetry breaking. Figure \ref{fig:2-7-V-domain-wall} shows how we can force a domain wall for Figure \ref{fig:2-7-V}, but not Figure \ref{fig:2-7-V-simple} (If temperature high there is lots of random fluctuation; domains appear when system cooled.).
 
 \begin{figure}[H]
-	\caption[Potential for (\ref{eq:spontaneous:symmetry:L})]{Potential for (\ref{eq:spontaneous:symmetry:L}), with and without spontaneous symmetry breaking}
-	\begin{subfigure}{0.32\textwidth}
-		\caption{Possible spontaneous symmetry breaking: two ground states}\label{fig:2-7-V}
+	\caption[$V(\Phi)$ with and without spontaneous symmetry breaking]{Potential for (\ref{eq:spontaneous:symmetry:L}), with and without spontaneous symmetry breaking}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\vskip 0pt
+		\caption{Possible spontaneous symmetry breaking: two ground states. This is not a continuous symmetry, as we can't interpolate between minima.}\label{fig:2-7-V}
 		\includegraphics[width=0.8\textwidth]{2-7-V}
 	\end{subfigure}
-	\begin{subfigure}{0.32\textwidth}
+	\hfill
+	\begin{subfigure}[t]{0.45\textwidth}
+		\vskip 0pt
 		\caption{Potential without spontaneous symmetry breaking: only one ground state}\label{fig:2-7-V-simple}
 		\includegraphics[width=0.8\textwidth]{2-7-V-simple}
 	\end{subfigure}
-	\begin{subfigure}{0.32\textwidth}
+	\hfill
+	\begin{subfigure}{0.9\textwidth}
 		\caption{Domain wall for potential of Figure \ref{fig:2-7-V}}\label{fig:2-7-V-domain-wall}
 		\includegraphics[width=0.8\textwidth]{2-7-V-domain-wall}
 	\end{subfigure}
 \end{figure}
+
+Imagine a complex field, Figure \ref{fig:2-7-complex-phi}.
+\begin{align*}
+	\Phi =& \Phi_R + i \Phi_I\\
+	\Phi^* =& \Phi_R - i \Phi_I\\
+	\mathcal{L} =&  \partial_\mu \Phi^* \partial^\mu \Phi 
+\end{align*}
+
+This is symmetric under: $\Phi \rightarrow \Phi^\prime=e^{i \theta} \Phi$
+\begin{figure}[H]
+	\caption{2-7-complex-phi}\label{fig:2-7-complex-phi}
+	\includegraphics[width=0.8\textwidth]{2-7-complex-phi}
+\end{figure}
+
+Let's add a potential that shares this symmetry.
+\begin{align*}
+\mathcal{L} =&  \partial_\mu \Phi^* \partial^\mu \Phi -V(\Phi \Phi^*) \text{, symmetrical about rotation in $\Phi$ plane}\\
+V =& \Phi \Phi^* \text{, completely symmetric} \text{, or}\\
+V=& -a \Phi \Phi^* + b (\Phi \Phi^*)^2
+\end{align*}
+Near the origin, V is at a maximum. $\Phi$ wants to move away from zero, but not too far. It also doesn't want $\partial_\mu \Phi^* \partial^\mu \Phi$ to get too big, so we expect field to bunch somewhere on minimum.
+
+Are there domain walls? Figure \ref{fig:2-7-V-quartic-domain-wall} shows an attempt. Note that we don't get an abrupt transition, as we need to keep $\partial_\mu \Phi^* \partial^\mu \Phi$ small.
+
+\begin{figure}[H]
+	\caption{Potentials}\label{fig:s-7-potentials}
+	\begin{subfigure}{0.4\textwidth}
+		\caption{Quadratic V. Minimum at origin.}\label{fig:2-7-V-quad}
+		\includegraphics[width=\textwidth]{2-7-V-quad}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\caption{Quartic V. Minimum lies on a circle, or radius $f$.}\label{sig:2-7-V-quartic}
+		\includegraphics[width=\textwidth]{2-7-V-quartic}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\caption{Clamp values to try to produce domain wall: we don't have them diametrically opposed to remove ambiguity.}\label{fig:2-7-V-quartic-domain-wall}
+		\includegraphics[width=\textwidth]{2-7-V-quartic-domain-wall}
+	\end{subfigure}
+\end{figure}
+
+From the point of view of wave equations, a filed with only graidnet terms in energy is massless: quanta are massless. Also for field $e^{ikx}$, if $k=0$ makes energy $0$, then very long wavelength field has zero mass.
+\url{https://youtu.be/7cKvhkFhXDk?t=2837}
+
 \section{The Higgs field}
 
-\url{https://youtu.be/7cKvhkFhXDk?t=1100}
+
 
 TBP
 
