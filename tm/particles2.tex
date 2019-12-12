@@ -967,7 +967,7 @@ Spontaneous symmetry breaking has an instability that can let the system go one 
 
 \section{Spontaneous symmetry breaking and Goldstone bosons}
 
-Goal is to show how a particle like photon can gain a mass from spontaneous symmetry breaking; how it can gain amass from the Higgs mechanism. We will cover:
+Goal is to show how a particle like photon can gain a mass from something called spontaneous symmetry breaking; how it can gain a mass from the Higgs mechanism. There are two important ingredients:
 
 \begin{itemize}
 	\item Spontaneous symmetry breaking
@@ -975,15 +975,19 @@ Goal is to show how a particle like photon can gain a mass from spontaneous symm
 \end{itemize}
 
 \subsection{Spontaneous symmetry breaking}
-There is no fundamental difference between up and down. Answer can be determined by one spin very far away.
+In the last lecture we considered a system of spins that pointed up and down.
+There is no fundamental asymmetry between up and down. Two up spins have the sane energy as two downs; and up and a down has the same energy as a down and an up. Because it is energetically favourable for them to be parallel, the spins should be all up or all down. The direction can be controlled by one spin very far away that is frozen. We have symmetry, but it is broken spontaneously (but it may take a finite time to propagate.).
+
+Compare with explicit symmetry breaking, e.g. a magnetic field that is pointed up. Now energy will be lower for one direction.
 
 What if we find aligned system, how do we know whether or not it is spontaneous? Domain walls: set one boundary to one direction, other to the other, and see what happens. If there is bias, then our change should not propagate in very far. If spontaneous we expect a domain wall to emerge.
 
 We can imagine a real scalar field, $\Phi$, which behaves the same way. It has a Lagrangian:
 
 \begin{align*}
-\mathcal{L} =& \frac{1}{2} \partial_\mu \Phi \partial^\mu \Phi - V(Phi)\text{, where V has the form of Figure \ref{fig:2-7-V}} \numberthis \label{eq:spontaneous:symmetry:L}
+	\mathcal{L} =& \frac{1}{2} \partial_\mu \Phi \partial^\mu \Phi - V(\Phi) \numberthis \label{eq:spontaneous:symmetry:L}
 \end{align*}
+where V has the form of Figure \ref{fig:2-7-V}.
 
 Since $V$ is completely symmetric, there will be two ground states. Why can't system jump from $-f$ to $f$? A jump would make $\frac{\partial \Phi}{\partial x}$ very large. Figure \ref{fig:2-7-V-simple} shows a different potential, which does not lead to spontaneous symmetry breaking. Figure \ref{fig:2-7-V-domain-wall} shows how we can force a domain wall for Figure \ref{fig:2-7-V}, but not Figure \ref{fig:2-7-V-simple} (If temperature high there is lots of random fluctuation; domains appear when system cooled.).
 
@@ -1002,21 +1006,26 @@ Since $V$ is completely symmetric, there will be two ground states. Why can't sy
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.9\textwidth}
-		\caption{Domain wall for potential of Figure \ref{fig:2-7-V}}\label{fig:2-7-V-domain-wall}
-		\includegraphics[width=0.8\textwidth]{2-7-V-domain-wall}
+		\begin{center}
+			\caption{Domain wall for potential of Figure \ref{fig:2-7-V}}\label{fig:2-7-V-domain-wall}
+			\includegraphics[width=0.8\textwidth]{2-7-V-domain-wall}
+		\end{center}
 	\end{subfigure}
 \end{figure}
 
-Imagine a complex field, Figure \ref{fig:2-7-complex-phi}.
+In both cases we have looked at breaking a discrete symmetry. What if we break a continuous symmetry, such as $U(1)$ or $SU(2)$? We will do one example of a continuous symmetry breaking, and the idea of a Goldstone boson (which replaces the idea of domain walls); we'll see how how the Goldstone boson can radically change it nature when the symmetry had to do with gauge bosons. It morphs from spontaneous symmetry breaking into the Higgs phenomenon. We will see how the Higgs mechanism allows the Z-boson yo have mass.
+
+
+Imagine a complex field, Figure \ref{fig:2-7-complex-phi}\footnote{The $\frac{1}{2}$ is normally omitted from $\mathcal{L}$ for complex fields.}.
 \begin{align*}
 	\Phi =& \Phi_R + i \Phi_I\\
 	\Phi^* =& \Phi_R - i \Phi_I\\
 	\mathcal{L} =&  \partial_\mu \Phi^* \partial^\mu \Phi 
 \end{align*}
 
-This is symmetric under: $\Phi \rightarrow \Phi^\prime=e^{i \theta} \Phi$
+This is symmetric under $U(1)$: $\Phi \rightarrow \Phi^\prime=e^{i \theta} \Phi$
 \begin{figure}[H]
-	\caption{2-7-complex-phi}\label{fig:2-7-complex-phi}
+	\caption{A complex field (not necessarily an analytic function)}\label{fig:2-7-complex-phi}
 	\includegraphics[width=0.8\textwidth]{2-7-complex-phi}
 \end{figure}
 
@@ -1040,11 +1049,15 @@ Are there domain walls? Figure \ref{fig:2-7-V-quartic-domain-wall} shows an atte
 		\caption{Quartic V. Minimum lies on a circle, or radius $f$.}\label{sig:2-7-V-quartic}
 		\includegraphics[width=\textwidth]{2-7-V-quartic}
 	\end{subfigure}
-	\begin{subfigure}{0.4\textwidth}
-		\caption{Clamp values to try to produce domain wall: we don't have them diametrically opposed to remove ambiguity.}\label{fig:2-7-V-quartic-domain-wall}
-		\includegraphics[width=\textwidth]{2-7-V-quartic-domain-wall}
+	\begin{subfigure}{0.9\textwidth}
+		\begin{center}
+			\caption{Clamp values to try to produce domain wall: we don't have them diametrically opposed to remove ambiguity.}\label{fig:2-7-V-quartic-domain-wall}
+			\includegraphics[width=\textwidth]{2-7-V-quartic-domain-wall}
+		\end{center}
 	\end{subfigure}
 \end{figure}
+
+
 
 From the point of view of wave equations, a field with only gradient terms in energy is massless: quanta are massless. Also for field $e^{ikx}$, if $k=0$ makes energy $0$, then very long wavelength field has zero mass.
 
@@ -1198,7 +1211,7 @@ TBP
 	
 	How does the Z boson get a mass?
 	
-	Figure \ref{fig:2-a3-zilch-Z} shows a Z-boson exchanging zilch with the condensate, so it oscillates between Z and Ziggs, thereby getting mass. This is the Brout-Englert-Higgs phenomenon.
+	Figure \ref{fig:2-a3-zilch-Z} shows a Z-boson exchanging zilch with the condensate, so it oscillates between Z and Ziggs, thereby getting mass. This is known as the Brout-Englert-Higgs phenomenon.
 	
 	If there were a condensate of electric charge, the proton would have mass, which would be Very Bad.
 	
