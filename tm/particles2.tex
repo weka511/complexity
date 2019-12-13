@@ -1018,53 +1018,98 @@ In both cases we have looked at breaking a discrete symmetry. What if we break a
 
 Imagine a complex field, Figure \ref{fig:2-7-complex-phi}\footnote{The $\frac{1}{2}$ is normally omitted from $\mathcal{L}$ for complex fields.}.
 \begin{align*}
-	\Phi =& \Phi_R + i \Phi_I\\
+	\Phi =& \Phi_R + i \Phi_I \\
 	\Phi^* =& \Phi_R - i \Phi_I\\
 	\mathcal{L} =&  \partial_\mu \Phi^* \partial^\mu \Phi 
 \end{align*}
 
-This is symmetric under $U(1)$: $\Phi \rightarrow \Phi^\prime=e^{i \theta} \Phi$
+This is symmetric under $U(1)$: $\Phi \rightarrow \Phi^\prime=e^{i \theta} \Phi$\footnote{For $\theta$ constant.}
 \begin{figure}[H]
 	\caption{A complex field (not necessarily an analytic function)}\label{fig:2-7-complex-phi}
 	\includegraphics[width=0.8\textwidth]{2-7-complex-phi}
 \end{figure}
 
-Let's add a potential that shares this symmetry.
+Let's add a potential that shares this symmetry. We will focus on two kinds of potentials: one of them spontaneously breaks the symmetry, the other doesn't.
 \begin{align*}
 \mathcal{L} =&  \partial_\mu \Phi^* \partial^\mu \Phi -V(\Phi \Phi^*) \text{, symmetrical about rotation in $\Phi$ plane}\\
-V =& \Phi \Phi^* \text{, completely symmetric} \text{, or}\\
-V=& -a \Phi \Phi^* + b (\Phi \Phi^*)^2
+V =& \Phi \Phi^* \text{, completely symmetric--\text{, see Figure \ref{fig:2-7-V-quad}}, or} \numberthis \label{eq:symmetric}\\
+V=& -a \Phi \Phi^* + b (\Phi \Phi^*)^2 \text{, see Figure \ref{fig:2-7-V-quartic}} \text{, where $a>0,b>0$}\numberthis \label{eq:breakable:symmetric}
 \end{align*}
-Near the origin, V is at a maximum. $\Phi$ wants to move away from zero, but not too far. It also doesn't want $\partial_\mu \Phi^* \partial^\mu \Phi$ to get too big, so we expect field to bunch somewhere on minimum.
 
-Are there domain walls? Figure \ref{fig:2-7-V-quartic-domain-wall} shows an attempt. Note that we don't get an abrupt transition, as we need to keep $\partial_\mu \Phi^* \partial^\mu \Phi$ small.
+\begin{itemize}
+	\item At the origin, V of (\ref{eq:symmetric}) is at a minimum. This is the ground state. There is no explicit or spontaneous breaking of symmetry.
+	\item Near the origin, V of (\ref{eq:breakable:symmetric}) is at a maximum. There are many ground states around the minimum circle. $\Phi$ wants to move away from zero, but not too far. It also doesn't want $\partial_\mu \Phi^* \partial^\mu \Phi$ to get too big, so we expect field to bunch \emph{somewhere} on minimum.
+\end{itemize}
+
+Are there domain walls? Figure \ref{fig:2-7-V-quartic-domain-wall} shows an attempt to check this. Note that we don't get an abrupt transition, as we need to keep $\partial_\mu \Phi^* \partial^\mu \Phi$ small.
 
 \begin{figure}[H]
 	\caption{Potentials}\label{fig:s-7-potentials}
-	\begin{subfigure}{0.4\textwidth}
-		\caption{Quadratic V. Minimum at origin.}\label{fig:2-7-V-quad}
+	\begin{subfigure}{0.5\textwidth}
+		\caption{ (\ref{eq:symmetric})-- Minimum at origin.}\label{fig:2-7-V-quad}
 		\includegraphics[width=\textwidth]{2-7-V-quad}
 	\end{subfigure}
-	\begin{subfigure}{0.4\textwidth}
-		\caption{Quartic V. Minimum lies on a circle, or radius $f$.}\label{sig:2-7-V-quartic}
+	\begin{subfigure}{0.5\textwidth}
+		\caption{(\ref{eq:breakable:symmetric})--Minimum on circle of radius $f$.}\label{fig:2-7-V-quartic}
 		\includegraphics[width=\textwidth]{2-7-V-quartic}
 	\end{subfigure}
-	\begin{subfigure}{0.9\textwidth}
-		\begin{center}
-			\caption{Clamp values to try to produce domain wall: we don't have them diametrically opposed to remove ambiguity.}\label{fig:2-7-V-quartic-domain-wall}
-			\includegraphics[width=\textwidth]{2-7-V-quartic-domain-wall}
-		\end{center}
+	\begin{subfigure}{0.5\textwidth}
+		\caption{Clamp values to try to produce domain wall}\label{fig:2-7-V-quartic-domain-wall-ab}
+		\includegraphics[width=\textwidth]{2-7-V-quartic-domain-wall-ab}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\caption{We don't have the clamped values diametrically opposed to remove ambiguity.}\label{fig:2-7-V-quartic-domain-wall}
+		\includegraphics[width=\textwidth]{2-7-V-quartic-domain-wall}
 	\end{subfigure}
 \end{figure}
 
+It turn out that the field varies smoothly between $a$ and $b$.
+
+\begin{thm}[Mexican Hat Potential]
+	Angle varies linearly
+\end{thm}
+\begin{proof}
+	TBP -- use calculus of variations.
+\end{proof}
+
+ From the point of view of wave equations, a field with only gradient terms in energy is massless: quanta are massless. Also for field $e^{ikx}$, if $k=0$ makes energy $0$, then very long wavelength field has zero mass.
+ 
 
 
-From the point of view of wave equations, a field with only gradient terms in energy is massless: quanta are massless. Also for field $e^{ikx}$, if $k=0$ makes energy $0$, then very long wavelength field has zero mass.
+We will look at various potentials, starting with $\frac{m^2 \phi^2}{2}$--  Figure \ref{fig:2-7-V-simple}. It clear that if you created a wave that varied from place to place, no matter how long that wavelength was, as long as there is is variation away from zero, there is going to be an appreciable cost of energy--Figure \ref{fig:2-7-variation-from-zero}. This is a massive particle: if there is no mass, the only energy comes from gradient, and that is small for a long wavelength particle. $\frac{m^2 \phi^2}{2}$ is called a mass term.
 
+\begin{figure}[H]
+	\begin{center}
+		\caption{There are a lot of places where wave away from zero, and those are going to cost energy.}\label{fig:2-7-variation-from-zero}
+		\includegraphics[width=0.6\textwidth]{2-7-variation-from-zero}
+	\end{center}
+\end{figure}
 
-\url{https://youtu.be/7cKvhkFhXDk?t=2837}
+Returning to \ref{fig:2-7-V-quartic}, let's tru to identify why there is a massless particle. Massless particle corresponds to long wave staying at minimum. We start with the Lagrangian:
 
-We will look at various potentials, such as Figure \ref{fig:2-7-V-simple}--$\frac{m^2 \phi^2}{2}$. There will be a lot of places away from zero, and they all cost energy. We have seen [where?] that this term is connected with mass.
+\begin{align*}
+	\mathcal{L} =& \partial \Phi \partial \Phi^* - V(\Phi^*\Phi) \text{. Now, writing}\\
+	\Phi =& \rho e^{i \alpha]} \text{, we find} \\
+	\partial \Phi =& e^{i \alpha]} \big[\partial \rho + i \rho \partial \alpha\big]\\
+	\partial \Phi^* =& e^{-i \alpha]} \big[\partial \rho - i \rho \partial \alpha\big]\\
+	\mathcal{L} =& (\partial \rho)^2 + \rho^2  (\partial \alpha)^2 - V(\rho) \text{, independent of $\alpha$, --a symmetry.} 
+\end{align*}
+
+If field stays in track, and oscillates very slowly, then it doesn't pay to change $\rho$; it is effectively a constant, $f$.
+
+\begin{align*}
+	\mathcal{L} =& (\partial \rho)^2 + \underbrace{f^2(\partial \alpha)^2}_\text{can absorb $f$ into $\alpha$: behaves like Lagrangian of massless field}   - V(\rho)
+\end{align*}
+
+Choose ground-state at some point if groove. We can oscillate in 2 directions, $\alpha$ and $\rho$: the radial oscillation is similar to the way it would oscillate if there were a $\Phi^*\Phi$ term corresponding to a mass.
+
+A mass is an energy that corresponds to zero momentum; zero momentum means that the field is homogeneous, and doesn't vary from point to point--no variation at all. A restoring fore that gives a periodic oscillation is what a massive field does. Whenever you have a continuous symmetry, and that symmetry is spontaneously broken, there is always the possibility of changing the orientation of things gradually from place to place, and you have massless excitations, massless particles, and these are called Goldstone bosons.
+\begin{defn}[Goldstone boson]
+	 A Goldstone particle is a particle, or a Goldstone field is a field which is massless, has no restoring force by virtue of a symmetry, by virtue of the fact that you're moving the field in a direction that costs no energy.
+\end{defn}
+ Whenever you have a spontaneously broken symmetry there are Goldstone bosons. In this case the Goldstone boson is the quanta of the field $\alpha$
+
+\url{https://youtu.be/7cKvhkFhXDk?t=2829}
  
 \section{The Higgs field}
 
