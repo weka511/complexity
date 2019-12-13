@@ -1157,9 +1157,17 @@ We will modify the Lagrangian by replacing ordinary derivatives with covariant d
 
 Now this wouldn't be an interesting vector potential without some dynamics.
 
-Energy of Electromagnetic field is given by $E^2 + B^2$, Lagrangian $E^2-B^2$. We will express in terms of the field tensor.
-
+Energy of Electromagnetic field is given by $E^2 + B^2$, Lagrangian $E^2-B^2$. We will express in terms of the field tensor\cite{susskind2017special}:
 \begin{align*}
+	F_{\mu,\nu} =&\begin{pmatrix}
+					0&-E_x&-E_y&-E_z\\
+					E_x&0&B_z&-B_y\\
+					E_y&-B_z&0&B_x\\
+					E_z&B_y&-B_x&0
+				\end{pmatrix}
+\end{align*}
+
+\begin{align*} 
 	F_{\mu,\nu} =& \partial_\mu A_\nu - \partial_\nu A_\mu\\
 	\mathcal{L} =& F_{\mu,\nu} F^{\mu,\nu} \text{. Is $F_{\mu,\nu}$ gauge invariant? }\\
 	F_{\mu,\nu}^\prime =&\partial_\mu A_\nu^\prime - \partial_\nu A_\mu^\prime\\
