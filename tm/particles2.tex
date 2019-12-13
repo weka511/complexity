@@ -1023,7 +1023,13 @@ Imagine a complex field, Figure \ref{fig:2-7-complex-phi}\footnote{The $\frac{1}
 	\mathcal{L} =&  \partial_\mu \Phi^* \partial^\mu \Phi 
 \end{align*}
 
-This is symmetric under $U(1)$: $\Phi \rightarrow \Phi^\prime=e^{i \theta} \Phi$\footnote{For $\theta$ constant.}
+This is symmetric under U(1):
+\begin{align*}
+	\Phi \rightarrow \Phi^\prime=e^{i \theta} \Phi  \numberthis \label{eq:U1:theta}
+\end{align*}
+
+For the time being assume $\theta$ constant--but we will relax this in Section \ref{section:gauge:invariance}.
+
 \begin{figure}[H]
 	\caption{A complex field (not necessarily an analytic function)}\label{fig:2-7-complex-phi}
 	\includegraphics[width=0.8\textwidth]{2-7-complex-phi}
@@ -1109,7 +1115,50 @@ A mass is an energy that corresponds to zero momentum; zero momentum means that 
 \end{defn}
  Whenever you have a spontaneously broken symmetry there are Goldstone bosons. In this case the Goldstone boson is the quanta of the field $\alpha$
 
-\url{https://youtu.be/7cKvhkFhXDk?t=2829}
+\subsection{Gauge Invariance}\label{section:gauge:invariance}
+
+This is also associated with $U(1)$ symmetry. Originally introduced for electric charge conservation, but it might be some other charge, e.g. for Z bosons. Earlier we associated $U(1)$ symmetry with conservation of electric charge carried by $\Phi$ field. In (\ref{eq:U1:theta}), can $\theta$ vary from one position to another? Let us test by applying to field, and seeing what happens to Lagrangian.
+
+\begin{align*}
+	\Phi^\prime =& e^{i \theta(x)} \Phi \numberthis \label{eq:gauge-phi}\\
+	{\Phi^\prime}^* =& e^{-i \theta(x)} \Phi^* \numberthis \label{eq:gauge-phi-star}\\
+	\partial \Phi^\prime =& \big[\partial \Phi + i \Phi \frac{\partial \theta}{\partial x}\big] e^{i \theta(x)}\\
+	\partial (\Phi^\prime)^* =& \big[\partial \Phi^* - i \Phi^* \frac{\partial \theta}{\partial x}\big] e^{-i \theta(x)}\\
+	\partial \Phi^\prime \partial {\Phi^\prime}^* =&\partial \Phi \partial \Phi^* + i[\Phi \partial \Phi^* -\Phi^* \partial \Phi] + \Phi^* \Phi (\frac{\partial \theta}{\partial x})^2
+\end{align*}
+
+So this is not at symmetry: if $V=V(\Phi^*\Phi)$, the Lagrangian is not the same in the transformed variable. We are picking up a little energy. Can we do anything to restore the symmetry? Yes, if we introduce gauge boson fields (e.g. electro magnetic field.)
+
+\begin{defn}[Gauge symmetry]
+	A symmetry which depends on position is called a gauge symmetry.
+\end{defn}
+
+Can we do something to cancel $\frac{\partial \theta}{\partial}$? If so, why would be do this? \emph{It turns out all interesting symmetries are associated with gauge bosons.}
+
+Add a 4-vector of fields: in electrodynamics this would be the vector potential, $A_\mu$: $A_0$ is electric potential, and $\nabla \times A_i$ is the magnetic field. How does this new field transform under symmetry--$A \rightarrow a^\prime$? The following turns out to work.
+\begin{align*}
+	A^\prime_\mu =& A_\mu - \partial_\mu \theta \numberthis \label{eq:gauge:field}
+\end{align*}
+
+
+
+\begin{align*}
+	D_\mu \Phi \triangleq& \partial_\mu \Phi + i A_\mu \Phi \text{, This would not make sense if $\Phi$ were real.} \numberthis \label{eq:covariant:derivative}\\
+	D_\mu \Phi^* =& \partial_\mu \Phi^* - i A_\mu \Phi^*
+\end{align*}
+
+We will modify the Lagrangian by replacing ordinary derivatives with covariant derivatives\footnote{Not General Relativistic covariant derivatives}.
+\begin{align*}
+	D \phi^\prime =& \big[\phi + \cancel{i \phi \frac{\partial \theta}{\partial x}}\big]e^{i \theta} + i \big[A-\cancel{\partial \theta} \big]\phi e^{i \theta} \text{, cancelling troublemakers}\\
+	=& D \Phi  e^{i \theta} \text{, similarly}\\
+	D {\phi^\prime}^* =& D {\Phi}^*  e^{-i \theta} \text{, and}\\
+	D \phi^\prime D {\phi^\prime}^*=& D \Phi D {\Phi}^* \text{, so the Lagrangian is invariant}
+\end{align*}
+
+Now this wouldn't be an interesting vector potential without some dynamics.
+
+
+\url{https://youtu.be/7cKvhkFhXDk?t=5598}
  
 \section{The Higgs field}
 
