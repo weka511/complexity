@@ -1157,6 +1157,31 @@ We will modify the Lagrangian by replacing ordinary derivatives with covariant d
 
 Now this wouldn't be an interesting vector potential without some dynamics.
 
+Energy of Electromagnetic field is given by $E^2 + B^2$, Lagrangian $E^2-B^2$. We will express in terms of the field tensor.
+
+\begin{align*}
+	F_{\mu,\nu} =& \partial_\mu A_\nu - \partial_\nu A_\mu\\
+	\mathcal{L} =& F_{\mu,\nu} F^{\mu,\nu} \text{. Is $F_{\mu,\nu}$ gauge invariant? }\\
+	F_{\mu,\nu}^\prime =&\partial_\mu A_\nu^\prime - \partial_\nu A_\mu^\prime\\
+	=& \partial_\mu A_\nu - \cancel{\partial_\mu \partial_\nu \theta}-\partial_\nu A_\mu + \cancel{\partial_\nu \partial_\mu \theta}\\
+	=& 	F_{\mu,\nu} \text{. So $F$, and hence the Lagrangian, is gauge invariant!}
+\end{align*}
+
+We can construct a completely gauge invariant dynamics of the electromagnetic field coupled to a field whose quanta are charged particles.
+\begin{align*}
+	\mathcal{L} = D_\mu \Phi D_\mu \Phi^* -V(Phi\Phi^*) + F^2
+\end{align*}
+
+So we can promote $U(1)$ to a local symmetry, at the cost of an extra field, which can be included in a Maxwell style Lagrangian.
+
+What can't we add?
+
+\begin{itemize}
+	\item Potentials that depend on something other than $\Phi^*\Phi$ 
+	\item Terms like $\frac{m^2}{2}A_\mu A^\mu$, which would add mass to the photon (not gauge invariant).
+\end{itemize}
+
+Next week we'll look at breaking the $U(1)$ symmetry spontaneously by using a Mexican Hat potential: this will give photon a mass and remove Goldstaone boson. Of course a real photon doesn't have a mass, but the Z boson does. This is the Higgs phenomenon. It gives mass to a particle when we can't do it by hand.
 
 \url{https://youtu.be/7cKvhkFhXDk?t=5598}
  
