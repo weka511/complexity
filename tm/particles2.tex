@@ -732,7 +732,7 @@ The 8 gluons aren't neutral, as they have colour. The carry large amounts of ene
 
 QCD is a gauge field--Sections \ref{section:gauge:symmetry} and \ref{section:gauge:invariance}.
 
-\begin{defn}[Gauge field]
+\begin{defn}[Gauge field]\label{defn:gauge:field}
 	A gauge field is any theory where conserved quantities are coupled to a Maxwell-like field. They are always based on symmetries.
 \end{defn}
 
@@ -998,8 +998,8 @@ Our goal is to show how a particle like a photon can gain a mass from something 
 \end{itemize}
 
 \subsection{Spontaneous symmetry breaking}
-In the last lecture we considered a system of spins that pointed up and down.
-There is no fundamental asymmetry between up and down. Two up spins have the sane energy as two downs; and up and a down has the same energy as a down and an up. Because it is energetically favourable for them to be parallel, the spins should be all up or all down. The direction can be controlled by one spin very far away that is frozen. We have symmetry, but it is broken spontaneously (but it may take a finite time to propagate.).
+In the last lecture we considered a system of spins that pointed up or down.
+There is no fundamental asymmetry between up and down. Two up spins have the same energy as two downs; and an up and a down has the same energy as a down and an up. Because it is energetically favourable for them to be parallel, the spins should be all up or all down. The direction can be controlled by one spin very far away that is frozen. We have symmetry, but it is broken spontaneously; it may take a finite time to propagate.
 
 Compare with explicit symmetry breaking, e.g. a magnetic field that is pointed up. Now energy will be lower for one direction.
 
@@ -1105,7 +1105,7 @@ It turn out that the field varies smoothly between $a$ and $b$.
  
 
 
-We will look at various potentials, starting with $\frac{m^2 \phi^2}{2}$--  Figure \ref{fig:2-7-V-simple}. It clear that if you created a wave that varied from place to place, no matter how long that wavelength was, as long as there is is variation away from zero, there is going to be an appreciable cost of energy--Figure \ref{fig:2-7-variation-from-zero}. This is a massive particle: if there is no mass, the only energy comes from gradient, and that is small for a long wavelength particle. $\frac{m^2 \phi^2}{2}$ is called a mass term.
+We will look at various potentials, starting with $\frac{m^2 \phi^2}{2}$--  Figure \ref{fig:2-7-V-simple}. It clear that if you created a wave that varied from place to place, no matter how long that wavelength was, as long as there is  variation away from zero, there is going to be an appreciable cost of energy--Figure \ref{fig:2-7-variation-from-zero}. This is a massive particle: if there is no mass, the only energy comes from gradient, and that is small for a long wavelength particle. $\frac{m^2 \phi^2}{2}$ is called a mass term.
 
 \begin{figure}[H]
 	\begin{center}
@@ -1114,14 +1114,14 @@ We will look at various potentials, starting with $\frac{m^2 \phi^2}{2}$--  Figu
 	\end{center}
 \end{figure}
 
-Returning to \ref{fig:2-7-V-quartic}, let's tru to identify why there is a massless particle. Massless particle corresponds to long wave staying at minimum. We start with the Lagrangian:
+Returning to \ref{fig:2-7-V-quartic}, let's try to identify why there is a massless particle. Ao massless particle corresponds to a long wave staying at minimum. We start with the Lagrangian:
 
 \begin{align*}
 	\mathcal{L} =& \partial \Phi \partial \Phi^* - V(\Phi^*\Phi) \text{. Now, writing}\\
-	\Phi =& \rho e^{i \alpha]} \text{, we find} \\
-	\partial \Phi =& e^{i \alpha]} \big[\partial \rho + i \rho \partial \alpha\big]\\
-	\partial \Phi^* =& e^{-i \alpha]} \big[\partial \rho - i \rho \partial \alpha\big]\\
-	\mathcal{L} =& (\partial \rho)^2 + \rho^2  (\partial \alpha)^2 - V(\rho) \text{, independent of $\alpha$, --a symmetry.} 
+	\Phi =& \rho e^{i \alpha} \text{, we find} \\
+	\partial \Phi =& e^{i \alpha} \big[\partial \rho + i \rho \partial \alpha\big]\\
+	\partial \Phi^* =& e^{-i \alpha} \big[\partial \rho - i \rho \partial \alpha\big]\\
+	\mathcal{L} =& (\partial \rho)^2 + \rho^2  (\partial \alpha)^2 - V(\rho) \text{, independent of $\alpha$, which is a symmetry.} 
 \end{align*}
 
 If field stays in track, and oscillates very slowly, then it doesn't pay to change $\rho$; it is effectively a constant, $f$.
@@ -1130,21 +1130,21 @@ If field stays in track, and oscillates very slowly, then it doesn't pay to chan
 	\mathcal{L} =& (\partial \rho)^2 + \underbrace{f^2(\partial \alpha)^2}_\text{can absorb $f$ into $\alpha$: behaves like Lagrangian of massless field}   - V(\rho)
 \end{align*}
 
-Choose ground-state at some point if groove. We can oscillate in 2 directions, $\alpha$ and $\rho$: the radial oscillation is similar to the way it would oscillate if there were a $\Phi^*\Phi$ term corresponding to a mass.
+Choose ground-state at some point in groove. We can oscillate in 2 directions, $\alpha$ and $\rho$: the radial oscillation is similar to the way it would oscillate if there were a $\Phi^*\Phi$ term corresponding to a mass.
 
-A mass is an energy that corresponds to zero momentum; zero momentum means that the field is homogeneous, and doesn't vary from point to point--no variation at all. A restoring fore that gives a periodic oscillation is what a massive field does. Whenever you have a continuous symmetry, and that symmetry is spontaneously broken, there is always the possibility of changing the orientation of things gradually from place to place, and you have massless excitations, massless particles, and these are called Goldstone bosons.
+A mass is an energy that corresponds to zero momentum; zero momentum means that the field is homogeneous, and doesn't vary from point to point--no variation at all. A restoring force that gives a periodic oscillation is what a massive field does. Whenever you have a continuous symmetry, and that symmetry is spontaneously broken, there is always the possibility of changing the orientation of things gradually from place to place, and you have massless excitations, massless particles, and these are called Goldstone bosons.
 \begin{defn}[Goldstone boson]
 	 A Goldstone particle is a particle, or a Goldstone field is a field which is massless, has no restoring force by virtue of a symmetry, by virtue of the fact that you're moving the field in a direction that costs no energy.
 \end{defn}
- Whenever you have a spontaneously broken symmetry there are Goldstone bosons. In this case the Goldstone boson is the quanta of the field $\alpha$
+ Whenever you have a spontaneously broken symmetry there are Goldstone bosons. In this case the Goldstone bosons are the quanta of the field $\alpha$
 
 \subsection{Gauge Invariance}\label{section:gauge:invariance}
 
 This is also associated with $U(1)$ symmetry. Originally introduced for electric charge conservation, but it might be some other charge, e.g. for Z bosons. Earlier we associated $U(1)$ symmetry with conservation of electric charge carried by $\Phi$ field. In (\ref{eq:U1:theta}), can $\theta$ vary from one position to another? Let us test by applying to field, and seeing what happens to Lagrangian.
 
 \begin{align*}
-	\Phi^\prime =& e^{i \theta(x)} \Phi \numberthis \label{eq:gauge-phi}\\
-	{\Phi^\prime}^* =& e^{-i \theta(x)} \Phi^* \numberthis \label{eq:gauge-phi-star}\\
+	\Phi^\prime =& e^{i \theta(x)} \Phi \\
+	{\Phi^\prime}^* =& e^{-i \theta(x)} \Phi^*\\
 	\partial \Phi^\prime =& \big[\partial \Phi + i \Phi \frac{\partial \theta}{\partial x}\big] e^{i \theta(x)}\\
 	\partial (\Phi^\prime)^* =& \big[\partial \Phi^* - i \Phi^* \frac{\partial \theta}{\partial x}\big] e^{-i \theta(x)}\\
 	\partial \Phi^\prime \partial {\Phi^\prime}^* =&\partial \Phi \partial \Phi^* + i[\Phi \partial \Phi^* -\Phi^* \partial \Phi] + \Phi^* \Phi (\frac{\partial \theta}{\partial x})^2
@@ -1172,10 +1172,10 @@ Add a 4-vector of fields: in electrodynamics this would be the vector potential,
 
 We will modify the Lagrangian by replacing ordinary derivatives with covariant derivatives\footnote{Not General Relativistic covariant derivatives}.
 \begin{align*}
-	D \phi^\prime =& \big[\phi + \cancel{i \phi \frac{\partial \theta}{\partial x}}\big]e^{i \theta} + i \big[A-\cancel{\partial \theta} \big]\phi e^{i \theta} \text{, cancelling troublemakers}\\
+	D \Phi^\prime =& \big[\Phi + \cancel{i \Phi \frac{\partial \theta}{\partial x}}\big]e^{i \theta} + i \big[A-\cancel{\partial \theta} \big]\Phi e^{i \theta} \text{, cancelling troublemakers}\\
 	=& D \Phi  e^{i \theta} \text{, similarly}\\
-	D {\phi^\prime}^* =& D {\Phi}^*  e^{-i \theta} \text{, and}\\
-	D \phi^\prime D {\phi^\prime}^*=& D \Phi D {\Phi}^* \text{, so the Lagrangian is invariant}
+	D {\Phi^\prime}^* =& D {\Phi}^*  e^{-i \theta} \text{, and}\\
+	D \Phi^\prime D {\Phi^\prime}^*=& D \Phi D {\Phi}^* \text{, so the Lagrangian is invariant}
 \end{align*}
 
 Now this wouldn't be an interesting vector potential without some dynamics.
@@ -1195,7 +1195,7 @@ We can construct a completely gauge invariant dynamics of the electromagnetic fi
 	\mathcal{L} = D_\mu \Phi D_\mu \Phi^* -V(Phi\Phi^*) + F^2
 \end{align*}
 
-So we can promote $U(1)$ to a local symmetry, at the cost of an extra field, which can be included in a Maxwell style Lagrangian.
+So we can promote $U(1)$ to a local symmetry, at the cost of an extra field, which can be included in a Maxwell style Lagrangian--Definition \ref{defn:gauge:field}.
 
 What can't we add?
 
@@ -1206,8 +1206,6 @@ What can't we add?
 
 Next week we'll look at breaking the $U(1)$ symmetry spontaneously by using a Mexican Hat potential: this will give photon a mass and remove Goldstaone boson. Of course a real photon doesn't have a mass, but the Z boson does. This is the Higgs phenomenon. It gives mass to a particle when we can't do it by hand.
 
-\url{https://youtu.be/7cKvhkFhXDk?t=5598}
- 
 \section{The Higgs field}
 
 
@@ -1243,8 +1241,10 @@ TBP
 	
 	Figure \ref{fig:mexican-hat} shows a different potential, with an unstable equilibrium at the origin. This is like a world where the vacuum has a non-zero field. The minimum is a circle centred on the origin: we can set a particle vibrating without expending any energy. If rotation corresponds to charge, we can get a charge without expending energy--a condensate.
 	\begin{figure}[H]
-		\caption{Mexican Hat potential}\label{fig:mexican-hat}
-		\includegraphics[width=0.9\textwidth]{mexican-hat}
+		\begin{center}
+			\caption{Mexican Hat potential}\label{fig:mexican-hat}
+			\includegraphics[width=0.6\textwidth]{mexican-hat}
+		\end{center}
 	\end{figure}
 
 	True lowest energy should be a stationary state on circle, to avoid kinetic energy. But the uncertainty principle prohibits standing still with zero momentum: if we know that the field is zero, we don't know the velocity. The vacuum must be filled with an uncertain amount of charge.
@@ -1257,7 +1257,7 @@ TBP
 	
 	Particles have mass: maximum is Planck Mass - anything heavier would form a black hole. Largest known particle is $\approxeq 10^{-17}$ Planck mass: why so light? To detect a really huge particle we need a humungous accelerator. Maybe there are heavier particles?
 	
-	I have skipped over list of Fermions and Bosons. They should all be \emph{massless} (see below). In part this explains why masses so small. Figure \ref{fig:sm:processes} depicts some process from the Standard Model, which are relevant to this Lecture.
+	I have skipped over list of Fermions and Bosons. They should all be \emph{massless} (see below). In part this explains why masses so small. Figure \ref{fig:sm:processes} depicts some processes from the Standard Model, which are relevant to this Lecture.
 	
 	\begin{figure}[H]
 		\caption{Processes of the Standard Model (not exhaustive)}\label{fig:sm:processes}
@@ -1303,7 +1303,7 @@ TBP
 		An indefinite number of particles. In a condensate it doesn't matter whether you put in a particle or take one out.
 	\end{defn}
 
-	Is there any reason why a particle needs the Higgs phenomenon to have a  mass? Figure \ref{fig:2-a2-box-of-radiation} depicts a massless, perfectly reflective box of radiation. Since $E=mc^2$, this box acquires mass. Figure \ref{fig:2-a2-box-of-gluons} depicts to proton as a box of quarks and gluons. Even if the quarks and gluons were massless, the proton would lose only about 1\% of its mass; the rest comes from the kinetic energy of its contents. Protons and black holes don't need the Higgs mechanism. We will concentrate on electrons.
+	Is there any reason why a particle needs the Higgs phenomenon to have a  mass? Figure \ref{fig:2-a2-box-of-radiation} depicts a massless, perfectly reflective box of radiation. Since $E=mc^2$, this box acquires mass. Figure \ref{fig:2-a2-box-of-gluons} depicts the proton as a box of quarks and gluons. Even if the quarks and gluons were massless, the proton would lose only about 1\% of its mass; the rest comes from the kinetic energy of its contents. Protons and black holes don't need the Higgs mechanism. We will concentrate on electrons.
 	
 	\begin{figure}[H]
 		\caption{How to get a mass}
@@ -1319,7 +1319,7 @@ TBP
 
 	\subsection{The Dirac Electron}
 	
-	There are two kinds of electrons, right handed and left handed. They can flip, but not if they were travelling at the speed of light (time infinitely slow); in the Dirac theory, mass is the rate at which it flips. See Figure \ref{fig:2-a3-flipping-electron}. Figure \ref{fig:2-a3-Z-boson} depicts the Z boson, which can be emitted by electrons or neutrinos. The coupling isn't charge--it is called "weak hypercharge", or, as Prof Susskind says, "zilch". Zilch is like electric charge, but it isn't electric charge. When a particle with zilch accelerates, it emits a Z-boson.
+	There are two kinds of electrons, right handed and left handed. They can flip, but not if they were travelling at the speed of light (time infinitely slow); in the Dirac theory, mass is the rate at which handedness flips. See Figure \ref{fig:2-a3-flipping-electron}. Figure \ref{fig:2-a3-Z-boson} depicts the Z boson, which can be emitted by electrons or neutrinos. The coupling isn't charge--it is called "weak hypercharge", or, as Prof Susskind says, "zilch". Zilch is like electric charge, but it isn't electric charge. When a particle with zilch accelerates, it emits a Z-boson.
 	
 	\begin{figure}[H]
 	\caption{Electron flipping between left and right}
@@ -1333,7 +1333,7 @@ TBP
 		\end{subfigure}	
 	\end{figure} 
 
-	Left-handed and right-handed electrons have the same charge but different zilch: LH +1, RH 0. So zilch changes as electron changed from left to right, which is impossible since it is conserved. So the standard model electron has zero mass.
+	Left-handed and right-handed electrons have the same charge but different zilch: LH +1, RH 0. So zilch changes as electron changes from left to right, which is impossible since it is conserved. So the standard model electron has zero mass.
 	
 	We get around this by introducing the Ziggs boson. This is related to the Mexican Hat, Figure \ref{fig:mexican-hat}, and forms a condensate. It has zilch. Figure \ref{fig:2-a3-zilch} shows an electron exchanging zilch with the condensate via Ziggs bosons. This is the mechanism by which electrons, quarks, and their partners get their mass.
 	
@@ -1353,7 +1353,7 @@ TBP
 	
 	How does the Z boson get a mass?
 	
-	Figure \ref{fig:2-a3-zilch-Z} shows a Z-boson exchanging zilch with the condensate, so it oscillates between Z and Ziggs, thereby getting mass. This is known as the Brout-Englert-Higgs phenomenon.
+	Figure \ref{fig:2-a3-zilch-Z} shows a Z-boson exchanging zilch with the condensate; it oscillates between Z and Ziggs, thereby getting mass. This is known as the Brout-Englert-Higgs phenomenon.
 	
 	If there were a condensate of electric charge, the proton would have mass, which would be Very Bad.
 	
@@ -1376,7 +1376,7 @@ TBP
 	
 	Why was is so hard to discover?
 	
-	Figure \ref{fig:2-a3-higgs-decay} depicts the decay of the Higgs: heavy particles are favoured. WE can read diagram either left to right or right to left. We have been colliding electrons and positrons for a long time, and need very high energy. In addition cross section of reaction is slow.
+	Figure \ref{fig:2-a3-higgs-decay} depicts the decay of the Higgs: heavy particles are favoured. We can read diagram either left to right or right to left. We have been colliding electrons and positrons for a long time, and need very high energy. In addition cross section of reaction is slow.
 	
 	How about quarks? The usual ones are very light. Lightness of particles made production of Higgs unlikely. Best candidate is the top quark, the heaviest. Use top and antitop. But they aren't easy to find: they decay quickly. We have to make them. Figure \ref{fig:2-a3-gluons} depicts protons colliding at LHC: they contain gluons that make the top quark. 
 	
