@@ -51,13 +51,13 @@ Figure \ref{fig:particles:fields:forces} shows a triangle of concepts:
 Consider two electric charges
 
 \begin{align*}
-E=&\int (e_1 \vec{E_1})^2 dV\\
-E=&\int (e_2 \vec{E_2})^2 dV\\
+E=&\int (e_1 \vec{E_1})^2 dV \text{, energy for first chanrge}\\
+E=&\int (e_2 \vec{E_2})^2 dV \text{, energy for second chanrge}\\
 E=&\int (e_1\vec{E_1}+e_2 \vec{E_2})^2 dV\\
 =&\int \underbrace{(e_1\vec{E_1})^2}_\text{self energy}+ \underbrace{(e_2\vec{E_2})^2}_\text{self energy} + \underbrace{2e_1e_2\vec{E_1}.\vec{E_2}}_\text{interesting term}
 \end{align*}
 
-The first two terms represent self energy, which is includes in mass; the last term is proportional to the charges.
+The first two terms represent self energy, which is included in mass; the last term is proportional to the charges.
 \begin{itemize}
 	\item  If they are so far away that $\vec{E_1}$ is negligible near second charge there will be no perceptible effect.
 	\item If the particles are close we will get a contribution from $\vec{E_1}.\vec{E_2}$. This turns out to be the Coulumb force. 
@@ -69,26 +69,28 @@ Where do molecular forces come from? There are several mechanisms: we will focus
 
 \begin{figure}[H]
 	\caption[Molecular forces: two protons and a single electron]{Two protons and a single electron. Classically electron can't swap between Figures \ref{fig:2proton1Electrona} and \ref{fig:2proton1Electronb}, but QM allows it to tunnel.}\label{fig:2protons:electron}
-	\begin{subfigure}{0.45\textwidth}
-		\caption{Right hand protons is a long way from left: Schr\"odinger wave function for electron near left hand.} 
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Right hand proton is a long way from left. We show the Schr\"odinger wave function for electron near left hand.} 
 		\includegraphics[width=0.9\textwidth]{2proton1Electrona}\label{fig:2proton1Electrona}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Protons closer together: Figure \ref{fig:2proton1Electrona} still possible, but so is this; they have the same energy.}
 		\includegraphics[width=0.9\textwidth]{2proton1Electronb}\label{fig:2proton1Electronb}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Effect of tunnelling}
 		\includegraphics[width=0.9\textwidth]{2proton1Electronab}\label{fig:2proton1Electronab}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Energy as a function of distance between protons. Gradient in energy tries to move protons together, but Coulomb force tries to separate them; nett effect is a covalent bond.}
 		\includegraphics[width=0.9\textwidth]{2proton1ElectronEnergy}\label{fig:2proton1ElectronEnergy}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\caption{Electron exchange between protons. This lowers energy, leading to attraction.}
-		\includegraphics[width=0.9\textwidth]{2proton1ElectronHopping}\label{fig:2proton1ElectronHopping}
-	\end{subfigure}
+
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Electron exchange between protons. This lowers energy, leading to attraction.}
+	\includegraphics[width=0.5\textwidth]{2proton1ElectronHopping}\label{fig:2proton1ElectronHopping}
 \end{figure}
 
 Key ideas: 
@@ -110,20 +112,25 @@ Can we think of Coulumb force in QM terms? Consider single proton and electron: 
 
 \begin{figure}[H]
 	\caption{Emission and absorption of photons}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Electron absorbing and reabsorbing photons.}
 		\includegraphics[width=0.9\textwidth]{2-1-electron-photons0}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\caption{The electron is a QM superposition of states}\label{fig:2-1-electron-photons}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{The electron is a QM superposition of states}\label{fig:2-1-electron-photonst}
 		\includegraphics[width=0.9\textwidth]{2-1-electron-photons}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Two Electrons }
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Two Electrons absorbing and reabsorbing photons.}\label{fig:2-1-second-electron-photons}
 		\includegraphics[width=0.9\textwidth]{2-1-second-electron-photons}
 	\end{subfigure}
-		\begin{subfigure}{0.45\textwidth}
-		\caption{Feynman diagram of Electrons absorbing and reabsorbing photons. Sometimes one electron absorbs photon emitted to other.}\label{fig:2-1-electron-photons-feynmann}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Feynman diagram of Electrons absorbing and reabsorbing photons. Sometimes one electron absorbs photon emitted by other.}\label{fig:2-1-electron-photons-feynmann}
 		\includegraphics[width=0.9\textwidth]{2-1-second-electron-photons-feynman}
 	\end{subfigure}
 \end{figure}
@@ -140,12 +147,12 @@ The Standard Model is a mess. We don't understand why the particles are as they 
 
 \begin{table}[H]
 	\begin{center}
-		\caption{Particles (Field symbol)}
+		\caption{Some Particles and Fields}
 		\begin{tabular}{|l|l|l|r|l|r|}\hline
 			Name&Symbol&Type&Charge&B\#&Mass\\ \hline
 			photon&$\gamma$ A&B&0&0&0 \\ \hline
 			electron&$e+\pm \Psi_e\}$&F&-1&0&$0.15MeV$\\ \hline
-			Quark&q&F&&$\frac{1}{3}$&\\ \hline
+			Quark&q&F&below&$\frac{1}{3}$&below\\ \hline
 			down&q(Q) $\Psi_q$&F&$-\frac{1}{3}$&$\frac{1}{3}$&10meV\\ \hline
 			up&&F&$\frac{2}{3}$&$\frac{1}{3}$&5meV\\ \hline
 			strange&&F&$-\frac{1}{3}$&$\frac{1}{3}$&100meV\\ \hline
@@ -158,21 +165,21 @@ The Standard Model is a mess. We don't understand why the particles are as they 
 
 Notes:\begin{enumerate}
 	\item Particle and Field usually have the same name
-	\item charge--electron is unit
-	\item mass--unit is electron Volt--eV
+	\item Electric charge--electron is unit
+	\item Mass--unit is electron Volt--eV
 	\item Proton has Baryon number 1.
-	\item 3 families of quarks. Why?
+	\item Why are there 3 families of quarks?
 \end{enumerate}
 
 Figure \ref{fig:fep} depicts the way that electromagnetic processes emerge from a Lagrangian.
 
 \begin{figure}[H]
 	\caption{Electromagnetic processes emerge from a Lagrangian: $\mathcal{L}$: $e \Psi_e^\dagger \Psi_e A$}\label{fig:fep}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Fundamental electromagnetic process. Can rearrange.}\label{fig:fep1}
 		\includegraphics[width=0.9\textwidth]{2-1-em-process}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Fundamental electromagnetic process--exchange of particle.}\label{fig:fep2}
 		\includegraphics[width=0.9\textwidth]{2-1-em-process-feynman}
 	\end{subfigure}
@@ -196,11 +203,11 @@ Can we make an analogue of proton/neutron with strange quarks? Yes. E.g. $sdu$, 
 			$\pi^+$&$u\bar{d}$&+1&$\approx140 meV$  \\ \hline
 			$\pi^0$&$\frac{1}{\sqrt{2}}\big(\ket{\bar{u}u}+\ket{\bar{d}d}\big)$&0&$\approx140 meV$  \\ \hline
 			$\eta$&$\frac{1}{\sqrt{2}}\big(\ket{\bar{u}u}-\ket{\bar{d}d}\big)$& 0&$\approx500 meV$ \\ \hline
-			&$\bar{u}s$&-1& \\ \hline
-			&$u\bar{s}$&+1& \\ \hline
-			&$\bar{d}s$&0& \\ \hline
-			&$d\bar{s}$&0& \\ \hline
-			&$\bar{s}s$&0& \\ \hline
+			$K^-$&$\bar{u}s$&-1& \\ \hline
+			$K^+$&$u\bar{s}$&+1& \\ \hline
+			$\bar{K}^0$&$\bar{d}s$&0& \\ \hline
+			$K^0$&$d\bar{s}$&0& \\ \hline
+			$\Phi$&$\bar{s}s$&0& \\ \hline
 		\end{tabular}
 	\end{center}
 \end{table}
@@ -208,21 +215,19 @@ Can we make an analogue of proton/neutron with strange quarks? Yes. E.g. $sdu$, 
 We also have strange mesons ($K-mesons$).
 
 
-\section{Quantum Chromodynamics}
+\section{Quantum Chromodynamics}\label{section:qcd}
 
 This is the theory of Quarks and gluons, and the things that they make.
 
 \begin{defn}[Hadron]
-	The things that Quarks and gluons make are called hadrons.
+	The things that Quarks and gluons make are called hadrons. There are 3 types of hadron: baryons, Definition \ref{defn:baryon}, mesons, Definition \ref{defn:meson}, and glueballs, Definition \ref{defn:glueball}.
 \end{defn}
 
-
-
-\begin{defn}[Baryon]
+\begin{defn}[Baryon]\label{defn:baryon}
 	An object made of 3 quarks is called a baryon: they always have spin $\frac{1}{2}$, $\frac{3}{2},...$.
 \end{defn}
 
-\begin{defn}[Meson]
+\begin{defn}[Meson][Baryon]\label{defn:meson}
 	An object made of quark plus antiquark is called a meson; mesons are quark-anti-quark pairs.
 \end{defn}
 
@@ -231,17 +236,17 @@ This is the theory of Quarks and gluons, and the things that they make.
 \end{defn}
 
 \subsection{Spin without group theory}
-We start with the basic commutation relations:\cite{susskind2009particles}
+We start with the basic commutation relations for angular momentum:\cite{susskind2009particles}
 \begin{align*}
 	[L_x,L_y] =& i \hslash L_z\\
 	[L_y,L_z] =& i \hslash L_x\\
 	[L_z,L_x] =& i \hslash L_y
 \end{align*}
 
-In a previous set of lectures, \cite{susskind2009particles}:
+In a previous set of lectures, \cite{susskind2009particles}, we saw that:
 
 \begin{itemize}
-	\item we broke the symmetry by focusing on $L_z$.
+	\item we can break the symmetry by focusing on $L_z$.
 	\item we can measure only one $L_i$ at a time.
 	\item $L_i$ is quantized--$\hslash$.
 \end{itemize}
@@ -340,11 +345,11 @@ The fundamental electromagnetic process is depicted in Figure \ref{fig:fep1}. A 
 
 \begin{figure}[H]
 	\caption{Gluons}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Introducing the gluon}
 		\includegraphics[width=0.9\textwidth]{2-2-gluon1}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{A gluon behaves a bit like a quark-antiquark pair: this the gluon as a fictitious quark-antiquark pair}
 		\includegraphics[width=0.9\textwidth]{2-2-gluon2}
 	\end{subfigure}
@@ -363,19 +368,19 @@ B\bar{R}&B\bar{G}&B\bar{B}
 Gluons can interact with each other--Figure \ref{2-2-gluon6}.
 \begin{figure}[H]
 	\caption{The basic vertices of QCD}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Red quark changes to green: analogous to process with photon.}
 		\includegraphics[width=0.9\textwidth]{2-2-gluon3}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Red quark changes to green, using fictitious quark-antiquark pair}
 		\includegraphics[width=0.9\textwidth]{2-2-gluon4}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Second basic vertex, which has no analogue for photons. Fictitious quark-antiquark pairs represent gluons. This process makes QCD more complex and more interesting.}\label{2-2-gluon5}
 		\includegraphics[width=0.9\textwidth]{2-2-gluon5}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Second basic vertex, redrawn with gluons, instead of fictitious quark-antiquark pairs. Use Figure \ref{2-2-gluon5} to determine which combinations don't break any lines.}\label{2-2-gluon6}
 		\includegraphics[width=0.9\textwidth]{2-2-gluon6}
 	\end{subfigure}
@@ -385,11 +390,11 @@ Photons cannot exchange photons, but gluons can exchange gluons, which means tha
 
 \begin{figure}[H]
 	\caption{Photons cannot exchange photons, but gluons can exchange gluons.}\label{fig:quarks:gluons:forces}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Force between quarks}
 		\includegraphics[width=0.9\textwidth]{2-2-gluon7}
 	\end{subfigure}
-		\begin{subfigure}{0.45\textwidth}
+		\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Force between gluons}
 		\includegraphics[width=0.9\textwidth]{2-2-gluon8}
 	\end{subfigure}
@@ -638,7 +643,7 @@ Gluon behaves a quark-antiquark under colour symmetry: it transforms under the 8
 
 What if we combine gluons together, or gluons with quarks?
 
-\begin{defn}[Glueball]
+\begin{defn}[Glueball][Baryon]\label{defn:glueball}
 	Combine two gluons. $\bm{8} \otimes \bm{8} = \bm{63} \oplus \bm{1}$ -- 2 gluons. The singlet is known as a glueball.
 \end{defn}
 
@@ -695,23 +700,23 @@ The 8 gluons aren't neutral, as they have colour. The carry large amounts of ene
  
 \begin{figure}[H]
 	\caption{Why QCD is more complicated than QED}\label{fig:QCD:QED}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption[Quark surrounded by Gluon Field]{Quark surrounded by Gluon Field: there are 8 such fields, which transform according to the {\bfseries 8}.}\label{fig:2-4-quark-gluon-field}
 		\includegraphics[width=0.9\textwidth]{2-4-quark-gluon-field}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{If Figure \ref{fig:2-4-quark-gluon-field} were an electromagnetic field, field lines would not attract or repel each other. In QCD they have colour, so they attract each other and form tubes.}
 		\includegraphics[width=0.9\textwidth]{2-4-quark-gluon-field-tubes}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Tube linking quark and anti-quark-fluxoid. There is a uniform field, no matter how far particles separated.}
 		\includegraphics[width=0.9\textwidth]{2-4-quark-gluon-field-tubes-QAQ}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Fluxoid. There is a uniform energy per unit length, so force increases as tube stretches. Unless flux tube ends at a quark/antiquark, energy is infinite.}
 		\includegraphics[width=0.9\textwidth]{2-4-quark-gluon-field-tube-uniform-energy}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{If meson has enough energy, tube may break, using quark-antiquark pair from vacuum. This forms a jet.}
 		\includegraphics[width=0.9\textwidth]{2-4-split-meson}
 	\end{subfigure}
@@ -758,11 +763,11 @@ Gauge theories  always have conserved quantities, hence symmetries. Colour is an
 
 \begin{figure}[H]
 	\caption{Basic interactions of gauge theory}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{i becomes j by emitting a quantum of field $A_{ji}$}
 		\includegraphics[width=0.9\textwidth]{2-change-charge}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Interaction with gluons only: they exert forces that photons don't.}
 		\includegraphics[width=0.9\textwidth]{2-5-gluon-gluon.jpg}
 	\end{subfigure}
@@ -842,19 +847,19 @@ Imagine that W is like photons or gluons, so it behaves as shown in Figure \ref{
 
 \begin{figure}[H]
 	\caption{W are like photons or gluons}\label{fig:W:photon:fluon}
-	\begin{subfigure}{0.2\textwidth}
+	\begin{subfigure}[t]{0.2\textwidth}
 		\caption{$e \rightarrow\nu + W^-$}\label{fig:2-5-W1}
 		\includegraphics[width=0.9\textwidth]{2-5-W1}
 	\end{subfigure}
-	\begin{subfigure}{0.2\textwidth}
+	\begin{subfigure}[t]{0.2\textwidth}
 		\caption{$d \rightarrow u + W^-$}
 		\includegraphics[width=0.9\textwidth]{2-5-W2}
 	\end{subfigure}
-	\begin{subfigure}{0.2\textwidth}
+	\begin{subfigure}[t]{0.2\textwidth}
 		\caption{$s \rightarrow c + W^-$}
 		\includegraphics[width=0.9\textwidth]{2-5-W3}
 	\end{subfigure}
-	\begin{subfigure}{0.2\textwidth}
+	\begin{subfigure}[t]{0.2\textwidth}
 		\caption{$W^+$ and $W^-$ are antiparticles, so we can redraw \ref{fig:2-5-W1}}
 		\includegraphics[width=0.9\textwidth]{2-5-W4}
 	\end{subfigure}
@@ -862,15 +867,15 @@ Imagine that W is like photons or gluons, so it behaves as shown in Figure \ref{
 
 \begin{figure}[H]
 	\caption{Examples of W boson mediated decays}
-	\begin{subfigure}{0.30\textwidth}
+	\begin{subfigure}[t]{0.30\textwidth}
 		\caption{Pion decay (electron, muon, tau, and associated neutrino)}
 		\includegraphics[width=0.9\textwidth]{2-5-pion-decay}
 	\end{subfigure}
-	\begin{subfigure}{0.30\textwidth}
+	\begin{subfigure}[t]{0.30\textwidth}
 		\caption{Muon decay}
 		\includegraphics[width=0.9\textwidth]{2-5-muon-decay}
 	\end{subfigure}
-	\begin{subfigure}{0.30\textwidth}
+	\begin{subfigure}[t]{0.30\textwidth}
 		\caption{Neutron decay. W doesn't have enough energy to make muon, unless we hit neutron really hard.}
 		\includegraphics[width=0.9\textwidth]{2-5-neutron-decay}
 	\end{subfigure}
@@ -902,11 +907,11 @@ In Figure \ref{tab:QCD:rows} we have three symmetries: $SU(3) \otimes SU(2) \oti
 
 \begin{figure}[H]
 	\caption{Possible fates of a W boson}
-	\begin{subfigure}{0.5\textwidth}
+	\begin{subfigure}[t]{0.5\textwidth}
 		\caption{Decay of a neutron. The $W$ line is the \emph{propagator}}\label{fig:2-6-W1}
 		\includegraphics[width=\textwidth]{2-6-W1}
 	\end{subfigure}
-	\begin{subfigure}{0.4\textwidth}
+	\begin{subfigure}[t]{0.4\textwidth}
 		\caption{A different fate for a W Boson: re-absorption}\label{fig:absorption:W:boson}
 		\includegraphics[width=\textwidth]{2-6-W2}
 	\end{subfigure}
@@ -1005,7 +1010,7 @@ Since $V$ is completely symmetric, there will be two ground states. Why can't sy
 		\includegraphics[width=0.8\textwidth]{2-7-V-simple}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{0.9\textwidth}
+	\begin{subfigure}[t]{0.9\textwidth}
 		\begin{center}
 			\caption{Domain wall for potential of Figure \ref{fig:2-7-V}}\label{fig:2-7-V-domain-wall}
 			\includegraphics[width=0.8\textwidth]{2-7-V-domain-wall}
@@ -1051,19 +1056,19 @@ Are there domain walls? Figure \ref{fig:2-7-V-quartic-domain-wall} shows an atte
 
 \begin{figure}[H]
 	\caption{Potentials}\label{fig:s-7-potentials}
-	\begin{subfigure}{0.5\textwidth}
+	\begin{subfigure}[t]{0.5\textwidth}
 		\caption{ (\ref{eq:symmetric})-- Minimum at origin.}\label{fig:2-7-V-quad}
 		\includegraphics[width=\textwidth]{2-7-V-quad}
 	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
+	\begin{subfigure}[t]{0.5\textwidth}
 		\caption{(\ref{eq:breakable:symmetric})--Minimum on circle of radius $f$.}\label{fig:2-7-V-quartic}
 		\includegraphics[width=\textwidth]{2-7-V-quartic}
 	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
+	\begin{subfigure}[t]{0.5\textwidth}
 		\caption{Clamp values to try to produce domain wall}\label{fig:2-7-V-quartic-domain-wall-ab}
 		\includegraphics[width=\textwidth]{2-7-V-quartic-domain-wall-ab}
 	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
+	\begin{subfigure}[t]{0.5\textwidth}
 		\caption{We don't have the clamped values diametrically opposed to remove ambiguity.}\label{fig:2-7-V-quartic-domain-wall}
 		\includegraphics[width=\textwidth]{2-7-V-quartic-domain-wall}
 	\end{subfigure}
