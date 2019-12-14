@@ -1172,15 +1172,18 @@ Add a 4-vector of fields: in electrodynamics this would be the vector potential,
 
 We will modify the Lagrangian by replacing ordinary derivatives with covariant derivatives\footnote{Not General Relativistic covariant derivatives}.
 \begin{align*}
-	D \Phi^\prime =& \big[\Phi + \cancel{i \Phi \frac{\partial \theta}{\partial x}}\big]e^{i \theta} + i \big[A-\cancel{\partial \theta} \big]\Phi e^{i \theta} \text{, cancelling troublemakers}\\
-	=& D \Phi  e^{i \theta} \text{, similarly}\\
+	D_\mu \Phi^\prime =& \partial_\mu \Phi^\prime + i A_\mu^\prime \Phi^\prime\\
+	=& e^{i\theta}\big(\partial_\mu \Phi +\cancel{i\partial_\mu \theta \Phi} \big) + i \big(A_\mu -\cancel{ \partial_\mu \theta} \big) e^{i \theta(x)} \Phi\\
+	=& e^{i\theta} \big( \partial_\mu \Phi +i A_\mu \Phi \big)\\
+	=& (D_\mu \Phi)^\prime \text{, or, suppresing indices}\\
+	D \Phi^\prime =&  D \Phi  e^{i \theta} \text{, similarly}\\
 	D {\Phi^\prime}^* =& D {\Phi}^*  e^{-i \theta} \text{, and}\\
 	D \Phi^\prime D {\Phi^\prime}^*=& D \Phi D {\Phi}^* \text{, so the Lagrangian is invariant}
 \end{align*}
 
 Now this wouldn't be an interesting vector potential without some dynamics.
 
-Energy of Electromagnetic field is given by $E^2 + B^2$, Lagrangian $E^2-B^2$.
+The energy of an Electromagnetic field is given by $E^2 + B^2$, and the Lagrangian $E^2-B^2$.
 
 \begin{align*} 
 	F_{\mu,\nu} =& \partial_\mu A_\nu - \partial_\nu A_\mu \text{, see (\ref{eq:field:tensor})}\\
