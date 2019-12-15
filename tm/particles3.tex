@@ -129,7 +129,7 @@ Feynman diagrams are based on two things:
 	\item propagators: represent motion from one point to another--Figure \ref{fig:3-1-feynman-propagator}.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
 	\begin{center}
 		\caption{Elements of a Feynman diagram}
 		\begin{subfigure}[t]{0.45\textwidth}
@@ -143,7 +143,35 @@ Feynman diagrams are based on two things:
 	\end{center}
 \end{figure}
 
-\url{https://youtu.be/W6srShxBCrk?t=2227}
+Let's start with renormalization of the mass. Notice that (\ref{eq:potential}) contains $m^2$ -- usually mass only appears as $\sqrt{m^2}$. So what is renormalization of $m^2$? In Figure \ref{fig:3-1-feynman-vertices}, do we care if the emission and absorption points are really the same? We aren't interested in anything that is finer than the resolution of our accelerators, so if we can find a process that mimics vertex,  even if blurred, any process that absorbs and re-emits can be counted as part of mass term--for example Figure \ref{fig:3-1-feynman-mimic}.
+
+
+\begin{figure}[H]
+	\caption{Mimicking the Vertex}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Particle emitted and returns to same point: scale so small we don't notice}\label{fig:3-1-feynman-mimic}
+		\includegraphics[width=\textwidth]{3-1-feynman-mimic}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Amplitude following cut-off}\label{fig:3-1-cutoff}
+		\includegraphics[width=\textwidth]{3-1-cutoff}
+	\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Original mass term}\label{fig:3-1-original}
+		\includegraphics[width=\textwidth]{3-1-original}
+	\end{subfigure}
+\end{figure}
+
+We saw in Figure \ref{fig:3-1-feynman-propagator} that the propagator has amplitude:
+\begin{align*}
+	\braket{0|\Phi(y)\Phi(x)|0}=&\frac{1}{|x-y|^2}
+\end{align*}
+
+Let us introduce a cut-off, saying that we are not interested in scales smaller than $\delta$; we smear the point over $\delta$--Figure \ref{fig:3-1-cutoff}. Figure \ref{fig:3-1-original} shows the original mass term. If we include Figure \ref{fig:3-1-cutoff} we see that the effect of ignoring terms smaller than $\delta$ is to increase the effective mass: the amplitude becomes $\frac{m_0^2}{2}+\frac{1}{\delta^2}$.  \emph{This is what we'd see in the laboratory if our resolution isn't high enough to resolve lengths less than $\delta$.}  
+
+But there are more Feynman diagrams!
+
+\url{https://youtu.be/W6srShxBCrk?t=2705}
 	
 \section{Fermions and bosons}
 
