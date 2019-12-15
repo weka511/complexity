@@ -35,6 +35,8 @@
 
 \section{Renormalization  and dimensional analysis}
 
+\subsection{Renormalization}
+
 Most of the basic ideas of this quarter originated from questions having to do with renormalization of the standard model. Renormalization is a combination of two things:
 \begin{itemize}
 	\item Learning how to eliminate out of the description of physics things arising from distances that are so small that they are irrelevant to the questions you are asking
@@ -58,8 +60,10 @@ Small usually goes with fast.
 Consider two atoms, each including a cloud of electrons. We want to replace Figure \ref{fig:3-2-atoms} with two simple atom,es with forces between them. Electrons are very fast compared to nuclei, so we cold almost think of atom as a bowling ball with little flies.
 
 \begin{figure}[H]
-	\caption{Two atoms with clouds of electrons}\label{fig:3-2-atoms}
-	\includegraphics[width=0.5\textwidth]{3-2-atoms}
+	\begin{center}
+		\caption{Two atoms with clouds of electrons}\label{fig:3-2-atoms}
+		\includegraphics[width=0.5\textwidth]{3-2-atoms}
+	\end{center}
 \end{figure}
 
 First approximation: the atoms are so heavy that they don't move at all. Start by writing down Hamiltonian.
@@ -81,9 +85,65 @@ To a first approximation fix the protons and treat the Hamiltonian as being for 
 E=& \underbrace{\frac{P_1^2}{M} + \frac{P_2^2}{M} + \frac{e^2}{R_{12}}}_\text{protons} +\underbrace{ E_{electrons}(R_1,R_2)}_\text{Part of potential energy}
 \end{align*}
 
-We don't have to think about electrons again. All renrmalization is based on this idea.
+We don't have to think about electrons again. All renormalization is based on this idea. 
 
-\url{https://youtu.be/W6srShxBCrk?t=1195}
+\subsection{Dimensional Analysis}
+
+In physics we have three scales, distance, time, and mass, and we can get rid of two of them by setting:
+\begin{align*}
+	c=&1\\
+	\hslash=& 1
+\end{align*} 
+but we still need one dimension, which we will take to be a length.
+
+\begin{align*}
+	[m] =& [E]\\
+	=& [P]\\
+	[l] =& [t]\\
+	=& \frac{1}{[m]}
+\end{align*}
+
+\subsection{A typical quantum field theory}
+
+Renormalizing a scalar field $\Phi$. Our Lagrangian is:
+
+\begin{align*}
+	\mathcal{L} =& (\partial_\mu \Phi)^2 - V(\Phi)\\
+	S =& \int d^4 x \mathcal{L} \text{ action - same units as $\hslash=1$}
+\end{align*}
+
+This means that $\mathcal{L}$ had dimensions $[l^{-4}]$
+
+\begin{align*}
+	[(\frac{\partial \Phi}{\partial x})^2]=l^{-4}\\
+	[\Phi] = l^{-1}
+\end{align*}
+We imagine that the potential is something like:
+\begin{align*}
+	V(\Phi) =& \frac{m^2}{2} \Phi^2 + g \Phi^3 + \underbrace{\lambda}_\text{dimensionless} \Phi^4 \numberthis \label{eq:potential}
+\end{align*}
+
+Feynman diagrams are based on two things:
+\begin{itemize}
+	\item vertices, read off from V--Figure \ref{fig:3-1-feynman-vertices}
+	\item propagators: represent motion from one point to another--Figure \ref{fig:3-1-feynman-propagator}.
+\end{itemize}
+
+\begin{figure}
+	\begin{center}
+		\caption{Elements of a Feynman diagram}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Feynman Vertices for (\ref{eq:potential}). Cross in left hand vertex indicates absorption/re-emission}\label{fig:3-1-feynman-vertices}
+			\includegraphics[width=\textwidth]{3-1-feynman-vertices}
+		\end{subfigure}
+			\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Propagator $\braket{0|\Phi(y)\Phi(x)|0}$: amplitude that particle created at $x$ found at $y$. Dimension $[l^-2]$--$\frac{1}{|x-y|^2} if no mass$. If x and y close, propagator blows up--this is the source of all divergences in QFT.}\label{fig:3-1-feynman-propagator}
+		\includegraphics[width=\textwidth]{3-1-feynman-propagator}
+	\end{subfigure}
+	\end{center}
+\end{figure}
+
+\url{https://youtu.be/W6srShxBCrk?t=2227}
 	
 \section{Fermions and bosons}
 
