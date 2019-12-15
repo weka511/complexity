@@ -1,5 +1,21 @@
 \documentclass[]{article}
 
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm}
+\usepackage[toc,nonumberlist]{glossaries}
+\usepackage{glossaries-extra}
+\usepackage[toc,page]{appendix}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lemma}[thm]{Lemma}
+\graphicspath{{figs/}}
+\widowpenalty10000
+\clubpenalty10000
+\setcounter{tocdepth}{2}
+
 %opening
 \title{Theoretical Minimum\\Particle Physics 3\\Supersymmetry and Grand Unification}
 \author{}
@@ -9,19 +25,106 @@
 \maketitle
 
 \begin{abstract}
-
+	These are my notes for the \emph{New Revolutions in Particle Physics 3} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind2010supersymmetry}.
 \end{abstract}
 
-\section{Renormalization concepts, and dimensional analysis}
+\tableofcontents
+\listoffigures
+\listoftables
+\listoftheorems
+
+\section{Renormalization  and dimensional analysis}
+
+Most of the basic ideas of this quarter originated from questions having to do with renormalization of the standard model. Renormalization is a combination of two things:
+\begin{itemize}
+	\item Learning how to eliminate out of the description of physics things arising from distances that are so small that they are irrelevant to the questions you are asking
+	\item learning how to think about how dimensional analysis tells you how to answer some of the difficult questions about field theory that have to do with distances much smaller than you might be interested in.
+\end{itemize}
+
+Examples of getting rid of things that are too small to be of interest.
+\begin{itemize}
+	\item Studying the nucleus at protons and neutrons instead of quarks. Use QCD to figure out properties of protons and neutrons and their forces. Nucleons move slowly, so we can ignore relativity. Now forget quarks.
+	\item For atoms, can forget nucleons.
+\end{itemize}
+
+The result is a coarse-grained description that is less accurate byt more useful.
+
+In field theory each possible wavelength represents a degree of freedom. In describing things at one length scale we don't want to deal with shorter scales. We find a way to sum up the shorter stuff and replace by effective new parameters.
+
+Example: atoms and atomic forces.
+
+Small usually goes with fast.
+
+Consider two atoms, each including a cloud of electrons. We want to replace Figure \ref{fig:3-2-atoms} with two simple atom,es with forces between them. Electrons are very fast compared to nuclei, so we cold almost think of atom as a bowling ball with little flies.
+
+\begin{figure}[H]
+	\caption{Two atoms with clouds of electrons}\label{fig:3-2-atoms}
+	\includegraphics[width=0.5\textwidth]{3-2-atoms}
+\end{figure}
+
+First approximation: the atoms are so heavy that they don't move at all. Start by writing down Hamiltonian.
+
+\begin{align*}
+	E=& \underbrace{\frac{P_1^2}{M} + \frac{P_2^2}{M} + \frac{e^2}{R_{12}}}_\text{protons} + \underbrace{\sum \frac{q^2}{2m} + \frac{e^2}{r_{ij}}- \frac{e^2}{R_{1i}} - \frac{e^2}{R_{2i}}}_\text{electrons} \numberthis \label{eq:hamiltonian:H2}
+\end{align*}
+
+There are two time scales:
+\begin{itemize}
+	\item slow for nuclei, which are heavy
+	\item fast for electrons, which are a blur.
+\end{itemize}
+
+To a first approximation fix the protons and treat the Hamiltonian as being for electrons. We solve the Schr\"odinger equation for the lowest energy state, $E_{electrons}(R_1,R_2)$. Then (\ref{eq:hamiltonian:H2}) becomes:
+
+
+\begin{align*}
+E=& \underbrace{\frac{P_1^2}{M} + \frac{P_2^2}{M} + \frac{e^2}{R_{12}}}_\text{protons} +\underbrace{ E_{electrons}(R_1,R_2)}_\text{Part of potential energy}
+\end{align*}
+
+We don't have to think about electrons again. All renrmalization is based on this idea.
+
+\url{https://youtu.be/W6srShxBCrk?t=1195}
+	
 \section{Fermions and bosons}
+
+TBP
+
 \section{Propagators and renormalization of mass}
+
+TBP
+
 \section{Symmetry and Grassmann numbers}
+
+TBP
+
 \section{A first supersymmetric model}
+
+TBP
+
 \section{Supersymmetry building blocks}
+
+TBP
+
 \section{Lagrangians that preserve supersymmetry}
+
+TBP
+
 \section{Generalizing supersymmetry to 3+1 spacetime, and QFT}
+
+TBP
+
 \section{Supersymmetry breaking and an introduction to grand unified theories}
+
+TBP
+
 \section{GUTs, the SU(5) representation, proton decay}
 
+TBP
+
+
+\bibliographystyle{unsrt}
+\addcontentsline{toc}{section}{Bibliography}
+\raggedright
+\bibliography{tm}
 
 \end{document}
