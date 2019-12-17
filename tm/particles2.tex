@@ -1310,15 +1310,35 @@ $\Phi$ is a charge carrying boson field, and $A_\mu$ is the electromagnetic pote
 
 All gauge theories have a similar structure.
 
+\subsection{The Higgs phenomenon}
+
 What happens when a potential such as Figure \ref{fig:mexican-hat} breaks the symmetry?
 
-The $F$ is massless, as it contains only derivatives: it isn't changed by shifting in space. So we have two massless particles, the Goldstone boson and the photon. If photon had mass we have a term proportional to $A^2$. This isn't gauge invariant: $A^2 \rightarrow (A+\partial \theta)^2$.
+The $F$ is massless, as it contains only derivatives: it isn't changed by shifting in space. So we have two massless particles, the Goldstone boson and the photon. If photon had mass we have a term proportional to $A^2$. This isn't gauge invariant: $A^2 \rightarrow (A+\partial \theta)^2$. Gauge invariance prohibits mass
 
-\subsection{The Higgs particle}
+\begin{align*}
+	\mathcal{L} =& D\Phi^* D\Phi -V(\Phi^*\Phi) +F^2\\
+	=& \big( \Phi^* - i A \Phi^*\big) \big( \Phi + i A \Phi\big) -V(\Phi^*\Phi) +F^2
+\end{align*}
 
-\subsection{Covariant derivative}
+Let us look at $\Phi = f$. Then the Lagrangian contains a term $f^2A^2$, which behaves like a mass $\sqrt{2}f$.
 
-\url{https://youtu.be/fw4K3sgza04?t=3895}
+When we spontaneously break symmetry and consider field near $f$, photon behaves as if it had a mass.
+
+Goldstone boson disappears. The Goldstone boson is a slowly varying $\alpha$. We can make $\alpha$ vary by gauge transformation, which surely involves the Goldstone boson. But gauge transformation is a symmetry; it doesn't change energy and remains in the ground state. The Goldstone boson disappears, and the massless photon is replaced by a massive one. The Higgs boson now has a mass. That is the Higgs phenomenon.
+
+
+Freeze radial variable.
+
+\begin{align*}
+	D \Phi = (\partial \alpha + iA)e^{i\alpha}f\\
+	D \Phi^* = (\partial \alpha - iA)e^{-i\alpha}f
+\end{align*}
+
+We make a gauge transformation to get rid of $\alpha$: we subtract $\theta$. All that is left of the Lagrangian is $F^2+f^2A^2$. The angular degree of freedom disappears, Goldstone is gone, photon gets a mass.
+
+This is also what happens in super-conductance. There are charge bosons, "Cooper pairs" of electrons. Charged boson field is shifted from origin, and gives rise to a broken symmetry.
+
 
 \section{The Higgs field and fermions}
 
