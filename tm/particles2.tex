@@ -1342,6 +1342,8 @@ This is also what happens in super-conductance. There are charge bosons, "Cooper
 
 \section{The Higgs field and fermions}
 
+\subsection{Bosons}
+
 The gauge bosons, Z and W, get their mass from the Higgs mechanism. Keep in mind that we aren't really talking about the photon.
 
 We derive Maxwell's equations:
@@ -1361,9 +1363,53 @@ Now we add the Higgs field:
 
 If we shift $A^\prime$ everywhere, we'd get some energy from $f^2 {A^\prime}^2$. \emph{We have introduced mass!} Vacuum shifted to some new spontaneously broken, and excitations of field in that vacuum have a mass. $\alpha$ has disappeared.
 
-There is still the thing that we froze in an approximation. What if we hot it hard enough to set it oscillating in radial direction? These are the Higgs bosons.
+There is still the thing that we froze in an approximation. What if we hit it hard enough to set it oscillating in radial direction? These are the Higgs bosons.
  
-\url{https://youtu.be/qzGY-BrCUgA?t=1434}
+\subsection{Fermions}
+
+Where do they get their mass?
+
+We go back to weak interactions.
+
+Reflection symmetry is not a good symmetry of elementary particles (1950s). This is a symmetry of QM and QCD, but it is not a symmetry of the weak interaction (mirror image of a weak interaction is not another possible process!). 
+
+\begin{figure}[H]
+	\caption{The electron is always left handed in n weak interactions}
+	\begin{subfigure}{0.4\textwidth}
+		\caption{Beta decay of a neutron}\label{fig:2-9-beta-decay-neutron}
+		\includegraphics[width=0.8\textwidth]{2-9-beta-decay-neutron}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\caption{W boson converting left handed eelctron to neutrino}\label{fig:2-9-W-boson}
+		\includegraphics[width=0.8\textwidth]{2-9-W-boson}
+	\end{subfigure}
+\end{figure}
+
+Is there a notion of handedness? Yes, we have spin and direction of motion. Either it rotates with direction of motion (right handed screw) or left handed. You might think that Figure \ref{fig:2-9-beta-decay-neutron} could make right-handed or left-handed neutrons, but the electrons are always left handed. Moreover in scattering by a W-boson, it is only the left handed electron that interacts with a W-bosn--e.g. Figure \ref{fig:2-9-W-boson}. It is an experimental fact that the left=handed electron scatter, and the right handed one doesn't. Similarly it is always the left-handed neutrino that interacts: it is questionable whther there are right handed neutrinos.
+
+There is something asymmetric about weak interactions: it is as if left=handed particles carried "charge" associated with boson, but right don't.
+
+Let's go back to the Dirac equation. The Dirac Field, $\Psi$, is a four component object: particles can have spin along either direction, up or down, and positive or negative energy.
+
+\begin{align*}
+	i \big(\frac{\partial \Psi}{\partial t} + \alpha_i \frac{\partial \Psi}{\partial 	x^i}\big) =&0
+\end{align*}
+ This would be Dirac equation if electron massless, because equation only involves derivatives of the field. There is no restoring force, no tendency to oscillate.
+ 
+ \begin{align*}
+ 	i \big(\frac{\partial \Psi}{\partial t} + \alpha_i \frac{\partial \Psi}{\partial 	x^i}\big) =&m \beta \Psi
+ \end{align*}
+ 
+ The electron could be moving along with a momentum so there is a gradient. Spin can be along or opposite to direction of motion. 
+ 
+ \begin{align*}
+ 	i \big(\frac{\partial \Psi_R}{\partial t} + \alpha_i \frac{\partial \Psi_R}{\partial 	x^i}\big) =& m \Psi_L \text{, since $\beta$ interchanges R and L}\\
+ 	i \big(\frac{\partial \Psi_L}{\partial t} - \alpha_i \frac{\partial \Psi_L}{\partial 	x^i}\big) =& m \Psi_R \text{, mass couples L and R}
+ \end{align*}
+ 
+ Let us suppose that only left-handed particle has a charge (True for weak, not for electro-magnetic). Then we can't have these equations because of charge conservation. Another way to look at is the gauge transformation $e^{i\theta}$.
+ 
+\url{https://youtu.be/qzGY-BrCUgA?t=2103}
 
 \section{Renormalization and the running of coupling constants}
 
