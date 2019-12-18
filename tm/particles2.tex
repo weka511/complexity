@@ -1473,9 +1473,7 @@ Neutrinos can mix with anti-neutrinos and produce a massive Majorana particle wh
 
 \section{Renormalization and the running of coupling constants}
 
-Lagrangian for Dirac Equation.
-
-
+\subsection{Lagrangian for Dirac Equation}
 
  \begin{align*}
 	i \big(\frac{\partial \Psi}{\partial t} + \alpha_i \frac{\partial \Psi}{\partial 	x^i}\big) -m \beta \Psi =&0 \text{, we want to derive from variational principle}\\
@@ -1501,6 +1499,8 @@ We noted that $\gamma^\mu \partial_\mu$ in (\ref{eq:dirac:lagrange}) does not co
 	\bar{\Psi}\Psi =& \Psi^\dagger_L \Psi_R + \Psi^\dagger_R \Psi_L \numberthis \label{eq:LR}
 \end{align*}
 so the mass term in  (\ref{eq:dirac:lagrange}) mixes up left and right. A Dirac mass is a term in the Lagrangian which causes left and right fermions to flip. A massless Fermion has a definite chirality, but a massive one flips.
+
+\subsection{The W boson and mass scale for Higgs boson}
 
 We talked about weak interactions, in particular the emission and absorption of W and Z bosons. For some reason the W boson is emitted only by left handed particles (not true for photons, more complicated for Z, which has asymmetric couplings to LH and RH). So for $SU(2)$ the left handed particles are "charged". The term (\ref{eq:LR}) is not legal in a Lagrangian if would take charged to uncharged.
 
@@ -1533,14 +1533,46 @@ The same $f$ is used for the Z and W bosons ($\approxeq200GeV$), so we can use o
 At the time of the lecture the Higgs had not been found: however there seemed to be no way to make the mathematical theory consistent without the Higgs. The theory does make verifiable productions about the Z and W bosons.
 
 
+\subsection{Dynamics of the Higgs boson}
+
+This is all contained in Mexican Hat potential--Figure \ref{fig:2-10-MexicanHat}
+\begin{figure}[H]
+	\caption{Mexican Hat Potential for Higgs}\label{fig:2-10-MexicanHat}
+	\includegraphics[width=0.8\textwidth]{2-10-MexicanHat}
+\end{figure}
+One such function is:
+\begin{align*}
+	V =& \underbrace{-\frac{\mu^2}{2} \phi^2}_\text{This would be mass if it were positive} + \frac{\lambda}{4} \phi^4
+\end{align*}
+
+The "imaginary mass" isn't a problem; having the origin be unstable is odd, so we introduce the quartic coupling constant $\lambda$ to prevent $\phi$ falling indefinitely. It appears\footnote{Indirect evidence from weak interactions} that $\lambda$ is small, but not absurdly small, around 0.01 ($\mu$ has dimensions of mass).
+
+We want to find $f$, the $\phi$ which gives the minimum of $V$.
+\begin{align*}
+	V^\prime =& -\mu^2 \phi + \lambda \phi^3\\
+	=& 0 \text{, at a minimum. We divide by $\phi$}\\
+	f =& \frac{\mu}{\sqrt{\lambda}}
+\end{align*}
+
+$f$ is mass pf Z or W Bosons, and it comes into mass of Fermion. It controls the masses of all the particles we know about: why are they all controlled by the same phenomenon? Why are there no particles whose mass doesn't involve spontaneous symmetry breaking? E.g. we can imagine a particle whose left and right variants both have weak charge: we wouldn't need $\Phi$. Or particles without weak interactions?
+
+The general thinking (i.e. a widespread \emph{belief}) is that the mass scale is enormous, much higher that those of the known particles, and that the only small mass parameter is $f$; only those particles that are this light have been detected. But why is $f$ so small? (compared with what?) 
+
+\begin{itemize}
+	\item Planck Mass
+	\item Unification mass
+\end{itemize}
+
+These are about 15 orders of magnitude larger than $f$.
+
+Bose condensates. Helium--not normally considered an elementary particle, but, at some scale it can th treated as one. There is a Helium field, that is normally zero. Spontaneous symmetry breaking can happen and create superfluidity.
+
+If $He$ charged it can behave like a Higgs, and give mass to the photon. We have Cooper pairs of electrons, which can condense.
+
+\subsection{What is the normal mass scale for elementary particle physics?}
 
 
-
-
-
-
-
-\url{https://youtu.be/QD8SEcoFyAw?t=1215}
+\url{https://youtu.be/QD8SEcoFyAw?t=2322}
 
 
 
