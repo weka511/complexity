@@ -1431,14 +1431,18 @@ Let's go back to the Dirac equation. The Dirac Field, $\Psi$, is a four componen
  Figure \ref{fig:modified:Dirac} shows how to interpret these equations in terms of Feynman diagrams. Left and right change into each other, and the cost of emitting charged particles, with coupling constant $g$, the \emph{Yukawa coupling}.
  \begin{figure}[H]
  	\caption{Interpretation of modified Dirac equation}\label{fig:modified:Dirac}
- 	\begin{subfigure}{0.4\textwidth}
+ 	\begin{subfigure}{0.3\textwidth}
  		\caption{RH electron $\rightarrow$ LH + $\bar{\Phi}$--(\ref{eq:mod:Dirac:R})}
  		\includegraphics[width=\textwidth]{2-9-RH}
  	\end{subfigure}
-  	\begin{subfigure}{0.4\textwidth}
+  	\begin{subfigure}{0.3\textwidth}
   		\caption{LH electron $\rightarrow$ RH + $\Phi$--(\ref{eq:mod:Dirac:L})}
 	 	\includegraphics[width=\textwidth]{2-9-LH}
 	 \end{subfigure}
+   	\begin{subfigure}{0.3\textwidth}
+ 	\caption{LH electron $\rightarrow$ RH + Higgs--(\ref{eq:fermion:Higgs})}\label{fig:2-9-Higgs-boson}
+ 	\includegraphics[width=\textwidth]{2-9-Higgs-boson}
+ \end{subfigure}
  \end{figure}
 
 What if $\Phi$ is a magical Higgs field, $\Phi=\rho e^{i\alpha}$. It has a spontaneous symmetry breaking $\Phi=f$ ($\alpha$ got eaten). (\ref{eq:mod:Dirac:R}) and (\ref{eq:mod:Dirac:L}) become:
@@ -1450,8 +1454,22 @@ i \big(\frac{\partial \Psi_L}{\partial t} - \alpha_i \frac{\partial \Psi_L}{\par
 
 We use the mass of Z and W to determine $f$, so we can figure out $g$ from $m$. Since there are different masses for Fermions, there are multiple Yukawa couplings.
 
+The Higgs particle is the fluctuation away from the frozen value. We should really write:
+ \begin{align*}
+i \big(\frac{\partial \Psi_R}{\partial t} + \alpha_i \frac{\partial \Psi_R}{\partial 	x^i}\big) =& g (f+H) \Psi_L  \numberthis \label{eq:fermion:Higgs}\\
+i \big(\frac{\partial \Psi_L}{\partial t} - \alpha_i \frac{\partial \Psi_L}{\partial 	x^i}\big) =& g (f+H) \Psi_R  
+\end{align*}
 
-\url{https://youtu.be/qzGY-BrCUgA?t=3494}
+In (eq:fermion:Higgs) and Figure \ref{fig:2-9-Higgs-boson} we see that RH can turn into LH + Higgs. When Higgs is found we want to verify the relative rates of different Higgs interactions. 
+
+None of the particles in the Standard Model would have mass if it were not for the Higgs Field. Gauge Bosons normally don't have mass: the only way to give it to them is via spontaneous symmetry breaking, and it is proportional to $f$. The Fermions, because all their interactions are left handed, and they need $f$.(Positron is right handed, BTW).
+
+Left handed neutrino, right handed anti-neutrino. Ettore Majorana particle.
+
+All particles of Standard Model trace their back to $f$; if $f$ were zero, they'd be massless. Why? Maybe we haven't fount them because $f$ is around 250GeV, and that is the limit of what our current accelerators will do.
+
+Imagine that a particle existed where L and R both had charge. Then there would be no limit on mass. Some people think that the limit on mass is much greater than $f$. Dark Energy?
+
 
 \section{Renormalization and the running of coupling constants}
 
