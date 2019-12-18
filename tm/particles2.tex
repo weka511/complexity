@@ -1460,7 +1460,7 @@ i \big(\frac{\partial \Psi_R}{\partial t} + \alpha_i \frac{\partial \Psi_R}{\par
 i \big(\frac{\partial \Psi_L}{\partial t} - \alpha_i \frac{\partial \Psi_L}{\partial 	x^i}\big) =& g (f+H) \Psi_R  
 \end{align*}
 
-In (eq:fermion:Higgs) and Figure \ref{fig:2-9-Higgs-boson} we see that RH can turn into LH + Higgs. When Higgs is found we want to verify the relative rates of different Higgs interactions. 
+In (\ref{eq:fermion:Higgs}) and Figure \ref{fig:2-9-Higgs-boson} we see that RH can turn into LH + Higgs. When Higgs is found we want to verify the relative rates of different Higgs interactions. 
 
 None of the particles in the Standard Model would have mass if it were not for the Higgs Field. Gauge Bosons normally don't have mass: the only way to give it to them is via spontaneous symmetry breaking, and it is proportional to $f$. The Fermions, because all their interactions are left handed, and they need $f$.(Positron is right handed, BTW).
 
@@ -1484,10 +1484,68 @@ Lagrangian for Dirac Equation.
 	\Psi^\dagger  = &\bar{\Psi} \beta \text{, since $\beta^2=1$}\\
 	\mathcal{L} =& \bar{\Psi}\beta \partial_t + \bar{\Psi}\beta \alpha_i \partial \Psi +m \bar{\Psi}  \Psi\\
 	=& \bar{\Psi}\gamma_0 \partial_t + \bar{\Psi}\gamma_i \partial_i \Psi +m \bar{\Psi}  \Psi\\
-	=& \bar{\Psi}\big(\gamma_\mu \partial_\mu +m  \big) \Psi
+	=& \bar{\Psi}\big(\underbrace{\gamma^\mu \partial_\mu}_\text{Does not copule LH \& RH} +m  \big) \Psi \numberthis \label{eq:dirac:lagrange}
 \end{align*}
 
-\url{https://youtu.be/QD8SEcoFyAw?t=581}
+Thee is a fifth Dirac matrix:
+\begin{align*}
+	\gamma_5 \triangleq & \gamma_0 \gamma_1 \gamma_2 \gamma_3 \text{, no $\gamma_4$!}\\
+	\gamma_5^2 ==1
+\end{align*}
+
+Eigenvalues $\pm 1$--correspond to LH and RH. $\gamma_5^2$ is called "chirality".
+
+We noted that $\gamma^\mu \partial_\mu$ in (\ref{eq:dirac:lagrange}) does not couple LH and RH, i.e. the eigenvectors of $\gamma_5^2$ corresponding to $\pm 1$. But
+
+\begin{align*}
+	\bar{\Psi}\Psi =& \Psi^\dagger_L \Psi_R + \Psi^\dagger_R \Psi_L \numberthis \label{eq:LR}
+\end{align*}
+so the mass term in  (\ref{eq:dirac:lagrange}) mixes up left and right. A Dirac mass is a term in the Lagrangian which causes left and right fermions to flip. A massless Fermion has a definite chirality, but a massive one flips.
+
+We talked about weak interactions, in particular the emission and absorption of W and Z bosons. For some reason the W boson is emitted only by left handed particles (not true for photons, more complicated for Z, which has asymmetric couplings to LH and RH). So for $SU(2)$ the left handed particles are "charged". The term (\ref{eq:LR}) is not legal in a Lagrangian if would take charged to uncharged.
+
+So how do we get a mass for Fermions? Higgs also plays role as charged object for $SU(2)$ for weak interactions. In fact it is a doublet, like electron/neutrino. Higgs transforms under $SU(2)$. We need to multiply term in (\ref{eq:LR}) by Higgs field; Higgs either has no charge or the opposite charge to particle. Figure fig:2-10-Higgs-emitted and (\ref{eq:higgs:emitted}) illustrate the process of Higgs carrying off weak charge.
+
+\begin{align*}
+	\underbrace{g_y}_\text{Yukawa coupling} \bar{\Psi}\Psi =& g_y \Psi^\dagger_L \underbrace{\Phi}_\text{Emitted Higgs carries off weak charge} \Psi_R + g_y \Psi^\dagger_R \Psi_L \Phi^\dagger \numberthis \label{eq:higgs:emitted}
+\end{align*}
+
+\begin{figure}[H]
+	\caption[Higgs interacting with Fermions]{Higgs interacting with Fermions: two forms of the same diagram}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Higgs carries off weak charge}\label{fig:2-10-Higgs-emitted}
+		\includegraphics[width=\textwidth]{2-10-Higgs-emitted}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Higgs decaying into electron + positron}\label{fig:2-10-Higgs-decaying}
+		\includegraphics[width=\textwidth]{2-10-Higgs-decaying}
+	\end{subfigure}
+\end{figure}
+
+That would be the end of the story, except that Nature has chosen a Mexican Hat potential for the Higgs field, so we have a fluctuation, $\Phi=f+H$.
+
+\begin{align*}
+g_y \bar{\Psi}\Psi =& g_y f \big(\Psi^\dagger_L  \Psi_R +  \Psi^\dagger_R \Psi_L  \big) + g_y\underbrace{ H \big(\Psi^\dagger_L  \Psi_R +  \Psi^\dagger_R \Psi_L  \big)}_\text{Emit electron and re-emit it plus Higgs}
+\end{align*}
+
+The same $f$ is used for the Z and W bosons ($\approxeq200GeV$), so we can use observed masses to determine $g_w$ (different for each type of particle). Figure \ref{fig:2-10-Higgs-emitted} can be redrawn as a single Higgs decaying, Figure \ref{fig:2-10-Higgs-decaying}, so, once we can find a Higgs in the laboratory, we should be able to predict decay rates.
+
+At the time of the lecture the Higgs had not been found: however there seemed to be no way to make the mathematical theory consistent without the Higgs. The theory does make verifiable productions about the Z and W bosons.
+
+
+
+
+
+
+
+
+
+\url{https://youtu.be/QD8SEcoFyAw?t=1215}
+
+
+
+
+
 \begin{appendices}
 	\section{Demystifying the Higgs Boson}
 	
