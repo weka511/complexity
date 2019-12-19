@@ -1571,8 +1571,40 @@ If $He$ charged it can behave like a Higgs, and give mass to the photon. We have
 
 \subsection{What is the normal mass scale for elementary particle physics?}
 
+We start with Lagrangian, which includes a bunch of parameters--such as mass and charges. But what we measure we get numbers that are a product of a whole lot of interactions between high and low frequency modes, which renormalize values of parameters.
 
-\url{https://youtu.be/QD8SEcoFyAw?t=2322}
+One example is electric charge. The normally observed charge is determined by Coulomb law for things at a large distance: $V=\frac{e^2}{R}$. This is asymptotically true for large $R$.
+
+If you do this in a material you will get a different value; you will get a slightly reduced value (except in a vacuum). What if we put a charge into a conductor? Field causes motion of charges until charges flow to boundary--Figure \ref{fig:2-10-charged-conductor}. Figure \ref{fig:2-10-neg-charged-conductor} shows the same thing with a negative charge. We find that there is no attraction: experimental charge is not what we put in.
+
+\begin{figure}[H]
+	\caption{Charged conductor}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Charged flows out to distant boundary, and get surrounded by opposite charge.}\label{fig:2-10-charged-conductor}
+		\includegraphics[width=\textwidth]{2-10-charged-conductor}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Negative charge}\label{fig:2-10-neg-charged-conductor}
+		\includegraphics[width=\textwidth]{2-10-neg-charged-conductor}
+	\end{subfigure}
+\end{figure}
+
+Let's move the charges together, assuming charges are smaller than the clouds. Make them be closer than cloud, then we do feel coulomb force. We could say that charge is a function of distance, and $V=\frac{e(R)^2}{R}$, where $e(R)$ is the \emph{running charge}.
+
+Now consider a dielectric. Electrons are bound to atoms, but there is some movement allowed. There will be some screening; diminished attraction from Coulomb law. We still have $e(R)$, but it doesn't do all the way to zero at infinity.
+
+Exactly this happens if QFT. Vacuum is basically a dielectric. Charge that is felt at a large distance is not the bare electric charge in Lagrangian. Separation between members of a virtual pair depends on virtual energy. As you bring charged particles closer, screening from low energy virtual pairs will not be there--Figure \ref{fig:2-10-effective-charge}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Running charge increasing logarithmically with $\frac{1}{R}$}\label{fig:2-10-effective-charge}
+		\includegraphics[width=0.8\textwidth]{2-10-effective-charge}
+	\end{center}
+\end{figure}
+
+If you scatter at low energy, charge, and hence scattering, is reduced.
+
+\url{https://youtu.be/QD8SEcoFyAw?t=3800}
 
 
 
