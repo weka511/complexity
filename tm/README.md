@@ -10,7 +10,7 @@ File|Description
 |particles3.tex|[Particle Physics 3: Supersymmetry and Grand Unification](http://theoreticalminimum.com/courses/particle-physics-3-supersymmetry-and-grand-unification/2010/spring/lecture-1)|
 |sm.tex|[Statistical Mechanics](http://theoreticalminimum.com/courses/statistical-mechanics/2013/spring)
 |tm.bib|Bibliography for Theoretical Minimum
-|tm.wpr|Python project for helper files
+
 
 Helper programs
 
@@ -18,3 +18,4 @@ File|Description
 ----------------|-------------------------------------------------------------
 |Ising.nlogo| Demonstration of Domain walls|
 |plot-quartic.py|Plot potential function for particles2.tex
+|tm.wpr|Python project for helper files
