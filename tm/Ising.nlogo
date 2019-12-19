@@ -4,6 +4,7 @@ globals [
                  ;; the magnetization (which is the average spin)
   lh-clamp-cor
   rh-clamp-cor
+  temp
 ]
 
 patches-own [
@@ -26,6 +27,7 @@ to setup
     recolor
   ]
   set sum-of-spins sum [ spin ] of patches
+  set temp temperature
   reset-ticks
 end
 
@@ -34,6 +36,8 @@ to go
   repeat 1000 [
     ask one-of patches [ if lh-clamp-cor < pxcor and pxcor < rh-clamp-cor[update] ]
   ]
+  if temp > min-temperature [set temp  temp * annealing]
+
   tick-advance 1000  ;; use `tick-advance`, as we are updating 1000 patches at a time
   update-plots       ;; unlike `tick`, `tick-advance` doesn't update the plots, so we need to do so explicitly
 end
@@ -44,7 +48,7 @@ to update  ;; patch procedure
   ;; so the difference in energy, if we flip,
   ;; is -2 times our current energy
   let Ediff 2 * spin * sum [ spin ] of neighbors4
-  if (Ediff <= 0) or (temperature > 0 and (random-float 1.0 < exp ((- Ediff) / temperature))) [
+  if (Ediff <= 0) or (temp > 0 and (random-float 1.0 < exp ((- Ediff) / temp))) [
     set spin (- spin)
     set sum-of-spins sum-of-spins + 2 * spin
     recolor
@@ -114,22 +118,22 @@ NIL
 SLIDER
 10
 80
-306
+130
 113
 temperature
 temperature
 0
 10
-0.5
+10.0
 0.01
 1
 NIL
 HORIZONTAL
 
 MONITOR
-95
+190
 155
-209
+304
 200
 magnetization
 magnetization
@@ -155,6 +159,7 @@ false
 PENS
 "average spin" 1.0 0 -13345367 true "" "plotxy ticks magnetization"
 "axis" 1.0 0 -16777216 true ";; draw a horizontal line to show the x axis\nauto-plot-off\nplotxy 0 0\nplotxy 1000000000000000 0\nauto-plot-on" ""
+"temperature" 1.0 0 -7500403 true "" "plotxy ticks temp"
 
 SLIDER
 10
@@ -209,6 +214,36 @@ rh-clamp
 0
 1
 -1000
+
+SLIDER
+140
+80
+260
+113
+annealing
+annealing
+0
+1
+0.9999
+0.000001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+5
+165
+150
+198
+min-temperature
+min-temperature
+0
+0.1
+0.00923
+0.00001
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
