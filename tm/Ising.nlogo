@@ -2,6 +2,8 @@ globals [
   sum-of-spins   ;; sum of all the spins -- keeping track of this
                  ;; means that we can always instantly calculate
                  ;; the magnetization (which is the average spin)
+  lh-clamp-cor
+  rh-clamp-cor
 ]
 
 patches-own [
@@ -10,10 +12,17 @@ patches-own [
 
 to setup
   clear-all
+  ifelse lh-clamp [set lh-clamp-cor min-pxcor][set lh-clamp-cor min-pxcor - 1]
+  ifelse rh-clamp [set rh-clamp-cor max-pxcor][set rh-clamp-cor max-pxcor + 1]
   ask patches [
-    ifelse random 100 < probability-of-spin-up
+    ifelse pxcor = lh-clamp-cor
+    [set spin  1]
+    [ifelse pxcor = rh-clamp-cor
+      [set spin  -1]
+      [ifelse random 100 < probability-of-spin-up
       [ set spin  1 ]
-      [ set spin -1 ]
+      [ set spin -1 ]]]
+
     recolor
   ]
   set sum-of-spins sum [ spin ] of patches
@@ -23,7 +32,7 @@ end
 to go
   ;; update 1000 patches at a time
   repeat 1000 [
-    ask one-of patches [ update ]
+    ask one-of patches [ if lh-clamp-cor < pxcor and pxcor < rh-clamp-cor[update] ]
   ]
   tick-advance 1000  ;; use `tick-advance`, as we are updating 1000 patches at a time
   update-plots       ;; unlike `tick`, `tick-advance` doesn't update the plots, so we need to do so explicitly
@@ -45,7 +54,7 @@ end
 ;; color the patches according to their spin
 to recolor  ;; patch procedure
   ifelse spin = 1
-    [ set pcolor blue + 2 ]
+    [ set pcolor red ]
     [ set pcolor blue - 2 ]
 end
 
@@ -111,17 +120,17 @@ temperature
 temperature
 0
 10
-1.03
+0.5
 0.01
 1
 NIL
 HORIZONTAL
 
 MONITOR
-100
-115
-214
-160
+95
+155
+209
+200
 magnetization
 magnetization
 3
@@ -129,10 +138,10 @@ magnetization
 11
 
 PLOT
-10
-165
-306
-445
+5
+205
+301
+485
 Magnetization
 time
 average spin
@@ -178,6 +187,28 @@ NIL
 NIL
 NIL
 1
+
+SWITCH
+10
+120
+120
+153
+lh-clamp
+lh-clamp
+0
+1
+-1000
+
+SWITCH
+170
+120
+282
+153
+rh-clamp
+rh-clamp
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
