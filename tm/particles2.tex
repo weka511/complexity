@@ -1345,19 +1345,19 @@ This is also what happens in super-conductance. There are charge bosons, "Cooper
 
 \subsection{Bosons}
 
-The gauge bosons, Z and W, get their mass from the Higgs mechanism. Keep in mind that we aren't really talking about the photon.
+The gauge bosons, Z and W, get their mass from the Higgs mechanism. Keep in mind that we aren't really talking about the photon, but ut will be useful to develop the maths as if we were.
 
-We derive Maxwell's equations:
+There is a dynamics Maxwell's equations:
 \begin{align*}
 	F_{\mu\nu}=&\frac{\partial A_\mu}{\partial x^\nu}-\frac{\partial A_\nu}{\partial x^\mu}\\
-	\mathcal{L} =& F_{\mu\nu} F^{\mu\nu} \text{, this has no energy from shift, so massless.}
+	\mathcal{L} =& F_{\mu\nu} F^{\mu\nu} \text{, this has no energy from shift, so it is massless.}
 \end{align*}
 
 Now we add the Higgs field:
 \begin{align*}
-	\Phi =& \rho e^{1 \alpha}\\
+	\Phi =& \rho e^{i \alpha}\\
 	D \Phi =& \partial \Phi + i A \Phi\\
-	=& i \big( \partial \alpha + A \big) f e^(i \alpha) \text{, if $\rho$ frozen}\\
+	=& i \big( \partial \alpha + A \big) f e^{i \alpha} \text{, if $\rho$ frozen}\\
 	\mathcal{L} =& f^2 \big(\partial \alpha + A \big)^2 \text{, now make a gauge transformation}\\
 	=& f^2 {A^\prime}^2
 \end{align*}
@@ -1381,14 +1381,14 @@ Reflection symmetry is not a good symmetry of elementary particles (1950s). This
 		\includegraphics[width=0.8\textwidth]{2-9-beta-decay-neutron}
 	\end{subfigure}
 	\begin{subfigure}{0.4\textwidth}
-		\caption{W boson converting left handed eelctron to neutrino}\label{fig:2-9-W-boson}
+		\caption{W boson converting left handed electron to neutrino}\label{fig:2-9-W-boson}
 		\includegraphics[width=0.8\textwidth]{2-9-W-boson}
 	\end{subfigure}
 \end{figure}
 
-Is there a notion of handedness? Yes, we have spin and direction of motion. Either it rotates with direction of motion (right handed screw) or left handed. You might think that Figure \ref{fig:2-9-beta-decay-neutron} could make right-handed or left-handed neutrons, but the electrons are always left handed. Moreover in scattering by a W-boson, it is only the left handed electron that interacts with a W-bosn--e.g. Figure \ref{fig:2-9-W-boson}. It is an experimental fact that the left=handed electron scatter, and the right handed one doesn't. Similarly it is always the left-handed neutrino that interacts: it is questionable whther there are right handed neutrinos.
+Is there a notion of handedness? Yes, we have spin and direction of motion. Either the electron rotates with direction of motion (right handed screw) or left handed. You might think that Figure \ref{fig:2-9-beta-decay-neutron} could make right-handed or left-handed neutrons, but the electrons are always left handed. Moreover in scattering by a W-boson, it is only the left handed electron that interacts with a W-boson--e.g. Figure \ref{fig:2-9-W-boson}. It is an experimental fact that the left-handed electron scatters, and the right handed one doesn't. Similarly it is always the left-handed neutrino that interacts: it is \emph{questionable} whether there are right handed neutrinos.
 
-There is something asymmetric about weak interactions: it is as if left=handed particles carried "charge" associated with boson, but right don't.
+There is something asymmetric about weak interactions: it is as if left-handed particles carried "charge" associated with boson, but right don't.
 
 Let's go back to the Dirac equation. The Dirac Field, $\Psi$, is a four component object: particles can have spin along either direction, up or down, and positive or negative energy.
 
@@ -1398,31 +1398,31 @@ Let's go back to the Dirac equation. The Dirac Field, $\Psi$, is a four componen
  This would be Dirac equation if electron massless, because equation only involves derivatives of the field. There is no restoring force, no tendency to oscillate.
  
  \begin{align*}
- 	i \big(\frac{\partial \Psi}{\partial t} + \alpha_i \frac{\partial \Psi}{\partial 	x^i}\big) =&m \beta \Psi
+ 	i \big(\frac{\partial \Psi}{\partial t} + \alpha_i \frac{\partial \Psi}{\partial 	x^i}\big) =&m \beta \Psi \text{, Dirac equation with mass.}
  \end{align*}
  
- The electron could be moving along with a momentum so there is a gradient. Spin can be along or opposite to direction of motion. 
+ The electron could be moving along with a momentum so there is a gradient, $\frac{\partial \Psi}{\partial x_i}$. Spin can be along or opposite to direction of motion. 
  
  \begin{align*}
  	i \big(\frac{\partial \Psi_R}{\partial t} + \alpha_i \frac{\partial \Psi_R}{\partial 	x^i}\big) =& m \Psi_L \text{, since $\beta$ interchanges R and L}\\
  	i \big(\frac{\partial \Psi_L}{\partial t} - \alpha_i \frac{\partial \Psi_L}{\partial 	x^i}\big) =& m \Psi_R \text{, mass couples L and R}
  \end{align*}
  
- Let us suppose that only left-handed particle has a charge (True for weak, not for electro-magnetic). Then we can't have these equations because of charge conservation. Another way to look at is the gauge transformation $e^{i\theta}$. Charge conservation would forbid a mass for the electron of only left had charge.
+ Let us suppose that only left-handed particle has a charge (True for weak, not for electro-magnetic). Then we can't have these equations because of charge conservation. Another way to look at is the gauge transformation $e^{i\theta}$. Charge conservation would forbid a mass for the electron if only left had charge.
  
  Meanwhile back in the real world this isn't true.
  
- Suppose there were only a left handed electron. If it has mass we could slow it down, bring it to rest, then send it back- handedness has changed although spin hasn't. What is no mass? Then we can't do this.
+ Suppose there were only a left handed electron. If it has mass we could slow it down, bring it to rest, then send it back; handedness would have changed although spin hadn't. What if no mass? Then we can't do this.
  
  How might electrons get a mass in this fake world where only left have electric charge? Imagine there is a Boson field, $\Phi$, whose quanta have positive charge.
  
  Under $U(a)$:
  \begin{align*}
- 	\Psi_L \rightarrow& e^{i\theta} \Psi_L\\
- 	\Psi_R \rightarrow& \Psi_R\\
- 	\Phi \rightarrow& e^{i\theta} \Phi
+ 	\Psi_L \rightarrow& e^{i\theta} \Psi_L \text{, because charged}\\
+ 	\Psi_R \rightarrow& \Psi_R \text{, because not charged}\\
+ 	\Phi \rightarrow& e^{i\theta} \Phi \text{, because charged}
  \end{align*}
- Clearly Dirac not invariant. We will rewrite to be invariant:
+ Clearly Dirac equation is not invariant under $U(a)$. We will rewrite to be invariant:
  
  \begin{align*}
 	 i \big(\frac{\partial \Psi_R}{\partial t} + \alpha_i \frac{\partial \Psi_R}{\partial 	x^i}\big) =& g \Phi^* \Psi_L \numberthis \label{eq:mod:Dirac:R}\\
@@ -1446,7 +1446,7 @@ Let's go back to the Dirac equation. The Dirac Field, $\Psi$, is a four componen
  \end{subfigure}
  \end{figure}
 
-What if $\Phi$ is a magical Higgs field, $\Phi=\rho e^{i\alpha}$. It has a spontaneous symmetry breaking $\Phi=f$ ($\alpha$ got eaten). (\ref{eq:mod:Dirac:R}) and (\ref{eq:mod:Dirac:L}) become:
+What if $\Phi$ is a magical Higgs field, $\Phi=\rho e^{i\alpha}$? It has a spontaneous symmetry breaking $\Phi=f$ ($\alpha$ got eaten). (\ref{eq:mod:Dirac:R}) and (\ref{eq:mod:Dirac:L}) become:
 
  \begin{align*}
 i \big(\frac{\partial \Psi_R}{\partial t} + \alpha_i \frac{\partial \Psi_R}{\partial 	x^i}\big) =& g f \Psi_L \\
@@ -1461,16 +1461,16 @@ i \big(\frac{\partial \Psi_R}{\partial t} + \alpha_i \frac{\partial \Psi_R}{\par
 i \big(\frac{\partial \Psi_L}{\partial t} - \alpha_i \frac{\partial \Psi_L}{\partial 	x^i}\big) =& g (f+H) \Psi_R  
 \end{align*}
 
-In (\ref{eq:fermion:Higgs}) and Figure \ref{fig:2-9-Higgs-boson} we see that RH can turn into LH + Higgs. When Higgs is found we want to verify the relative rates of different Higgs interactions. 
+In (\ref{eq:fermion:Higgs}) and Figure \ref{fig:2-9-Higgs-boson} we see that RH can turn into LH + Higgs. When Higgs is found\footnote{This lecture predates the discovery at LHC.} we want to verify the relative rates of different Higgs interactions. 
 
-None of the particles in the Standard Model would have mass if it were not for the Higgs Field. Gauge Bosons normally don't have mass: the only way to give it to them is via spontaneous symmetry breaking, and it is proportional to $f$. The Fermions, because all their interactions are left handed, and they need $f$.(Positron is right handed, BTW).
+None of the particles in the Standard Model would have mass if it were not for the Higgs Field. Gauge Bosons normally don't have mass: the only way to give them mass is via spontaneous symmetry breaking, and this mass is proportional to $f$. The Fermions, because all their interactions are left handed, so they need $f$ to acquire mass (Positron is right handed, BTW).
 
 Left handed neutrino, right handed anti-neutrino. Ettore Majorana particle.
 
-All particles of Standard Model trace their back to $f$; if $f$ were zero, they'd be massless. Why? Maybe we haven't fount them because $f$ is around 250GeV, and that is the limit of what our current accelerators will do.
+All particles of Standard Model trace their back to $f$; if $f$ were zero, they'd be massless. Why? Maybe we haven't found them because $f$ is around 250GeV, and that is the limit of what our current accelerators will do.
 
 Imagine that a particle existed where L and R both had charge. Then there would be no limit on mass. Some people think that the limit on mass is much greater than $f$. Dark Energy?
-Neutrinos can mix with anti-neutrinos and produce a massive Majorana particle which is is own antiparticle.
+Neutrinos can mix with anti-neutrinos and produce a massive Majorana particle which is its own antiparticle.
 
 \section{Renormalization and the running of coupling constants}
 
