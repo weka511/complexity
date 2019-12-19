@@ -1221,7 +1221,7 @@ $U(1)$ is the symmetry that goes with the conservation of charge.
 
 The symmetry of the photon is broken in a superconductor: photons propagate with a mass in the superconductor. It doesn't happen in a prism, even though velocity is less than $c$.
 
-Figure \ref{fig:2-8-massless} shows the relationship between the frequency and wave number: in a prism, $c$ changes away from its value in empty space. 
+Figure \ref{fig:2-8-massless} shows the relationship between the frequency and wave number: in a prism, $c$ changes away from its value in empty space (wave number changes with constant frequency when $c$ changes). 
 
 \begin{figure}[H]
 	\caption{Dispersion relations for Massive and Massless particles}
@@ -1235,7 +1235,7 @@ Figure \ref{fig:2-8-massless} shows the relationship between the frequency and w
 	\end{subfigure}
 \end{figure}
 
-For a particle with mass, $E=\sqrt{c^2 + m^2 c^4}$--Figure \ref{fig:2-8-massive}. Infinite wavelength still has non-zero $E$ (infinite wavelength means that the field is absolutely homogeneous). Whole field oscillates. Oscillations of a homogeneous field are what we call mass.
+For a particle with mass, $E=\sqrt{p^2 c^2 + m^2 c^4}$--Figure \ref{fig:2-8-massive}. Infinite wavelength still has non-zero $E$ (infinite wavelength means that the field is absolutely homogeneous). Whole field oscillates. Oscillations of a homogeneous field are what we call mass.
 
 Mass is connected with the curvature of potential energy at the equilibrium point. If we shift system away it starts to oscillate, and $\omega \ne 0$ at $k=0$; in fact $\omega = m$. The only way this doesn't happen is if potential energy is flat. In Figure \ref{fig:mexican-hat}, we have a flat direction along dip, but not along radius. We therefore have two kinds of quanta:
 \begin{itemize}
@@ -1245,7 +1245,7 @@ Mass is connected with the curvature of potential energy at the equilibrium poin
 
 ''The Goldstone boson got eaten by the gauge boson, resulting in giving the Higgs boson a mass.''--this is the phenomenon which we want to do mathematically in this lecture.
 
-There is a collection of particles in the standard model that cannot have mass unless there is spontaneous symmetry breaking. Are there any that don't require spontaneous symmetry breaking? Yes, they are the particles that we don't see in the laboratory. The natural mass may be very large, up by the Planck mass, beyond the range of our accelerators. These may be the dark matter particles.
+There is a collection of particles in the standard model that cannot have mass unless there is spontaneous symmetry breaking. Are there any that don't require spontaneous symmetry breaking? Yes, \emph{they are the particles that we don't see in the laboratory.} The natural mass may be very large, up by the Planck mass, beyond the range of our accelerators. These may be the dark matter particles.
 
 The first class that cannot get a mass without spontaneous symmetry breaking are the gauge bosons. We'll start with a field:
 
@@ -1256,16 +1256,16 @@ The first class that cannot get a mass without spontaneous symmetry breaking are
 	=& \rho e^{-i \alpha}
 \end{align*}
 
-In Figure \ref{fig:mexican-hat}, $\alpha$ corresponds to angular motion (massless), $rho$  to radial, massive.
+In Figure \ref{fig:mexican-hat}, $\alpha$ corresponds to angular motion (massless), $\rho$  to radial (massive).
 
 \begin{align*}
-	\mathcal{L} =& \partial \phi^* \partial \Phi - V(\Phi^*\Phi)  \numberthis \label{eq:mexican:LagrangeRI}\\
+	\mathcal{L} =& \partial \Phi^* \partial \Phi - V(\Phi^*\Phi)  \numberthis \label{eq:mexican:LagrangeRI}\\
 	=& (\partial \rho)^2 + \rho^2 (\partial \alpha)^2 - V(\rho) \numberthis \label{eq:mexican:Lagrange}
 \end{align*} 
 
 If we take the simplest V, $\rho^2$
 \begin{align*}
-	\mathcal{L} = (\partial \Phi_R)^2 +  (\partial \Phi_R)^2 -(\Phi_R)^2  -(\Phi_L)^2
+	\mathcal{L} = (\partial \Phi_R)^2 +  (\partial \Phi_I)^2 -(\Phi_R)^2  -(\Phi_I)^2
 \end{align*}
 which gives two uncoupled oscillations. This representation isn't so useful for Figure \ref{fig:mexican-hat}. In (\ref{eq:mexican:Lagrange}) we have two uncoupled oscillations. $V$ has a minimum at $f$. We let
 
@@ -1282,7 +1282,7 @@ We will say that the low energy behaviour of $\rho$ is frozen at $f$, and (\ref{
 
 $\beta$ is a massless field, the Goldstone boson. Goldstone bosons are massless particles which are the consequence of spontaneous symmetry breaking of a continuous symmetry.
 
-\subsection{Local variation of gauge invariance - Goldstone bosons}
+\subsection{Local variation of gauge invariance--Goldstone bosons}
 
 \begin{defn}[Scalar field]
 	A scalar field is one which doesn't change when we rotate space.
@@ -1290,7 +1290,7 @@ $\beta$ is a massless field, the Goldstone boson. Goldstone bosons are massless 
 
 A complex number is a means of talking about pairs of numbers. Given two real fields I can assemble them into a single complex field. Don't confuse a complex scalar field with a vector field: we are dealing with different spaces.
 
-The Lagrangian of (\ref{eq:mexican:LagrangeRI})  does not change when we rotate the complex plan in the fictions field by an constant angle. This is a global symmetry.
+The Lagrangian of (\ref{eq:mexican:LagrangeRI})  does not change when we rotate the complex plan in the fictitious field by an constant angle. This is a global symmetry.
 
 We saw in Section \ref{section:gauge:invariance} that it is not a  symmetry to rotate by an angle that varies from point to point:
 \begin{align*}
@@ -1300,16 +1300,16 @@ We saw in Section \ref{section:gauge:invariance} that it is not a  symmetry to r
 We saw that can fix this by introducing a vector potential $A_\mu$ and defining the covariant derivative $D$:
 \begin{align*}
 	A^\prime_\mu(x) =& A_\mu(x) + \partial_\mu \theta(x)\\
-	\partial \Phi^\prime =& e^{i\theta} \big[\partial \Phi + \underbrace{i \partial \theta \Phi}_\text{ this is the term that wrecks the symmetry}\big] \\
+	\partial_\mu \Phi^\prime =& e^{i\theta} \big[\partial_\mu \Phi + i \partial_\mu \theta \,\Phi\big] \text{. The term containing $\partial \theta$  wrecks the symmetry}\\
 	D_\mu \Phi \triangleq& \partial_\mu \Phi + i A_\mu \Phi\\
 	D_\mu \Phi^* =& \partial_\mu \Phi^* - i A_\mu \Phi^* \text{. In Section \ref{section:gauge:invariance} we saw that:}\\
 	D_\mu \Phi^\prime =& \partial_\mu \Phi^\prime + i A^\prime_\mu \Phi^\prime \\
 	=& (D_\mu \Phi)^\prime \text{. The operators commute!}
 \end{align*}
 
-$\Phi$ is a charge carrying boson field, and $A_\mu$ is the electromagnetic potential: $F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu$ is gauge invariant. The Lagrangian have the form $D\Phi^* D\Phi -V(\Phi^*\Phi) +F^2$. 
+$\Phi$ is a charge carrying boson field, and $A_\mu$ is the electromagnetic potential: $F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu$ is gauge invariant. The Lagrangian has the form $D\Phi^* D\Phi -V(\Phi^*\Phi) +F^2$. 
 
-All gauge theories have a similar structure.
+All gauge theories have a similar structure to this one.
 
 \subsection{The Higgs phenomenon}
 
