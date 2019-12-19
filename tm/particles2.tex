@@ -1,5 +1,6 @@
+% !TeX program = lualatex
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm,tikz-feynman}
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
 \usepackage[toc,page]{appendix}
@@ -1510,15 +1511,25 @@ So how do we get a mass for Fermions? Higgs also plays role as charged object fo
 	\underbrace{g_y}_\text{Yukawa coupling} \bar{\Psi}\Psi =& g_y \Psi^\dagger_L \underbrace{\Phi}_\text{Emitted Higgs carries off weak charge} \Psi_R + g_y \Psi^\dagger_R \Psi_L \Phi^\dagger \numberthis \label{eq:higgs:emitted}
 \end{align*}
 
+
+
+
+
 \begin{figure}[H]
 	\caption[Higgs interacting with Fermions]{Higgs interacting with Fermions: two forms of the same diagram}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Higgs carries off weak charge}\label{fig:2-10-Higgs-emitted}
-		\includegraphics[width=\textwidth]{2-10-Higgs-emitted}
+		\feynmandiagram[vertical=i2 to i1]{
+			i1[particle=L] -- [fermion] a -- [fermion] i2[particle=R],
+			a--[charged scalar,edge label=weak charge] b[particle=$\Phi$]
+		};
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Higgs decaying into electron + positron}\label{fig:2-10-Higgs-decaying}
-		\includegraphics[width=\textwidth]{2-10-Higgs-decaying}
+		\feynmandiagram[vertical=o1 to i1]{
+			i1[particle=$\Phi$]--[charged scalar] a --[fermion] o1 [particle=$e^-$],
+			a --[anti fermion] o2 [particle=$e^+$]
+		};
 	\end{subfigure}
 \end{figure}
 
