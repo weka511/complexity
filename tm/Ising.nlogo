@@ -36,7 +36,7 @@ to go
   repeat 1000 [
     ask one-of patches [ if lh-clamp-cor < pxcor and pxcor < rh-clamp-cor[update] ]
   ]
-  if temp > min-temperature [set temp  temp * annealing]
+  ifelse anneal [set temp  temp * rate][set temp temperature]
 
   tick-advance 1000  ;; use `tick-advance`, as we are updating 1000 patches at a time
   update-plots       ;; unlike `tick`, `tick-advance` doesn't update the plots, so we need to do so explicitly
@@ -72,9 +72,9 @@ end
 ; See Info tab for full copyright and license.
 @#$#@#$#@
 GRAPHICS-WINDOW
-315
+395
 10
-728
+808
 424
 -1
 -1
@@ -124,18 +124,18 @@ temperature
 temperature
 0
 10
-10.0
+7.24
 0.01
 1
 NIL
 HORIZONTAL
 
 MONITOR
-190
-155
-304
-200
-magnetization
+485
+430
+599
+475
+Magnetization
 magnetization
 3
 1
@@ -144,22 +144,21 @@ magnetization
 PLOT
 5
 205
-301
+380
 485
 Magnetization
 time
-average spin
+NIL
 0.0
 20.0
 -1.0
 1.0
 true
-false
+true
 "" ""
 PENS
-"average spin" 1.0 0 -13345367 true "" "plotxy ticks magnetization"
-"axis" 1.0 0 -16777216 true ";; draw a horizontal line to show the x axis\nauto-plot-off\nplotxy 0 0\nplotxy 1000000000000000 0\nauto-plot-on" ""
-"temperature" 1.0 0 -7500403 true "" "plotxy ticks temp"
+"average spin (scaled)" 1.0 0 -13345367 true "" "plotxy ticks magnetization * temperature"
+"temperature" 1.0 0 -2674135 true "" "plotxy ticks temp"
 
 SLIDER
 10
@@ -196,54 +195,61 @@ NIL
 SWITCH
 10
 120
-120
+105
 153
 lh-clamp
 lh-clamp
-0
+1
 1
 -1000
 
 SWITCH
-170
+115
 120
-282
+205
 153
 rh-clamp
 rh-clamp
-0
+1
 1
 -1000
 
 SLIDER
-140
+240
 80
-260
+332
 113
-annealing
-annealing
+rate
+rate
 0
 1
-0.9999
+0.99999
 0.000001
 1
 NIL
 HORIZONTAL
 
-SLIDER
-5
-165
-150
-198
-min-temperature
-min-temperature
-0
-0.1
-0.00923
-0.00001
+SWITCH
+135
+80
+238
+113
+anneal
+anneal
 1
-NIL
-HORIZONTAL
+1
+-1000
+
+MONITOR
+650
+430
+777
+475
+Current Temperature
+temp
+9
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -255,6 +261,10 @@ The first version of the model worked on by the physicist Ising was on a 1D latt
 In the 2D Ising model, when the temperature is low, there is spontaneous magnetization, and we say that the system is in the ferromagnetic phase. When the temperature is high, there is no spontaneous magnetization, and we say that the system is in the paramagnetic phase. (At room temperature, a refrigerator magnet is ferromagnetic, but an ordinary piece of iron is paramagnetic.)
 
 This very abstract model can be interpreted in other ways as well, for example as a model of liquid/gas phase transitions where the two states are liquid and gas instead of two magnetic spin states. It has also been used as a basis for simulating phenomena in the social sciences that involve phase-transition-like behavior.
+
+_I have modified Uri Wilensky's original model in two ways:_
+ * Clamp left and right hand cells to demonstrate _sponteneously broken symmetry_
+ * Simulated annealing.
 
 ## HOW IT WORKS
 
