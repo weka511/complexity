@@ -174,17 +174,28 @@ Notes:\begin{enumerate}
 	\item Why are there 3 families of quarks?
 \end{enumerate}
 
-Figure \ref{fig:fep} depicts the way that electromagnetic processes emerge from a Lagrangian.
+Figure \ref{fig:fep} shows how electromagnetic processes emerge from a Lagrangian.
+\begin{itemize}
+	\item Figure \ref{fig:fep1} depicts the Fundamental electromagnetic process. It can be rearranged in all legal ways.
+	\item Figure \ref{fig:fep2} depicts the Fundamental electromagnetic process--exchange of particle.
+\end{itemize}
 
 \begin{figure}[H]
 	\caption{Electromagnetic processes emerge from a Lagrangian: $\mathcal{L}$: $e \Psi_e^\dagger \Psi_e A$}\label{fig:fep}
 	\begin{subfigure}[t]{0.45\textwidth}
-		\caption{Fundamental electromagnetic process. Can rearrange.}\label{fig:fep1}
-		\includegraphics[width=0.9\textwidth]{2-1-em-process}
+		\caption{Fundamental  process.}\label{fig:fep1}
+		\feynmandiagram[vertical = o1 to i1]{
+			i1[particle=e]--[fermion]a--[fermion]o1[particle=e],
+			a--[photon,edge label=$\gamma$]o2
+		};
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\textwidth}
-		\caption{Fundamental electromagnetic process--exchange of particle.}\label{fig:fep2}
-		\includegraphics[width=0.9\textwidth]{2-1-em-process-feynman}
+		\caption{Exchange of particle.}\label{fig:fep2}
+		\feynmandiagram[vertical = i2 to i1]{
+			i1 -- [fermion] a -- [fermion] i2,
+			a -- [photon,edge label=$\gamma$] b,
+			f1 -- [fermion] b -- [fermion] f2,
+		};
 	\end{subfigure}
 \end{figure}
 
@@ -350,7 +361,10 @@ The fundamental electromagnetic process is depicted in Figure \ref{fig:fep1}. A 
 	\caption{Gluons}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Introducing the gluon}\label{fig2-2-gluon1}
-		\includegraphics[width=0.9\textwidth]{2-2-gluon1}
+		\feynmandiagram[vertical = o1 to i1]{
+			i1[particle=q]--[fermion]a--[fermion]o1[particle=q],
+			a--[gluon]o2
+		};
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{A gluon behaves a bit like a quark-antiquark pair: this shows the gluon of Figure \ref{fig2-2-gluon1} as a fictitious quark-antiquark pair}
@@ -868,21 +882,33 @@ Imagine that W is like photons or gluons, so it behaves as shown in Figure \ref{
 
 \begin{figure}[H]
 	\caption{W are like photons or gluons}\label{fig:W:photon:fluon}
-	\begin{subfigure}[t]{0.2\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{$e \rightarrow\nu + W^-$}\label{fig:2-5-W1}
-		\includegraphics[width=0.9\textwidth]{2-5-W1}
+		\feynmandiagram[vertical=o1 to i1]{
+			i1[particle=$e$]--[fermion] a--[fermion] o1[particle=$\nu$],
+			a--[charged boson,edge label=$W^-$]o2
+		};
 	\end{subfigure}
-	\begin{subfigure}[t]{0.2\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{$d \rightarrow u + W^-$}
-		\includegraphics[width=0.9\textwidth]{2-5-W2}
+		\feynmandiagram[vertical=o1 to i1]{
+			i1[particle=$d$]--[fermion] a--[fermion] o1[particle=$u$],
+			a--[charged boson,edge label=$W^-$]o2
+		};
 	\end{subfigure}
-	\begin{subfigure}[t]{0.2\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{$s \rightarrow c + W^-$}
-		\includegraphics[width=0.9\textwidth]{2-5-W3}
+		\feynmandiagram[vertical=o1 to i1]{
+			i1[particle=$s$]--[fermion] a--[fermion] o1[particle=$c$],
+			a--[charged boson,edge label=$W^-$]o2
+	};
 	\end{subfigure}
-	\begin{subfigure}[t]{0.2\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{$W^+$ and $W^-$ are antiparticles, so we can redraw \ref{fig:2-5-W1}}
-		\includegraphics[width=0.9\textwidth]{2-5-W4}
+		\feynmandiagram[vertical=o1 to i1]{
+			i1[particle=$e$]--[fermion] a--[fermion] o1[particle=$\nu$],
+			o2--[charged boson,edge label=$W^+$]a
+		};
 	\end{subfigure}
 \end{figure}
 
@@ -1376,11 +1402,11 @@ Reflection symmetry is not a good symmetry of elementary particles (1950s). This
 
 \begin{figure}[H]
 	\caption{The electron is always left handed in n weak interactions}
-	\begin{subfigure}{0.4\textwidth}
+	\begin{subfigure}[t]{0.4\textwidth}
 		\caption{Beta decay of a neutron}\label{fig:2-9-beta-decay-neutron}
 		\includegraphics[width=0.8\textwidth]{2-9-beta-decay-neutron}
 	\end{subfigure}
-	\begin{subfigure}{0.4\textwidth}
+	\begin{subfigure}[t]{0.4\textwidth}
 		\caption{W boson converting left handed electron to neutrino}\label{fig:2-9-W-boson}
 		\includegraphics[width=0.8\textwidth]{2-9-W-boson}
 	\end{subfigure}
@@ -1432,15 +1458,15 @@ Let's go back to the Dirac equation. The Dirac Field, $\Psi$, is a four componen
  Figure \ref{fig:modified:Dirac} shows how to interpret these equations in terms of Feynman diagrams. Left and right change into each other, and the cost of emitting charged particles, with coupling constant $g$, the \emph{Yukawa coupling}.
  \begin{figure}[H]
  	\caption{Interpretation of modified Dirac equation}\label{fig:modified:Dirac}
- 	\begin{subfigure}{0.3\textwidth}
+ 	\begin{subfigure}[t]{0.3\textwidth}
  		\caption{RH electron $\rightarrow$ LH + $\bar{\Phi}$--(\ref{eq:mod:Dirac:R})}
  		\includegraphics[width=\textwidth]{2-9-RH}
  	\end{subfigure}
-  	\begin{subfigure}{0.3\textwidth}
+  	\begin{subfigure}[t]{0.3\textwidth}
   		\caption{LH electron $\rightarrow$ RH + $\Phi$--(\ref{eq:mod:Dirac:L})}
 	 	\includegraphics[width=\textwidth]{2-9-LH}
 	 \end{subfigure}
-   	\begin{subfigure}{0.3\textwidth}
+   	\begin{subfigure}[t]{0.3\textwidth}
  	\caption{LH electron $\rightarrow$ RH + Higgs--(\ref{eq:fermion:Higgs})}\label{fig:2-9-Higgs-boson}
  	\includegraphics[width=\textwidth]{2-9-Higgs-boson}
  \end{subfigure}
@@ -1476,44 +1502,53 @@ Neutrinos can mix with anti-neutrinos and produce a massive Majorana particle wh
 
 \subsection{Lagrangian for Dirac Equation}
 
+We want to derive the Dirac equation from a variational principle.
  \begin{align*}
-	i \big(\frac{\partial \Psi}{\partial t} + \alpha_i \frac{\partial \Psi}{\partial 	x^i}\big) -m \beta \Psi =&0 \text{, we want to derive from variational principle}\\
-	\Psi^\dagger i \big(\frac{\partial \Psi}{\partial t} + \alpha_i \frac{\partial \Psi}{\partial 	x^i} -m \beta \Psi\big) =& \mathcal{L}\\
-	\Psi^\dagger \beta =& \bar{\Psi} \text{, in covarinat language}\\
-	\Psi^\dagger  = &\bar{\Psi} \beta \text{, since $\beta^2=1$}\\
+	i \big(\frac{\partial \Psi}{\partial t} + \alpha_i \frac{\partial \Psi}{\partial 	x^i}\big) -m \beta \Psi =&0 \text{,  Dirac equation}
+\end{align*}
+
+\begin{align*}
+	\mathcal{L}=&\Psi^\dagger i \big(\frac{\partial \Psi}{\partial t} + \alpha_i \frac{\partial \Psi}{\partial 	x^i} -m \beta \Psi\big)\text{. If we write}\\
+	\bar{\Psi} \triangleq&\Psi^\dagger \beta  \\
+	\Psi^\dagger  =& \bar{\Psi} \beta \text{, since $\beta^2=1$}\\
 	\mathcal{L} =& \bar{\Psi}\beta \partial_t + \bar{\Psi}\beta \alpha_i \partial \Psi +m \bar{\Psi}  \Psi\\
 	=& \bar{\Psi}\gamma_0 \partial_t + \bar{\Psi}\gamma_i \partial_i \Psi +m \bar{\Psi}  \Psi\\
-	=& \bar{\Psi}\big(\underbrace{\gamma^\mu \partial_\mu}_\text{Does not copule LH \& RH} +m  \big) \Psi \numberthis \label{eq:dirac:lagrange}
+	=& \bar{\Psi}\big(\gamma^\mu \partial_\mu +m  \big) \Psi \text{. The term $\gamma^\mu \partial_\mu$ does not couple LH \& RH} \numberthis \label{eq:dirac:lagrange}
 \end{align*}
-
-Thee is a fifth Dirac matrix:
+There is a fifth Dirac matrix:
 \begin{align*}
-	\gamma_5 \triangleq & \gamma_0 \gamma_1 \gamma_2 \gamma_3 \text{, no $\gamma_4$!}\\
-	\gamma_5^2 ==1
+	\gamma_5 \triangleq & \gamma_0 \gamma_1 \gamma_2 \gamma_3 \text{, \emph{not} $\gamma_4$!}\\
+	\gamma_5^2 =&1
 \end{align*}
 
-Eigenvalues $\pm 1$--correspond to LH and RH. $\gamma_5^2$ is called "chirality".
+Eigenvalues $\pm 1$--correspond to LH and RH.
 
-We noted that $\gamma^\mu \partial_\mu$ in (\ref{eq:dirac:lagrange}) does not couple LH and RH, i.e. the eigenvectors of $\gamma_5^2$ corresponding to $\pm 1$. But
+\begin{defn}[chirality]
+	$\gamma_5^2$ is called chirality.
+\end{defn}
 
-\begin{align*}
-	\bar{\Psi}\Psi =& \Psi^\dagger_L \Psi_R + \Psi^\dagger_R \Psi_L \numberthis \label{eq:LR}
-\end{align*}
+In (\ref{eq:dirac:lagrange}), we noted that $\gamma^\mu \partial_\mu$  does not couple LH and RH, i.e. the eigenvectors of $\gamma_5^2$ corresponding to $\pm 1$. But
+
+\begin{thm}[The mass term in  (\ref{eq:dirac:lagrange}) mixes up left and right]
+	\begin{align*}
+		\bar{\Psi}\Psi =& \Psi^\dagger_L \Psi_R + \Psi^\dagger_R \Psi_L \numberthis \label{eq:LR}
+	\end{align*}
+\end{thm}
+\begin{proof}
+	TBP
+\end{proof}
+
 so the mass term in  (\ref{eq:dirac:lagrange}) mixes up left and right. A Dirac mass is a term in the Lagrangian which causes left and right fermions to flip. A massless Fermion has a definite chirality, but a massive one flips.
 
 \subsection{The W boson and mass scale for Higgs boson}
 
-We talked about weak interactions, in particular the emission and absorption of W and Z bosons. For some reason the W boson is emitted only by left handed particles (not true for photons, more complicated for Z, which has asymmetric couplings to LH and RH). So for $SU(2)$ the left handed particles are "charged". The term (\ref{eq:LR}) is not legal in a Lagrangian if would take charged to uncharged.
+We talked about weak interactions, in particular the emission and absorption of W and Z bosons. For some reason the W boson is emitted only by left handed particles (not true for photons, more complicated for Z, which has asymmetric couplings to LH and RH). So for $SU(2)$ the left handed particles are "charged". The term (\ref{eq:LR}) is not legal in a Lagrangian if it would take charged to uncharged.
 
-So how do we get a mass for Fermions? Higgs also plays role as charged object for $SU(2)$ for weak interactions. In fact it is a doublet, like electron/neutrino. Higgs transforms under $SU(2)$. We need to multiply term in (\ref{eq:LR}) by Higgs field; Higgs either has no charge or the opposite charge to particle. Figure fig:2-10-Higgs-emitted and (\ref{eq:higgs:emitted}) illustrate the process of Higgs carrying off weak charge.
+So how do we get a mass for Fermions? Higgs also plays role as charged object for $SU(2)$ for weak interactions. In fact it is a doublet, like electron/neutrino. Higgs transforms under $SU(2)$. We need to multiply term in (\ref{eq:LR}) by Higgs field; the Higgs either has no charge or the opposite charge to particle. Figure \ref{fig:2-10-Higgs-emitted} and (\ref{eq:higgs:emitted}) illustrate the process of Higgs, $\Phi$, carrying off the weak charge.
 
 \begin{align*}
-	\underbrace{g_y}_\text{Yukawa coupling} \bar{\Psi}\Psi =& g_y \Psi^\dagger_L \underbrace{\Phi}_\text{Emitted Higgs carries off weak charge} \Psi_R + g_y \Psi^\dagger_R \Psi_L \Phi^\dagger \numberthis \label{eq:higgs:emitted}
+	g_y \bar{\Psi}\Psi =& g_y \Psi^\dagger_L \Phi \Psi_R + g_y \Psi^\dagger_R \Psi_L \Phi^\dagger \text{, where $g_y$ is the Yukawa coupling} \numberthis \label{eq:higgs:emitted}
 \end{align*}
-
-
-
-
 
 \begin{figure}[H]
 	\caption[Higgs interacting with Fermions]{Higgs interacting with Fermions: two forms of the same diagram}
@@ -1539,9 +1574,9 @@ That would be the end of the story, except that Nature has chosen a Mexican Hat 
 g_y \bar{\Psi}\Psi =& g_y f \big(\Psi^\dagger_L  \Psi_R +  \Psi^\dagger_R \Psi_L  \big) + g_y\underbrace{ H \big(\Psi^\dagger_L  \Psi_R +  \Psi^\dagger_R \Psi_L  \big)}_\text{Emit electron and re-emit it plus Higgs}
 \end{align*}
 
-The same $f$ is used for the Z and W bosons ($\approxeq200GeV$), so we can use observed masses to determine $g_w$ (different for each type of particle). Figure \ref{fig:2-10-Higgs-emitted} can be redrawn as a single Higgs decaying, Figure \ref{fig:2-10-Higgs-decaying}, so, once we can find a Higgs in the laboratory, we should be able to predict decay rates.
+The same $f$ is used for the Z and W bosons ($\approxeq200GeV$), so we can use observed masses to determine $g_y$ (different for each type of particle). Figure \ref{fig:2-10-Higgs-emitted} can be redrawn as a single Higgs decaying, Figure \ref{fig:2-10-Higgs-decaying}, so, once we can find a Higgs in the laboratory, we should be able to predict decay rates.
 
-At the time of the lecture the Higgs had not been found: however there seemed to be no way to make the mathematical theory consistent without the Higgs. The theory does make verifiable productions about the Z and W bosons.
+At the time of the lecture the Higgs had not been found: however there seems to be no way to make the mathematical theory consistent without the Higgs. The theory does make verifiable productions about the Z and W bosons.
 
 
 \subsection{Dynamics of the Higgs boson}
@@ -1553,36 +1588,32 @@ This is all contained in Mexican Hat potential--Figure \ref{fig:2-10-MexicanHat}
 \end{figure}
 One such function is:
 \begin{align*}
-	V =& \underbrace{-\frac{\mu^2}{2} \phi^2}_\text{This would be mass if it were positive} + \frac{\lambda}{4} \phi^4
+	V =& -\frac{\mu^2}{2} \phi^2 + \frac{\lambda}{4} \phi^4 \text{. The first term would represent mass if it were positive}
 \end{align*}
 
 The "imaginary mass" isn't a problem; having the origin be unstable is odd, so we introduce the quartic coupling constant $\lambda$ to prevent $\phi$ falling indefinitely. It appears\footnote{Indirect evidence from weak interactions} that $\lambda$ is small, but not absurdly small, around 0.01 ($\mu$ has dimensions of mass).
 
 We want to find $f$, the $\phi$ which gives the minimum of $V$.
 \begin{align*}
-	V^\prime =& -\mu^2 \phi + \lambda \phi^3\\
-	=& 0 \text{, at a minimum. We divide by $\phi$}\\
+	\frac{d V}{d \phi} =& -\mu^2 \phi + \lambda \phi^3\\
+	=& \phi \big(\lambda \phi^2 - \mu^2\big)\\
+	=& 0 \text{, at a minimum. Since $\phi=0$ is unstable}\\
 	f =& \frac{\mu}{\sqrt{\lambda}}
 \end{align*}
 
-$f$ is mass pf Z or W Bosons, and it comes into mass of Fermion. It controls the masses of all the particles we know about: why are they all controlled by the same phenomenon? Why are there no particles whose mass doesn't involve spontaneous symmetry breaking? E.g. we can imagine a particle whose left and right variants both have weak charge: we wouldn't need $\Phi$. Or particles without weak interactions?
+$f$ is mass of Z or W Bosons, and it comes into mass of Fermion. It controls the masses of all the particles we know about: why are they all controlled by the same phenomenon? Why are there no particles whose mass doesn't involve spontaneous symmetry breaking? E.g. we can imagine a particle whose left and right variants both have weak charge: we wouldn't need $\Phi$. Or particles without weak interactions?
 
 The general thinking (i.e. a widespread \emph{belief}) is that the mass scale is enormous, much higher that those of the known particles, and that the only small mass parameter is $f$; only those particles that are this light have been detected. But why is $f$ so small? (compared with what?) 
 
-\begin{itemize}
-	\item Planck Mass
-	\item Unification mass
-\end{itemize}
+The Planck Mass and Unification Mass are about 15 orders of magnitude larger than $f$.
 
-These are about 15 orders of magnitude larger than $f$.
-
-Bose condensates. Helium--not normally considered an elementary particle, but, at some scale it can th treated as one. There is a Helium field, that is normally zero. Spontaneous symmetry breaking can happen and create superfluidity.
+Bose condensates. Helium is not normally considered an elementary particle, but, at some scale it can be treated as one. There is a Helium field, that is normally zero. Spontaneous symmetry breaking can happen and create superfluidity.
 
 If $He$ charged it can behave like a Higgs, and give mass to the photon. We have Cooper pairs of electrons, which can condense.
 
 \subsection{What is the normal mass scale for elementary particle physics?}
 
-We start with Lagrangian, which includes a bunch of parameters--such as mass and charges. But what we measure we get numbers that are a product of a whole lot of interactions between high and low frequency modes, which renormalize values of parameters.
+We start with Lagrangian, which includes a bunch of parameters--such as mass and charges. But when we measure, we get numbers that are a product of a whole lot of interactions between high and low frequency modes, which renormalize values of parameters.
 
 One example is electric charge. The normally observed charge is determined by Coulomb law for things at a large distance: $V=\frac{e^2}{R}$. This is asymptotically true for large $R$.
 
@@ -1602,17 +1633,17 @@ If you do this in a material you will get a different value; you will get a slig
 
 Let's move the charges together, assuming charges are smaller than the clouds. Make them be closer than cloud, then we do feel coulomb force. We could say that charge is a function of distance, and $V=\frac{e(R)^2}{R}$, where $e(R)$ is the \emph{running charge}.
 
-Now consider a dielectric. Electrons are bound to atoms, but there is some movement allowed. There will be some screening; diminished attraction from Coulomb law. We still have $e(R)$, but it doesn't do all the way to zero at infinity.
+Now consider a dielectric. Electrons are bound to atoms, but there is some movement allowed. There will be some screening; diminished attraction from Coulomb law. We still have $e(R)$, but it doesn't go all the way to zero at infinity.
 
-Exactly this happens if QFT. Vacuum is basically a dielectric. Charge that is felt at a large distance is not the bare electric charge in Lagrangian. Separation between members of a virtual pair depends on virtual energy. As you bring charged particles closer, screening from low energy virtual pairs will not be there--Figure \ref{fig:2-10-effective-charge}
+This is exactly this happens in QFT. Vacuum is basically a dielectric. Charge that is felt at a large distance is not the bare electric charge in Lagrangian. Separation between members of a virtual pair depends on virtual energy. As you bring charged particles closer, screening from low energy virtual pairs will not be there--Figure \ref{fig:2-10-effective-charge}
 
 \begin{figure}[H]
 	\caption{Running charges}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{EM Running charge increasing logarithmically with $\frac{1}{R}$}\label{fig:2-10-effective-charge}
 		\includegraphics[width=\textwidth]{2-10-effective-charge}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Weak, Strong and EM Running charge}\label{fig:2-10-effective-charge-esw}
 		\includegraphics[width=\textwidth]{2-10-effective-charge-esw}
 	\end{subfigure}
