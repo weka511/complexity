@@ -23,7 +23,7 @@
 \maketitle
 
 \begin{abstract}
-These are my notes from the Advanced Quantum Mechanics lectures from Leonard Susskind's Theoretical Minimum series.
+These are my notes from the Advanced Quantum Mechanics lectures from Leonard Susskind's Theoretical Minimum series\cite{susskind2013advanced}.
 \end{abstract}
 
 \tableofcontents
@@ -883,11 +883,11 @@ We will study the relativistic electron. We will start with an electron that mov
 \begin{align*}
 E =& \frac{p^2}{2m} \text {, classical}\\
 P =& -i \frac{\partial}{\partial x} \text{, quantum}\\
-H = & \frac{\partial}{\partial t}\\
+H = & i \frac{\partial}{\partial t}\\
 E^2 =& p^2 + m^2 \text{, relativistic($c^2=1$). This becomes:}\\
 -\frac{\partial^2}{\partial t^2} \phi(x) =& -\frac{\partial^2}{\partial x^2}\phi(x) + m^2 \phi(x) \text{, Klein-Gordon equation. But Dirac wanted this:}\\
-i \frac{\partial psi}{\partial t} =& H\psi\\
-=& \sqrt{- \frac{\partial}{\partial x} + m^2} \psi \text{. What could this mean?}  
+i \frac{\partial \psi}{\partial t} =& H\psi\\
+=& \sqrt{- \frac{\partial^2}{\partial x^2} + m^2} \psi \text{. What could this mean?}  
 \end{align*}
 
 Dirac decided to start again. Imagine a particle moving along the x axis with the speed of light.
@@ -1155,5 +1155,9 @@ But this also describes the interactions of  Figures \ref{fig:electron_scatterin
 
 Same pattern in solid state physics. If you have crystal with lots of electrons, put all electrons into lowest available states--ground state. We have the Fermi sea. Can take an energy out of sea and kick into higher state, leaving a hole which behaves like a particle. But Dirac did this first!
 
+\bibliographystyle{unsrt}
+\addcontentsline{toc}{section}{Bibliography}
+\raggedright
+\bibliography{tm}
 
 \end{document}
