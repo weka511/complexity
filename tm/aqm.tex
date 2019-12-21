@@ -1,6 +1,7 @@
+% !TeX program = lualatex
 \documentclass[]{article}
 
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,tikz-feynman}
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
@@ -23,7 +24,7 @@
 \maketitle
 
 \begin{abstract}
-These are my notes from the Advanced Quantum Mechanics lectures from Leonard Susskind's Theoretical Minimum series\cite{susskind2013advanced}.
+These are my notes from the Advanced Quantum Mechanics lectures from Leonard Susskind's Theoretical Minimum series\cite{susskind2013advanced}. Feynman diagrams were prepared using \emph{TikZ-Feynman} \cite{ellis2016tikz}.
 \end{abstract}
 
 \tableofcontents
@@ -823,9 +824,16 @@ H =& \int dx  \Psi^\dagger_e(x) \frac{- \nabla^2}{2m_e} \Psi_e(x) + \int dx \Psi
 g=& \textit{ coupling constant--proportional to probability of interaction.}
 \end{align*}
 
+\feynmandiagram{};
+
 \begin{figure}[H]
-	\caption[$\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)$--scattering]{$\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)$: annihilate and create an electron and proton if they are at the same place, then create again --i.e. scatter}\label{fig:scatter:e:p}
-	\includegraphics[width=0.8\textwidth]{scatter_e_p}
+	\begin{center}
+		\caption[$\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)$--scattering]{$\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)$: annihilate and create an electron and proton if they are at the same place, then create again --i.e. scatter}\label{fig:scatter:e:p}
+		\feynmandiagram[vertical=o1 to i1]{
+			i1[particle=$e^-$]--[fermion]a--[fermion]o1[particle=$e^-$],
+			i2[particle=$e^+$]--[anti fermion]a--[anti fermion]o2[particle=$e^+$]
+		};
+	\end{center}
 \end{figure}
 
 \begin{itemize}
@@ -837,8 +845,13 @@ g=& \textit{ coupling constant--proportional to probability of interaction.}
 Imagine particle decay, as shown in Figure \ref{fig:particle:decay}. We might try a term: $\Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x)$. Since space it isotropic, the interaction can happen anywhere: $g \int \Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x) dx$. We can show that momentum is conserved.
 
 \begin{figure}[H]
-	\caption{Particle Decay: $\Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x)$}\label{fig:particle:decay}
-	\includegraphics[width=0.8\textwidth]{particle_decay}
+	\begin{center}
+		\caption{Particle Decay: $\Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x)$}\label{fig:particle:decay}
+		\feynmandiagram[horizontal' = b to c]{
+			a[particle=a]--[charged scalar]cc--[charged scalar]b[particle=b],
+			cc--[charged scalar]c[particle=c]
+		};
+	\end{center}
 \end{figure}
 
 Now what goes in the Hamiltonian must be Hermitian, so we need:
@@ -864,8 +877,14 @@ Imagine that we made $\epsilon$ a little larger in (\ref{eq:update:state}):
 What is the effect of $H^2$? E.g., Figure \ref{fig:particle:decay} becomes a scatter: $b+c \rightarrow a \rightarrow b + c$. Or Figure \ref{fig:scatter:annihilate} shows a more complex situation. You can have a forest of interactions that are mediated by a single term in the Hamiltonian.
 
 \begin{figure}[H]
-	\caption{Exchange diagram}\label{fig:scatter:annihilate}
-	\includegraphics[width=0.8\textwidth]{scatter_annihilate}
+	\begin{center}
+		\caption{Exchange diagram}\label{fig:scatter:annihilate}
+		\feynmandiagram[vertical=o1 to i1]{
+			i1[particle=a]--[fermion]n1--[fermion]o1[particle=b],
+			i2[particle=b]--[fermion]n2--[fermion]o2[particle=a],
+			n1--[boson,edge label=c]n2
+		};
+	\end{center}
 \end{figure}
 
 Figure \ref{fig:scatter:annihilate} has a coupling constant $g^2$.
@@ -1117,7 +1136,10 @@ Imagine photon coming along and hitting -ve energy electron in vacuum: we get an
 \begin{figure}
 	\begin{center}
 		\caption[Photon$\rightarrow$ electrons + hole]{Photon$\rightarrow$ electons + hole. By convention positron points down. Can slice in time: upwards electron, down positrons.}\label{photon:dirac}
-		\includegraphics[width=0.5\textwidth]{photon-electrons}
+		\feynmandiagram[vertical=o2 to i1]{
+			i1--[photon,edge label=$\gamma$]n1--[anti fermion]o1[particle=$e^+$],
+			n1--[fermion]o2[particle=$e^-$]
+		};
 	\end{center}
 \end{figure}
 
@@ -1141,15 +1163,25 @@ But this also describes the interactions of  Figures \ref{fig:electron_scatterin
 	\caption{Possible outcomes of $\Psi^\dagger(x)\Psi(x)A$: Feynman diagrams}
 	\begin{subfigure}{0.3\textwidth}
 		\caption{Electron scattering}\label{fig:electron_scattering_dirac}
-		\includegraphics[width=0.9\textwidth]{electron_scattering_dirac}
+		\feynmandiagram[vertical=o2 to i1]{
+			i1[particle=$e^-$]--[fermion]a--[fermion]o1[particle=$e^-$],
+			a--[photon]o2
+		};
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
 		\caption{Positron annihilation}\label{fig:positron annihilating_dirac}
-		\includegraphics[width=0.9\textwidth]{positron-annihilation}
+		\feynmandiagram[vertical=a to i1]{
+			i1[particle=$e^-$]--[fermion]a--[boson]o1,
+			i2[particle=$e^+$]--[anti fermion]a
+		};
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
 		\caption{Electron, photon, positron created}\label{fig:all3-created}
-		\includegraphics[width=0.9\textwidth]{all3-created}
+		\feynmandiagram[vertical=o2 to i1]{
+			i1--[fermion]o1[particle=$e^-$],
+			i1--[boson]o2,
+			i1--[anti fermion]o3[particle=$e^+$]
+		};
 	\end{subfigure}
 \end{figure}
 
