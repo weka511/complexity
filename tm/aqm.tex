@@ -892,7 +892,22 @@ Figure \ref{fig:scatter:annihilate} has a coupling constant $g^2$.
 
 \begin{figure}[H]
 	\caption[Scatter electron and emit photon(field $A$):$A\Psi^+_e\Psi^-_e$]{Scatter electron and emit photon(field $A$):$A\Psi^+_e\Psi^-_e$. Sometimes what you thought was an electron behaves like an electron + photon. Low probability: think of as correction to electron, not a new process. If we look, we will screw up electron! Superposition.}
-	\includegraphics[width=0.8\textwidth]{electron_scattering}
+	\begin{center}
+		\begin{subfigure}{0.45\textwidth}
+		\feynmandiagram[vertical=e2 to e1]{
+			e1[particle=$e^-$]--[fermion]e2[particle=$e^-$]
+			--[fermion]e3[particle=$e^-$],
+			e2--[photon]x
+		};
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\feynmandiagram[vertical=e4 to e1]{
+				e1[particle=$e^-$]--[fermion]e2--[fermion]e3
+				--[fermion]e4[particle=$e^-$],
+				e2--[photon,looseness=3.0,half left]e3
+			};
+		\end{subfigure}
+	\end{center}
 \end{figure}
 
 \subsection{The Dirac Equation}
