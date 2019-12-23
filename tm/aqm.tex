@@ -14,7 +14,7 @@
 \widowpenalty10000
 \clubpenalty10000
 \setcounter{tocdepth}{1}
- \tikzfeynmanset{compat=1.0.0}
+\tikzfeynmanset{compat=1.0.0}
 %opening
 \title{Theoretical Minimum\\Advanced Quantum Mechanics}
 \author{Simon Crase}
@@ -124,34 +124,96 @@ G =& \frac{P_x}{\hslash}\text{, Generator of $x$ translation}
 
 \section{Symmetry groups and degeneracy}
 
-Crystal symmetry: translate one lattice spacing.
+\subsection{Symmetry groups and degeneracy}
+
+Symmetries are operations that you can do on a system which don't change:
+\begin{itemize}
+	\item the description;
+	\item the phenomena;
+	\item then energy levels, and value of the energy.
+\end{itemize}
+
+Examples of symmetry:
+\begin{itemize}
+	\item translation--doesn't change energy levels, Hamiltonian, or the Scro\"edinger equation;
+	\item rotation;
+	\item interchanging identical particles;
+	\item crystal symmetry: translate one lattice spacing (not exact if crystal not infinite).
+\end{itemize}
+Some symmetries are more abstract than others; the more obvious symmetries come from the properties of space; homogeneity and isotropy.
 
 \begin{defn}[Degeneracy of energy levels]
 	If there is more than one state with given energy level, that energy level is called degenerate. We will see that it only happens when there is a symmetry: symmetries sometimes imply degeneracy, but not always.
 \end{defn}
- 
-Rotation.
 
+Degeneracy isn't a coincidence: symmetry sometimes implies degeneracy.
+
+One application of symmetry is to analyze the energy of a system and see if it has energy levels that exactly match.
+
+
+We will start with Rotation symmetry and think about a very simple system, a particle moving in a circle. If it can't leave the circle we can describe its position using an angle $\theta$. It has a wave function $\psi(\theta)$, such that $\psi^*(\theta)\psi(\theta)$ gives the probability of finding the particle at a particular point.
+
+For a small counter-clockwise rotation:
 \begin{align*}
 \psi(\theta) \rightarrow & \psi(\theta - \epsilon)\\
-\delta\psi =& - \epsilon \frac{\partial \psi}{\partial \theta}\\
-=& -i \epsilon \big(-i \frac{\partial \psi}{\partial \theta}\big).\text{ Now defining the Angular Momentum operator $L$}\\
-- i \frac{\partial}{\partial \theta} =&\hslash L \\
-\delta\psi =& - \frac{i \epsilon}{\hslash} L \psi \text{, generator of rotation}
+\delta\psi =& - \epsilon \frac{\partial \psi}{\partial \theta} \text{, c.f. linear momentum}\\
+=& -i \epsilon \big(-i \frac{\partial \psi}{\partial \theta}\big)
 \end{align*}
-
-Eigenvalues and Eigenvectors.
+Now defining the Angular Momentum operator $L$:
+\begin{align}
+- i \frac{\partial}{\partial \theta} \triangleq&\hslash L \text{, Hermitean--c.f. $P=-i\hslash \frac{\partial}{\partial x}$}\\
+\delta\psi =& - \frac{i \epsilon}{\hslash} L \psi \text{, generator of rotation}
+\end{align}
+What are the Eigenvalues and Eigenvectors of Rotation?
 
 \begin{align*}
-L\ket{\psi} =& l \ket{\psi}\\
--i \hslash \frac{\partial \psi}{\partial \theta} =& \psi\\
-\psi(\theta) =& e^{\frac{i m \theta}{\hslash}}\text{Now, we want $\psi$ single valued, so}\\
+L\ket{\psi} =& m \ket{\psi}\\
+-i \hslash \frac{\partial \psi}{\partial \theta} =& m \psi\\
+\psi(\theta) =& e^{\frac{i m \theta}{\hslash}}\text{. Now, we want $\psi$ single valued (symmetry!), i.e.}\\
+\psi(\theta + 2\pi) =& \psi(\theta) \text{, so}\\
 \frac{m}{\hslash}=&k\text{, some integer. But, by convention, redefine $m$}\\
-L=& m \hslash
+L=& m \hslash \numberthis \label{eq:magnetic:quantum:number}
 \end{align*}
 This is the quantization of angular momentum.
 
-$m\ne 0 \implies E(m)=E(-m)$, so we have degeneracy. A magnetic field breaks this; symmetry isn't enough for degeneracy, but adding reflection symmetry is sufficient (but need two non-commuting symmetries).
+\begin{defn}[Magnetic quantum number]
+	The eigenvalue of $L$, $m$ in (\ref{eq:magnetic:quantum:number}) is known as the Magnetic quantum number.
+\end{defn}
+
+We expect that the energy will depend on the angular momentum. Now $m\ne 0 \implies E(m)=E(-m)$, so we have degeneracy. A magnetic field breaks this; rotational symmetry isn't enough for degeneracy, but adding reflection symmetry is sufficient (but need two non-commuting symmetries).
+
+We will use $M$ to denote reflection symmetry. If we have reflection symmetry, $E(m)=E(-m)$, because the reflection of a system with specified angular momentum is a system with opposite angular momentum (Avoid calling reflection symmetry "mirror symmetry", as is this is used in string theory with a precise meaning).
+
+The reflection of a magnetic field is not the same field, as it is an axial vector. Imagine a current generating a magnetic field going into the plane. If we reflect, the current goes in the opposite direction, as does the magnetic field.
+
+\begin{thm}[Two symmetries that don't commute apply degeneracy]
+	Suppose we have two symmetries, whose generators are $A$ and $B$.
+	\begin{align*}
+		[A,H]=&0 \text{, because it's a symmetry}\\
+		[B,H]=& 0\\
+		[A,B]\ne 0
+	\end{align*}
+	then...
+\end{thm}
+\begin{proof}
+	\begin{align*}
+		[A,B]=& i C  \text{. Need $i$ for $C$ to be Hermitean}
+	\end{align*}
+	\begin{lemma}[C commutes with H]
+		$[C,H]=0$
+	\end{lemma}
+	\begin{proof}
+		There are two cases: $C$ is a linear combination of $A$ and $B$, or $A$, $B$, and $C$ are independent. Since the lemma is trivial in the former case, we shall suppose the latter.
+		\begin{align*}
+		i[C,H] =& (AB)H - H(AB)\\
+		=& AHB -HAB\\
+		=& [A,H]B\\
+		=&0
+		\end{align*}
+	\end{proof}
+	
+	TBP
+\end{proof}
 
 \begin{thm}[Reflection and rotation don't commute]
 	If $M\psi(\theta) = \psi(-\theta)$, $ML \ne LM$
@@ -161,28 +223,122 @@ $m\ne 0 \implies E(m)=E(-m)$, so we have degeneracy. A magnetic field breaks thi
 	MLe^{i m \theta} =& M m e^{i m \theta}\\
 	=&m e^{- i m \theta}\\
 	LMe^{i m \theta} =& L e^{- i m \theta}\\
-	=& -m e^{- i m \theta}
+	=& -m e^{- i m \theta}\\
+	[M,L]e^{im\theta}=&2m e^{- i m \theta}
 	\end{align*}
 \end{proof}
 
+
+
+
+
+\begin{defn}[Commutator algebra]
+	Closure of $\{A,B,C,...\}$ under commutation.
+\end{defn}
+
+Collection of generators is an algebra.
+
+\begin{defn}[abelian]
+	A group of symmetries that all commute.
+\end{defn}
+
+\begin{defn}[non-abelian]
+	A group of symmetries that isn't abelian.
+\end{defn}
+
+\subsection{An example: Angular Momentum}
+
+Consider a classical orbit with energy $E$, Figure \ref{eq:aqm-2-1}. 	Is it degenerate? All we have to do is rotate it to see a new orbit with energy $E$: rotation about the y-axis has added a z-component. This is a classical suggestion that the quantum mechanical operators of angular momentum don't commute (rotation about 2nd axis converts rotation about 1st into something with a component along 3rd).
+
+\begin{figure}[H]
+	\caption{Degeneracy of Angular Momentum(classical)}\label{eq:aqm-2-1}
+	\includegraphics[width=0.8\textwidth]{aqm-2-1}
+\end{figure}
+
+Let's look at the angular momentum generators. Figure \ref{aqm-2-2} shows a  rotation about the z-axis by a small angle $\epsilon$.
+
+\begin{figure}[H]
+	\caption{Rotation in 2D by a small angle $\epsilon$}\label{eq:aqm-2-2}
+	\includegraphics[width=0.8\textwidth]{aqm-2-2}
+\end{figure}
+
 \begin{align*}
-[L,H]=& 0\\
-[L_x,L_y] =& i L_z \numberthis \label{eq:lx_ly}\\
-[L_y,L_z] =& i L_x\numberthis \label{eq:ly_lz}\\
-[L_z,L_x] =& i L_y\numberthis \label{eq:lz_lx}\\
-L_{\pm} \triangleq& L_x \pm i L_y\\
-[L_{\pm},L_Z] =& \mp L_{\pm} \numberthis \label{eq:comm:LpmLz}
+	\delta x =& - y \epsilon\\
+	\delta y =& x \epsilon \text{. Now for a wave function $\psi(x,y)$}\\
+	\delta \psi =& \frac{\partial \psi}{\partial x} \delta x + \frac{\partial \psi}{\partial y} \delta y\\
+	=&\big( - y \frac{\partial \psi}{\partial x} + x \frac{\partial \psi}{\partial y}\big) \epsilon\\
+	\triangleq& i \epsilon L_z \psi\\
+	=& \big(- y P_x + x P_y x\big) i \epsilon \text{, whence}\\
+	L_z =& x P_y - y P_x \text{, similarly}\\
+	L_x =& y P_z - z P_y \text{, and}\\
+	L_y =& x P_x - x P_z \text{, c.f. the classical formula}\\
+	\vec{L} =& \vec{r} \times \vec{P}
 \end{align*}
-Suppose we have found one eigenvector:
+These are symmetries if the system is rotationally invariant.
+
+Do they commute with each other? In \cite{susskind2014quantum} we saw
 \begin{align*}
-L_z \ket{m} =& m \ket{m} \numberthis \label{eq:ev:Lz}\\
-[L_+,L_z] \ket{m} =& \big(L_+L_z - L_zL_+\big) \ket{m}\\
-=&- L_+ \ket{m} \text{, from (\ref{eq:comm:LpmLz}). Rearranging  and using (\ref{eq:ev:Lz})}\\
- m L_+\ket{m} + L_+\ket{m} =& L_z L_+ \ket{m} \text{, whence}\\
- \big(m + 1 \big)L_+\ket{m}  =& L_z L_+ \ket{m} \text{; $L_+ \ket{m}$ is an eigenvector, eigenvalue $m+1$}\numberthis \label{eq:create_m}
+	[L,H]=& 0\\
+	[L_x,L_y] =& i L_z \numberthis \label{eq:lx_ly}\\
+	[L_y,L_z] =& i L_x\numberthis \label{eq:ly_lz}\\
+	[L_z,L_x] =& i L_y\numberthis \label{eq:lz_lx}
 \end{align*}
 
-Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. This terminates if  $L_{\pm} \ket{m}=0$. From symmetry we can show $m$ integral or half integral.
+\begin{defn}[algebra]
+	In mathematics, an algebra over a field (often simply called an algebra) is a vector space equipped with a bilinear product. 
+\end{defn}
+
+\begin{defn}[Lie algebra]
+	A Lie algebra is an algebra where multiplication is commutation. LS uses the definition that is is a collection of generators that is closed under commutation.
+\end{defn}
+
+So $L_x$, $L_y$, $L_z$ generate a Lie algebra: if we continue commuting we don't find anything new.
+
+We want to find eigenvalues of angular momentum. It us useful to introduce creation and annihilation operators for $L_z$.
+\begin{align*}
+	L_{\pm} \triangleq& L_x \pm i L_y \\
+	[L_{\pm},L_Z] =& \mp L_{\pm} \numberthis \label{eq:comm:LpmLz}
+\end{align*}
+
+\begin{thm}[If $\ket{m}$ is an eigenvector of $L_z$, so are $L_+ \ket{m}$ and $L_- \ket{m}$]
+	If 
+	\begin{align*}
+		L_z \ket{m} =& m \ket{m} \text{, then }\\
+		L_z (L^+ \ket{m}) =& (m+1) (L^+\ket{m}) \text{, and}\\
+		L_z (L^- \ket{m}) =& (m-1) (L^-\ket{m})
+	\end{align*}
+\end{thm}
+\begin{proof}
+	Suppose we have found one eigenvector of $L_z$:
+	\begin{align*}
+		L_z \ket{m} =& m \ket{m} \text{, magnetic quantum number}\numberthis \label{eq:ev:Lz}\\
+		[L_+,L_z] \ket{m} =& \big(L_+L_z - L_zL_+\big) \ket{m}\\
+		=&- L_+ \ket{m} \text{, from (\ref{eq:comm:LpmLz}). Rearranging  and using (\ref{eq:ev:Lz})}\\
+		m L_+\ket{m} + L_+\ket{m} =& L_z L_+ \ket{m} \text{, whence}\\
+		\big(m + 1 \big)L_+\ket{m}  =& L_z L_+ \ket{m} \text{; $L_+ \ket{m}$ is an eigenvector, eigenvalue $m+1$}\numberthis \label{eq:create_m}
+	\end{align*}
+	Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. This terminates if  $L_{\pm} \ket{m}=0$.
+\end{proof}
+
+So, using the algebra of commutators, we have generated a spectrum of values of $L_z$, separated by integers--see Figure \ref{fig:aqm-2-3}. Imagine that we rotate by $180\degree$: this takes $L_z\rightarrow - L_z$, so rotational symmetry requires that the termination points be reversed: they must be symmetrical. There are two possibilities--Figures \ref{fig:aqm-2-3a} and \ref{fig:aqm-2-3b}. We can show that the only values that are allowed for orbital angular momentum are integral (single values wave function), but half integral is also possible for spin. 
+
+\begin{figure}[H]
+	\caption{Spectrum of $L_z$.}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Terminators marked in red}\label{fig:aqm-2-3}
+		\includegraphics[width=0.8\textwidth]{aqm-2-3}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{One solution: integral values marked in red}\label{fig:aqm-2-3a}
+		\includegraphics[width=0.8\textwidth]{aqm-2-3a}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Other solution: half integral values marked in red}\label{fig:aqm-2-3b}
+		\includegraphics[width=0.8\textwidth]{aqm-2-3b}
+	\end{subfigure}
+\end{figure}
+
+ We now show that the multiplet of states in Figure \ref{fig:aqm-2-3a} all have the same energy. 
 
 \begin{thm}[Eigenvectors of $L_z$ are degenerate eigenvectors of $H$]
 	\begin{align*}
@@ -199,9 +355,10 @@ Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. This terminates if
 	=& E L_+  \ket{m}\\
 	H \ket{m+1} =& E \ket{m+1} \text{, from (\ref{eq:create_m})}
 	\end{align*}
+	Since symmetries commute, we have degeneracy.
 \end{proof}
 
-Since symmetries commute, we have degeneracy.
+
 
 \section{Atomic orbits and harmonic oscillators}
 
