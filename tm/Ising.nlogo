@@ -124,18 +124,18 @@ temperature
 temperature
 0
 10
-7.24
+7.23
 0.01
 1
 NIL
 HORIZONTAL
 
 MONITOR
-485
-430
-599
-475
-Magnetization
+410
+435
+465
+480
+Spin
 magnetization
 3
 1
@@ -146,7 +146,7 @@ PLOT
 205
 380
 485
-Magnetization
+Spin
 time
 NIL
 0.0
@@ -241,11 +241,11 @@ anneal
 -1000
 
 MONITOR
-650
-430
-777
-475
-Current Temperature
+490
+435
+575
+480
+Temperature
 temp
 9
 1
