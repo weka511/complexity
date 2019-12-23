@@ -13,7 +13,7 @@
 \graphicspath{{figs/}}
 \widowpenalty10000
 \clubpenalty10000
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 \tikzfeynmanset{compat=1.0.0}
 %opening
 \title{Theoretical Minimum\\Advanced Quantum Mechanics}
@@ -251,15 +251,19 @@ Collection of generators is an algebra.
 Consider a classical orbit with energy $E$, Figure \ref{eq:aqm-2-1}. 	Is it degenerate? All we have to do is rotate it to see a new orbit with energy $E$: rotation about the y-axis has added a z-component. This is a classical suggestion that the quantum mechanical operators of angular momentum don't commute (rotation about 2nd axis converts rotation about 1st into something with a component along 3rd).
 
 \begin{figure}[H]
-	\caption{Degeneracy of Angular Momentum(classical)}\label{eq:aqm-2-1}
-	\includegraphics[width=0.8\textwidth]{aqm-2-1}
+	\begin{center}
+		\caption{Degeneracy of Angular Momentum(classical)}\label{eq:aqm-2-1}
+		\includegraphics[width=0.6\textwidth]{aqm-2-1}
+	\end{center}
 \end{figure}
 
-Let's look at the angular momentum generators. Figure \ref{aqm-2-2} shows a  rotation about the z-axis by a small angle $\epsilon$.
+Let's look at the angular momentum generators. Figure \ref{fig:aqm-2-2} shows a  rotation about the z-axis by a small angle $\epsilon$.
 
 \begin{figure}[H]
-	\caption{Rotation in 2D by a small angle $\epsilon$}\label{eq:aqm-2-2}
-	\includegraphics[width=0.8\textwidth]{aqm-2-2}
+	\begin{center}
+		\caption{Rotation in 2D by a small angle $\epsilon$}\label{fig:aqm-2-2}
+		\includegraphics[width=0.6\textwidth]{aqm-2-2}
+	\end{center}
 \end{figure}
 
 \begin{align*}
@@ -317,7 +321,7 @@ We want to find eigenvalues of angular momentum. It us useful to introduce creat
 		m L_+\ket{m} + L_+\ket{m} =& L_z L_+ \ket{m} \text{, whence}\\
 		\big(m + 1 \big)L_+\ket{m}  =& L_z L_+ \ket{m} \text{; $L_+ \ket{m}$ is an eigenvector, eigenvalue $m+1$}\numberthis \label{eq:create_m}
 	\end{align*}
-	Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. This terminates if  $L_{\pm} \ket{m}=0$.
+	Similarly, $L_- \ket{m}$ is an eigenvector, eigenvalue $m-1$. The sequence of eigenvectors terminates if  $L_{\pm} \ket{m}=0$.
 \end{proof}
 
 So, using the algebra of commutators, we have generated a spectrum of values of $L_z$, separated by integers--see Figure \ref{fig:aqm-2-3}. Imagine that we rotate by $180\degree$: this takes $L_z\rightarrow - L_z$, so rotational symmetry requires that the termination points be reversed: they must be symmetrical. There are two possibilities--Figures \ref{fig:aqm-2-3a} and \ref{fig:aqm-2-3b}. We can show that the only values that are allowed for orbital angular momentum are integral (single values wave function), but half integral is also possible for spin. 
@@ -325,15 +329,15 @@ So, using the algebra of commutators, we have generated a spectrum of values of 
 \begin{figure}[H]
 	\caption{Spectrum of $L_z$.}
 	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{Terminators marked in red}\label{fig:aqm-2-3}
+		\caption{Terminators in red}\label{fig:aqm-2-3}
 		\includegraphics[width=0.8\textwidth]{aqm-2-3}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{One solution: integral values marked in red}\label{fig:aqm-2-3a}
+		\caption{Integral values in red}\label{fig:aqm-2-3a}
 		\includegraphics[width=0.8\textwidth]{aqm-2-3a}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{Other solution: half integral values marked in red}\label{fig:aqm-2-3b}
+		\caption{Half integral values}\label{fig:aqm-2-3b}
 		\includegraphics[width=0.8\textwidth]{aqm-2-3b}
 	\end{subfigure}
 \end{figure}
