@@ -122,7 +122,7 @@ G =& \frac{P_x}{\hslash}\text{, Generator of $x$ translation}
 \end{align*}
 
 
-\section{Symmetry groups and degeneracy}
+\section{Symmetry groups and degeneracy}\label{seq:symmetry:degeneracy}
 
 \subsection{Symmetry groups and degeneracy}
 
@@ -253,7 +253,7 @@ Consider a classical orbit with energy $E$, Figure \ref{eq:aqm-2-1}. 	Is it dege
 \begin{figure}[H]
 	\begin{center}
 		\caption{Degeneracy of Angular Momentum(classical)}\label{eq:aqm-2-1}
-		\includegraphics[width=0.6\textwidth]{aqm-2-1}
+		\includegraphics[width=0.5\textwidth]{aqm-2-1}
 	\end{center}
 \end{figure}
 
@@ -262,7 +262,7 @@ Let's look at the angular momentum generators. Figure \ref{fig:aqm-2-2} shows a 
 \begin{figure}[H]
 	\begin{center}
 		\caption{Rotation in 2D by a small angle $\epsilon$}\label{fig:aqm-2-2}
-		\includegraphics[width=0.6\textwidth]{aqm-2-2}
+		\includegraphics[width=0.5\textwidth]{aqm-2-2}
 	\end{center}
 \end{figure}
 
@@ -282,14 +282,14 @@ These are symmetries if the system is rotationally invariant.
 
 Do they commute with each other? In \cite{susskind2014quantum} we saw
 \begin{align*}
-	[L,H]=& 0\\
+	[L,H_i]=& 0 \numberthis \label{eq:LH}\\
 	[L_x,L_y] =& i L_z \numberthis \label{eq:lx_ly}\\
 	[L_y,L_z] =& i L_x\numberthis \label{eq:ly_lz}\\
 	[L_z,L_x] =& i L_y\numberthis \label{eq:lz_lx}
 \end{align*}
 
-\begin{defn}[algebra]
-	In mathematics, an algebra over a field (often simply called an algebra) is a vector space equipped with a bilinear product. 
+\begin{defn}[Algebra]
+	In mathematics, an \emph{algebra over a field } (often simply called an algebra) is a vector space equipped with a bilinear product. 
 \end{defn}
 
 \begin{defn}[Lie algebra]
@@ -300,7 +300,7 @@ So $L_x$, $L_y$, $L_z$ generate a Lie algebra: if we continue commuting we don't
 
 We want to find eigenvalues of angular momentum. It us useful to introduce creation and annihilation operators for $L_z$.
 \begin{align*}
-	L_{\pm} \triangleq& L_x \pm i L_y \\
+	L_{\pm} \triangleq& L_x \pm i L_y \numberthis \label{eq:comm:Lpm}\\
 	[L_{\pm},L_Z] =& \mp L_{\pm} \numberthis \label{eq:comm:LpmLz}
 \end{align*}
 
@@ -366,55 +366,122 @@ So, using the algebra of commutators, we have generated a spectrum of values of 
 
 \section{Atomic orbits and harmonic oscillators}
 
-\subsection{Atomic orbits}
+\subsection{Atomic orbits and Angular Momentum}
 
-If a particle moves in a central force field, angular momentum and orbital plane are preserved. State is $\psi(r,\theta,\phi)= \psi(r,\theta)$, and $L = -i \frac{\partial}{\partial \theta}$.
+We will talk more about what angular momentum is about.
+
+If a particle moves in a central force field, angular momentum and, hence, the orbital plane are preserved. The state is $\psi(r,\theta,\phi)= \psi(r,\theta)$; if system were 2 dimensional, the angular momentum would be:
 
 \begin{align*}
--i \frac{\partial \psi(r,\theta)}{\partial \theta} =& l \psi(r,\theta) \text{, eigenvector}\\
+L =& -i \frac{\partial}{\partial \theta} \text{, and the eigenvalues and eigenvectors would satisfy}\\
+-i \frac{\partial \psi(r,\theta)}{\partial \theta} =& l \psi(r,\theta) \text{, which has solution}\\
 \psi(r,\theta) =& e^{i l \theta} \chi(r) \text{, for some $\chi$}
 \end{align*}
-More generally, $\psi(r,\theta,\phi)= Y(\theta,\phi) \chi(r)$
+
+In 3 dimensions, $\psi(r,\theta,\phi)= Y(\theta,\phi) \chi(r)$, where $Y(\theta,\phi)$ encapsulates the angular dependence of the wave function.
+
+In Section \ref{seq:symmetry:degeneracy} we derived the commutators, (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). We selected one component, $L_z$, and worked with its eigenvectors, $L_z \ket{m} = m \ket{m}$. We defined $L_\pm$, (\ref{eq:comm:Lpm}), and found that they had useful properties, (\ref{eq:comm:LpmLz}). $L_\pm$ were raising and lowering operators, which take use up and down the spectrum.
+
+We asked whether the raising and lowering could go on forever. The only way to come to an end is if $\exists l$ such that $L_+\ket{k}=0$ (and similarly for $L_-$). Spectrum has to be symmetric (rotational invariance). We found spectrum had to go up in integers, and that it started at either an integer or half integer. We found that the spectrum was a multiplet of $2l+1$ states. The multiplet is characterized by the magnitude of angular momentum.
 
 
 From (\ref{eq:create_m}) we have a spectrum of angular momenta, integral or half integral, say $\set{-l,...,l:L_+\ket{l}=0}$. There are $2l+1$ states with constant $L^2 = L_x^2 + L_y^2 + L_x^2$. Classically $L^2 = L_z^2 +(L_x-iL_y)(L_x+iL_y)$, but this fails in quantum mechanics as they operators don't commute.
 
+The quantum version is:
 \begin{align*}
-L^2 =& L_z^2 +(L_x-iL_y)(L_x+iL_y) -i [L_x,L_y]\\
-=& L_z^2 + L_z + L^-L^+\\
-L^2\ket{l}=& L_z^2\ket{l} + L_z\ket{l} + L^-L^+\ket{l}\\
-=& l^2\ket{l} + l\ket{l} + 0\text{, because eigenvectors.}\\
-L^2\ket{l}=&l (l+1) \ket{l}
+	L^2 =& L_z^2 +(L_x-iL_y)(L_x+iL_y) -i [L_x,L_y]\\
+	=& L_z^2 + L_z + L^-L^+\\
+	L^2\ket{l}=& L_z^2\ket{l} + L_z\ket{l} + L^-L^+\ket{l}\\
+	=& l^2\ket{l} + l\ket{l} + 0\text{, because eigenvectors.}\\
+	L^2\ket{l}=&l (l+1) \ket{l} \numberthis \label{eq:max:L}
 \end{align*}
 
-\begin{thm}[All eigenvectors of $L_z$ are degenerate eigenvectors of $L^2$]
+\begin{thm}[Degeneracy of $L^2$]\label{thm:degeneracy:L2}
 	\begin{enumerate}
-		\item $[L^2, L_i] =0$
-		\item All eigenvectors of $L_z$ are eigenvectors of $L^2$, eigenvalue $l(L+1)$
+		\item $[L^2, L_i] =0$\label{thm:degeneracy:1}
+		\item All eigenvectors of $L_z$ are eigenvectors of $L^2$, eigenvalue $l(l+1)$\label{thm:degeneracy:2}
 	\end{enumerate}
 \end{thm}
 \begin{proof}
-	Exercise
+	Part \ref{thm:degeneracy:1}
+	\begin{align*}
+		[L^2, L_x] =& [L_x^2+L_y^2+L_2^2,L_x]\\
+		=& \cancel{[L_x^2,L_x]} + [L_y^2,L_x] + [L_z^2,L_x] \numberthis \label{eq:L2}\\
+		[L_y^2,L_x]=&L_yL_yL_x -L_y L_x L_y + L_y L_x L_y -L_xL_yL_y\\
+		=&-L_y[L_x,L_y]-[L_x,L_y]L_y\\
+		=&-iL_yL_z-iL_zL_y \text{, using (\ref{eq:lx_ly})} \numberthis \label{eq:ly2x}\\
+		[L_z^2,L_x]=&L_zL_zL_x -L_z L_x L_z + L_z L_x L_z -L_xL_zL_z\\
+		=&L_z[L_z,L_x]+[L_z,L_x]L_z\\
+		=&iL_zL_y+iL_yL_z \text{, using (\ref{eq:lz_lx})} \numberthis \label{eq:lz2x}\\
+		[L^2, L_x] =&0 \text{, on substituing (\ref{eq:ly2x}) and (\ref{eq:lz2x}) in (\ref{eq:L2})}
+	\end{align*}
+	Part \ref{thm:degeneracy:2}. We know from (\ref{eq:max:L}) that the eigenvector of $L_z$ with the maximum eigenvalue satisfies the  theorem. The theorem follows by induction once we have the following Lemma.
+	\begin{lemma}[Induction step for Theorem \ref{thm:degeneracy:L2}]
+		If $\ket{m}$ is an eigenvector of $L_z$, and it is also an eigenvector of $L^2$, with eigenvalue $l(l+1)$, and $L_-\ket{m}$ is not zero, then  $L_-\ket{m}$ is an eigenvector of $L^2$, with eigenvalue $l(l+1)$.
+	\end{lemma}
+	\begin{proof}
+		\begin{align*}
+		L^2\ket{m}=&l (l+1) \ket{m} \text{, by hypothesis. Now}\\
+		[L_-,L^2] =& 0 \text{, from (\ref{eq:comm:Lpm}) and Part \ref{thm:degeneracy:1}, hence}\\
+		L^2(L_- \ket{m})=&(L^2 L_-) \ket{m}\\
+		=& (L_- L^2) \ket{m}\\
+		=& L_- (L^2 \ket{m})\\
+		=& L_- [l (l+1) \ket{m}]\\
+		=& l (l+1) (L_- \ket{m})
+		\end{align*}
+	\end{proof}
+	
 \end{proof}
 
-\begin{figure}[H]
-	\caption{Degeneracy of Energy Levels in Hydrogen Atom}\label{fig:degeneracy:hydrogen}
-	\includegraphics[width=0.9\textwidth]{hydrogen-degeneracy}
-\end{figure}
+When we find a multiplet such as Figure \ref{fig:aqm-2-3}, we not only have eigenvectors of $L_z$, but also of $L^2$. For each $l $, there are $2l+1$ states with the same $L^2$, and the same Energy\footnote{Because $[L_i,H]=0$--(\ref{eq:LH})}. Classically they are just tilts--Figure \ref{eq:aqm-2-1}.
+
+We have a collection of functions of the angles, characterized by $m$ and $l$, $Y_{ml}(\theta,\phi)$. They are known as ''spherical harmonics'', and they are the analogues on the unit sphere of $e^{\pm i l \theta}$
+
+\subsection{The Central Force Problem}
+
+We will use classical mechanics to guess a solution.
+
+
 Classically:
 \begin{align*}
-H =& \frac{p^2}{2m} + V(r) \text{, conserved} \numberthis \label{eq:classical:Hamiltonian}\\
-L =& r \times P  \text{, conserved, so use xy plane}\\
-H =& \frac{p_r^2+p_{\theta}^2}{2m} +V(r)\\
-=& \frac{P_r^2}{2m} + \frac{L^2}{2m r^2} + V(r) 
+	H =& \frac{\vec{P}^2}{2m} + V(r) \text{, conserved} \numberthis \label{eq:classical:Hamiltonian}\\
+	\vec{L} =& \vec{r}\times \vec{P}  \text{, angular momentum is conserved, so use $xy$ plane}\\
+	H =& \frac{P_r^2+P_{\theta}^2}{2m} +V(r) \text{, resolving as shown in Figure \ref{fig:aqm-3-1-momentum}}\\
+	=& \frac{P_r^2}{2m} + \frac{L^2}{2m r^2} + V(r) \text{, since $\left|L\right| = \left|r\right| \left|P\right|$}
 \end{align*}
+
+So we have an equation for a one dimensional problem. Figure \ref{fig:aqm-3-central} depicts the potential, and Figure \ref{fig:aqm-3-central-osc} shows a solution, oscillations about the $r$ that yields the minimum potential. 
+
+\begin{figure}[H]
+	\caption{Central Force as  a one dimensional problem}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Resolving momentum into radial and angular components}\label{fig:aqm-3-1-momentum}
+		\includegraphics[width=0.6\textwidth]{aqm-3-1-momentum}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Potential assuming the Coulomb force}\label{fig:aqm-3-central}
+		\includegraphics[width=0.6\textwidth]{aqm-3-central}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Small oscillations about minimum}\label{fig:aqm-3-central-osc}
+		\includegraphics[width=0.6\textwidth]{aqm-3-central-osc}
+	\end{subfigure}
+\end{figure}
+
+That is the classical physics. What about the quantum physics?
+
+\url{https://youtu.be/LKYs_xwWKY4?t=3037}
 
 Schr\"odinger Equation:
 \begin{align*}
--\frac{\hslash^2}{2m}\frac{\partial^2 \psi(r)}{\partial r^2} + \frac{l(l+1)\hslash^2}{r^2}\psi(r)+V(r)\psi(r) =& E\psi(r)\numberthis \label{eq:schroedinger:central}
+	-\frac{\hslash^2}{2m}\frac{\partial^2 \psi(r)}{\partial r^2} + \frac{l(l+1)\hslash^2}{r^2}\psi(r)+V(r)\psi(r) =& E\psi(r)\numberthis \label{eq:schroedinger:central}
 \end{align*}
 
-Number of nodes (zeroes) characterize energy levels.
+\begin{defn}[node]
+	A node is a point where the wave function is zero.
+\end{defn}
+
+Number of nodes  characterize energy levels.
 
 Classical mechanics inspires choice of Hamiltonian(\ref{eq:classical:Hamiltonian}), but Schr\"odinger equation (\ref{eq:schroedinger:central}) is quantum.
 
@@ -425,39 +492,39 @@ Everything in physic that disturbs equilibrium by a small amount can be approxim
 Start with suspended mass $(m=1)$, spring constant $(k=\omega^2)$
 
 \begin{align*}
-H =& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2}\\
-=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) - \frac{i \omega}{2} [x,P] \text{, Dirac!}\\
-=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) + \underbrace{\frac{\hslash \omega}{2}}_\text{ground state energy}\\
-=&\omega \frac{\big(P + i \omega x \big)}{\sqrt{2 \omega}}\frac{\big(P - i \omega x \big)}{\sqrt{2 \omega}}\text{, we'll drop the ground state energy fot the time being.}
+	H =& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2}\\
+	=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) - \frac{i \omega}{2} [x,P] \text{, Dirac!}\\
+	=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) + \underbrace{\frac{\hslash \omega}{2}}_\text{ground state energy}\\
+	=&\omega \frac{\big(P + i \omega x \big)}{\sqrt{2 \omega}}\frac{\big(P - i \omega x \big)}{\sqrt{2 \omega}}\text{, we'll drop the ground state energy fot the time being.}
 \end{align*}
 
 We'll introduce raising and lowering operators:
 
 \begin{align*}
-a^+ \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \numberthis \label{eq:creation:operator}\\
-a^- \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, Hermitean conjugate} \numberthis \label{eq:annihilation:operator}\\
-H =& \omega a^+ a^-\text{. We'll take the commutator:}\numberthis \label{eq:shM}\\
-[a^-,a^+] =& \frac{1}{2\omega}\big[P - i \omega x,P + i \omega x\big]\\
-=& 1\text{. We also define} \numberthis \label{eq:a:comm}\\
-N \triangleq& a^+a^-\text{, so (\ref{eq:shM}) becomes} \numberthis \label{eq:number:operator}\\
-H =& \omega N
+	a^+ \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \numberthis \label{eq:creation:operator}\\
+	a^- \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, Hermitean conjugate} \numberthis \label{eq:annihilation:operator}\\
+	H =& \omega a^+ a^-\text{. We'll take the commutator:}\numberthis \label{eq:shM}\\
+	[a^-,a^+] =& \frac{1}{2\omega}\big[P - i \omega x,P + i \omega x\big]\\
+	=& 1\text{. We also define} \numberthis \label{eq:a:comm}\\
+	N \triangleq& a^+a^-\text{, so (\ref{eq:shM}) becomes} \numberthis \label{eq:number:operator}\\
+	H =& \omega N
 \end{align*}
 $N$ is Hermitean, so it has a complete set of eigenvalues and eigenvectors.
 
 \begin{align*}
-N\ket{n} =& n\ket{n}\\
-a^+a^-\ket{n} =& n\ket{n}\\
-a^+(a^-a^+ - a^+a^-)\ket{n} =& a^+\ket{n}\text{, using (\ref{eq:a:comm})}\\
-a^+a^-a^+ \ket{n} =& a^+a^+a^-\ket{n} + a^+\ket{n}\\
-N a^+ \ket{n} =& (n+1) a^+ \ket{n}
+	N\ket{n} =& n\ket{n}\\
+	a^+a^-\ket{n} =& n\ket{n}\\
+	a^+(a^-a^+ - a^+a^-)\ket{n} =& a^+\ket{n}\text{, using (\ref{eq:a:comm})}\\
+	a^+a^-a^+ \ket{n} =& a^+a^+a^-\ket{n} + a^+\ket{n}\\
+	N a^+ \ket{n} =& (n+1) a^+ \ket{n}
 \end{align*}
 
 So $a^+$ acts as raising operator, and we can show $a^-$ is lowering. Also $a^-$ eventually leads to $0$.
 
 We will see (Theorem \ref{thm:norm:harmonic}) the appropriate normalization:
 \begin{align*}
-a^+\ket{n} =& \sqrt{n+1}\ket{n+1}\\
-a^-\ket{n} =& \sqrt{n}\ket{n-1}
+	a^+\ket{n} =& \sqrt{n+1}\ket{n+1}\\
+	a^-\ket{n} =& \sqrt{n}\ket{n-1}
 \end{align*}
  
 \section{Spin}
@@ -470,16 +537,16 @@ We will find ground state from Schr\"odinger equation.
 Since $H$ is positive, there can be no negative eigenvalues.
 
 \begin{align*}
-a^-\ket{0}=&0\\
-N\ket{0}=& 0
+	a^-\ket{0}=&0\\
+	N\ket{0}=& 0
 \end{align*}
 NB $\ket{0} \ne 0$. $\ket{0}$ is a vector which can be normalized; $0$ is a vector of length 0.
 \begin{align*}
--\frac{1}{2}\frac{d^2 \psi(x)}{dx^2} + \omega^2 x^2 \psi(x)=& E\psi(x)\text{, Schr\"odinger}\\
-\int_{-\infty}^{\infty} dx \psi^*(x) \psi(x) =& 1\\
-a^-\ket{0}=& 0\\
-\big(-i \frac{d}{dx} - i \omega x \big)\psi_0(x) =& 0\\
-\psi_0(x) =& e^{-\frac{\omega x^2}{2}} \text{, not normalized.}
+	-\frac{1}{2}\frac{d^2 \psi(x)}{dx^2} + \omega^2 x^2 \psi(x)=& E\psi(x)\text{, Schr\"odinger}\\
+	\int_{-\infty}^{\infty} dx \psi^*(x) \psi(x) =& 1\\
+	a^-\ket{0}=& 0\\
+	\big(-i \frac{d}{dx} - i \omega x \big)\psi_0(x) =& 0\\
+	\psi_0(x) =& e^{-\frac{\omega x^2}{2}} \text{, not normalized.}
 \end{align*}
 
 We can then use $a^+$  to generate excited states. Time dependent looks like classical oscillator, especially at high energy (energy larger that ground state). Figure \ref{fig:wave:harmonic} shows how higher levels are away from 0 most of time.
@@ -520,6 +587,11 @@ J=&L+s
 \end{align*}
 
 Eigenvalues of $s_z$ are $\pm \frac{1}{2}$: notice that we have integral and half integral spins.
+
+\begin{figure}[H]
+	\caption{Degeneracy of Energy Levels in Hydrogen Atom}\label{fig:degeneracy:hydrogen}
+	\includegraphics[width=0.9\textwidth]{hydrogen-degeneracy}
+\end{figure}
 
 See Figure \ref{fig:degeneracy:hydrogen}. Number of states for each n, 1, 4, 9, 16, ...
 
