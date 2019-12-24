@@ -446,7 +446,7 @@ Classically:
 \begin{align*}
 	H =& \frac{\vec{P}^2}{2m} + V(r) \text{, conserved} \numberthis \label{eq:classical:Hamiltonian}\\
 	\vec{L} =& \vec{r}\times \vec{P}  \text{, angular momentum is conserved, so use $xy$ plane}\\
-	H =& \frac{P_r^2+P_{\theta}^2}{2m} +V(r) \text{, resolving as shown in Figure \ref{fig:aqm-3-1-momentum}}\\
+	H =& \frac{P_r^2+P_{\theta}^2}{2m} +V(r) \text{, resolving as shown in Figure \ref{fig:aqm-3-1-momentum}} \numberthis \label{eq:resolve}\\
 	=& \frac{P_r^2}{2m} + \frac{L^2}{2m r^2} + V(r) \text{, since $\left|L\right| = \left|r\right| \left|P\right|$}
 \end{align*}
 
@@ -456,42 +456,42 @@ So we have an equation for a one dimensional problem. Figure \ref{fig:aqm-3-cent
 	\caption{Central Force as  a one dimensional problem}
 	\begin{subfigure}[t]{0.3\textwidth}
 		\caption{Resolving momentum into radial and angular components}\label{fig:aqm-3-1-momentum}
-		\includegraphics[width=0.6\textwidth]{aqm-3-1-momentum}
+		\includegraphics[width=\textwidth]{aqm-3-1-momentum}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.3\textwidth}
 		\caption{Potential assuming the Coulomb force}\label{fig:aqm-3-central}
-		\includegraphics[width=0.6\textwidth]{aqm-3-central}
+		\includegraphics[width=\textwidth]{aqm-3-central}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.3\textwidth}
 		\caption{Small oscillations about minimum}\label{fig:aqm-3-central-osc}
-		\includegraphics[width=0.6\textwidth]{aqm-3-central-osc}
+		\includegraphics[width=\textwidth]{aqm-3-central-osc}
 	\end{subfigure}
 \end{figure}
 
-That is the classical physics. What about the quantum physics? For the quantum physics we have a wave function which satisfies the Schr\"odinger Equation. The angular part is totally taken care of by our existing study of angular momentum.
+That is the classical physics. What about the quantum physics? For the quantum physics we have a wave function which satisfies the Schr\"odinger Equation(\ref{eq:schroedinger:central}). The angular part is totally taken care of by our existing study of angular momentum\footnote{Strictly step (\ref{eq:resolve}) requires a quantum mechanical justification}.
 \begin{align*}
 	-\frac{\hslash^2}{2m}\frac{\partial^2 \psi(r)}{\partial r^2} + \hslash^2 \frac{l(l+1)\hslash^2}{r^2}\psi(r)+V(r)\psi(r) =& E\psi(r)\numberthis \label{eq:schroedinger:central}
 \end{align*}
 
-Figure \ref{fig:aqm-3-central-potential} depicts the potential for the Coulomb force. The energy levels of (\ref{eq:schroedinger:central}) are characterized by the number of nodes--Definition \ref{defn:node} and Figures \ref{fig:aqm-3-central-0node}, \ref{fig:aqm-3-central-1node}, and \ref{fig:aqm-3-central-2nodes} (The more nodes, the faster they wiggle, hence higher momentum).
+Figure \ref{fig:aqm-3-central-potential} depicts the potential for the Coulomb force. The energy levels of (\ref{eq:schroedinger:central}) are characterized by the number of nodes--Definition \ref{defn:node} and Figures \ref{fig:aqm-3-central-0node}, \ref{fig:aqm-3-central-1node}, and \ref{fig:aqm-3-central-2nodes} (The more nodes, the faster the wiggle, hence higher momentum).
 
 \begin{figure}[H]
 	\caption{Solving (\ref{eq:schroedinger:central})}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Potential}\label{fig:aqm-3-central-potential}
-		\includegraphics[width=0.9\textwidth]{aqm-3-central-potential}
+		\includegraphics[width=\textwidth]{aqm-3-central-potential}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{No nodes}\label{fig:aqm-3-central-0node}
-		\includegraphics[width=0.9\textwidth]{aqm-3-central-0node}
+		\includegraphics[width=\textwidth]{aqm-3-central-0node}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{One node}\label{fig:aqm-3-central-1node}
-		\includegraphics[width=0.9\textwidth]{aqm-3-central-1node}
+		\includegraphics[width=\textwidth]{aqm-3-central-1node}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Two nodes}\label{fig:aqm-3-central-2nodes}
-		\includegraphics[width=0.9\textwidth]{aqm-3-central-2node2}
+		\includegraphics[width=\textwidth]{aqm-3-central-2node2}
 	\end{subfigure}
 \end{figure}
 
@@ -503,15 +503,31 @@ Figure \ref{fig:aqm-3-central-potential} depicts the potential for the Coulomb f
 	The ground state has 0 nodes, the first excited one node, etc.
 \end{thm}
 
-What can we say about energy levels in general? Figure \ref{fig:degeneracy:hydrogen} plots the number of energy levels against $l$, and plots number of nodes vertically.
+What can we say about energy levels in general? Figure \ref{fig:degeneracy:hydrogen} plots the number of energy levels against $l$, and plots number of nodes vertically. It exhibits degeneracy. If the energy is too high the electron escapes. The Coulomb potential has a very special feature. It is almost an accident: it is violated by the finite size of the nucleus, by relativistic corrections, by spin. \emph{The zero node energy for $l=1$ is equal to the 1 node energy for $l=0$, etc}--Figure \ref{fig:aqm-3-central-coulomb}.
 
-\url(https://youtu.be/LKYs_xwWKY4?t=3878)
+
+
 \begin{figure}[H]
-	\caption{Degeneracy of Energy Levels in Hydrogen Atom}\label{fig:degeneracy:hydrogen}
-	\includegraphics[width=0.9\textwidth]{hydrogen-degeneracy}
+	\begin{center}
+		\caption[Degeneracy of Energy Levels in Hydrogen Atom]{Degeneracy of Energy Levels in Hydrogen Atom. Each $l$ has its own Schro\"edinger equation (\ref{eq:schroedinger:central}), so each $l$ may have its own set of bound solutions. The ground state for $l=0$ has no nodes,  the next state has one node, etc. For $l=1$ the energy of the ground state lies somewhere above the corresponding state for $l=1$. Moreover there are 3 states for each node: the energy levels are degenerate. Similarly for $l=2$ there are 5 states for each node, and the energy levels are higher.}\label{fig:degeneracy:hydrogen}
+		\includegraphics[width=0.9\textwidth]{aqm-3-hydrogen-degeneracy}
+	\end{center}
 \end{figure}
 
-Classical mechanics inspires choice of Hamiltonian(\ref{eq:classical:Hamiltonian}), but Schr\"odinger equation (\ref{eq:schroedinger:central}) is quantum.
+\begin{figure}[H]
+	\begin{center}
+		\caption[Energy Levels for the Coulomb Force]{For the Coulomb force \emph{only}, the energy levels for $l+1$ match those for $l$, shifted up by one. This is an extra degeneracy from a bizarre symmetry. The number of states at each level is  $\{1,4,9,16,...\}$}\label{fig:aqm-3-central-coulomb}
+		\includegraphics[width=0.8\textwidth]{aqm-3-central-coulomb}
+	\end{center}
+\end{figure}
+
+Real atoms behave a bit differently.
+\begin{itemize}
+	\item the nucleus has finite size, so at short distances the Coulomb law isn't quite accurate;
+	\item Instead of  $\{1,4,9,16,...\}$ states at each energy level there are  $\{2,8,18,32,...\}$--we have ignored \emph{spin}.
+\end{itemize}
+
+\url{https://youtu.be/LKYs_xwWKY4?t=5001}
 
 \subsection{Harmonic oscillators}
 
