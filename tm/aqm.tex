@@ -362,8 +362,6 @@ So, using the algebra of commutators, we have generated a spectrum of values of 
 	Since symmetries commute, we have degeneracy.
 \end{proof}
 
-
-
 \section{Atomic orbits and harmonic oscillators}
 
 \subsection{Atomic orbits and Angular Momentum}
@@ -527,45 +525,73 @@ Real atoms behave a bit differently.
 	\item Instead of  $\{1,4,9,16,...\}$ states at each energy level there are  $\{2,8,18,32,...\}$--we have ignored \emph{spin}.
 \end{itemize}
 
-\url{https://youtu.be/LKYs_xwWKY4?t=5001}
+
+
+Are there always raising an lowering operators? No: only when you are very lucky; physics has been lucky twice. The harmonic oscillator piece of luck is very pervasive, as many things in nature can be well approximated by a harmonic oscillator. For example, go to a higher momentum state of the central force problem, Figure \ref{fig:aqm-3-central-osc}, and the simplest solution is to treat them as a harmonic oscillator.
 
 \subsection{Harmonic oscillators}
 
-Everything in physics that disturbs equilibrium by a small amount can be approximated by a simple harmonic oscillator. 
 
-Start with suspended mass $(m=1)$, spring constant $(k=\omega^2)$
+Everything in physics that has an equilibrium, if you disturb equilibrium by a small amount, the behaviour can be approximated by a  harmonic oscillator. The model is just a suspended mass $(m=1)$, spring constant $(k=\omega^2)$
 
+\begin{figure}[H]
+	\begin{center}
+		\caption[Model: suspended mass.]{Suspended mass $(m=1)$, spring constant $(k=\omega^2)$.  $X$ is deviation from equillibrium.}\label{fig:aqm-3-shm-suspended-mass}
+		\includegraphics[width=0.8\textwidth]{aqm-3-shm-suspended-mass}
+	\end{center}
+\end{figure}
+
+Classically:
+\begin{align*}
+	H =& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2} \text{. We'll check with Hamilton's equations}\\
+	 \dot{p}=&\frac{\partial H}{\partial x} \\
+	=& \dot{x} \\
+	\dot{x} =& -\frac{\partial H}{\partial p} \\
+	=& - \omega^2 p \\
+	\dddot{x} + \omega^2 x =&0 \text{, as expected}
+\end{align*}
+
+Quantum mechanically:
 \begin{align*}
 	H =& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2}\\
-	=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) - \frac{i \omega}{2} [x,P] \text{, Dirac!}\\
-	=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) + \underbrace{\frac{\hslash \omega}{2}}_\text{ground state energy}\\
-	=&\omega \frac{\big(P + i \omega x \big)}{\sqrt{2 \omega}}\frac{\big(P - i \omega x \big)}{\sqrt{2 \omega}}\text{, we'll drop the ground state energy fot the time being.}
+	=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) - \frac{i \omega}{2} [x,P] \text{, since x and p don't commute}\\
+	=& \frac{\omega}{2 \omega}\big(P + i \omega x \big)\big(P - i \omega x \big) + \underbrace{\frac{\hslash \omega}{2}}_\text{zero point energy}\\
+	=&\omega \frac{\big(P + i \omega x \big)}{\sqrt{2 \omega}}\frac{\big(P - i \omega x \big)}{\sqrt{2 \omega}}
 \end{align*}
+
+Classically both $p=0$ and $x=0$ in the ground state; since the Heisenberg uncertainty principle precludes  $p=0$ and $x=0$, the zero point energy is the minimum possible. We'll drop the ground state energy (zero point energy) for the time being, since it is just an additive constant.
 
 We'll introduce raising and lowering operators:
 
 \begin{align*}
 	a^+ \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \numberthis \label{eq:creation:operator}\\
-	a^- \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, Hermitean conjugate} \numberthis \label{eq:annihilation:operator}\\
+	a^- \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, Hermitean conjugate--$a^-=(a^+)^\dagger$} \numberthis \label{eq:annihilation:operator}\\
 	H =& \omega a^+ a^-\text{. We'll take the commutator:}\numberthis \label{eq:shM}\\
 	[a^-,a^+] =& \frac{1}{2\omega}\big[P - i \omega x,P + i \omega x\big]\\
 	=& 1\text{. We also define} \numberthis \label{eq:a:comm}\\
 	N \triangleq& a^+a^-\text{, so (\ref{eq:shM}) becomes} \numberthis \label{eq:number:operator}\\
 	H =& \omega N
 \end{align*}
-$N$ is Hermitean, so it has a complete set of eigenvalues and eigenvectors.
+$N$ is Hermitian, so it has a complete set of eigenvalues and eigenvectors.
 
 \begin{align*}
-	N\ket{n} =& n\ket{n}\\
+	N\ket{n} =& n\ket{n} \text{, we aren't \emph{assuming} that $n$ is an integer}\\
 	a^+a^-\ket{n} =& n\ket{n}\\
 	a^+(a^-a^+ - a^+a^-)\ket{n} =& a^+\ket{n}\text{, using (\ref{eq:a:comm})}\\
-	a^+a^-a^+ \ket{n} =& a^+a^+a^-\ket{n} + a^+\ket{n}\\
+	a^+a^-a^+ \ket{n} - a^+\underbrace{a^+a^- \ket{n}}_\text{$ n\ket{n}$} =& a^+\ket{n}\\
+	\underbrace{a^+a^-}_\text{$N$}a^+ \ket{n} =& n a^+\ket{n} + a^+\ket{n}\\
 	N a^+ \ket{n} =& (n+1) a^+ \ket{n}
 \end{align*}
 
-So $a^+$ acts as raising operator, and we can show $a^-$ is lowering. Also $a^-$ eventually leads to $0$.
+So $a^+$ acts as raising operator, and we can show $a^-$ is lowering.  Since the Hamiltonian is positive we can't ever get negative energy, so there must be a lowest energy state, $0$--Figure \ref{fig:aqm-3-spectrum}. In QM there is a theorem that all the eigenvalues of $MM^\dagger$ are positive or zero, for any operator $M$. 
 
-We will see (Theorem \ref{thm:norm:harmonic}) the appropriate normalization:
+\begin{figure}[H]
+	\begin{center}
+		\caption[Energy Spectrum for Harmonic Oscillator]{Energy Spectrum for Harmonic Oscillator. $a^+$ takes energy up one level, and $a+-$ down, except for $a^-\ket{0}$=0.}\label{fig:aqm-3-spectrum}
+		\includegraphics[width=0.8\textwidth]{aqm-3-spectrum}
+	\end{center}
+\end{figure}
+We will see (Theorem \ref{thm:norm:harmonic}) the appropriate normalization gives:
 \begin{align*}
 	a^+\ket{n} =& \sqrt{n+1}\ket{n+1}\\
 	a^-\ket{n} =& \sqrt{n}\ket{n-1}
@@ -574,6 +600,7 @@ We will see (Theorem \ref{thm:norm:harmonic}) the appropriate normalization:
 \section{Spin}
 
 \subsection{Harmonic oscillators(continued)}
+
 Vacuum is the equilibrium for electromagnetic field. 
 
 We will find ground state from Schr\"odinger equation.
