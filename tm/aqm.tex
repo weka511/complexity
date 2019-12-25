@@ -587,7 +587,7 @@ So $a^+$ acts as raising operator, and we can show $a^-$ is lowering.  Since the
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Energy Spectrum for Harmonic Oscillator]{Energy Spectrum for Harmonic Oscillator. $a^+$ takes energy up one level, and $a+-$ down, except for $a^-\ket{0}$=0.}\label{fig:aqm-3-spectrum}
+		\caption[Energy Spectrum for Harmonic Oscillator]{Energy Spectrum for Harmonic Oscillator. $a^+$ takes energy up one level, and $a^-$ down, except for $a^-\ket{0}$=0.}\label{fig:aqm-3-spectrum}
 		\includegraphics[width=0.8\textwidth]{aqm-3-spectrum}
 	\end{center}
 \end{figure}
@@ -601,31 +601,72 @@ We will see (Theorem \ref{thm:norm:harmonic}) the appropriate normalization give
 
 \subsection{Harmonic oscillators(continued)}
 
-Vacuum is the equilibrium for electromagnetic field. 
+Harmonic oscillators are ubiquitous. Any time a system has an equilibrium, thee can be oscillations about equilibrium. An oscillator can oscillate at different frequencies simultaneously (harmonics)--e.g. a violin string. We will be particularly interested in oscillations in an electromagnetic field.  For example, if you have radiation in a cavity, there will be a variety of oscillations. What is the equilibrium? No electromagnetic field, i.e. vacuum is the equilibrium for electromagnetic field. Give it a knock, e.g. microwaves, and there will be oscillations.
 
-We will find ground state from Schr\"odinger equation.
+In a crystal, the oscillations of one atom affect its neighbours, so we have a field. The quanta are called phonons.
 
-Since $H$ is positive, there can be no negative eigenvalues.
+In the previous lecture we found:
+\begin{align*}
+	H =& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2} \text{, and we defined}\\
+	a^\pm=& \frac{q \pm i \omega x}{\sqrt{2 \omega}} \text{, raising and lowering operators}\\
+	[a^-,a^+]=& 1\\
+	N =& a^+a^- \text{, whence}\\
+	H =& \omega(N+\frac{1}{2})
+\end{align*}
 
+We will find ground state by solving the Schr\"odinger equation.
+\begin{align*}
+	\ket{psi} \rightarrow& \psi_0(x) \text{, in thr ground state}\\
+	X \rightarrow& x. \text{, multiplication}\\
+	P \rightarrow& -i \frac{d}{dx}
+\end{align*}
+
+
+We know that there has to be a ground state. We can't use $a^-$ indefinitely; since $H$ is positive, there can be no negative eigenvalues. So $\exists \ket{0}$ such that: 
 \begin{align*}
 	a^-\ket{0}=&0\\
-	N\ket{0}=& 0
+	N\ket{0}=&a^+a^- \ket{0 }\\
+	=& a^+0\\
+	=&0
 \end{align*}
+
 NB $\ket{0} \ne 0$. $\ket{0}$ is a vector which can be normalized; $0$ is a vector of length 0.
+Applying the transformations given above, we get the time independent Schr\"odinger equation.
 \begin{align*}
-	-\frac{1}{2}\frac{d^2 \psi(x)}{dx^2} + \omega^2 x^2 \psi(x)=& E\psi(x)\text{, Schr\"odinger}\\
-	\int_{-\infty}^{\infty} dx \psi^*(x) \psi(x) =& 1\\
-	a^-\ket{0}=& 0\\
-	\big(-i \frac{d}{dx} - i \omega x \big)\psi_0(x) =& 0\\
+	-\frac{1}{2}\frac{d^2 \psi(x)}{dx^2} + \omega^2 x^2 \psi(x)=& E\psi(x)
+\end{align*}
+
+ There are solutions for all $E$, but the solutions are not normalizable unless E is in the spectrum, Figure \ref{fig:aqm-3-spectrum}. So we impose the condition $\braket{\psi|\psi}=1$, or:
+\begin{align*}
+	\int_{-\infty}^{\infty} dx \psi^*(x) \psi(x) =& 1 \text{. We know that}\\
+	a^-\ket{0}=& 0 \text{, whence}\\
+	\big(-i \frac{d}{dx} - i \omega x \big)\psi_0(x) =& 0 \text{. Write}\\
+	\psi(x)=&e^{f(x)} \text{, then}\\
+	\psi^\prime(x) =&f^\prime e^{f(x)}\\
+	i \big[f^\prime  + \omega x\big]e^{f(x)} =&0\\
+	f(x) =& -\frac{\omega x^2}{2}+C\\
 	\psi_0(x) =& e^{-\frac{\omega x^2}{2}} \text{, not normalized.}
 \end{align*}
 
-We can then use $a^+$  to generate excited states. Time dependent looks like classical oscillator, especially at high energy (energy larger that ground state). Figure \ref{fig:wave:harmonic} shows how higher levels are away from 0 most of time.
+We can then use $a^+$  to generate excited states.
+\begin{align*}
+	\ket{1}=& a^+ \ket{0} \text{, or, in the Schro\"edinger representation:}\\
+	\psi_1(x) =& \big(-i \frac{d}{dx} + i \omega x \big) e^{-\frac{\omega x^2}{2}}\\
+	=& 2 i \omega e^{-\frac{\omega x^2}{2}}
+\end{align*}
+
+This is an odd function (antisymmetric)--Figure \ref{fig:wave:harmonic}. It has one node.
+
+Figure \ref{fig:wave:harmonic} shows how higher levels have more wiggles (momentum) and are away from origin (more likely to be far away) most of time.
 
 \begin{figure}[H]
 	\caption{Wave functions for harmonic oscillator}\label{fig:wave:harmonic}
 	\includegraphics[width=0.9\textwidth]{harmonic_wavefunction}
 \end{figure}
+
+To see classical behaviour, superpose states to create wave packets. Time dependent looks like classical oscillator, especially at high energy (energy larger that ground state).
+
+\url{https://youtu.be/ATxq2IEekk4?t=2504}
 
 \subsection{Spin}
 
