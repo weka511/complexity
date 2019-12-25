@@ -657,7 +657,7 @@ We can then use $a^+$  to generate excited states.
 
 This is an odd function (antisymmetric)--Figure \ref{fig:wave:harmonic}. It has one node.
 
-Figure \ref{fig:wave:harmonic} shows how higher levels have more wiggles (momentum) and are away from origin (more likely to be far away) most of time.
+Figure \ref{fig:wave:harmonic} shows how higher levels have more wiggles (momentum) and are away from origin (the particle is more likely to be far away) most of time.
 
 \begin{figure}[H]
 	\caption{Wave functions for harmonic oscillator}\label{fig:wave:harmonic}
@@ -666,55 +666,80 @@ Figure \ref{fig:wave:harmonic} shows how higher levels have more wiggles (moment
 
 To see classical behaviour, superpose states to create wave packets. Time dependent looks like classical oscillator, especially at high energy (energy larger that ground state).
 
-\url{https://youtu.be/ATxq2IEekk4?t=2504}
+
 
 \subsection{Spin}
 
-Some particles have half-integral spin, e.g. electron or proton. At rest has no orbital rotation, only spin. Spin is angular momentum attached to particle - see (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). We introduce the Pauli matrices:
+Some particles have half-integral spin, e.g. electron or proton. At rest they have no orbital rotation, no $\vec{r}\times\vec{p}$, only spin. Spin is a kind of angular momentum that is attached to a particle. You can think of it as an abstract quantity or as a tiny thing that is literally spinning. It transforms under rotation as angular momentum does. Spin has two states, up or down, left or right, in or out. The thing that characterizes angular momentum is having three components, which can be represented by matrices satisfying (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). These are closely related to the commutation relations of the Pauli matrices (we will work in the representation of the $z$ compoent of the spin):
 
-$$
-\sigma_z = \begin{pmatrix}
-1 & 0 \\
-0 & -1
-\end{pmatrix}
-\quad
-\sigma_x = \begin{pmatrix}
-0 & 1 \\
-1 & 0
-\end{pmatrix}
-\quad
-\sigma_y = \begin{pmatrix}
-0 & -i \\
-i & 0
-\end{pmatrix}
-$$
-
-then define:
 \begin{align*}
-s_i =& \frac{\sigma_i}{2} \text{. We can show the $s_i$ satisfy (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx})}\\
-[s_x,s_y] =& i s_z \\
-[s_y,s_z] =& i s_x\\
-[s_z,s_x] =& i s_y \text{. We define $J$, the total angular momentum}\\
-J=&L+s
+	\sigma_z =& \begin{pmatrix}
+		1 & 0 \\
+		0 & -1\\
+	\end{pmatrix} \\
+	\sigma_x =& \begin{pmatrix}
+		0 & 1 \\
+		1 & 0\\
+	\end{pmatrix}\\
+	\sigma_y =& \begin{pmatrix}
+		0 & -i \\
+		i & 0\\
+	\end{pmatrix}
 \end{align*}
 
-Eigenvalues of $s_z$ are $\pm \frac{1}{2}$: notice that we have integral and half integral spins.
-
-
-See Figure \ref{fig:degeneracy:hydrogen}. Number of states for each n, 1, 4, 9, 16, ...
-
-For Helium, we can put 2 electrons into ground state; if we try to create an ion with 3 electrons, one goes into next state! Pauli exclusion principle. New property with two values, up and down. Checked with magnetic field.
-
-Pauli's Exclusion Principle is a\emph{ postulate} of non-relativistic QM, but a \emph{consequence} of relativistic QM. There are two kinds of particles: ones that satisfy Pauli, and those that don't.
-
-Identical quantum particles are indistinguishable.
+The Pauli matrices are Hermitian. We define:
 
 \begin{align*}
-\psi(x) =& \braket{x|\psi}\\
-\psi(x_1,x_2) =& \braket{x_1x_2|\psi}\text{, two particles}\\
-\psi(x_1,x_2) \rightarrow & \psi(x_2,x_1)\text{, swap using operator $S$}\\
-S\ket{x1,x2} =& \ket{x2,x1}\\
-S^2 =& 1
+	\vec{s} =& \frac{\vec{\sigma}}{2} \text{. We can show the $s_i$ satisfy (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx})}\\
+	[s_x,s_y] =& i s_z \\
+	[s_y,s_z] =& i s_x\\
+	[s_z,s_x] =& i s_y
+\end{align*}
+
+So the Pauli matrices, with 2D vectors, represent a simple angular momentum system, which is attached to the particles. Now we can ask about eigenvalues and eigenvectors. The Eigenvalues of $s_z$ are $\pm \frac{1}{2}$. 
+
+In Figures \ref{fig:aqm-2-3a} and \ref{fig:aqm-2-3b} we saw there were two possibilities for the spectrum of angular momentum, integral and half integral spins. We could have \emph{guessed} the Pauli matrices by noticing the spin ${-\frac{1}{2},\frac{1}{2}}$ case. Note: there are spin $0$ particles, such as the Higgs, and the deuteron. We will largely focus on spin $\frac{1}{2}$ particles.
+
+We define $J$, the total angular momentum:
+\begin{align*}
+	J=&L+s \text{, where $L$ denotes the orbital angular momentum $\vec{r}\times\vec{P}$}
+\end{align*}
+
+There are QM rules for adding angular momenta, which we won't cover in this lecture.
+
+
+The first experimental background came from spectroscopy and the periodic table. The goal of this lecture is to see how periodic table emerges from spin. Pauli realized spin was needed.
+
+$L^2=l(l+1)$. We look at the energy levels of hydrogen --see Figure \ref{fig:degeneracy:hydrogen}. There is a bunch of states for $l=0$, for zero nodes($n=0$), 1 node, etc. For $l=1$ there are $2l+1=3$ states for each node, and ground state for $l=1$ has more energy than ground state for $l=0$, because it has angular momentum.
+
+Figure \ref{fig:aqm-3-central-coulomb} shows the coincidence that the  energy for  for one value of $l$ matches that $l-1$, except that energies are shifted in $n$: $E(n,l)$ satisfies $E(n,l+1)=E(n+1,l)$. So the number of states for each n is 1, 4, 9, 16, ...
+
+The Helium nucleus has twice the charge of the hydrogen nucleus, so electrons are pulled in tighter, but the structure of Figure \ref{fig:aqm-3-central-coulomb}  is preserved for a Helium ion (negative). Put another electron in: we can put 2 electrons into ground state; if we try to create an ion with 3 electrons, one goes into first excited state! 
+
+\subsection{Pauli exclusion principle}
+
+Pauli exclusion principle: no two electrons can ever get into the same state. But we can put 2 electrons into ground state. Pauli said there was a new property with two values, up and down.
+
+Lithium has 3 electrons, 2 in ground state, 3rd in 1st excited state. There is room for 8 states in first excited level, if we allow for spin. This explains 2nd row of periodic table. The fact that spin was angular momentum was checked with magnetic field (split energy levels).
+
+Pauli's Exclusion Principle is a \emph{postulate} of non-relativistic QM, but a \emph{consequence} of relativistic QM. There are two kinds of particles: ones that satisfy Pauli's Exclusion Principle (Fermions), and those that don't (Bosons).
+
+In statistical mechanics, how do we handle identical particles? Imagine that we are putting particles into boxes (real or phase space). In Figure \ref{fig:aqm-4-particles-boxen} we can imagine each particle having a name painted in "classical paint", so they are distinct. Or we can treat them as absolutely identical, so we usually count as if they were identical. In quantum mechanics, however, identical  particles are indistinguishable.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Configurations Particles in Boxes]{Configurations Particles in Boxes: if we exchange labels, do we count as separate configurations?}\label{fig:aqm-4-particles-boxen}
+		\includegraphics[width=0.6\textwidth]{aqm-4-particles-boxen}
+	\end{center}
+\end{figure}
+
+Consider two particles, forgetting spin.
+\begin{align*}
+	\psi(x) =& \braket{x|\psi}\\
+	\psi(x_1,x_2) =& \braket{x_1x_2|\psi}\text{, two particles}\\
+	\psi(x_1,x_2) \rightarrow & \psi(x_2,x_1)\text{, swap using operator $S$}\\
+	S\ket{x1,x2} =& \ket{x2,x1}\\
+	S^2 =& 1
 \end{align*}
 
 $S$ is unitary, so eigenvalues are $\pm1$.
