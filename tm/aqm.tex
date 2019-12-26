@@ -327,7 +327,7 @@ We want to find eigenvalues of angular momentum. It us useful to introduce creat
 So, using the algebra of commutators, we have generated a spectrum of values of $L_z$, separated by integers--see Figure \ref{fig:aqm-2-3}. Imagine that we rotate by $180\degree$: this takes $L_z\rightarrow - L_z$, so rotational symmetry requires that the termination points be reversed: they must be symmetrical. There are two possibilities--Figures \ref{fig:aqm-2-3a} and \ref{fig:aqm-2-3b}. We can show that the only values that are allowed for orbital angular momentum are integral (single values wave function), but half integral is also possible for spin. 
 
 \begin{figure}[H]
-	\caption{Spectrum of $L_z$.}
+	\caption{Spectrum of $L_z$.}\label{fig:spectrum_Lz}
 	\begin{subfigure}[t]{0.3\textwidth}
 		\caption{Terminators in red}\label{fig:aqm-2-3}
 		\includegraphics[width=0.8\textwidth]{aqm-2-3}
@@ -750,6 +750,7 @@ $S$ is unitary, so eigenvalues are $\pm1$.
 
 \section{Fermions: a tale of two minus signs}
 
+
 We'll review the chemistry that went into the discovery of spin, and the Fermionic character of electrons. The Fermionic character implies two things that are related:
 \begin{itemize}
 	\item spin of electron is half spin $\pm \frac{1}{2}$
@@ -763,6 +764,8 @@ Photons don't have an exclusion principle; in fact they have a tendency to congr
 Can we have spin $\frac{1}{2}$ particles that don't obey Pauli exclusion principle, or a spin integer that does obey Pauli exclusion principle? No. Can show this from quantum field theory.
 
 This lecture is a tale of two minus signs, one from spin, the other from exchange.
+
+\subsection{Swapping particles}\label{section:swap}
 
 The Pauli Exclusion Principle is deeper than simply saying that you cannot put two particles into the same state. It is actually a statement about multi particle wave functions. Let's forget about spin for the moment.
 
@@ -787,31 +790,83 @@ NB: sign is not observable.
 \begin{table}[H]
 	\begin{center}
 		\caption{Wave functions for Fermions and Bosons}
-			\begin{tabular}{|l| l| l|} \hline 
-				-&Fermions&Bosons \\ \hline 
-				$\psi(x_1,x_2)=-\psi(x_2,x_1)$&Fermions&-\\ \hline
-				$\psi(x_1,x_2)=\psi(x_2,x_1)$&-& Bosons\\ \hline
+			\begin{tabular}{|l| c| c|} \hline 
+				Wave function&Fermions&Bosons \\ \hline 
+				$\psi(x_1,x_2)=-\psi(x_2,x_1)$&OK&not OK\\ \hline
+				$\psi(x_1,x_2)=\psi(x_2,x_1)$&not OK& OK\\ \hline
 				$\psi_0(x_1)\psi_0(x_2)$&not OK& OK\\ \hline
 				$\psi_0(x_1)\psi_1(x_2)$&not OK& not OK\\ \hline
 				$\psi_0(x_1)\psi_1(x_2)+\psi_0(x_2)\psi_1(x_1)$&not OK& OK\\ \hline
 				$\psi_0(x_1)\psi_1(x_2)-\psi_0(x_2)\psi_1(x_1)$&OK&not OK \\ \hline
-			\hline
 		\end{tabular}
 	\end{center}
 \end{table}
 
+When there is spin we can think of the wave function as a function of position and spin--$\psi(x,\sigma_z)$ and $\psi(x1,\sigma_1,x2,\sigma_2,...)$. You cannot put two Fermions into the same state.
 
-Rotate system by $2\pi$: is there a phase?
+\subsection{Spin}\label{section:spin}
 
+Rotation by $2\pi$ is a mathematical process that you might expect to do nothing. Let's consider a wave function for one particle $\psi(x,\sigma)$ and rotate the coordinate system or the particle. What happens when you rotate a system with a given angular momentum by an angle about any axis--$R(\theta)2\pi$? What about $R(2\pi)2\pi$? Surely this leaves the system unchanged? But the system is analogous to swapping particles--Section \ref{section:swap}. If all we want is for the probabilities and expectation to be preserved, perhaps the rotations introduce a phase--$\pm1$.
+
+Consider the generator of rotations:
 \begin{align*}
-J_z\ket{\psi} =& -i \frac{\partial \ket{\psi}}{\partial \theta}\\
-=& m\ket{\psi} \text{, if eigenvector}\\
-\ket{\psi(\theta)} =& e^{im\theta}\ket{\psi(0)}\text{, so $m$ integral or half integral.}
+	J_z\ket{\psi} =& -i \frac{\partial \ket{\psi}}{\partial \theta}
+\end{align*}
+Imagine that angular momentum about $z$ has a definite value, so $\ket{\psi}$ is an eigenvector.
+\begin{align*}
+	J_z\ket{\psi}=& m\ket{\psi} \text{, which is easily solved.}\\
+	\ket{\psi(\theta)} =& e^{im\theta}\ket{\psi(0)}
 \end{align*}
 
-What if $m$ half integral and we rotate by $2\pi$? We have phase of $-1$, so $\psi$ changes sign.
+But, from the commutation relations\footnote{See discussion preceding Figure \ref{fig:spectrum_Lz}} we know that  $m$ integral or half integral (in 3D, not 2D).
+What if $m$ half integral and we rotate by $2\pi$? We have phase of $-1$, so $\psi$ changes sign. Fermions follow $-1$, Bosons $+1$. Of course rotation by  $4\pi$ does give the identity.
 
-David Finkelstein. Belt, Deep topological connection between rotation and interchange.
+Leonard Susskind demonstrated that $2\pi\ne0$:
+\begin{itemize}
+	\item Gerard 't Hooft Coffee Cup--Figure \ref{fig:thooft:coffee_cup} \url{https://youtu.be/A7PZftS7uOA?t=3117}
+	\item Dirac sphere in a box
+\end{itemize}
+In each case we are following a path in rotation space.
+
+\begin{figure}[H]
+	\caption{Leonard Susskind demonstrating the Gerard 't Hooft Coffee Cup trick}\label{fig:thooft:coffee_cup}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Starting the first rotation}
+		\includegraphics[width=\textwidth]{aqm-5-coffee-cup1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{$2\pi$: That is not the identity: let me tell you I'm quite certian that is not the identity!}
+		\includegraphics[width=\textwidth]{aqm-5-coffee-cup2}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Staring the 2nd rotation}
+		\includegraphics[width=\textwidth]{aqm-5-coffee-cup3}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{$4\pi$: that is the identity}
+		\includegraphics[width=\textwidth]{aqm-5-coffee-cup4}
+	\end{subfigure}
+\end{figure}
+The wave function
+\begin{itemize}
+	\item  for two fermions changes sign when we swap them;
+	\item for a single fermion changes sign when we rotate by $2\pi$.
+\end{itemize}
+
+Is there a connection between interchange and rotation? Yes, it was discovered by David Finkelstein. Belt, Deep topological connection between rotation and interchange.
+
+\begin{figure}[H]
+	\caption{The David Finkelstein Belt Trick}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Exchange of the two loops}
+		\includegraphics[width=\textwidth]{aqm-5-belt-exchange}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\text{Turn around and we see 2 rotations instead}
+		\includegraphics[width=\textwidth]{aqm-5-belt-rotation}
+	\end{subfigure}
+\end{figure}
+\url{https://youtu.be/A7PZftS7uOA?t=3432}
 
 \section{Quantum Field Theory}
 
