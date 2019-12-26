@@ -529,7 +529,7 @@ Real atoms behave a bit differently.
 
 Are there always raising an lowering operators? No: only when you are very lucky; physics has been lucky twice. The harmonic oscillator piece of luck is very pervasive, as many things in nature can be well approximated by a harmonic oscillator. For example, go to a higher momentum state of the central force problem, Figure \ref{fig:aqm-3-central-osc}, and the simplest solution is to treat them as a harmonic oscillator.
 
-\subsection{Harmonic oscillators}
+\subsection{Harmonic oscillators}\label{sect:harmonic:oscillators}
 
 
 Everything in physics that has an equilibrium, if you disturb equilibrium by a small amount, the behaviour can be approximated by a  harmonic oscillator. The model is just a suspended mass $(m=1)$, spring constant $(k=\omega^2)$
@@ -601,11 +601,11 @@ We will see (Theorem \ref{thm:norm:harmonic}) the appropriate normalization give
 
 \subsection{Harmonic oscillators(continued)}
 
-Harmonic oscillators are ubiquitous. Any time a system has an equilibrium, thee can be oscillations about equilibrium. An oscillator can oscillate at different frequencies simultaneously (harmonics)--e.g. a violin string. We will be particularly interested in oscillations in an electromagnetic field.  For example, if you have radiation in a cavity, there will be a variety of oscillations. What is the equilibrium? No electromagnetic field, i.e. vacuum is the equilibrium for electromagnetic field. Give it a knock, e.g. microwaves, and there will be oscillations.
+Harmonic oscillators are ubiquitous. Any time a system has an equilibrium, there can be oscillations about equilibrium. An oscillator can oscillate at different frequencies simultaneously (harmonics)--e.g. a violin string. We will be particularly interested in oscillations in an electromagnetic field.  For example, if you have radiation in a cavity, there will be a variety of oscillations. What is the equilibrium? No electromagnetic field, i.e. vacuum is the equilibrium for electromagnetic field. Give it a knock, e.g. microwaves, and there will be oscillations.
 
 In a crystal, the oscillations of one atom affect its neighbours, so we have a field. The quanta are called phonons.
 
-In the previous lecture we found:
+In Section \ref{sect:harmonic:oscillators} we found:
 \begin{align*}
 	H =& \frac{P^2}{2m} + \frac{\omega^2 x^2}{2} \text{, and we defined}\\
 	a^\pm=& \frac{q \pm i \omega x}{\sqrt{2 \omega}} \text{, raising and lowering operators}\\
@@ -616,7 +616,7 @@ In the previous lecture we found:
 
 We will find ground state by solving the Schr\"odinger equation.
 \begin{align*}
-	\ket{psi} \rightarrow& \psi_0(x) \text{, in thr ground state}\\
+	\ket{\psi} \rightarrow& \psi_0(x) \text{, in thr ground state}\\
 	X \rightarrow& x. \text{, multiplication}\\
 	P \rightarrow& -i \frac{d}{dx}
 \end{align*}
@@ -670,7 +670,7 @@ To see classical behaviour, superpose states to create wave packets. Time depend
 
 \subsection{Spin}
 
-Some particles have half-integral spin, e.g. electron or proton. At rest they have no orbital rotation, no $\vec{r}\times\vec{p}$, only spin. Spin is a kind of angular momentum that is attached to a particle. You can think of it as an abstract quantity or as a tiny thing that is literally spinning. It transforms under rotation as angular momentum does. Spin has two states, up or down, left or right, in or out. The thing that characterizes angular momentum is having three components, which can be represented by matrices satisfying (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). These are closely related to the commutation relations of the Pauli matrices (we will work in the representation of the $z$ compoent of the spin):
+Some particles have half-integral spin, e.g. electron or proton. At rest they have no orbital rotation, no $\vec{r}\times\vec{p}$, only spin. Spin is a kind of angular momentum that is attached to a particle. You can think of it as an abstract quantity or as a tiny thing that is literally spinning. It transforms under rotation as angular momentum does. Spin has two states, up or down, left or right, in or out. The thing that characterizes angular momentum is having three components, which can be represented by matrices satisfying (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}). These are closely related to the commutation relations of the Pauli matrices (we will work in the representation of the $z$ component of the spin):
 
 \begin{align*}
 	\sigma_z =& \begin{pmatrix}
@@ -690,13 +690,17 @@ Some particles have half-integral spin, e.g. electron or proton. At rest they ha
 The Pauli matrices are Hermitian. We define:
 
 \begin{align*}
-	\vec{s} =& \frac{\vec{\sigma}}{2} \text{. We can show the $s_i$ satisfy (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx})}\\
+	\vec{s} =& \frac{\vec{\sigma}}{2} 
+\end{align*}
+
+We can show the $s_i$ satisfy (\ref{eq:lx_ly}), (\ref{eq:ly_lz}), and (\ref{eq:lz_lx}).
+
+\begin{align*}
 	[s_x,s_y] =& i s_z \\
 	[s_y,s_z] =& i s_x\\
 	[s_z,s_x] =& i s_y
 \end{align*}
-
-So the Pauli matrices, with 2D vectors, represent a simple angular momentum system, which is attached to the particles. Now we can ask about eigenvalues and eigenvectors. The Eigenvalues of $s_z$ are $\pm \frac{1}{2}$. 
+So the Pauli matrices, operating on 2D vectors, represent a simple angular momentum system, which is attached to the particles. Now we can ask about eigenvalues and eigenvectors. The Eigenvalues of $s_z$ are $\pm \frac{1}{2}$. 
 
 In Figures \ref{fig:aqm-2-3a} and \ref{fig:aqm-2-3b} we saw there were two possibilities for the spectrum of angular momentum, integral and half integral spins. We could have \emph{guessed} the Pauli matrices by noticing the spin ${-\frac{1}{2},\frac{1}{2}}$ case. Note: there are spin $0$ particles, such as the Higgs, and the deuteron. We will largely focus on spin $\frac{1}{2}$ particles.
 
@@ -746,18 +750,36 @@ $S$ is unitary, so eigenvalues are $\pm1$.
 
 \section{Fermions: a tale of two minus signs}
 
-Fermions: spin $\frac{1}{2}$ particles, which satisfy Pauli exclusion principle. NB, the 2 electrons in Helium are \textit{entangled}.
+We'll review the chemistry that went into the discovery of spin, and the Fermionic character of electrons. The Fermionic character implies two things that are related:
+\begin{itemize}
+	\item spin of electron is half spin $\pm \frac{1}{2}$
+	\item the electron satisfies the Pauli Exclusion Principle.
+\end{itemize} 
+
+We can put 2 electrons into the ground state only because of spin. NB, the 2 electrons in Helium are \textit{entangled}.
 
 Photons don't have an exclusion principle; in fact they have a tendency to congregate.
  
-Can we have spin $\frac{1}{2}$ particles that don't obey Pauli exclusion principle? No. Can show this from quantum field theory?
+Can we have spin $\frac{1}{2}$ particles that don't obey Pauli exclusion principle, or a spin integer that does obey Pauli exclusion principle? No. Can show this from quantum field theory.
 
-Consider wave function of positions for multiple particles, e.g. $\ket{x_1,x_2,x_3}$. Then $\braket{x_1,...x_n|\psi}=\psi(x_1,...x_n)$
+This lecture is a tale of two minus signs, one from spin, the other from exchange.
 
+The Pauli Exclusion Principle is deeper than simply saying that you cannot put two particles into the same state. It is actually a statement about multi particle wave functions. Let's forget about spin for the moment.
+
+Consider wave function of positions for multiple particles, e.g. $\ket{x_1,x_2,x_3}$. Then $\braket{x_1,...x_n|\psi}=\psi(x_1,...x_n)$, and $\psi^*(x_1,...x_n)\psi(x_1,...x_n)$ is the probability that the system is in state $\ket{x_1,...x_n}$. We ask whether $\psi(x_1,x_2,...x_n)$ is the same as $\psi(x_2,x_1,...x_n)$, or, equivalently, whether the upper configuration in Figure \ref{fig:aqm-4-states} is the same as the lower one. All experiments and theory agree that they are the same state: $\ket{x1,x2}=\ket{x2,x1}$ .
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Is the upper configuration the same as the lower one?}\label{fig:aqm-4-states}
+		\includegraphics[width=0.8\textwidth]{aqm-4-states}
+	\end{center}
+\end{figure}
+
+On the other hand, the physical properties of a state do not depend on the overall phase. We can't say that $\ket{x_1, x_2}=\ket{x_2, x_1}$, as there may be a phase $e^{i\phi}$.
 \begin{align*}
-\ket{x_1, x_2}=&\ket{x_2, x_1}e^{i\phi}\text{, interchange twice--there are two possibilities}\\
-\ket{x_1, x_2}=&+\ket{x_2, x_1}\text{ Bosons}\\
-\ket{x_1, x_2}=&-\ket{x_2, x_1}\text{ Fermions}
+	\ket{x_1, x_2}=&\ket{x_2, x_1}e^{i\phi}\text{, interchange twice--there are two possibilities}\\
+	\ket{x_1, x_2}=&+\ket{x_2, x_1}\text{ Bosons}\\
+	\ket{x_1, x_2}=&-\ket{x_2, x_1}\text{ Fermions}
 \end{align*}
 
 NB: sign is not observable.
