@@ -847,26 +847,47 @@ In each case we are following a path in rotation space.
 		\includegraphics[width=\textwidth]{aqm-5-coffee-cup4}
 	\end{subfigure}
 \end{figure}
-The wave function
+
 \begin{itemize}
-	\item  for two fermions changes sign when we swap them;
-	\item for a single fermion changes sign when we rotate by $2\pi$.
+	\item The wave function for two fermions changes sign when we swap them;
+	\item The wave function for a single fermion changes sign when we rotate by $2\pi$.
 \end{itemize}
 
-Is there a connection between interchange and rotation? Yes, it was discovered by David Finkelstein. Belt, Deep topological connection between rotation and interchange.
-
+Is there a connection between interchange and rotation? Yes: it was discovered by David Finkelstein. 
+\url{https://youtu.be/A7PZftS7uOA?t=3435}
 \begin{figure}[H]
-	\caption{The David Finkelstein Belt Trick}
-	\begin{subfigure}[t]{0.45\textwidth}
+	\caption[The David Finkelstein Belt Trick]{The David Finkelstein Belt Trick: A rotation by $2\pi$, plus an exchange, gives an untwisted belt}
+	\begin{subfigure}[t]{0.5\textwidth}
 		\caption{Exchange of the two loops}
 		\includegraphics[width=\textwidth]{aqm-5-belt-exchange}
 	\end{subfigure}
-	\begin{subfigure}[t]{0.45\textwidth}
-		\text{Turn around and we see 2 rotations instead}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\caption{Turn around and we see 2 rotations instead}
 		\includegraphics[width=\textwidth]{aqm-5-belt-rotation}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.24\textwidth}
+		\caption{This is not a possible configuration from twisting a belt}
+		\includegraphics[width=\textwidth]{aqm-5-belt-illegal}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.24\textwidth}
+		\caption{The extra twist makes it legal: you can pull it apart to get the topologically trivial configuration.}
+		\includegraphics[width=\textwidth]{aqm-5-belt-legal}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.24\textwidth}
+		\caption{Add time, and create two pairs of particles at bottom}
+		\includegraphics[width=\textwidth]{aqm-5-belt-legal-time}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.24\textwidth}
+		\caption{Rotate one particle, and switch two of them. The switch and rotate give the same configuration}\label{fig:belt_switch:rotate}
+		\includegraphics[width=\textwidth]{aqm-5-belt-switch-rotate}
 	\end{subfigure}
 \end{figure}
 \url{https://youtu.be/A7PZftS7uOA?t=3432}
+
+This shows the deep topological connection between rotation and interchange.
+
+Imagine that I have two particles. I take one at rotate it by $2\pi$, then I switch two of them. Then, regardless of whether they are Fermions or Bosons, doing nothing is equivalent to doing a rotation and an exchange--Figure \ref{fig:belt_switch:rotate} (this isn't the way Pauli did it).
+
 
 \section{Quantum Field Theory}
 
