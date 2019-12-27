@@ -888,9 +888,49 @@ This shows the deep topological connection between rotation and interchange.
 
 Imagine that I have two particles. I take one at rotate it by $2\pi$, then I switch two of them. Then, regardless of whether they are Fermions or Bosons, doing nothing is equivalent to doing a rotation and an exchange--Figure \ref{fig:belt_switch:rotate} (this isn't the way Pauli did it).
 
-This would not make sense if particles were eternal. Quantum Field Theory allows particles to be created. We start with no particles, then create particle-antiparticle pairs--Figure \ref{fig:aqm-5-belt-legal-time}. Do whatever it takes to create particles out of nothing. As time goes on, at the same time we rotate one particle and exchange the two negative ones
+This would not make sense if particles were eternal. Quantum Field Theory allows particles to be created. We start with no particles, then create particle-antiparticle pairs--Figure \ref{fig:aqm-5-belt-legal-time}. Do whatever it takes to create particles out of nothing. As time goes on, at the same time we rotate one particle and exchange the two negative ones. Topologically this is equivalent to just creating the two particles and not doing anything.
+
+The spin statistics theorem is more general than the version Pauli proved. It is also true for solitons. A soliton is (solitary wave) is a lump of field (Finkelstein, Rubinstein). Its true for lumps of stuff in condensed matter physics, for manifolds, for all kinds of things where Pauli's argument doesn't apply.
 \url{https://youtu.be/A7PZftS7uOA?t=3879}
 
+Assume field is mostly zero, but there are lumps. The spin statistics theorem says that there are two kinds of lumps: those whose wave function changes sign when rotated, and those where it doesn't change--Figure \ref{fig:lump:antilump}--Fermions and Bosons.
+
+\begin{figure}[H]
+	\caption{Annihilation of lumps and anti-lumps}\label{fig:lump:antilump}
+	\begin{subfigure}{0.3\textwidth}
+		\caption{Blue and black lumps}
+		\includegraphics[width=\textwidth]{aqm-5-lumps}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\caption{Mirror image}
+		\includegraphics[width=\textwidth]{aqm-5-anti-lumps}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\caption{Bring together - black lumps annihilated}
+		\includegraphics[width=\textwidth]{aqm-5-partially-annihilated}
+	\end{subfigure}
+\end{figure}
+
+Is there a way to observe the change in phase of a Fermion?
+
+Let's start with a experiment where you wouldn't see anything. Put electron in a cavity with a magnetic field, \emph{slowly} rotate box, release, and generate interference pattern--Figure \ref{fig:aqm-5-expt1}. Compare with another experiment where we don't rotate: the interference pattern won't show any differences--Figure \ref{fig:aqm-5-expt-beam-splitter}. Now use a beam splitter, and we see interference from the $2\pi$ rotation (we don't know which box contains electron: don't look!).
+
+Repeat with a beam splitter
+\begin{figure}[H]
+	\caption {An experiment to observe the change in phase of a Fermion}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Two experiments, with an without \emph{slow} rotation}\label{fig:aqm-5-expt1}
+		\includegraphics[width=\textwidth]{aqm-5-expt1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Experiment with beam splitter: one electron, but waves are split. One box \emph{only} rotates. $\psi_1(x)-\psi_2(x)\ne\psi_1(x)+\psi_2(x)$}\label{fig:aqm-5-expt-beam-splitter}
+		\includegraphics[width=\textwidth]{aqm-5-expt-beam-splitter}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Detail of actual experiment. Magnetic field used to rotate spin, tuned so rotation is $2\pi$}
+		\includegraphics[width=\textwidth]{aqm-5-expt-actual}
+	\end{subfigure}
+\end{figure}
 \section{Quantum Field Theory}
 
 The description of nature as we know it, with the exception of gravity. In principle we believe that we could explain everything, except gravity, if we only had enough computational power.
