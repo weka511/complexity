@@ -938,57 +938,87 @@ Repeat with a beam splitter
 
 \section{Quantum Field Theory}
 
-The description of nature as we know it, with the exception of gravity. In principle we believe that we could explain everything, except gravity, if we only had enough computational power.
+We are entering today into the world of Quantum Field Theory. Quantum Field Theory is the description of nature as we know it, with the exception of gravity. In principle we believe that we could explain everything, except gravity, if we only had enough computational power. Of course problems tend to be too complicated. We can understand hydrogen, but boron is already too complicated, and human beings are much too complicated. Nevertheless, apart from gravity, Quantum Field Theory seems to be all there is. Today we will study second qunatization.
 
-\subsection{Review of Harmonic Oscillator}
-Imagine many (possibly infinite number) harmonic oscillators.
+\subsection{Review and Generalization of Harmonic Oscillator}
+The Harmonic Oscillator is the central mathematical object that goes into Quantum Field Theory. We need to understand it well.
+We are interested in the algebra of the operators $a^+$, $a^-$ and $N$.
+
+Imagine many (possibly infinite number) harmonic oscillators. Think of each oscillator  as an independent system of degrees of freedom, each with its own frequency.
 
 From (\ref{eq:creation:operator}) and (\ref{eq:annihilation:operator}):
 \begin{align*}
-a^+_i \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \text{, creation operator} \numberthis \label{eq:creation:operator:i}\\
-a^-_i \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, annihilation operator} \numberthis \label{eq:annihilation:operator_i}\\
+	a^+_i \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \text{, raising or creation operator} \numberthis \label{eq:creation:operator:i}\\
+	a^-_i \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, lowering or annihilation operator} \numberthis \label{eq:annihilation:operator_i}\\
+	a^-\ket{0} =& \vec{0}\\
+	N_i\triangleq& a^+_i a^-_i \text{, number operator--this is what goes into Hamiltonian}
 \end{align*}
 
-Think of each oscillator  as an independent system of degrees of freedom, so operators commute. Using  (\ref{eq:a:comm}), and (\ref{eq:number:operator})
+ We can compute the commutators from  (\ref{eq:a:comm}) and (\ref{eq:number:operator}), and use the fact that oscillators $i$ and $j$ are independent (if two measurements don't commute, they can not be measured simultaneously - i.e. they are not independent). 
 
 \begin{align*}
-[a^+_i,a^+_j] =& 0 \numberthis \label{eq:a:comm_i_plus}\\
-[a^-_i,a^-_j] =& 0 \numberthis \label{eq:a:comm_i_minus}\\
-[a^-_i,a^+_i] =& \delta_{i,j} \numberthis \label{eq:a:comm_i}\\
-H =& \hslash \sum_{i}  \omega_i N_i\text{, where $N_i$ are known as occupation numbers.}
+	[a^+_i,a^+_j] =& 0 \numberthis \label{eq:a:comm_i_plus}\\
+	[a^-_i,a^-_j] =& 0 \numberthis \label{eq:a:comm_i_minus}\\
+	[a^-_i,a^+_i] =& \delta_{i,j} \numberthis \label{eq:a:comm_i}\\
+	H =& \hslash \sum_{i}  \omega_i N_i\text{: the $N_i$ are known as \emph{occupation numbers}.}
 \end{align*}
-We're ignoring ground state energy.
+We're ignoring ground state energy, as it is just an additive constant, and plays no role.
 
-One basis of states is $\ket{n_1,n_2,n_3,...}$.
+How do we label states? For one oscillator we have the occupation number. One way to specify a basis of states is to write the occupation number for each oscillator--$\ket{n_1,n_2,n_3,...}$. One example where we need an infinite number of oscillators is an idealized violin string.
 
 \begin{thm}[Normalization of harmonic oscillator state--creation]\label{thm:norm:harmonic}
 	\begin{align*}
-	\left|\ket{n}\right|=&1\\
-	\implies&\\
-	a^+\ket{n}=&\sqrt{n+1}\ket{n+1}
+		\braket{m|n}=&\delta_{m,n} \numberthis \label{eq:norm}\\
+		\implies&\\
+		a^+\ket{n}=&\sqrt{n+1}\ket{n+1}
 	\end{align*}
 \end{thm} 
 
 \begin{proof}
 	\begin{align*}
-	a^+\ket{n}=&c_n\ket{n+1} \text{, fot the eigenvalue $c_n$}\\
-	\bra{n}a^-=&c_n\bra{n+1}\text{, assume real}\\
-	\braket{n|a^-a^+|n}=&c_n^2\text{, normalization!}\\
-	=& \braket{n|a^+a^-+1|n}\text{, using (\ref{eq:a:comm_i})}\\
-	=& \braket{n|N+1|n} \text{, from (\ref{eq:number:operator})}\\
-	=&n+1 \text{, whence}\\
-	c_n=&\sqrt{n+1}
+		a^+\ket{n}=&c_n\ket{n+1} \text{, for the eigenvector $\ket{n}$ and some $c_n$}\\
+		\bra{n}a^-=&c_n\bra{n+1}\text{, wlog assume $c_n$ real}\\
+		\braket{n|a^-a^+|n}=&c_n^2\text{, from (ref{eq:norm})}\\
+		=& \braket{n|a^+a^-+1|n}\text{, using (\ref{eq:a:comm_i})}\\
+		=& \braket{n|N+1|n} \text{, from (\ref{eq:number:operator})}\\
+		=&n+1 \text{, whence}\\
+		c_n=&\sqrt{n+1}
 	\end{align*}
 \end{proof}
 
-\begin{cor}[Normalization of harmonic oscillator state--annihilation]
+\begin{thm}[Normalization of harmonic oscillator state--annihilation]\label{thm:norm:a-}
 	\begin{align*}
-	a^-\ket{n}=\sqrt{n}\ket{n-1}
+		a^-\ket{n}=\sqrt{n}\ket{n-1}
+	\end{align*}
+\end{thm}
+
+\begin{proof}
+	\begin{align*}
+		a^-\ket{n}=&c^\prime_n\ket{n-1} \text{, for the eigenvector $\ket{n}$ and some $c_n$}\\
+		\bra{n}a^+=&c^\prime_n\bra{n-1} \text{, wlog assume $c_n$ real}\\
+		\bra{n}a^+a^-\ket{n}=&(c^\prime_n)^2\bra{n-1}\ket{n-1}\\
+		\bra{n}N\ket{n}=&(c^\prime_n)^2 \text{, from (\ref{eq:number:operator})}\\
+		n=&(c^\prime_n)^2
+	\end{align*}
+\end{proof}
+
+\begin{cor}[Annihilation of ground state]
+	\begin{align*}
+		a^-\ket{0} =& \vec{0}
 	\end{align*}
 \end{cor}
 
+\begin{proof}
+	In the proof of Theorem \ref{thm:norm:a-}, $c^\prime_n=0$.
+\end{proof}
 
-$a_i^+\ket{n_1,n_2,.....}=\sqrt{n_i+1}\ket{n_1,n_2,...n_i+1,...}$
+\begin{cor}[Creation operator acting on vector]
+	\begin{align*}
+		a_i^+\ket{n_1,n_2,...n_i,..}=&\sqrt{n_i+1}\ket{n_1,n_2,...n_i+1,...}
+	\end{align*}
+\end{cor}
+
+\url{https://youtu.be/D36VXLx0hOc?t=1792}
 
 \subsection{Quantum Field Theory of Bosons}
 
