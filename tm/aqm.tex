@@ -1040,56 +1040,95 @@ Each field $\Psi$ corresponds to a particular type of particle: for this lecture
 A question was asked about using $i$ to label states. Let's go back to single particle quantum mechanics. For simplicity consider one particle in a box, whose potential energy stops it getting out of the box. Since there's only one particles we don't need to worry about bosons versus fermions. Let's think about energy eigenstates. They are wave functions, and the lowest eigenstate $\psi_1(x)$ will be sine (lowest energy level)--Figure \ref{fig:aqm-6-sine}. Next $\psi_2(x)$ has one node, with higher energy, $\psi_3(x)$ two nodes,...
 
 \begin{figure}[H]
-	\caption[Wave function of 1-particle system in a box]{Wave function of 1-particle system in a box: $\psi_1(x)$, $\psi_2(x)$,..., using non standard notation where $i$ stands for the number of nodes. NB: this is not the same $i$ as used in (\ref{eq:creation:operator:i}).}\label{fig:aqm-6-sine}
-	\includegraphics[width=0.6\textwidth]{aqm-6-sine}
+	\begin{center}
+		\caption[Wave function of 1-particle system in a box]{Wave function of 1-particle system in a box: $\psi_1(x)$, $\psi_2(x)$,..., using non standard notation where $i$ stands for the number of nodes. NB: this is not the same $i$ as used in (\ref{eq:creation:operator:i}).}\label{fig:aqm-6-sine}
+		\includegraphics[width=0.6\textwidth]{aqm-6-sine}
+	\end{center}
 \end{figure}
 
-Now imagine that we have many particles (bosons), some in state 1 (first energy level), some in second,..., which we will write: $\ket{n1,n2,n3,...}$. This is identical to the way we labelled states in a multi-oscillator system (We couldn't do this for Fermions!).  Because this is a complete parallel, we can \emph{invent} operators as in (\ref{eq:a:comm_i_plus}) - (\ref{eq:a:comm_i}) to \emph{literally} create and remove particles. NB $\set{1,2,3,...}$ are states $\set{n_i}$ occupation numbers.
+Now imagine that we have many particles (bosons), some in state 1 (first energy level), some in second,..., which we will write: $\ket{n1,n2,n3,...}$. This is identical to the way we labelled states in a multi-oscillator system (We couldn't do this for Fermions!).  Because this is a complete parallel, we can \emph{invent} operators as in (\ref{eq:a:comm_i_plus}) - (\ref{eq:a:comm_i}) to \emph{literally} create and remove particles. NB $\set{1,2,3,...}$ are states, $\set{n_i}$ occupation numbers.
+
+\begin{align*}
+	a_1^+\ket{n_1,n_2,...} =& \sqrt{n_1+1} \ket{n_1+1,n_2,...}
+\end{align*}
+We had a question about the physical significance of the square root. We know that
+\begin{align*}
+	a^+a^-\ket{n} = n \ket{n} \numberthis \label{eq:creator:annihil}
+\end{align*}
+so it is reasonable to expect a square root to be associated with each operator. However, we can do better. Suppose that we don't know (\ref{eq:creator:annihil}), but we did know about commutator and square root.
 
 \begin{align*}
 	(a^+a^-)\ket{n}=&(a^-a^+-1)\ket{n}\\
-	=&\sqrt(n+1)a^-\ket{n+1}-\ket{n}\\
+	=&\sqrt{n+1}a^-\ket{n+1}-\ket{n}\\
+	=&(\sqrt{n+1})^2\ket{n}-\ket{n}\\
 	=&(n+1)\ket{n}-\ket{n}\\
-	=&n\ket{n}
+	=&n\ket{n} \text{, which is  (\ref{eq:creator:annihil})}
 \end{align*}
 
-NB: we are \text{ defining} creation and annihilation operators. Don't ask \emph{why} for a definition, \emph{ask why it is useful}. E.g. creation lets us create a photon. We want to study system with variable number of photons.
-\url{https://youtu.be/D36VXLx0hOc?t=2922}
+NB: we are \emph{defining} creation and annihilation operators. Don't ask \emph{why} for a definition, \emph{ask why it is useful}. E.g. our definition of creation is useful because we want to explore systems where the number of particles may change. It lets us create a photon, and annihilation lets us absorb particles.
 
 \begin{defn}[Vacuum]
-	Vacuum is state that is annihilated by $a^-$ -- $\ket{0,0,0,....}$.
+	Vacuum is the state that is annihilated by all annihilation operators: $a^-$ -- $\ket{0,0,0,....}$.
 \end{defn}
 
 Denote energy by $\omega_i$ for state $i$. 
 
 \begin{align*}
-E =& \sum_{i} n_i \omega_i\\
-=& \sum_{i} \omega_i a^+_i a^-_i 
+	E =& \sum_{i} n_i \omega_i\\
+	=& \sum_{i} \omega_i \underbrace{ a^+_i a^-_i}_\text{$N_i$} 
 \end{align*}
+You can think of this two ways:
+\begin{itemize}
+	\item oscillator energies;
+	\item sum of all particles.
+\end{itemize}
+
+We are inventing something that is a bunch of oscillators.
+\begin{itemize}
+	\item a violin string is a bunch of oscillators;
+	\item radiation in a cavity is a bunch of oscillators.
+\end{itemize}
+We are building up an idea of collections of particles as harmonic oscillators; soon enough we'll see the connection with fields.
 
 We'll consider free particles--no interactions.
 
 Why can we ignore ground-state energy? Because constants commute with everything. 
 
-Quantum field theory is a book-keeping device for particles.
+Quantum field theory is a book-keeping device for keeping track of many particles that come and go.
 
-$\Psi(x)$ -- an operator that is a function of position--\emph{Fock Space}.
+\subsubsection{Digression on History of  Quantum Field Theory }
+\begin{itemize}
+	\item Faraday invented Field Theory.
+	\item Maxwell invented modern Field Equations (there had been wave eqiations before him).
+	\item Planck introduced $\hslash$ (realized classical field theory not enough). He quantized the oscillators in cavity of black body: he didn't realize that field had to be quantized.
+	\item Einstein realized field had to be quantized.
+	\item Heisenberg, Pauli, Dirac put it all together around 1928.
+	\item particle creation via harmonic oscillator? Maybe Dirac.
+\end{itemize}
+
+Quanta are the things that occupy the Occupation Numbers: if the field is the electromagnetic field we call the quanta photons.
+
+\subsubsection{Quantum Field Theory resumed}
+$\Psi(x)$ -- an operator that is a function of position--one operator for each position. It acts on a space of states $\{\ket{n_1,n_2,...n_i,...}\}$, known as \emph{Fock Space}--\cite{wiki:fock}.
 
 \begin{align*}
-\Psi(x)\triangleq&\sum_{i}a^-_i\psi_i(x)\text{, not Hermitean, so conjugate is}\\
-\Psi^\dagger(x)=&\sum_{i}a^+_i\psi_i^*(x)\\
-\Psi(x)+\Psi^\dagger \text{ is}&\text{ Hermitean}
+	\Psi(x)\triangleq&\sum_{i}a^-_i\psi_i(x)\text{, not Hermitean, so conjugate is}\\
+	\Psi^\dagger(x)=&\sum_{i}a^+_i\psi_i^*(x)\\
+	\Psi(x)+\Psi^\dagger \text{ is}&\text{ Hermitean}
 \end{align*}
 
-What if we apply to vacuum? $\Psi(x)$ annihilates it--what about $\Psi(x)^\dagger$.
+If the $\psi$ were in the momentum representation, the coefficients would resemble Fourier coefficients. They are the quantum version of Fourier coefficients. 
+
+What if we apply $\Psi^\dagger$ to vacuum? $\Psi(x)$ annihilates it--what about $\Psi(x)^\dagger$.
 
 \begin{align*}
-\sum_{i} \ket{i} \bra{i} =& I \text{, sum over states with $\psi_i$}\\
-\sum_{i} \ket{i} \braket{i|X} =& \ket{X}\\
-\psi^*_i(x)\underbrace{\ket{i}}_\text{one particle with state $i$} =& \ket{X}\text{, but}\\
-\ket{i} =& a^+_i\ket{0} \text{, whence}\\
-\psi^*_i(x) a^+_i\ket{0}=&\ket{x}\\
-\Psi^\dagger(x) \ket{0} =& \ket{x}\text{ so $\Psi^\dagger(x)$ creates a particle at $x$.}
+	\sum_{i} \ket{i} \bra{i} =& I \text{, sum over one particle states with $\psi_i$}\\
+\sum_{i} \ket{i} \braket{i|X} =& \ket{X} \text{, state where particles known to be at $X$. But}\\
+	\braket{i|X}=&\psi^*(X) \text{, so we can write:}\\
+	\psi^*_i(x)\ket{i} =& \ket{x}\text{ one particle in state $i$ at $x$. But}\\
+	\ket{i} =& a^+_i\ket{0} \text{, using $a^+_i$ to create the particle. Whence}\\
+	\psi^*_i(x) a^+_i\ket{0}=&\ket{x}\\
+	\Psi^\dagger(x) \ket{0} =& \ket{x}\text{ so $\Psi^\dagger(x)$ creates a particle at $x$.}
 \end{align*}
 
 \begin{itemize}
@@ -1103,16 +1142,18 @@ There is a separate field for each Boson.
 
 Add vacuum to a state, we get probability of 0.5 of vacuum, 0.5 of original state. It is not the same as zero. Vacuum has length of 1!
 
-Let's add two particles, at $x$ and $y$. 
+Let's make a two particle state, at $x$ and $y$. 
  
 \begin{align*}
-\Psi(y)\Psi(x)\ket{0} =& \ket{y,x}\\
-\Psi(x)\Psi(y)\ket{0} =& \ket{x,y} \text{, but from (\ref {eq:a:comm_i_plus})}\\
-\Psi(y)\Psi(x) =& \Psi(x)\Psi(y) \text{, so}\\
-\ket{x,y} =& \ket{y,x} \text{, which is what we expect for Bosons.} 
+	\Psi^\dagger(y)\Psi^\dagger(y)\ket{0} =& \ket{y,x}\\
+	\Psi^\dagger(x)\Psi^\dagger(y)\ket{0} =& \ket{x,y} \text{, but from (\ref {eq:a:comm_i_plus})}\\
+	\Psi^\dagger(y)\Psi^\dagger(x) =& \Psi^\dagger(x)\Psi^\dagger(y) \text{, so}\\
+	\ket{x,y} =& \ket{y,x} \text{, which is the defining property of Bosons.} 
 \end{align*}
 
-We can handle situation where number of particles is a random variable: a laser wave is a superposition.
+A given quantum field describes one type of Boson. There are two types of field for photons, as there are two polarizations. There is a separate field for each type of particle.
+
+We can handle situation where number of particles is a random variable: a laser wave is a superposition of different number of photons.
 
 \section{Quantum Field Theory II}
 
