@@ -1171,7 +1171,7 @@ We next introduced some a particle states that form an orthonormal basis. There 
 \end{align*}
 Now we have another useful little manipulation. 
 
-\begin{thm}[For any orthonormal basis $\delta(x-y)= \sum_{i} \psi_i(y) \psi^*_i(x)$]
+\begin{thm}Construction of delta function from orthonormal basis]
 	For any orthonormal basis, $\psi_i$, and any $x$ and $y$:
 	\begin{align*}
 		\delta(x-y)=& \sum_{i} \psi_i(y) \psi^*_i(x)
@@ -1189,23 +1189,39 @@ Now we have another useful little manipulation.
 	\end{align*}
 \end{proof}
 
-This is true for any set of eigenvectors of any Hermitan operator.
-\url{https://youtu.be/l6vR825BR3c?t=854}
+This is true for any set of eigenvectors of any Hermitian operator.
 
-Can characterize multi-particle system by $\ket{n_1, n_2,...n_i,...}$. We want to increase and decrease occupation numbers, so introduce creation and annihilation operators.
+Now we move on to problem of studying many particles at the same time. How are we going to characterize a state? One set of states that is particularly useful is to say how many there are for each energy level. Characterize by the occupation numbers,  $\ket{n_1, n_2,...n_i,...}$. These don't belong in the same vector space s the single particle wave functions. Do not confuse the single particle states with these more general structures. We use the same notation merely because nobody has invented anything that works better than Dirac's bras and kets.
+
+We want to change the numbers of particles, i.e. increase and decrease occupation numbers. We introduce an oscillator for each $i$: this has nothing to do with oscillation, it is just a bookkeeping trick. We introduce creation and annihilation operators, $a^+_i$ and $a^-_i$, and make them behave the same as the oscillator creation and annihilation operators. They are often written slightly differently.
 
 \begin{itemize}
 	\item $a^+_i=a^\dagger_i$
 	\item $a^-_i=a_i$
 \end{itemize} 
 
-Introduce field operator
+
+
+We will find it convenient to introduce the field operator, which operates on Fock space.
 \begin{align*}
-\Psi(x) \triangleq & \sum_{i} a_i \psi_i(x) \text{, would be Fourier if sine/cosine waves}\\
-\Psi^\dagger(x) =& \sum_{i} a^\dagger \psi^*_i(x)\\
-\Psi(x) + \Psi^\dagger(x) \text{ is}& \text{ Hermitean (observable)}\\
-\frac{\Psi(x) - \Psi^\dagger(x)}{i} \text{ is}& \text{ Hermitean (observable)}
+	\Psi(x) \triangleq & \sum_{i} a_i \psi_i(x)\\
+	\Psi^\dagger(x) \triangleq& \sum_{i} a^\dagger_i \psi^*_i(x)
 \end{align*}
+
+\begin{itemize}
+	\item These would be Fourier transforms if sine/cosine waves, except they are operator values, not numeric.
+	\item $\Psi(x)$ and $\Psi^\dagger(x)$ are not Hermitian.
+\end{itemize}
+
+The following are Hermitian, and, hence, observable:
+\begin{align*}
+	\Psi(x) + \Psi^\dagger(x) \\
+	\frac{\Psi(x) - \Psi^\dagger(x)}{i}
+\end{align*}
+But right now we aren't observing them, just using them as bookkeeping devices.
+
+We will now look at a different interpretation of $\Psi(x)$.
+\url{https://youtu.be/l6vR825BR3c?t=1434}
 
 Vacuum: $\ket{0} = \ket{0,0,0,.....}$.
 
