@@ -1041,7 +1041,7 @@ A question was asked about using $i$ to label states. Let's go back to single pa
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Wave function of 1-particle system in a box]{Wave function of 1-particle system in a box: $\psi_1(x)$, $\psi_2(x)$,..., using non standard notation where $i$ stands for the number of nodes. NB: this is not the same $i$ as used in (\ref{eq:creation:operator:i}).}\label{fig:aqm-6-sine}
+		\caption[Wave function of 1-particle system in a box]{Wave function of 1-particle system in a box: $\psi_1(x)$, $\psi_2(x)$,..., using non standard notation where $i$ stands for the number of nodes plus 1. NB: this is not the same $i$ as used in (\ref{eq:creation:operator:i}).}\label{fig:aqm-6-sine}
 		\includegraphics[width=0.6\textwidth]{aqm-6-sine}
 	\end{center}
 \end{figure}
@@ -1157,14 +1157,40 @@ We can handle situation where number of particles is a random variable: a laser 
 
 \section{Quantum Field Theory II}
 
-Can start with particles and see why they can be described by fields, or start with fields and quantize. Starting with particles we can use fields to handle variable numbers of particles. Normalization $\int \psi^*(x) \psi(x) dx=1$ gives \textit{number of particles}.
+\subsection{Review construction of a simple quantum field}
 
-Given an orthonormal basis:
+The trick of introducing fields from particles can be done in two ways. We can start with particles and reconstruct why they can be described by fields, or start with wave fields and work out why they have quanta. Starting with particles we can describe 1 particle, 2 particles, etc, then move on to a variable number of particles. We'll start with one single type of particle. Number of photons in room changes constantly. A neuron can decay into a proton, an electron, and a neutrino. We can't rely on quantum mechanics of a single particle: we need to invent fields.
+
+We will start with single particle quantum mechanics, a state vector $\ket{\psi}$. We can construct the inner product $\bra{x}\ket{\psi}=\psi(x)$ and the probability density $\psi^*(x) \psi(x)$.  Normalization $\int \psi^*(x) \psi(x) dx=1$ gives \textit{number of particles}: this isn't very interesting since we had only one particle to begin with.
+
+\url{https://youtu.be/l6vR825BR3c?t=393}
+
+We next introduced some a particle states that form an orthonormal basis. There are many ways to do this. For instance the x-states form an orthonormal basis. The eigenvectors of any Hermitian operator will form a basis. In particular the energy eigenstates of the particles in a box--Figure \ref{fig:aqm-6-sine} form an orthonormal basis. 
 \begin{align*}
-\sum_{i} \ket{i} \bra{i} =& I \text{, "Resolution of the Identity"}\numberthis \label{eq:resolution:identity}\\
-\braket{y|x}=& \sum_{i} \braket{y|i} \braket{i|x}\\
-\delta(x-y)=& \sum_{i} \psi_i(y) \psi^*_i(x)\text{, for any set of eigenvectors of Hermitan operator.}
+		\int d(x) \psi^*_i(x) \psi_j(x) =& \delta_{i,j}
 \end{align*}
+Now we have another useful little manipulation. 
+
+\begin{thm}[For any orthonormal basis $\delta(x-y)= \sum_{i} \psi_i(y) \psi^*_i(x)$]
+	For any orthonormal basis, $\psi_i$, and any $x$ and $y$:
+	\begin{align*}
+		\delta(x-y)=& \sum_{i} \psi_i(y) \psi^*_i(x)
+	\end{align*}
+\end{thm}
+
+\begin{proof}
+	We start with the Resolution of the Identity (\ref{eq:resolution:identity})
+	\begin{align*}
+		\sum_{i} \ket{i} \bra{i} =& I \text{. For any $x$ and $y$}\numberthis \label{eq:resolution:identity}\\
+		\braket{y|x}=& \sum_{i} \braket{y|i} \braket{i|x}\\
+		=& \sum_{i} \psi_i(y) \psi^*_i(x) \text{, but}\\
+		\braket{y|x}=&\delta(x-y) \text{, whence}\\
+		\delta(x-y)=& \sum_{i} \psi_i(y) \psi^*_i(x)
+	\end{align*}
+\end{proof}
+
+This is true for any set of eigenvectors of any Hermitan operator.
+\url{https://youtu.be/l6vR825BR3c?t=854}
 
 Can characterize multi-particle system by $\ket{n_1, n_2,...n_i,...}$. We want to increase and decrease occupation numbers, so introduce creation and annihilation operators.
 
