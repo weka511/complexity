@@ -829,13 +829,13 @@ Leonard Susskind demonstrated that $2\pi\ne0$:
 In each case we are following a path in rotation space.
 
 \begin{figure}[H]
-	\caption{Leonard Susskind demonstrating the Gerard 't Hooft Coffee Cup trick}\label{fig:thooft:coffee_cup}
+	\caption{The Gerard 't Hooft Coffee Cup trick}\label{fig:thooft:coffee_cup}
 	\begin{subfigure}{0.45\textwidth}
 		\caption{Starting the first rotation}
 		\includegraphics[width=\textwidth]{aqm-5-coffee-cup1}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\caption{$2\pi$: That is not the identity: let me tell you I'm quite certian that is not the identity!}
+		\caption{$2\pi$: That is not the identity: let me tell you I'm quite certain that is not the identity!}
 		\includegraphics[width=\textwidth]{aqm-5-coffee-cup2}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
@@ -1018,31 +1018,43 @@ How do we label states? For one oscillator we have the occupation number. One wa
 	\end{align*}
 \end{cor}
 
-\url{https://youtu.be/D36VXLx0hOc?t=1792}
+\subsection{Non-relativistic Quantum Field Theory of Bosons}
 
-\subsection{Quantum Field Theory of Bosons}
+Particles are described by wave functions, which are functions of position, and sort od look like fields. Fields are degrees of freedom that depend on position and time, but we'll focus on position and freeze time for a while. The wave function of a particle, $\psi(x)$, the state vector in the position representation, is a function of position, but it isn't "the field". For one thing $\psi(x)$ is not Hermitian, hence it is not an observable; we observe position, momentum, angular momentum, etc, but not $\psi$.
+\begin{enumerate}
+	\item $\psi$ is not an observable;
+	\item for multiple particles, $\psi$ is a function of all positions--$\psi(x_1,x_2)$
+	\item $\psi(x_1,x_2,...x_n)$ describes the state of a \emph{fixed number of particles}.
+\end{enumerate}
 
-Fields are functions of position. $\psi(x)$ not Hermitian, hence not an observable; we observe position, momentum, etc, but not $\psi$. $\psi(x_1,x_2,...x_{15})$ function of many positions. We want a quantity $\Psi$ such that:
+ That is not the idea of a quantum field. We want a quantity $\Psi$ such that:
 
-\begin{itemize}
-	\item $\Psi$ is an observable, e.g. magnetic field, so an operator.
-	\item $\Psi$ function of one position
-	\item $\Psi$ describes any number of particles.
-\end{itemize}
+\begin{enumerate}
+	\item $\Psi$ is an observable, e.g. magnetic field, so it is an operator, not a state;
+	\item $\Psi$ function of one position;
+	\item $\Psi$ describes a system of any number of particles (even if number of particles changes).
+\end{enumerate}
 
+Each field $\Psi$ corresponds to a particular type of particle: for this lecture we mean bosons.
 
-Consider one particle in a box, and think about energy eigenstates. Wave function $\psi_1(x)$ is sine (lowest energy level). Next $\psi_2(x)$ has one node, with higher energy, $\psi_3(x)$ two nodes,...
+A question was asked about using $i$ to label states. Let's go back to single particle quantum mechanics. For simplicity consider one particle in a box, whose potential energy stops it getting out of the box. Since there's only one particles we don't need to worry about bosons versus fermions. Let's think about energy eigenstates. They are wave functions, and the lowest eigenstate $\psi_1(x)$ will be sine (lowest energy level)--Figure \ref{fig:aqm-6-sine}. Next $\psi_2(x)$ has one node, with higher energy, $\psi_3(x)$ two nodes,...
 
-Now many particles (bosons), some in first energy level, some in second,...$\ket{n1,n2,n3,...}$;  we invent operators as in (\ref{eq:a:comm_i_plus}) - (\ref{eq:a:comm_i}) to create and remove particles. NB $\set{1,2,3,...}$ are states $\set{n_i}$ occupation numbers.
+\begin{figure}[H]
+	\caption[Wave function of 1-particle system in a box]{Wave function of 1-particle system in a box: $\psi_1(x)$, $\psi_2(x)$,..., using non standard notation where $i$ stands for the number of nodes. NB: this is not the same $i$ as used in (\ref{eq:creation:operator:i}).}\label{fig:aqm-6-sine}
+	\includegraphics[width=0.6\textwidth]{aqm-6-sine}
+\end{figure}
+
+Now imagine that we have many particles (bosons), some in state 1 (first energy level), some in second,..., which we will write: $\ket{n1,n2,n3,...}$. This is identical to the way we labelled states in a multi-oscillator system (We couldn't do this for Fermions!).  Because this is a complete parallel, we can \emph{invent} operators as in (\ref{eq:a:comm_i_plus}) - (\ref{eq:a:comm_i}) to \emph{literally} create and remove particles. NB $\set{1,2,3,...}$ are states $\set{n_i}$ occupation numbers.
 
 \begin{align*}
-(a^+a^-)\ket{n}=&(a^-a^+-1)\ket{n}\\
-=&\sqrt(n+1)a^-\ket{n+1}-\ket{n}\\
-=&(n+1)\ket{n}-\ket{n}\\
-=&n\ket{n}
+	(a^+a^-)\ket{n}=&(a^-a^+-1)\ket{n}\\
+	=&\sqrt(n+1)a^-\ket{n+1}-\ket{n}\\
+	=&(n+1)\ket{n}-\ket{n}\\
+	=&n\ket{n}
 \end{align*}
 
 NB: we are \text{ defining} creation and annihilation operators. Don't ask \emph{why} for a definition, \emph{ask why it is useful}. E.g. creation lets us create a photon. We want to study system with variable number of photons.
+\url{https://youtu.be/D36VXLx0hOc?t=2922}
 
 \begin{defn}[Vacuum]
 	Vacuum is state that is annihilated by $a^-$ -- $\ket{0,0,0,....}$.
