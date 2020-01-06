@@ -951,7 +951,7 @@ From (\ref{eq:creation:operator}) and (\ref{eq:annihilation:operator}):
 	a^+_i \triangleq & \frac{P + i \omega x } {\sqrt{2 \omega}} \text{, raising or creation operator} \numberthis \label{eq:creation:operator:i}\\
 	a^-_i \triangleq & \frac{P - i \omega x } {\sqrt{2 \omega}}\text{, lowering or annihilation operator} \numberthis \label{eq:annihilation:operator_i}\\
 	a^-\ket{0} =& \vec{0}\\
-	N_i\triangleq& a^+_i a^-_i \text{, number operator--this is what goes into Hamiltonian}
+	N_i\triangleq& a^+_i a^-_i \text{, number operator--this is what goes into Hamiltonian} 
 \end{align*}
 
  We can compute the commutators from  (\ref{eq:a:comm}) and (\ref{eq:number:operator}), and use the fact that oscillators $i$ and $j$ are independent (if two measurements don't commute, they can not be measured simultaneously - i.e. they are not independent). 
@@ -1161,13 +1161,11 @@ We can handle situation where number of particles is a random variable: a laser 
 
 The trick of introducing fields from particles can be done in two ways. We can start with particles and reconstruct why they can be described by fields, or start with wave fields and work out why they have quanta. Starting with particles we can describe 1 particle, 2 particles, etc, then move on to a variable number of particles. We'll start with one single type of particle. Number of photons in room changes constantly. A neuron can decay into a proton, an electron, and a neutrino. We can't rely on quantum mechanics of a single particle: we need to invent fields.
 
-We will start with single particle quantum mechanics, a state vector $\ket{\psi}$. We can construct the inner product $\bra{x}\ket{\psi}=\psi(x)$ and the probability density $\psi^*(x) \psi(x)$.  Normalization $\int \psi^*(x) \psi(x) dx=1$ gives \textit{number of particles}: this isn't very interesting since we had only one particle to begin with.
-
-\url{https://youtu.be/l6vR825BR3c?t=393}
+We will start with single particle quantum mechanics, a state vector $\ket{\psi}$. We can construct the inner product $\bra{x}\ket{\psi}=\psi(x)$ and the probability density $\psi^*(x) \psi(x)$.  Normalization: $\int \psi^*(x) \psi(x) dx=1$ gives \textit{number of particles}: this isn't very interesting since we had only one particle to begin with.
 
 We next introduced some a particle states that form an orthonormal basis. There are many ways to do this. For instance the x-states form an orthonormal basis. The eigenvectors of any Hermitian operator will form a basis. In particular the energy eigenstates of the particles in a box--Figure \ref{fig:aqm-6-sine} form an orthonormal basis. 
 \begin{align*}
-		\int d(x) \psi^*_i(x) \psi_j(x) =& \delta_{i,j}
+		\int d(x) \psi^*_i(x) \psi_j(x) =& \delta_{i,j} \numberthis \label{eq:orthog:psi}
 \end{align*}
 Now we have another useful little manipulation. 
 
@@ -1179,9 +1177,8 @@ Now we have another useful little manipulation.
 \end{thm}
 
 \begin{proof}
-	We start with the Resolution of the Identity (\ref{eq:resolution:identity})
 	\begin{align*}
-		\sum_{i} \ket{i} \bra{i} =& I \text{. For any $x$ and $y$}\numberthis \label{eq:resolution:identity}\\
+		\sum_{i} \ket{i} \bra{i} =& I \text{. For any $x$ and $y$}\\
 		\braket{y|x}=& \sum_{i} \braket{y|i} \braket{i|x}\\
 		=& \sum_{i} \psi_i(y) \psi^*_i(x) \text{, but}\\
 		\braket{y|x}=&\delta(x-y) \text{, whence}\\
@@ -1199,8 +1196,6 @@ We want to change the numbers of particles, i.e. increase and decrease occupatio
 	\item $a^+_i=a^\dagger_i$
 	\item $a^-_i=a_i$
 \end{itemize} 
-
-
 
 We will find it convenient to introduce the field operator, which operates on Fock space.
 \begin{align*}
@@ -1220,28 +1215,50 @@ The following are Hermitian, and, hence, observable:
 \end{align*}
 But right now we aren't observing them, just using them as bookkeeping devices.
 
-We will now look at a different interpretation of $\Psi(x)$.
-\url{https://youtu.be/l6vR825BR3c?t=1434}
-
-Vacuum: $\ket{0} = \ket{0,0,0,.....}$.
+We will now look at a different interpretation of $\Psi(x)$. What does it do when it operates on the vacuum, the Fock space state where all the occupation numbers are zero: $\ket{0} = \ket{0,0,0,.....}$? We'll write down the following formula.
 
 \begin{align*}
-\ket{x}=&\sum_{i}\ket{i}\braket{i|x}\text{, from (\ref{eq:resolution:identity})}\\
-=& \sum_i \psi^*_i(x)a^\dagger_i\ket{0}\\
-=& \Psi^\dagger(x) \ket{0}\text{, creation operator at a point.}
+	\ket{x}=&\sum_{i}\ket{i}\braket{i|x}\text{ "resolution of the identity". Now}\\
+	\ket{i}=&a^\dagger_i\ket{0} \text{, i.e. a state with one particle in $i^{th}$ energy level, and}\\
+	\braket{i|x}=&\psi_i(x) \text{, so}\\
+	\ket{x}=& \sum_i \psi^*_i(x)a^\dagger_i\ket{0}\\
+	=& \Psi^\dagger(x) \ket{0}
 \end{align*} 
 
-Consider the following operator:
+So $\Psi^\dagger(x)$ is the operator that creates, out of the vacuum, a particle with position $x$.
+
+\begin{itemize}
+	\item $a^\dagger_i$ creates particles with definite energy;
+	\item $\Psi^\dagger$ creates particles at definite locations.
+\end{itemize}
+
+Dirac introduced the following terminology:
+\begin{itemize}
+	\item c-number (an ordinary number) commutes with everything;
+	\item q-number (quantum operator "number") does not always commute.
+\end{itemize}
+
+\subsection{Some illustrative calculations}
+We will now see what we can do with the  $\Psi$ and  $\Psi^\dagger$ operators.
+
+\subsubsection{Density of particles}
+
+The operator $\int dx \Psi^\dagger(x) \Psi(x)$ is interesting: it is not the same as $\int dx \psi^\dagger(x) \psi(x)$ (operator vs wave function). What does it do?
 \begin{align*}
-\int dx \Psi^\dagger(x) \Psi(x)=&\int dx \sum_{i,j}a^+_i\psi_i^*(x) a_j\psi_j(x)\\
-=&\sum_{i,j} a^+_i a_j \int dx \psi_i^*(x) \psi_j(x)\\
-=&\sum_{i,j} a^+_i a_j \delta_{i,j}\\
-=&\sum_i a^+_i a_i\\
-=&\sum_i N_i\text{, operator representing total number of particles.}
+	\int dx \Psi^\dagger(x) \Psi(x)=&\int dx \sum_{i,j}a^+_i\psi_i^*(x) a_j\psi_j(x) \text{, expanding using definition of $\Psi$ and $\Psi^\dagger$}\\
+	=&\sum_{i,j} a^+_i a_j \int dx \psi_i^*(x) \psi_j(x)\\
+	=&\sum_{i,j} a^+_i a_j \delta_{i,j} \text{, from (\ref{eq:orthog:psi})}\\
+	=&\sum_i a^+_i a_i \text{. Now we use (\ref{eq:number:operator})}\\
+	=&\sum_i N_i \text{, total number of particles.}
 \end{align*}
+So $\int dx \Psi^\dagger(x) \Psi(x)$ is the operator representing total number of particles. Will it be finite, since there are infinitely many $i$s? Unless the total energy is insanely high, the $N_i$ must fall off quickly. To make energy finite, total number of particles must be finite. $\Psi^\dagger(x) \Psi(x)$ represents particle density\footnote{The measured value is not necessarily the probability; usually will be within $sqrt{n}$ of probability.}, since its integral is the total number.
 
-To make energy finite, total number of particles must be finite. $\Psi^\dagger(x) \Psi(x)$ represents particle density.
+Now  $\Psi^\dagger(x) \Psi(x)$ is an observable, so we can measure it.  To measure we integrate over a small volume, and ask how many particles are there. Like any observable it has states: you can measure and get a variety of answers.
 
+$\{\ket{n_1,n_2,...n_i,...}\}$ is not the most general state: it is a basis. We can superpose to get the most general state.
+
+\url{https://youtu.be/l6vR825BR3c?t=2626}
+\subsubsection{Total Energy}
 We now calculate the total energy.
 
 \begin{align*}
