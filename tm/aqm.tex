@@ -1169,7 +1169,7 @@ We next introduced some a particle states that form an orthonormal basis. There 
 \end{align*}
 Now we have another useful little manipulation. 
 
-\begin{thm}Construction of delta function from orthonormal basis]
+\begin{thm}[Construction of delta function from orthonormal basis]\label{thm:orthonormal}
 	For any orthonormal basis, $\psi_i$, and any $x$ and $y$:
 	\begin{align*}
 		\delta(x-y)=& \sum_{i} \psi_i(y) \psi^*_i(x)
@@ -1270,7 +1270,7 @@ We determine $\omega_i$ from eigenvalues of the time independent Schr\"odinger e
 \begin{align*}
 	H \psi_i =& \omega_i \psi_i\\
 	\big[\frac{p^2}{2m} + V(x)\big]\psi_i(x)=& \omega_i \psi_i(x)\\
-	\big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_i(x)=& \omega_i \psi_i(x)
+	\big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_i(x)=& \omega_i \psi_i(x) \numberthis \label{eq:schroedinger:psi}
 \end{align*}
 
 We will guess the solution. Start with the observation that the expectation of the energy for one particle is given by:
@@ -1279,7 +1279,7 @@ We will guess the solution. Start with the observation that the expectation of t
 \end{align*}
 
 This suggests:
-\begin{thm}[Energy of multiparticle system.]
+\begin{thm}[Energy of multi-particle system]
 	\begin{align*}
 		E=&\int dx \Psi^\dagger(x) \big[-\frac{\nabla^2}{2m} + V(x)\big] \Psi(x)
 	\end{align*}
@@ -1289,16 +1289,29 @@ This suggests:
 	\begin{align*}
 		&\int dx \underbrace{\Psi^\dagger(x) \big[-\frac{\nabla^2}{2m} + V(x)\big] \Psi(x)}_\text{energy density} \\
 		=& \int dx \sum_{i,j}a^+_i\psi_i^*(x)\big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_j(x)a^-_j\\
-		=& \int dx \sum_{i,j} a^+_i a^-_j \psi_i^*(x) \omega_j \psi_j(x)\\
-		=&  \sum_{i,j} a^+_i a^-_j \delta_{i,j} \omega_j\\
+		=& \int dx \sum_{i,j} a^+_i a^-_j \psi_i^*(x) \omega_j \psi_j(x) \text{, from (\ref{eq:schroedinger:psi})}\\
+		=& \sum_{i,j} a^+_i a^-_j \delta_{i,j} \omega_j \text{, since $\{\psi_i\}$ form an orthonormal basis} \\
 		=& \sum_{i} a^+_i a^-_i  \omega_i\\
 		=& \sum_i N_i \omega_i
 	\end{align*}
 \end{proof}
-\url{https://youtu.be/l6vR825BR3c?t=3981}
-Behaves like classical theory if the number of particles is very large. E.g. expectations follow classical laws.
 
-If we don't split too many hairs, density from electromagnetic field is density of photons.
+Notes:
+\begin{itemize}
+	\item We can recover single particle QM from QFT: just go to states where total number of particles is one.
+	\item Behaves like classical theory if the number of particles in same state is very large. E.g. expectations follow  laws of classical particles.
+	\item If we don't split too many hairs,square of electromagnetic field is qualitatively related to density of photons.
+\end{itemize}
+
+You can imagine how confused everybody was before Dirac put it all together. People were confused by $psi$, which they thought was a field, like the electromagnetic field. Some thought it was just an auxiliary device for computing probabilities. If that was what is was, how was it connected with electromagnetic field? What was connection between particles and fields. The Scr\"odinger equation looked a but like Maxwell's equations. But Maxwell's equations were not anything to do with probability amplitudes: they concerned measurable value of the field. But there was a connection, as the photons were quanta of the field. QFT is the resolution of that confusion.  
+
+For electromagnetic field:
+\begin{align*}
+	\vec{\Psi} =& \vec{E} + i \vec{B}\\
+	\vec{\Psi^*} =& \vec{E} - i \vec{B}\\
+	\vec{\Psi} \vec{\Psi^*} =&\text{ energy density of photons: $E^2+B^2$}
+\end{align*}
+Density of photons isn't a good concept, but energy density is.
 
 \section {Second Quantization}
 
