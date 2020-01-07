@@ -1251,36 +1251,51 @@ The operator $\int dx \Psi^\dagger(x) \Psi(x)$ is interesting: it is not the sam
 	=&\sum_i a^+_i a_i \text{. Now we use (\ref{eq:number:operator})}\\
 	=&\sum_i N_i \text{, total number of particles.}
 \end{align*}
-So $\int dx \Psi^\dagger(x) \Psi(x)$ is the operator representing total number of particles. Will it be finite, since there are infinitely many $i$s? Unless the total energy is insanely high, the $N_i$ must fall off quickly. To make energy finite, total number of particles must be finite. $\Psi^\dagger(x) \Psi(x)$ represents particle density\footnote{The measured value is not necessarily the probability; usually will be within $sqrt{n}$ of probability.}, since its integral is the total number.
+So $\int dx \Psi^\dagger(x) \Psi(x)$ is the operator representing total number of particles. Will it be finite, since there are infinitely many $i$s? Unless the total energy is insanely high, the $N_i$ must fall off quickly. To make energy finite, total number of particles must be finite. $\Psi^\dagger(x) \Psi(x)$ represents particle density\footnote{The measured value is not necessarily the probability; usually will be within $\sqrt{n}$ of probability.}, since its integral is the total number.
 
 Now  $\Psi^\dagger(x) \Psi(x)$ is an observable, so we can measure it.  To measure we integrate over a small volume, and ask how many particles are there. Like any observable it has states: you can measure and get a variety of answers.
 
 $\{\ket{n_1,n_2,...n_i,...}\}$ is not the most general state: it is a basis. We can superpose to get the most general state.
 
-\url{https://youtu.be/l6vR825BR3c?t=2626}
+
 \subsubsection{Total Energy}
-We now calculate the total energy.
+We now determine the operator that gives the total energy. We'll assume that particles don't interact. This works for dilute particles. Even photons will interact if they are dense enough (we can't get this density in the laboratory.)
 
 \begin{align*}
-E =& \sum_{i} N_i \omega_i\\
-=& \sum_{i} a^\dagger_i a_i \omega_i
+	E =& \sum_{i} N_i \omega_i \text{ sum over all modes, i.e. single particle states}\\
+	=& \sum_{i} a^\dagger_i a_i \omega_i
 \end{align*}
 
-We determine $\omega_i$ from eigenvalues of Schr\"odinger equation (ignoring interactions):
+We determine $\omega_i$ from eigenvalues of the time independent Schr\"odinger equation (ignoring interactions). Particles may interact with $V$, but not with each other.
 \begin{align*}
-H \psi_i =& \omega_i \psi_i\\
-\big[\frac{p^2}{2m} + V(x)\big]\psi_i(x)=& \omega_i \psi_i(x)\\
-\big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_i(x)=& \omega_i \psi_i(x)
+	H \psi_i =& \omega_i \psi_i\\
+	\big[\frac{p^2}{2m} + V(x)\big]\psi_i(x)=& \omega_i \psi_i(x)\\
+	\big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_i(x)=& \omega_i \psi_i(x)
 \end{align*}
 
-Guess solution
+We will guess the solution. Start with the observation that the expectation of the energy for one particle is given by:
 \begin{align*}
-E=&\int dx \underbrace{\Psi^\dagger(x) \big[-\frac{\nabla^2}{2m} + V(x)\big] \Psi(x)}_\text{energy density} \\
-=& \int dx \sum_{i,j}a^+_i\psi_i^*(x)\big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_j(x)a^-_j\\
-=& \int dx \sum_{i,j} a^+_i a^-_j \psi_i^*(x) \omega_j \psi_j(x)\\
-=&  \sum_{i,j} a^+_i a^-_j \delta_{i,j} \omega_j
+	\braket{\psi | H | \psi} =& \big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_i(x)
 \end{align*}
 
+This suggests:
+\begin{thm}[Energy of multiparticle system.]
+	\begin{align*}
+		E=&\int dx \Psi^\dagger(x) \big[-\frac{\nabla^2}{2m} + V(x)\big] \Psi(x)
+	\end{align*}
+\end{thm}
+
+\begin{proof}
+	\begin{align*}
+		&\int dx \underbrace{\Psi^\dagger(x) \big[-\frac{\nabla^2}{2m} + V(x)\big] \Psi(x)}_\text{energy density} \\
+		=& \int dx \sum_{i,j}a^+_i\psi_i^*(x)\big[-\frac{\nabla^2}{2m} + V(x)\big]\psi_j(x)a^-_j\\
+		=& \int dx \sum_{i,j} a^+_i a^-_j \psi_i^*(x) \omega_j \psi_j(x)\\
+		=&  \sum_{i,j} a^+_i a^-_j \delta_{i,j} \omega_j\\
+		=& \sum_{i} a^+_i a^-_i  \omega_i\\
+		=& \sum_i N_i \omega_i
+	\end{align*}
+\end{proof}
+\url{https://youtu.be/l6vR825BR3c?t=3981}
 Behaves like classical theory if the number of particles is very large. E.g. expectations follow classical laws.
 
 If we don't split too many hairs, density from electromagnetic field is density of photons.
