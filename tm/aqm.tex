@@ -1319,25 +1319,29 @@ Density of photons isn't a good concept, but energy density is.
 
 If neutrinos have mass, and they mix, do they have the same mass? No. So how to mix and conserve energy?
 
-Neutrinos -- mass is energy. Eigenstates of energy are linear superpositions of eigenstates of something else, the type of neutrino. Eigenstates of energy don't mix with each other, but they are mixtures themselves. Here is an analogous situation. Imagine a particle trapped in the potential of Figure \ref{fig:aqm-7-potential}, and assume middle barrier very high, so, to a good approximation, particle is trapped on one side or t'other (ignore tunnelling). What is ground state? In Figure \ref{fig:particle_mixed_left} we treat the barrier as a brick wall and construct a wave function in the left half. But there must be a second ground state, from symmetry--Figure \ref{fig:double:well}.
+Mass is energy. The eigenstates of energy are linear superpositions of eigenstates of something else, \emph{the type of neutrino}. The eigenstates of energy don't mix with each other, but they are mixtures themselves.
+
+\subsubsection{A simple example}
+
+Here is simple example. Imagine a particle trapped in the potential of Figure \ref{fig:aqm-7-potential}, and let's suppose for the sake of argument that the middle barrier very high, so, to a good approximation, particle is trapped on one side or t'other (ignore tunnelling). So we can treat particle as being on the left, say. In Figure \ref{fig:particle_mixed_left} we treat the barrier as a brick wall and ask what is the ground state. We might say that Figure \ref{fig:particle_mixed_left} shows the ground state: it has no nodes, is as smooth as possible, and has an energy, $E$. But there must be a second ground state, from symmetry--Figure \ref{fig:double:well}, with the same energy. These are two states that have apparently the same energy--except they don't. The two wave functions in Figure  \ref{fig:double:well} are not exactly eigenstates of the energy.
 
 \begin{figure}[H]
-	\caption{Double well potential}
+	\caption{Double well potential with very high barrier}
 	\begin{subfigure}{0.3\textwidth}
 		\caption{Double well potential}\label{fig:aqm-7-potential}
 		\includegraphics[width=0.8\textwidth]{aqm-7-potential}
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
-		\caption{Ground state (left)--no nodes}\label{fig:particle_mixed_left}
+		\caption{One "ground state"}\label{fig:particle_mixed_left}
 		\includegraphics[width=0.8\textwidth]{particle_mixed_left}
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
-		\caption{Particle trapped in double well}\label{fig:double:well}
+		\caption{Two "ground states"}\label{fig:double:well}
 		\includegraphics[width=0.8\textwidth]{particle_mixed}
 	\end{subfigure}
 \end{figure}
 
-
+We know that for a potential like Figure \ref{fig:aqm-7-potential} the eigenstates are either symmetric or antisymmetric functions.
 
 \begin{thm}[If $V$ is an even function, $\psi$ is either even or odd.]
 	If  $\psi$  is a continuously differentiable solution to the time independent Schr\"odinger equation
@@ -1375,7 +1379,7 @@ Neutrinos -- mass is energy. Eigenstates of energy are linear superpositions of 
 	We still need to rule out the possibility that $\rho$ changes sign at a zero. Let $x_0$ be a point such that $\psi(x_0)=0$, and, WLOG, assume that $\psi(x)=\psi^{\prime}(x)$ in some interval up to $x_0-$ and $\psi(x)=-\psi^{\prime}(x)$ in some interval starting $x_0+$. Since $\psi$ is continuously differentiable: then $\frac{\psi^{\prime}(x_0-)}{dx}=\frac{\psi^(x_0-)}{dx}$. Now define $\psi^{\prime\prime} \triangleq \big(\psi^{\prime}-\psi\big)$: $\psi^{\prime\prime}$ satisfies (\ref{eq:ti:schroedinger}), $\psi^{\prime\prime}(x_0)=0$, and $\frac{\psi^{\prime\prime}(x_0-)}{dx}=0$, whence $\psi^{\prime\prime}=0 \forall x$. 
 \end{proof}
 
-But neither LHS or RHS wave function of Figure \ref{fig:double:well} symmetric or antisymmetric. Can make symmetric or antisymmetric combinations. Figure \ref{fig:double:well:symmetrized} has slightly lower energy than Figure \ref{fig:double:well}. Figure \ref{fig:double:well:1st} shows first excited state.
+But neither LHS or RHS wave function of Figure \ref{fig:double:well} symmetric or antisymmetric. Can make symmetric or antisymmetric combinations. Figure \ref{fig:double:well:symmetrized} has slightly lower energy than Figure \ref{fig:double:well}: it is the true ground state\footnote{Remember that sign of wave function doesn't matter}. Figure \ref{fig:double:well:1st} shows first excited state: it's energy is ever so slightly larger that a wave function constrained to be on one side.
 
 \begin{figure}[H]
 	\caption{Wave functions for Figure \ref{fig:double:well}}
@@ -1392,13 +1396,13 @@ But neither LHS or RHS wave function of Figure \ref{fig:double:well} symmetric o
 
 So we mix the pure states from Figures \ref{fig:double:well:symmetrized} and \ref{fig:double:well:1st}. Let's start with electron on left, and evolve.
 \begin{align*}
-\frac{\psi_L+\psi_R}{\sqrt{2}}& \text{--symmetric, with energy }& E_1-\epsilon\\
-\frac{\psi_L-\psi_R}{\sqrt{2}}& \text{--antisymmetric, with energy }& E_1+\epsilon
+	\frac{\psi_L+\psi_R}{\sqrt{2}}& \text{--symmetric, with energy }& E_1-\epsilon\\
+	\frac{\psi_L-\psi_R}{\sqrt{2}}& \text{--antisymmetric, with energy }& E_1+\epsilon
 \end{align*}
-Each is an eigenvector, so they evolve as follows:
+What if we put a particle on the left? How does it evolve? Each is an eigenvector, so they evolve as follows:
 \begin{align*}
-\frac{\psi_L+\psi_R}{\sqrt{2}} e^{(E_1-\epsilon)t}=&\psi^+ \text{, say}\\
-\frac{\psi_L-\psi_R}{\sqrt{2}}e^{(E_1+\epsilon)t}=&\psi^-
+	\frac{\psi_L+\psi_R}{\sqrt{2}} e^{(E_1-\epsilon)t}=&\psi^+ \text{, say}\\
+	\frac{\psi_L-\psi_R}{\sqrt{2}}e^{(E_1+\epsilon)t}=&\psi^-
 \end{align*}
 
 Now what if we start with pure $\psi_L$?
@@ -1409,12 +1413,26 @@ Now what if we start with pure $\psi_L$?
 \end{align*}
 Signs change with time, so eventually they will be opposite.
 \begin{align*}
-e^{-\epsilon t} =& - e^{\epsilon t}\\
-e^{2 \epsilon t}=&-1\\
-2 \epsilon t = \pi \text{, so $\psi_L$ becomes $\psi_R$!}
+	e^{-\epsilon t} =& - e^{\epsilon t}\\
+	e^{2 \epsilon t}=&-1\\
+	2 \epsilon t = \pi
 \end{align*}
+So $\psi_L$ becomes $\psi_R$!
 
-Mixing goes with oscillation. Neutrinos go like that--electron neutrino changes to muon neutrino. Masses are energy levels. Coupling in Hamiltonian.
+\subsubsection{Neutrinos}
+
+The phenomenon of mixing goes with the phenomenon of oscillation. Neutrinos behave  like that: 
+\begin{itemize}
+	\item the analog of the left wave function is the neutrino that is made when a particle decays to an electron plus a neutrino;
+	\item the analog of the right wave function is the neutrino that is made when a particle decays to a muon plus a neutrino.
+\end{itemize}
+The real eigenstate of the energy is a linear combination of the muon and electron neutrino. When a neutrino is made, it is either in a state of an electron neutrino or a muon neutrino. If you wait a while it will change to the other state.
+--electron neutrino changes to muon neutrino.
+Now the neutrino can be scattered, and produce an electron (from electron neutrino) or a muon. But wait a while and see what is produced: electron neutrino becomes muon neutrino, and can produce muons. This will oscillate!
+
+\url{https://youtu.be/7G4C7scQX3A?t=1449}
+
+ Masses are energy levels. Coupling in Hamiltonian.
 
 Ammonia is analogous: $N$ tunnels through $H_3$ plane. 
 
