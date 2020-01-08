@@ -1428,17 +1428,38 @@ The phenomenon of mixing goes with the phenomenon of oscillation. Neutrinos beha
 \end{itemize}
 The real eigenstate of the energy is a linear combination of the muon and electron neutrino. When a neutrino is made, it is either in a state of an electron neutrino or a muon neutrino. If you wait a while it will change to the other state.
 --electron neutrino changes to muon neutrino.
-Now the neutrino can be scattered, and produce an electron (from electron neutrino) or a muon. But wait a while and see what is produced: electron neutrino becomes muon neutrino, and can produce muons. This will oscillate!
+Now the neutrino can be scattered, and produce an electron (from electron neutrino) or a muon. But wait a while and see what is produced: electron neutrino becomes muon neutrino, and can produce muons. This type of neutrino will oscillate! If you have a very long baseline you'll see the oscillations
 
-\url{https://youtu.be/7G4C7scQX3A?t=1449}
+What controls size of $\epsilon$? All sorts of details, mass of particle, height of barrier, width of barrier. It is extremely sensitive. 
 
- Masses are energy levels. Coupling in Hamiltonian.
+The neutrino masses are the energy levels. They start small, but mixing splits the energy a bit. There is no barrier; there is a coupling in the Hamiltonian which, for whatever reason takes an electron neutrino to a muon neutrino and vice versa. In Figure \ref{fig:double:well} the coupling is due to tunnelling.
 
-Ammonia is analogous: $N$ tunnels through $H_3$ plane. 
+Ammonia has a tetrahedral shape--Figure \ref{fig:aqm-8-nh3}. The Nitrogen likes to sit a certain distance of the base of the triangle (energy lowest). But there is another state which is symmetric, with Nitrogen below: $N$ tunnels through $H_3$ plane. 
 
-Spins.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Ammonia has a tetrahedral shape}\label{fig:aqm-8-nh3}
+		\includegraphics[width=0.5\textwidth]{aqm-8-nh3}
+	\end{center}
+\end{figure}
+
+We've also seen this with spins. Without any magnetic field up and down have the same energy. Now apply a weak magnetic field--Figure \ref{fig:aqm-8-spins-lr}. What are the eigenstates? Left, and right. But these are just linear combinations of up and down.
+\begin{align*}
+	\ket{l} = \frac{1}{\sqrt{2}}\big[\ket{u} + \ket{v}\big]\\
+	\ket{r} = \frac{1}{\sqrt{2}}\big[\ket{u} - \ket{v}\big]
+\end{align*}
+The eigenstates have slightly different energy because of the magnetic field: we have the same situation with slightly different energy levels. What happens if we start the electron up? It precesses, moving between down and up. There is no tunnelling, just a term in the Hamiltonian.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Spins in a weak magnetic field}\label{fig:aqm-8-spins-lr}
+		\includegraphics[width=0.5\textwidth]{aqm-8-spins-lr}
+	\end{center}
+\end{figure}
 
 
+
+\url{https://youtu.be/7G4C7scQX3A?t=1788}
 
 \subsection{Second Quantization of Bosons}
 
@@ -1472,10 +1493,10 @@ Remember there is a field operator for each kind of particle.
 Can prove following.
  
 \begin{align*}
-[\Psi^+(x),\Psi^-(y)] =& \delta(x-y) \text{, introduces Heisenberg uncertainty!}\\
-[\Psi^+(x),\Psi^+(y)] =&0\\
-[\Psi^-(x),\Psi^-(y)] =&0\\
-[\Psi^+_R(x),\Psi^-_I(y)] =& \delta(x-y) \text{, can not measure simultaneously at same point!}
+	[\Psi^+(x),\Psi^-(y)] =& \delta(x-y) \text{, introduces Heisenberg uncertainty!}\\
+	[\Psi^+(x),\Psi^+(y)] =&0\\
+	[\Psi^-(x),\Psi^-(y)] =&0\\
+	[\Psi^+_R(x),\Psi^-_I(y)] =& \delta(x-y) \text{, can not measure simultaneously at same point!}
 \end{align*}
 
 Makes sense in relativity: would violate causality. Spacelike! Can measure at different points.
