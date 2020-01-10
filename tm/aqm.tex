@@ -1572,32 +1572,45 @@ Fermions don't work like this! One measurement can kick another arbitrarily far 
 
 \section{Quantum Field Hamiltonian}
 
+
+
 \subsection{Particle Field Interactions}
 
-Hamiltonian for very simple quantum field--particles satisfying Schr\"odinger equation. The second term counts particles, giving each energy $V(x)$.
+In the previous lectures we talked about Quantum Fields, the quanta of those fields, the creation and annihilation operators, and examined the Hamiltonian for a very simple field--non-interacting particles satisfying Schr\"odinger's equation. The second term counts particles, giving each energy $V(x)$.\footnote{We are not restricted to 3D: x may be a vector.}
 \begin{align*}
-H =& \int dx \big[ \Psi^\dagger(x) \big[\frac{- \nabla^2}{2m} \Psi(x) \big]+ V(x) \Psi^\dagger(x) \Psi(x) \big] \\
-&\text{We restrict to the special case of constant potential energy}\\
+	H =& \int dx \big[ \Psi^\dagger(x) \big[\frac{- \nabla^2}{2m} \Psi(x) \big]+ V(x) \Psi^\dagger(x) \Psi(x) \big] 
+\end{align*}
+$\Psi^\dagger(x) \Psi(x)$ represents the density of particles at $x$, so $\Psi^\dagger(x) \Psi(x) V(x)$ counts particles at $x$, and gives each one energy $V(x)$.
+
+We restrict to the special case of constant potential energy
+\begin{align*}
 H=&\int dx \big[\Psi^\dagger(x) \big(\frac{- \nabla^2}{2m} \Psi(x)\big) + mc^2 \Psi^\dagger(x) \Psi(x)\big]  \numberthis\label{eq:psi_mc2}
 \end{align*}
 
-The Hamiltonian updates state.
+Each particle has energy $mc^2$.
+
+How do we see from (\ref{eq:psi_mc2}) that momentum is conserved?
+
+The Hamiltonian updates state, $\phi$, say.
 
 \begin{align*}
-\ket{\phi(t+\epsilon)} =& (1-i \epsilon H) \ket{\phi(t)} \text{State}\\
-=& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)} \numberthis \label{eq:update:state}
+	\ket{\phi(t+\epsilon)} =& (1-i \epsilon H) \ket{\phi(t)} \text{State}\\
+	=& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)} \numberthis \label{eq:update:state}
 \end{align*}
-
-What would it mean to say momentum is conserved? It means Hamiltonian doesn't change momentum. Let's see how this works with (\ref{eq:psi_mc2}). Rewrite 2nd term  using momentum variables
+\url{https://youtu.be/7a1hon7NJ1M?t=467}
+What would it mean to say momentum is conserved? It means Hamiltonian, when it acts on a state with definite momentum, doesn't change momentum. Whatever the Hamiltonian does, if it acts on a state with given momentum, it must give back the same momentum, \emph{if momentum is conserved.}  Let's see how this works with (\ref{eq:psi_mc2}). Rewrite 2nd term  using momentum variables (Fourier transform).
 
 \begin{align*}
-\Psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi}(p) e^{ipx}\\
-\Psi^\dagger (x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi^\dagger}(p) e^{-ipx} \numberthis \label{eq:psi:dagger}\\
-\int dx \big(mc^2\big) \Psi^\dagger(x) \Psi(x) =& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p_2) \widetilde{\Psi}(p_1) e^{i(p_1-p_2)x} dx dp_2 dp_1\\
-=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p_2) \widetilde{\Psi}(p_1) \delta(p_1-p_2) dp_2 dp_1\\
-=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp
+	\Psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi}(p) e^{ipx}\\
+	\Psi^\dagger (x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi^\dagger}(p) e^{-ipx} \numberthis \label{eq:psi:dagger}
 \end{align*}
-This just removes a particle with momentum $p$ and puts it back; momentum isn't changed. Let's repeat with the 1st term of (\ref{eq:psi_mc2}.)
+ The factor is actually $\big(\frac{1}{\sqrt{2\pi}}\big)^n$ where $n$ is number of dimensions.
+\begin{align*}
+	\int dx \big(mc^2\big) \Psi^\dagger(x) \Psi(x) =& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p_2) \widetilde{\Psi}(p_1) e^{i(p_1-p_2)x} dx dp_2 dp_1\\
+	=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p_2) \widetilde{\Psi}(p_1) \delta(p_1-p_2) dp_2 dp_1\\
+	=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp
+\end{align*}
+This just removes a particle with momentum $p$ and puts it back; momentum isn't changed. Let's repeat with the 1st term of (\ref{eq:psi_mc2}).
 
 (Digression: calculation with multiple particles shows momentum still conserved.)
 
