@@ -1522,46 +1522,53 @@ Standard Model predicts a very small dipole moment that is too small to detect. 
 \url{https://youtu.be/7G4C7scQX3A?t=4380}
 
 \subsection{Second Quantization of Bosons}
+ How are fields connected with Fourier transforms? In ordinary QM we have wave functions; in the position representation, and the squares define probabilities of the particle being at a particular point. We can Fourier transform the wave functions, and the transform is the representation in momentum space.
 
-Fourier transforms let us move between the position and momentum representations.
 
 \begin{align*}
-\psi(x) \rightarrow& \psi^*(x)\psi(x)=&P(x) \text{ in position representation}\\
-\widetilde{\psi}(p) \rightarrow& \widetilde{\psi}^*(p) \widetilde{\psi}(p) =&P(p) \text{ in momentum representation, where}\\
-\widetilde{\psi}(p) =& \int \frac{dx}{\sqrt{2\pi}} \psi(x) e^{-i p x}\\
-\psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\psi}(p) e^{+i p x}
+	\psi(x) \rightarrow& \psi^*(x)\psi(x)=&P(x) \text{ in position representation}\\
+	\widetilde{\psi}(p) \rightarrow& \widetilde{\psi}^*(p) \widetilde{\psi}(p) =&P(p) \text{ in momentum representation, where}\\
+	\widetilde{\psi}(p) =& \int \frac{dx}{\sqrt{2\pi}} \psi(x) e^{-i p x}\\
+	\psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\psi}(p) e^{+i p x}
 \end{align*}
 
-Now consider this in field theory.
+Now let's go to field theory, with creation and annihilation operators.
 
 \begin{align*}
-\Psi(x) =& \sum_{i} a^-_i \psi_i(x)\\
-\psi_i(x) =& e^{ipx} \text{ for a free particle (different $i$!), so} \\
-\Psi(x)=& \int \frac{dp}{\underbrace{\sqrt{2\pi}}_\text{by convention}} a^-(p) e^{ipx} \text{, where annihilation operator}\\
-a^-(p)& \text{ removes 1 particle with momentum p: plays same role as $\widetilde{\psi}(p)$ }\\
-\Psi^\dagger(x)=& \int \frac{dp}{\sqrt{2\pi}} a^+(p) e^{ipx} \text{ creates particle at position $x$}
+	\Psi(x) =& \sum_{i} a^-_i \psi_i(x)\\
+	\psi_i(x) =& e^{ipx} \text{ for a free particle (different $i$!), so} \\
+	\Psi(x)=& \int \frac{dp}{\underbrace{\sqrt{2\pi}}_\text{by convention}} a^-(p) e^{ipx} \text{, where annihilation operator}
 \end{align*}
-
-There is a similarity between wave functions in position and momentum space and creation and annihilation operators for particles and given position or momentum.
+The momentum states are now represented by a continuous parameter, $p$, not a discrete $i$. Moreover $a^-(p)$  removes 1 particle with momentum $p$: it plays same role as $\widetilde{\psi}(p)$. If there is no particle to remove, $a^-(p)$ annihilates the state.
 \begin{align*}
-a^-(p) = \int \frac{dx}{\sqrt{2\pi}} \Psi(x) e^{-ipx}\\
-a^+(p) = \int \frac{dx}{\sqrt{2\pi}} \Psi^\dagger(x) e^{ipx}
+	\Psi^\dagger(x)=& \int \frac{dp}{\sqrt{2\pi}} a^+(p) e^{ipx} \text{ creates particle at position $x$}
+\end{align*}
+There is a similarity between wave functions in position and momentum space and creation and annihilation operators for particles and given position or momentum. And we can invert the equations.
+\begin{align*}
+	a^-(p) = \int \frac{dx}{\sqrt{2\pi}} \Psi(x) e^{-ipx}\\
+	a^+(p) = \int \frac{dx}{\sqrt{2\pi}} \Psi^\dagger(x) e^{ipx}
 \end{align*}
 
 Remember there is a field operator for each kind of particle.
 
-Can prove following.
+If we recall the commutators:
+\begin{align*}
+	[a^+_i,a^-_j] =& \delta_{i,j}\\
+	[a^+_i,a^+_j] =& 0\\
+	[a^-_i,a^-_j] =& 
+\end{align*}
+We can prove the following.
  
 \begin{align*}
 	[\Psi^+(x),\Psi^-(y)] =& \delta(x-y) \text{, introduces Heisenberg uncertainty!}\\
-	[\Psi^+(x),\Psi^+(y)] =&0\\
+	[\Psi^+(x),\Psi^+(y)] =&0 \\
 	[\Psi^-(x),\Psi^-(y)] =&0\\
 	[\Psi^+_R(x),\Psi^-_I(y)] =& \delta(x-y) \text{, can not measure simultaneously at same point!}
 \end{align*}
 
-Makes sense in relativity: would violate causality. Spacelike! Can measure at different points.
+Makes sense in relativity: if measuring field at one point kicked value at a distant point, it would violate causality/locality. If there is a spacelike separation between measurements one cannot affect another!
 
-Fermions don't work like this! One measurement can kick another arbitrarily far away.
+Fermions don't work like this! One measurement can kick another arbitrarily far away. This sounds crazy--or there is no way to measure a Fermion Field.
 
 \section{Quantum Field Hamiltonian}
 
