@@ -186,7 +186,7 @@ We will use $M$ to denote reflection symmetry. If we have reflection symmetry, $
 
 The reflection of a magnetic field is not the same field, as it is an axial vector. Imagine a current generating a magnetic field going into the plane. If we reflect, the current goes in the opposite direction, as does the magnetic field.
 
-\begin{thm}[Two symmetries that don't commute apply degeneracy]
+\begin{thm}[Two symmetries that don't commute imply degeneracy]
 	Suppose we have two symmetries, whose generators are $A$ and $B$.
 	\begin{align*}
 		[A,H]=&0 \text{, because it's a symmetry}\\
@@ -1597,12 +1597,12 @@ The Hamiltonian updates state, $\phi$, say.
 	\ket{\phi(t+\epsilon)} =& (1-i \epsilon H) \ket{\phi(t)} \text{State}\\
 	=& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)} \numberthis \label{eq:update:state}
 \end{align*}
-\url{https://youtu.be/7a1hon7NJ1M?t=467}
+
 What would it mean to say momentum is conserved? It means Hamiltonian, when it acts on a state with definite momentum, doesn't change momentum. Whatever the Hamiltonian does, if it acts on a state with given momentum, it must give back the same momentum, \emph{if momentum is conserved.}  Let's see how this works with (\ref{eq:psi_mc2}). Rewrite 2nd term  using momentum variables (Fourier transform).
 
 \begin{align*}
-	\Psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi}(p) e^{ipx}\\
-	\Psi^\dagger (x) =& \int \frac{dp}{\sqrt{2\pi}} \widetilde{\Psi^\dagger}(p) e^{-ipx} \numberthis \label{eq:psi:dagger}
+	\Psi(x) =& \int \frac{dp}{\sqrt{2\pi}} \underbrace{ \widetilde{\Psi}(p)}_\text{annihilation operator} e^{ipx}\\
+	\Psi^\dagger (x) =& \int \frac{dp}{\sqrt{2\pi}} \underbrace{ \widetilde{\Psi}(p)}_\text{creation operator} e^{-ipx} \numberthis \label{eq:psi:dagger}
 \end{align*}
  The factor is actually $\big(\frac{1}{\sqrt{2\pi}}\big)^n$ where $n$ is number of dimensions.
 \begin{align*}
@@ -1610,30 +1610,43 @@ What would it mean to say momentum is conserved? It means Hamiltonian, when it a
 	=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p_2) \widetilde{\Psi}(p_1) \delta(p_1-p_2) dp_2 dp_1\\
 	=& \frac{mc^2}{2 \pi} \int \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp
 \end{align*}
-This just removes a particle with momentum $p$ and puts it back; momentum isn't changed. Let's repeat with the 1st term of (\ref{eq:psi_mc2}).
 
-(Digression: calculation with multiple particles shows momentum still conserved.)
+This just removes a particle with momentum $p$ and puts it back with same momentum; momentum isn't changed. The key thing was the integration over $x$, which introduced $\delta$ for momentum. Before we repeat with the 1st term of (\ref{eq:psi_mc2}) we will see that this can be more general. Let's suppose we had a term in the Hamiltonian for a whole bunch of fields: $\Psi^\dagger(x) \Psi(x)\rightarrow \Psi^\dagger_A(x) \Psi_A(x) + \Psi^\dagger_B(x) \Psi_B(x)+...$. We would end up with an integral:
+\begin{align*}
+	&\int dp_1A dp_1B...dp_2A dp 2B \Pi \Psi(p_1) \Pi \Psi(p_2) e^{i(\sum p_1-\sum p_2)x} dx\\
+	=&\int dp_1A dp_1B...dp_2A dp 2B \Pi \Psi(p_1) \Pi \Psi(p_2) \delta(\sum p_1-\sum p_2) 
+\end{align*}
+The first sum is the momentum we put in, the 2nd the momentum that we take out. Total that we take out = total that we put in. Whenever we see a Hamiltonian of this form we have sum of outgoing momentum = sum incoming.
+
+Let's look at derivatives. If we calculate $\nabla^2 \Psi^\dagger (x)$,  only one part of (\ref{eq:psi:dagger}) is affected, $e^{-ipx}$, since the remainder is doesn't involve $x$. 
+\begin{align*}
+	- \nabla^2 \Psi^\dagger (x) =& \int \frac{dp}{\sqrt{2\pi}} p^2 \widetilde{\Psi^\dagger}(p) e^{-ipx}\text{, so}\\
+	\int dx \Psi^\dagger(x) \frac{- \nabla^2}{2m} \Psi(x)=& \int \frac{ p^2}{2m} \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp \numberthis \label{eq:minus:nabla}
+\end{align*}
+This adds the kinetic energy of all the particles.
+
+Note: the left hand side of (\ref{eq:minus:nabla}) looks negative, but it is meant to be kinetic energy, which is positive. Integrating by parts we get:
 
 \begin{align*}
-- \nabla^2 \Psi^\dagger (x) =& \int \frac{dq}{\sqrt{2\pi}} q^2 \widetilde{\Psi^\dagger}(q) e^{-iqx}\text{, from (\ref{eq:psi:dagger}), so}\\
-\int dx \Psi^\dagger(x) \frac{- \nabla^2}{2m} \Psi(x)=& \int \frac{ p^2}{2m} \widetilde{\Psi^\dagger}(p) \widetilde{\Psi}(p) dp \text{, adds up kinetic energy.}
+	\int dx \Psi^\dagger(x) \frac{- \nabla^2}{2m} \Psi(x)=& \frac{1}{2m} \int dx \frac{\partial }{\partial x} \Psi^\dagger(x)  \frac{\partial }{\partial x} \Psi(x)
 \end{align*}
+This looks like any other Hamiltonian, where you see squares of derivatives of the fields. 
 
-Imagine two species of particles: fake electrons and protons that happen to be bosons.
+Imagine two species of particles: fake electrons and protons that happen to be bosons.\footnote{We aren't quite ready for Fermions.}
 
 \begin{align*}
-H =& \int dx  \Psi^\dagger_e(x) \frac{- \nabla^2}{2m_e} \Psi_e(x) + \int dx \Psi^\dagger_p(x) \frac{- \nabla^2}{2m_p} \Psi_p(x)  + g \int dx \underbrace{\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)}_\text{Figure \ref{fig:scatter:e:p}} \text{, where}\\
-g=& \textit{ coupling constant--proportional to probability of interaction.}
+	H =& \int dx  \Psi^\dagger_e(x) \frac{- \nabla^2}{2m_e} \Psi_e(x) + \int dx \Psi^\dagger_p(x) \frac{- \nabla^2}{2m_p} \Psi_p(x)  + g \int dx \underbrace{\Psi^\dagger_e(x) \Psi^\dagger_p(x) \Psi_e(x) \Psi_p(x)}_\text{Figure \ref{fig:scatter:e:p}} 
 \end{align*}
+where $g$ is a coupling constant--proportional to probability of interaction. 
 
-\feynmandiagram{};
+The integrand in last term annihilates a proton and an electron if it finds them at point $x$, then creates an electron and a proton.
 
 \begin{figure}[H]
 	\begin{center}
 		\caption[$\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)$--scattering]{$\Psi^\dagger_e(x) \Psi^\dagger_e(x) \Psi_e(x) \Psi_p(x)$: annihilate and create an electron and proton if they are at the same place, then create again --i.e. scatter}\label{fig:scatter:e:p}
 		\feynmandiagram[vertical=o1 to i1]{
 			i1[particle=$e^-$]--[fermion]a--[fermion]o1[particle=$e^-$],
-			i2[particle=$e^+$]--[anti fermion]a--[anti fermion]o2[particle=$e^+$]
+			i2[particle=$p^+$]--[fermion]a--[fermion]o2[particle=$p^+$]
 		};
 	\end{center}
 \end{figure}
@@ -1642,53 +1655,66 @@ g=& \textit{ coupling constant--proportional to probability of interaction.}
 	\item Total momentum is conserved, not that of individual particles.
 	\item Coulomb potential has been ignored.
 	\item If experiment shows that particles interact, then there must be a term in the Hamiltonian.
+	\item This is the sort of term for a short range interaction.
 \end{itemize}
 
-Imagine particle decay, as shown in Figure \ref{fig:particle:decay}. We might try a term: $\Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x)$. Since space it isotropic, the interaction can happen anywhere: $g \int \Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x) dx$. We can show that momentum is conserved.
+Imagine we find particle decay in an experiment, as shown in Figure \ref{fig:particle:decay}. We might try a term: $\Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x)$. Since space it isotropic, the interaction can happen anywhere: $g \int \Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x) dx$. We can show that momentum is conserved.
 
 \begin{figure}[H]
-	\begin{center}
+	\caption{$\Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x) dx +  \Psi^\dagger_a(x) \Psi_c(x) \Psi_b(x)$}\label{fig:particle:decay:and:reverse}
+	\begin{subfigure}{0.45\textwidth}
 		\caption{Particle Decay: $\Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x)$}\label{fig:particle:decay}
 		\feynmandiagram[horizontal' = b to c]{
 			a[particle=a]--[charged scalar]cc--[charged scalar]b[particle=b],
 			cc--[charged scalar]c[particle=c]
 		};
-	\end{center}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Reverse: $\Psi^\dagger_a(x) \Psi_c(x) \Psi_b(x)$}\label{fig:particle:decay:reverse}
+		\feynmandiagram[horizontal' = b to c]{
+			b[particle=b]--[charged scalar]cc--[charged scalar]a[particle=a],
+			c[particle=c]--[charged scalar]cc
+		};
+	\end{subfigure}
 \end{figure}
 
 Now what goes in the Hamiltonian must be Hermitian, so we need:
 \begin{align*}
-g \int \Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x) dx + g \int \Psi^\dagger_a(x) \Psi_c(x) \Psi_a(x)
+	g \int \Psi^\dagger_b(x) \Psi^\dagger_c(x) \Psi_a(x) dx + g \int \Psi^\dagger_a(x) \Psi_c(x) \Psi_b(x)
 \end{align*}
-which reverses the process of  Figure \ref{fig:particle:decay}: $b+c\rightarrow a$.
-We now have a simple version of quantum field theory:
+which reverses the process of  Figure \ref{fig:particle:decay}: $b+c\rightarrow a$--Figure \ref{fig:particle:decay:reverse}.
+
+We now have a the basic rules of a simple version of quantum field theory:
 \begin{itemize}
 	\item Creation and annihilation operators;
 	\item Fields made out of creation and annihilation operators;
 	\item Fields are functions of position;
+	\item The Fields can be thought of as creation and annihilation operators at a definite position;
 	\item Each type of particle has its own field;
-	\item Write down Hamiltonian with kinetic energies of particles and other concoctions. 
+	\item We write down Hamiltonian with kinetic energies of particles and other concoctions. 
 \end{itemize}
 
-Imagine that we made $\epsilon$ a little larger in (\ref{eq:update:state}):
+In the first round of QFT the concoctions largely came from experiment. A classic example it beta decay: a neutron decaying into a proton, an electron, and a neutrino--$g \int \Psi^\dagger_{\nu}(x) \Psi^\dagger_e(x) \Psi^\dagger_p(x) \Psi_n(x) dx$ (need to make Hermitian).
+
+Let's go one step further. Imagine that we made $\epsilon$ a little larger in (\ref{eq:update:state}):
 
 \begin{align*}
-\ket{\phi(t+\epsilon)} =& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)} - \frac{\epsilon^2}{2} H^2 \ket{\phi(t)}
+	\ket{\phi(t+\epsilon)} =& \ket{\phi(t)} -i \epsilon H \ket{\phi(t)} - \frac{\epsilon^2}{2} H^2 \ket{\phi(t)}
 \end{align*}
 
-What is the effect of $H^2$? E.g., Figure \ref{fig:particle:decay} becomes a scatter: $b+c \rightarrow a \rightarrow b + c$. Or Figure \ref{fig:scatter:annihilate} shows a more complex situation. You can have a forest of interactions that are mediated by a single term in the Hamiltonian.
+What is the effect of $H^2$? We can multiply it out, but the easy way is to use the pictures. E.g., Figure \ref{fig:particle:decay} becomes a scatter: $b+c \rightarrow a \rightarrow b + c$. Or Figure \ref{fig:scatter:annihilate} shows a more complex situation. You can have a forest of interactions that are mediated by a single term in the Hamiltonian.
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Exchange diagram}\label{fig:scatter:annihilate}
+		\caption{$\Psi^\dagger_c\Psi^\dagger_b\Psi_a\Psi^\dagger_a\Psi_b\Psi_c$}\label{fig:scatter:annihilate}
 		\feynmandiagram[vertical=o1 to i1]{
-			i1[particle=a]--[fermion]n1--[fermion]o1[particle=b],
-			i2[particle=b]--[fermion]n2--[fermion]o2[particle=a],
-			n1--[boson,edge label=c]n2
+			i1[particle=b]--[fermion]n1--[fermion]o1[particle=b],
+			i2[particle=c]--[fermion]n2--[fermion]o2[particle=c],
+			n1--[boson,edge label=a]n2
 		};
 	\end{center}
 \end{figure}
-
+\url{https://youtu.be/7a1hon7NJ1M?t=2917}
 Figure \ref{fig:scatter:annihilate} has a coupling constant $g^2$.
 
 
