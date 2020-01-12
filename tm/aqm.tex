@@ -1761,58 +1761,65 @@ Energy isn't just the sum of the particles: it includes these interactions.
 We have just seen the basic physics: the rest is technology and tricks.
 
 
+\url{https://youtu.be/7a1hon7NJ1M?t=3939}
+
 \subsection{The Dirac Equation}
 
-We will study the relativistic electron. We will start with an electron that moves in 1 direction along a line. Why did Dirac want to handle the relativistic case? Electrons in at atom move at a significant proportion of the speed of light.  
+We will study the relativistic electron. We will start with an electron that moves in 1 direction along a line. Why did Dirac want to handle the relativistic case? Electrons in at atom move at a significant proportion of the speed of light. 
 
 \begin{align*}
-E =& \frac{p^2}{2m} \text {, classical}\\
-P =& -i \frac{\partial}{\partial x} \text{, quantum}\\
-H = & i \frac{\partial}{\partial t}\\
-E^2 =& p^2 + m^2 \text{, relativistic($c^2=1$). This becomes:}\\
--\frac{\partial^2}{\partial t^2} \phi(x) =& -\frac{\partial^2}{\partial x^2}\phi(x) + m^2 \phi(x) \text{, Klein-Gordon equation. But Dirac wanted this:}\\
-i \frac{\partial \psi}{\partial t} =& H\psi\\
-=& \sqrt{- \frac{\partial^2}{\partial x^2} + m^2} \psi \text{. What could this mean?}  
+	E =& \frac{p^2}{2m} \text {, classical}\\
+	P =& -i \frac{\partial}{\partial x} \text{, quantum}\\
+	H = & i \frac{\partial}{\partial t}\\
+	E^2 =& p^2 + m^2 \text{, relativistic($c^2=1$). It becomes:}\\
+	-\frac{\partial^2}{\partial t^2} \phi(x) =& -\frac{\partial^2}{\partial x^2}\phi(x) + m^2 \phi(x) 
 \end{align*}
 
-Dirac decided to start again. Imagine a particle moving along the x axis with the speed of light.
+This was already known; it is the Klein-Gordon equation. But Dirac wanted this:
+\begin{align*}
+	i \frac{\partial \psi}{\partial t} =& H\psi\\
+	=& \big(\sqrt{- \frac{\partial^2}{\partial x^2} + m^2}\big) \psi  
+\end{align*}
+What could this possibly mean? What is the operator on the right hand side? Dirac decided to start again. Imagine a particle moving along the x axis with the speed of light (massless).
 
 \begin{align*}
-P =& E \text{, moving to right}\\
-i \frac{\partial \psi}{\partial t} =& -i \frac{\partial \psi}{\partial x}\\
-\implies&\\
-\frac{\partial \psi}{\partial t} + \frac{\partial \psi}{\partial x}=&0\text{. Any function of x-t will satisfy equation}
+	c P =& E \text{, moving to right. ($c=1$)}\\
+	i \frac{\partial \psi}{\partial t} =& -i \frac{\partial \psi}{\partial x}\\
+	\implies&\\
+	\frac{\partial \psi}{\partial t} + \frac{\partial \psi}{\partial x}=&0
 \end{align*}
+
+Any function of x-t will satisfy this  equation. It describes a wave, moving to the right.
 
 Three things are wrong with this equation:
 \begin{enumerate}
-	\item Allows particles with negative energy with negative momentum.
-	\item Only has particles that move to the right.
-	\item Electron has no mass: speed of light.
+	\item it allows particles with negative momentum, which have negative energy;
+	\item it only has particles that move to the right;
+	\item the electron has no mass, so it moves with the speed of light.
 \end{enumerate}
 
-Dirac solved second problem by imagining two species of electrons, one moving to the right, t'other to the left, labelled $\psi_1$ and $\psi_2$. Or a particle can be one or t-other, or a superposition.
+Dirac solved second problem by imagining two species of electrons, one moving to the right, t'other to the left, labelled $\psi_1$ and $\psi_2$. Or a particle can be one or t'other, or a superposition.
 
 \begin{align*}
-\frac{\partial \psi_1}{\partial t} + \frac{\partial \psi_1}{\partial x}=&0\\
-\frac{\partial \psi_2}{\partial t} - \frac{\partial \psi_2}{\partial x}=&0
+	\frac{\partial \psi_1}{\partial t} + \frac{\partial \psi_1}{\partial x}=&0 \text{, moving to right}\\
+	\frac{\partial \psi_2}{\partial t} - \frac{\partial \psi_2}{\partial x}=&0 \text{, moving to left}
 \end{align*}
 
-Imagine particle with two degrees of freedom, $x$ and $1/2$. Make second degree into matrix index. Introduce an observable, $\alpha$, to tell is whether particle is 1 or 2.
+Imagine particle with two degrees of freedom, $x$ and $1/2$. Make second degree into matrix index. Introduce an observable, $\alpha$, to tell us whether particle is 1 or 2 (a bit like a spin). We thinks of the $\psi$s as a column vector, and introduce a matrix whose eigenvectors are $\psi_1$ or $\psi_2$. Here is such a matrix (observable).
 
 \begin{align*}
-\underbrace{
+	\underbrace{
+		\begin{pmatrix}
+			1 & 0\\
+			0 & -1
+		\end{pmatrix}
+	}_\text{Dirac's $\alpha$}
 	\begin{pmatrix}
-		1 & 0\\
-		0 & -1
-	\end{pmatrix}
-}_\text{Dirac's $\alpha$}
-\begin{pmatrix}
-	\psi_1\\
-	\psi_2
-\end{pmatrix}\\
-H =& \alpha P\\
-i\frac{\partial \psi}{\partial t} =& -i \alpha \frac{\partial \psi}{\partial x} \text{, matrix equation!}
+		\psi_1\\
+		\psi_2
+	\end{pmatrix}\\
+	H =& \alpha P\\
+	i\frac{\partial \psi}{\partial t} =& -i \alpha \frac{\partial \psi}{\partial x} \text{, matrix equation!}
 \end{align*}
 
 Dirac added a term to give electron mass. Then:
