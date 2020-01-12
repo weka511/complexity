@@ -27,7 +27,7 @@
 \maketitle
 
 \begin{abstract}
-	These are my notes for the \emph{New Revolutions in Particle Physics 3} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind2010supersymmetry}.
+	These are my notes for the \emph{New Revolutions in Particle Physics 3--Supersymmetry and Grand Unification} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind2010supersymmetry}.
 \end{abstract}
 
 \tableofcontents
@@ -177,6 +177,7 @@ But there are more Feynman diagrams!
 	
 \section{Fermions and bosons}
 
+\subsection{Difference between Fermions and bosons}
 Supersymmetry has to do with Fermions and Bosons, and their symmetries. We will Fermions and Bosons again, but, before that, we'll look at rotations.
 
 Normally we are told that a rotation of $2\pi$ is equivalent to no rotation at all, but it is not true.
@@ -199,14 +200,60 @@ Normally we'd expect it to come back to itself, but we know that $2\pi$ is not t
 
 Can we detect this experimentally? It was long thought that we could not. If we take a family of electrons, all prepared identically, stick half into a magnetic field and rotate $2\pi$, we can't tell the two lots apart.
 
-We can, however, do a 2 slit experiment\cite{aharonov1967observability}--Figue \ref{fig:particles3-2-2slit}.
+We can, however, do a 2 slit experiment\cite{aharonov1967observability}--Figure \ref{fig:particles3-2-2slit}.
 
 \begin{figure}[H]
+	\caption{A 2 slit experiment to detect rotation by $2\pi$}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\begin{center}
+			\caption{There is a magnetic field behind each slit, which traps electron temporarily. While an electron is trapped we rotate one field or the other, which can be detected in the interference pattern.}\label{fig:particles3-2-2slit}
+			\includegraphics[width=\textwidth]{particles3-2-2slit}
+		\end{center}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
 	\begin{center}
-		\caption[A 2 slit experiment to detect rotation by $2\pi$]{A 2 slit experiment to detect rotation by $2\pi$. There is a magnetic field behind each slit, which traps electron temporarily. While an electron is trapped we rotate one field or the other, which can be detected in the interference pattern.}\label{fig:particles3-2-2slit}
-		\includegraphics[width=0.7\textwidth]{particles3-2-2slit}
+		\caption{We create a superposition of two states, electron going through slit 1 or slit 2. In either case electron is in one box or the other. Now we rotate 2nd box by $2\pi$. The wave function for an electron changes sign, but this has no physical consequence on it own. For the superposition, if we rotate one electron wave function, we can never find electron at centre. $\psi_1$ and $psi_2$ will interfere.}\label{fig:particles3-2-2slit-wave-function-2-2slit}
+		\includegraphics[width=\textwidth]{particles3-2-2slit-wave-function}
 	\end{center}
+\end{subfigure}
 \end{figure}
+
+The experiment has been performed for Fermions (which get the minus sign), and Bosons (which don't). The result is also deeply embedded in the theory.
+
+You cannot interfere an up spin with a down spin: you can only interfere things that are otherwise the same.
+
+\subsection{Feynman Diagrams}
+
+We'll be dealing with diagrams in the vacuum, with nothing more complicated than a single closed loop--Figures \ref{fig:particles3-2-loops} and \ref{fig:particles3-2-loops-boson}. This diagram controls, among other things, the amplitude that you start with nothing and get nothing. It is part of the vacuum structure. The diagram has a  value, which is a contribution to the vacuum energy. Just as Figure \ref{fig:particles3-2-loops-p} contributes to the energy of the particle, Figure \ref{fig:particles3-2-loops} and \ref{fig:particles3-2-loops-boson} contributes to the energy of the vacuum. Does it shift it up or down? Surprisingly the answer is different for Fermions and Bosons.
+
+
+\begin{figure}[H]
+	\caption{Closed Loops Feynman diagrams}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Fermion Closed Loop}\label{fig:particles3-2-loops}
+		\feynmandiagram{
+			b-- [fermion,half left]
+			c-- [fermion,half left] b
+		};
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Boson Closed Loop}\label{fig:particles3-2-loops-boson}
+		\feynmandiagram{
+			b-- [boson,half left]
+			c-- [boson,half left] b
+		};
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Loop for particle}\label{fig:particles3-2-loops-p}
+		\feynmandiagram[vertical=e4 to e1]{
+			e1[particle=$e^-$]--[fermion]e2--[fermion]e3
+			--[fermion]e4[particle=$e^-$],
+			e2--[photon,looseness=3.0,half left]e3
+		};
+	\end{subfigure}
+\end{figure}
+
+\url{https://youtu.be/-nBOCF0sPgU?t=1305}
 
 \section{Propagators and renormalization of mass}
 
