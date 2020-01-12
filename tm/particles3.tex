@@ -1,6 +1,7 @@
+% !TeX program = lualatex
 \documentclass[]{article}
 
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm,tikz-feynman}
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
 \usepackage[toc,page]{appendix}
@@ -15,6 +16,7 @@
 \widowpenalty10000
 \clubpenalty10000
 \setcounter{tocdepth}{2}
+\tikzfeynmanset{compat=1.0.0}
 
 %opening
 \title{Theoretical Minimum\\Particle Physics 3\\Supersymmetry and Grand Unification}
@@ -175,7 +177,36 @@ But there are more Feynman diagrams!
 	
 \section{Fermions and bosons}
 
-TBP
+Supersymmetry has to do with Fermions and Bosons, and their symmetries. We will Fermions and Bosons again, but, before that, we'll look at rotations.
+
+Normally we are told that a rotation of $2\pi$ is equivalent to no rotation at all, but it is not true.
+
+\begin{thm}[Rotation by $4\pi$ is equivalent to no rotation at all]
+	Take a box, put a basketball in, and connect it to the walls with strings. A rotation by $2\pi$ tangles the strings; a rotation by $4\pi$ is equivalent to no rotation.
+\end{thm}
+
+Imagine that we have a particles, and we are interested in the spin $s$. What happens to the state when you rotate spin by $2\pi$.
+\begin{itemize}
+	\item apply string magnetic field and rotate;
+	\item use field to precess particle.
+\end{itemize}
+
+Normally we'd expect it to come back to itself, but we know that $2\pi$ is not the identity. Perhaps it multiplies by a number. If we multiply by a phase, $\xi$, we won't be able to detect it. Multiplication by $4\pi$ squares phase, since it does nothing, so $\xi^2=1$, so $\xi=\pm1$.
+\begin{align*}
+	\ket{s} \rightarrow& +\ket{s} \text{, or}\\
+	\ket{s} \rightarrow& -\ket{s}
+\end{align*}
+
+Can we detect this experimentally? It was long thought that we could not. If we take a family of electrons, all prepared identically, stick half into a magnetic field and rotate $2\pi$, we can't tell the two lots apart.
+
+We can, however, do a 2 slit experiment\cite{aharonov1967observability}--Figue \ref{fig:particles3-2-2slit}.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[A 2 slit experiment to detect rotation by $2\pi$]{A 2 slit experiment to detect rotation by $2\pi$. There is a magnetic field behind each slit, which traps electron temporarily. While an electron is trapped we rotate one field or the other, which can be detected in the interference pattern.}\label{fig:particles3-2-2slit}
+		\includegraphics[width=0.7\textwidth]{particles3-2-2slit}
+	\end{center}
+\end{figure}
 
 \section{Propagators and renormalization of mass}
 
