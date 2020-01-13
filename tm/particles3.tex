@@ -253,7 +253,95 @@ We'll be dealing with diagrams in the vacuum, with nothing more complicated than
 	\end{subfigure}
 \end{figure}
 
-\url{https://youtu.be/-nBOCF0sPgU?t=1305}
+\begin{thm}[Contribution of loops to vacuum energy]
+	The contribution to the vacuum energy of a loop of Bosons is positive;
+	The contribution to the vacuum energy of a loop of Fermions is negative.
+\end{thm}
+
+\begin{proof}
+	You can think of a loop as the production and annihilation of a pair, or as a single particle looping in space-time. The sign of a particle in a loop can be either positive or negative. What about two loops--Figures \ref{fig:two:loops:fermion} and \ref{fig:two:loops:boson}? This is the product of two separate loops. So if there is a plus sign for one loop, there will be a plus sign for the product: if there is a minus sign for one loop, there will still be a plus sign for the product. So there will  be a plus sign for the product either way.
+	
+	\begin{figure}[H]
+		\caption{Two loops}\label{fig:two:loops}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\caption{Two Fermion loops}\label{fig:two:loops:fermion}
+			\feynmandiagram{
+				b-- [fermion,half left]
+				c-- [fermion,half left] b
+			};
+			\feynmandiagram{
+				b-- [fermion,half left]
+				c-- [fermion,half left] b
+			};
+		\end{subfigure}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\caption{Two Boson loops}\label{fig:two:loops:boson}
+			\feynmandiagram{
+				b-- [boson,half left]
+				c-- [boson,half left] b
+			};
+			\feynmandiagram{
+				b-- [boson,half left]
+				c-- [boson,half left] b
+			};
+		\end{subfigure}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Two Fermion loops, split at t=0}\label{fig:two:loops:split}
+			\begin{equation*}t=0
+				\feynmandiagram[inline=(c.base),horizontal'=a to c]{
+					a -- [quarter left]
+					b-- [quarter left]
+					c-- [quarter left]
+					d-- [quarter left] a,
+				};\,
+				\feynmandiagram[inline=(c.base),horizontal'=a to c]{
+					a --[quarter left]
+					b-- [quarter left]
+					c-- [quarter left]
+					d-- [quarter left] a,
+				};
+			\end{equation*}		
+		\end{subfigure}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Two Fermion loops, interchange}\label{fig:two:loops:interchange}
+			\begin{equation*}t=0
+				\feynmandiagram[inline=(c.base),horizontal'=a to c]{
+					a -- [quarter left]
+					b-- [fermion,quarter left]
+					c-- [quarter left]
+					d-- [quarter left] a,
+				};
+				\feynmandiagram[inline=(c.base),horizontal'=a to c]{
+					a --[quarter left]
+					b-- [quarter left]
+					c-- [quarter left]
+					d-- [anti fermion,quarter left] a,
+				};
+			\end{equation*}		
+	\end{subfigure}
+	\end{figure}
+	Let's assume our particles are Fermions: lets break the loop and look in the middle at t=0--Figure \ref{fig:two:loops:split}. 
+	\begin{itemize}
+		\item What happens for amplitude of a system if we exchange two Bosons? Plus sign. 
+		\item What happens for amplitude of a system if we exchange two Fermions? Minus sign. 
+	\end{itemize}
+	Now interchange particles, as in Figure \ref{fig:two:loops:interchange}.
+	\begin{itemize}
+		\item If we are dealing with Fermions we get a minus sign. We have gone from two loops (positive) to one loop, negative.
+		\item If we are dealing with Bosons we get a plus sign.
+	\end{itemize} 
+\end{proof}
+
+The consequences are profound:
+\begin{itemize}
+	\item the contribution to the vacuum of a Boson loop is positive;
+	\item the contribution to the vacuum of a Fermion loop is negative.
+\end{itemize}
+We have this strange puzzle about the vacuum energy; it is extremely small, and we call it Dark Energy. The naive calculation in quantum field theory would give an answer 123 orders of magnitude larger.  We saw that the answer can be positive or negative: it depends on all sorts of things, such as mass and charge. We can at least get positive and negative signs. The fact that they cancel to 123 order of magnitude is bizarre, but we can cancel. All things being equal, a boson and a fermion will give exactly the same contribution, except for a different sign.
+
+That doesn't mean that the vacuum energy is zero, but it suggest that maybe there is a lot of cancellation. To get an exact cancellation, we'd need for every boson with the same mass and same properties, then we could conceive that the particles would cancel out the vacuum energy.
+
+\url{https://youtu.be/-nBOCF0sPgU?t=1552}
 
 \section{Propagators and renormalization of mass}
 
