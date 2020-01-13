@@ -1863,8 +1863,8 @@ We have the 1-dimensional version of Dirac's equation.
 
 So
 \begin{align*}
-i\frac{\partial \psi_1}{\partial t} + i\frac{\partial \psi_1}{\partial x}=&m \psi_2\\
-i\frac{\partial \psi_2}{\partial t} - i\frac{\partial \psi_2}{\partial x}=&m \psi_1
+	i\frac{\partial \psi_1}{\partial t} + i\frac{\partial \psi_1}{\partial x}=&m \psi_2\\
+	i\frac{\partial \psi_2}{\partial t} - i\frac{\partial \psi_2}{\partial x}=&m \psi_1
 \end{align*}
 
 So the mass term couples the two equations, and makes particle move slower then light. Dirac knew that mass is coupled to ability to move left or right.
@@ -1873,19 +1873,40 @@ So the mass term couples the two equations, and makes particle move slower then 
 
 \subsection{Second Quantization of Fermions}
 
-If you have two bosons, can put them into same state, and creation and annihilation operators commute. Now, imagine two particles whose wave function changes sign when we interchange. Let $\ket{x,y}$ represent particles at x and y. $\Psi^\dagger(x)\Psi^\dagger(y)\ket{0}$ will create. If operators commute $\ket{x,y}=\ket{y,x}$. For Fermions, $\ket{x,y}=-\ket{y,x}$, so we need  $\Psi^\dagger(x)\Psi^\dagger(y)= -\Psi^\dagger(y)\Psi^\dagger(x)$
- 
+If you have two bosons, can put them into same state, and creation and annihilation operators commute. There is nothing strange about commuting, but anticommuting is odd. Suppose we have two particles, and we want to say that when we interchange them the wave function or state vector changes sign.  whose wave function changes sign when we interchange. Let $\ket{x,y}$ represent particles at x and y (two 3 dimensional positions). $\Psi^\dagger(x)\Psi^\dagger(y)\ket{0}$ will create.
+
+For bosons, operators commute and:
 \begin{align*}
-	\Psi^\dagger(x)\Psi^\dagger(y)+\Psi^\dagger(y)\Psi^\dagger(x)=&0 \text{ for Fermions. This is usually written:}\\
-	\{\Psi^\dagger(x)\Psi^\dagger(y)\}=&0 \text{, where}\\
+	\ket{x,y}=&\ket{y,x} \text{, because}\\
+	\Psi^\dagger(x)\Psi^\dagger(y)=&\Psi^\dagger(y)\Psi^\dagger(x) \text{, because}\\
+	[\Psi^\dagger(x),\Psi^\dagger(y)]=&0
+\end{align*}
+
+For Fermions:
+\begin{align*}
+	\ket{x,y}=&-\ket{y,x} \text{, so we need}\\
+	\Psi^\dagger(x)\Psi^\dagger(y)=& -\Psi^\dagger(y)\Psi^\dagger(x) \text{, or}\\
+	\Psi^\dagger(x)\Psi^\dagger(y)+\Psi^\dagger(y)\Psi^\dagger(x)=&0 \text{. This is usually written:}\\
+	\{\Psi^\dagger(x), \Psi^\dagger(y)\}=&0 \text{, where}\\
 	\{A,B\}\triangleq& AB + BA \text{, the anticommutator.}
 \end{align*}
 
-NB  $\Psi^\dagger(x)\Psi^\dagger(x)=0$,  so we can't have two identical particles at same position.
+In general we can go from Bosons to Fermions by replacing the commutator with the anticommutator.
 
-We can't confuse Boson creation and annihilation operators, since $[a,a^\dagger]=1$ (\ref{eq:a:comm_i}), and $[a^\dagger,a]=-1$. Spectrum of energies from $0$ to $\infty$ can't be turned upside down. For Fermions $\{a\dagger,a\}= \{a,a\dagger\}=1$: from the algebra there is no difference between creation and annihilation operators.
+NB  $\Psi^\dagger(x)\Psi^\dagger(x)=\frac{1}{2}\{\Psi^\dagger(x)\Psi^\dagger(x)\}=0$,  so we can't have two identical particles at same position.
 
-Consider occupation numbers of Fermion with only one state: creation operator takes $0$ to $1$, then annihilates, leaving 0. Complete symmetry between empty and filled, creation and annihilation (mathematically!). $a^2=(a^\dagger)^2=0$.
+\begin{itemize}
+	\item For Bosons there is a clear distinction between creation and annihilation operators, since $[a,a^\dagger]=1$ (\ref{eq:a:comm_i}), and $[a^\dagger,a]=-1$. We can't confuse them because the spectrum of energies from $0$ to $\infty$ can't be turned upside down. Creation operators never give 0!.
+	\item For Fermions $\{a^\dagger,a\}= \{a,a^\dagger\}=+1$: from the algebra there is no difference between creation and annihilation operators. They do different things, so they are different, but we can't see this from the algebra alone.
+\end{itemize}
+
+Consider occupation numbers of Fermion with only one state: creation operator takes $0$ to $1$; if we create again the operator  annihilates, leaving $0$. Complete symmetry between empty and filled, creation and annihilation (mathematically!--it doesn't mean they are the same).
+\begin{align*}
+	a^2=&0\\
+	(a^\dagger)^2=&0
+\end{align*}
+
+\url{https://youtu.be/DQUJpT_iz8U?t=949}
 
 \subsection{The Dirac Equation in 3 dimensions}
 
