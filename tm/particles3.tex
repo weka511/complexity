@@ -341,7 +341,72 @@ We have this strange puzzle about the vacuum energy; it is extremely small, and 
 
 That doesn't mean that the vacuum energy is zero, but it suggest that maybe there is a lot of cancellation. To get an exact cancellation, we'd need for every boson with the same mass and same properties, then we could conceive that the particles would cancel out the vacuum energy.
 
-\url{https://youtu.be/-nBOCF0sPgU?t=1552}
+We know that there isn't an exact Boson for each Fermion. For example, the electron: there isn't a Boson equivalent to the electron: if there were, the partners could be produced--Figure \ref{fig:partners}-- with exactly the same probability as an electron-positron pair--Figure \ref{fig:re:emit}. We know this isn't the case: Nature does not have a Boson$\leftrightarrow$Fermion symmetry.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Why there isn't a Boson equivalent to the electron}
+		\begin{subfigure}{0.45\textwidth}
+			\caption{Producing the partners}\label{fig:partners}
+			\feynmandiagram[vertical'=b to a]{
+				i1 [particle=\(e^{-}\)]
+				-- [fermion] a
+				-- [fermion] f1 [particle=\(e^{-}\)],
+				a -- [photon,edge label=\(\gamma\)] b,
+				i2 [particle=\(e^{+}\)]
+				-- [boson] b
+				-- [boson] f2 [particle=\(e^{+}\)],
+			};
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\caption{Reemitting the Fermions}\label{fig:re:emit}
+			\feynmandiagram[vertical'=b to a]{
+				i1 [particle=\(e^{-}\)]
+				-- [fermion] a
+				-- [fermion] f1 [particle=\(e^{-}\)],
+				a -- [photon,edge label=\(\gamma\)] b,
+				i2 [particle=\(e^{+}\)]
+				-- [fermion] b
+				-- [anti fermion] f2 [particle=\(e^{+}\)],
+			};
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+ Keep these two thoughts in mind.
+\begin{itemize}
+	\item  However, if we had a theory which was sufficiently symmetrical, we would at least have a chance of cancelling the vacuum energy.
+	\item Can this also help with the self-energy of Bosons: we have quadratic infinities. Even if the initial mass is zero, we have diagrams that give us a huge mass.
+\end{itemize}
+
+Fermions don't have same problem with infinities. Now consider Figure \ref{fig:2loops}. In Figure \ref{fig:2loops:bosons} we have a Boson going round the loop, and in Figure \ref{fig:2loops:fermions} a Fermion. Fermion and Bosons always have opposites signs, so we can imagine, if everything were absolutely symmetrical, we might imagine things cancelling, so that self energy is not infinite.
+
+\begin{figure}[H]
+	\caption{Two loops for a boson}\label{fig:2loops}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Boson going around loop}\label{fig:2loops:bosons}
+		\feynmandiagram[vertical=b to d]{
+			i--[boson]b,
+			a --[boson,quarter left]
+			b-- [boson,quarter left]
+			c-- [boson,quarter left]
+			d-- [boson,quarter left] a,
+			ii--[photon]d	
+		};
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\caption{Fermion going round loop}\label{fig:2loops:fermions}
+		\feynmandiagram[vertical=b to d]{
+			i--[boson]b,
+			a --[quarter left]
+			b-- [quarter left]
+			c-- [quarter left]
+			d-- [quarter left] a,
+			ii--[photon]d	
+		};
+	\end{subfigure}
+\end{figure}
+\url{https://youtu.be/-nBOCF0sPgU?t=2110}
 
 \section{Propagators and renormalization of mass}
 
