@@ -2151,7 +2151,7 @@ Consider the interaction of Figure \ref{fig:electron_scattering_dirac}.
 
 But this also describes the interactions of  Figures \ref{fig:electron_scattering_dirac}, \ref{fig:positron annihilating_dirac}, and \ref{fig:all3-created}.
 \begin{figure}[H]
-	\caption{Possible outcomes of $\Psi^\dagger(x)\Psi(x)A$: Feynman diagrams. 2nd and 3rd not quite right!}
+	\caption{Possible outcomes of $\Psi^\dagger(x)\Psi(x)A$: Feynman diagrams.}
 	\begin{subfigure}{0.3\textwidth}
 		\caption{Electron scattering}\label{fig:electron_scattering_dirac}
 		\feynmandiagram[vertical'=a to i1]{
@@ -2162,16 +2162,20 @@ But this also describes the interactions of  Figures \ref{fig:electron_scatterin
 	\begin{subfigure}{0.3\textwidth}
 		\caption{Positron annihilation}\label{fig:positron annihilating_dirac}
 		\feynmandiagram[vertical'=i2 to a]{
-			i1[particle=$e^-$]--[fermion]a--[boson]o1,
-			i2[particle=$e^+$]--[anti fermion]a
+			a -- [boson]b,
+			c[particle=$e^-$]--[fermion]b,
+			d[particle=$e^+$]--[anti fermion]b
 		};
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
 		\caption{Electron, photon, positron created}\label{fig:all3-created}
 		\feynmandiagram[vertical=o2 to i1]{
-			i1--[fermion]o1[particle=$e^-$],
-			i1--[boson]o2,
-			i1--[anti fermion]o3[particle=$e^+$]
+			a--[opacity=0.0]b,
+			a--[fermion]c[particle=$e^-$],
+			a--[anti fermion]d[particle=$e^+$],
+			a--[boson]e,
+			a--[opacity=0.0]f,
+			a--[opacity=0.0]g
 		};
 	\end{subfigure}
 \end{figure}
