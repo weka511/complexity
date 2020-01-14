@@ -2091,20 +2091,38 @@ Dirac equation can have negative energy, even in 1 D case. We don't need 3D even
 	H=P \text{, right moving electron, What if $P<0$?}
 \end{align*} 
 
-Ground state has lowest energy (not fewest particles). With negative energy can lower indefinitely! What does -ve energy mean? They are very dangerous, because ground state is lowest energy: if we have negative energies could lower energy past vacuum!
+Ground state has lowest energy (not fewest particles). With negative energy can lower indefinitely! What does -ve energy mean? They are very dangerous, because ground state is lowest energy: if we have negative energies could lower energy past vacuum! Or we could lower energy indefinitely. 
 
-Dirac \emph{defined} vacuum to have lowest energy. Dirac filled with negative energies (Fermions!) --only one in each state. Vacuum must have every negative state occupied. Can add positive energy electron, or move a negative energy electron to positive--Figure \ref{fig:dirac:sea}.
+Dirac \emph{defined} vacuum to have lowest energy. Dirac filled with negative energies (Fermions!) --only one in each state. Since they are Fermions, if state filled we can't keep going. Vacuum must have every negative state occupied; then thee is no room to lower energy further. Can add positive energy electron, or move a negative energy electron to positive--Figure \ref{fig:dirac:sea}. (This was an intuitive way to describe some mathematics).
 
+In Figure \ref{fig:ds} we have filled all negative energy levels, whch stabilizes vacuum. We can put in a positive energy electron, Figure \ref{fig:aqm-10-dirac-sea}, or take out a negative energy electron and leave a hole, Figure \ref{fig:dirac:sea}
 \begin{figure}[H]
 	\begin{center}
-		\caption[Dirac Sea]{Dirac Sea. Pluck out negative energy electron and get +ve charge and +ve energy hole (positron)}\label{fig:dirac:sea}
-		\includegraphics[width=0.4\textwidth]{DiracSea}
+		\caption{The Dirac Sea}\label{fig:ds}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\begin{center}
+				\caption{Positive energy electron added}\label{fig:aqm-10-dirac-sea}
+				\includegraphics[width=0.5\textwidth]{aqm-10-dirac-sea}
+			\end{center}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\begin{center}
+				\caption{Pluck out negative energy electron and get +ve charge and +ve energy hole (positron)}\label{fig:dirac:sea}
+				\includegraphics[width=0.5\textwidth]{DiracSea}
+			\end{center}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\begin{center}
+				\caption{Photon displaces negative energy electron and produces +ve charge and +ve energy hole (positron)}\label{fig:dirac:sea:photon}
+				\includegraphics[width=\textwidth]{aqm-10-dirac-sea-photon}
+			\end{center}
+	\end{subfigure}
 	\end{center}
 \end{figure}
 
-Imagine photon coming along and hitting -ve energy electron in vacuum: we get an electron and a hole--Figure \ref{photon:dirac}.
+Imagine photon coming along and hitting -ve energy electron in vacuum: we get an electron and a hole--Figures \ref{fig:dirac:sea:photon} and \ref{photon:dirac}.
 
-\begin{figure}
+\begin{figure}[H]
 	\begin{center}
 		\caption[Photon$\rightarrow$ electrons + hole]{Photon$\rightarrow$ electons + hole. By convention positron points down. Can slice in time: upwards electron, down positrons.}\label{photon:dirac}
 		\feynmandiagram[vertical=n1 to i1]{
@@ -2116,12 +2134,14 @@ Imagine photon coming along and hitting -ve energy electron in vacuum: we get an
 
 The wave function needs fermion operators, which anticommute.
 \begin{align*}
-\Psi =& \int_{-\infty}^{\infty} dp a^-(p) e^{-ipx}\\
-=& \underbrace{\int_{-\infty}^0 dp a^-(p) e^{-ipx}}_\text{negative energies}+ \underbrace{\int_0^{\infty} dp a^-(p) e^{-ipx}}_\text{positive energies}\\
-=&  \underbrace{\int_0^{\infty} dp b^+(p) e^{ipx}}_\text{Creation operator for positron}+ \int_0^{\infty} dp a^-(p) e^{-ipx}
+	\Psi =& \int_{-\infty}^{\infty} dp a^-(p) e^{-ipx}\\
+	=& \underbrace{\int_{-\infty}^0 dp a^-(p) e^{-ipx}}_\text{negative energies}+ \underbrace{\int_0^{\infty} dp a^-(p) e^{-ipx}}_\text{positive energies}
 \end{align*}
 
-Since Fermion creation and annihilation operators the same.
+But the mathematics doesn't distinguish between Fermion creation and annihilation operators. Introducing $b^+(p)$, the creation operator for positirons:
+\begin{align*}
+	\Psi =&  \int_0^{\infty} dp  b^+(p) e^{ipx}+ \int_0^{\infty} dp a^-(p) e^{-ipx}
+\end{align*}
 
 Consider the interaction of Figure \ref{fig:electron_scattering_dirac}.
 \begin{align*}
@@ -2131,17 +2151,17 @@ Consider the interaction of Figure \ref{fig:electron_scattering_dirac}.
 
 But this also describes the interactions of  Figures \ref{fig:electron_scattering_dirac}, \ref{fig:positron annihilating_dirac}, and \ref{fig:all3-created}.
 \begin{figure}[H]
-	\caption{Possible outcomes of $\Psi^\dagger(x)\Psi(x)A$: Feynman diagrams}
+	\caption{Possible outcomes of $\Psi^\dagger(x)\Psi(x)A$: Feynman diagrams. 2nd and 3rd not quite right!}
 	\begin{subfigure}{0.3\textwidth}
 		\caption{Electron scattering}\label{fig:electron_scattering_dirac}
-		\feynmandiagram[vertical=o2 to i1]{
+		\feynmandiagram[vertical'=a to i1]{
 			i1[particle=$e^-$]--[fermion]a--[fermion]o1[particle=$e^-$],
 			a--[photon]o2
 		};
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
 		\caption{Positron annihilation}\label{fig:positron annihilating_dirac}
-		\feynmandiagram[vertical=a to i1]{
+		\feynmandiagram[vertical'=i2 to a]{
 			i1[particle=$e^-$]--[fermion]a--[boson]o1,
 			i2[particle=$e^+$]--[anti fermion]a
 		};
@@ -2155,6 +2175,10 @@ But this also describes the interactions of  Figures \ref{fig:electron_scatterin
 		};
 	\end{subfigure}
 \end{figure}
+
+This was pretty much the start of Feynman diagrams (back in Dirac's day)! But Feynman figured out how to evaluate them.
+
+How do modern physicists think of the Dirac Sea? They just forget the Dirac sea and replace creation operators for negative energy with annihilators for positive.
 
 Same pattern in solid state physics. If you have crystal with lots of electrons, put all electrons into lowest available states--ground state. We have the Fermi sea. Can take an energy out of sea and kick into higher state, leaving a hole which behaves like a particle. But Dirac did this first!
 
