@@ -1,7 +1,7 @@
 % !TeX program = lualatex
 \documentclass[]{article}
 
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,tikz-feynman}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,tikz-feynman,mathtools}
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
@@ -474,7 +474,7 @@ That is the classical physics. What about the quantum physics? For the quantum p
 Figure \ref{fig:aqm-3-central-potential} depicts the potential for the Coulomb force. The energy levels of (\ref{eq:schroedinger:central}) are characterized by the number of nodes--Definition \ref{defn:node} and Figures \ref{fig:aqm-3-central-0node}, \ref{fig:aqm-3-central-1node}, and \ref{fig:aqm-3-central-2nodes} (The more nodes, the faster the wiggle, hence higher momentum).
 
 \begin{figure}[H]
-	\caption{Solving (\ref{eq:schroedinger:central})}
+	\caption{Solving Central Potential Schro\"dinger Equation (\ref{eq:schroedinger:central})}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Potential}\label{fig:aqm-3-central-potential}
 		\includegraphics[width=\textwidth]{aqm-3-central-potential}
@@ -1909,6 +1909,8 @@ Consider occupation numbers of Fermion with only one state: creation operator ta
 
 \subsection{The Dirac Equation in 3 dimensions}
 
+\subsubsection{Review of 1D Dirac Electron}
+
 Returning to the 1D Dirac equation for zero mass, (\ref{eq:dirac1:R}):
 \begin{align*}
 	i \frac{\partial \psi}{\partial t}=& -i \frac{\partial \psi}{\partial x} \\
@@ -1936,24 +1938,84 @@ That didn't get us a mass, but it got stuff moving in both directions. We then i
 1&0
 \end{pmatrix}$ and in (\ref{eq:dirac:1D:m}) wrote $H = \alpha P + \beta m$. Note $\alpha^2=\beta^2=1$, and $\alpha\beta + \beta\alpha=1$, whence $H^2=P^2+m^2$. We combined left moving and right moving, then added coupling to give mass. It is in this sense that a mass term switches you from left moving to right moving.
 
- How do we do this in 3D? Let's  drop $m$ temporarily, make $\alpha$ a vector, so we can dot product with P.
+\subsubsection{The Dirac Equation in 3 dimensions}
+
+ How do we do this in 3D? Let's  drop $m$ temporarily, make $\alpha$ a vector, $\vec{\alpha}$, so we can dot product with $\vec{P}$.
 \begin{align*}
-	H =& \alpha \boldsymbol{\cdot} P\\
-	=& \alpha_x P_x + \alpha_y P_y + \alpha_z P_z \text{, we want}\\
-	H^2 =& P_x^2 + P_y^2 + P_z^2 \text{, whence}\\
-	\alpha_x^2 =&1\\
-	\alpha_y^2 = &1\\
-	\alpha_z^2 =& 1 {, and}\\
-	\alpha_y\alpha_x + \alpha_x\alpha_y=&1\\
-	\alpha_z\alpha_x + \alpha_x\alpha_z=&1\\
-	\alpha_x\alpha_y + \alpha_y\alpha_z=&1
+	H =& \vec{\alpha} \boldsymbol{\cdot} \vec{P}\\
+	=& \alpha_x P_x + \alpha_y P_y + \alpha_z P_z \text{. We want}\\
+	H^2 =& P_x^2 + P_y^2 + P_z^2
 \end{align*}
-\url{https://youtu.be/DQUJpT_iz8U?t=1545}
+So we need
 \begin{align*}
-	\alpha =& \begin{pmatrix}
-		\sigma&0 \\
-		0&-\sigma
-	\end{pmatrix} \text{, spin}\\ 
+	\alpha_x^2 =&1\\
+	\alpha_y^2 =&1\\
+	\alpha_z^2 =&1
+\end{align*}
+and
+\begin{align*}
+	\alpha_y\alpha_x + \alpha_x\alpha_y=&0\\
+	\alpha_z\alpha_x + \alpha_x\alpha_z=&0\\
+	\alpha_x\alpha_y + \alpha_y\alpha_z=&0
+\end{align*}
+which can be written:
+\begin{align*}
+	\{\alpha_y,\alpha_x\} =&0\\
+	\{\alpha_z,\alpha_x\} =&0\\
+	\{\alpha_x,\alpha_y\} =&0
+\end{align*}
+
+Dirac needed three matrices that satisfy these equations; the three Pauli matrices do exactly that:
+\begin{align*}
+	\vec{\alpha}=&\vec{\sigma} \text{, so}\\
+	H =& \vec{\sigma} \cdot \vec{P}
+\end{align*}
+
+Spin is always $\pm 1$, so it looks as if we have two cases, where spin is either in the same direction as momentum, or the opposite; again we have a massless particle with positive and negative energy, and whose spin is locked so its axis is along the momentum vector.
+
+Dirac's logic, which was not necessarily unimpeachable, was that he wanted to write an equation for H in terms or P without having an insane square root. He wrote $	H = \vec{\alpha} \cdot \vec{P}$ because he wanted it to be linear in the momentum. He wondered what $\alpha$ was, because it couldn't just be a bunch of numbers. By requiring $H^2=P^2$ he found the Pauli matrices. He thought that he had discovered the origin of spin. He was not correct it that it is not the case that every particles has to have spin, but he was right for Fermions.
+
+We still have $H^2=P^2$, and we don't have a mass. So we try $H= H = \vec{\alpha} \cdot \vec{P}+\beta m$ for some $\beta$ such that $\beta^2=1$.
+
+\begin{align*}
+	H^2 = P^2 +& m^2 \\
+	+& P_x m (\sigma_x \beta + \beta \sigma_x) \\
+	+& P_y m (\sigma_y \beta + \beta \sigma_y) \\
+	+& P_z m (\sigma_z \beta + \beta \sigma_z)
+\end{align*}
+
+So $\beta$ anticommutes with all the Pauli matrices: unfortunately there is not matrix that anticommutes with all the Pauli matrices.
+
+\begin{thm}[There is no $2 \times 2$ matrix that anticommutes with the Pauli matrices]
+	We can find 3 $2 \times 2$ matrices that anticommute, but not 4.
+\end{thm}
+\begin{proof}
+	TBP
+\end{proof}
+We have two choices: we can give up, or introduce another 2 valued degree of freedom, so we would use $4 \times 4$. It turns out that this will work: $4 \times 4$ \emph{has nothing to do with space being 4 dimensional; it is just a mathematical fact about anti-commuting matrices.} 
+
+There are many different and equivalent representation of the Dirac matrices, which must satisfy:
+\begin{align*}
+	\alpha_x^2=&1  \\
+	\alpha_y^2=&1  \\
+	\alpha_z^2=&1  \\
+	\beta^2=&1
+\end{align*}
+and
+\begin{align*}
+	[\alpha_y,\alpha_z] =&0 \\
+	[\alpha_z,\alpha_x] =&0 \\
+	[\alpha_x,\alpha_y ]=&0 \\
+	[\alpha_x,\beta]=&0 \\
+	[\alpha_y,\beta]=&0 \\
+	[\alpha_z,\beta]=&0 
+\end{align*}
+Here is one solution, the Pauli representation of the Dirac matrices. This is not the representation that Dirac used.
+\begin{align*}
+	\vec{\alpha} =& \begin{pmatrix}
+		\vec{\sigma}&0 \\
+		0&-\vec{\sigma}
+	\end{pmatrix} \\ 
 	\alpha_x =& \begin{pmatrix}
 		\sigma_x&0\\
 		0&-\sigma_x
@@ -1967,56 +2029,71 @@ That didn't get us a mass, but it got stuff moving in both directions. We then i
 	\sigma_y&0\\
 	0&-\sigma_y
 	\end{pmatrix}=&\begin{pmatrix}
-	0&i&0&0\\
-	-i&0&0&0\\
-	0&0&0&-i\\
-	0&0&i&0
+		0&i&0&0\\
+		-i&0&0&0\\
+		0&0&0&-i\\
+		0&0&i&0
 	\end{pmatrix}\\
 	\alpha_z =& \begin{pmatrix}
 	\sigma_z&0\\
 	0&-\sigma_z
 	\end{pmatrix}=&\begin{pmatrix}
-	1&0&0&0\\
-	0&-1&0&0\\
-	0&0&-1&0\\
-	0&0&0&1
+		1&0&0&0\\
+		0&-1&0&0\\
+		0&0&-1&0\\
+		0&0&0&1
 	\end{pmatrix}\\
 	\beta =& \begin{pmatrix}
 		0&1\\
 		1&0
 	\end{pmatrix} =& \begin{pmatrix}
-	0&0&1&0\\
-	0&0&1&0\\
-	1&0&0&0\\
-	0&1&0&0
+		0&0&1&0\\
+		0&0&0&1\\
+		1&0&0&0\\
+		0&1&0&0
 	\end{pmatrix}
 \end{align*}
 
-In Dirac theory, mass couples left handed chirality with right handed. Massless particles conserve chirality.
+When we tried $H= H = \vec{\alpha} \cdot \vec{P}+\beta m$, we found that for positive energy, $\sigma$ has to be aligned with momentum. We introduced another species which has its spin reversed: this is said to be the opposite \emph{chirality}.
 
+\begin{defn}[Chirality]
+	Chirality is the relationship between the directions of spin and momentum. If the directions are the same, the cirality is right handed, otherwise left handed.
+\end{defn}
+
+We coupled the left and right handed particles using the off diagonal entries in $\beta$, and the mass. So mass is a coupling between left and right. For massless particles, chirality is conserved.[Sort out helicity]
+
+What is $\alpha$? Each component of $\alpha$ is a matrix, with two eigenvalues $+1$ and two $-1$. What physical quantity does it represent? They don't commute, so we can't measure them simultaneously. What is physical meaning of a component? It is the velocity, so the expectation value in any state is the velocity of the particle.
+
+For any operator $L$:
 \begin{align*}
-\dot L =& i [H,L] \text{, for any operator L. We'll consider}\\
-\dot X =& i[\alpha P + \beta m,X]\\
-=& i \alpha [P,X]\\
-=&\alpha_x \text{, velocity of particle!}
+	\dot L =& i [H,L] \text{, for any operator L. We'll consider}\\
+	\dot X =& i[\alpha P + \beta m,X]\\
+	=& i \alpha [P,X]\\
+	=&\alpha_x
 \end{align*}
 
+So it is the velocity of particle! Velocity is not the same as momentum for electron.
+
 \begin{align*}
-[H,\alpha_x] \ne 0 \text{, so $\alpha_x$ is not conserved.}
+	\frac{d}{dt} \alpha_x=&[H,\alpha_x]\\
+	 \ne& 0 \text{ because H contains $\alpha_y$ and $\alpha_z$}
 \end{align*}
+so $\alpha_x$ is not conserved.
 
+It does a spiral movement called Zitterbewegung.
 
-Multiple states --chirality and spin.
+Dirac discovered a multiplicity of different states of the electron, one had to do with chirality, the other to do with actual spin.
 
-Dirac equation can have negative energy, even in 1 D case.
+\subsubsection{Dirac Electron  and negative energy}
+Dirac equation can have negative energy, even in 1 D case. We don't need 3D even for interesting effects.
 
 \begin{align*}
-H=P \text{, right moving electron, What if $P<0$?}
+	H=P \text{, right moving electron, What if $P<0$?}
 \end{align*} 
 
-Ground state has lowest energy (not fewest particles). With negative energy can lower indefinitely! What does -ve energy mean?
+Ground state has lowest energy (not fewest particles). With negative energy can lower indefinitely! What does -ve energy mean? They are very dangerous, because ground state is lowest energy: if we have negative energies could lower energy past vacuum!
 
-Dirac defined vacuum to have lowest energy. Dirac filled with negative energies (Fermions!) --only one in each state. Vacuum must have every negative state occupied. Can add positive energy electron, or move a negative energy electron to positive--Figure \ref{fig:dirac:sea}.
+Dirac \emph{defined} vacuum to have lowest energy. Dirac filled with negative energies (Fermions!) --only one in each state. Vacuum must have every negative state occupied. Can add positive energy electron, or move a negative energy electron to positive--Figure \ref{fig:dirac:sea}.
 
 \begin{figure}[H]
 	\begin{center}
@@ -2030,7 +2107,7 @@ Imagine photon coming along and hitting -ve energy electron in vacuum: we get an
 \begin{figure}
 	\begin{center}
 		\caption[Photon$\rightarrow$ electrons + hole]{Photon$\rightarrow$ electons + hole. By convention positron points down. Can slice in time: upwards electron, down positrons.}\label{photon:dirac}
-		\feynmandiagram[vertical=o2 to i1]{
+		\feynmandiagram[vertical=n1 to i1]{
 			i1--[photon,edge label=$\gamma$]n1--[anti fermion]o1[particle=$e^+$],
 			n1--[fermion]o2[particle=$e^-$]
 		};
@@ -2048,8 +2125,8 @@ Since Fermion creation and annihilation operators the same.
 
 Consider the interaction of Figure \ref{fig:electron_scattering_dirac}.
 \begin{align*}
-a^+a^-A& \text{, which comes from a term in the Hamiltonian:}\\
-\Psi^\dagger(x)\Psi(x)A&\text{, }
+	a^+a^-A& \text{, which comes from a term in the Hamiltonian:}\\
+	\Psi^\dagger(x)\Psi(x)A&\text{, }
 \end{align*}
 
 But this also describes the interactions of  Figures \ref{fig:electron_scattering_dirac}, \ref{fig:positron annihilating_dirac}, and \ref{fig:all3-created}.
