@@ -93,8 +93,6 @@ Rotational symmetry is one of the most important symmetries, as is translational
 	Moreover the symmetry $V$ should transform mutually exclusive states into mutually exclusive states, whence it should preserve orthogonality, hence $V$ should be unitary. 
 \end{proof}
 
-
-
 Symmetries can be discrete or continuous.
 
 \begin{itemize}
@@ -371,9 +369,9 @@ We will talk more about what angular momentum is about.
 If a particle moves in a central force field, angular momentum and, hence, the orbital plane are preserved. The state is $\psi(r,\theta,\phi)= \psi(r,\theta)$; if system were 2 dimensional, the angular momentum would be:
 
 \begin{align*}
-L =& -i \frac{\partial}{\partial \theta} \text{, and the eigenvalues and eigenvectors would satisfy}\\
--i \frac{\partial \psi(r,\theta)}{\partial \theta} =& l \psi(r,\theta) \text{, which has solution}\\
-\psi(r,\theta) =& e^{i l \theta} \chi(r) \text{, for some $\chi$}
+	L =& -i \frac{\partial}{\partial \theta} \text{, and the eigenvalues and eigenvectors would satisfy}\\
+	-i \frac{\partial \psi(r,\theta)}{\partial \theta} =& l \psi(r,\theta) \text{, which has solution}\\
+	\psi(r,\theta) =& e^{i l \theta} \chi(r) \text{, for some $\chi$}
 \end{align*}
 
 In 3 dimensions, $\psi(r,\theta,\phi)= Y(\theta,\phi) \chi(r)$, where $Y(\theta,\phi)$ encapsulates the angular dependence of the wave function.
@@ -525,8 +523,6 @@ Real atoms behave a bit differently.
 	\item Instead of  $\{1,4,9,16,...\}$ states at each energy level there are  $\{2,8,18,32,...\}$--we have ignored \emph{spin}.
 \end{itemize}
 
-
-
 Are there always raising an lowering operators? No: only when you are very lucky; physics has been lucky twice. The harmonic oscillator piece of luck is very pervasive, as many things in nature can be well approximated by a harmonic oscillator. For example, go to a higher momentum state of the central force problem, Figure \ref{fig:aqm-3-central-osc}, and the simplest solution is to treat them as a harmonic oscillator.
 
 \subsection{Harmonic oscillators}\label{sect:harmonic:oscillators}
@@ -559,7 +555,7 @@ Quantum mechanically:
 	=&\omega \frac{\big(P + i \omega x \big)}{\sqrt{2 \omega}}\frac{\big(P - i \omega x \big)}{\sqrt{2 \omega}}
 \end{align*}
 
-Classically both $p=0$ and $x=0$ in the ground state; since the Heisenberg uncertainty principle precludes  $p=0$ and $x=0$, the zero point energy is the minimum possible. We'll drop the ground state energy (zero point energy) for the time being, since it is just an additive constant.
+Classically both $p=0$ and $x=0$ in the ground state; since the Heisenberg uncertainty principle precludes  $p=0$ and $x=0$, the zero point energy is the minimum possible. We'll drop the ground state energy (zero point energy) for the time being, since it is just an additive constant\footnote{At the end of lecture \ref{section:fermions:dirac}, LS mentioned that the zero point energy is involved only in gravitational interactions; elsewhere only the energy \emph{difference} matters}.
 
 We'll introduce raising and lowering operators:
 
@@ -1869,7 +1865,7 @@ So
 
 So the mass term couples the two equations, and makes particle move slower then light. Dirac knew that mass is coupled to ability to move left or right.
 
-\section{Fermions and the Dirac equation}
+\section{Fermions and the Dirac equation}\label{section:fermions:dirac}
 
 \subsection{Second Quantization of Fermions}
 
@@ -2056,8 +2052,11 @@ Here is one solution, the Pauli representation of the Dirac matrices. This is no
 
 When we tried $H= H = \vec{\alpha} \cdot \vec{P}+\beta m$, we found that for positive energy, $\sigma$ has to be aligned with momentum. We introduced another species which has its spin reversed: this is said to be the opposite \emph{chirality}.
 
+\begin{defn}[Helicity]
+	 Physically, the helicity operator can be thought of as a projection operator of spin along the direction of motion $h=\frac{\vec{S}\cdot\vec{P}}{\lvert P \rvert}$.
+\end{defn}
 \begin{defn}[Chirality]
-	Chirality is the relationship between the directions of spin and momentum. If the directions are the same, the cirality is right handed, otherwise left handed.
+	Chirality is the relationship between the directions of spin and momentum. If the directions are the same, the cirality is right handed, otherwise left handed.\cite{meredith2018helicity}
 \end{defn}
 
 We coupled the left and right handed particles using the off diagonal entries in $\beta$, and the mass. So mass is a coupling between left and right. For massless particles, chirality is conserved.[Sort out helicity]
@@ -2186,7 +2185,7 @@ How do modern physicists think of the Dirac Sea? They just forget the Dirac sea 
 
 Same pattern in solid state physics. If you have crystal with lots of electrons, put all electrons into lowest available states--ground state. We have the Fermi sea. Can take an energy out of sea and kick into higher state, leaving a hole which behaves like a particle. But Dirac did this first!
 
-Question about Cosmological constant. Can think of it as energy in Dirac Sea, or zero point oscillation of field. Photons aren't thought of as part of Dirac sea, but they contribute $\frac{1}{2}\hslash\omega$ for every oscillating mode. For photns background energy is positive, for Fermions it is negative. You could think of them cancelling, but Fermions have mass, photons don't, so they don't cancel. You are always left with some huge amount of energy left over. 
+Question about Cosmological constant. Can think of it as energy in Dirac Sea, or zero point oscillation of field. Photons aren't thought of as part of Dirac sea, but they contribute $\frac{1}{2}\hslash\omega$ for every oscillating mode. For photons background energy is positive, for Fermions it is negative. You could think of them cancelling, but Fermions have mass, photons don't, so they don't cancel. You are always left with some huge amount of energy left over. 
 
 Keep in mind that the only time zero point energy comes into anything is when that energy is gravitating. For all other purposes we can ignore it because only differences matter.
 
