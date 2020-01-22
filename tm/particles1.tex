@@ -1300,10 +1300,31 @@ Often can ignore parts of Lagrangian: e.g. quarks don't have much to do with ele
 
 \section{Field Lagrangians and path integrals}
 
+The basic technique the the previous lecture alluded to is called the path integral method of quantum mechanics. It is the most direct route to the theory of particles interactions based on Feynman diagrams. The path integral is the quantum mechanical version of the Principle of Least Action. If we think of a classical Newtonian particle its motion from one point of space-time to another is determined by a Lagrangian $\mathcal{L}(\dot{X},X)$. We use the Lagrangian to construct the Action. 
 
-This is the quantum mechanical version of the Principle of Least Action: minimize $\int \mathcal{L}(\dot{X},X) dt$. In a field theory $\mathcal{L}=\mathcal{L}(\phi,phi_\mu)$. Must be a scalar.
+\begin{defn}[Action of Path]
+	For every trajectory, $P$ from the initial point to the final point , whether or not the trajectory is a solution to Newton's Laws of motion,  the Action is: 
+	\begin{align*}
+		\mathcal{A}=\int_P dx^4 \mathcal{L}
+	\end{align*}
+\end{defn}
 
-Action: $\mathcal{A}=\int dx^4 \mathcal{L}$. Integrate from initial to final.
+The classical form of the Principle of Least Action is that the true trajectory minimizes the action. We can use the calculus of variations to derive differential equations which satisfy Newton's Laws.
+
+The same idea works in classical field theory, where $\mathcal{L}=\mathcal{L}(\phi,\phi_\mu)$. The theory of relativity requires that the Lagrangian be a scalar.
+
+\begin{defn}[Action over Region]
+	For a region of spaces time, $R$,  the Action is: 
+	\begin{align*}
+		\mathcal{A}=\int_R dx^4 \mathcal{L}
+	\end{align*}
+\end{defn}
+
+The analogue of the starting point for a particle is the initial value of the field. If we prescribe the starting and final values of the field, we can ask whether there is a solution that starts with starting values, and ask whether there is a solution that minimizes the action. The principle of least action states that the correct value of the fields is the one that minimizes the action. The degrees of freedom are fields.
+
+We now look at the quantum mechanical version of the Principal of Least Action: \emph{we won't attempt to derive the classical version from the quantum mechanical version.}
+
+\url{https://youtu.be/q-QaaKCvDUs?list=PL768E1383EA79C603&t=445}
 
 Imagine that particle is injected at $(x,t)$: what is amplitude that particle will be found at $(x^\prime,t^\prime)$?
 
