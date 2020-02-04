@@ -27,7 +27,7 @@
 \maketitle
 
 \begin{abstract}
-	These are my notes for the \emph{New Revolutions in Particle Physics 3--Supersymmetry and Grand Unification} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind2010supersymmetry}.
+	These are my notes for the \emph{New Revolutions in Particle Physics 3--Supersymmetry and Grand Unification}\cite{susskind2010supersymmetry} lectures from Leonard Susskind's \emph{Theoretical Minimum} series\cite{susskind2007theoretical}. These notes follow on from \cite{susskind2010standard}. Feynman diagrams were prepared using \emph{TikZ-Feynman} \cite{ellis2016tikz}.
 \end{abstract}
 
 \tableofcontents
@@ -93,6 +93,8 @@ E=& \underbrace{\frac{P_1^2}{M} + \frac{P_2^2}{M} + \frac{e^2}{R_{12}}}_\text{pr
 
 We don't have to think about electrons again. All renormalization is based on this idea: getting rid of fast degrees of freedom, and replacing them with a renormalized Hamiltonian. 
 
+What do we get rid of in Quantum Field Theory? Thins associated with very small distances, or things associated with high frequencies, or very short wave lengths (high energies). But first let's take a break and work on dimensional analysis.
+
 \subsection{Dimensional Analysis}
 
 In physics we have three scales, distance, time, and mass, and we can get rid of two of them by setting:
@@ -100,38 +102,45 @@ In physics we have three scales, distance, time, and mass, and we can get rid of
 	c=&1\\
 	\hslash=& 1
 \end{align*} 
-but we still need one dimension, which we will take to be a length.
+but we still need one dimension, which we will take to be a length (we could have used a time, or a mass). With the above units we have: 
 
 \begin{align*}
-	[m] =& [E]\\
-	=& [P]\\
-	[l] =& [t]\\
-	=& \frac{1}{[m]}
+	[m] =& [E]	= [P]\\
+	[l] =& [t]	= \frac{1}{[m]}
 \end{align*}
 
-\subsection{A typical quantum field theory}
+\subsubsection{A typical quantum field theory}
 
-Renormalizing a scalar field $\Phi$. Our Lagrangian is:
+Renormalizing a scalar field $\Phi$. It has a Lagrangian, from which we derive Feynman diagrams. Our Lagrangian is:
 
 \begin{align*}
-	\mathcal{L} =& (\partial_\mu \Phi)^2 - V(\Phi)\\
-	S =& \int d^4 x \mathcal{L} \text{ action - same units as $\hslash=1$}
+	\mathcal{L} =& (\partial_\mu \Phi)^2 - V(\Phi) \text{, which we use to determine the \emph{action}}\\
+	S =& \int d^4 x \mathcal{L} \text{, which has the same units as $\hslash=1$}
 \end{align*}
 
-This means that $\mathcal{L}$ had dimensions $[l^{-4}]$
+This means that $\mathcal{L}$ has dimensions $[l^{-4}]$
 
 \begin{align*}
-	[(\frac{\partial \Phi}{\partial x})^2]=l^{-4}\\
+	[(\frac{\partial \Phi}{\partial x})^2]=l^{-4} \text{, whence}\\
 	[\Phi] = l^{-1}
 \end{align*}
+
+\subsubsection{Feynman digrams}
+
 We imagine that the potential is something like:
 \begin{align*}
-	V(\Phi) =& \frac{m^2}{2} \Phi^2 + g \Phi^3 + \underbrace{\lambda}_\text{dimensionless} \Phi^4 \numberthis \label{eq:potential}
+	V(\Phi) =& \frac{m^2}{2} \Phi^2 + g \Phi^3 + \lambda \Phi^4 \numberthis \label{eq:potential}
 \end{align*}
-
-Feynman diagrams are based on two things:
+Since $[\Phi] = l^{-1}$ we can read off the dimensions of the coefficients:
 \begin{itemize}
-	\item vertices, read off from V--Figure \ref{fig:3-1-feynman-vertices}
+	\item $m$--mass;
+	\item $g$--mass;
+	\item $lambda$--dimensionless. Dimensionless copuling constants are very important in renormalization theory.
+\end{itemize}
+
+Feynman diagrams are built out of two types of elements:
+\begin{itemize}
+	\item vertices, read off from V--(\ref{eq:potential})-- see Figure \ref{fig:3-1-feynman-vertices}
 	\item propagators: represent motion from one point to another--Figure \ref{fig:3-1-feynman-propagator}.
 \end{itemize}
 
@@ -139,15 +148,23 @@ Feynman diagrams are based on two things:
 	\begin{center}
 		\caption{Elements of a Feynman diagram}
 		\begin{subfigure}[t]{0.45\textwidth}
-			\caption{Feynman Vertices for (\ref{eq:potential}). Cross in left hand vertex indicates absorption/re-emission}\label{fig:3-1-feynman-vertices}
+			\caption{Feynman Vertices for (\ref{eq:potential}). Cross in left hand vertex indicates absorption/re-emission. A Feynman diagram has a value, which corresponds to the amplitude for a process to happen.}\label{fig:3-1-feynman-vertices}
 			\includegraphics[width=\textwidth]{3-1-feynman-vertices}
 		\end{subfigure}
-			\begin{subfigure}[t]{0.45\textwidth}
-			\caption{Propagator $\braket{0|\Phi(y)\Phi(x)|0}$: amplitude that particle created at $x$ found at $y$. Dimension $[l^-2]$--$\frac{1}{|x-y|^2} if no mass$. If x and y close, propagator blows up--this is the source of all divergences in QFT.}\label{fig:3-1-feynman-propagator}
-		\includegraphics[width=\textwidth]{3-1-feynman-propagator}
-	\end{subfigure}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Propagator--amplitude that particle created at $x$ found at $y$. The line should not be read as a path along which particles moves, but rather as joining points where particle detected.}\label{fig:3-1-feynman-propagator}
+			\includegraphics[width=\textwidth]{3-1-feynman-propagator}
+		\end{subfigure}
 	\end{center}
 \end{figure}
+
+\begin{itemize}
+	\item We can represent the propagator is  $\braket{0|\Phi(y)\Phi(x)|0}$: create at $x$, annihilate at $y$.
+	\item Dimension of propagator is $[l^-2]$. If there is no mass, distance between $x$ and $y$ is the only length scale in the problem--$\frac{1}{\lVert x-y \Vert^2}$. 
+	\item If $x$ and $y$ close, propagator blows up--this is the source of all divergences in QFT.
+\end{itemize}
+
+
 
 Let's start with renormalization of the mass. Notice that (\ref{eq:potential}) contains $m^2$ -- usually mass only appears as $\sqrt{m^2}$. So what is renormalization of $m^2$? In Figure \ref{fig:3-1-feynman-vertices}, do we care if the emission and absorption points are really the same? We aren't interested in anything that is finer than the resolution of our accelerators, so if we can find a process that mimics vertex,  even if blurred, any process that absorbs and re-emits can be counted as part of mass term--for example Figure \ref{fig:3-1-feynman-mimic}.
 
