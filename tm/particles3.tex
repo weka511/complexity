@@ -69,26 +69,29 @@ Consider two atoms, each including a cloud of electrons. We want to get rid of t
 	\end{center}
 \end{figure}
 
-First approximation: the atoms are so heavy that they don't move at all. Start by writing down Hamiltonian.
+First approximation: the atoms are so heavy that they don't move at all. We want to calculate the effective potential between the two nuclei, in a way that gets rid of the electrons. Start by writing down Hamiltonian (ignore relativity, and some factors of $2\pi$).
 
 \begin{align*}
-	E=& \underbrace{\frac{P_1^2}{M} + \frac{P_2^2}{M} + \frac{e^2}{R_{12}}}_\text{protons} + \underbrace{\sum \frac{q^2}{2m} + \frac{e^2}{r_{ij}}- \frac{e^2}{R_{1i}} - \frac{e^2}{R_{2i}}}_\text{electrons} \numberthis \label{eq:hamiltonian:H2}
+	E=& \underbrace{\frac{P_1^2}{2M} + \frac{P_2^2}{2M} + \frac{e^2}{R_{12}}}_\text{protons} + \underbrace{\sum_i \frac{q_i^2}{2m} + \sum_{i,j}\frac{e^2}{r_{ij}}- \sum_i \frac{e^2}{R_{1i}} - \sum_i \frac{e^2}{R_{2i}}}_\text{things that involve electrons} \numberthis \label{eq:hamiltonian:H2}
 \end{align*}
 
-There are two time scales:
+Intuitively there are two time scales here:
 \begin{itemize}
-	\item slow for nuclei, which are heavy
+	\item slow for nuclei, which are heavy;
 	\item fast for electrons, which are a blur.
 \end{itemize}
 
-To a first approximation fix the protons and treat the Hamiltonian as being for electrons. We solve the Schr\"odinger equation for the lowest energy state, $E_{electrons}(R_1,R_2)$. Then (\ref{eq:hamiltonian:H2}) becomes:
+We'd like to get rid of the blur of electrons. This is easy to do \emph{in principle.} Take everything in the Hamiltonian that involves electrons; group them and think of them as the Hamiltonian for the electrons alone. Since the nuclei move slowly compared to electrons, treat them as fixed: to a first approximation nuclei are stationary.
+
+To a first approximation fix the protons and treat the Hamiltonian as being for electrons in a fixed background from nuclei. We solve the Schr\"odinger equation for the lowest energy eigenvalue, $E_{electrons}(R_1,R_2)$. Then (\ref{eq:hamiltonian:H2}) becomes:
 
 
 \begin{align*}
-E=& \underbrace{\frac{P_1^2}{M} + \frac{P_2^2}{M} + \frac{e^2}{R_{12}}}_\text{protons} +\underbrace{ E_{electrons}(R_1,R_2)}_\text{Part of potential energy}
+E=& \underbrace{\frac{P_1^2}{M} + \frac{P_2^2}{M} + \frac{e^2}{R_{12}}}_\text{protons} +\underbrace{ E_{electrons}(R_1,R_2)}_\text{Part of potential energy}\\
+=& \frac{P_1^2}{M} + \frac{P_2^2}{M} + \frac{e^2}{R_{12}}+ E_{electrons}(R_1-R_2)
 \end{align*}
 
-We don't have to think about electrons again. All renormalization is based on this idea. 
+We don't have to think about electrons again. All renormalization is based on this idea: getting rid of fast degrees of freedom, and replacing them with a renormalized Hamiltonian. 
 
 \subsection{Dimensional Analysis}
 
