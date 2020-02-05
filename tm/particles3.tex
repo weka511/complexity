@@ -166,6 +166,8 @@ Feynman diagrams are built out of two types of elements:
 
 Everything else is just building up Feynman diagrams, calculating them, and interpreting them.
 
+\subsubsection{Renormalization of Mass}
+
 Let's start with renormalization, and how it works in this very simple context.
 Let's start with renormalization of the mass. Notice that (\ref{eq:potential}) contains $m^2$ -- usually mass only appears as $\sqrt{m^2}$. This is connected with $E=\sqrt{p^2 + m^2}$. So what is renormalization of $m^2$? What does it mean, and how do we do it? In Figure \ref{fig:3-1-feynman-vertices} we see that the interpretation of a mass term is just a basic simple Feynman diagram, a vertex in the digram where a particles is absorbed at a point and emitted from the same point. Does it have to be exactly the same point? If we have a microscope, an accelerator, which can resolve down to $10^{-17}m$, say, we aren't really interested in things that happen on smaller scales; so if we can find a process in nature that would mimic that vertex,  even if blurred, any process that absorbs and re-emits at a nearby point would be counted as part of mass term in an effective description in which we don't look too closely.
 
@@ -223,7 +225,7 @@ Consider:
 \begin{align*}
 	\int_{\delta}^{\infty} \frac{d \delta}{\delta} =& - \log(\delta)
 \end{align*}
-Dimensional analysis would suggest this is dimensionless, but we have to be careful as it is a divergent integral. In dimensional analysis, an integral with  the same number of powers of $\delta$ in the numerator and denominator is always a logarithm.
+Dimensional analysis would suggest this is dimensionless, but we have to be careful as it is a divergent integral. In dimensional analysis, an integral with  the same number of powers of $\delta$ in the numerator and denominator is always a logarithm. Since log is always $\log\frac{...}{scale}$ we treat as dimensionless.
 
 Consider Figure \ref{fig:particles3-1-two-cubic-vertices}. There are two propagators, giving $\frac{1}{\Delta^4}$.
 \begin{figure}[H]
@@ -235,7 +237,7 @@ Consider Figure \ref{fig:particles3-1-two-cubic-vertices}. There are two propaga
 
 We have (keeping lower point fixed):
 \begin{align*}
-\int_{\delta}^{\infty} \frac{g^2}{\Delta^4} d^4 \Delta =& g^2 \log(\delta)
+	\int_{\delta}^{\infty} \frac{g^2}{\Delta^4} d^4 \Delta =& g^2 \log(\delta)
 \end{align*}
 
 When $\delta$ is small, $\frac{1}{\delta^n}$ dominates $\log(\delta)$.
@@ -244,7 +246,46 @@ Note that $[g^2] = [m^2]$.
 
 That is the idea of mass renormalization.
 
-\url{https://youtu.be/W6srShxBCrk?t=3637}
+\subsubsection{Renormalization of $\lambda$}
+
+It's not just mass that gets renormalized: every term in the Lagrangian can get renormalized.
+
+From an operational point of view, $\lambda \phi^4$ is nothing but two particles being absorbed and re-emitted--Figure \ref{fig:lambda:phi:4}. If everything happens on a scale that is too small to see, we lump it in to $\lambda \phi^4$. Now Figure \ref{fig:lambda:phi:4x} will also contribute a renormalzation to $\lambda \phi^4$.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Renormalization of $\lambda \phi^4$}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Feynman Diagram for $\lambda \phi^4$}\label{fig:lambda:phi:4}
+			\feynmandiagram[horizontal=i1 to f1]{
+				i1--[fermion]a--i2,
+				f1--[fermion]a--f2
+			};
+		\end{subfigure}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{This will also contribute a renormalization to $\lambda \phi^4$}\label{fig:lambda:phi:4x}
+			\feynmandiagram[horizontal=i1 to i2]{
+				a--[red!0!blue,quarter right]b
+				 --[red!33!blue,quarter right]c
+				 --[red!66!blue,quarter right]d
+				 --[red!100!blue,quarter right]a,
+				 i1--[fermion]a,
+				 i2--[fermion]a,
+				 c--[fermion]o1,
+				 c--[fermion]o2
+			};
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+Each one of these terms can be renormalized. The effect of very small scale physics, when you sum it up and take it into account the way we did with the electron, we find some description that doesn't involve these microscopic degrees of freedom. \emph{The parameters of the theory that you measure are not the same as the ones you input to the theory!}
+
+\subsubsection{Renormalization of the mass of a Fermion}
+
+You might expect the theory to work the same for Fermions, but it doesn't. Fermions are better behaved than Bosons, which are badly behaved in the following sense. Imagine that the cutoff distance is very, very small, e.g. the Planck scale. The $\delta \approx l_p = \sqrt{\frac{\hslash G}{\c{^3}}}$--20 order of magnitude smaller than a proton, 16 orders of magnitude smaller than the resolution of our best accelerators! If we are working on the Higgs Boson, we'd need to expressions to cancel to 34 digits, leaving the answer in the 35th. This is known as the "fine tuning problem of the Higgs Boson".
+
+
+\url{https://youtu.be/W6srShxBCrk?t=4199}
 	
 \section{Fermions and bosons}
 
