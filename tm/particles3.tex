@@ -109,6 +109,7 @@ but we still need one dimension, which we will take to be a length (we could hav
 	[l] =& [t]	= \frac{1}{[m]}
 \end{align*}
 
+\subsection{Vacuum energy renormalization}
 \subsubsection{A typical quantum field theory}
 
 Renormalizing a scalar field $\Phi$. It has a Lagrangian, from which we derive Feynman diagrams. Our Lagrangian is:
@@ -125,7 +126,7 @@ This means that $\mathcal{L}$ has dimensions $[l^{-4}]$
 	[\Phi] = l^{-1}
 \end{align*}
 
-\subsubsection{Feynman digrams}
+\subsubsection{Feynman diagrams}
 
 We imagine that the potential is something like:
 \begin{align*}
@@ -135,7 +136,7 @@ Since $[\Phi] = l^{-1}$ we can read off the dimensions of the coefficients:
 \begin{itemize}
 	\item $m$--mass;
 	\item $g$--mass;
-	\item $lambda$--dimensionless. Dimensionless copuling constants are very important in renormalization theory.
+	\item $lambda$--dimensionless. Dimensionless coupling constants are very important in renormalization theory.
 \end{itemize}
 
 Feynman diagrams are built out of two types of elements:
@@ -263,17 +264,19 @@ From an operational point of view, $\lambda \phi^4$ is nothing but two particles
 			};
 		\end{subfigure}
 		\begin{subfigure}[t]{0.45\textwidth}
-			\caption{This will also contribute a renormalization to $\lambda \phi^4$}\label{fig:lambda:phi:4x}
-			\feynmandiagram[horizontal=i1 to i2]{
-				a--[red!0!blue,quarter right]b
-				 --[red!33!blue,quarter right]c
-				 --[red!66!blue,quarter right]d
-				 --[red!100!blue,quarter right]a,
-				 i1--[fermion]a,
-				 i2--[fermion]a,
-				 c--[fermion]o1,
-				 c--[fermion]o2
-			};
+			\begin{center}
+				\caption{This will also contribute a renormalization to $\lambda \phi^4$}\label{fig:lambda:phi:4x}
+				\feynmandiagram[horizontal=i1 to i2]{
+					a--[quarter right]b
+					--[quarter right]c
+					--[quarter right]d
+					--[quarter right]a,
+					i1--[fermion]a,
+					i2--[fermion]a,
+					c--[fermion]o1,
+					c--[fermion]o2
+				};
+			\end{center}
 		\end{subfigure}
 	\end{center}
 \end{figure}
@@ -282,10 +285,40 @@ Each one of these terms can be renormalized. The effect of very small scale phys
 
 \subsubsection{Renormalization of the mass of a Fermion}
 
-You might expect the theory to work the same for Fermions, but it doesn't. Fermions are better behaved than Bosons, which are badly behaved in the following sense. Imagine that the cutoff distance is very, very small, e.g. the Planck scale. The $\delta \approx l_p = \sqrt{\frac{\hslash G}{\c{^3}}}$--20 order of magnitude smaller than a proton, 16 orders of magnitude smaller than the resolution of our best accelerators! If we are working on the Higgs Boson, we'd need to expressions to cancel to 34 digits, leaving the answer in the 35th. This is known as the "fine tuning problem of the Higgs Boson".
 
+You might expect the theory to work the same for Fermions, but it doesn't. Fermions are better behaved than Bosons, which are badly behaved in the following sense. Imagine that the cutoff distance is very, very small, e.g. the Planck scale. The $\delta \approx l_p = \sqrt{\frac{\hslash G}{\c{^3}}}$--20 order of magnitude smaller than a proton, 16 orders of magnitude smaller than the resolution of our best accelerators! If we are working on the Higgs Boson, we'd need the expressions in (\ref{eq:sum|lambdas}) to cancel to 34 digits, leaving the answer in the 35th. This is known as the "fine tuning problem of the Higgs Boson".
+\begin{align*}
+	\frac{m_0^2}{2} + \frac{\lambda}{\delta^2} +  + \frac{\lambda^2}{\delta^2}  + \frac{\lambda^3}{\delta^2} =& \frac{m^2}{2}\numberthis\label{eq:sum|lambdas}
+\end{align*}
 
-\url{https://youtu.be/W6srShxBCrk?t=4199}
+Let's recall what we know about the mass term of the Higgs Boson. The Higgs field has a potential that looks like Figure \ref{fig:higgs-potential}. Near the origin it looks like $\phi^2$, but with a negative coefficient ($m_0^2$ can be negative!). We assume that $\lambda<1$, as otherwise sequence of power would be intractable. Assume $\lambda$ is modestly small, but not humungously so. Experimentally we know it's about $1\%$.
+
+\begin{figure}[H]
+	\caption[Higgs potential]{Higgs potential after \cite{susskind2010standard}: Near the origin it looks like $\phi^2$, but with a negative coefficient }\label{fig:higgs-potential}
+	\includegraphics{higgs-potential}
+\end{figure}
+
+\begin{align*}
+	V(\phi) =& - \frac{\mu^2}{2} \phi^2 + \lambda \phi^4\\
+	\phi_{min}^2 =& f^2 = \frac{\mu_2}{\lambda}
+\end{align*}
+
+Now experimentally we know that $f\approxeq200GeV$, and $\lambda$ is of order 1, so $\mu^2$ is of order 200GeV, yet it is computed by (\ref{eq:sum|lambdas}), every term being 38 orders of magnitude bigger! This is known as the "fine tuning problem", or the "gauge hierarchy problem", or the "hierarchy problem", the hierarchy being the hierarchy of mass scales from Planck scale to the scale of ordinary particle physics. There are many finely tuned pieces, which have to add up to something small. We know that this is ridiculous: what do we do about that.
+
+There is no such problem with other particles in the Standard Model. Why doesn't the electron have the same kind of problem? Let's talk about Fermions.
+
+The mass term of a Fermion involves the mass, not the mass squared. The Lagrangian contains a term $m \bar{\Psi} \Psi$. Figure \ref{fig:Fermion:feynman} shows the Feynman diagram.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Feynman diagram for $m \bar{\Psi} \Psi$}\label{fig:Fermion:feynman}
+		\feynmandiagram[vertical=b to a]{
+			a--[fermion,edge label=\(\Psi\)]b
+			--[fermion,edge label=\(\bar{\Psi}\)]c
+		};
+	\end{center}
+\end{figure}
+\url{https://youtu.be/W6srShxBCrk?t=4603}
 	
 \section{Fermions and bosons}
 
