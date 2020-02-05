@@ -307,18 +307,120 @@ Now experimentally we know that $f\approxeq200GeV$, and $\lambda$ is of order 1,
 
 There is no such problem with other particles in the Standard Model. Why doesn't the electron have the same kind of problem? Let's talk about Fermions.
 
-The mass term of a Fermion involves the mass, not the mass squared. The Lagrangian contains a term $m \bar{\Psi} \Psi$. Figure \ref{fig:Fermion:feynman} shows the Feynman diagram.
+The mass term of a Fermion involves the mass, not the mass squared. The Lagrangian contains a term $m \bar{\Psi} \Psi$. Figure \ref{fig:Fermion:feynman} shows the Feynman diagram. What kind of thing could renormalize electron?
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Feynman diagram for $m \bar{\Psi} \Psi$}\label{fig:Fermion:feynman}
-		\feynmandiagram[vertical=b to a]{
-			a--[fermion,edge label=\(\Psi\)]b
-			--[fermion,edge label=\(\bar{\Psi}\)]c
-		};
+		\caption{Feynman diagram for $m \bar{\Psi} \Psi$}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{$m \bar{\Psi} \Psi$ flips helicity}\label{fig:Fermion:feynman}
+			\feynmandiagram[vertical=b to a]{
+				a--[fermion,edge label=L]b
+				--[fermion,edge label=R]c
+			};
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+				\caption{Emit scalar boson}\label{fig:emit:scalar}
+				\feynmandiagram[vertical=b to a]{
+					a--[fermion,edge label=L]b
+					--[fermion,edge label=R]c,
+					b--[scalar]d
+				};
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Emit gauge boson}\label{fig:emit:gauge}
+			\feynmandiagram[vertical=b to a]{
+				a--[fermion,edge label=L]b
+				--[fermion,edge label=L]c,
+				b--[photon]d
+			};
+		\end{subfigure}
 	\end{center}
 \end{figure}
-\url{https://youtu.be/W6srShxBCrk?t=4603}
+
+We recall that $m \bar{\Psi} \Psi$ always absorbs a left handed particle and emits right handed, or vice versa[find reference to this in earlier lecture]--it flips helicity. What sort of thing could renormalize the electron? We could emit a boson, Figures \ref{fig:emit:scalar} and \ref{fig:emit:gauge}. In QED the only thing that can happen is to emit a photon, Figure \ref{fig:emit:gauge}. What happens to the handedness of the electron when it emits a gauge boson? The answer is nothing: the handedness doesn't change: The emission of a gauge boson doesn't flip helicity--Figures \ref{fig:emit:gauge:no:flip}.
+[Work this out from Lagrangian]
+\begin{figure}[H]
+	\begin{center}
+		\caption{Emission of a gauge boson doesn't flip helicity}\label{fig:emit:gauge:no:flip}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Emit gauge boson}\label{fig:emit:gauge:LL}
+			\feynmandiagram[vertical=b to a]{
+				a--[fermion,edge label=L]b
+				--[fermion,edge label=L]c,
+				b--[photon]d
+			};
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Emit gauge boson}\label{fig:emit:gauge:RR}
+			\feynmandiagram[vertical=b to a]{
+				a--[fermion,edge label=R]b
+				--[fermion,edge label=R]c,
+				b--[photon]d
+			};
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+What about a scalar boson? It turns out they do flip--Figure \ref{fig:emit:scalar:flip}.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Emission of a scalar boson does flip helicity}\label{fig:emit:scalar:flip}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Emit gauge boson}
+			\feynmandiagram[vertical=b to a]{
+				a--[fermion,edge label=L]b
+				--[fermion,edge label=R]c,
+				b--[scalar]d
+			};
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Emit gauge boson}
+			\feynmandiagram[vertical=b to a]{
+				a--[fermion,edge label=R]b
+				--[fermion,edge label=L]c,
+				b--[scalar]d
+			};
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+We'll look at processes that can renormalize the mass of an electron. Suppose that electron starts with no mass. In the Boson case, if particle starts with no mass it gets humongous contribution from the $\lambda s$ and $\delta s$ in (\ref{eq:sum|lambdas}). So renormalized mass is independent of original. Now let's take the electron. It could emit and absorb a photon--Figure \ref{fig:emit:absorb:photon}. Now, by definition, a mass term is recognized as an amplitude to change from L to R or vice versa--an oscillation. Can this happen, as in Figure \ref{fig:can:this:happen}? Photons can't do this. The conslusion is that in QED, or any theory with gauge bosons only, electrons get no mass renormalization at all, so the correction to a massless electron would be zero. In pure QED (not the Standard Model) a massless electron is a consistent thing. What about scalar bosons? Figure \ref{fig:higgs:doesnt:help} shows why they don't help. No matter how complex the Feynman diagram, it is always going to involve an even number of vertices.
+
+\begin{figure}[H]
+		\caption{Electron emits and absorbs boson}\label{fig:emit:absorb:photon}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Emit gauge boson}
+			\feynmandiagram[vertical=b to a]{
+				a--[fermion]b
+				--[fermion]c
+				--[fermion]d,
+				b--[photon,half left,looseness=1.5]c
+			};
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Can this happen? Is there any way to go from L to R?}\label{fig:can:this:happen}
+			\feynmandiagram[vertical=b to a]{
+				a--[fermion,edge label=L]b
+				--[fermion]c
+				--[fermion,edge label=R]d,
+				b--[photon,half left,looseness=1.5]c
+			};
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Scalar bosons don't help, as the helicity gets flipped twice}\label{fig:higgs:doesnt:help}
+			\feynmandiagram[vertical=b to a]{
+				a--[fermion,edge label=L]b
+				--[fermion,edge label=R]c
+				--[fermion,edge label=L]d,
+				b--[scalar,half left,looseness=1.5]c
+			};
+		\end{subfigure}
+	\end{figure}
+
+Can you ever get a shift in the mass of an electron in QED? Yes--if you \emph{start} with a mass.
+ 
+\url{https://youtu.be/W6srShxBCrk?t=5021}
 	
 \section{Fermions and bosons}
 
