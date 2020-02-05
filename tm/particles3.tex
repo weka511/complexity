@@ -214,12 +214,37 @@ But we haven't finished. We haven't evaluated every possible Feynman diagram tha
 Coefficient is of order $\lambda^2$, so it is a second order Feynman diagram. It also has three propagators, each with coefficient $\frac{1}{\Delta^2}$, so $\frac{1}{\Delta^6}$. We need to integrate over all $\delta s$ 
 
 \begin{align*}
-	\lambda^2 \int_{\delta} \frac{1}{\Delta^6} d^4 \Delta \propto& \frac{\lambda^2}{\delta^2} \text{, by dimensional analysis.}
+	\lambda^2 \int_{\delta}^\infty \frac{1}{\Delta^6} d^4 \Delta \propto& \frac{\lambda^2}{\delta^2} \text{, by dimensional analysis.}
 \end{align*}
 
-There are many other Feynman diagrams, which will also contribute higher powers of $\lambda$
+There are many other Feynman diagrams, which will also contribute higher powers of $\lambda$. There is an infinite series of terms of order $\frac{1}{\Delta^2}$, with higher powers of $\lambda$. There are other terms that we haven't used, from $\phi^3$.
 
-\url{https://youtu.be/W6srShxBCrk?t=2699}
+Consider:
+\begin{align*}
+	\int_{\delta}^{\infty} \frac{d \delta}{\delta} =& - \log(\delta)
+\end{align*}
+Dimensional analysis would suggest this is dimensionless, but we have to be careful as it is a divergent integral. In dimensional analysis, an integral with  the same number of powers of $\delta$ in the numerator and denominator is always a logarithm.
+
+Consider Figure \ref{fig:particles3-1-two-cubic-vertices}. There are two propagators, giving $\frac{1}{\Delta^4}$.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Two cubic vertices, with 3 particles at each vertex.}\label{fig:particles3-1-two-cubic-vertices}
+		\includegraphics{particles3-1-two-cubic-vertices}
+	\end{center}
+\end{figure}
+
+We have (keeping lower point fixed):
+\begin{align*}
+\int_{\delta}^{\infty} \frac{g^2}{\Delta^4} d^4 \Delta =& g^2 \log(\delta)
+\end{align*}
+
+When $\delta$ is small, $\frac{1}{\delta^n}$ dominates $\log(\delta)$.
+
+Note that $[g^2] = [m^2]$.
+
+That is the idea of mass renormalization.
+
+\url{https://youtu.be/W6srShxBCrk?t=3637}
 	
 \section{Fermions and bosons}
 
