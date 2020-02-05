@@ -164,19 +164,22 @@ Feynman diagrams are built out of two types of elements:
 	\item If $x$ and $y$ close, propagator blows up--this is the source of all divergences in QFT.
 \end{itemize}
 
+Everything else is just building up Feynman diagrams, calculating them, and interpreting them.
 
+Let's start with renormalization, and how it works in this very simple context.
+Let's start with renormalization of the mass. Notice that (\ref{eq:potential}) contains $m^2$ -- usually mass only appears as $\sqrt{m^2}$. This is connected with $E=\sqrt{p^2 + m^2}$. So what is renormalization of $m^2$? What does it mean, and how do we do it? In Figure \ref{fig:3-1-feynman-vertices} we see that the interpretation of a mass term is just a basic simple Feynman diagram, a vertex in the digram where a particles is absorbed at a point and emitted from the same point. Does it have to be exactly the same point? If we have a microscope, an accelerator, which can resolve down to $10^{-17}m$, say, we aren't really interested in things that happen on smaller scales; so if we can find a process in nature that would mimic that vertex,  even if blurred, any process that absorbs and re-emits at a nearby point would be counted as part of mass term in an effective description in which we don't look too closely.
 
-Let's start with renormalization of the mass. Notice that (\ref{eq:potential}) contains $m^2$ -- usually mass only appears as $\sqrt{m^2}$. So what is renormalization of $m^2$? In Figure \ref{fig:3-1-feynman-vertices}, do we care if the emission and absorption points are really the same? We aren't interested in anything that is finer than the resolution of our accelerators, so if we can find a process that mimics vertex,  even if blurred, any process that absorbs and re-emits can be counted as part of mass term--for example Figure \ref{fig:3-1-feynman-mimic}.
+Are there any Feynman diagrams that we can build that will mimic a particle going in and a particle going out? We will build it out of the $\phi*4$ vertex in Figure \ref{fig:3-1-feynman-vertices}, the $\lambda$ vertex--see Figure \ref{fig:3-1-feynman-mimic}.
 
 
 \begin{figure}[H]
-	\caption{Mimicking the Vertex}
+	\caption{Mimicking the Vertex}\label{fig:mimicking:vertex}
 	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{Particle emitted and returns to same point: scale so small we don't notice}\label{fig:3-1-feynman-mimic}
+		\caption{Particle emitted and returns to same point: scale so small we don't notice. Particle isn't going anywhere!}\label{fig:3-1-feynman-mimic}
 		\includegraphics[width=\textwidth]{3-1-feynman-mimic}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{Amplitude following cut-off}\label{fig:3-1-cutoff}
+		\caption{Amplitude following cut-off. We have reinstated $\lambda$ from $\phi^4$ term.}\label{fig:3-1-cutoff}
 		\includegraphics[width=\textwidth]{3-1-cutoff}
 	\end{subfigure}
 		\begin{subfigure}[t]{0.3\textwidth}
@@ -187,14 +190,36 @@ Let's start with renormalization of the mass. Notice that (\ref{eq:potential}) c
 
 We saw in Figure \ref{fig:3-1-feynman-propagator} that the propagator has amplitude:
 \begin{align*}
-	\braket{0|\Phi(y)\Phi(x)|0}=&\frac{1}{|x-y|^2}
+	\braket{0|\Phi(y)\Phi(x)|0}=&\frac{1}{|x-y|^2}\text{, which blows up to $infty$}
 \end{align*}
 
-Let us introduce a cut-off, saying that we are not interested in scales smaller than $\delta$; we smear the point over $\delta$--Figure \ref{fig:3-1-cutoff}. Figure \ref{fig:3-1-original} shows the original mass term. If we include Figure \ref{fig:3-1-cutoff} we see that the effect of ignoring terms smaller than $\delta$ is to increase the effective mass: the amplitude becomes $\frac{m_0^2}{2}+\frac{1}{\delta^2}$.  \emph{This is what we'd see in the laboratory if our resolution isn't high enough to resolve lengths less than $\delta$.}  
+Let us introduce a cut-off, saying that we are not interested in scales smaller than $\delta$; we smear the point over $\delta$--Figure \ref{fig:3-1-cutoff}. What is the amplitude in this approximation for a particle to come in, be absorbed, and re-emitted? There are two ways to make this happen. Figure \ref{fig:3-1-original} shows the original mass term. If we include Figure \ref{fig:3-1-cutoff} we see that the effect of ignoring terms smaller than $\delta$ is to increase the effective mass: the amplitude becomes $\frac{m_0^2}{2}+\frac{1}{\delta^2}$.  \emph{This is what we'd see in the laboratory if our resolution isn't high enough to resolve lengths less than $\delta$.}  
 
-But there are more Feynman diagrams!
+But we haven't finished. We haven't evaluated every possible Feynman diagram that can go into this. Let's do another Feynman diagram for the same thing. Figure \ref{fig:particles3-another-Feynman} depicts a particles going in and out, and something happening in the centre. What if the centre has size $\approxeq \Delta$? Can we integrate it out?
 
-\url{https://youtu.be/W6srShxBCrk?t=2705}
+\begin{figure}[H]
+	\begin{center}
+		\caption{More diagrams from Figure \ref{fig:mimicking:vertex}}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Another Diagram. Particle is absorbed where the heavy dot is. We need to integrate over all the places where it could be re-emitted. This derives from the third part of Figure \ref{fig:3-1-feynman-vertices}--4 things coming together at a vertex.}\label{fig:particles3-another-Feynman}
+			\includegraphics{particles3-another-Feynman}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Diagram giving $\lambda^4$}\label{fig:particles3-yet-another-Feynman}
+			\includegraphics{particles3-yet-another-Feynman}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+Coefficient is of order $\lambda^2$, so it is a second order Feynman diagram. It also has three propagators, each with coefficient $\frac{1}{\Delta^2}$, so $\frac{1}{\Delta^6}$. We need to integrate over all $\delta s$ 
+
+\begin{align*}
+	\lambda^2 \int_{\delta} \frac{1}{\Delta^6} d^4 \Delta \propto& \frac{\lambda^2}{\delta^2} \text{, by dimensional analysis.}
+\end{align*}
+
+There are many other Feynman diagrams, which will also contribute higher powers of $\lambda$
+
+\url{https://youtu.be/W6srShxBCrk?t=2699}
 	
 \section{Fermions and bosons}
 
