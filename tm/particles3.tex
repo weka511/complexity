@@ -35,7 +35,7 @@
 \listoftables
 \listoftheorems
 
-\section{Renormalization  and dimensional analysis}
+\section{Renormalization  and dimensional analysis}\label{sect:renormalization}
 
 \subsection{Renormalization}
 
@@ -247,7 +247,7 @@ Note that $[g^2] = [m^2]$.
 
 That is the idea of mass renormalization.
 
-\subsubsection{Renormalization of $\lambda$}
+\subsubsection{Renormalization of $\lambda$}\label{sect:renormalization:lambda}
 
 It's not just mass that gets renormalized: every term in the Lagrangian can get renormalized.
 
@@ -446,7 +446,7 @@ So if the starting mass is small it will remain small. For reasons we don't unde
 
 What about gauge bosons? They have the same property: if they start massless they remain massless to all orders. There is therefore only one fine-tuning problem, the fine-tuning problem of the Higgs Boson. Get that one right and all the others are alright, as their masses arise from shifting of the Higgs field. If $f$ is controlled (\ref{eg:higgs:minimum}), then all other masses are controlled. The only really crazy fine-tuning in the Standard Model is  $f$, which has to be 38 order of magnitude smaller than we'd expect from (\ref{eq:sum:lambdas}). This is the great puzzle that super-symmetry and other theories are intended to address. Roughly speaking we ask whether there is any theory where the Higgs mass isn't driven to enormous values by renormalization.
 
-\subsubsection{Renormalization of vacuum energy}
+\subsubsection{Renormalization of vacuum energy}\label{sect:vacuum:energy:renormalization}
 There is one other extreme fine-tuning problem, but it only comes in to play when we start thinking about gravity. It is the problem of renormalization of vacuum energy.
 
 For most physics the vacuum energy isn't a problem, as it is an additive constant: normally when we add a particles we care only that it adds the right energy. Energy differences are all that is important. Don't think of the energy of an electron, think of the energy we have to add to the vacuum. Who cares if we add a large amount of energy to the vacuum, as long as everything is shifted with it? 
@@ -509,11 +509,11 @@ We can, however, do a 2 slit experiment\cite{aharonov1967observability}--Figure 
 		\end{center}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\textwidth}
-	\begin{center}
-		\caption{We create a superposition of two states, electron going through slit 1 or slit 2. In either case electron is in one box or the other. Now we rotate 2nd box by $2\pi$. The wave function for an electron changes sign, but this has no physical consequence on it own. For the superposition, if we rotate one electron wave function, we can never find electron at centre. $\psi_1$ and $\psi_2$ will interfere.}\label{fig:particles3-2-2slit-wave-function-2-2slit}
-		\includegraphics[width=\textwidth]{particles3-2-2slit-wave-function}
-	\end{center}
-\end{subfigure}
+		\begin{center}
+			\caption{We create a superposition of two states, electron going through slit 1 or slit 2. In either case electron is in one box or the other. Now we rotate 2nd box by $2\pi$. The wave function for an electron changes sign, but this has no physical consequence on it own. For the superposition, if we rotate one electron wave function, we can never find electron at centre. $\psi_1$ and $\psi_2$ will interfere.}\label{fig:particles3-2-2slit-wave-function-2-2slit}
+			\includegraphics[width=\textwidth]{particles3-2-2slit-wave-function}
+		\end{center}
+	\end{subfigure}
 \end{figure}
 
 The experiment has been performed for Fermions (which get the minus sign), and Bosons (which don't). The result is also deeply embedded in the theory.
@@ -522,38 +522,44 @@ You cannot interfere an up spin with a down spin: you can only interfere things 
 
 \subsection{Feynman Diagrams}
 
-We'll be dealing with diagrams in the vacuum, with nothing more complicated than a single closed loop--Figures \ref{fig:particles3-2-loops} and \ref{fig:particles3-2-loops-boson}. This diagram controls, among other things, the amplitude that you start with nothing and get nothing. It is part of the vacuum structure. The diagram has a  value, which is a contribution to the vacuum energy. Just as Figure \ref{fig:particles3-2-loops-p} contributes to the energy of the particle, Figure \ref{fig:particles3-2-loops} and \ref{fig:particles3-2-loops-boson} contributes to the energy of the vacuum. Does it shift it up or down? Surprisingly the answer is different for Fermions and Bosons.
+We'll be dealing with diagrams that are very simple. They are just Feynman diagrams in the vacuum, empty space, and they consist of nothing more complicated than a single closed loop. It could be an electron, Figure \ref{fig:particles3-2-loops}, or a photon, Figure \ref{fig:particles3-2-loops-boson}. This diagram controls, among other things, the amplitude that you start with nothing and get nothing. It is part of the vacuum structure. The diagram has a  value, which is a contribution to the vacuum energy. Just as Figure \ref{fig:particles3-2-loops-p} contributes to the energy of the particle, Figure \ref{fig:particles3-2-loops} and \ref{fig:particles3-2-loops-boson} contributes to the energy of the vacuum. Does it shift it up or down? We are going to find out that the answer is different for Fermions and Bosons.
 
 
 \begin{figure}[H]
 	\caption{Closed Loops Feynman diagrams}
-	\begin{subfigure}[t]{0.3\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Fermion Closed Loop}\label{fig:particles3-2-loops}
 		\feynmandiagram{
 			b-- [fermion,half left]
 			c-- [fermion,half left] b
 		};
 	\end{subfigure}
-	\begin{subfigure}[t]{0.3\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Boson Closed Loop}\label{fig:particles3-2-loops-boson}
 		\feynmandiagram{
-			b-- [boson,half left]
-			c-- [boson,half left] b
+			b-- [photon,half left]
+			c-- [photon,half left] b
 		};
 	\end{subfigure}
-	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{Loop for particle}\label{fig:particles3-2-loops-p}
+\end{figure}
+
+\begin{figure}[h]
+	\begin{center}
+		\caption{Loop which contributes to the energy of the particle}\label{fig:particles3-2-loops-p}
 		\feynmandiagram[vertical=e4 to e1]{
 			e1[particle=$e^-$]--[fermion]e2--[fermion]e3
 			--[fermion]e4[particle=$e^-$],
 			e2--[photon,looseness=3.0,half left]e3
 		};
-	\end{subfigure}
+	\end{center}
 \end{figure}
 
 \begin{thm}[Contribution of loops to vacuum energy]
-	The contribution to the vacuum energy of a loop of Bosons is positive;
-	The contribution to the vacuum energy of a loop of Fermions is negative.
+	
+	\begin{enumerate}
+		\item The contribution to the vacuum energy of a loop of Bosons is positive;
+		\item The contribution to the vacuum energy of a loop of Fermions is negative.
+	\end{enumerate}
 \end{thm}
 
 \begin{proof}
@@ -591,7 +597,7 @@ We'll be dealing with diagrams in the vacuum, with nothing more complicated than
 					b-- [quarter left]
 					c-- [quarter left]
 					d-- [quarter left] a,
-				};\,
+				};\,\,
 				\feynmandiagram[inline=(c.base),horizontal'=a to c]{
 					a --[quarter left]
 					b-- [quarter left]
@@ -601,32 +607,32 @@ We'll be dealing with diagrams in the vacuum, with nothing more complicated than
 			\end{equation*}		
 		\end{subfigure}
 		\begin{subfigure}[t]{0.45\textwidth}
-			\caption{Two Fermion loops, interchange}\label{fig:two:loops:interchange}
+			\caption{One Fermion loop, built by interchanging particles }\label{fig:two:loops:interchange}
 			\begin{equation*}t=0
 				\feynmandiagram[inline=(c.base),horizontal'=a to c]{
 					a -- [quarter left]
-					b-- [fermion,quarter left]
-					c-- [quarter left]
+					b-- [fermion]
+					c-- [fermion]
 					d-- [quarter left] a,
 				};
 				\feynmandiagram[inline=(c.base),horizontal'=a to c]{
-					a --[quarter left]
+					a --[anti fermion]
 					b-- [quarter left]
 					c-- [quarter left]
-					d-- [anti fermion,quarter left] a,
+					d-- [anti fermion] a,
 				};
 			\end{equation*}		
 	\end{subfigure}
 	\end{figure}
 	Let's assume our particles are Fermions: lets break the loop and look in the middle at t=0--Figure \ref{fig:two:loops:split}. 
 	\begin{itemize}
-		\item What happens for amplitude of a system if we exchange two Bosons? Plus sign. 
-		\item What happens for amplitude of a system if we exchange two Fermions? Minus sign. 
+		\item What happens for amplitude of a system if we exchange two Bosons? We get a plus sign. 
+		\item What happens for amplitude of a system if we exchange two Fermions? We get a minus sign. 
 	\end{itemize}
 	Now interchange particles, as in Figure \ref{fig:two:loops:interchange}.
 	\begin{itemize}
-		\item If we are dealing with Fermions we get a minus sign. We have gone from two loops (positive) to one loop, negative.
-		\item If we are dealing with Bosons we get a plus sign.
+		\item If we are dealing with Fermions we get a minus sign when we interchange the particles. We have gone from two loops (positive) to one loop, negative. A single loop for Fermions necessarily has a minus sign associated with it.
+		\item If we are dealing with Bosons we get a plus sign. We have gone from two loops (positive) to one loop, also positive.
 	\end{itemize} 
 \end{proof}
 
@@ -635,11 +641,11 @@ The consequences are profound:
 	\item the contribution to the vacuum of a Boson loop is positive;
 	\item the contribution to the vacuum of a Fermion loop is negative.
 \end{itemize}
-We have this strange puzzle about the vacuum energy; it is extremely small, and we call it Dark Energy. The naive calculation in quantum field theory would give an answer 123 orders of magnitude larger.  We saw that the answer can be positive or negative: it depends on all sorts of things, such as mass and charge. We can at least get positive and negative signs. The fact that they cancel to 123 order of magnitude is bizarre, but we can cancel. All things being equal, a boson and a fermion will give exactly the same contribution, except for a different sign.
+We have this strange puzzle about the vacuum energy, which was introduced in Section \ref{sect:vacuum:energy:renormalization}; it is extremely small, and we call it Dark Energy. The naive calculation in quantum field theory would give an answer 123 orders of magnitude larger. It is interesting that the answer can be positive or negative: it depends on all sorts of things, such as mass and charge. We can at least get positive and negative signs. The fact that they cancel to 123 order of magnitude is bizarre, butat least we have the possibility cancelling contributions. All things being equal, a boson and a fermion will give exactly the same contribution to the vacuum energy, except one with a plus sign and one with a minus sign.
 
-That doesn't mean that the vacuum energy is zero, but it suggest that maybe there is a lot of cancellation. To get an exact cancellation, we'd need for every boson with the same mass and same properties, then we could conceive that the particles would cancel out the vacuum energy.
+That doesn't explain why the vacuum energy is zero, it may create a thought in your head: perhaps there is a lot of cancellation. To get an exact cancellation, we'd need for every boson with the same mass and same properties in every other respect, then we could conceive that the particles would cancel out the vacuum energy. That is one of the things that a supersymmetric theory can do: they can cancel out the contributions for the vaccum energy.
 
-We know that there isn't an exact Boson for each Fermion. For example, the electron: there isn't a Boson equivalent to the electron: if there were, the partners could be produced--Figure \ref{fig:partners}-- with exactly the same probability as an electron-positron pair--Figure \ref{fig:re:emit}. We know this isn't the case: Nature does not have a Boson$\leftrightarrow$Fermion symmetry.
+We know that there isn't an exact Boson for each Fermion and vice versa. For example, the electron: there isn't a Boson equivalent to the electron: if there were, the partners could be produced--Figure \ref{fig:partners}-- with exactly the same probability as an electron-positron pair--Figure \ref{fig:re:emit}. We know this isn't the case: Nature does not have a Boson$\leftrightarrow$Fermion symmetry. We know this because it doesn't happen in the laboratory; there is no Boson--Fermion reflection.  
 
 \begin{figure}[H]
 	\begin{center}
@@ -671,11 +677,11 @@ We know that there isn't an exact Boson for each Fermion. For example, the elect
 	\end{center}
 \end{figure}
 
+We know it isn't true, but still it interesting to contemplate the fact that,  if we had a theory which was sufficiently symmetrical between Fermions and Bosons, we would at least have a chance of cancelling the vacuum energy. Keep this thought in mind.
  Keep these two thoughts in mind.
-\begin{itemize}
-	\item  However, if we had a theory which was sufficiently symmetrical, we would at least have a chance of cancelling the vacuum energy.
-	\item Can this also help with the self-energy of Bosons: we have quadratic infinities. Even if the initial mass is zero, we have diagrams that give us a huge mass.
-\end{itemize}
+
+Another thought to keep in mind: can this also help with the self-energy of Bosons: we have Feynman diagrams which give rise to quadratic divergences in the mass of a Boson. Even if the initial mass is zero, we have diagrams that give us a huge mass--Section \ref{sect:renormalization:lambda}. We would like to create a theory which doesn't give rise to these huge masses from renormalization.
+
 
 Fermions don't have same problem with infinities. Now consider Figure \ref{fig:2loops}. In Figure \ref{fig:2loops:bosons} we have a Boson going round the loop, and in Figure \ref{fig:2loops:fermions} a Fermion. Fermion and Bosons always have opposites signs, so we can imagine, if everything were absolutely symmetrical, we might imagine things cancelling, so that self energy is not infinite.
 
