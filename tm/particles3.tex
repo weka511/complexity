@@ -47,7 +47,7 @@ Most of the basic ideas of this quarter originated out of questions having to do
 
 Examples of getting rid of things that are too small to be of interest.
 \begin{itemize}
-	\item Studying the nucleus aa protons and neutrons instead of quarks. Use QCD to figure out properties of protons and neutrons and their forces. Nucleons move slowly, so we can ignore relativity. Nucleus can be described by the non-relativistic theory of neutrons and protons. All we need from quark theory is to find out what the properties of protons and neutrons are--masses, spins, and the forces between them.
+	\item Studying the nucleus as protons and neutrons instead of quarks. Use QCD to figure out properties of protons and neutrons and their forces. Nucleons move slowly, so we can ignore relativity. Nucleus can be described by the non-relativistic theory of neutrons and protons. All we need from quark theory is to find out what the properties of protons and neutrons are: masses, spins, and the forces between them.
 	\item For atoms, you might not be particularly interested in what makes up the nucleus. You use nuclear physics to calculate the properties of nuclei--which nuclei exist, their masses, and charges. Now we can forget protons and neutrons, but we need electrons.
 	\item Now move on to atoms and forget their contents.
 \end{itemize}
@@ -93,7 +93,7 @@ E=& \underbrace{\frac{P_1^2}{M} + \frac{P_2^2}{M} + \frac{e^2}{R_{12}}}_\text{pr
 
 We don't have to think about electrons again. All renormalization is based on this idea: getting rid of fast degrees of freedom, and replacing them with a renormalized Hamiltonian. 
 
-What do we get rid of in Quantum Field Theory? Thins associated with very small distances, or things associated with high frequencies, or very short wave lengths (high energies). But first let's take a break and work on dimensional analysis.
+What do we get rid of in Quantum Field Theory? Things associated with very small distances, or things associated with high frequencies, or very short wave lengths (high energies). But first let's take a break and work on dimensional analysis.
 
 \subsection{Dimensional Analysis}
 
@@ -160,8 +160,8 @@ Feynman diagrams are built out of two types of elements:
 \end{figure}
 
 \begin{itemize}
-	\item We can represent the propagator is  $\braket{0|\Phi(y)\Phi(x)|0}$: create at $x$, annihilate at $y$.
-	\item Dimension of propagator is $[l^-2]$. If there is no mass, distance between $x$ and $y$ is the only length scale in the problem--$\frac{1}{\lVert x-y \Vert^2}$. 
+	\item We can represent the propagator is  $\braket{0|\bar{\Phi}(y)\Phi(x)|0}$: create at $x$, annihilate at $y$.
+	\item Dimension of propagator is $[l^{-2}]$. If there is no mass, distance between $x$ and $y$ is the only length scale in the problem--$\frac{1}{\lVert x-y \Vert^2}$. 
 	\item If $x$ and $y$ close, propagator blows up--this is the source of all divergences in QFT.
 \end{itemize}
 
@@ -170,22 +170,22 @@ Everything else is just building up Feynman diagrams, calculating them, and inte
 \subsubsection{Renormalization of Mass}
 
 Let's start with renormalization, and how it works in this very simple context.
-Let's start with renormalization of the mass. Notice that (\ref{eq:potential}) contains $m^2$ -- usually mass only appears as $\sqrt{m^2}$. This is connected with $E=\sqrt{p^2 + m^2}$. So what is renormalization of $m^2$? What does it mean, and how do we do it? In Figure \ref{fig:3-1-feynman-vertices} we see that the interpretation of a mass term is just a basic simple Feynman diagram, a vertex in the digram where a particles is absorbed at a point and emitted from the same point. Does it have to be exactly the same point? If we have a microscope, an accelerator, which can resolve down to $10^{-17}m$, say, we aren't really interested in things that happen on smaller scales; so if we can find a process in nature that would mimic that vertex,  even if blurred, any process that absorbs and re-emits at a nearby point would be counted as part of mass term in an effective description in which we don't look too closely.
+Let's start with renormalization of the mass. Notice that (\ref{eq:potential}) contains $m^2$ -- usually mass only appears as $\sqrt{m^2}$. This is connected with $E=\sqrt{p^2 + m^2}$. So what is renormalization of $m^2$? What does it mean, and how do we do it? In Figure \ref{fig:3-1-feynman-vertices} we see that the interpretation of a mass term is just a basic simple Feynman diagram, a vertex in the diagram where a particles is absorbed at a point and emitted from the same point. Does it have to be exactly the same point? If we have a microscope, an accelerator, which can resolve down to $10^{-17}m$, say, we aren't really interested in things that happen on smaller scales; so if we can find a process in nature that would mimic that vertex,  even if blurred, any process that absorbs and re-emits at a nearby point would be counted as part of mass term in an effective description in which we don't look too closely.
 
-Are there any Feynman diagrams that we can build that will mimic a particle going in and a particle going out? We will build it out of the $\phi*4$ vertex in Figure \ref{fig:3-1-feynman-vertices}, the $\lambda$ vertex--see Figure \ref{fig:3-1-feynman-mimic}.
+Are there any Feynman diagrams that we can build that will mimic a particle going in and a particle going out? We will build it out of the $\Phi^4$ vertex in Figure \ref{fig:3-1-feynman-vertices}, the $\lambda$ vertex--see Figure \ref{fig:3-1-feynman-mimic}.
 
 
 \begin{figure}[H]
 	\caption{Mimicking the Vertex}\label{fig:mimicking:vertex}
-	\begin{subfigure}[t]{0.3\textwidth}
+	\begin{subfigure}[t]{0.32\textwidth}
 		\caption{Particle emitted and returns to same point: scale so small we don't notice. Particle isn't going anywhere!}\label{fig:3-1-feynman-mimic}
 		\includegraphics[width=\textwidth]{3-1-feynman-mimic}
 	\end{subfigure}
-	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{Amplitude following cut-off. We have reinstated $\lambda$ from $\phi^4$ term.}\label{fig:3-1-cutoff}
+	\begin{subfigure}[t]{0.32\textwidth}
+		\caption{Amplitude following cut-off. We have reinstated $\lambda$ from $\Phi^4$ term.}\label{fig:3-1-cutoff}
 		\includegraphics[width=\textwidth]{3-1-cutoff}
 	\end{subfigure}
-		\begin{subfigure}[t]{0.3\textwidth}
+		\begin{subfigure}[t]{0.32\textwidth}
 		\caption{Original mass term}\label{fig:3-1-original}
 		\includegraphics[width=\textwidth]{3-1-original}
 	\end{subfigure}
@@ -193,7 +193,7 @@ Are there any Feynman diagrams that we can build that will mimic a particle goin
 
 We saw in Figure \ref{fig:3-1-feynman-propagator} that the propagator has amplitude:
 \begin{align*}
-	\braket{0|\Phi(y)\Phi(x)|0}=&\frac{1}{|x-y|^2}\text{, which blows up to $infty$}
+	\braket{0|\bar{\Phi}(y)\Phi(x)|0}=&\frac{1}{|x-y|^2}\text{, which blows up to $infty$}
 \end{align*}
 
 Let us introduce a cut-off, saying that we are not interested in scales smaller than $\delta$; we smear the point over $\delta$--Figure \ref{fig:3-1-cutoff}. What is the amplitude in this approximation for a particle to come in, be absorbed, and re-emitted? There are two ways to make this happen. Figure \ref{fig:3-1-original} shows the original mass term. If we include Figure \ref{fig:3-1-cutoff} we see that the effect of ignoring terms smaller than $\delta$ is to increase the effective mass: the amplitude becomes $\frac{m_0^2}{2}+\frac{1}{\delta^2}$.  \emph{This is what we'd see in the laboratory if our resolution isn't high enough to resolve lengths less than $\delta$.}  
@@ -220,7 +220,7 @@ Coefficient is of order $\lambda^2$, so it is a second order Feynman diagram. It
 	\lambda^2 \int_{\delta}^\infty \frac{1}{\Delta^6} d^4 \Delta \propto& \frac{\lambda^2}{\delta^2} \text{, by dimensional analysis.}
 \end{align*}
 
-There are many other Feynman diagrams, which will also contribute higher powers of $\lambda$. There is an infinite series of terms of order $\frac{1}{\Delta^2}$, with higher powers of $\lambda$. There are other terms that we haven't used, from $\phi^3$.
+There are many other Feynman diagrams, which will also contribute higher powers of $\lambda$. There is an infinite series of terms of order $\frac{1}{\Delta^2}$, with higher powers of $\lambda$. There are other terms that we haven't used, from $\Phi^3$.
 
 Consider:
 \begin{align*}
@@ -251,13 +251,13 @@ That is the idea of mass renormalization.
 
 It's not just mass that gets renormalized: every term in the Lagrangian can get renormalized.
 
-From an operational point of view, $\lambda \phi^4$ is nothing but two particles being absorbed and re-emitted--Figure \ref{fig:lambda:phi:4}. If everything happens on a scale that is too small to see, we lump it in to $\lambda \phi^4$. Now Figure \ref{fig:lambda:phi:4x} will also contribute a renormalzation to $\lambda \phi^4$.
+From an operational point of view, $\lambda \Phi^4$ is nothing but two particles being absorbed and re-emitted--Figure \ref{fig:lambda:phi:4}. If everything happens on a scale that is too small to see, we lump it in to $\lambda \Phi^4$. Now Figure \ref{fig:lambda:phi:4x} will also contribute a renormalzation to $\lambda \Phi^4$.
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Renormalization of $\lambda \phi^4$}
+		\caption{Renormalization of $\lambda \Phi^4$}
 		\begin{subfigure}[t]{0.45\textwidth}
-			\caption{Feynman Diagram for $\lambda \phi^4$}\label{fig:lambda:phi:4}
+			\caption{Feynman Diagram for $\lambda \Phi^4$}\label{fig:lambda:phi:4}
 			\feynmandiagram[horizontal=i1 to f1]{
 				i1--[fermion]a--i2,
 				f1--[fermion]a--f2
@@ -265,7 +265,7 @@ From an operational point of view, $\lambda \phi^4$ is nothing but two particles
 		\end{subfigure}
 		\begin{subfigure}[t]{0.45\textwidth}
 			\begin{center}
-				\caption{This will also contribute a renormalization to $\lambda \phi^4$}\label{fig:lambda:phi:4x}
+				\caption{This will also contribute a renormalization to $\lambda \Phi^4$}\label{fig:lambda:phi:4x}
 				\feynmandiagram[horizontal=i1 to i2]{
 					a--[quarter right]b
 					--[quarter right]c
@@ -291,16 +291,16 @@ You might expect the theory to work the same for Fermions, but it doesn't. Fermi
 	\frac{m_0^2}{2} + \frac{\lambda}{\delta^2} +  + \frac{\lambda^2}{\delta^2}  + \frac{\lambda^3}{\delta^2} =& \frac{m^2}{2}\numberthis\label{eq:sum:lambdas}
 \end{align*}
 
-Let's recall what we know about the mass term of the Higgs Boson. The Higgs field has a potential that looks like Figure \ref{fig:higgs-potential}. Near the origin it looks like $\phi^2$, but with a negative coefficient ($m_0^2$ can be negative!). We assume that $\lambda<1$, as otherwise sequence of power would be intractable. Assume $\lambda$ is modestly small, but not humungously so. Experimentally we know it's about $1\%$.
+Let's recall what we know about the mass term of the Higgs Boson. The Higgs field has a potential that looks like Figure \ref{fig:higgs-potential}. Near the origin it looks like $\Phi^2$, but with a negative coefficient ($m_0^2$ can be negative!). We assume that $\lambda<1$, as otherwise sequence of power would be intractable. Assume $\lambda$ is modestly small, but not humungously so. Experimentally we know it's about $1\%$.
 
 \begin{figure}[H]
-	\caption[Higgs potential]{Higgs potential after \cite{susskind2010standard}: Near the origin it looks like $\phi^2$, but with a negative coefficient }\label{fig:higgs-potential}
+	\caption[Higgs potential]{Higgs potential after \cite{susskind2010standard}: Near the origin it looks like $\Phi^2$, but with a negative coefficient }\label{fig:higgs-potential}
 	\includegraphics{higgs-potential}
 \end{figure}
 
 \begin{align*}
-	V(\phi) =& - \frac{\mu^2}{2} \phi^2 + \lambda \phi^4\\
-	\phi_{min}^2 =& f^2 = \frac{\mu_2}{\lambda} \numberthis \label{eg:higgs:minimum}
+	V(\Phi) =& - \frac{\mu^2}{2} \Phi^2 + \lambda \Phi^4\\
+	\Phi_{min}^2 =& f^2 = \frac{\mu_2}{\lambda} \numberthis \label{eg:higgs:minimum}
 \end{align*}
 
 Now experimentally we know that $f\approxeq200GeV$, and $\lambda$ is of order 1, so $\mu^2$ is of order 200GeV, yet it is computed by (\ref{eq:sum:lambdas}), every term being 38 orders of magnitude bigger! This is known as the "fine-tuning problem", or the "gauge hierarchy problem", or the "hierarchy problem", the hierarchy being the hierarchy of mass scales from Planck scale to the scale of ordinary particle physics. There are many finely tuned pieces, which have to add up to something small. We know that this is ridiculous: what do we do about that.
@@ -453,8 +453,10 @@ For most physics the vacuum energy isn't a problem, as it is an additive constan
 
 Vacuum is renormalized by diagrams that have no inputs and no outputs. Figure \ref{fig:particles3-1-5-4-theory} shows a such a diagram from the 5-4 theory
 \begin{figure}[H]
-	\caption{5-4 theory: value $\lambda \frac{1}{\delta^2} \frac{1}{\delta^2}= \frac{\lambda}{\delta^4}$}\label{fig:particles3-1-5-4-theory}
-	\includegraphics{particles3-1-5-4-theory}
+	\begin{center}
+		\caption{5-4 theory: value $\lambda \frac{1}{\delta^2} \frac{1}{\delta^2}= \frac{\lambda}{\delta^4}$}\label{fig:particles3-1-5-4-theory}
+		\includegraphics{particles3-1-5-4-theory}
+	\end{center}
 \end{figure}
 
 There are more complicated diagrams. Vacuum energy gets renormalized, so if you want it to be zero you'd better fine-tune it to high precision. Who cares? We don't care \emph{until gravity becomes important}. The standard theory for gravity says that energy gravitates: this is connected to Dark Energy and the Cosmological constant; vacuum energy has to be fine-tuned to extremely high precision (123 decimal places).
@@ -464,25 +466,31 @@ The two fine-tuning problems are the biggest puzzles in particle physics at the 
 Supersymmetry is a potential problem to the fine tuning of the Higgs field, but it is not a potential solution to the fine-tuning of the cosmological constant.
 
 If you believe QFT down to scales that are many times smaller than the weak interaction scale, but only is we can solve renormalization problems at smaller scales. This section deals with a lower bound the the problems. They could be bigger.
+
+In order to cancel terms in (\ref{eq:sum:lambdas}), terms need to be very closely balanced. matching them is what Supersymmetry does. The simplest possible Feynman diagrams for Fermions have negative energy, the simplest for Bosons have positive. In principle if they had exactly the same mass they could cancel each other in the vacuum energy
 	
 \section{Fermions and bosons}
 
 \subsection{Difference between Fermions and bosons}
-Supersymmetry has to do with Fermions and Bosons, and their symmetries. We will Fermions and Bosons again, but, before that, we'll look at rotations.
+Supersymmetry has to do with Fermions and Bosons, and their symmetries. We will talk again about Fermions and Bosons; I want to tell you some odd and peculiar facts about Fermions, but, before that, we'll look at rotations in space.
 
 Normally we are told that a rotation of $2\pi$ is equivalent to no rotation at all, but it is not true.
 
 \begin{thm}[Rotation by $4\pi$ is equivalent to no rotation at all]
-	Take a box, put a basketball in, and connect it to the walls with strings. A rotation by $2\pi$ tangles the strings; a rotation by $4\pi$ is equivalent to no rotation.
+	Take a box, put a basketball in, and connect it to the walls with flexible but unbreakable strings. A rotation by $2\pi$ tangles the strings; a rotation by $4\pi$ is equivalent to no rotation.
 \end{thm}
 
-Imagine that we have a particles, and we are interested in the spin $s$. What happens to the state when you rotate spin by $2\pi$.
+Imagine that we have a particles, Fermions or Bosons, and we are interested in the spin of the particle only, and the spin is described by a quantum state $\bra{s}$. What happens to the state when you rotate the particle by $2\pi$?
+
+How would you rotate an electron by $2\pi$?
+
 \begin{itemize}
-	\item apply string magnetic field and rotate;
+	\item apply strong magnetic field and rotate magnetic field around;
 	\item use field to precess particle.
 \end{itemize}
 
-Normally we'd expect it to come back to itself, but we know that $2\pi$ is not the identity. Perhaps it multiplies by a number. If we multiply by a phase, $\xi$, we won't be able to detect it. Multiplication by $4\pi$ squares phase, since it does nothing, so $\xi^2=1$, so $\xi=\pm1$.
+What happens to the state when you rotate the particle by $2\pi$? Normally we'd expect it to come back to itself, but we know that $2\pi$ is not the identity. Perhaps it multiplies by a number--$\bra{s} \rightarrow \xi \bra{s}$. If we multiply by a phase, $\xi$, we won't be able to detect it. Multiplication by $4\pi$ squares phase, since it does nothing, so $\xi^2=1$, or $\xi=\pm1$.
+
 \begin{align*}
 	\ket{s} \rightarrow& +\ket{s} \text{, or}\\
 	\ket{s} \rightarrow& -\ket{s}
@@ -502,7 +510,7 @@ We can, however, do a 2 slit experiment\cite{aharonov1967observability}--Figure 
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\textwidth}
 	\begin{center}
-		\caption{We create a superposition of two states, electron going through slit 1 or slit 2. In either case electron is in one box or the other. Now we rotate 2nd box by $2\pi$. The wave function for an electron changes sign, but this has no physical consequence on it own. For the superposition, if we rotate one electron wave function, we can never find electron at centre. $\psi_1$ and $psi_2$ will interfere.}\label{fig:particles3-2-2slit-wave-function-2-2slit}
+		\caption{We create a superposition of two states, electron going through slit 1 or slit 2. In either case electron is in one box or the other. Now we rotate 2nd box by $2\pi$. The wave function for an electron changes sign, but this has no physical consequence on it own. For the superposition, if we rotate one electron wave function, we can never find electron at centre. $\psi_1$ and $\psi_2$ will interfere.}\label{fig:particles3-2-2slit-wave-function-2-2slit}
 		\includegraphics[width=\textwidth]{particles3-2-2slit-wave-function}
 	\end{center}
 \end{subfigure}
