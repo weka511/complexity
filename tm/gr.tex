@@ -50,6 +50,62 @@ Figure \ref{fig:gr-1-elevator} depicts an elevator. Assuming we know the laws of
 	\includegraphics{gr-1-elevator}
 \end{figure}
 
+In this lecture we'll ignore Special Relativity, which is tantamount to setting $c=\infty$, or assuming all velocities very small. If General Relativity is the generalization of Special Relativity, how did Einstein get away with ignoring Special Relativity? The answer is that Special Relativity is about high velocities. Gravity has to do with heavy masses. There are situation where the mass is high, but the velocity isn't. Einstein started thinking about these situations, and then combined it with Special relativity to think about the combination of high masses and high velocities.
+
+Let's think about inertial reference frames. If $z$ and $x^\prime$ are inertial, they are related by uniform velocity, so we nave the coordinate transformation:
+
+\begin{align*}
+	L(t)=&vt\\
+	z^\prime =& z-L(t)\\
+	=& z-vt\\
+	t^\prime =& t\\
+	x^\prime =& x
+\end{align*}
+
+Now introduce Newton's 2nd law of motion. How does this change under the coordinate transformation?
+
+\begin{align*}
+	F =& m \ddot{z} \text{ in the $z$ frame}\\
+	\ddot{z^\prime} =& \ddot{z} \text{ since $v$ is constant, whence:}\\
+	F =& m \ddot{z^\prime} \text{ since $v$ is constant, so Newton's 2nd Law holds.}
+\end{align*}
+
+Now let's go to an accelerated frame--Figure \ref{fig:gr-1-elevator-accelerated}.
+
+\begin{figure}[H]
+	\caption{Elevator in a accelerated Frame}\label{fig:gr-1-elevator-accelerated}
+	\includegraphics{gr-1-elevator-accelerated}
+\end{figure}
+
+The coordinate transformation is now:
+\begin{align*}
+	L(t)=&vt\\
+	z^\prime =& z-\frac{1}{2}g t^2\\
+	=& z-vt\\
+	t^\prime =& t\\
+	x^\prime =& x
+\end{align*}
+
+We will continue to assume that Newton's laws hold in the $z$ frame of reference.
+\begin{align*}
+	\ddot{z^\prime} =& \ddot{z}-g\\
+	\underbrace{F -mg}_\text{Force, including fictitious term} =& m \ddot{z^\prime} 
+\end{align*}
+
+The fictitious force looks like a uniform gravitational field. The special property of gravity is that gravitational forces are proportional to mass. That has a deep implication: the mass cancels, so the motion doesn't depend on the mass. Most people before Einstein considered this largely an accident. People know that acceleration mimicked gravity; Einstein said it was deep principle of nature. Figure \ref{fig:gr-1-coordinates-const} shows the coordinate transformation for constant velocity. Straight lines go to straight lines. Figure \ref{fig:gr-1-coordinates-accelerated} shows the results of accelerating the coordinate system: straight lines are not preserved. We have a curvy linear transformation. Einstein understood very early that there is a connection between gravity and curvy linear transformations of spacetime. Special Relativity was all about linear transformations
+
+\begin{figure}[H]
+	\caption[Coordinate Transformation for constant velocity]{Coordinate Transformation for constant velocity. Green represents constant $z^\prime$}\label{fig:gr-1-coordinates-const}
+	\includegraphics{gr-1-coordinates-const}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Coordinate Transformation accelerated}\label{fig:gr-1-coordinates-accelerated}
+	\includegraphics{gr-1-coordinates-accelerated}
+\end{figure}
+
+\url{https://youtu.be/JRZgW1YjCKk?t=1441}
+
 \subsection{Tensor analysis}
 
 \section{Tensor mathematics}
