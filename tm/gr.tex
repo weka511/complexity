@@ -225,8 +225,8 @@ We have two sets of coordinates, $x$ and $y$, and write $x^m = x^m(y)$, and $y^m
 	V^{\prime m} =&  \frac{\partial y^m}{\partial x^p} V^p \numberthis \label{eq:contravariant}
 \end{align*}
 
-\begin{defn}[contravariant]
-	A Vector whose components transform in accordance with (\ref{eq:contravariant}) is said to be contravariant.
+\begin{defn}[Contravariant]
+	A Vector whose components transform in accordance with (\ref{eq:contravariant}) is said to be \emph{contravariant}.
 \end{defn}
 
 Consider a scalar function, $s$, then the gradient is a vector.
@@ -240,8 +240,8 @@ Consider a scalar function, $s$, then the gradient is a vector.
 	W_m^\prime =& \frac{\partial x^p}{\partial y^m} W_p \numberthis \label{eq:covariant}
 \end{align*}
 
-\begin{defn}[contravariant]
-	A Vector whose components transform in accordance with (\ref{eq:covariant}) is said to be covariant.
+\begin{defn}[Covariant]
+	A Vector whose components transform in accordance with (\ref{eq:covariant}) is said to be \emph{covariant}.
 \end{defn}
  
 Relativity is about the transformation properties of objects.
@@ -256,7 +256,57 @@ LS derived the transformation properties, and showed that $g_mn$ is covariant.
 
 \section{Tensor mathematics}
 
-TBP
+A good notation will carry you a long way. When it is good it tells you what to do next. It's like tinker toys: you put the stick into a hole. The notation of GR is like that: if you follow the rules it is difficult to make mistakes. The rules are tensor analysis and tensor algebra.
+
+\subsection{Flat space}
+
+Our aim is to distinguish flat from not flat. LS rolls flat page into cylinder, which is locally flat (it has extrinsic curvature from the embedding in 3D, not intrinsic: a tiny bug embedded in the surface can't notice this sort of curvature, but can find intrinsic curvature). Riemannian geometry is about intrinsic properties of space.
+ 
+Figures \ref{fig:gr-2-lattice} and \ref{fig:gr-2-lattice-not-flat} illustrate a surface can be flattened and one that cannot. A curved surface is one that cannot be flattened without distorting it.
+
+\begin{figure}[H]
+	\caption{Can we flatten the lattice onto a surface?}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\caption{Flat Lattice of equilateral triangles. These can be drawn on a plane.}\label{fig:gr-2-lattice}
+		\includegraphics[width=\textwidth]{gr-2-lattice}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\caption{Not a Flat Lattice: the bold lines are twice the length of the others, so the central one is forced up, out of blackboard.}\label{fig:gr-2-lattice-not-flat}
+		\includegraphics[width=\textwidth]{gr-2-lattice-not-flat}
+	\end{subfigure}
+\end{figure}
+
+Our problem is to decide whether or not a space is really flat. What are we given? We are given a metric tensor.
+
+\subsection{Metric tensor}
+
+\subsection{Scalars transform trivially}
+
+\begin{align*}
+	x^m \leftrightarrow& y^m \\
+	S^\prime(y) =& S(x) \text{, we call such an $s$ a scalar}
+\end{align*}
+
+Figure \ref{fig:gr-2-coordinates} depicts a coordinate system, and a vector $\vec{V}$.
+\begin{figure}[H]
+	\caption[A set of coordinates, not necessarily perpendicular.]{A set of coordinates, not necessarily perpendicular (although they could be). Furthermore the distances along the axes are just labels: they need not be equidistant. There are two unit vectors, $\vec{e_1}$ and $\vec{e_2}$ along the $x_1$ and $x_2$ axes.}\label{fig:gr-2-coordinates}
+	\includegraphics{gr-2-coordinates}
+\end{figure}
+
+$\vec{V}$ can be expanded:
+\begin{align*}
+	\vec{V} =& \sum_i V^i \vec{e_i} \numberthis \label{eq:contravariant:components}
+\end{align*}
+
+\begin{defn}[Contravariant components]
+	 In (\ref{eq:contravariant:components}), the numbers $V^i$ are called the\emph{ contravariant components} of $\vec{V}$.
+\end{defn}
+
+\url{https://youtu.be/5VKyRVLMMQ4?t=1230}
+
+\subsection{Scalar and tensor fields}
+\subsection{Tensor analysis}
+\subsection{Tensor mathematics: addition, multiplication, contraction}
 
 \section{Flatness \& curvature}
 
