@@ -302,7 +302,28 @@ $\vec{V}$ can be expanded:
 	 In (\ref{eq:contravariant:components}), the numbers $V^i$ are called the\emph{ contravariant components} of $\vec{V}$.
 \end{defn}
 
-\url{https://youtu.be/5VKyRVLMMQ4?t=1230}
+What is $\vec{V} \boldsymbol{\cdot} \vec{e_1}$? If the coordinate system were rectangular, and the labels were equally spaced, it would be $V^1$. As things stand we define:
+\begin{align*}
+	V_n \triangleq & \vec{V} \boldsymbol{\cdot} \vec{e_n} \numberthis \label{eq:covariant:components}\\
+	=& V^m \underbrace{\vec{e_m}\boldsymbol{\cdot} \vec{e_n}}_\text{The metric tensor $g_{mn}$} \numberthis \label{eq:metric_tensor}
+\end{align*}
+
+\begin{defn}[Covariant components]
+	In (\ref{eq:covariant:components}), the numbers $V^i$ are called the\emph{ covariant components} of $\vec{V}$.
+\end{defn}
+
+Let's compute the length of $\vec{V}$.
+
+\begin{align*}
+	\vec{V}\boldsymbol{\cdot} \vec{V} =& V^m \vec{e_m}\boldsymbol{\cdot} V^n \vec{e_n}\\
+	=& V^m V^n (\vec{e_m}\boldsymbol{\cdot} \vec{e_n})\\
+	=&  V^m V^n g_{mn} \text{, where we define $g_{m,n}$ as in (\ref{eq:metric_tensor})}
+\end{align*}
+
+If the coordinates are perpendicular, and the separations are the same, the distinction between covariant and contravariant disappears. Polar coordinates are orthogonal, but the separations are not the same.
+
+
+\url{https://youtu.be/5VKyRVLMMQ4?t=1751}
 
 \subsection{Scalar and tensor fields}
 \subsection{Tensor analysis}
