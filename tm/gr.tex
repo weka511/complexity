@@ -170,17 +170,46 @@ Figure \ref{fig:2000:mile:man} shows why we can't transform the field away. In F
 	\end{subfigure}
 \end{figure}
 
-That raises a question: if I present you with a force field, e.g. the force field of uniform acceleration, 
+That raises a question: if I present you with a force field, e.g. the force field of uniform acceleration--Figure \ref{fig:gr-1-uniform-force-field}--you can make it look more complicated via a suitable transformation. If transformation involve the $x$ axis it can make the field bend. Or accelerate along $z$ while oscillating along $x$. This will give a complicated apparent gravitational field. If I tell you what the field is everywhere, how do I determine if it is just a fake gravitational field, from acceleration, or a real genuine one? If it is Newtonian gravitational field, just calculate the tidal forces on a freely falling object. If there is squeezing or stretching we have gravity,  otherwise not. If you can transform the field away it is not real gravity, otherwise it is real (can detect tidal forces via crystal).
 
 \begin{figure}[H]
 	\caption{Uniform Force Field}\label{fig:gr-1-uniform-force-field}
 	\includegraphics{gr-1-uniform-force-field}
 \end{figure}
 
-
-\url{https://youtu.be/JRZgW1YjCKk?t=2059}
-
 \subsection{Tensor analysis}
+
+Einstein asked what kind of mathematics he needed to answer the questions about real and apparent gravitational fields. The other element was special relativity: he know from the work of Minkowski that special relativity had a geometry associated with it, which had a length, proper distance.
+
+\begin{align*}
+	d\tau^2 =& dt^2 - dx^2 \text{, or, depending on who you are}\\
+	ds^2 =& dx^2 -dt^2
+\end{align*}
+
+Einstein realized that the problem of deciding whether or not a gravitation filed was real was similar to a problem that Riemann had explored, deciding whether or not a space was flat. Riemann had not considered metrics with a minus sign. In Euclidean space:
+\begin{align*}
+	ds^2 =& \sum (dx^i)^2
+\end{align*}
+ 
+Gauss had already understood that in non-Euclidean spaces the formula for distance on a surface was more complicated. Riemann took the next step. Consider a curved surface (let's not worry what this means exactly), and lay out coordinates as in Figure \ref{fig:gr-1-curved-surface-coordinates}.
+ 
+\begin{figure}[H]
+	\caption[Curved Surface with coordinates]{Curved Surface with coordinates. Don't worry about straight lines.}\label{fig:gr-1-curved-surface-coordinates}
+	\includegraphics{gr-1-curved-surface-coordinates}
+\end{figure} 
+
+The formula for the distance between two close points becomes:
+\begin{align*}
+	ds^2 =& \sum_{m,n} g_{mn}(x) dx^m dx^n
+\end{align*}
+It works also for curved coordinates in a flat space.
+
+
+
+
+\url{https://youtu.be/JRZgW1YjCKk?t=3610}
+
+
 
 \section{Tensor mathematics}
 
