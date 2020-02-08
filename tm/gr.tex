@@ -177,7 +177,6 @@ That raises a question: if I present you with a force field, e.g. the force fiel
 	\includegraphics{gr-1-uniform-force-field}
 \end{figure}
 
-\subsection{Tensor analysis}
 
 Einstein asked what kind of mathematics he needed to answer the questions about real and apparent gravitational fields. The other element was special relativity: he know from the work of Minkowski that special relativity had a geometry associated with it, which had a length, proper distance.
 
@@ -188,7 +187,7 @@ Einstein asked what kind of mathematics he needed to answer the questions about 
 
 Einstein realized that the problem of deciding whether or not a gravitation filed was real was similar to a problem that Riemann had explored, deciding whether or not a space was flat. Riemann had not considered metrics with a minus sign. In Euclidean space:
 \begin{align*}
-	ds^2 =& \sum (dx^i)^2
+	ds^2 =& \sum (dx^i)^2 \numberthis \label{eq:euclidean:metric}
 \end{align*}
  
 Gauss had already understood that in non-Euclidean spaces the formula for distance on a surface was more complicated. Riemann took the next step. Consider a curved surface (let's not worry what this means exactly), and lay out coordinates as in Figure \ref{fig:gr-1-curved-surface-coordinates}.
@@ -204,10 +203,19 @@ The formula for the distance between two close points becomes:
 \end{align*}
 It works also for curved coordinates in a flat space.
 
+We are building up geometry in little regions and piecing them together. Maybe we can put them together on a flat plane, but maybe not. So, given the little pieces, how do we know whether or not it is flat? Is there a coordinate system where (\ref{eq:euclidean:metric}) holds?
 
+We have two parallel questions. Can we find a coordinate system:
+\begin{itemize}
+	\item where apparent gravitational field is zero;
+	\item where (\ref{eq:euclidean:metric}) is true.
+\end{itemize}
 
+We will need the mathematics of Tensor Analysis.
 
-\url{https://youtu.be/JRZgW1YjCKk?t=3610}
+\subsection{Tensor analysis}
+
+\url{https://youtu.be/JRZgW1YjCKk?t=4205}
 
 
 
