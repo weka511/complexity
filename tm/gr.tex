@@ -33,11 +33,11 @@
 \listoftables
 \listoftheorems
 
-\section{The equivalence principle and tensor analysis}
+\section{The Equivalence Principle and Tensor Analysis}
 
 LS begins where Einstein started. Einstein started with the simplest things and deduced far racing conclusions.
 
-\subsection{The equivalence principle}
+\subsection{The Equivalence Principle}
 
 This is the principle that gravity is, in some sense, the same as acceleration.
 
@@ -213,9 +213,40 @@ We have two parallel questions. Can we find a coordinate system:
 
 We will need the mathematics of Tensor Analysis.
 
-\subsection{Tensor analysis}
+\subsection{Tensor Analysis}
 
-\url{https://youtu.be/JRZgW1YjCKk?t=4205}
+Can we change $g_{mn}$ to $\delta_{mn}$? First question is how does $g_{mn}$ change when we change coordinates?
+
+We have two sets of coordinates, $x$ and $y$, and write $x^m = x^m(y)$, and $y^m = y^m(x)$. How do $dx_m$ transform?
+
+\begin{align*}
+	dy^m =& \sum_p \frac{\partial y^m}{\partial x^p} dx^p\\
+	V^{\prime m} =& \sum_p \frac{\partial y^m}{\partial x^p} V^p \text{, or, using Einstein's summation convention} \\
+	V^{\prime m} =&  \frac{\partial y^m}{\partial x^p} V^p \numberthis \label{eq:contravariant}
+\end{align*}
+
+\begin{defn}[contravariant]
+	A Vector whose components transform in accordance with (\ref{eq:contravariant}) is said to be contravariant.
+\end{defn}
+
+Consider a scalar function, $s$, then the gradient is a vector.
+
+\begin{defn}[Gradient]
+	The gradient of $s$ is $\frac{\partial s}{\partial x^p}$.
+\end{defn}
+
+\begin{align*}
+	\frac{\partial s}{\partial y^m} =& \frac{\partial s}{\partial x^p}\frac{\partial x^p}{\partial y^m}\\
+	W_m^\prime =& \frac{\partial x^p}{\partial y^m} W_p \numberthis \label{eq:covariant}
+\end{align*}
+
+\begin{defn}[contravariant]
+	A Vector whose components transform in accordance with (\ref{eq:covariant}) is said to be covariant.
+\end{defn}
+ 
+Relativity is about the transformation properties of objects.
+ 
+\url{https://youtu.be/JRZgW1YjCKk?t=5922}
 
 
 
