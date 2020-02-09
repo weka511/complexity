@@ -774,17 +774,63 @@ LS wanted to go back over some of the motivations, and repeat some things about 
 
 A lot of particle physics is dependent on Feynman diagrams. We use them to calculate scattering probabilities, particles go in and go out. Feynman diagrams do this very efficiently. You have to sum all the Feynman diagrams that go into the calculation. Another thing Feynman diagrams do is to help you calculate the effective Lagrangian, i.e. an approximate Lagrangian that is effective at removing a lot of the complexity that was to complicated to calculate. An effective Lagrangian typically involves a cutoff, a smallest distance or a largest momentum.
 
-Propagators are the amplitude of putting in a particles at one place and taking it out at another place. They are functions of relative coordinates, $\Delta^\mu$. The propagator can also be Fourier transformed, and expressed as a function of 4 other variables, the Fourier conjugate coordinates, i.e. momentum. The Feynman rules are usually expressed in terms of momentum, but we're not going to do that. In momentum space Feynman diagrams become integrals over momentum.
+Propagators are the amplitude of putting in a particles at one place and taking it out at another place. They are functions of relative coordinates, $\Delta^\mu$. The propagator can also be Fourier transformed, and expressed as a function of 4 other variables, the Fourier conjugate coordinates, i.e. momentum. The Feynman rules are usually expressed in terms of momentum, but we're not going to do that. In momentum space Feynman diagrams become integrals over momentum. We can think of the Feynman Diagram of Figure \ref{fig:particles3-3-feynman-loop} in two ways:
+\begin{itemize}
+	\item a propagator joining a point with itself;
+	\item an integral over all the momenta that can flow around in this closed loop.
+\end{itemize}
 
 \begin{figure}[H]
-	\caption{Simplest Feynman Diagram -- a closed loop}\label{fig:particles3-3-feynman-loop}
+	\caption{Simplest Feynman Diagram -- a closed loop with nothing going in or out. It can be thought of as a propagator joining a point with itself.}\label{fig:particles3-3-feynman-loop}
 	\includegraphics{particles3-3-feynman-loop}
 \end{figure}
 
+Feynman diagrams are always sums over all things that can happen. We can think of the divergences as happening in two ways. Either:
+\begin{itemize}
+	\item because the two points are too close together, being the same point, or;
+	\item there are too many momenta to integrate over.
+\end{itemize}
+
+Momentum is associated with inverse wavelength, so large momentum is small wavelength. We can think of diagram being in $\vec{k}$ space or $\vec{x}$ space.
+
+What is the propagator between two point for various kinds of particles?
+
+\begin{figure}[H]
+	\caption{Propagators}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Spin 0}
+		\includegraphics{particles3-3-propagator0}
+	\end{subfigure}
+\end{figure}
+
+\begin{align*}
+	\braket{0|\Phi(x)\Phi(y)|0}& \text{, spin 0--Higgs}\\
+	\braket{0|\Phi^\dagger(x)\Phi(y)|0}& \text{, spin 0 charged}\\
+	\braket{0|\Psi^\dagger_i(x)\Psi_j(y)|0}& \text{, spin $\frac{1}{2}$ -- 4 component spinor}\\
+\end{align*}
+
+Mass is inverse length. So a length scale is also a mass scale. But when you are talking about massless particles the only scale is length: dimensional analysis is enough to give the form of the (value of the) propagator. Once there is a mass, then the answer is a little more complicated.
+
+For the massless case we want to figure out the dimensions of $\Psi$: the basic rule is the action is always dimensionless (because $\hslash=1$).
 
 
 
-\url{https://youtu.be/GzoncJBqeNk?t=310}
+\begin{align*}
+	[\int d^x \big(\frac{\partial \phi}{\partial x}\big)^2] =&[\mathfrak{l}] \text{, or}\\
+	[\mathfrak{l}]^2[\phi]^2=&[\mathfrak{l}]\\
+	[\phi]=&[\mathfrak{l}]^{-1} \text{, by dimensional analysis. Now let's check}\\
+	[\int d^x \big(\frac{\partial \phi}{\partial x}\big)^2 - \underbrace{\frac{m^2}{2}}_\text{$[m]=[l]^{-1}$} \phi^2]=&[\mathfrak{l}]\\
+	[\int d^x \big(\frac{\partial \phi}{\partial x}\big)^2 - \frac{m^2}{2}\phi^2 + \lambda \phi^4] =&[\mathfrak{l}] \text{ requires $\lambda$ dimensionless}
+\end{align*}
+
+Propagator can only depend on distance between $x$ and $y$, and it has to be Lorentz invariant, so it can only depend on the proper distance between the points, whence:
+
+\begin{align*}
+	[\braket{0|\Phi(x)\Phi(y)|0}]=&\frac{1}{\Delta}^2 \text{, to within a numerical constant, where}\\
+	\Delta^2 =& \Delta^\mu\Delta_\mu
+\end{align*}
+
+\url{https://youtu.be/GzoncJBqeNk?t=1389}
 \section{Symmetry and Grassmann numbers}
 
 TBP
