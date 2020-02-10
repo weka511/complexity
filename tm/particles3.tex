@@ -933,7 +933,44 @@ Now we have our amplitude $\frac{\lambda}{\delta^2} - \frac{g^2}{\delta^2}$. You
 
 \section{Symmetry and Grassmann numbers}
 
-TBP
+\subsection{Symmetry}
+
+Symmetries always relate things that are being transformed in some way. Things that are related by symmetries generally have the same mass. Whether supersymmetry is a continuous symmetry or not is a question which has no answer. It doesn't fall into the category of things where the question makes sense.
+
+Symmetries are operations on a system which are described by operators. The system is described by state vectors. Consider a rotation:
+
+\begin{align*}
+	U\ket{\psi} \text{, where U is unitary, characterized by axis and angle}
+\end{align*}
+
+Any symmetry requires a unitary matrix, $U\dagger U=1$. An infinitesimal unitary transformation has the form:
+\begin{align*}
+	U =& I + i \epsilon L \text{, where I is Hermitean, e.g. }\\
+	=& I + i \underbrace{\epsilon}_\text{angle} \underbrace{L_x}_\text{ab out x axis}
+\end{align*}
+
+An important constant is the commutator algebra on the generators, e.g.:
+\begin{align*}
+	[L_i,L_j] =& i e_{ijk} L_k 
+\end{align*}
+
+What is the geometric meaning of the commutator algebra, and the fact that the generators close under commutation? Consider two rotations, $U$ and $V$.
+\begin{align*}
+	V^\dagger U^\dagger VU \ne& I \text{, except for a few special values of $U$ and $V$, but}\\
+	V^\dagger U^\dagger VU =& W \text{, some other rotation.}
+\end{align*}
+
+Let's try small rotations: [check this!]
+\begin{align*}
+	(I-i\delta L_y) (I-i\epsilon L_x) (I+i\delta L_y) (I+i\epsilon L_x) =& I + 2[L_x,l_y]\epsilon\delta
+\end{align*}
+
+The commutator is the thing that keeps track of the fact that rotations in different order don't cancel out.
+
+\url{https://youtu.be/o_gafEasmvE?list=PLpi18tMShZSBKLugjxRsN8U5MmILu1nBo&t=1368}
+
+
+\subsection{Grassmann numbers}
 
 \section{A first supersymmetric model}
 
