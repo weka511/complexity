@@ -960,9 +960,14 @@ What is the geometric meaning of the commutator algebra, and the fact that the g
 	V^\dagger U^\dagger VU =& W \text{, some other rotation.}
 \end{align*}
 
-Let's try small rotations: [check this!]
+Let's try small rotations:
 \begin{align*}
-	(I-i\delta L_y) (I-i\epsilon L_x) (I+i\delta L_y) (I+i\epsilon L_x) =& I + 2[L_x,l_y]\epsilon\delta
+	&(I-\underbrace{i\delta L_y}_\text{a}) (I-\underbrace{i\epsilon L_x}_\text{b}) (I+\underbrace{i\delta L_y}_\text{c}) (I+\underbrace{i\epsilon L_x}_\text{d})\\
+	= I +& \delta (\underbrace{-i L_y}_\text{a} + \underbrace{-i L_y}_\text{c}) + \epsilon (\underbrace{-i L_x}_\text{b} + \underbrace{-i L_y}_\text{d}) \\
+	+& \delta^2 \underbrace{\cancel{(-i^2)} L_y^2}_\text{ac} + \epsilon^2 \underbrace{\cancel{(-i^2)} L_x^2}_\text{bd}\\
+	+& \delta \epsilon ( \underbrace{i^2 L_y L_x}_\text{ab}  - \underbrace{i^2 L_y L_x}_\text{ad} -\underbrace{i^2 L_x L_y}_\text{bc} + \underbrace{i^2 L_y L_x}_\text{cd})\\
+	+& \text{ ...}\\
+	\approxeq  I +& \delta^2 L_y^2 + \epsilon^2 L_x^2 +[Lx,Ly] \text{, to 2nd order.}
 \end{align*}
 
 The commutator is the thing that keeps track of the fact that rotations in different order don't cancel out. Whenever you have a group of transformations to whole structure is there in the commutator algebra. You can build any transformation out of a lot of little ones, so if you know how the little ones behave you can figure out the rest.
