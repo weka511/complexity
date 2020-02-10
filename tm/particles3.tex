@@ -773,11 +773,15 @@ Atoms have electrons. There would be partners to photons and electrons--photinos
 
 \section{Propagators and renormalization of mass}
 
-LS wanted to go back over some of the motivations, and repeat some things about divergences that have to do with the renormalization of particles.
+We will go back over some of the motivations, and repeat some things about divergences that have to do with the renormalization of particles.
 
-A lot of particle physics is dependent on Feynman diagrams. We use them to calculate scattering probabilities, particles go in and go out. Feynman diagrams do this very efficiently. You have to sum all the Feynman diagrams that go into the calculation. Another thing Feynman diagrams do is to help you calculate the effective Lagrangian, i.e. an approximate Lagrangian that is effective at removing a lot of the complexity that was to complicated to calculate. An effective Lagrangian typically involves a cutoff, a smallest distance or a largest momentum.
+A lot of particle physics is dependent on Feynman diagrams. We use them to calculate scattering probabilities: particles go in and go out. Feynman diagrams do this very efficiently. You have to sum all the Feynman diagrams that go into the calculation. Another thing Feynman diagrams do is to help you calculate the effective Lagrangian, 
 
-Propagators are the amplitude of putting in a particles at one place and taking it out at another place. They are functions of relative coordinates, $\Delta^\mu$. The propagator can also be Fourier transformed, and expressed as a function of 4 other variables, the Fourier conjugate coordinates, i.e. momentum. The Feynman rules are usually expressed in terms of momentum, but we're not going to do that. In momentum space Feynman diagrams become integrals over momentum. We can think of the Feynman Diagram of Figure \ref{fig:particles3-3-feynman-loop} in two ways:
+\begin{defn}[Effective Lagrangian]
+	An approximate Lagrangian that is effective at removing a lot of the complexity that was to complicated to calculate. An effective Lagrangian typically involves a cutoff, a smallest distance or a largest momentum.
+\end{defn}
+
+The value of a Propagator is the amplitude of putting in a particle at one place and taking it out at another place. Propagators are functions of relative coordinates, $\Delta^\mu$. The propagator can also be Fourier transformed, and expressed as a function of 4 other variables, the Fourier conjugate coordinates, i.e. momentum. The Feynman rules are usually expressed in terms of momentum, but we're not going to do that. In momentum space Feynman diagrams become integrals over momentum. We can think of the Feynman Diagram of Figure \ref{fig:particles3-3-feynman-loop} in two ways:
 \begin{itemize}
 	\item a propagator joining a point with itself;
 	\item an integral over all the momenta that can flow around in this closed loop.
@@ -801,10 +805,10 @@ Feynman diagrams are always sums over all things that can happen. We can think o
 
 Momentum is associated with inverse wavelength, so large momentum is small wavelength. We can think of diagram being in $\vec{k}$ space or $\vec{x}$ space.
 
-What is the propagator between two point for various kinds of particles?
+What is the propagator between two points for various kinds of particles?
 
 \begin{figure}[H]
-	\caption{Propagators. There are two points shown, to emphasize dependence on $x$ and $y$}
+	\caption[Propagators between two points for various kinds of particles.]{Propagators between two points for various kinds of particles. There are two points shown, to emphasize dependence on $x$ and $y$}
 	\begin{subfigure}[t]{0.3\textwidth}
 		\caption{Spin 0}
 		\feynmandiagram{a[particle=\( \boldsymbol{\cdot} \boldsymbol{\cdot} \)]
@@ -828,6 +832,7 @@ What is the propagator between two point for various kinds of particles?
 	\end{subfigure}
 \end{figure}
 
+Propagators look like this:
 \begin{align*}
 	\braket{0|\Phi(x)\Phi(y)|0}& \text{, spin 0--Higgs}\\
 	\braket{0|\Phi^\dagger(x)\Phi(y)|0}& \text{, spin 0 charged}\\
@@ -857,7 +862,7 @@ Propagator can only depend on distance between $x$ and $y$ (homogeneity of space
 	\Delta^2 =& \Delta^\mu\Delta_\mu
 \end{align*}
 
-What happens when there is a mass in a problem? Here is the logic. As a general rule, things with very large momentum forget that the particle has mass. For example, the energy of a particle with momentum $p$:
+What happens when there is a mass in a problem? Here is the logic. As a general rule, things with very large momentum forget that the particle has mass. For example, the energy of a particle with momentum $p$ is:
 \begin{align*}
 	E =& \sqrt{p^2 + m^2} \text{. What happens if $p$ gets very large}\\
 	E \approxeq& \lvert p \rvert \text{, with exact equality for a massless particle}
@@ -870,7 +875,7 @@ This is an example of how a formula forgets mass when $p$ is  large. Large momen
 	\includegraphics{particles3-3-massive-and-massless-propagators}
 \end{figure}
 
-Figure \ref{fig:particles3-3-loops-p} depicts the correction from $\lambda \phi^4$ to the mass term. It gives $\frac{\lambda}{\Delta^2}$, which is infinite for $\Delta=0$. We can't trust or theories for very small distances. We know there is some fuzziness at very small distance, but we know very little about it. 
+Figure \ref{fig:particles3-3-loops-p} depicts the correction from $\lambda \phi^4$ to the mass term. It gives $\frac{\lambda}{\Delta^2}$, which is infinite for $\Delta=0$. We can't trust our theories for very small distances. We know there is some fuzziness at very small distance, but we know very little about it. 
 
 \begin{figure}[h]
 	\begin{center}
@@ -900,22 +905,30 @@ which must have dimension 1, giving $[\Psi]=\frac{1}{\mathfrak{l}^\frac{3}{2}}$ 
 	=& \big(\frac{\Delta_\mu \gamma^\mu}{\Delta^4}\big)_{ij}
 \end{align*}
 
-Recall Figure \ref{fig:particles3-3-loops-p}, and the fact that closed loop diagrams for Bosons are positive, and those for Fermions negative--Theorem \ref{thm:contribution:loops}. Figure \ref{fig:fermion:loop} shows a scalar boson splitting into two Fermions and recombining. The amplitude is $- g^2 \int_\delta^\infty d^4 \Delta \frac{1}{\Delta^6}=-\frac{g^2}{\Delta^2}$.
+Recall Figure \ref{fig:particles3-3-loops-p}, and the fact that closed loop diagrams for Bosons are positive, and those for Fermions negative--Theorem \ref{thm:contribution:loops}. Figure \ref{fig:fermion:loop} shows a scalar boson splitting into two Fermions and recombining. The amplitude is:
+
+\begin{align*}
+	- g^2 \int d^4 \Delta \frac{1}{\Delta^6}& \text{. introducing the cutoff distance $\delta$}\\
+	- g^2 \int_\delta^\infty d^4 \Delta \frac{1}{\Delta^6}&=-\frac{g^2}{\delta^2} \text{, on dimensional grounds.} 
+\end{align*}
 
 \begin{figure}[H]
-	\caption{A scalar boson splitting into two Fermions and recombining, with coupling constants $g$.}\label{fig:fermion:loop}
-	\feynmandiagram[vertical=d to a]{
-		a--[scalar]b[particle=g]--[fermion,half right,edge label=\(\frac{1}{\Delta^3}\)]c[particle=g]--[scalar]d,
-		b--[anti fermion,half left,edge label=\(\frac{1}{\Delta^3}\)]c
-	};
+	\begin{center}
+		\caption{A scalar boson splitting into two Fermions and recombining, with coupling constants $g$.}\label{fig:fermion:loop}
+		\feynmandiagram[vertical=d to a]{
+			a--[scalar]b[particle=g]--[fermion,half right,edge label=\(\frac{1}{\Delta^3}\)]c[particle=g]--[scalar]d,
+			b--[anti fermion,half left,edge label=\(\frac{1}{\Delta^3}\)]c
+		};
+	\end{center}
 \end{figure}
 
-The action is
+What are the dimension of $g$? The action is
 \begin{align*}
 	\int d^4x \big[\bar{\Psi} \gamma^\mu \partial_\mu \Psi + g \phi \bar{\Psi} \Psi\big]
 \end{align*}
-whence g is dimensionless.
+whence $g$ is dimensionless.
 
+Now we have our amplitude $\frac{\lambda}{\delta^2} - \frac{g^2}{\delta^2}$. You would think it would take a miracle for $g^2=\lambda$, that it would require some magical structure, some special symmetry: that is supersymmetry. This is the sort of thing supersymmetry does: it relates coupling coefficients to make things like this happen. Note that the masses have to match for this to work.
 
 
 \section{Symmetry and Grassmann numbers}
