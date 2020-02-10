@@ -4,13 +4,13 @@
 
 \documentclass[]{article}
 
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm,tikz-feynman}
+\usepackage{mathtools,mathrsfs,caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm,tikz-feynman}
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
 \usepackage[toc,page]{appendix}
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
-
+\newcommand{\Lagr}{\mathscr{L}}
 \newtheorem{thm}{Theorem}
 \newtheorem{defn}[thm]{Definition}
 \newtheorem{cor}[thm]{Corollary}
@@ -834,6 +834,8 @@ What is the propagator between two point for various kinds of particles?
 	\braket{0|\Psi^\dagger_i(x)\Psi_j(y)|0}& \text{, spin $\frac{1}{2}$ -- 4 component spinor}\\
 \end{align*}
 
+\subsection{Scalar Bosons}
+
 Mass is inverse length. So a length scale is also a mass scale. But when you are talking about massless particles the only scale is length: dimensional analysis is enough to give the form of the (value of the) propagator. Once there is a mass, then the answer is a little more complicated.
 
 For the massless case we want to figure out the dimensions of $\Psi$: the basic rule is the action is always dimensionless (because $\hslash=1$).
@@ -885,8 +887,23 @@ If we think of Figure \ref{fig:particles3-3-loops-p} representing an integral ov
 
 NB $\frac{e^{- \Delta m}}{\Delta^2}$ doesn't help with small $\Delta$.
 
+\subsection{Fermions}
 
-\url{https://youtu.be/GzoncJBqeNk?t=1981}
+The only difference is the form of the Lagrangian. The action is
+
+\begin{align*}
+	\int d^4x \big[\bar{\Psi} \gamma^\mu \partial_\mu \Psi + m \bar{\Psi} \Psi\big]
+\end{align*}
+which must have dimension 1, giving $[\Psi]=\frac{1}{\mathfrak{l}^\frac{3}{2}}$ (Fermions always have halves!). We find:
+\begin{align*}
+	[\braket{0|\Psi^\dagger_i(x)\Psi_j(y)|0}]=&\frac{1}{\Delta^3} \text{, or, more exactly,}\\
+	=& \big(\frac{\Delta_\mu \gamma^\mu}{\Delta^4}\big)_{ij}
+\end{align*}
+
+
+
+
+\url{https://youtu.be/GzoncJBqeNk?t=2359}
 
 \section{Symmetry and Grassmann numbers}
 
