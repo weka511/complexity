@@ -1,4 +1,7 @@
 % !TeX program = lualatex
+
+%% We need to use lualatex to make some features of tikz-feynman work properly 
+
 \documentclass[]{article}
 
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm,tikz-feynman}
@@ -781,8 +784,13 @@ Propagators are the amplitude of putting in a particles at one place and taking 
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{Simplest Feynman Diagram -- a closed loop with nothing going in or out. It can be thought of as a propagator joining a point with itself.}\label{fig:particles3-3-feynman-loop}
-	\includegraphics{particles3-3-feynman-loop}
+	\begin{center}
+		\caption{Simplest Feynman Diagram -- a closed loop with nothing going in or out. It can be thought of as a propagator joining a point with itself.}\label{fig:particles3-3-feynman-loop}
+		\feynmandiagram{a[particle=\( \boldsymbol{\cdot} \)]
+			--[scalar,half left]b
+			--[scalar,half left]a
+		};
+	\end{center}
 \end{figure}
 
 Feynman diagrams are always sums over all things that can happen. We can think of the divergences as happening in two ways. Either:
@@ -796,10 +804,27 @@ Momentum is associated with inverse wavelength, so large momentum is small wavel
 What is the propagator between two point for various kinds of particles?
 
 \begin{figure}[H]
-	\caption{Propagators}
+	\caption{Propagators. There are two points shown, to emphasize dependence on $x$ and $y$}
 	\begin{subfigure}[t]{0.3\textwidth}
 		\caption{Spin 0}
-		\includegraphics{particles3-3-propagator0}
+		\feynmandiagram{a[particle=\( \boldsymbol{\cdot} \boldsymbol{\cdot} \)]
+			--[scalar,half left]b
+			--[scalar,half left]a
+		};
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Spin $\frac{1}{2}$}
+		\feynmandiagram{a[particle=\( \boldsymbol{\cdot} \boldsymbol{\cdot} \)]
+			--[fermion,half left]b
+			--[fermion,half left]a
+		};
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Spin 1}
+		\feynmandiagram{a[particle=\( \boldsymbol{\cdot} \boldsymbol{\cdot} \)]
+			--[boson,half left]b
+			--[boson,half left]a
+		};
 	\end{subfigure}
 \end{figure}
 
@@ -823,14 +848,46 @@ For the massless case we want to figure out the dimensions of $\Psi$: the basic 
 	[\int d^x \big(\frac{\partial \phi}{\partial x}\big)^2 - \frac{m^2}{2}\phi^2 + \lambda \phi^4] =&[\mathfrak{l}] \text{ requires $\lambda$ dimensionless}
 \end{align*}
 
-Propagator can only depend on distance between $x$ and $y$, and it has to be Lorentz invariant, so it can only depend on the proper distance between the points, whence:
+Propagator can only depend on distance between $x$ and $y$ (homogeneity of space), and it has to be Lorentz invariant, so it can only depend on the proper distance between the points, whence:
 
 \begin{align*}
 	[\braket{0|\Phi(x)\Phi(y)|0}]=&\frac{1}{\Delta}^2 \text{, to within a numerical constant, where}\\
 	\Delta^2 =& \Delta^\mu\Delta_\mu
 \end{align*}
 
-\url{https://youtu.be/GzoncJBqeNk?t=1389}
+What happens when there is a mass in a problem? Here is the logic. As a general rule, things with very large momentum forget that the particle has mass. For example, the energy of a particle with momentum $p$:
+\begin{align*}
+	E =& \sqrt{p^2 + m^2} \text{. What happens if $p$ gets very large}\\
+	E \approxeq& \lvert p \rvert \text{, with exact equality for a massless particle}
+\end{align*} 
+
+This is an example of how a formula forgets mass when $p$ is  large. Large momentum means small mass, so propagators become insensitive to mass at short distances. The Fourier transform of a propagator is a function of momentum, and the high momentum part forgets the mass. But high momentum is intimately connected with short distance. At very short distances, $\frac{1}{\Delta^2}$ is the way the propagator behaves. What is there is mass? How is it corrected? It is corrected by things that can be important at large distances. When $\Delta > \frac{1}{m}$, particle has a harder time propagating a large way. This is why forces mediated by massless particles are longer range than forces mediated by massive particles. So the typical thing that happens approximately is propagator behaves like  $\frac{e^{- \Delta m}}{\Delta^2}$ -- Figure \ref{fig:particles3-3-massive-and-massless-propagators}
+
+\begin{figure}[H]
+	\caption{Massive and Massless propagators}\label{fig:particles3-3-massive-and-massless-propagators}
+	\includegraphics{particles3-3-massive-and-massless-propagators}
+\end{figure}
+
+Figure \ref{fig:particles3-3-loops-p} depicts the correction from $\lambda \phi^4$ to the mass term. It gives $\frac{\lambda}{\Delta^2}$, which is infinite for $\Delta=0$. We can't trust or theories for very small distances. We know there is some fuzziness at very small distance, but we know very little about it. 
+
+\begin{figure}[h]
+	\begin{center}
+		\caption{Correction from $\lambda \phi^4$: 2 particles in and 2 out}\label{fig:particles3-3-loops-p}
+		\feynmandiagram[inline=(b.base),vertical=e3 to e1]{
+			e1--[scalar]e2--[scalar]e3,
+			e2--[scalar,half left]b
+			--[scalar,half left]e2
+		};$\lambda$
+	\end{center}
+\end{figure}
+
+If we think of Figure \ref{fig:particles3-3-loops-p} representing an integral over momenta we are getting too much from high momenta. So you could think of a cutoff at small distances or high momenta.
+
+NB $\frac{e^{- \Delta m}}{\Delta^2}$ doesn't help with small $\Delta$.
+
+
+\url{https://youtu.be/GzoncJBqeNk?t=1981}
+
 \section{Symmetry and Grassmann numbers}
 
 TBP
