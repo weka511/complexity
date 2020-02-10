@@ -981,12 +981,73 @@ Generators of rotations are angular momentum; generators for translations are or
 	\end{center}
 \end{figure}
 
+If you have a legitimate symmetry group, then the energy should not change when you perform an operation.
 
+\begin{align*}
+	H \ket{E} =& E \ket{E}\\
+	HU \ket{E} =& E U\ket{E} \text{, if U is a symmetry}\\
+	=& U H \ket{E} \text{, whence}\\
+	(HU - UH) \ket{E} =& 0 \text{, but the eigenstates are complete, so}\\
+	[H,U]=&0 \text{. Now for any generator $L$}\\
+	[H,I+i \epsilon L]  =& 0 \text{, or}\\
+	[H,L] =& 0 \text{, which implies a conservation law!}
+\end{align*}
 
-\url{https://youtu.be/o_gafEasmvE?list=PLpi18tMShZSBKLugjxRsN8U5MmILu1nBo&t=1929}
+All the symmetries that we have discussed have one thing in common: they transform Fermions into Fermions, Bosons into Bosons. E.g. a colour symmetry takes a quark to a different coloured quark. They don't affect mass.
+
+Supersymmetry transforms a Boson into a Fermion, and vice versa. It ensures that there is a Fermion for every Boson, and vice versa, and enables us to solve the renormalization issues that we have encountered. The mathematics is very strange.
+
+The generators are called $Q$.
+
+\begin{align*}
+	Q \ket{b} =& \ket{f} \numberthis \label{eq:Q:boson}\\
+	Q \ket{f} =& \ket{b}
+\end{align*}
+
+What kind of operator can do that? We can build one from creation and annihilation operators.
+
+\begin{align*}
+	Q =& a^\dagger c + c^\dagger a \\
+	(a^\dagger c + c^\dagger a) \ket{b} =& \ket{f}\\
+	(a^\dagger c + c^\dagger a) \ket{f} =& \ket{b}\\
+	(a^\dagger c + c^\dagger a) \ket{0} = 0 \text{. Doesn't work on vaccum}
+\end{align*}
+
+Consider (\ref{eq:Q:boson}) on a scalar Boson: there must be 2 Qs, as Fermion can be up or down, so we need another index, $\frac{\pm 1}{2}$.
+
+\begin{align*}
+Q_i \ket{b} =& \ket{f_i} \text{, where $i=\frac{\pm 1}{2}$}\\
+Q_i \ket{f_j} =& \ket{b} \text{, if $i=j$}\\
+=& 0 \text{ otherwise.}
+\end{align*}
+
+The $Q_i$ must have an odd number of Fermion operators; up until now we have worked with things with an even number.
+
+We remind ourselves of some properties of creation and annihilation operators. For Bosons:
+\begin{align*}
+	[a_i,a_j] =& 0\\
+	[a_i^\dagger,a_j^\dagger]=&0\\
+	[a,a^\dagger] =& 1\\
+	a_i^\dagger a_j^\dagger \ket{0} =& a_j^\dagger a_i^\dagger \ket{0} \text{, symmetry under interchange of Bosons}
+\end{align*}
+
+For Fermions:
+\begin{align*}
+	\{c,c\}=& 0\\
+	\{c^\dagger, c^\dagger \}=&0 \text{, Pauli Exclusion pronciple}\\
+	\{c, c^\dagger \}=&1\\
+	c_i^\dagger c_j^\dagger \ket{0} =& -c_j^\dagger c_i^\dagger \ket{0} 
+\end{align*}
+
+The character of Fermions and Bosons is encoded in the commutation and anticommutation relations. The square of a Fermion operator being zero is very different from Bosons. When you build up a large number of Bosons they behave more or less classically. 
+
+There is a generalization of mathematics in which numbers anticommute.
+
 
 
 \subsection{Grassmann numbers}
+
+\url{https://youtu.be/o_gafEasmvE?list=PLpi18tMShZSBKLugjxRsN8U5MmILu1nBo&t=4069}
 
 \section{A first supersymmetric model}
 
