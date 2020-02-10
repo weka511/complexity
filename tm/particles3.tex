@@ -557,7 +557,7 @@ We'll be dealing with diagrams that are very simple. They are just Feynman diagr
 	\end{center}
 \end{figure}
 
-\begin{thm}[Contribution of loops to vacuum energy]
+\begin{thm}[Contribution of loops to vacuum energy]\label{thm:contribution:loops}
 	
 	\begin{enumerate}
 		\item The contribution to the vacuum energy of a loop of Bosons is positive;
@@ -900,10 +900,23 @@ which must have dimension 1, giving $[\Psi]=\frac{1}{\mathfrak{l}^\frac{3}{2}}$ 
 	=& \big(\frac{\Delta_\mu \gamma^\mu}{\Delta^4}\big)_{ij}
 \end{align*}
 
+Recall Figure \ref{fig:particles3-3-loops-p}, and the fact that closed loop diagrams for Bosons are positive, and those for Fermions negative--Theorem \ref{thm:contribution:loops}. Figure \ref{fig:fermion:loop} shows a scalar boson splitting into two Fermions and recombining. The amplitude is $- g^2 \int_\delta^\infty d^4 \Delta \frac{1}{\Delta^6}=-\frac{g^2}{\Delta^2}$.
+
+\begin{figure}[H]
+	\caption{A scalar boson splitting into two Fermions and recombining, with coupling constants $g$.}\label{fig:fermion:loop}
+	\feynmandiagram[vertical=d to a]{
+		a--[scalar]b[particle=g]--[fermion,half right,edge label=\(\frac{1}{\Delta^3}\)]c[particle=g]--[scalar]d,
+		b--[anti fermion,half left,edge label=\(\frac{1}{\Delta^3}\)]c
+	};
+\end{figure}
+
+The action is
+\begin{align*}
+	\int d^4x \big[\bar{\Psi} \gamma^\mu \partial_\mu \Psi + g \phi \bar{\Psi} \Psi\big]
+\end{align*}
+whence g is dimensionless.
 
 
-
-\url{https://youtu.be/GzoncJBqeNk?t=2359}
 
 \section{Symmetry and Grassmann numbers}
 
