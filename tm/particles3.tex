@@ -1047,7 +1047,60 @@ There is a generalization of mathematics in which numbers anticommute.
 
 \subsection{Grassmann numbers}
 
-\url{https://youtu.be/o_gafEasmvE?list=PLpi18tMShZSBKLugjxRsN8U5MmILu1nBo&t=4069}
+Fermion fields are Grassmann numbers, and so are the generators of Supersymmetry. Grassmann number anticommute.
+
+We start with a collection of ordinary numbers $\{\alpha_i\}$. We know that:
+\begin{align*}
+	\alpha_j \alpha_j =& \alpha_j \alpha_i
+\end{align*}
+
+We invent the Grassmann numbers $\{ \theta_i\}$, with the property:
+\begin{align*}
+	\{\theta_i,\theta_j\} =& 0 \text{, or}\\
+	\theta_i \theta_j =& - \theta_j \theta_i \text{, whence}\\
+	\theta_i^2 =& 0
+\end{align*}
+
+Imagine that there were only one Grassmann number, $\theta$, say. We suppose that ordinary numbers commute with Grassmann numbers, $[\alpha,\theta]=0$.
+
+They are a bit like odd and even:
+\begin{itemize}
+	\item the product of two ordinary numbers is ordinary;
+	\item the product of two Grassmann numbers is ordinary;
+	\item the product or an ordinary number and a Grassmann number is Grassmann.
+\end{itemize}
+
+If there is only one Grassmann number\footnote{To within a 1-D vector space}, the function we can build are limited. E.g.
+\begin{align*}
+	\alpha& + \beta \theta + \underbrace{\gamma \theta^2}_\text{$=0$} 
+\end{align*}
+
+Now suppose there are two\footnote{To within a 2-D vector space}
+\begin{align*}
+	\alpha& + \beta_1 \theta_1 + \beta_2 \theta_2 + \gamma \theta_1 \theta_2 \text{, where}\\
+	\theta_1 \theta_2& \ne 0\\
+	(\theta_1 \theta_2)^2& = 0
+\end{align*}
+
+If there is only one Grassmann number we can construct exponentials.
+\begin{align*}
+	e^{\alpha \theta} 	e^{\beta \theta} =& (1+\alpha \theta)(1+\beta \theta)\\
+	=& [1+(\alpha + \beta) \theta]\\
+	=& e^{(\alpha + \beta) \theta} 
+\end{align*}
+
+What about two $\theta$s? We can show:
+\begin{align*}
+	e^(\theta_1 + \theta_2) =& e^{\theta_1} + e^{\theta_2} \text{. Actually we saw in Lecture this isn't true!}
+\end{align*}
+
+We can integrate and differentiate Grassmann numbers.
+\begin{align*}
+	\frac{\partial}{\partial \theta_1} \big(\alpha + \beta_1 \theta_1 + \beta_2 \theta_2 + \gamma \theta_1 \theta_2 \big) =& \beta_1 + \gamma \theta_2\\
+	\frac{\partial}{\partial \theta_2} \big(\alpha + \beta_1 \theta_1 + \beta_2 \theta_2 + \gamma \theta_1 \theta_2 \big) =& \beta_2 - \gamma \theta_1
+\end{align*}
+
+When you pass derivative though Grassmann number, change sign.
 
 \section{A first supersymmetric model}
 
