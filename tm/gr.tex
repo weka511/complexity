@@ -350,6 +350,8 @@ LS presents usual properties, and shows that $g_{mn}$ is a symmetric tensor. He 
 
 ''General Relativity has a reputation for being very difficult. I think the reason is because it's very difficult.''--Leonard Susskind
 
+\subsection{Flatness}
+
 A flat geometry is one where all Euclid's postulates are true. It is characterized in terms of the metric, not that $g_{i,j} = \delta_{i,j}$, but rather that coordinates can be found where the metric has such a simple form. More generally, given a metric that is smooth and has all the good differential properties, the problem of determining whether or not that space is flat is somewhat difficult. The bad way is to consider all coordinate systems, calculate the metric, and calculate whether it has the required for. The good way is to look for diagnostic quantities, things you can calculate which, if they are zero everywhere the space is flat; if they are non-zero anywhere it means the space is curved there. The diagnostic quantity is called the curvature tensor.
 
 Where want to find a tensor $R$ such that $R=0$ in a flat space.
@@ -388,6 +390,8 @@ Where want to find a tensor $R$ such that $R=0$ in a flat space.
 \end{proof}
 The problem is that we can't extend away from $x_0$, except in a flat space. The problem is the second derivatives. In general $\frac{\partial^2 g_{m,n}(x_0)}{\partial x^r \partial x^s}\ne0$. The metric is locally flat.
 
+\subsection{Gaussian normal coordinates}
+
 \begin{itemize}
 	\item Can we construct a derivative of a tensor?
 	\item What does it mean for one vector to be the same as another at a different point? Equality of components isn't enough--Figure \ref{fig:gr-4-equality-of-vectors}. 
@@ -399,6 +403,8 @@ The problem is that we can't extend away from $x_0$, except in a flat space. The
 		\includegraphics{gr-4-equality-of-vectors}
 	\end{center}
 \end{figure}
+
+\subsection{Covariant Derivatives}
 
 We need a better definition of the derivative of a vector.
 
@@ -447,7 +453,47 @@ Now we take (\ref{eq:D:d:3}) + (\ref{eq:D:d:2}) - (\ref{eq:D:d:1}).
 	\Gamma\indices{^t_{mn}} =& \frac{1}{2}\big[\partial_n g_{sm} + \partial_m g_{sn}- \partial_s g_{mn}\big]  g^{st}   \numberthis \label{eq:christoffel}
 \end{align*}
 
-\url{https://youtu.be/cyW0LWEACfI?t=4586}
+\subsection{The Riemann Curvature Tensor}
+
+We want to define curvature. Consider Figures \ref{fig:gr-4-curved-cone} and \ref{fig:gr-4-curved-cone-vector-field} show that the direction of a vector field changes if we transport it around in a surface that is curved, even though we transported it parallel to itself, i.e. the covariant derivative was zero.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Illustrating curvature}
+		\begin{subfigure}[t]{0.4\textwidth}
+			\caption{A cone, which is flat everywhere except at the top.}\label{fig:gr-4-curved-cone}
+			\includegraphics[width=0.9\textwidth]{gr-4-curved-cone}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.4\textwidth}
+			\caption{Vector field is transported around cone: angle to cut changes!}\label{fig:gr-4-curved-cone-vector-field}
+			\includegraphics[width=0.9\textwidth]{gr-4-curved-cone-vector-field}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+Figure \ref{fig:gr-4-2D} transports a vector along two paths. In a flat space two transported vectors will be identical, $D_r D_s V_m = D_s D_r V_m$, but this is not true in curved space.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Compare vector along two paths}\label{fig:gr-4-2D}
+		\includegraphics{gr-4-2D}
+	\end{center}
+\end{figure}
+
+\begin{align*}
+	D_s d_r V_m =& D_s \big[ \partial_r V_m -\Gamma \indices{_{rn}^t} V_t\big]\\
+	D_s d_r V_m - D_r d_s V_m =& R\indices{_{sr}^t_n} V_t \text{, where the Riemann curvature tensor is}\\
+	R\indices{_{sr}^t_n} =& \partial_r \Gamma \indices{_{sn}^t} - \partial_s \Gamma \indices{_{rn}^t} + \Gamma \indices{_{sn}^p} \Gamma \indices{_{pr}^t}- \Gamma \indices{_{rn}^p} \Gamma \indices{_{ps}^t} 
+\end{align*}
+
+The curvature tensor indicates whether or not a space is flat, and it includes the today forces.
+
+In Figure \ref{fig:gr-3-move-links} we see the geometric interpretation of {$D_s d_r V_m - D_r d_s V_m$. It measures the stretching that happens when we move the structure of links into the curved region.
+
+\begin{figure}[H]
+	\caption[Geometric meaning of $D_s d_r V_m - D_r d_s V_m$]{$D_s d_r V_m - D_r d_s V_m$ measuring the stretching that happens when we move the structure of links into the curved region.}\label{fig:gr-3-move-links}
+	\includegraphics{gr-3-move-links}
+\end{figure}
+
 
 \section{Geodesics \& gravity}
 
