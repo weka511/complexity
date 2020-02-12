@@ -1,8 +1,8 @@
 \documentclass[]{article}
 
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,thmtools,gensymb,braket,bm}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel}
 \usepackage[toc,nonumberlist]{glossaries}
-\usepackage{glossaries-extra}
+\usepackage{glossaries-extra,thmtools,gensymb,braket,bm,tensor}
 \usepackage[toc,page]{appendix}
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
@@ -345,14 +345,53 @@ Also if a tensor is zero in one frame it is zero in all frames: if a tensor equa
 
 LS presents usual properties, and shows that $g_{mn}$ is a symmetric tensor. He points out that eigenvalues cannot be zero, as otherwise we'd have an elementary vector of zero length. Hence it has an inverse: $g^{mn}g_{np}=\delta_m^p$.
 
-\subsection{Scalar and tensor fields}
-\subsection{Tensor analysis}
-
-\url{https://youtu.be/5VKyRVLMMQ4?t=5658}
 
 \section{Flatness \& curvature}
 
-TBP
+''General Relativity has a reputation for being very difficult. I think the reason is because it's very difficult.''--Leonard Susskind
+
+A flat geometry is one where all Euclid's postulates are true. It is characterized in terms of the metric, not that $g_{i,j} = \delta_{i,j}$, but rather that coordinates can be found where the metric has such a simple form. More generally, given a metric that is smooth and has all the good differential properties, the problem of determining whether or not that space is flat is somewhat difficult. The bad way is to consider all coordinate systems, calculate the metric, and calculate whether it has the required for. The good way is to look for diagnostic quantities, things you can calculate which, if they are zero everywhere the space is flat; if they are non-zero anywhere it means the space is curved there. The diagnostic quantity is called the curvature tensor.
+
+Where want to find a tensor $R$ such that $R=0$ in a flat space.
+
+\begin{align*}
+	ds^2 =& g\indices{_{mn}}(x) dx^m dx^n\\
+	\exists  g\indices{^{mn}} \mid  g\indices{^{mn}} g\indices{_{nr}} =& \delta\indices{^m_r}\\
+	V^m g_{mn} =& V_n\\
+	V_m g^{mn} =& V^n
+\end{align*}
+ 
+ In Riemannian geometry, unlike Einsteinian, $ds^2 \ge 0$.
+ 
+ \begin{thm}[Gaussian Normal coordinates--Figure \ref{fig:gr-4-gaussian-normal}]
+ 	At every point, $x_0$ you can choose coordinates such that:
+ 	\begin{align*}
+ 	g_{mn}(x_0)=&\delta_{mn}, \text{, and} \numberthis \label{eq:gnf1}\\
+ 	\frac{\partial g_{m,n}(x_0)}{\partial x^r}=&0 \numberthis \label{eq:gnf2}
+ 	\end{align*}
+ \end{thm}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Gaussian Normal Form}\label{fig:gr-4-gaussian-normal}
+		\includegraphics{gr-4-gaussian-normal}
+	\end{center}
+\end{figure}
+
+\begin{proof}
+	Start with some coordinates $y$ and derive new coordinates $x$.
+	\begin{align*}
+		x^m = y^m + c\indices{^m_{nr}} y^n y^r \text{, assume the same origin.}
+	\end{align*}
+	In 4 dimensional space there are 40 combinations of $m$, $n$ and $r$; there are 40 coefficients $c\indices{^m_{nr}}$. Moreover (\ref{eq:gnf2}) is actually 40 equations, so we can choose the $c\indices{^m_{nr}}$ so (\ref{eq:gnf2})  is satisfied.
+	How do we get the flat metric?
+\end{proof}
+The problem is that we can't extend away from $x_0$, except in a flat space. The problem is the second derivatives. In general $\frac{\partial^2 g_{m,n}(x_0)}{\partial x^r \partial x^s}\ne0$. The metric is locally flat.
+
+Can we construct a derivative of a tensor?
+
+
+\url{https://youtu.be/cyW0LWEACfI?t=2388}
 
 \section{Geodesics \& gravity}
 
