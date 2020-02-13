@@ -49,14 +49,14 @@ Figure \ref{fig:gr-1-elevator} depicts an elevator. Assuming we know the laws of
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Moving Elevator]{Moving Elevator: there are two coordinate systems, $z$ and $z^\prime$, and $L(t)$ alows us to pass from one to the other.}\label{fig:gr-1-elevator}
-		\includegraphics{gr-1-elevator}
+		\caption[Moving Elevator]{Moving Elevator: there are two coordinate systems, $z$ and $z^\prime$, and $L(t)$ allows us to pass from one to the other.}\label{fig:gr-1-elevator}
+		\includegraphics[width=0.4\textwidth]{gr-1-elevator}
 	\end{center}
 \end{figure}
 
-In this lecture we'll ignore Special Relativity, which is tantamount to setting $c=\infty$, or assuming all velocities very small. If General Relativity is the generalization of Special Relativity, how did Einstein get away with ignoring Special Relativity? The answer is that Special Relativity is about high velocities. Gravity has to do with heavy masses. There are situation where the mass is high, but the velocity isn't. Einstein started thinking about these situations, and then combined it with Special relativity to think about the combination of high masses and high velocities.
+In this lecture we'll ignore Special Relativity, which is tantamount to setting $c=\infty$ or assuming all velocities very small. If General Relativity is the generalization of Special Relativity, how did Einstein get away with ignoring Special Relativity? The answer is that Special Relativity is about high velocities. Gravity has to do with heavy masses. There are situation where the mass is high, but the velocity isn't. Einstein started thinking about these situations, and then combined it with Special Relativity to think about the combination of high masses and high velocities.
 
-Let's think about inertial reference frames. If $z$ and $x^\prime$ are inertial, they are related by uniform velocity, so we nave the coordinate transformation:
+Let's think about inertial reference frames. If $z$ and $z^\prime$ are inertial, they are related by uniform velocity, so we have the coordinate transformation:
 
 \begin{align*}
 	L(t)=&vt\\
@@ -79,7 +79,7 @@ Now let's go to an accelerated frame--Figure \ref{fig:gr-1-elevator-accelerated}
 \begin{figure}[H]
 	\begin{center}
 		\caption{Elevator in a accelerated Frame}\label{fig:gr-1-elevator-accelerated}
-		\includegraphics{gr-1-elevator-accelerated}
+		\includegraphics[width=0.4\textwidth]{gr-1-elevator-accelerated}
 	\end{center}
 \end{figure}
 
@@ -101,17 +101,24 @@ We will continue to assume that Newton's laws hold in the $z$ frame of reference
 The fictitious force looks like a uniform gravitational field. The special property of gravity is that gravitational forces are proportional to mass. That has a deep implication: the mass cancels, so the motion doesn't depend on the mass. Most people before Einstein considered this largely an accident. People know that acceleration mimicked gravity; Einstein said it was deep principle of nature. Figure \ref{fig:gr-1-coordinates-const} shows the coordinate transformation for constant velocity. Straight lines go to straight lines. Figure \ref{fig:gr-1-coordinates-accelerated} shows the results of accelerating the coordinate system: straight lines are not preserved. We have a curvy linear transformation. Einstein understood very early that there is a connection between gravity and curvy linear transformations of spacetime. Special Relativity was all about linear transformations
 
 \begin{figure}[H]
-	\caption[Coordinate Transformation for constant velocity]{Coordinate Transformation for constant velocity. Green represents constant $z^\prime$}\label{fig:gr-1-coordinates-const}
-	\includegraphics{gr-1-coordinates-const}
+	\begin{center}
+		\caption{Coordinate Transformation for constant velocity versus accelerated}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Coordinate Transformation for constant velocity. Green represents 	constant $z^\prime$}\label{fig:gr-1-coordinates-const}
+			\includegraphics[width=\textwidth]{gr-1-coordinates-const}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.4\textwidth}
+			\caption{Coordinate Transformation 		accelerated}\label{fig:gr-1-coordinates-accelerated}
+			\includegraphics[width=\textwidth]{gr-1-coordinates-accelerated}
+		\end{subfigure}
+	\end{center}
 \end{figure}
 
-\begin{figure}[H]
-	\caption{Coordinate Transformation accelerated}\label{fig:gr-1-coordinates-accelerated}
-	\includegraphics{gr-1-coordinates-accelerated}
-\end{figure}
+
 
 \subsubsection{Example: what is the influence of gravity on light?}
-In 1907 most physicists would have thought there was no effect. Einstein argued from the equivalence principle that grapity would affect light. Consider a beam of light in our elevator--Figure \ref{fig:gr-1-elevator-accelerated}.
+In 1907 most physicists would have thought there was no effect. Einstein argued from the equivalence principle that gravity would affect light. Consider a beam of light in our elevator--Figures \ref{fig:gr-1-light-in-elevator} and \ref{fig:gr-1-elevator-accelerated-curved-path}.
 
 \begin{figure}[H]
 	\caption{What is the influence of gravity on light? }
@@ -127,8 +134,8 @@ In 1907 most physicists would have thought there was no effect. Einstein argued 
 
 We'll write down the equation for the path of the light beam:
 \begin{align*}
-	x =& ct \text{ in the $z$ frame}\\
-	z =& 0 \text{, but in the moving frams}\\
+	x =& ct \text{ in the $z$ frame, and}\\
+	z =& 0 \text{; in the moving frams}\\
 	z^\prime + g\frac{t^2}{2} =&0 \text{, which is curved--Figure \ref{fig:gr-1-elevator-accelerated-curved-path}}
 \end{align*}
 
@@ -147,38 +154,46 @@ What we have learned.
 	\item One thing that happens is that apparent  gravitational fields  materialize that are apparently indistinguishable from ordinary gravitational fields.
 \end{enumerate}
 
-But are they really indistinguishable? Not really. Let's t1lk about gravitational fields generated by the Sun or the Earth--Figure \ref{fig:gr-1-suns-gravitational-field}. It is pretty obvious that there is no way to do a coordinate transformation like the ones we've been discussing which will remove the gravitational field. In \ref{fig:gr-1-suns-gravitational-field-local} we are in a laboratory we can transform away the field locally,  but there is no way to get rid of the fact that we are dealing with a filed that is inwards globally.
+But are they really indistinguishable? Not really. Let's talk about gravitational fields generated by the Sun or the Earth--Figure \ref{fig:gr-1-suns-gravitational-field}. It is pretty obvious that there is no way to do a coordinate transformation like the ones we've been discussing which will remove the gravitational field. In \ref{fig:gr-1-suns-gravitational-field-local} we are in a laboratory we can transform away the field locally,  but there is no way to get rid of the fact that we are dealing with a field that is inwards globally.
 
 \begin{figure}[H]
-	\caption{Sun's Gravitational Field}
-	\begin{subfigure}[t]{0.5\textwidth}
-		\caption{There is no way to do a coordinate transformation like the ones we've been discussing which will remove the gravitational field}\label{fig:gr-1-suns-gravitational-field}
-		\includegraphics[width=\textwidth]{gr-1-suns-gravitational-field}
-	\end{subfigure}
-	\begin{subfigure}[t]{0.5\textwidth}
-		\caption{If we are in a laboratory we can transform away the field locally, but there is no way to get rid of the fact that we are dealing with a filed that is inwards globally.}\label{fig:gr-1-suns-gravitational-field-local}
-		\includegraphics[width=\textwidth]{gr-1-suns-gravitational-field-local}
-	\end{subfigure}
+	\begin{center}
+		\caption{Sun's Gravitational Field}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{There is no way to do a coordinate transformation like the ones we've 	been discussing which will remove the gravitational field}\label{fig:gr-1-suns-gravitational-field}
+			\includegraphics[width=\textwidth]{gr-1-suns-gravitational-field}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{If we are in a laboratory we can transform away the field locally, but 	there is no way to get rid of the fact that we are dealing with a field that is inwards globally.}\label{fig:gr-1-suns-gravitational-field-local}
+			\includegraphics[width=\textwidth]{gr-1-suns-gravitational-field-local}
+		\end{subfigure}
+	\end{center}
 \end{figure}
 
-Figure \ref{fig:2000:mile:man} shows why we can't transform the field away. In Figure \ref{fig:gr-1-suns-gravitational-field-2000-mile-ff} is oriented with his feet towards the Sun: fe feels a tidal pull, as his feet are closer to the Sun than his head. In Figure \ref{fig:gr-1-suns-gravitational-field-2000-mile} he feels pressure at his head and feet. Being squashed is not something we can get rid of by performing a coordinate transformation. So it is not true that gravity is equivalent to a coordinate transformation. Einstein said that for small objects and small times, gravity was equivalent to a coordinate transformation.
+Figure \ref{fig:2000:mile:man} shows why we can't transform the field away. In Figure \ref{fig:gr-1-suns-gravitational-field-2000-mile-ff} 2000 Mile Man is oriented with his feet towards the Sun: he feels a tidal pull, as his feet are closer to the Sun than his head. In Figure \ref{fig:gr-1-suns-gravitational-field-2000-mile} he feels pressure at his head and feet. Being squashed is not something we can get rid of by performing a coordinate transformation. So it is not true that gravity is equivalent to a coordinate transformation. Einstein said that for small objects and small times, gravity was equivalent to a coordinate transformation.
 \begin{figure}[H]
-	\caption{2000 mile man}\label{fig:2000:mile:man}
-		\begin{subfigure}[t]{0.5\textwidth}
-		\caption{If we are in a laboratory we can transform away the field locally, but there is no way to get rid of the fact that we are dealing with a filed that is inwards globally.}\label{fig:gr-1-suns-gravitational-field-2000-mile-ff}
-		\includegraphics[width=\textwidth]{gr-1-suns-gravitational-field-2000-mile-ff}
-	\end{subfigure}
-	\begin{subfigure}[t]{0.5\textwidth}
-		\caption{If we are in a laboratory we can transform away the field locally, but there is no way to get rid of the fact that we are dealing with a filed that is inwards globally.}\label{fig:gr-1-suns-gravitational-field-2000-mile}
-		\includegraphics[width=\textwidth]{gr-1-suns-gravitational-field-2000-mile}
-	\end{subfigure}
+	\begin{center}
+		\caption{2000 mile man}\label{fig:2000:mile:man}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{ 2000 Mile Man is oriented with his feet towards the Sun: he feels a 	tidal pull, as his feet are closer to the Sun than his head. }\label{fig:gr-1-suns-gravitational-field-2000-mile-ff}
+			\includegraphics[width=\textwidth]{gr-1-suns-gravitational-field-2000-mile-ff}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{This time our hero feels pressure at his head and feet. Being squashed 	is not something we can get rid of by performing a coordinate transformation.}\label{fig:gr-1-suns-gravitational-field-2000-mile}
+			\includegraphics[width=\textwidth]{gr-1-suns-gravitational-field-2000-mile}
+		\end{subfigure}
+	\end{center}
 \end{figure}
 
-That raises a question: if I present you with a force field, e.g. the force field of uniform acceleration--Figure \ref{fig:gr-1-uniform-force-field}--you can make it look more complicated via a suitable transformation. If transformation involve the $x$ axis it can make the field bend. Or accelerate along $z$ while oscillating along $x$. This will give a complicated apparent gravitational field. If I tell you what the field is everywhere, how do I determine if it is just a fake gravitational field, from acceleration, or a real genuine one? If it is Newtonian gravitational field, just calculate the tidal forces on a freely falling object. If there is squeezing or stretching we have gravity,  otherwise not. If you can transform the field away it is not real gravity, otherwise it is real (can detect tidal forces via crystal).
+That raises a question: if I present you with a force field, e.g. the force field of uniform acceleration--Figure \ref{fig:gr-1-uniform-force-field}--you can make it look more complicated via a suitable transformation. If a transformation involve the $x$ axis it can make the field bend, or accelerate along $z$ while oscillating along $x$. This will give a complicated apparent gravitational field. If I tell you what the field is everywhere, how do I determine if it is just a fake gravitational field, from acceleration, or a real genuine one? If it is Newtonian gravitational field, just calculate the tidal forces on a freely falling object. If there is squeezing or stretching we have gravity,  otherwise not. If you can transform the field away it is not real gravity, otherwise it is real (can detect tidal forces via crystal).
 
 \begin{figure}[H]
-	\caption{Uniform Force Field}\label{fig:gr-1-uniform-force-field}
-	\includegraphics{gr-1-uniform-force-field}
+	\begin{center}
+		\caption{Uniform Force Field}\label{fig:gr-1-uniform-force-field}
+		\includegraphics[width=0.5\textwidth]{gr-1-uniform-force-field}
+	\end{center}
 \end{figure}
 
 
@@ -189,7 +204,7 @@ Einstein asked what kind of mathematics he needed to answer the questions about 
 	ds^2 =& dx^2 -dt^2
 \end{align*}
 
-Einstein realized that the problem of deciding whether or not a gravitation filed was real was similar to a problem that Riemann had explored, deciding whether or not a space was flat. Riemann had not considered metrics with a minus sign. In Euclidean space:
+Einstein realized that the problem of deciding whether or not a gravitation field was real was similar to a problem that Riemann had explored, deciding whether or not a space was flat. Riemann had not considered metrics with a minus sign. In Euclidean space:
 \begin{align*}
 	ds^2 =& \sum (dx^i)^2 \numberthis \label{eq:euclidean:metric}
 \end{align*}
@@ -257,7 +272,7 @@ To define more general tensors, consider products of vectors -- e.g.
 	V^mU^n=&T^{mn} \text{, contravariant tensor of rank 2 }
 \end{align*}
 
-LS derived the transformation properties, and showed that $g_mn$ is covariant.
+LS derived the transformation properties, and showed that $g_{mn}$ is covariant.
 
 
 \section{Tensor mathematics}
