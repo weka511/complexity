@@ -33,7 +33,7 @@
 \listoftables
 \listoftheorems
 
-\section{The Equivalence Principle and Tensor Analysis}
+\section{The Equivalence Principle \& Tensor Analysis}
 
 LS begins where Einstein started. Einstein started with the simplest things and deduced far racing conclusions.
 
@@ -48,8 +48,10 @@ If we are in an accelerated frame of reference, an elevator moving up or down sa
 Figure \ref{fig:gr-1-elevator} depicts an elevator. Assuming we know the laws of physics in the $z$ frame, surely we can figure then out in $z^\prime$.
 
 \begin{figure}[H]
-	\caption[Moving Elevator]{Moving Elevator: there are two coordinate systems, $z$ and $z^\prime$, and $L(t)$ alows us to pass from one to the other.}\label{fig:gr-1-elevator}
-	\includegraphics{gr-1-elevator}
+	\begin{center}
+		\caption[Moving Elevator]{Moving Elevator: there are two coordinate systems, $z$ and $z^\prime$, and $L(t)$ alows us to pass from one to the other.}\label{fig:gr-1-elevator}
+		\includegraphics{gr-1-elevator}
+	\end{center}
 \end{figure}
 
 In this lecture we'll ignore Special Relativity, which is tantamount to setting $c=\infty$, or assuming all velocities very small. If General Relativity is the generalization of Special Relativity, how did Einstein get away with ignoring Special Relativity? The answer is that Special Relativity is about high velocities. Gravity has to do with heavy masses. There are situation where the mass is high, but the velocity isn't. Einstein started thinking about these situations, and then combined it with Special relativity to think about the combination of high masses and high velocities.
@@ -75,8 +77,10 @@ Now introduce Newton's 2nd law of motion. How does this change under the coordin
 Now let's go to an accelerated frame--Figure \ref{fig:gr-1-elevator-accelerated}.
 
 \begin{figure}[H]
-	\caption{Elevator in a accelerated Frame}\label{fig:gr-1-elevator-accelerated}
-	\includegraphics{gr-1-elevator-accelerated}
+	\begin{center}
+		\caption{Elevator in a accelerated Frame}\label{fig:gr-1-elevator-accelerated}
+		\includegraphics{gr-1-elevator-accelerated}
+	\end{center}
 \end{figure}
 
 The coordinate transformation is now:
@@ -193,8 +197,10 @@ Einstein realized that the problem of deciding whether or not a gravitation file
 Gauss had already understood that in non-Euclidean spaces the formula for distance on a surface was more complicated. Riemann took the next step. Consider a curved surface (let's not worry what this means exactly), and lay out coordinates as in Figure \ref{fig:gr-1-curved-surface-coordinates}.
  
 \begin{figure}[H]
-	\caption[Curved Surface with coordinates]{Curved Surface with coordinates. Don't worry about straight lines.}\label{fig:gr-1-curved-surface-coordinates}
-	\includegraphics{gr-1-curved-surface-coordinates}
+	\begin{center}
+		\caption[Curved Surface with coordinates]{Curved Surface with coordinates. Don't worry about straight lines.}\label{fig:gr-1-curved-surface-coordinates}
+		\includegraphics{gr-1-curved-surface-coordinates}
+	\end{center}
 \end{figure} 
 
 The formula for the distance between two close points becomes:
@@ -424,9 +430,9 @@ We need a better definition of the derivative of a vector.
 
 We find:
 \begin{align*}
-	D_r V_m =& \partial r V_{m} - \Gamma\indices{^t_{rm}} V^t \text{, covariant derivative.}\\
+	D_r V_m =& \partial r V_{m} - \Gamma\indices{^t_{rm}} V^t \text{, covariant derivative.} \numberthis \label{eq:covariant_1}\\
 	\Gamma\indices{^t_{rm}} =& \Gamma\indices{^t_{rm}}\numberthis \label{eq:symmetry:Gamma}\\
-	D_r T_{mn} =& \partial_r T_{mn} - \Gamma\indices{^t_{rm}} T_{tn} - \Gamma\indices{^t_{rn}} T_{tm}
+	D_r T_{mn} =& \partial_r T_{mn} - \Gamma\indices{^t_{rm}} T_{tn} - \Gamma\indices{^t_{rn}} T_{mt} \numberthis \label{eq:covariant_2}
 \end{align*}
 
 $\Gamma$ is known a "connection", or a Christoffel symbol; which contains various $\frac{\partial g_{m,n}}{\partial x^r}$, which are zero in Gaussian Normal coordinates.
@@ -439,19 +445,27 @@ $\Gamma$ is known a "connection", or a Christoffel symbol; which contains variou
 	The result follows from the fact that the metric tensor has zero derivatives at $x_0$ in Gaussian Normal coordinates, and the definition of covariant derivative is to differentiate in Gaussian Normal coordinates and treat the result as a tensor.
 \end{proof}
 
-\begin{align*}
-	D_s g_{mn} =& \partial_s g_{mn} - \Gamma\indices{^t_{sm}} g_{tn} - \Gamma\indices{^t_{sn}} g_{tm} 	=& 0 \numberthis \label{eq:D:d:1}\\
-	D_m g_{sn} =& \partial_m g_{sn} - \underbrace{\Gamma\indices{^t_{sm}}}_\text{From (\ref{eq:symmetry:Gamma})} g_{tn} - \Gamma\indices{^t_{mn}} g_{st} 	=& 0 \numberthis \label{eq:D:d:2}\\
-	D_n g_{sm} =& \partial_n g_{sm} - \Gamma\indices{^t_{sn}} g_{tm} - \Gamma\indices{^t_{mn}} g_{st} 	=& 0 \numberthis \label{eq:D:d:3}
-\end{align*}
+\begin{thm}[Christoffel symbols]
+	\begin{align*}
+		\Gamma\indices{^t_{mn}} =& \frac{1}{2}\big[\partial_n g_{sm} + \partial_m g_{sn}- \partial_s g_{mn}\big]  g^{st}   \numberthis \label{eq:christoffel}
+	\end{align*}
+\end{thm}
 
-Now we take (\ref{eq:D:d:3}) + (\ref{eq:D:d:2}) - (\ref{eq:D:d:1}).
-
-\begin{align*}
-	\partial_n g_{sm} + \partial_m g_{sn}- \partial_s g_{mn} =& \bcancel{\Gamma\indices{^t_{sn}} g_{tm}} + \Gamma\indices{^t_{mn}} g_{st} + \cancel{\Gamma\indices{^t_{sm}}g_{tn}} + \Gamma\indices{^t_{mn}} g_{st} - \cancel{\Gamma\indices{^t_{sm}} g_{tn}} - \bcancel{\Gamma\indices{^t_{sn}} g_{tm}} \\
-	=&2 \Gamma\indices{^t_{mn}} g_{st} \text{, whence}\\
-	\Gamma\indices{^t_{mn}} =& \frac{1}{2}\big[\partial_n g_{sm} + \partial_m g_{sn}- \partial_s g_{mn}\big]  g^{st}   \numberthis \label{eq:christoffel}
-\end{align*}
+\begin{proof}
+	\begin{align*}
+		D_s g_{mn} =& \partial_s g_{mn} - \Gamma\indices{^t_{sm}} g_{tn} - \Gamma\indices{^t_{sn}} g_{tm} 	=& 0 \numberthis \label{eq:D:d:1}\\
+		D_m g_{sn} =& \partial_m g_{sn} - \underbrace{\Gamma\indices{^t_{sm}}}_\text{From (\ref{eq:symmetry:Gamma})} g_{tn} - \Gamma\indices{^t_{mn}} g_{st} 	=& 0 \numberthis \label{eq:D:d:2}\\
+		D_n g_{sm} =& \partial_n g_{sm} - \Gamma\indices{^t_{sn}} g_{tm} - \Gamma\indices{^t_{mn}} g_{st} 	=& 0 \numberthis \label{eq:D:d:3}
+	\end{align*}
+	
+	Now we take (\ref{eq:D:d:3}) + (\ref{eq:D:d:2}) - (\ref{eq:D:d:1}).
+	
+	\begin{align*}
+		\partial_n g_{sm} + \partial_m g_{sn}- \partial_s g_{mn} =& \bcancel{\Gamma\indices{^t_{sn}} g_{tm}} + \Gamma\indices{^t_{mn}} g_{st} + \cancel{\Gamma\indices{^t_{sm}}g_{tn}} + \Gamma\indices{^t_{mn}} g_{st} - \cancel{\Gamma\indices{^t_{sm}} g_{tn}} - \bcancel{\Gamma\indices{^t_{sn}} g_{tm}} \\
+		=&2 \Gamma\indices{^t_{mn}} g_{st} \text{, whence}\\
+		\Gamma\indices{^t_{mn}} =& \frac{1}{2}\big[\partial_n g_{sm} + \partial_m g_{sn}- \partial_s g_{mn}\big]  g^{st}   
+	\end{align*}
+\end{proof}
 
 \subsection{The Riemann Curvature Tensor}
 
@@ -479,18 +493,44 @@ Figure \ref{fig:gr-4-2D} transports a vector along two paths. In a flat space tw
 	\end{center}
 \end{figure}
 
-\begin{align*}
-	D_s d_r V_m =& D_s \big[ \partial_r V_m -\Gamma \indices{_{rn}^t} V_t\big]\\
-	D_s d_r V_m - D_r d_s V_m =& R\indices{_{sr}^t_n} V_t \text{, where the Riemann curvature tensor is}\\
-	R\indices{_{sr}^t_n} =& \partial_r \Gamma \indices{_{sn}^t} - \partial_s \Gamma \indices{_{rn}^t} + \Gamma \indices{_{sn}^p} \Gamma \indices{_{pr}^t}- \Gamma \indices{_{rn}^p} \Gamma \indices{_{ps}^t} 
-\end{align*}
+\begin{thm}[Riemann curvature tensor]
+	\begin{align*}
+		D_s D_r V_m - D_r D_s V_m =& R\indices{_{sr}^t_m} V_t \text{, where the Riemann curvature tensor is}\\
+		R\indices{_{sr}^t_m} \triangleq & \partial_r \Gamma \indices{^t_{sm}} - \partial_s \Gamma \indices{^t_{rm}} + \Gamma \indices{^p_{sm}} \Gamma \indices{^t_{pr}}- \Gamma \indices{^p_{rm}} \Gamma \indices{^t_{ps}} 
+	\end{align*}
+\end{thm}
 
-The curvature tensor indicates whether or not a space is flat, and it includes the today forces.
+\begin{proof}
+	\begin{align*}
+		D_s D_r V_m =& D_s T_{rm} \text{, where}\\
+		T_{rm}=& \partial_r V_m -\Gamma \indices{^t_{rm}} V_t \text{, whence}\\
+		D_s D_r V_m	=& \partial_s T_{rm} - \Gamma\indices{^t_{sr}} T_{tm} - \Gamma\indices{^t_{sm}} T_{rt} \text{, from (\ref{eq:covariant_2})}\\
+		=& \partial_s \big(\partial_r V_m -\Gamma \indices{^t_{rm}} V_t\big) - \Gamma\indices{^t_{sr}} \big(\partial_t V_m -\Gamma \indices{^u_{tm}} V_u\big) - \Gamma\indices{^t_{sm}} \big(\partial_r V_t -\Gamma \indices{^u_{rt}} V_u\big)\\
+		=& \partial_s \partial_r V_m - \partial_s \big( \Gamma \indices{^t_{rm}} V_t\big) - \Gamma\indices{^t_{sr}}\partial_t V_m + \Gamma\indices{^t_{sr}} \Gamma \indices{^u_{tm}} V_u - \Gamma\indices{^t_{sm}} \partial_r V_t + \Gamma\indices{^t_{sm}}\Gamma \indices{^u_{rt}} V_u\\
+		=& \partial_s \partial_r V_m - \partial_s \big( \Gamma \indices{^t_{rm}} \big)V_t -  \Gamma \indices{^t_{rm}}  \partial_s V_t - \Gamma\indices{^t_{sr}}\partial_t V_m +  \Gamma\indices{^t_{sr}} \Gamma \indices{^u_{tm}} V_u - \Gamma\indices{^t_{sm}} \partial_r V_t + \Gamma\indices{^t_{sm}}\Gamma \indices{^u_{rt}} V_u
+	\end{align*}
+	
+	We interchange the subscripts $r$ and $s$ in the last equation, and then mark the terms that can be cancelled when we subtract, taking into account the symmetry of $g_{rs}$ and $\Gamma\indices{^._{rs}}$.
+	
+	\begin{align*}
+		D_s D_r V_m =&\underbrace{\partial_s \partial_r V_m}_\text{I} - \partial_s \big( \Gamma \indices{^t_{rm}} \big)V_t -  \underbrace{\Gamma \indices{^t_{rm}}  \partial_s V_t}_\text{II} - \underbrace{\Gamma\indices{^t_{sr}}\partial_t V_m}_\text{IV} +  \underbrace{\Gamma\indices{^t_{sr}} \Gamma \indices{^u_{tm}} V_u}_\text{V} - \underbrace{\Gamma\indices{^t_{sm}} \partial_r V_t}_\text{III} + \Gamma\indices{^t_{sm}}\Gamma \indices{^u_{rt}} V_u\\
+		D_r D_s V_m =&\underbrace{\partial_r \partial_r V_m}_I - \partial_r \big( \Gamma \indices{^t_{sm}} \big)V_t -  \underbrace{\Gamma \indices{^t_{sm}}  \partial_r V_t}_\text{III} - \underbrace{\Gamma\indices{^t_{rs}}\partial_t V_m}_\text{IV} +  \underbrace{\Gamma\indices{^t_{rs}} \Gamma \indices{^u_{tm}} V_u}_\text{V} - \underbrace{\Gamma\indices{^t_{rm}} \partial_s V_t}_\text{II} + \Gamma\indices{^t_{rm}}\Gamma \indices{^u_{st}} V_u
+	\end{align*}
+	
+	Subtracting, and replacing summation indices in the last two terms, we have:
+	\begin{align*}
+		D_s D_r V_m - D_r D_s V_m =& \partial_r \big( \Gamma \indices{^t_{sm}} \big)V_t - \partial_s \big( \Gamma \indices{^t_{rm}} \big)V_t + \Gamma\indices{^t_{sm}}\Gamma \indices{^u_{rt}} V_u - \Gamma\indices{^t_{rm}}\Gamma \indices{^u_{st}} V_u\\
+		=& \partial_r \big( \Gamma \indices{^t_{sm}} \big)V_t - \partial_s \big( \Gamma \indices{^t_{rm}} \big)V_t + \Gamma\indices{^p_{sm}}\Gamma \indices{^t_{rp}} V_t - \Gamma\indices{^p_{rm}}\Gamma \indices{^t_{sp}} V_t\\
+		=& \big[\partial_r  \Gamma \indices{^t_{sm}}  - \partial_s \Gamma \indices{^t_{rm}} + \Gamma\indices{^p_{sm}}\Gamma \indices{^t_{rp}}  - \Gamma\indices{^p_{rm}}\Gamma \indices{^t_{sp}} \big] V_t
+	\end{align*}
+\end{proof}
 
-In Figure \ref{fig:gr-3-move-links} we see the geometric interpretation of {$D_s d_r V_m - D_r d_s V_m$. It measures the stretching that happens when we move the structure of links into the curved region.
+The curvature tensor indicates whether or not a space is flat, and it includes the tidal forces.
+
+In Figure \ref{fig:gr-3-move-links} we see the geometric interpretation of {$D_s D_r V_m - D_r D_s V_m$. It measures the stretching that happens when we move the structure of links into the curved region.
 
 \begin{figure}[H]
-	\caption[Geometric meaning of $D_s d_r V_m - D_r d_s V_m$]{$D_s d_r V_m - D_r d_s V_m$ measuring the stretching that happens when we move the structure of links into the curved region.}\label{fig:gr-3-move-links}
+	\caption[Geometric meaning of $D_s D_r V_m - D_r D_s V_m$]{$D_s D_r V_m - D_r D_s V_m$ measuring the stretching that happens when we move the structure of links into the curved region.}\label{fig:gr-3-move-links}
 	\includegraphics{gr-3-move-links}
 \end{figure}
 
