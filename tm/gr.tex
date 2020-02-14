@@ -596,14 +596,19 @@ Given a vector field, move along curve. Does vector remain parallel to itself, i
 \begin{figure}[H]
 	\caption{Parallel Transport}
 	\begin{center}
-		\begin{subfigure}[t]{0.45\textwidth}
+		\begin{subfigure}[t]{0.3\textwidth}
 			\caption{Transporting vector along curve}\label{fig:gr-4-DV-along-curve}
 			\includegraphics[width=\textwidth]{gr-4-DV-along-curve}
 		\end{subfigure}
 		\;
-		\begin{subfigure}[t]{0.45\textwidth}
+		\begin{subfigure}[t]{0.3\textwidth}
 			\caption{Parallel Transport is path dependent}\label{fig:gr-4-parallel-transport-path-dependent}
 			\includegraphics[width=\textwidth]{gr-4-parallel-transport-path-dependent}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Transporting vectors around a cone gives different results, e.g. the bold portion of the curve versus the rest of the curve. }\label{fig:gr-4-cone-round}
+			\includegraphics[width=\textwidth]{gr-4-cone-round}
 		\end{subfigure}
 	\end{center}
 \end{figure}
@@ -617,10 +622,64 @@ Given a vector field, move along curve. Does vector remain parallel to itself, i
 	If $DV^n=0$ along the curve, we say it is being transported parallel to itself.
 \end{defn}
 
-The result of parallel transporting vector in curved space depends on the path--Figure \ref{fig:gr-4-parallel-transport-path-dependent}.
+\begin{thm}[Parallel transport preserved length]
+	If $DV^n=0$ along the curve, the lenghth of V is preserved.
+\end{thm}
 
+\begin{proof}
+	TBP
+\end{proof}
 
-\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=1438}
+The result of parallel transporting vector in curved space depends on the path--Figures \ref{fig:gr-4-parallel-transport-path-dependent} and \ref{fig:gr-4-cone-round}. 
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{In general the tangent vector to a curve is not covariantly constant}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{The cone modified with a sharp point, se we can unroll}\label{fig:gr-4-cone}
+			\includegraphics[width=\textwidth]{gr-4-cone}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Open up the cone and transport a tangent vector, which is changed when it comes back to the original point. The two dots represent the same point.}\label{fig:gr-4-cone-sliced-tangent}
+			\includegraphics[width=\textwidth]{gr-4-cone-sliced-tangent}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Add a second vector which maintains the same heading}\label{fig:gr-4-cone-sliced}
+			\includegraphics[width=\textwidth]{gr-4-cone-sliced}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+ 
+Figures \ref{fig:gr-4-cone}, \ref{fig:gr-4-cone-sliced-tangent}, and \ref{fig:gr-4-cone-sliced} we slice the cone and open it up. This illustrates the fact that the tangent isn't always parallel to the curve; when it is, the curve is a geodesic, but the curve in Figure \ref{fig:gr-4-cone} is clearly not a geodesic.
+
+\subsection{Geodesics} 
+
+\begin{itemize}
+	\item 	A geodesic is a curve whose distance it stationary.
+	\item A better definition is to look locally along the curve and require that the curve be as straight as possible.
+\end{itemize}
+
+If along the curve the derivative of the tangent vector is zero, that curve is as straight as possible.
+
+In Figure \ref{fig:gr-4-geodesic-intuition} we have a terrain with hills and valleys. We drive a car which is small compared to any curves in the terrain. Point steering wheel to dead straight and start driving without deviating: your path--Figure \ref{fig:gr-4-geodesic-intuition-path}--will be a geodesic.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Intuition for geodesics}
+		\begin{subfigure}{0.45\textwidth}
+			\caption{Terrain}\label{fig:gr-4-geodesic-intuition}
+			\includegraphics[width=\textwidth]{gr-4-geodesic-intuition}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\caption{Your path will be a geodesic}\label{fig:gr-4-geodesic-intuition-path}
+			\includegraphics[width=\textwidth]{gr-4-geodesic-intuition-path}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=1766}
 
 
 \section{Metric for a gravitational field}
