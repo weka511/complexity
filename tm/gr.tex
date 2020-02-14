@@ -589,7 +589,27 @@ The point of a covariant derivative is to write a tensor such that in Gaussian N
 	
 \end{proof}
 
-\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=763}
+\subsection{Parallel Transport}
+
+Given a vector field, move along curve. Does vector remain parallel to itself, i.e. $D_m V^n=0$--Figure \ref{fig:gr-4-DV-along-curve}.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{ Transporting vector along curve}\label{fig:gr-4-DV-along-curve}
+		\includegraphics{gr-4-DV-along-curve}
+	\end{center}
+\end{figure}
+
+\begin{align*}
+	DV^n \triangleq& D_m V^v dx_m\\
+	=& \underbrace{\frac{\partial V^n}{\partial x^m} dx^m}_\text{$\triangleq dV^n $} + \Gamma \indices{^n_{mr}} V^r dx^m
+\end{align*}
+
+\begin{defn}[Parallel transport]
+	If $DV^n=0$ along the curve, we say it is being transported parallel to itself.
+\end{defn}
+
+\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=1183}
 
 
 \section{Metric for a gravitational field}
