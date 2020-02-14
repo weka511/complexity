@@ -174,7 +174,7 @@ But are they really indistinguishable? Not really. Let's talk about gravitationa
 Figure \ref{fig:2000:mile:man} shows why we can't transform the field away. In Figure \ref{fig:gr-1-suns-gravitational-field-2000-mile-ff} 2000 Mile Man is oriented with his feet towards the Sun: he feels a tidal pull, as his feet are closer to the Sun than his head. In Figure \ref{fig:gr-1-suns-gravitational-field-2000-mile} he feels pressure at his head and feet. Being squashed is not something we can get rid of by performing a coordinate transformation. So it is not true that gravity is equivalent to a coordinate transformation. Einstein said that for small objects and small times, gravity was equivalent to a coordinate transformation.
 \begin{figure}[H]
 	\begin{center}
-		\caption{2000 mile man}\label{fig:2000:mile:man}
+		\caption{The adventures of 2000 mile man}\label{fig:2000:mile:man}
 		\begin{subfigure}[t]{0.45\textwidth}
 			\caption{ 2000 Mile Man is oriented with his feet towards the Sun: he feels a 	tidal pull, as his feet are closer to the Sun than his head. }\label{fig:gr-1-suns-gravitational-field-2000-mile-ff}
 			\includegraphics[width=\textwidth]{gr-1-suns-gravitational-field-2000-mile-ff}
@@ -299,14 +299,16 @@ Figures \ref{fig:gr-2-lattice} and \ref{fig:gr-2-lattice-not-flat} illustrate a 
 
 Our problem is to decide whether or not a space is really flat. What are we given? We are given a metric tensor.
 
-\subsection{Metric tensor}
+\subsection{Transformations}
 
-\subsection{Scalars transform trivially}
+\subsubsection{Scalars transform trivially}
 
 \begin{align*}
 	x^m \leftrightarrow& y^m \\
 	S^\prime(y) =& S(x) \text{, we call such an $s$ a scalar}
 \end{align*}
+
+\subsubsection{Contravariant \& Covariant Vectors}
 
 Figure \ref{fig:gr-2-coordinates} depicts a coordinate system, and a vector $\vec{V}$.
 \begin{figure}[H]
@@ -320,7 +322,7 @@ $\vec{V}$ can be expanded:
 \end{align*}
 
 \begin{defn}[Contravariant components]
-	 In (\ref{eq:contravariant:components}), the numbers $V^i$ are called the\emph{ contravariant components} of $\vec{V}$.
+	 In (\ref{eq:contravariant:components}), the numbers $V_i$ are called the\emph{ contravariant components} of $\vec{V}$.
 \end{defn}
 
 What is $\vec{V} \boldsymbol{\cdot} \vec{e_1}$? If the coordinate system were rectangular, and the labels were equally spaced, it would be $V^1$. As things stand we define:
@@ -373,7 +375,7 @@ LS presents usual properties, and shows that $g_{mn}$ is a symmetric tensor. He 
 
 \subsection{Flatness}
 
-A flat geometry is one where all Euclid's postulates are true. It is characterized in terms of the metric, not that $g_{i,j} = \delta_{i,j}$, but rather that coordinates can be found where the metric has such a simple form. More generally, given a metric that is smooth and has all the good differential properties, the problem of determining whether or not that space is flat is somewhat difficult. The bad way is to consider all coordinate systems, calculate the metric, and calculate whether it has the required for. The good way is to look for diagnostic quantities, things you can calculate which, if they are zero everywhere the space is flat; if they are non-zero anywhere it means the space is curved there. The diagnostic quantity is called the curvature tensor.
+A flat geometry is one where all Euclid's postulates are true. It is characterized in terms of the metric: not that $g_{i,j} = \delta_{i,j}$, but rather that coordinates can be found where the metric has such a simple form. More generally, given a metric that is smooth and has all the good differentiable properties, the problem of determining whether or not that space is flat is somewhat difficult. The bad way is to consider all coordinate systems, calculate the metric, and calculate whether it has the required form. The good way is to look for diagnostic quantities, things you can calculate which, if they are zero everywhere the space is flat; if they are non-zero anywhere it means the space is curved there. The diagnostic quantity is called the curvature tensor.
 
 Where want to find a tensor $R$ such that $R=0$ in a flat space.
 
@@ -452,7 +454,7 @@ We find:
 
 $\Gamma$ is known a "connection", or a Christoffel symbol; which contains various $\frac{\partial g_{m,n}}{\partial x^r}$, which are zero in Gaussian Normal coordinates.
 
-\begin{lemma}[$D_r g_{mn}=0$]
+\begin{lemma}[$D_r g_{mn}=0$]\label{thm:covariant_derivative:metric}
 	The covariant derivative of the metric tensor is zero.
 \end{lemma}
 
@@ -478,7 +480,7 @@ $\Gamma$ is known a "connection", or a Christoffel symbol; which contains variou
 	\begin{align*}
 		\partial_n g_{sm} + \partial_m g_{sn}- \partial_s g_{mn} =& \bcancel{\Gamma\indices{^t_{sn}} g_{tm}} + \Gamma\indices{^t_{mn}} g_{st} + \cancel{\Gamma\indices{^t_{sm}}g_{tn}} + \Gamma\indices{^t_{mn}} g_{st} - \cancel{\Gamma\indices{^t_{sm}} g_{tn}} - \bcancel{\Gamma\indices{^t_{sn}} g_{tm}} \\
 		=&2 \Gamma\indices{^t_{mn}} g_{st} \text{, whence}\\
-		\Gamma\indices{^t_{mn}} =& \frac{1}{2}\big[\partial_n g_{sm} + \partial_m g_{sn}- \partial_s g_{mn}\big]  g^{st}   
+		\Gamma\indices{^t_{mn}} =& \frac{1}{2}\big[\partial_n g_{sm} + \partial_m g_{sn}- \partial_s g_{mn}\big]  g^{st} \numberthis \label{eq:christoffel:g}  
 	\end{align*}
 \end{proof}
 
@@ -552,7 +554,43 @@ In Figure \ref{fig:gr-3-move-links} we see the geometric interpretation of {$D_s
 
 \section{Geodesics \& gravity}
 
-TBP
+\subsection{Review}
+
+The point of a covariant derivative is to write a tensor such that in Gaussian Normal Coordinates it is just the derivative.
+
+\begin{thm}[Covariant Derivative of contravariant vector]
+	\begin{align*}
+		D_m V^n =& \partial m V_n + \Gamma\indices{^n_{mr}} V^r
+	\end{align*}
+\end{thm}
+
+\begin{proof}
+	\begin{align*}
+		D_m V^n =& D_m\big( g^{np} V_p\big)\\
+		=&  \cancel{\big(D_m g^{np}\big) V_p} +  g^{np} D_m V_p \text{,  where we have used Lemma \ref{thm:covariant_derivative:metric}}\\
+		=& g^{np} \big(\partial_m V_p -  \Gamma\indices{^r_{pm}} V_r\big) \text{, from (\ref{eq:covariant_1})}\\
+		=& g^{np} \big[\partial_m \big(g_{pq} V^q\big) -  \Gamma\indices{^r_{pm}} g_{rq} V^q\big]\\
+		=& g^{np} \big[ \partial_m \big(g_{pq} \big)V^q + g_{pq} \partial_m V^q -  \Gamma\indices{^r_{pm}} g_{rq} V^q\big]\\
+		=& \cancel{g^{np} g_{pq}} \partial_m V^q +  g^{np} \big[ \partial_m \big(g_{pq} \big) -   \Gamma\indices{^r_{pm}} g_{rq} \big] V^q \numberthis\label{eq:cov:contra}
+	\end{align*}
+	Now, using (\ref{eq:christoffel:g})
+	\begin{align*}
+		 \partial_m g_{pq} -   \Gamma\indices{^r_{pm}} g_{rq} =&\partial_m \big(g_{pq} \big) - \frac{1}{2}\big[\partial_m g_{sp} + \partial_p g_{sm}- \partial_s g_{pm}\big]  \cancel{g^{sr} g_{rq}}\\
+		=& \partial_m \big(g_{pq} \big) - \frac{1}{2}\big[\partial_m g_{sp} + \partial_p g_{sm}- \partial_s g_{pm}\big] \partial_m g_{pq} +   \Gamma\indices{^r_{pm}} g_{rq}\\
+		 =& \frac{1}{2}\big[\partial_m g_{qp} - \partial_p g_{qm}+ \partial_q g_{pm}\big] 
+	\end{align*}
+	
+	Using (\ref{eq:christoffel:g}) again:
+	\begin{align*}
+		g^{np} \big[ \partial_m \big(g_{pq} \big) -   \Gamma\indices{^r_{pm}} g_{rq} \big] V^q =& g^{np} \frac{1}{2}\big[\partial_m g_{qp} - \partial_p g_{qm}+ \partial_q g_{pm}\big] V^q\\
+		=& \Gamma \indices{^n_{qm}} V^q \text{, and (\ref{eq:cov:contra}) becomes}\\
+		D_m V^n =& \partial_m V^n +  \Gamma \indices{^n_{qm}} V^q
+	\end{align*}
+	
+\end{proof}
+
+\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=763}
+
 
 \section{Metric for a gravitational field}
 
