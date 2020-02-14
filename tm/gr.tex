@@ -677,9 +677,34 @@ In Figure \ref{fig:gr-4-geodesic-intuition} we have a terrain with hills and val
 			\includegraphics[width=\textwidth]{gr-4-geodesic-intuition-path}
 		\end{subfigure}
 	\end{center}
+\end{figure} 
+
+Figure \ref{fig:gr-4-tangent-vector} illustrates the construction of a unit tangent vector.
+\begin{figure}[H]
+	\caption[Construction of unit tangent vector]{Construction of unit tangent vector: take the limit as the two points approach each other}\label{fig:gr-4-tangent-vector}
+	\includegraphics{gr-4-tangent-vector}
 \end{figure}
 
-\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=1766}
+\begin{align*}
+	t^m \triangleq& \frac{d x^m}{ds} \text{, we want this to be constant, so}\\
+	dt^n + \Gamma \indices{^n_{mr}} t^r dx^m =& 0\\
+	\frac{dt^n}{ds}  =& - \Gamma \indices{^n_{mr}} t^r \frac{dx^m}{ds} \\
+	=& - \Gamma \indices{^n_{mr}} t^r t^m \text{, or}\\
+	\frac{d^2 x^n }{ds^2}=& - \Gamma \indices{^n_{mr}} t^r t^m \text{, equation of motion of a geodesic}
+\end{align*}
+
+So, if $s$ is increasing with time, the left hand side looks like acceleration, and the equation itself looks like Newton's 2nd law. The right hand side depends on the geometry, and the particles moves in the straightest line possible.
+
+So far we have discussed 3 dimensional space, as Riemann knew it. We now move to Minkowskian space-time, with proper time. 
+
+
+
+
+
+
+
+
+\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2278}
 
 
 \section{Metric for a gravitational field}
