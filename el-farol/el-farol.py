@@ -18,7 +18,37 @@
 import random,numpy as np
 
 history = []
-NN      = None
+
+def past(history,k=2,NN=None):
+    if len(history)>k:
+        return history[-k]
+    elif len(history)>0:
+        return history[-1]
+    else:
+        return random.randint(0,NN)
+
+def average(history,k=3,NN=None):
+    if len(history)>k:
+        return np.average(history[-k:])
+    elif len(history)>0:
+        return np.average(history)
+    else:
+        return random.randint(0,NN)
+
+def trend(history,k=3,NN=None):
+    if len(history)>k:
+        coeff = np.polyfit(range(k),history[-k:],1)
+        return max(0,min(NN,coeff[0]+k*coeff[1]))
+    elif len(history)>0:
+        return history[-1]
+    else:
+        return random.randint(0,NN)
+
+def mirror(history,NN=100): #FIXME
+    if len(history)>0:
+        return NN-history[-1]
+    else:
+        return random.randint(0,NN)
 
 class BarGoer():
     def __init__(self):
@@ -27,55 +57,28 @@ class BarGoer():
         pass
     def review(self,attendance,threshold=60):
         pass
-
-
-def past(history,k=2):
-    if len(history)>k:
-        return history[-k]
-    elif len(history)>0:
-        return history[-1]
-    else:
-        return random.randint(0,100)
-
-def average(history,k=3):
-    if len(history)>k:
-        return np.average(history[-k:])
-    elif len(history)>0:
-        return np.average(history)
-    else:
-        return random.randint(0,100)
-
-def trend(history,k=3):
-    if len(history)>k:
-        coeff = np.polyfit(range(k),history[-k:],1)
-        return max(0,min(NN,coeff[0]+k*coeff[1]))
-    elif len(history)>0:
-        return history[-1]
-    else:
-        return random.randint(0,100)
-
-def mirror(history,m=100): #FIXME
-    if len(history)>0:
-        return m-history[-1]
-    else:
-        return 67
-    
+        
 class Arthur(BarGoer):
-    basket = [lambda history: past(history,k=1),
-              lambda history: past(history,k=2),
-              lambda history: past(history,k=3),
-              lambda history: trend(history,k=2),
-              lambda history: trend(history,k=4),
-              lambda history: trend(history,k=8),
-              lambda history: past(history,k=5),
-              lambda history: int(average(history,k=4)),
-              lambda history: int(average(history,k=8)),
-              lambda history: mirror(history)
-              ]
+    basket=None     # Basket of starategies used to populate individual instances
+    @classmethod
+    def createBasket(dummy,NN=None):
+        Arthur.basket = [
+            lambda history: past(history,k=1,NN=NN),
+            lambda history: past(history,k=2,NN=NN),
+            lambda history: past(history,k=3,NN=NN),
+            lambda history: trend(history,k=2,NN=NN),
+            lambda history: trend(history,k=4,NN=NN),
+            lambda history: trend(history,k=8,NN=NN),
+            lambda history: past(history,k=5,NN=NN),
+            lambda history: int(average(history,k=4,NN=NN)),
+            lambda history: int(average(history,k=8,NN=NN)),
+            lambda history: mirror(history,NN=NN)
+        ]
+        
     def __init__(self,nstrategies=3):
         super().__init__()
         self.strategies = [Arthur.basket[i] for i in random.sample(range(len(Arthur.basket)),nstrategies)]
-        self.favourite  = 0
+        self.favourite  = 0 # OK to initialize to 0 as selection of strategies is random
         self.prediction = None
         
     def predict(self):
@@ -140,6 +143,9 @@ if __name__=='__main__':
         print ('Random number generator initialized with seed={0}'.format(args.seed))
     else:
         print ('Random number generator initialized with random seed')
+        
+    Arthur.createBasket(NN=args.NA + args.NGA)
+    
     bargoers = [Arthur(nstrategies=args.nstrategies) for i in range(args.NA)] + [GA() for i in range(args.NGA)]
-    NN       = len(bargoers)
+    
     run(bargoers, N=args.N, L=args.L, I=args.I, threshold=args.threshold)
