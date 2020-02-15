@@ -142,9 +142,6 @@ def step_week(bargoers,init=False,threshold=60,I=10,history = []):
     for b in bargoers:
         b.review(attendance,threshold,history)      
     history.append(attendance)
-    if len(history)>I:
-        history.pop(0)  
-    print (history,np.average(history))    
 
 # run
 #
@@ -154,25 +151,45 @@ def run(bargoers,N=100,L=10,I=10,threshold=60):
     history = []
     for i in range(L):
         step_week(bargoers,init=True,threshold=threshold,I=I,history = history)
-    total_attendance = 0
+
     for i in range(N):
         step_week(bargoers,threshold=threshold,I=I,history = history)
-        total_attendance += history[-1]
-    print (total_attendance/N)
+
     return history
-    
+
+def get_logfile_name(base):
+    out_parts = base.split('.')
+    if len(out_parts)==1:
+        return base + '.txt'
+    return base
+
+def log_history(history,out='log.txt'):
+    with open(get_logfile_name(out),'w') as f:
+        f.write('I={0},L={1},N={2},NA={3},NGA={4},threshold={5},seed={6},nstrategies={7}\n'.format(args.I,
+                                                                                       args.L,
+                                                                                       args.N,
+                                                                                       args.NA,
+                                                                                       args.NGA,
+                                                                                       args.threshold,
+                                                                                       args.seed,
+                                                                                       args.nstrategies))
+        for attendance in history:
+            f.write('{0}\n'.format(attendance))
+        f.write('Completed')
+            
 if __name__=='__main__':
     import argparse
     
     parser = argparse.ArgumentParser('El Farol simulation')
-    parser.add_argument('--I',           type=int, default=10,   help='Length of history')
-    parser.add_argument('--L',           type=int, default=100,  help='Number of generations for initialization')
-    parser.add_argument('--N',           type=int, default=100,  help='Number of generations')
-    parser.add_argument('--NA',          type=int, default=100,  help='Number of Arthurian Players')
-    parser.add_argument('--NGA',         type=int, default=0,    help='Number of Genetic Algorithm Players')
-    parser.add_argument('--threshold',   type=int, default=60,   help='Threshold for comfort')
-    parser.add_argument('--seed',        type=int, default=None, help='Random number seed')
-    parser.add_argument('--nstrategies', type=int, default=5,    help='Number of strategies')
+    parser.add_argument('--I',           type=int, default=10,    help='Length of history')
+    parser.add_argument('--L',           type=int, default=100,   help='Number of generations for initialization')
+    parser.add_argument('--N',           type=int, default=100,   help='Number of generations')
+    parser.add_argument('--NA',          type=int, default=100,   help='Number of Arthurian Players')
+    parser.add_argument('--NGA',         type=int, default=0,     help='Number of Genetic Algorithm Players')
+    parser.add_argument('--threshold',   type=int, default=60,    help='Threshold for comfort')
+    parser.add_argument('--seed',        type=int, default=None,  help='Random number seed')
+    parser.add_argument('--nstrategies', type=int, default=5,     help='Number of strategies')
+    parser.add_argument('--out',                   default='log', help='File for logging histories')
     
     args   = parser.parse_args();
     
@@ -181,15 +198,20 @@ if __name__=='__main__':
         print ('Random number generator initialized with seed={0}'.format(args.seed))
     else:
         print ('Random number generator initialized with random seed')
-            
+
     try:
         Arthur.createBasket(NN=args.NA + args.NGA)
         
-        run([Arthur(nstrategies=args.nstrategies) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
-            N=args.N,
-            L=args.L,
-            I=args.I,
-            threshold=args.threshold)
+        history = run([Arthur(nstrategies=args.nstrategies) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
+                      N=args.N,
+                      L=args.L,
+                      I=args.I,
+                      threshold=args.threshold)
         
+        log_history(history,out=args.out)
+
+        mu = np.mean(history[args.L:])
+        sigma = np.std(history[args.L:])
+        print ('Mean Attendance={0:.1f}, Standard deviation={1:.1f}, Sharpe={2:.1f}'.format(mu,sigma,mu/sigma))    
     except Exception as e:
         sys.exit('{0} {1}'.format(type(e),e.args))
