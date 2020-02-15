@@ -15,18 +15,16 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
-import random,abc,numpy as np
+import random,numpy as np
 
 history = []
 NN      = None
 
-class BarGoer(metaclass=abc.ABCMeta):
+class BarGoer():
     def __init__(self):
         pass
-    @abc.abstractmethod
     def predict(self):
         pass
-    @abc.abstractmethod
     def review(self,attendance,threshold=60):
         pass
 
@@ -65,7 +63,8 @@ def mirror(history,m=100): #FIXME
 class Arthur(BarGoer):
     basket = [lambda history: past(history,k=1),
               lambda history: past(history,k=2),
-              #lambda history: past(history,k=3),
+              lambda history: past(history,k=3),
+              lambda history: trend(history,k=2),
               lambda history: trend(history,k=4),
               lambda history: trend(history,k=8),
               lambda history: past(history,k=5),
