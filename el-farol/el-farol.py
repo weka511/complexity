@@ -157,13 +157,17 @@ def run(bargoers,N=100,L=10,I=10,threshold=60):
 
     return history
 
-def get_logfile_name(base):
-    out_parts = base.split('.')
-    if len(out_parts)==1:
-        return base + '.txt'
-    return base
+# log_history
+#
+# Write parameters and history to logfile
 
 def log_history(history,out='log.txt'):
+    def get_logfile_name(base):
+        out_parts = base.split('.')
+        if len(out_parts)==1:
+            return base + '.txt'
+        return base 
+    
     with open(get_logfile_name(out),'w') as f:
         f.write('I={0},L={1},N={2},NA={3},NGA={4},threshold={5},seed={6},nstrategies={7}\n'.format(args.I,
                                                                                        args.L,
