@@ -15,9 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
-import random,numpy as np
+import random,numpy as np,sys
 
-history = []
+# past
+#
+# Predict that attendance will be the same as 'k' weeks ago
 
 def past(history,k=2,NN=None):
     if len(history)>k:
@@ -27,6 +29,10 @@ def past(history,k=2,NN=None):
     else:
         return random.randint(0,NN)
 
+# average
+#
+# Predicts that attendance will be the average of previous 'k' weeks 
+
 def average(history,k=3,NN=None):
     if len(history)>k:
         return np.average(history[-k:])
@@ -34,6 +40,10 @@ def average(history,k=3,NN=None):
         return np.average(history)
     else:
         return random.randint(0,NN)
+
+# trend
+#
+# Predict attendance using trend line
 
 def trend(history,k=3,NN=None):
     if len(history)>k:
@@ -44,20 +54,32 @@ def trend(history,k=3,NN=None):
     else:
         return random.randint(0,NN)
 
-def mirror(history,NN=100): #FIXME
+# mirror
+#
+# Predict that attendance will be mirror image of previous week
+
+def mirror(history,NN=None):
     if len(history)>0:
         return NN-history[-1]
     else:
         return random.randint(0,NN)
 
+# Bargoer
+#
+# This class represents a person who decides whther or not to go to the bar
+
 class BarGoer():
     def __init__(self):
         pass
-    def predict(self):
-        pass
-    def review(self,attendance,threshold=60):
-        pass
-        
+    def predict(self,history = []):
+        raise Exception('Not implemented')
+    def review(self,attendance,threshold=60,history = []):
+        raise Exception('Not implemented')
+
+# Arthur
+#
+# Use Arthurian strategies for making decisions
+
 class Arthur(BarGoer):
     basket=None     # Basket of starategies used to populate individual instances
     @classmethod
@@ -81,11 +103,11 @@ class Arthur(BarGoer):
         self.favourite  = 0 # OK to initialize to 0 as selection of strategies is random
         self.prediction = None
         
-    def predict(self):
+    def predict(self,history = []):
         self.prediction = self.strategies[self.favourite](history)   
         return self.prediction
     
-    def review(self,attendance,threshold=60):
+    def review(self,attendance,threshold=60,history = []):
         if self.prediction<=threshold and attendance<=threshold:
             return
         if self.prediction>threshold and attendance>threshold:
@@ -101,29 +123,43 @@ class Arthur(BarGoer):
         if self.prediction>threshold and prediction<=threshold:
             return True
         return False
-       
+ 
+ # GA
+ #
+ # Use a Gnettic Algorithm for making decisions
+ 
 class GA(BarGoer):
     def __init__(self):
         super().__init__()
 
-def step_week(bargoers,init=False,threshold=60,I=10):
-    predictions = [b.predict() for b in bargoers]
+# step_week
+#
+# Simulate decision making process for one week
+
+def step_week(bargoers,init=False,threshold=60,I=10,history = []):
+    predictions = [b.predict(history) for b in bargoers]
     attendance  = sum(1 for p in predictions if p<=threshold)
     for b in bargoers:
-        b.review(attendance,threshold)      
+        b.review(attendance,threshold,history)      
     history.append(attendance)
     if len(history)>I:
         history.pop(0)  
     print (history,np.average(history))    
-    
+
+# run
+#
+# Simulate decision making process for entire time period
+
 def run(bargoers,N=100,L=10,I=10,threshold=60):
+    history = []
     for i in range(L):
-        step_week(bargoers,init=True,threshold=threshold,I=I)
+        step_week(bargoers,init=True,threshold=threshold,I=I,history = history)
     total_attendance = 0
     for i in range(N):
-        step_week(bargoers,threshold=threshold,I=I)
+        step_week(bargoers,threshold=threshold,I=I,history = history)
         total_attendance += history[-1]
     print (total_attendance/N)
+    return history
     
 if __name__=='__main__':
     import argparse
@@ -137,15 +173,23 @@ if __name__=='__main__':
     parser.add_argument('--threshold',   type=int, default=60,   help='Threshold for comfort')
     parser.add_argument('--seed',        type=int, default=None, help='Random number seed')
     parser.add_argument('--nstrategies', type=int, default=5,    help='Number of strategies')
+    
     args   = parser.parse_args();
+    
     if args.seed!=None:
         random.seed(args.seed)
         print ('Random number generator initialized with seed={0}'.format(args.seed))
     else:
         print ('Random number generator initialized with random seed')
+            
+    try:
+        Arthur.createBasket(NN=args.NA + args.NGA)
         
-    Arthur.createBasket(NN=args.NA + args.NGA)
-    
-    bargoers = [Arthur(nstrategies=args.nstrategies) for i in range(args.NA)] + [GA() for i in range(args.NGA)]
-    
-    run(bargoers, N=args.N, L=args.L, I=args.I, threshold=args.threshold)
+        run([Arthur(nstrategies=args.nstrategies) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
+            N=args.N,
+            L=args.L,
+            I=args.I,
+            threshold=args.threshold)
+        
+    except Exception as e:
+        sys.exit('{0} {1}'.format(type(e),e.args))
