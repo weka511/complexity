@@ -18,7 +18,8 @@
 import random,abc,numpy as np
 
 history = []
- 
+NN      = None
+
 class BarGoer(metaclass=abc.ABCMeta):
     def __init__(self):
         pass
@@ -26,7 +27,7 @@ class BarGoer(metaclass=abc.ABCMeta):
     def predict(self):
         pass
     @abc.abstractmethod
-    def review(self,threshold=60):
+    def review(self,attendance,threshold=60):
         pass
 
 
@@ -36,7 +37,7 @@ def past(history,k=2):
     elif len(history)>0:
         return history[-1]
     else:
-        return 67
+        return random.randint(0,100)
 
 def average(history,k=3):
     if len(history)>k:
@@ -44,14 +45,33 @@ def average(history,k=3):
     elif len(history)>0:
         return np.average(history)
     else:
+        return random.randint(0,100)
+
+def trend(history,k=3):
+    if len(history)>k:
+        coeff = np.polyfit(range(k),history[-k:],1)
+        return max(0,min(NN,coeff[0]+k*coeff[1]))
+    elif len(history)>0:
+        return history[-1]
+    else:
+        return random.randint(0,100)
+
+def mirror(history,m=100): #FIXME
+    if len(history)>0:
+        return m-history[-1]
+    else:
         return 67
     
 class Arthur(BarGoer):
-    basket = [lambda history: past(history,k=2),
-              lambda history: past(history,k=3),
-              lambda history: past(history,k=4),
+    basket = [lambda history: past(history,k=1),
+              lambda history: past(history,k=2),
+              #lambda history: past(history,k=3),
+              lambda history: trend(history,k=4),
+              lambda history: trend(history,k=8),
               lambda history: past(history,k=5),
-              lambda history: int(average(history,k=6)),
+              lambda history: int(average(history,k=4)),
+              lambda history: int(average(history,k=8)),
+              lambda history: mirror(history)
               ]
     def __init__(self,nstrategies=3):
         super().__init__()
@@ -63,10 +83,10 @@ class Arthur(BarGoer):
         self.prediction = self.strategies[self.favourite](history)   
         return self.prediction
     
-    def review(self,threshold=60):
-        if self.prediction<=threshold and history[-1]<=threshold:
+    def review(self,attendance,threshold=60):
+        if self.prediction<=threshold and attendance<=threshold:
             return
-        if self.prediction>threshold and history[-1]>threshold:
+        if self.prediction>threshold and attendance>threshold:
             return
         predictions = [strategy(history) for strategy in self.strategies]
         matches     = [i for i in range(len(self.strategies)) if self.match(predictions[i],threshold)]
@@ -87,19 +107,22 @@ class GA(BarGoer):
 def step_week(bargoers,init=False,threshold=60,I=10):
     predictions = [b.predict() for b in bargoers]
     attendance  = sum(1 for p in predictions if p<=threshold)
+    for b in bargoers:
+        b.review(attendance,threshold)      
     history.append(attendance)
     if len(history)>I:
-        history.pop(0)
-    for b in bargoers:
-        b.review(threshold)    
-    print (history)    
+        history.pop(0)  
+    print (history,np.average(history))    
     
 def run(bargoers,N=100,L=10,I=10,threshold=60):
     for i in range(L):
         step_week(bargoers,init=True,threshold=threshold,I=I)
+    total_attendance = 0
     for i in range(N):
         step_week(bargoers,threshold=threshold,I=I)
-
+        total_attendance += history[-1]
+    print (total_attendance/N)
+    
 if __name__=='__main__':
     import argparse
     
@@ -108,7 +131,7 @@ if __name__=='__main__':
     parser.add_argument('--L',           type=int, default=100,  help='Number of generations for initialization')
     parser.add_argument('--N',           type=int, default=100,  help='Number of generations')
     parser.add_argument('--NA',          type=int, default=100,  help='Number of Arthurian Players')
-    parser.add_argument('--NGA',         type=int, default=0,    help='Number of Generic Algorithm Players')
+    parser.add_argument('--NGA',         type=int, default=0,    help='Number of Genetic Algorithm Players')
     parser.add_argument('--threshold',   type=int, default=60,   help='Threshold for comfort')
     parser.add_argument('--seed',        type=int, default=None, help='Random number seed')
     parser.add_argument('--nstrategies', type=int, default=5,    help='Number of strategies')
@@ -119,4 +142,5 @@ if __name__=='__main__':
     else:
         print ('Random number generator initialized with random seed')
     bargoers = [Arthur(nstrategies=args.nstrategies) for i in range(args.NA)] + [GA() for i in range(args.NGA)]
+    NN       = len(bargoers)
     run(bargoers, N=args.N, L=args.L, I=args.I, threshold=args.threshold)
