@@ -5,8 +5,10 @@
 
 | Name | Purpose |
 |--------------------|--------------------------------------------------------------------------|
-| Proposal.tex | Agent Based Modelling Proposal |
-| README.md | This File |
+|el-farol.py|El Farol Simulation|
+|el-farol.wpr|Python Project File|
+|Proposal.tex |Agent Based Modelling Proposal|
+|README.md|This File|
 
 
 ## Journal
