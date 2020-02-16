@@ -69,10 +69,25 @@ def mirror(history,NN=None):
 # This class represents a person who decides whther or not to go to the bar
 
 class BarGoer():
-    def __init__(self):
-        pass
+    def __init__(self,I=None):
+        self.prediction = None
+        self.scores     = []
+        self.I          = I
+        
     def predict(self,history = []):
         raise Exception('Not implemented')
+    
+    def score(self,attendance,weight_miss=1,weight_uncomfortable=5):
+        error = self.prediction - attendance
+        myscore = 0
+        if error>0:
+            myscore = weight_miss
+        if error<0:
+            myscore = weight_uncomfortable
+        self.scores.append(myscore)
+        if len(self.scores)>self.I:
+            self.scores.pop(0)
+            
     def review(self,attendance,threshold=60,history = []):
         raise Exception('Not implemented')
 
@@ -97,11 +112,11 @@ class Arthur(BarGoer):
             lambda history: mirror(history,NN=NN)
         ]
         
-    def __init__(self,nstrategies=3):
-        super().__init__()
+    def __init__(self,nstrategies=3,I=None):
+        super().__init__(I=I)
         self.strategies = [Arthur.basket[i] for i in random.sample(range(len(Arthur.basket)),nstrategies)]
         self.favourite  = 0 # OK to initialize to 0 as selection of strategies is random
-        self.prediction = None
+ 
         
     def predict(self,history = []):
         self.prediction = self.strategies[self.favourite](history)   
@@ -136,24 +151,29 @@ class GA(BarGoer):
 #
 # Simulate decision making process for one week
 
-def step_week(bargoers,init=False,threshold=60,I=10,history = []):
+def step_week(bargoers,init=False,threshold=60,history = []):
     predictions = [b.predict(history) for b in bargoers]
     attendance  = sum(1 for p in predictions if p<=threshold)
+    
     for b in bargoers:
-        b.review(attendance,threshold,history)      
+        b.score(attendance)
+        
+    for b in bargoers:
+        b.review(attendance,threshold,history) 
+        
     history.append(attendance)
 
 # run
 #
 # Simulate decision making process for entire time period
 
-def run(bargoers,N=100,L=10,I=10,threshold=60):
+def run(bargoers,N=100,L=10,threshold=60):
     history = []
     for i in range(L):
-        step_week(bargoers,init=True,threshold=threshold,I=I,history = history)
+        step_week(bargoers,init=True,threshold=threshold,history = history)
 
     for i in range(N):
-        step_week(bargoers,threshold=threshold,I=I,history = history)
+        step_week(bargoers,threshold=threshold,history = history)
 
     return history
 
@@ -206,10 +226,9 @@ if __name__=='__main__':
     try:
         Arthur.createBasket(NN=args.NA + args.NGA)
         
-        history = run([Arthur(nstrategies=args.nstrategies) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
+        history = run([Arthur(nstrategies=args.nstrategies,I=args.I) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
                       N=args.N,
                       L=args.L,
-                      I=args.I,
                       threshold=args.threshold)
         
         log_history(history,out=args.out)
