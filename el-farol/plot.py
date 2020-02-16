@@ -15,17 +15,33 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
+# Plot attendance data for specified log files
+
 import re, matplotlib.pyplot as plt
 
+# plot_file
+#
+# Plot attendance data for one log file
+
 def plot_file(file_name):
+    completed = False
     with open(file_name) as file:
         attendances=[]
         for line in file:
             m = re.search('^[0-9]+$',line.strip())
             if m:
                 attendances.append(int(m.group(0)))
+            if line.startswith('Completed'):
+                completed = True
+        if not completed:
+            print ('File {0} may have data missing.'.format(file_name))
         plt.plot(attendances,label=file_name)        
- 
+
+
+#  get_logfile_name
+#
+# Pad file name with '.txt' if necessary
+
 def get_logfile_name(base):
     out_parts = base.split('.')
     if len(out_parts)==1:
@@ -40,8 +56,10 @@ if __name__=='__main__':
     parser.add_argument('--show',  action='store_true', default=False)
     parser.add_argument('--out',                        default='out')
     args = parser.parse_args()
+    
     for file_name in args.files:
         plot_file(get_logfile_name(file_name))
+        
     plt.xlabel('Generation')
     plt.ylabel('Attendance')
     plt.title('El Farol runs')

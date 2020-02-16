@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
-import random,numpy as np,sys
+import random,numpy as np,sys,plot
 
 # past
 #
@@ -182,24 +182,22 @@ def run(bargoers,N=100,L=10,threshold=60):
 # Write parameters and history to logfile
 
 def log_history(history,out='log.txt'):
-    def get_logfile_name(base):
-        out_parts = base.split('.')
-        if len(out_parts)==1:
-            return base + '.txt'
-        return base 
-    
-    with open(get_logfile_name(out),'w') as f:
-        f.write('I={0},L={1},N={2},NA={3},NGA={4},threshold={5},seed={6},nstrategies={7}\n'.format(args.I,
-                                                                                       args.L,
-                                                                                       args.N,
-                                                                                       args.NA,
-                                                                                       args.NGA,
-                                                                                       args.threshold,
-                                                                                       args.seed,
-                                                                                       args.nstrategies))
+   
+    with open(plot.get_logfile_name(out),'w') as f:
+        f.write('I={0},L={1},N={2},NA={3},NGA={4},threshold={5},seed={6},nstrategies={7}\n'.
+                format(args.I,
+                       args.L,
+                       args.N,
+                       args.NA,
+                       args.NGA,
+                       args.threshold,
+                       args.seed,
+                       args.nstrategies))
+        
         for attendance in history:
             f.write('{0}\n'.format(attendance))
-        f.write('Completed')
+            
+        f.write('Completed\n')
             
 if __name__=='__main__':
     import argparse
