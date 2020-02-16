@@ -77,18 +77,23 @@ class BarGoer():
     def predict(self,history = []):
         raise Exception('Not implemented')
     
-    def score(self,attendance,weight_miss=1,weight_uncomfortable=5):
-        error = self.prediction - attendance
+    def get_score(self,prediction,attendance,weight_miss=1,weight_uncomfortable=1,tolerance_miss=1,tolerance_discomfort=1):
+        error = prediction - attendance
         myscore = 0
-        if error>0:
+        if error>tolerance_miss and attendance <= 60: #miss event
             myscore = weight_miss
-        if error<0:
+        elif attendance > 60 and abs(error)>tolerance_discomfort: #attend when shouldn't
             myscore = weight_uncomfortable
+        return myscore
+    
+    def score(self,attendance,weight_miss=1,weight_uncomfortable=1):
+        myscore=self.get_score(self.prediction,attendance,weight_miss=weight_miss,weight_uncomfortable=weight_uncomfortable)
         self.scores.append(myscore)
         if len(self.scores)>self.I:
             self.scores.pop(0)
+
             
-    def review(self,attendance,threshold=60,history = []):
+    def review(self,attendance,threshold=5,history = []):
         raise Exception('Not implemented')
 
 # Arthur
@@ -103,11 +108,20 @@ class Arthur(BarGoer):
             lambda history: past(history,k=1,NN=NN),
             lambda history: past(history,k=2,NN=NN),
             lambda history: past(history,k=3,NN=NN),
+            lambda history: past(history,k=4,NN=NN),
+            lambda history: past(history,k=5,NN=NN),
+            lambda history: past(history,k=6,NN=NN),            
             lambda history: trend(history,k=2,NN=NN),
             lambda history: trend(history,k=4,NN=NN),
             lambda history: trend(history,k=8,NN=NN),
-            lambda history: past(history,k=5,NN=NN),
+            lambda history: trend(history,k=3,NN=NN),
+            lambda history: trend(history,k=5,NN=NN),
+            lambda history: trend(history,k=9,NN=NN),            
+            lambda history: int(average(history,k=2,NN=NN)),
+            lambda history: int(average(history,k=3,NN=NN)),
             lambda history: int(average(history,k=4,NN=NN)),
+            lambda history: int(average(history,k=5,NN=NN)),
+            lambda history: int(average(history,k=6,NN=NN)),            
             lambda history: int(average(history,k=8,NN=NN)),
             lambda history: mirror(history,NN=NN)
         ]
@@ -116,22 +130,32 @@ class Arthur(BarGoer):
         super().__init__(I=I)
         self.strategies = [Arthur.basket[i] for i in random.sample(range(len(Arthur.basket)),nstrategies)]
         self.favourite  = 0 # OK to initialize to 0 as selection of strategies is random
- 
+        self.grace = 10
         
     def predict(self,history = []):
         self.prediction = self.strategies[self.favourite](history)   
         return self.prediction
     
-    def review(self,attendance,threshold=60,history = []):
-        if self.prediction<=threshold and attendance<=threshold:
-            return
-        if self.prediction>threshold and attendance>threshold:
-            return
-        predictions = [strategy(history) for strategy in self.strategies]
-        matches     = [i for i in range(len(self.strategies)) if self.match(predictions[i],threshold)]
-        if len(matches)>0:
-            self.favourite = random.choice(matches)
-            
+    def get_gap(self,strategy,history): 
+        prediction = strategy(history[:-1])
+        return self.get_score(prediction,history[-1])
+        
+    def review(self,attendance,threshold=25,history = []):
+        self.grace-=1
+        if self.grace>0: return
+        LH    = 10
+        LL    = 10
+        score = sum(self.scores)
+        tol   = 0
+        if score>threshold and len(history)> LL+LH:
+            for i in range(len(self.strategies)):
+                scores        = [self.get_gap(self.strategies[i],history[:-j] if j>0 else history) for j in range(LL)]
+                if sum(scores)<score-tol:
+                    #print ('{0}->{1} {2} {3}'.format(i,self.favourite, score, sum(scores)))
+                    score          = sum(scores)
+                    self.favourite = i
+                    self.grace     = 10
+             
     def match(self,prediction,threshold=60):
         if self.prediction<=threshold and prediction>threshold:
             return True
@@ -158,8 +182,9 @@ def step_week(bargoers,init=False,threshold=60,history = []):
     for b in bargoers:
         b.score(attendance)
         
-    for b in bargoers:
-        b.review(attendance,threshold,history) 
+    if not init:
+        for b in bargoers:
+            b.review(attendance,threshold,history) 
         
     history.append(attendance)
 
@@ -167,7 +192,7 @@ def step_week(bargoers,init=False,threshold=60,history = []):
 #
 # Simulate decision making process for entire time period
 
-def run(bargoers,N=100,L=10,threshold=60):
+def run(bargoers,N=100,L=10,threshold=5):
     history = []
     for i in range(L):
         step_week(bargoers,init=True,threshold=threshold,history = history)
@@ -221,18 +246,17 @@ if __name__=='__main__':
     else:
         print ('Random number generator initialized with random seed')
 
-    try:
-        Arthur.createBasket(NN=args.NA + args.NGA)
-        
-        history = run([Arthur(nstrategies=args.nstrategies,I=args.I) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
-                      N=args.N,
-                      L=args.L,
-                      threshold=args.threshold)
-        
-        log_history(history,out=args.out)
+    #try:
+    Arthur.createBasket(NN=args.NA + args.NGA)
+    
+    history = run([Arthur(nstrategies=args.nstrategies,I=args.I) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
+                  N=args.N,
+                  L=args.L)
+    
+    log_history(history,out=args.out)
 
-        mu = np.mean(history[args.L:])
-        sigma = np.std(history[args.L:])
-        print ('Mean Attendance={0:.1f}, Standard deviation={1:.1f}, Sharpe={2:.1f}'.format(mu,sigma,mu/sigma))    
-    except Exception as e:
-        sys.exit('{0} {1}'.format(type(e),e.args))
+    mu = np.mean(history[args.L:])
+    sigma = np.std(history[args.L:])
+    print ('Mean Attendance={0:.1f}, Standard deviation={1:.1f}, Sharpe={2:.1f}'.format(mu,sigma,mu/sigma))    
+    #except Exception as e:
+        #sys.exit('{0} {1}'.format(type(e),e.args))
