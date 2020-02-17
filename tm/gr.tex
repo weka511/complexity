@@ -780,7 +780,37 @@ In special relativity $r$ and $\omega$ are the closest thing we have to uniform 
 
 Note that the 3 acceleration isn't uniform.
 
-\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=3730}
+Set:
+\begin{align*}
+	X=& R \cosh \omega\\
+	T=& R \sinh \omega \text{ then the proper acceleration is}\\
+	A =& \frac{c^2}{R} \text{, but $c=1$.}
+\end{align*}
+
+In hyperbolic polar coordinates
+\begin{align*}
+	d\tau^2 =& r^2 d \omega^2 - dr^2
+\end{align*}
+
+Figure \ref{fig:gr-4-constant-acceleration} depicts constant acceleration.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Constant Acceleration. We go out to a distance R, so acceleration is $g$, then a little further.}\label{fig:gr-4-constant-acceleration}
+		\includegraphics[width=0.8\textwidth]{gr-4-constant-acceleration}
+	\end{center}
+\end{figure}
+
+At $r=R+y$, the metric is:
+\begin{align*}
+	d\tau^2 =& \big(R^2 + 2 R y + y^2\big) d \omega^2 - dr^2\\
+	=& \big[1 + \frac{2  y}{R} + \big(\frac{y}{R}\big)^2\big] R^2 d \omega^2 - dr^2\\
+	=& \big[1 + \frac{2  y}{R} + \big(\frac{y}{R}\big)^2\big] dt^2 - dr^2 \text{, where we define $dt\triangleq R d \omega$}\\
+	\approxeq & \big[1 + \frac{2  y}{R} \big] dt^2 - dr^2 \text{, since $y \ll R$}
+\end{align*}
+
+The correction accounts for the gravitational force. We'll see this from the equation of motion.
+
+\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=4624}
 
 
 \section{Metric for a gravitational field}
