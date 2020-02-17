@@ -706,19 +706,81 @@ So far we have discussed 3 dimensional space, as Riemann knew it. We now move to
 
 
 \begin{align*}
-	d \tau^s =& dt^2 -dx^2 -dy^2 -dz^2\\
+	d \tau^2 =& dt^2 -dx^2 -dy^2 -dz^2\\
 	=& - g_{\mu\nu}(x) dx^\mu dx^\nu \text{, where }\\
 	g_{\mu\nu} =& \begin{pmatrix}
 		-1 &0&0&0\\
 		0&1&0&0\\
 		0&0&1&0\\
 		0&0&0&1
-	\end{pmatrix}
+	\end{pmatrix} \numberthis \label{eq:minkowski:metric}\\
+	\triangleq& \eta_{\mu\nu} \text{, whence}\\
+	d \tau^2=& \eta_{\mu\nu} dx^\mu dx^\nu
 \end{align*}
 
+\subsection{Minkowski space}
 
+In 4 dimensions, "flat" means that there is a coordinate system where the metric looks like (\ref{eq:minkowski:metric}).
 
-\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2569}
+We want to define a uniformly accelerated motion, but there are problems. \begin{itemize}
+	\item If you have a bunch of points which are uniformly separated, \ref{fig:gr-4-uniform-acceleration}, they will maintain a uniform distance, but distances are supposed to transform when they accelerate. If we did this, we'd find the distances getting larger in the rest frame, stretching the strings joining the points, eventually breaking them.
+	\item Also the points eventually move faster than the speed of light.
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{There is a problem defining uniform acceleration in Special Relativity }\label{fig:gr-4-uniform-acceleration}
+	\includegraphics{gr-4-uniform-acceleration}
+\end{figure}
+
+We will use an analogue of polar coordinates.
+
+\begin{figure}[H]
+	\caption{Constant Acceleration}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{If the point moves with uniform angular velocity on the circle, the acceleration is uniform, and directed toward the centre.}\label{fig:gr-4-polar}
+		\includegraphics[width=\textwidth]{gr-4-polar}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Constant acceleration in Special Relativity}\label{fig:gr-4-polar-sinh}
+		\includegraphics[width=\textwidth]{gr-4-polar-sinh}
+	\end{subfigure}
+\end{figure}
+
+In Figure \ref{fig:gr-4-polar}
+\begin{align*}
+	x=& r \cos \theta\\
+	y=& r \sin \theta\\
+	\cos^2 \theta + \sin^2 \theta =& 1\\
+	x^2 + y^2 =& r^2\\
+	\cos \theta =& \frac{e^{i \theta}+e^{-i \theta}}{2}\\
+	\sin \theta =& \frac{e^{i \theta}-e^{-i \theta}}{2i}
+\end{align*}
+
+If the point moves with uniform angular velocity on the circle, the acceleration is uniform, and directed toward the centre.
+
+Figure \ref{fig:gr-4-polar-sinh} depicts constant acceleration in Special Relativity. We replace the trigonometric function by hyperbolic cosines and signs, and the angle $\theta$ is replaces by $\omega$, which increases uniformly. The $\omega$ is like time.
+
+\begin{align*}
+	\cosh \omega =& \frac{e^\omega+e^{-\omega}}{2}\\
+	\sinh \omega =& \frac{e^\omega-e^{-\omega}}{2}\\
+	\cosh^2 \omega +\sinh^2 \omega=& 1\\
+	x=& r \cosh \omega\\
+	t=& r \sinh \omega\\
+	x^2 - t^1 =& 1
+\end{align*}
+
+In special relativity $r$ and $\omega$ are the closest thing we have to uniform acceleration--Figure \ref{fig:gr-4-uniform-sinh}. The points along $t=0$ remain the same distance apart as they sweep out their respective hyperbolae.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{The closest thing we have to uniform acceleration in special relativity.}\label{fig:gr-4-uniform-sinh}
+		\includegraphics[width=0.8\textwidth]{gr-4-uniform-sinh}
+	\end{center}
+\end{figure}
+
+Note that the 3 acceleration isn't uniform.
+
+\url{https://youtu.be/YdnLcYNdTzE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=3730}
 
 
 \section{Metric for a gravitational field}
