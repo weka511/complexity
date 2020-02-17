@@ -77,7 +77,7 @@ class BarGoer():
     def predict(self,history = []):
         raise Exception('Not implemented')
     
-    def get_score(self,prediction,attendance,weight_miss=10,weight_uncomfortable=2,tolerance_miss=0,tolerance_discomfort=0):
+    def get_score(self,prediction,attendance,weight_miss=10,weight_uncomfortable=2,tolerance_miss=0,tolerance_discomfort=0,threshold=60):
         error = prediction - attendance
         if prediction>60 and attendance<=60:
             return weight_miss
@@ -89,8 +89,11 @@ class BarGoer():
             return 1
         return 0
     
-    def score(self,attendance,weight_miss=10,weight_uncomfortable=1):
-        self.scores.append(self.get_score(self.prediction,attendance,weight_miss=weight_miss,weight_uncomfortable=weight_uncomfortable))
+    def score(self,attendance,weight_miss=10,weight_uncomfortable=1,threshold=60):
+        self.scores.append(
+            self.get_score(
+                self.prediction,attendance,
+                weight_miss=weight_miss,weight_uncomfortable=weight_uncomfortable,threshold=threshold))
         if len(self.scores)>self.I:
             self.scores.pop(0)
 
@@ -132,7 +135,6 @@ class Arthur(BarGoer):
         super().__init__(I=I)
         self.strategies = [Arthur.basket[i] for i in random.sample(range(len(Arthur.basket)),nstrategies)]
         self.favourite  = 0 # OK to initialize to 0 as selection of strategies is random
-        #self.grace = 10
         
     def predict(self,history = []):
         self.prediction = self.strategies[self.favourite](history)   
@@ -142,9 +144,7 @@ class Arthur(BarGoer):
         prediction = strategy(history[:-1])
         return self.get_score(prediction,history[-1])
         
-    def review(self,attendance,threshold=25,history = []):
-        #self.grace-=1
-        #if self.grace>0: return
+    def review(self,attendance,threshold=5,history = []):
         LH    = 10
         LL    = 10
         score = sum(self.scores)
@@ -153,10 +153,8 @@ class Arthur(BarGoer):
             for i in range(len(self.strategies)):
                 scores        = [self.get_gap(self.strategies[i],history[:-j] if j>0 else history) for j in range(LL)]
                 if sum(scores)<score-tol:
-                    #print ('{0}->{1} {2} {3}'.format(i,self.favourite, score, sum(scores)))
                     score          = sum(scores)
                     self.favourite = i
-                    #self.grace     = 10
              
     def match(self,prediction,threshold=60):
         if self.prediction<=threshold and prediction>threshold:
@@ -186,7 +184,7 @@ def step_week(bargoers,init=False,threshold=60,history = []):
         
     if not init:
         for b in bargoers:
-            b.review(attendance,threshold,history) 
+            b.review(attendance,threshold=threshold,history=history) 
         
     history.append(attendance)
 
@@ -235,7 +233,7 @@ if __name__=='__main__':
     parser.add_argument('--N',           type=int, default=100,   help='Number of generations')
     parser.add_argument('--NA',          type=int, default=100,   help='Number of Arthurian Players')
     parser.add_argument('--NGA',         type=int, default=0,     help='Number of Genetic Algorithm Players')
-    parser.add_argument('--threshold',   type=int, default=60,    help='Threshold for comfort')
+    parser.add_argument('--threshold',   type=int, default=60,    help='Threshold for comfort: stay home if expect more')
     parser.add_argument('--seed',        type=int, default=None,  help='Random number seed')
     parser.add_argument('--nstrategies', type=int, default=5,     help='Number of strategies')
     parser.add_argument('--out',                   default='log', help='File for logging histories')

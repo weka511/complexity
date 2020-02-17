@@ -52,9 +52,9 @@ if __name__=='__main__':
     import argparse
     
     parser = argparse.ArgumentParser('Plot attendance from El Farol simulation')
-    parser.add_argument('--files', nargs='+')
-    parser.add_argument('--show',  action='store_true', default=False)
-    parser.add_argument('--out',                        default='out')
+    parser.add_argument('--files', nargs='+',                          help='List of files to process')
+    parser.add_argument('--show',  action='store_true', default=False, help='Show plots (otherwise they will still be saved)')
+    parser.add_argument('--out',                        default='out', help='File for storing plots')
     args = parser.parse_args()
     
     for file_name in args.files:
