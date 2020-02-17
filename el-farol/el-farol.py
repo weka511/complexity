@@ -77,18 +77,20 @@ class BarGoer():
     def predict(self,history = []):
         raise Exception('Not implemented')
     
-    def get_score(self,prediction,attendance,weight_miss=1,weight_uncomfortable=1,tolerance_miss=1,tolerance_discomfort=1):
+    def get_score(self,prediction,attendance,weight_miss=10,weight_uncomfortable=2,tolerance_miss=0,tolerance_discomfort=0):
         error = prediction - attendance
-        myscore = 0
-        if error>tolerance_miss and attendance <= 60: #miss event
-            myscore = weight_miss
-        elif attendance > 60 and abs(error)>tolerance_discomfort: #attend when shouldn't
-            myscore = weight_uncomfortable
-        return myscore
+        if prediction>60 and attendance<=60:
+            return weight_miss
+        if prediction<=60 and attendance>60:
+            return weight_uncomfortable        
+        if error>tolerance_miss: # prediction too high
+            return 1
+        if error<0 and abs(error)>tolerance_discomfort: #too low
+            return 1
+        return 0
     
-    def score(self,attendance,weight_miss=1,weight_uncomfortable=1):
-        myscore=self.get_score(self.prediction,attendance,weight_miss=weight_miss,weight_uncomfortable=weight_uncomfortable)
-        self.scores.append(myscore)
+    def score(self,attendance,weight_miss=10,weight_uncomfortable=1):
+        self.scores.append(self.get_score(self.prediction,attendance,weight_miss=weight_miss,weight_uncomfortable=weight_uncomfortable))
         if len(self.scores)>self.I:
             self.scores.pop(0)
 
@@ -130,7 +132,7 @@ class Arthur(BarGoer):
         super().__init__(I=I)
         self.strategies = [Arthur.basket[i] for i in random.sample(range(len(Arthur.basket)),nstrategies)]
         self.favourite  = 0 # OK to initialize to 0 as selection of strategies is random
-        self.grace = 10
+        #self.grace = 10
         
     def predict(self,history = []):
         self.prediction = self.strategies[self.favourite](history)   
@@ -141,8 +143,8 @@ class Arthur(BarGoer):
         return self.get_score(prediction,history[-1])
         
     def review(self,attendance,threshold=25,history = []):
-        self.grace-=1
-        if self.grace>0: return
+        #self.grace-=1
+        #if self.grace>0: return
         LH    = 10
         LL    = 10
         score = sum(self.scores)
@@ -154,7 +156,7 @@ class Arthur(BarGoer):
                     #print ('{0}->{1} {2} {3}'.format(i,self.favourite, score, sum(scores)))
                     score          = sum(scores)
                     self.favourite = i
-                    self.grace     = 10
+                    #self.grace     = 10
              
     def match(self,prediction,threshold=60):
         if self.prediction<=threshold and prediction>threshold:
@@ -250,12 +252,13 @@ if __name__=='__main__':
     Arthur.createBasket(NN=args.NA + args.NGA)
     
     history = run([Arthur(nstrategies=args.nstrategies,I=args.I) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
-                  N=args.N,
-                  L=args.L)
+                  N         = args.N,
+                  L         = args.L,
+                  threshold = args.threshold)
     
     log_history(history,out=args.out)
 
-    mu = np.mean(history[args.L:])
+    mu    = np.mean(history[args.L:])
     sigma = np.std(history[args.L:])
     print ('Mean Attendance={0:.1f}, Standard deviation={1:.1f}, Sharpe={2:.1f}'.format(mu,sigma,mu/sigma))    
     #except Exception as e:
