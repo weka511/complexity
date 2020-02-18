@@ -151,25 +151,7 @@ class Arthur(BarGoer):
         self.prediction   = self.alternatives[self.favourite] 
         return self.prediction
 
-    def build_scores(self,
-                     prediction,
-                     attendance,
-                     scores,
-                     weight_miss          = 5,
-                     weight_uncomfortable = 5,
-                     tolerance_error      = 1,
-                     weight_error         = 0.5,
-                     threshold            = 60):
-        scores.append(self.get_score(prediction,
-                               attendance,
-                               weight_miss          = weight_miss,
-                               weight_uncomfortable = weight_uncomfortable,
-                               tolerance_error      = tolerance_error,
-                               weight_error         = weight_error,
-                               threshold            = threshold))
-        if len(scores)>self.I:
-            scores.pop(0)      
-        return scores
+
     
     def score(self,
               attendance,
@@ -179,7 +161,7 @@ class Arthur(BarGoer):
               weight_error         = 0.5,
               threshold            = 60):
         self.alternative_scores = [
-            self.build_scores(self.alternatives[i],
+            self.update_score_history(self.alternatives[i],
                               attendance,
                               self.alternative_scores[i],
                               weight_miss          = weight_miss,
@@ -187,40 +169,35 @@ class Arthur(BarGoer):
                               tolerance_error      = tolerance_error,
                               weight_error         = weight_error,
                               threshold            = threshold) for i in range(len(self.alternatives))]
-        #self.scores.append(
-            #self.get_score(
-                #self.prediction,attendance,
-                #weight_miss          = weight_miss,
-                #weight_uncomfortable = weight_uncomfortable,
-                #tolerance_error      = tolerance_error,
-                #weight_error         = weight_error,
-                #threshold            = threshold))
-        #if len(self.scores)>self.I:
-            #self.scores.pop(0)
-            
-    def get_gap(self,strategy,history): 
-        prediction = strategy(history[:-1])
-        return self.get_score(prediction,history[-1])
-        
+                    
     def review(self, attendance, max_score=5, history = [], LH=10, LL = 10, tolerance   = 1):
         total_scores = [sum(scores) for scores in self.alternative_scores]
         if total_scores[self.favourite]>max_score and len(history)> LL+LH:
             self.favourite = np.argmin(total_scores)
-        #score = sum(self.scores)
+               
        
-        #if score>max_score and len(history)> LL+LH:
-            #for i in range(len(self.strategies)):
-                #scores        = [self.get_gap(self.strategies[i],history[:-j] if j>0 else history) for j in range(LL)]
-                #if sum(scores)<score-tolerance:
-                    #score          = sum(scores)
-                    #self.favourite = i
-             
-    def match(self,prediction,threshold=60):
-        if self.prediction<=threshold and prediction>threshold:
-            return True
-        if self.prediction>threshold and prediction<=threshold:
-            return True
-        return False
+    # Update history of scores for one strategy: append latest score
+    # and main correct length
+    
+    def update_score_history(self,
+                             prediction,
+                             attendance,
+                             scores,
+                             weight_miss          = 5,
+                             weight_uncomfortable = 5,
+                             tolerance_error      = 1,
+                             weight_error         = 0.5,
+                             threshold            = 60):
+        scores.append(self.get_score(prediction,
+                               attendance,
+                               weight_miss          = weight_miss,
+                               weight_uncomfortable = weight_uncomfortable,
+                               tolerance_error      = tolerance_error,
+                               weight_error         = weight_error,
+                               threshold            = threshold))
+        if len(scores)>self.I:
+            scores.pop(0)      
+        return scores    
  
  # GA
  #
@@ -334,27 +311,27 @@ if __name__=='__main__':
     else:
         print ('Random number generator initialized with random seed')
 
-    #try:
-    Arthur.createBasket(NN=args.NA + args.NGA)
+    try:
+        Arthur.createBasket(NN=args.NA + args.NGA)
+        
+        history = []
+        run([Arthur(nstrategies=args.nstrategies,I=args.I) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
+            N         = args.N,
+            L         = args.L,
+            threshold = args.threshold,
+            history   = history,
+            reporting = 25)
+        
+        log_history(history,out=args.out)
     
-    history = []
-    run([Arthur(nstrategies=args.nstrategies,I=args.I) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
-        N         = args.N,
-        L         = args.L,
-        threshold = args.threshold,
-        history   = history,
-        reporting = 25)
-    
-    log_history(history,out=args.out)
-
-    mu    = np.mean(history[args.L:])
-    sigma = np.std(history[args.L:])
-    print ('Mean Attendance={0:.1f}, Standard deviation={1:.1f}, Sharpe={2:.1f}'.format(mu,sigma,mu/sigma))    
-    if args.show:
-        import matplotlib.pyplot as plt
-        plot.plot_file(plot.get_logfile_name(args.out))
-        plot.decorate_plot(args.out)
-        plt.show() 
+        mu    = np.mean(history[args.L:])
+        sigma = np.std(history[args.L:])
+        print ('Mean Attendance={0:.1f}, Standard deviation={1:.1f}, Sharpe={2:.1f}'.format(mu,sigma,mu/sigma))    
+        if args.show:
+            import matplotlib.pyplot as plt
+            plot.plot_file(plot.get_logfile_name(args.out))
+            plot.decorate_plot(args.out)
+            plt.show() 
             
-    #except Exception as e:
-        #sys.exit('{0} {1}'.format(type(e),e.args))
+    except Exception as e:
+        sys.exit('{0} {1}'.format(type(e),e.args))
