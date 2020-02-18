@@ -281,6 +281,7 @@ if __name__=='__main__':
     parser.add_argument('--seed',        type=int, default=None,  help='Random number seed')
     parser.add_argument('--nstrategies', type=int, default=5,     help='Number of strategies')
     parser.add_argument('--out',                   default='log', help='File for logging histories')
+    parser.add_argument('--show',  action='store_true', default=False, help='Show plot')
     
     args   = parser.parse_args();
     
@@ -306,6 +307,11 @@ if __name__=='__main__':
         mu    = np.mean(history[args.L:])
         sigma = np.std(history[args.L:])
         print ('Mean Attendance={0:.1f}, Standard deviation={1:.1f}, Sharpe={2:.1f}'.format(mu,sigma,mu/sigma))    
-        
+        if args.show:
+            import matplotlib.pyplot as plt
+            plot.plot_file(plot.get_logfile_name(args.out))
+            plot.decorate_plot(args.out)
+            plt.show() 
+            
     except Exception as e:
         sys.exit('{0} {1}'.format(type(e),e.args))

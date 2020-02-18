@@ -48,6 +48,13 @@ def get_logfile_name(base):
         return base + '.txt'
     return base 
 
+def decorate_plot(out):
+    plt.xlabel('Generation')
+    plt.ylabel('Attendance')
+    plt.title('El Farol runs')
+    plt.legend()
+    plt.savefig(out)
+    
 if __name__=='__main__':
     import argparse
     
@@ -60,10 +67,7 @@ if __name__=='__main__':
     for file_name in args.files:
         plot_file(get_logfile_name(file_name))
         
-    plt.xlabel('Generation')
-    plt.ylabel('Attendance')
-    plt.title('El Farol runs')
-    plt.legend()
-    plt.savefig(args.out)
+    decorate_plot(args.out)
+    
     if args.show:
         plt.show()
