@@ -77,23 +77,40 @@ class BarGoer():
     def predict(self,history = []):
         raise Exception('Not implemented')
     
-    def get_score(self,prediction,attendance,weight_miss=10,weight_uncomfortable=2,tolerance_miss=0,tolerance_discomfort=0,threshold=60):
-        error = prediction - attendance
-        if prediction>60 and attendance<=60:
+    def get_score(self,prediction,attendance,
+                  weight_miss          = 5,
+                  weight_uncomfortable = 5,
+                  tolerance_error      = 1,
+                  weight_error         = 1,
+                  threshold            = 60):
+        # start be dealing with mistakes that have consequences:
+        # we missed when we might have attended, or vice versa
+        if prediction>threshold and attendance<=threshold:
             return weight_miss
-        if prediction<=60 and attendance>60:
-            return weight_uncomfortable        
-        if error>tolerance_miss: # prediction too high
-            return 1
-        if error<0 and abs(error)>tolerance_discomfort: #too low
-            return 1
+        if prediction<=threshold and attendance>threshold:
+            return weight_uncomfortable 
+        error = prediction - attendance
+        if error>tolerance_error: # prediction too high
+            return weight_error*abs(error)
+        if error<0 and abs(error)>tolerance_error: #too low
+            return weight_error*abs(error)
         return 0
     
-    def score(self,attendance,weight_miss=10,weight_uncomfortable=1,threshold=60):
+    def score(self,
+              attendance,
+              weight_miss          = 5,
+              weight_uncomfortable = 5,
+              tolerance_error      = 1,
+              weight_error         = 0.5,
+              threshold            = 60):
         self.scores.append(
             self.get_score(
                 self.prediction,attendance,
-                weight_miss=weight_miss,weight_uncomfortable=weight_uncomfortable,threshold=threshold))
+                weight_miss          = weight_miss,
+                weight_uncomfortable = weight_uncomfortable,
+                tolerance_error      = tolerance_error,
+                weight_error         = weight_error,
+                threshold            = threshold))
         if len(self.scores)>self.I:
             self.scores.pop(0)
 
@@ -144,15 +161,14 @@ class Arthur(BarGoer):
         prediction = strategy(history[:-1])
         return self.get_score(prediction,history[-1])
         
-    def review(self,attendance,threshold=5,history = []):
-        LH    = 10
-        LL    = 10
+    def review(self, attendance, max_score=5, history = [], LH=10, LL = 10, tolerance   = 1):
+
         score = sum(self.scores)
-        tol   = 0
-        if score>threshold and len(history)> LL+LH:
+       
+        if score>max_score and len(history)> LL+LH:
             for i in range(len(self.strategies)):
                 scores        = [self.get_gap(self.strategies[i],history[:-j] if j>0 else history) for j in range(LL)]
-                if sum(scores)<score-tol:
+                if sum(scores)<score-tolerance:
                     score          = sum(scores)
                     self.favourite = i
              
@@ -165,7 +181,7 @@ class Arthur(BarGoer):
  
  # GA
  #
- # Use a Gnettic Algorithm for making decisions
+ # Use a Genetic Algorithm for making decisions
  
 class GA(BarGoer):
     def __init__(self):
@@ -175,16 +191,29 @@ class GA(BarGoer):
 #
 # Simulate decision making process for one week
 
-def step_week(bargoers,init=False,threshold=60,history = []):
+def step_week(bargoers,
+              init                 = False,
+              threshold            = 60,
+              history              = [],
+              weight_miss          = 5,
+              weight_uncomfortable = 5,
+              tolerance_error      = 1,
+              weight_error         = 0.5,
+              max_score            = 10):
     predictions = [b.predict(history) for b in bargoers]
     attendance  = sum(1 for p in predictions if p<=threshold)
     
     for b in bargoers:
-        b.score(attendance)
+        b.score(attendance,
+                threshold            = threshold, 
+                weight_miss          = weight_miss,
+                weight_uncomfortable = weight_uncomfortable,
+                tolerance_error      = tolerance_error,
+                weight_error         = weight_error)
         
     if not init:
         for b in bargoers:
-            b.review(attendance,threshold=threshold,history=history) 
+            b.review(attendance,max_score=max_score,history=history) 
         
     history.append(attendance)
 
@@ -192,14 +221,29 @@ def step_week(bargoers,init=False,threshold=60,history = []):
 #
 # Simulate decision making process for entire time period
 
-def run(bargoers,N=100,L=10,threshold=5):
-    history = []
-    for i in range(L):
-        step_week(bargoers,init=True,threshold=threshold,history = history)
-
-    for i in range(N):
-        step_week(bargoers,threshold=threshold,history = history)
-
+def run(bargoers,
+        N                    = 100,
+        L                    = 10,
+        threshold            = 60,
+        weight_miss          = 7,
+        weight_uncomfortable = 5,
+        tolerance_error      = 1,
+        weight_error         = 0.5,
+        history              = [],
+        reporting            = None):
+    
+    for i in range(L+N):
+        step_week(bargoers,
+                  init                 = i<L,
+                  threshold            = threshold,
+                  history              = history,
+                  weight_miss          = weight_miss,
+                  weight_uncomfortable = weight_uncomfortable,
+                  tolerance_error      = tolerance_error,
+                  weight_error         = weight_error)
+        if reporting!=None and reporting>0 and i%reporting==0:
+            print ('Step {0} of {1}'.format(i,L+N))
+        
     return history
 
 # log_history
@@ -229,7 +273,7 @@ if __name__=='__main__':
     
     parser = argparse.ArgumentParser('El Farol simulation')
     parser.add_argument('--I',           type=int, default=10,    help='Length of history')
-    parser.add_argument('--L',           type=int, default=100,   help='Number of generations for initialization')
+    parser.add_argument('--L',           type=int, default=10,   help='Number of generations for initialization')
     parser.add_argument('--N',           type=int, default=100,   help='Number of generations')
     parser.add_argument('--NA',          type=int, default=100,   help='Number of Arthurian Players')
     parser.add_argument('--NGA',         type=int, default=0,     help='Number of Genetic Algorithm Players')
@@ -246,18 +290,22 @@ if __name__=='__main__':
     else:
         print ('Random number generator initialized with random seed')
 
-    #try:
-    Arthur.createBasket(NN=args.NA + args.NGA)
+    try:
+        Arthur.createBasket(NN=args.NA + args.NGA)
+        
+        history = []
+        run([Arthur(nstrategies=args.nstrategies,I=args.I) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
+            N         = args.N,
+            L         = args.L,
+            threshold = args.threshold,
+            history   = history,
+            reporting = 25)
+        
+        log_history(history,out=args.out)
     
-    history = run([Arthur(nstrategies=args.nstrategies,I=args.I) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
-                  N         = args.N,
-                  L         = args.L,
-                  threshold = args.threshold)
-    
-    log_history(history,out=args.out)
-
-    mu    = np.mean(history[args.L:])
-    sigma = np.std(history[args.L:])
-    print ('Mean Attendance={0:.1f}, Standard deviation={1:.1f}, Sharpe={2:.1f}'.format(mu,sigma,mu/sigma))    
-    #except Exception as e:
-        #sys.exit('{0} {1}'.format(type(e),e.args))
+        mu    = np.mean(history[args.L:])
+        sigma = np.std(history[args.L:])
+        print ('Mean Attendance={0:.1f}, Standard deviation={1:.1f}, Sharpe={2:.1f}'.format(mu,sigma,mu/sigma))    
+        
+    except Exception as e:
+        sys.exit('{0} {1}'.format(type(e),e.args))
