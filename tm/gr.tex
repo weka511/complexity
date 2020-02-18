@@ -422,7 +422,7 @@ The problem is that we can't extend away from $x_0$, except in a flat space. The
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[What does it mean for one vector to be the same as another at a different point?]{What does it mean for one vector to be the same as another at a different point? $\frac{\partial V_m}{\partial V^n}=0$ is not a tensor equation, therefore $\frac{\partial V_m}{\partial V^n}$ is not a tensor.}\label{fig:gr-4-equality-of-vectors}
+		\caption[Comparing vectors at different points]{What does it mean for one vector to be the same as another at a different point? $\frac{\partial V_m}{\partial V^n}=0$ is not a tensor equation, therefore $\frac{\partial V_m}{\partial V^n}$ is not a tensor.}\label{fig:gr-4-equality-of-vectors}
 		\includegraphics{gr-4-equality-of-vectors}
 	\end{center}
 \end{figure}
@@ -728,7 +728,7 @@ We want to define a uniformly accelerated motion, but there are problems. \begin
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{There is a problem defining uniform acceleration in Special Relativity }\label{fig:gr-4-uniform-acceleration}
+	\caption[Defining uniform acceleration in Special Relativity]{There is a problem defining uniform acceleration in Special Relativity }\label{fig:gr-4-uniform-acceleration}
 	\includegraphics{gr-4-uniform-acceleration}
 \end{figure}
 
@@ -773,7 +773,7 @@ In special relativity $r$ and $\omega$ are the closest thing we have to uniform 
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{The closest thing we have to uniform acceleration in special relativity.}\label{fig:gr-4-uniform-sinh}
+		\caption{The closest thing to uniform acceleration in special relativity.}\label{fig:gr-4-uniform-sinh}
 		\includegraphics[width=0.8\textwidth]{gr-4-uniform-sinh}
 	\end{center}
 \end{figure}
@@ -850,7 +850,40 @@ Something strange happens when $y-2GM$: $g_{tt}=0$. This has to do with the hori
 
 \section{Metric for a gravitational field}
 
-TBP
+In Minkowskian space:
+\begin{align*}
+	d\tau^2 =dt^2 - \frac{dx^2}{c^2} - \frac{dy^2}{c^2} - \frac{dz^2}{c^2} 
+\end{align*}
+
+Sometimes we include c, other times set $c=1$; it depends on whether we want to keep track of how small things are.
+
+\begin{defn}[Timelike]
+	If $d\tau^2 >0$ we say the interval is timelike. Figure \ref{fig:gr-5-timelike} illustrates timelike vectors.
+\end{defn}
+
+\begin{defn}[Spacelike]
+	If $d\tau^2 <0$ we say the interval is spacelike. Spacelike vectors are outside the light cone--Figure \ref{fig:gr-5-timelike}. For a spacelike vector we define $ds^2=-d\tau^2$.
+\end{defn}
+
+\begin{defn}[Lightlike]
+	If $d\tau^2 =0$ we say the interval is lightlike. These vectors lie in the surface of the lightcone-- Figure \ref{fig:gr-5-timelike}.
+\end{defn}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{The lightcone, showing timelike vectors.}\label{fig:gr-5-timelike}
+		\includegraphics{gr-5-timelike}
+	\end{center}
+\end{figure}
+
+\begin{itemize}
+	\item The proper time is the time read of by a clock moving along a timelike trajectory;
+	\item proper distance is the distance measured bt a metre stick along a spacelike trajectory.
+\end{itemize} 
+
+
+
+\url{https://youtu.be/quWN1V9jOf0?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=502}
 
 \section{Black holes}
 
