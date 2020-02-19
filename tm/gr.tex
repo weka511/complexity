@@ -627,18 +627,31 @@ Given a vector field, move along curve. Does vector remain parallel to itself, i
 \end{thm}
 
 \begin{proof}
+	The result follows quickly from the following Lemma.
+	\begin{lemma}$D_pV^n=0 \implies \partial_p (g_{mn}V^mV^n)=0$\label{lemma:d:length}
+	\end{lemma}
+	\begin{proof}
+		\begin{align*}
+			\partial_p (g_{mn}V^mV^n)=&\partial_p g_{mn} V^m V^n + g_{mn} \partial_p V^m V^n + g_{mn}V^m  \partial_p V^n\\
+			D_pV^n=0 \implies&\partial_p V^n = -\Gamma\indices{^n_{pr}}V^r \text{, so the previous equation becomes:}\\
+			\partial_p (g_{mn}V^mV^n)=&\partial_p g_{mn} V^m V^n -g_{mn}\Gamma\indices{^m_{pr}}V^rV^n-\underbrace{g_{mn}\Gamma\indices{^n_{pr}}V^mV^r}_\text{$=g_{nm}\Gamma\indices{^m_{pr}}V^nV^r$}\\
+			=&\partial_p g_{mn} V^m V^n -g_{mn}\Gamma\indices{^m_{pr}}V^rV^n-g_{mn}\Gamma\indices{^m_{pr}}V^nV^r \text{, by summetry of $g_{mn}$}\\
+			=&\partial_p g_{mn} V^m V^n -2g_{mn}\Gamma\indices{^m_{pr}}V^rV^n \text{, symmetry of $V^rV^n$}\\
+			=&\partial_p g_{mn} V^m V^n - g_{mn}\big[\partial_p g_{tr} +\partial_r g_{pt} -\partial_t g_{pr} \big]g^{mt}V^rV^n \text{, from (\ref{eq:christoffel:g})}\\
+			=&\partial_p g_{mn} V^m V^n - \underbrace{g_{mn}g^{mt}}_{\delta_n^t}\big[\partial_p g_{tr} +\partial_r g_{pt} -\partial_t g_{pr} \big]V^rV^n
+			\\
+			=&\partial_p g_{mn} V^m V^n - \big[\partial_p g_{nr} +\partial_r g_{pn} -\partial_n g_{pr} \big]V^rV^n\\
+			=&\cancel{\partial_p g_{mn} V^m V^n} - \cancel{\partial_p g_{nr}V^rV^n} -\bcancel{\partial_r g_{pn}V^rV^n} +\bcancel{\partial_n g_{pr} V^rV^n} \text{, on relabelling }\\
+			=&0
+		\end{align*}
+	\end{proof}
+	Imagine a curve along which $D_pV^n=0$.  Assume that the length is known at some point, $\vec{x_0}$, on the curve. Then the length at a neighbouring point $\vec{x_0}+\vec{dx}$ is:
 	\begin{align*}
-		\partial_p (g_{mn}V^mV^n)=&\partial_p g_{mn} V^m V^n + g_{mn} \partial_p V^m V^n + g_{mn}V^m  \partial_p V^n\\
-		D_pV^n=0 \implies&\partial_p V^n = -\Gamma\indices{^n_{pr}}V^r \text{, so the previous equation becomes:}\\
-		\partial_p (g_{mn}V^mV^n)=&\partial_p g_{mn} V^m V^n -g_{mn}\Gamma\indices{^m_{pr}}V^rV^n-\underbrace{g_{mn}\Gamma\indices{^n_{pr}}V^mV^r}_\text{$=g_{nm}\Gamma\indices{^m_{pr}}V^nV^r$}\\
-		=&\partial_p g_{mn} V^m V^n -g_{mn}\Gamma\indices{^m_{pr}}V^rV^n-g_{mn}\Gamma\indices{^m_{pr}}V^nV^r \text{, by summetry of $g_{mn}$}\\
-		=&\partial_p g_{mn} V^m V^n -2g_{mn}\Gamma\indices{^m_{pr}}V^rV^n \text{, symmetry of $V^rV^n$}\\
-		=&\partial_p g_{mn} V^m V^n - g_{mn}\big[\partial_p g_{tr} +\partial_r g_{pt} -\partial_t g_{pr} \big]g^{mt}V^rV^n \text{, from (\ref{eq:christoffel:g})}\\
-		=&\partial_p g_{mn} V^m V^n - \underbrace{g_{mn}g^{mt}}_{\delta_n^t}\big[\partial_p g_{tr} +\partial_r g_{pt} -\partial_t g_{pr} \big]V^rV^n
-		\\
-		=&\partial_p g_{mn} V^m V^n - \big[\partial_p g_{nr} +\partial_r g_{pn} -\partial_n g_{pr} \big]V^rV^n\\
-		=&\cancel{\partial_p g_{mn} V^m V^n} - \cancel{\partial_p g_{nr}V^rV^n} -\bcancel{\partial_r g_{pn}V^rV^n} +\bcancel{\partial_n g_{pr} V^rV^n} \text{, on relabelling }\\
-		=&0
+		g_{mn}(\vec{x_0}+\vec{dx})V^m(\vec{x_0}+\vec{dx})V^n(\vec{x_0}+\vec{dx})=&	g_{mn}(\vec{x_0})V^m(\vec{x_0})V^n(\vec{x_0})+ \partial_p (g_{mn}V^mV^n) dx^p
+	\end{align*}
+	But, from Lemma \ref{lemma:d:length}, $\partial_p (g_{mn}V^mV^n)=0$ along the curve, whence:
+	\begin{align*}
+		g_{mn}(\vec{x_0}+\vec{dx})V^m(\vec{x_0}+\vec{dx})V^n(\vec{x_0}+\vec{dx})=&	g_{mn}(\vec{x_0})V^m(\vec{x_0})V^n(\vec{x_0})
 	\end{align*}
 \end{proof}
 
@@ -882,20 +895,38 @@ Sometimes we include c, other times set $c=1$; it depends on whether we want to 
 \end{defn}
 
 \begin{figure}[H]
+	\caption{Lightcones}
 	\begin{center}
-		\caption{The lightcone, showing timelike vectors.}\label{fig:gr-5-timelike}
-		\includegraphics{gr-5-timelike}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{SR lightcone, showing timelike vectors.}\label{fig:gr-5-timelike}
+			\includegraphics{gr-5-timelike}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.65\textwidth}
+			\caption{A selection of tipped and tilty lightcones, typical of GR. Shape of lightcone varies as we move around space.}\label{fig:gr-5-tipped-tilty-lightcone}
+			\includegraphics[width=\textwidth]{gr-5-tipped-tilty-lightcone}
+		\end{subfigure}
 	\end{center}
 \end{figure}
 
 \begin{itemize}
-	\item The proper time is the time read of by a clock moving along a timelike trajectory;
+	\item The proper time is the time read off by a clock moving along a timelike trajectory;
 	\item proper distance is the distance measured bt a metre stick along a spacelike trajectory.
 \end{itemize} 
 
+In general $g_{\mu\nu}$ is a function of position in space time, $g_{\mu\nu}(x)$. It cannot be just any old function: it must be a matrix with one negative eigenvalue (time) and 3 positive. We must have time everywhere, and a there is a lightcone everywhere. Figure \ref{fig:gr-5-tipped-tilty-lightcone} shows a selection of tipped and tilty lightcones, which reflects the fact that the coordinates might be curvy and wavy. At every point there is a notion of timelike vectors inside the cone, and spacelike outside. Phones move on the surface of the lightcone.
+
+\begin{defn}[Signature]
+	The collection of signs of the eigenvalues is known as the signature. The signature of Minkowski space is $\{-,+,+,+\}$. We must be sure that our metric has the correct signature.
+\end{defn}
+
+Any timelike vector is an eigenvector with eigenvalue -1; any spacelike vector is an eigenvector, eigenvalue +1;
 
 
-\url{https://youtu.be/quWN1V9jOf0?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=502}
+
+
+
+\url{https://youtu.be/quWN1V9jOf0?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=1052}
 
 \section{Black holes}
 
