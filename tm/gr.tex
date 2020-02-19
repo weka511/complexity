@@ -554,9 +554,9 @@ In Figure \ref{fig:gr-3-move-links} we see the geometric interpretation of {$D_s
 
 \section{Geodesics \& gravity}
 
-\subsection{Review}
+\subsection{Review of Covariant Derivatives}
 
-The point of a covariant derivative is to write a tensor such that in Gaussian Normal Coordinates it is just the derivative.
+The point of a covariant derivative is to write a tensor such that in Gaussian Normal Coordinates\footnote{At around this point LS switched to calling Gaussian Normal Coordinates "Perfect Coordinates", but I have retained the original term.} it is just the derivative.
 
 \begin{thm}[Covariant Derivative of contravariant vector]
 	\begin{align*}
@@ -567,7 +567,7 @@ The point of a covariant derivative is to write a tensor such that in Gaussian N
 \begin{proof}
 	\begin{align*}
 		D_m V^n =& D_m\big( g^{np} V_p\big)\\
-		=&  \cancel{\big(D_m g^{np}\big) V_p} +  g^{np} D_m V_p \text{,  where we have used Lemma \ref{thm:covariant_derivative:metric}}\\
+		=&  \cancel{\big(D_m g^{np}\big) V_p} +  g^{np} D_m V_p \text{,  using Lemma \ref{thm:covariant_derivative:metric}to cancel the first term} \\
 		=& g^{np} \big(\partial_m V_p -  \Gamma\indices{^r_{pm}} V_r\big) \text{, from (\ref{eq:covariant_1})}\\
 		=& g^{np} \big[\partial_m \big(g_{pq} V^q\big) -  \Gamma\indices{^r_{pm}} g_{rq} V^q\big]\\
 		=& g^{np} \big[ \partial_m \big(g_{pq} \big)V^q + g_{pq} \partial_m V^q -  \Gamma\indices{^r_{pm}} g_{rq} V^q\big]\\
@@ -619,15 +619,27 @@ Given a vector field, move along curve. Does vector remain parallel to itself, i
 \end{align*}
 
 \begin{defn}[Parallel transport]
-	If $DV^n=0$ along the curve, we say it is being transported parallel to itself.
+	If $DV^n=0$ along the curve, we say $V$ is being transported parallel to itself.
 \end{defn}
 
-\begin{thm}[Parallel transport preserved length]
-	If $DV^n=0$ along the curve, the lenghth of V is preserved.
+\begin{thm}[Parallel transport preserves length]
+	If $DV^n=0$ along the curve, the length of V is preserved.
 \end{thm}
 
 \begin{proof}
-	TBP
+	\begin{align*}
+		\partial_p (g_{mn}V^mV^n)=&\partial_p g_{mn} V^m V^n + g_{mn} \partial_p V^m V^n + g_{mn}V^m  \partial_p V^n\\
+		D_pV^n=0 \implies&\partial_p V^n = -\Gamma\indices{^n_{pr}}V^r \text{, so the previous equation becomes:}\\
+		\partial_p (g_{mn}V^mV^n)=&\partial_p g_{mn} V^m V^n -g_{mn}\Gamma\indices{^m_{pr}}V^rV^n-\underbrace{g_{mn}\Gamma\indices{^n_{pr}}V^mV^r}_\text{$=g_{nm}\Gamma\indices{^m_{pr}}V^nV^r$}\\
+		=&\partial_p g_{mn} V^m V^n -g_{mn}\Gamma\indices{^m_{pr}}V^rV^n-g_{mn}\Gamma\indices{^m_{pr}}V^nV^r \text{, by summetry of $g_{mn}$}\\
+		=&\partial_p g_{mn} V^m V^n -2g_{mn}\Gamma\indices{^m_{pr}}V^rV^n \text{, symmetry of $V^rV^n$}\\
+		=&\partial_p g_{mn} V^m V^n - g_{mn}\big[\partial_p g_{tr} +\partial_r g_{pt} -\partial_t g_{pr} \big]g^{mt}V^rV^n \text{, from (\ref{eq:christoffel:g})}\\
+		=&\partial_p g_{mn} V^m V^n - \underbrace{g_{mn}g^{mt}}_{\delta_n^t}\big[\partial_p g_{tr} +\partial_r g_{pt} -\partial_t g_{pr} \big]V^rV^n
+		\\
+		=&\partial_p g_{mn} V^m V^n - \big[\partial_p g_{nr} +\partial_r g_{pn} -\partial_n g_{pr} \big]V^rV^n\\
+		=&\cancel{\partial_p g_{mn} V^m V^n} - \cancel{\partial_p g_{nr}V^rV^n} -\bcancel{\partial_r g_{pn}V^rV^n} +\bcancel{\partial_n g_{pr} V^rV^n} \text{, on relabelling }\\
+		=&0
+	\end{align*}
 \end{proof}
 
 The result of parallel transporting vector in curved space depends on the path--Figures \ref{fig:gr-4-parallel-transport-path-dependent} and \ref{fig:gr-4-cone-round}. 
