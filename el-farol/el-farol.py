@@ -64,45 +64,51 @@ def mirror(history,NN=None):
     else:
         return random.randint(0,NN)
 
+# Scorer
+#
+# Class used for assessing perdiction
+
+class Scorer:
+    def __init__(self, 
+           weight_miss          = 5,
+           weight_uncomfortable = 5,
+           tolerance_error      = 1,
+           weight_error         = 1,
+           threshold            = 60):
+        self.weight_miss          = weight_miss
+        self.weight_uncomfortable = weight_uncomfortable
+        self.tolerance_error      = tolerance_error
+        self.weight_error         = weight_error
+        self.threshold            = threshold        
+    def get_score(self,prediction,attendance):
+        error = prediction - attendance
+        # start by dealing with mistakes that have consequences:
+        # we missed when we might have attended, or vice versa
+        if prediction>self.threshold and attendance<=self.threshold:
+            return max(self.weight_miss,self.weight_error*abs(error))
+        if prediction<=self.threshold and attendance>self.threshold:
+            return max(self.weight_uncomfortable,self.weight_error*abs(error)) 
+
+        if abs(error)>self.tolerance_error: 
+            return self.weight_error*abs(error)
+        return 0
+        
 # Bargoer
 #
 # This class represents a person who decides whther or not to go to the bar
-
+        
 class BarGoer():
     def __init__(self,I=None):
-        self.prediction = None
-        self.scores     = []
         self.I          = I
         
     def predict(self,history = []):
         raise Exception('Not implemented')
     
-    def get_score(self,prediction,attendance,
-                  weight_miss          = 5,
-                  weight_uncomfortable = 5,
-                  tolerance_error      = 1,
-                  weight_error         = 1,
-                  threshold            = 60):
-        # start be dealing with mistakes that have consequences:
-        # we missed when we might have attended, or vice versa
-        if prediction>threshold and attendance<=threshold:
-            return weight_miss
-        if prediction<=threshold and attendance>threshold:
-            return weight_uncomfortable 
-        error = prediction - attendance
-        if error>tolerance_error: # prediction too high
-            return weight_error*abs(error)
-        if error<0 and abs(error)>tolerance_error: #too low
-            return weight_error*abs(error)
-        return 0
+    def get_score(self,prediction,attendance, scorer=None):
+        return scorer.get_score(prediction,attendance)
     
     def score(self,
-              attendance,
-              weight_miss          = 5,
-              weight_uncomfortable = 5,
-              tolerance_error      = 1,
-              weight_error         = 0.5,
-              threshold            = 60):
+              attendance, scorer=None):
         raise Exception('Not implemented')
 
             
@@ -148,27 +154,13 @@ class Arthur(BarGoer):
         
     def predict(self,history = []):
         self.alternatives = [strategy(history) for strategy in self.strategies]
-        self.prediction   = self.alternatives[self.favourite] 
-        return self.prediction
-
-
+        return self.alternatives[self.favourite]
     
-    def score(self,
-              attendance,
-              weight_miss          = 5,
-              weight_uncomfortable = 5,
-              tolerance_error      = 1,
-              weight_error         = 0.5,
-              threshold            = 60):
+    def score(self, attendance, scorer=None):
         self.alternative_scores = [
             self.update_score_history(self.alternatives[i],
                               attendance,
-                              self.alternative_scores[i],
-                              weight_miss          = weight_miss,
-                              weight_uncomfortable = weight_uncomfortable,
-                              tolerance_error      = tolerance_error,
-                              weight_error         = weight_error,
-                              threshold            = threshold) for i in range(len(self.alternatives))]
+                              self.alternative_scores[i],scorer) for i in range(len(self.alternatives))]
                     
     def review(self, attendance, max_score=5, history = [], LH=10, LL = 10, tolerance   = 1):
         total_scores = [sum(scores) for scores in self.alternative_scores]
@@ -183,18 +175,8 @@ class Arthur(BarGoer):
                              prediction,
                              attendance,
                              scores,
-                             weight_miss          = 5,
-                             weight_uncomfortable = 5,
-                             tolerance_error      = 1,
-                             weight_error         = 0.5,
-                             threshold            = 60):
-        scores.append(self.get_score(prediction,
-                               attendance,
-                               weight_miss          = weight_miss,
-                               weight_uncomfortable = weight_uncomfortable,
-                               tolerance_error      = tolerance_error,
-                               weight_error         = weight_error,
-                               threshold            = threshold))
+                             scorer=None):
+        scores.append(self.get_score(prediction, attendance, scorer=scorer))
         if len(scores)>self.I:
             scores.pop(0)      
         return scores    
@@ -213,23 +195,15 @@ class GA(BarGoer):
 
 def step_week(bargoers,
               init                 = False,
-              threshold            = 60,
+              scorer               = None,
               history              = [],
-              weight_miss          = 5,
-              weight_uncomfortable = 5,
-              tolerance_error      = 1,
-              weight_error         = 0.5,
-              max_score            = 10):
+              max_score            = 10,
+              threshold            = None):
     predictions = [b.predict(history) for b in bargoers]
     attendance  = sum(1 for p in predictions if p<=threshold)
     
     for b in bargoers:
-        b.score(attendance,
-                threshold            = threshold, 
-                weight_miss          = weight_miss,
-                weight_uncomfortable = weight_uncomfortable,
-                tolerance_error      = tolerance_error,
-                weight_error         = weight_error)
+        b.score(attendance, scorer=scorer)
         
     if not init:
         for b in bargoers:
@@ -245,22 +219,16 @@ def run(bargoers,
         N                    = 100,
         L                    = 10,
         threshold            = 60,
-        weight_miss          = 7,
-        weight_uncomfortable = 5,
-        tolerance_error      = 1,
-        weight_error         = 0.5,
         history              = [],
-        reporting            = None):
-    
+        reporting            = None,
+        scorer               = None):
+
     for i in range(L+N):
         step_week(bargoers,
-                  init                 = i<L,
-                  threshold            = threshold,
-                  history              = history,
-                  weight_miss          = weight_miss,
-                  weight_uncomfortable = weight_uncomfortable,
-                  tolerance_error      = tolerance_error,
-                  weight_error         = weight_error)
+                  init      = i<L,
+                  scorer    = scorer,
+                  history   = history,
+                  threshold = threshold)
         if reporting!=None and reporting>0 and i%reporting==0:
             print ('Step {0} of {1}'.format(i,L+N))
         
@@ -292,16 +260,22 @@ if __name__=='__main__':
     import argparse
     
     parser = argparse.ArgumentParser('El Farol simulation')
-    parser.add_argument('--I',           type=int, default=10,    help='Length of history')
-    parser.add_argument('--L',           type=int, default=10,   help='Number of generations for initialization')
-    parser.add_argument('--N',           type=int, default=100,   help='Number of generations')
-    parser.add_argument('--NA',          type=int, default=100,   help='Number of Arthurian Players')
-    parser.add_argument('--NGA',         type=int, default=0,     help='Number of Genetic Algorithm Players')
-    parser.add_argument('--threshold',   type=int, default=60,    help='Threshold for comfort: stay home if expect more')
-    parser.add_argument('--seed',        type=int, default=None,  help='Random number seed')
-    parser.add_argument('--nstrategies', type=int, default=5,     help='Number of strategies')
-    parser.add_argument('--out',                   default='log', help='File for logging histories')
-    parser.add_argument('--show',  action='store_true', default=False, help='Show plot')
+    parser.add_argument('--I',                     type=int, default=10,    help='Length of history')
+    parser.add_argument('--L',                     type=int, default=10,    help='Number of generations for initialization')
+    parser.add_argument('--N',                     type=int, default=100,   help='Number of generations')
+    parser.add_argument('--NA',                    type=int, default=100,   help='Number of Arthurian Players')
+    parser.add_argument('--NGA',                   type=int, default=0,     help='Number of Genetic Algorithm Players')
+    parser.add_argument('--threshold',             type=int, default=60,    help='Threshold for comfort: stay home if expect more')
+    parser.add_argument('--seed',                  type=int, default=None,  help='Random number seed')
+    parser.add_argument('--nstrategies',           type=int, default=5,     help='Number of strategies')
+    parser.add_argument('--weight_miss',           type=int, default=5,     help='Penalty for not goiing when we should')
+    parser.add_argument('--weight_uncomfortable',  type=int, default=5,     help='Penalty for goiing when we should not')
+    parser.add_argument('--tolerance_error',       type=int, default=1,     help='Tolerance for inconsequnctial errors')
+    parser.add_argument('--weight_error',          type=int, default=1,     help='Weight for an error')
+    parser.add_argument('--reporting',             type=int, default=25,    help='For reporting progress')
+    parser.add_argument('--out',                             default='log', help='File for logging histories')
+    parser.add_argument('--show',  action='store_true',      default=False, help='Show plot')
+ 
     
     args   = parser.parse_args();
     
@@ -313,14 +287,20 @@ if __name__=='__main__':
 
     try:
         Arthur.createBasket(NN=args.NA + args.NGA)
-        
+    
         history = []
+        scorer = Scorer(threshold          = args.threshold,
+                      weight_miss          = args.weight_miss,
+                      weight_uncomfortable = args.weight_uncomfortable,
+                      tolerance_error      = args.tolerance_error,
+                      weight_error         = args.weight_error)    
         run([Arthur(nstrategies=args.nstrategies,I=args.I) for i in range(args.NA)] + [GA() for i in range(args.NGA)],
             N         = args.N,
             L         = args.L,
             threshold = args.threshold,
             history   = history,
-            reporting = 25)
+            reporting = args.reporting,
+            scorer    = scorer)
         
         log_history(history,out=args.out)
     
@@ -332,6 +312,6 @@ if __name__=='__main__':
             plot.plot_file(plot.get_logfile_name(args.out))
             plot.decorate_plot(args.out)
             plt.show() 
-            
+                
     except Exception as e:
         sys.exit('{0} {1}'.format(type(e),e.args))
