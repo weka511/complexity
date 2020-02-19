@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
-import random,numpy as np,sys,plot
+import random,numpy as np,sys,plot,copy
 
 # past
 #
@@ -66,7 +66,7 @@ def mirror(history,NN=None):
 
 # Scorer
 #
-# Class used for assessing perdiction
+# Class used for assessing prediction
 
 class Scorer:
     def __init__(self, 
@@ -92,6 +92,37 @@ class Scorer:
         if abs(error)>self.tolerance_error: 
             return self.weight_error*abs(error)
         return 0
+
+class Model():
+    def __init__(self,min_length=2,max_length=10,max_weight=1.0,max_value=100,sigma=0.1):
+        self.genome     = [uniform(-max_weight,max_weight) for i in random.randrange(min_length,max_length)]
+        self.max_value  = max_value
+        self.max_length = max_length
+        self.sigma      = sigma
+        
+    def predict(self,history):
+        i     = 1
+        value = self.genome[0]
+        j     = len(history)-1
+        while i < len(self.genome):
+            value += self.genome[i] * history[j]
+            i     += 1
+            j     -= 1
+        return min(value,self.max_value)
+    
+    def mutate(self):
+        possible_new_lenghths = [ll for ll in range(len(self.genome)-1,len(self.genome)+2) if 1 < ll and ll <= self.max_length]
+        new_length            = rancom.choice(possible_new_lenghths)
+        if new_length<len(self.genome):
+            self.genome = self.genome[:-1]
+        elif new_length<len(self.genome):
+            self.genome.append(0)
+        self.genome = [g + random.gauss(0,self.sigma) for g in self.genome]
+        
+    def spawn(self):
+        offspring = copy.deepcopy(self)
+        offspring.mutate()
+        return offspring
         
 # Bargoer
 #
@@ -181,13 +212,16 @@ class Arthur(BarGoer):
             scores.pop(0)      
         return scores    
  
+
+    
  # GA
  #
  # Use a Genetic Algorithm for making decisions
  
 class GA(BarGoer):
-    def __init__(self):
+    def __init__(self,k=10):
         super().__init__()
+        self.models=[Model() for i in range(k)]
 
 # step_week
 #
