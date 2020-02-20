@@ -980,17 +980,51 @@ Now there is a problem with $\bigg(1-\frac{2 MG}{c^2 r}\bigg)$ when r is too sma
 When $r$ is less that the Schwartzchild radius, we have crossed into a region with 4 space dimensions and no time dimensions, which is bad. We need a coefficient for $r^2$, so it turns into a time dimension when $t$ turns into space. We will see later that this works.
 
 \begin{align*}
-	d \tau^2 =& \bigg(1-\frac{2 MG}{c^2 r}\bigg) dt^2 - \frac{1}{\bigg(1-\frac{2 MG}{c^2 r}\bigg)}dr^2 - \frac{1}{c^2} r^2 d\Omega^2
+	d \tau^2 =& \bigg(1-\frac{2 MG}{c^2 r}\bigg) dt^2 - \frac{dr^2}{\bigg(1-\frac{2 MG}{c^2 r}\bigg)c^2} - \frac{1}{c^2} r^2 d\Omega^2
 \end{align*}
 
+\subsection{Black holes and the Event horizon}
 
+We want to see how relativistic particles move in this metric. We choose units where $c=1$, and consider two types of orbits, radial and circular. In Figure \ref{fig:gr-5-falling-in}  The external observer uses time $t$, and the person falling in uses $\tau$.
 
-\subsection{Black holes}
+\begin{figure}[H]
+	\caption[Falling into black hole]{Falling into black hole. The external observer uses $t$, and the person falling in uses $\tau$.}\label{fig:gr-5-falling-in}
+	\includegraphics{gr-5-falling-in}	
+\end{figure}
 
-\subsection{Event horizon}
+\begin{align*}
+d \tau^2 =& \bigg(1-\frac{2 MG}{ r}\bigg) dt^2 - \frac{dr^2}{\bigg(1-\frac{2 MG}{ r}\bigg)} - \underbrace{ r^2 d\Omega^2}_\text{, assume angle doesn't change}\\
+S =& -m \int \sqrt{\big(1-\frac{2 MG}{ r}\big)  - \frac{\dot{r}^2}{\big(1-\frac{2 MG}{ r}\big)}} dt\\
+\Lagr  =& -m \sqrt{\big(1-\frac{2 MG}{ r}\big)  - \frac{\dot{r}^2}{\big(1-\frac{2 MG}{ r}\big)}} 
+\end{align*}
+Now Energy should be conserved: we can get this from the Hamiltonian.
 
+\begin{align*}
+	P_r =& \frac{\partial \Lagr}{\partial r}\\
+	P_r \dot{r} - \Lagr =& H\\
+	H =& \frac{\big(1-\frac{2MG}{r}\big)m}{\sqrt{\big(1-\frac{2 MG}{ r}\big)  - \frac{\dot{r}^2}{\big(1-\frac{2 MG}{ r}\big)}}}\\
+	=& E \text{, constant. Whence}\\
+	\dot{r}^2 =& \big(1-\frac{2MG}{r}\big)^2- \frac{\big(1-\frac{2MG}{r}\big)^3}{E^2}\\
+	\dot{r} \approx & \sqrt{\frac{r-2MG}{MG}} \text{ near the event horizon.}
+\end{align*}
+The particles slows down asymptotically as it approaches the event horizon, and never actually gets there!
 
-\url{https://youtu.be/quWN1V9jOf0?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=3285}
+Consider a light ray, Figure \ref{fig:gr-5-lightray}, which moves along the surface of the light cone.
+ 
+\begin{figure}[H]
+	\caption{Light Ray on surface of light cone.}\label{fig:gr-5-lightray}
+	\includegraphics{gr-5-lightray}
+\end{figure}
+
+\begin{align*}
+	d \tau^2 =& \bigg(1-\frac{2 MG}{ r}\bigg) dt^2 - \frac{dr^2}{\bigg(1-\frac{2 MG}{ r}\bigg)}\\
+	=& 0 \text{, on the light cone, i.e.}\\
+	\bigg(1-\frac{2 MG}{ r}\bigg)^2 dt^2 =& dr^2\\
+	\dot{r} =& \pm \frac{r-2MG}{r}
+\end{align*}
+
+So the speed of light is zero at the event horizon!
+
 
 \section{Black holes}
 
