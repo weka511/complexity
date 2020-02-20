@@ -1,12 +1,12 @@
 \documentclass[]{article}
 
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,cancel,mathrsfs}
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra,thmtools,gensymb,braket,bm,tensor}
 \usepackage[toc,page]{appendix}
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
-
+\newcommand{\Lagr}{\mathscr{L}}
 \newtheorem{thm}{Theorem}
 \newtheorem{defn}[thm]{Definition}
 \newtheorem{cor}[thm]{Corollary}
@@ -683,7 +683,7 @@ Figures \ref{fig:gr-4-cone}, \ref{fig:gr-4-cone-sliced-tangent}, and \ref{fig:gr
 \subsection{Geodesics} 
 
 \begin{itemize}
-	\item 	A geodesic is a curve whose distance it stationary.
+	\item 	A geodesic is a curve whose distance is stationary.
 	\item A better definition is to look locally along the curve and require that the curve be as straight as possible.
 \end{itemize}
 
@@ -875,6 +875,8 @@ Something strange happens when $y-2GM$: $g_{tt}=0$. This has to do with the hori
 
 \section{Metric for a gravitational field}
 
+\subsection{Space-like, time-like, and light-like intervals}
+
 In Minkowskian space:
 \begin{align*}
 	d\tau^2 =dt^2 - \frac{dx^2}{c^2} - \frac{dy^2}{c^2} - \frac{dz^2}{c^2} 
@@ -893,6 +895,8 @@ Sometimes we include c, other times set $c=1$; it depends on whether we want to 
 \begin{defn}[Lightlike]
 	If $d\tau^2 =0$ we say the interval is lightlike. These vectors lie in the surface of the lightcone-- Figure \ref{fig:gr-5-timelike}.
 \end{defn}
+
+\subsection{Light cone}
 
 \begin{figure}[H]
 	\caption{Lightcones}
@@ -922,11 +926,43 @@ In general $g_{\mu\nu}$ is a function of position in space time, $g_{\mu\nu}(x)$
 
 Any timelike vector is an eigenvector with eigenvalue -1; any spacelike vector is an eigenvector, eigenvalue +1;
 
+We return to geodesics. Consider the proper time interval between two points. We will treat this as \emph{action} (actually $Action=-m\tau$), and find the path that gives stationary action, using the Euler Lagrange Equations\cite{susskind2013quantum}.
+
+\begin{align*}
+	\tau =& \int_{1}^{2} \sqrt{-g_{\mu\nu}(x) dx^\mu dx^\nu } \\
+	S =& -m \int_{1}^{2} \underbrace{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt} }}_\text{$=\Lagr(x,\dot{x})$--Lagrangian}  dt \numberthis \label{eq:action:g}\\
+	=& -m \int_{1}^{2} \Lagr(x,\dot{x}) dt
+\end{align*}
+
+ N.B. $-g_{\mu\nu}(x) dx^\mu dx^\nu>0$ along a timelike path. The action is minimized if we move along a path that satisfies the Euler-Lagrange equations.
+ 
+\begin{align*}
+ 	\frac{d}{dt}\big(\frac{\partial \Lagr}{\partial \dot{x}}\big) =& \frac{\partial \Lagr}{\partial x} \numberthis \label{eq:euler:lagrange}
+\end{align*}
+
+\begin{thm}[(\ref{eq:euler:lagrange}) $\iff$ 	(\ref{eq:geodesic})]
+	If the action is defined by (\ref{eq:action:g}), the Euler Lagrange equation (\ref{eq:euler:lagrange}) is equivalent to the geodesic equation (\ref{eq:geodesic}).
+\end{thm}
+\begin{proof}
+	TBP
+\end{proof}
+
+\subsection{Schwarzschild metric}
+
+We start with the following ansatz.
+
+\begin{align*}
+	d \tau^2 =& \bigg(1+\frac{2 U(x)}{c^2}\bigg) dt^2 - \frac{1}{c^2} ds^2 \text{, where U(x) is the gravitational potential}
+\end{align*}
 
 
 
+\subsection{Black holes}
 
-\url{https://youtu.be/quWN1V9jOf0?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=1052}
+\subsection{Event horizon}
+
+
+\url{https://youtu.be/quWN1V9jOf0?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2050}
 
 \section{Black holes}
 
