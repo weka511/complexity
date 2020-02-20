@@ -949,10 +949,38 @@ We return to geodesics. Consider the proper time interval between two points. We
 
 \subsection{Schwarzschild metric}
 
-We start with the following ansatz.
+We start with the following metric.
 
 \begin{align*}
-	d \tau^2 =& \bigg(1+\frac{2 U(x)}{c^2}\bigg) dt^2 - \frac{1}{c^2} ds^2 \text{, where U(x) is the gravitational potential}
+	d \tau^2 =& \bigg(1+\frac{2 U(x)}{c^2}\bigg) dt^2 - \frac{1}{c^2} ds^2 \text{, where U(x) is the gravitational potential} \numberthis \label{eq:sch:ansatz}\\
+	S =& -m c^2 \int_{1}^{2} \sqrt{\bigg(1+\frac{2U}{c^2}\bigg) - \frac{1}{c^2}\dot{X}^2} dt\\
+	=& -m c^2 \int_{1}^{2} \sqrt{1 +\frac{1}{c^2}\big(2U-\dot{X}^2\big)} dt\\
+	\approxeq& -m c^2 \int_{1}^{2} \big[1 + \frac{1}{2c^2}\big(2U-\dot{X}^2\big)\big] \text{, if velocity small (Binomial Theorem)}\\
+	=& -m c^2 -mU + \frac{m}{2} \dot{X}^2 \text{, plugging into Euler-Largange we get}\\
+	m\ddot{X} =& -m \nabla U \text{, Newton's second law.}
+\end{align*}
+
+We learn from this that the $g_00$ term in (\ref{eq:sch:ansatz}) gives riser to Newton's 2nd law for motion in a gravitational field for small velocity.
+
+Consider the gravitational field of the Sun.
+
+\begin{align*}
+	U(X) =& - \frac{MG}{r(X)} \text{, and adopt the \emph{ansatz}}\\
+		d \tau^2 =& \bigg(1-\frac{2 MG}{c^2 r}\bigg) dt^2 - \frac{1}{c^2} \big(dx^2 + dy^2 +dz^2\big) \text{. Now}\\
+		dx^2 + dy^2 +dz^2 =& dr^2 + r^2 \big(\underbrace{d\theta^2 + cos^2 \theta d\phi^2}_\text{$\triangleq d\Omega^2$}\big) \text{, whence}\\
+		d \tau^2 =& \bigg(1-\frac{2 MG}{c^2 r}\bigg) dt^2 - \frac{1}{c^2}dr^2 - \frac{1}{c^2} r^2 d\Omega^2
+\end{align*}
+
+Now there is a problem with $\bigg(1-\frac{2 MG}{c^2 r}\bigg)$ when r is too small; $g_00$ becomes negative, which gives a signature that is not physical.
+
+\begin{align*}
+	\bigg(1-\frac{2 MG}{c^2 r}\bigg) = \frac{r-\underbrace{\frac{2 MG}{c^2}}_\text{Schwartzchild radius}}{r}
+\end{align*}
+
+When $r$ is less that the Schwartzchild radius, we have crossed into a region with 4 space dimensions and no time dimensions, which is bad. We need a coefficient for $r^2$, so it turns into a time dimension when $t$ turns into space. We will see later that this works.
+
+\begin{align*}
+	d \tau^2 =& \bigg(1-\frac{2 MG}{c^2 r}\bigg) dt^2 - \frac{1}{\bigg(1-\frac{2 MG}{c^2 r}\bigg)}dr^2 - \frac{1}{c^2} r^2 d\Omega^2
 \end{align*}
 
 
@@ -962,7 +990,7 @@ We start with the following ansatz.
 \subsection{Event horizon}
 
 
-\url{https://youtu.be/quWN1V9jOf0?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2050}
+\url{https://youtu.be/quWN1V9jOf0?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=3285}
 
 \section{Black holes}
 
