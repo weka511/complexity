@@ -1064,8 +1064,6 @@ Notice that $1-\frac{2MG}{r}$ changes sign when $r=2MG$, but the signature of th
 Figure \ref{fig:gr-6-infalling} depicts a metre stick falling towards the event horizon. Imagine that the mere stick is also a clock, which will measure proper time $d\tau$, not coordinate time $dt$. When it is very far away, $r\approxeq\infty$, $d\tau\approxeq dt$. As it approaches we get less and less $\tau$ for $t$; we will see that there is only a finite $\tau$ elapsed to reach the Event Horizon, despite requiring an infinite $t$.
 
 
-
-
 \subsection{Light ray orbiting a black hole}
 
 Consider a beam of light passing outside the event horizon and being bent by the gravitational field--Figure \ref{fig:gr-6-bent-light-ray}. If the field is strong enough it will be bent into a circle.
@@ -1081,53 +1079,108 @@ Consider a beam of light passing outside the event horizon and being bent by the
 	\end{subfigure}
 \end{figure}
 
+\begin{thm}[Photosphere]
+	There is an unstable orbit for a light beam at $r=3MG$.
+\end{thm}
 
-The action is given by:
-
-\begin{align*}
-	S =&-m d\tau\\
-	=& -m \int \sqrt{\underbrace{\bigg(1-\frac{2MG}{r}\bigg)}_\text{$=\mathscr{F}$, say}dt^2-\underbrace{\frac{1}{1-\frac{2MG}{r}}}_\text{$=\mathscr{G}$, say}dr^2 - r^2 d\Omega^2} \\
-	=& -m \int \sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2} dt \text{, where $\theta$ has been chosen suitably.}\\
-	\Lagr =& -m \sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2} \text{ is the Lagrangian.}
-\end{align*}
-
-Now there are two conservation laws, energy and angular momentum.
-\begin{align*}
-	L =& \frac{\partial \Lagr}{\partial \dot{\theta}} \text{, angular momentum}\\
-	=& \frac{m r^2 \dot{\theta}}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}} \text{, constant.}\\
-	=& m \Lambda \text{, where $\Lambda=\frac{r^2 \dot{\theta}}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}}$, is also conserved}\\
-	P_r =& \frac{\partial \Lagr}{\partial \dot{r}}\\
-	=& \frac{m \mathscr{G} \dot{\theta}}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}}
-\end{align*}
-
-$P_r$ is not conserved, but the energy is. The energy is given by the classical Hamiltonian.
-\begin{align*}
-	H =& P_r \dot{r} + L \dot{\theta} - \Lagr\\
-	=& \frac{\mathscr{F}(r)m}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}} \text{. Check this!}\\
-	=& E \text{. So, for a circular orbit}\\
-	E =& \frac{\mathscr{F}(r)m}{\sqrt{\mathscr{F}(r)- r^2 \dot{\theta}^2}} \\
-	\frac{L}{M} =& \frac{r^2 \dot{\theta}}{\sqrt{\mathscr{F}(r) - r^2 \dot{\theta}^2}}\\
-	=& \Lambda \text{, reduced angular momentum}
-\end{align*}
-
-After some work we find:
-\begin{align*}
-	E =& \frac{\sqrt{\mathscr{F}} \sqrt{r^2 \Lambda^2 + r^4}}{r^2} m
-\end{align*}
-
-We want now to let $m \rightarrow 0$ for a photon. We want to minimize the energy for a fixed $\Lambda$. As $m \rightarrow 0$, for fixed $L$, $\Lambda\rightarrow\infty$. In the limit:
-\begin{align*}
-	E =& \frac{\sqrt{\mathscr{F}} L }{r} \text{. Equilibrium is when this is minimized/maximized--Figure \ref{fig:gr-6-energy-r} }\\
-	=& \frac{\sqrt{1-\frac{2MG}{r}} L }{r}
-\end{align*}
-
-Figure \ref{fig:gr-6-energy-r} shows an unstable equilibrium at $r=3MG$. This radius is called the photon-sphere or photo-sphere (does not depend on $L$!). If a photon comes in and is slightly outside photon-sphere it can whip around black hole multiple times before going out. If it is slightly inward it will spiral into horizon. (A massive particle inside photon-sphere will also fall in.)
+\begin{proof}
+	The argument is essentially classical, except for the use of the Schwarzschild metric to define the action:
+	\begin{enumerate}
+		\item construct Lagrangian $\Lagr$;
+		\item use conservation laws for a particle of mass $m$;
+		\item calculate energy as a function of $r$;
+		\item determine extremum of energy;
+		\item let $m\rightarrow0$.
+	\end{enumerate}
 	
+	The action is given by:
+	
+	\begin{align*}
+		S =&-m \int d\tau\\
+		=& -m \int \sqrt{\underbrace{\bigg(1-\frac{2MG}{r}\bigg)}_\text{$=\mathscr{F}$, say}dt^2-\underbrace{\frac{1}{1-\frac{2MG}{r}}}_\text{$=\mathscr{G}$, say}dr^2 - r^2 d\Omega^2} \\
+		=& -m \int \sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2} dt \text{, where $\theta$ has been chosen suitably.}\\
+		\Lagr =& -m \sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2} \text{ is the Lagrangian.}
+	\end{align*}
+	
+	Now there are two conservation laws, energy and angular momentum. We calculate the two momenta, angular and radial.
+	\begin{align*}
+		L =& P_{\theta} \text{, angular momentum}\\
+		=& \frac{\partial \Lagr}{\partial \dot{\theta}}\\
+		=& \frac{m r^2 \dot{\theta}}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}} \text{, constant.} \numberthis \label{eq:L:light:orbit}\\
+		=& m \Lambda \text{, where $\Lambda\triangleq\frac{r^2 \dot{\theta}}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}}$, is also conserved}\\
+		P_r =& \frac{\partial \Lagr}{\partial \dot{r}}\\
+		=& \frac{m \mathscr{G} \dot{r}}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}}
+	\end{align*}
+	
+	$P_r$ is not conserved, but the energy is. The energy is given by the classical Hamiltonian.
+	\begin{align*}
+		H =& P_r \dot{r} + L \dot{\theta} - \Lagr\\
+		=& \frac{m \mathscr{G} \dot{r}}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}}\dot{r} + \frac{m r^2 \dot{\theta}}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}}\dot{\theta}  +m \frac{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}}\\
+		=& \frac{\cancel{m \mathscr{G} \dot{r}^2} + \bcancel{m r^2\dot{\theta}^2} + m\mathscr{F}(r)-\cancel{m\mathscr{G}(r)\dot{r}^2} - \bcancel{mr^2 \dot{\theta}^2} }{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}}\\
+		=& \frac{\mathscr{F}(r)m}{\sqrt{\mathscr{F}(r)-\mathscr{G}(r)\dot{r}^2 - r^2 \dot{\theta}^2}} \\
+		=& E \text{. So, for a circular orbit}\\
+		E =& \frac{\mathscr{F}(r)m}{\sqrt{\mathscr{F}(r)- r^2 \dot{\theta}^2}} \text{. Now from (\ref{eq:L:light:orbit})}\\
+		\frac{L}{M} =& \frac{r^2 \dot{\theta}}{\sqrt{\mathscr{F}(r) - r^2 \dot{\theta}^2}}\\
+		=& \Lambda \text{, reduced angular momentum}
+	\end{align*}
+	
+	Solving for $\dot{\theta}$:
+	\begin{align*}
+		\Lambda^2 =& \frac{r^4 \dot{\theta}^2}{\mathscr{F}(r) - r^2 \dot{\theta}^2}\\
+		\Lambda^2 \big(\mathscr{F}(r) - r^2 \dot{\theta}^2\big)	=& r^4 \dot{\theta}^2\\
+		\Lambda^2 \mathscr{F}(r) =& \Lambda^2 r^2 \dot{\theta}^2 +  r^4 \dot{\theta}^2\\
+		=& \big(\Lambda^2 r^2  +  r^4\big) \dot{\theta}^2\\
+		\dot{\theta}^2=& \frac{\Lambda^2 \mathscr{F}(r)}{\Lambda^2 r^2  +  r^4}
+	\end{align*}
+	
+	Substituting in (\ref{eq:L:light:orbit}):
+	\begin{align*}
+		E =& \frac{\mathscr{F}(r)m}{\sqrt{\mathscr{F}(r)- r^2 \dot{\theta}^2}}\\
+		=&  \frac{\mathscr{F}(r)m}{\sqrt{\mathscr{F}(r)- r^2 \frac{\Lambda^2 \mathscr{F}(r)}{\Lambda^2 r^2  +  r^4}}}\\
+		E^2=&  \frac{\mathscr{F}(r) \bcancel{\mathscr{F}(r)}m^2 \big(\Lambda^2 r^2  +  r^4\big)}{\bcancel{\mathscr{F}(r)}\big(\cancel{\Lambda^2 r^2}  +  r^4\big)- \cancel{r^2 \Lambda^2 \mathscr{F}(r)}} \text{, whence:}\\
+		E =& \frac{\sqrt{\mathscr{F}} \sqrt{r^2 \Lambda^2 + r^4}}{r^2} m
+	\end{align*}
+	
+	We want now to let $m \rightarrow 0$ for a photon. We want to minimize the energy for a fixed $\Lambda$. As $m \rightarrow 0$, for fixed $L$, $\Lambda\rightarrow\infty$, whence $\sqrt{r^2 \Lambda^2 + r^4} m \rightarrow \sqrt{r^2 \Lambda^2 } m \rightarrow rL$. In the limit:
+	\begin{align*}
+		E =& \frac{\sqrt{\mathscr{F}} L }{r}
+	\end{align*}
+	Equilibrium is when this is minimized/maximized--Figure \ref{fig:gr-6-energy-r}
+	\begin{align*}
+		E 		=& \frac{\sqrt{1-\frac{2MG}{r}} L }{r}\\
+		\log{E} =& \frac{1}{2} \log{(1-\frac{2MG}{r})} - \log{r}\\
+		\frac{1}{E} \frac{dE}{dr} =& \frac{1}{\cancel{2}} \frac{\cancel{2}MG}{r^2 (1-\frac{2MG}{r})} - \frac{1}{r}\\
+		=& \frac{MG}{r(r-2MG)} -\frac{(r-2MG)}{r(r-2MG)}\\
+		=& \frac{3MG-r}{r(r-2MG)}\\
+		=& 0 \iff r=3MG
+	\end{align*}	
+	Figure \ref{fig:gr-6-energy-r} shows an unstable equilibrium at $r=3MG$.
+	
+	\begin{defn}[photon-sphere/photo-sphere]
+		This sphere of radius $3MG$ is called the photon-sphere or photo-sphere. It does not depend on $L$!.
+	\end{defn} 
+
+	 If a photon comes in and is slightly outside photon-sphere it can whip around black hole multiple times before going out. If it is slightly inward it will spiral into horizon. (A massive particle inside photon-sphere will also fall in.)
+
+\end{proof}	
 	
 \begin{figure}[H]
 	\caption{$\frac{\sqrt{1-\frac{2MG}{r}} L }{r}$}\label{fig:gr-6-energy-r}
 	\includegraphics{gr-6-energy-r}
 \end{figure}
+
+
+\begin{table}
+	\caption{Behaviour of orbit near photosphere}
+	\begin{center}
+		\begin{tabular}{|c|c|c|} \hline
+			&Photon&Massve\\ \hline
+			$r<3MG$&Spirals in&Spirals in\\ \hline
+			$r=3MG$&Unstable equilibrium&\\ \hline
+			$r>3MG$&Spirals out&May have stable orbit\\\hline
+		\end{tabular}
+	\end{center}
+\end{table}
 
 
 
