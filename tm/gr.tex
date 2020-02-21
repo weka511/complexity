@@ -980,7 +980,7 @@ Now there is a problem with $\bigg(1-\frac{2 MG}{c^2 r}\bigg)$ when r is too sma
 When $r$ is less that the Schwartzchild radius, we have crossed into a region with 4 space dimensions and no time dimensions, which is bad. We need a coefficient for $r^2$, so it turns into a time dimension when $t$ turns into space. We will see later that this works.
 
 \begin{align*}
-	d \tau^2 =& \bigg(1-\frac{2 MG}{c^2 r}\bigg) dt^2 - \frac{dr^2}{\bigg(1-\frac{2 MG}{c^2 r}\bigg)c^2} - \frac{1}{c^2} r^2 d\Omega^2
+	d \tau^2 =& \bigg(1-\frac{2 MG}{c^2 r}\bigg) dt^2 - \frac{dr^2}{\bigg(1-\frac{2 MG}{c^2 r}\bigg)c^2} - \frac{1}{c^2} r^2 d\Omega^2 \numberthis \label{eq:schwartzchild}
 \end{align*}
 
 \subsection{Black holes and the Event horizon}
@@ -1028,7 +1028,60 @@ So the speed of light is zero at the event horizon!
 
 \section{Black holes}
 
-TBP
+
+The Schwarzschild solution is an idealization. $F = \frac{mMg}{r^2}$ is itself an idealization, based on the assumption that the mass $M$ is concentrated at a point. For a realistic mass this isn't return inside the object. For a real mass if you squeeze everything to be arbitrarily small it will spring back. This isn't so in the General Theory of Relativity. Figure \ref{fig:gr-6-centrifugal-force} illustrates the fact that in Newtonian mechanics an incoming particle is infinitely unlikely to hit a point mass, despite the very strong gravitational attraction. This isn't true in General Relativity; the black hole pulls anything into the centre..
+
+\begin{figure}[H]
+	\caption[Centrifugal force]{In Newtonian physics, a particle heading for a massive particle will hit it only if it is aimed with absolute precision. Otherwise centrifugal force will cause it so swing past..}\label{fig:gr-6-centrifugal-force}
+	\includegraphics{gr-6-centrifugal-force}
+\end{figure} 
+
+\subsection{Schwarzschild metric}
+
+From (\ref{eq:schwartzchild}), the Schwarzschild metric is:
+\begin{align*}
+	d \tau^2 =&\bigg(1-\frac{2MG}{r}\bigg)dt^2-\frac{dr^2}{1-\frac{2MG}{r}} - r^2 d\Omega^2 
+\end{align*}
+
+Notice that $1-\frac{2MG}{r}$ changes sign when $r=2MG$, but the signature of the metric is unchanged, even though the signs of $dt$ and $dr$ change. See Figure \ref{fig:gr-6-schwartzchild-radius}. The metric also blows up when $r\rightarrow0$. We shall see that the first problem isn't serious, but the 2nd is.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Illustrating the Schwarzschild Metric]{Illustrating the Schwarzschild Metric. The vertical axis represents time.}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Far away (large $r$) this behaves like flat space: $ d \tau^2 =dt^2-dr^2 - r^2 d\Omega^2$. Notice that something funny happens at $r=2MG$: this is known as the Schwarzschild radius, and the Event Horizon.}\label{fig:gr-6-schwartzchild-radius}
+			\includegraphics[width=\textwidth]{gr-6-schwartzchild-radius}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{A metre stick falls in. As we saw earlier, it slows down and approaches the Event Horizon asymptotically. As the metre stick faala, the two ends approach each other: this is, in fact, a Lorentz transformation.}\label{fig:gr-6-infalling}
+			\includegraphics[width=\textwidth]{gr-6-infalling}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+Figure \ref{fig:gr-6-infalling} depicts a metre stick falling towards the event horizon. Imagine that the mere stick is also a clock, which will measure proper time $d\tau$, not coordinate time $dt$. When it is very far away, $r\approxeq\infty$, $d\tau\approxeq dt$. As it approaches we get less and less $\tau$ for $t$; we will see that there is only a finite $\tau$ elapsed to reach the Event Horizon, despite requiring an infinite $t$.
+
+Consider a beam of light passing outside the event horizon and being bent by the gravitational field--Figure \ref{fig:gr-6-bent-light-ray}. If the field is strong enough it will be bent into a circle.
+\begin{figure}[H]
+	\caption{Light ray being bent my massive object}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Bent light ray}\label{fig:gr-6-bent-light-ray}
+		\includegraphics[width=\textwidth]{gr-6-bent-light-ray}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Circular orbit}\label{fig:gr-6-circular-trajectory}
+		\includegraphics[width=\textwidth]{gr-6-circular-trajectory}
+	\end{subfigure}
+\end{figure}
+
+\url{https://youtu.be/yv2-KPagCQs?t=1426}
+
+\subsection{Schwarzschild Radius}
+\subsection{Black hole event horizon}
+\subsection{Light ray orbiting a black hole}
+\subsection{Photon sphere}
+\subsection{Hyperbolic coordinates}
+\subsection{Black hole singularity}
 
 \section{Falling into a black hole}
 
