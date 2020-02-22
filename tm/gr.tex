@@ -98,7 +98,7 @@ We will continue to assume that Newton's laws hold in the $z$ frame of reference
 	\underbrace{F -mg}_\text{Force, including fictitious term} =& m \ddot{z^\prime} 
 \end{align*}
 
-The fictitious force looks like a uniform gravitational field. The special property of gravity is that gravitational forces are proportional to mass. That has a deep implication: the mass cancels, so the motion doesn't depend on the mass. Most people before Einstein considered this largely an accident. People know that acceleration mimicked gravity; Einstein said it was deep principle of nature. Figure \ref{fig:gr-1-coordinates-const} shows the coordinate transformation for constant velocity. Straight lines go to straight lines. Figure \ref{fig:gr-1-coordinates-accelerated} shows the results of accelerating the coordinate system: straight lines are not preserved. We have a curvy linear transformation. Einstein understood very early that there is a connection between gravity and curvy linear transformations of spacetime. Special Relativity was all about linear transformations
+The fictitious force looks like a uniform gravitational field. The special property of gravity is that gravitational forces are proportional to mass. That has a deep implication: the mass cancels, so the motion doesn't depend on the mass. Most people before Einstein considered this largely an accident. People know that acceleration mimicked gravity; Einstein said it was deep principle of nature. Figure \ref{fig:gr-1-coordinates-const} shows the coordinate transformation for constant velocity. Straight lines go to straight lines. Figure \ref{fig:gr-1-coordinates-accelerated} shows the results of accelerating the coordinate system: straight lines are not preserved. We have a curvy linear transformation. Einstein understood very early that there is a connection between gravity and curvy linear transformations of spacetime. Special Relativity was all about linear transformations\cite{susskind2017special}.
 
 \begin{figure}[H]
 	\begin{center}
@@ -1165,8 +1165,10 @@ Consider a beam of light passing outside the event horizon and being bent by the
 \end{proof}	
 	
 \begin{figure}[H]
-	\caption{$\frac{\sqrt{1-\frac{2MG}{r}} L }{r}$}\label{fig:gr-6-energy-r}
-	\includegraphics{gr-6-energy-r}
+	\begin{center}
+		\caption[Energy near black hole horizon]{Energy near black hole horizon: $E=\frac{\sqrt{1-\frac{2MG}{r}}  }{r}L$. At $r=2MG$, E=0. As $r \rightarrow \infty$, E behaves like a straight line. As $r \rightarrow \infty$ E behaves like $\frac{1}{r}$. There should be a maximum in between. }\label{fig:gr-6-energy-r}
+		\includegraphics{gr-6-energy-r}
+	\end{center}
 \end{figure}
 
 
@@ -1174,7 +1176,7 @@ Consider a beam of light passing outside the event horizon and being bent by the
 	\caption{Behaviour of orbit near photosphere}
 	\begin{center}
 		\begin{tabular}{|c|c|c|} \hline
-			&Photon&Massve\\ \hline
+			&Photon&Massive\\ \hline
 			$r<3MG$&Spirals in&Spirals in\\ \hline
 			$r=3MG$&Unstable equilibrium&\\ \hline
 			$r>3MG$&Spirals out&May have stable orbit\\\hline
@@ -1182,13 +1184,56 @@ Consider a beam of light passing outside the event horizon and being bent by the
 	\end{center}
 \end{table}
 
-
-
-\url{https://youtu.be/yv2-KPagCQs?t=3602}
-
+\begin{figure}[H]
+	\caption[Light beams going past Black Hole]{Light beams going past Black Hole. Top light beam is bent, so it appears to be coming from further out. Object behind Black Hole heas its beams bent, but they converge at the eye; they become a ring. Finally light ray from back, near black hole, is also bent so it can be seen. }\label{fig:gr-6-light-rays-black-hole}
+	\includegraphics{gr-6-light-rays-black-hole}
+\end{figure}
 
 
 \subsection{Hyperbolic coordinates}
+
+Many things that happen in gravity an be understood via an uniformly accelerated coordinate system. Gravity is often not the same thing as a uniformly accelerated coordinate system, but the uniformly accelerated coordinate system is often useful in understanding gravity--Figure \ref{fig:gr-6-hyperbolic-coordinates}.
+
+\begin{figure}[H]
+	\caption[Hyperbolic coordinates. ]{Hyperbolic coordinates. Each dotted hyperbola is a surface on which $	X^2 - T^2 = constant$, and represents constant acceleration.}\label{fig:gr-6-hyperbolic-coordinates}
+	\includegraphics{gr-6-hyperbolic-coordinates}
+\end{figure}
+
+\begin{align*}
+	X =& \rho \cosh{\omega} \\
+	T =& \rho \sinh{\omega}\\
+	X^2 - T^2 =& 1 \text{. The metric is given by:}\\
+	d\tau^2 =& \rho^2 d\omega^2 - d \rho^2 
+\end{align*}
+
+We introduce new coordinates:
+\begin{align*}
+	\rho^2 =& 4 \xi\\
+	\omega =& \frac{t}{2} \text{ and the metric becomes}\\
+	d\tau^2 =& \xi dt^2 - \frac{d \xi^2}{\xi} \numberthis \label{eq:tau:xi}
+\end{align*}
+
+This is a bit like the Schwarzschild metric (\ref{eq:schwartzchild}). We will consider the case where $r \approxeq \frac{2MG}{r}$.
+
+\begin{align*}
+	\frac{r-2MG}{r} \approxeq & \frac{r-2MG}{2MG}\\
+	d \tau^2 =& \frac{r-2MG}{2MG} dt^2 - \frac{2MG}{r-2MG}dr^2
+\end{align*}
+
+Now use the Schwarzschild radius as the unit of length.
+
+\begin{align*}
+	d \tau^2 =& (r-1) dt^2 - \frac{1}{r-1}dr^2\\ \text{, now call $r-1$ $\xi$}\\
+	d \tau^2 =& \xi dt^2 - \frac{1}{\xi} d\xi^2 \text{, which matches(\ref{eq:tau:xi}) }
+\end{align*}
+
+This tells us that the vicinity of the horizon is locally flat, since we can transform the singularity away. 
+
+
+
+\url{https://youtu.be/yv2-KPagCQs?t=4957}
+
+
 \subsection{Black hole singularity}
 
 \section{Falling into a black hole}
