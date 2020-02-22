@@ -1229,13 +1229,78 @@ Now use the Schwarzschild radius as the unit of length.
 
 This tells us that the vicinity of the horizon is locally flat, since we can transform the singularity away. 
 
+What about the business of time becoming space and vice versa? Since $\xi=r-1$, it changes sign as we cross the event horizon. What does it mean in the flat space? We have $\rho^2 = 4 \xi$. How can it be negative? Think instead of $X^2-T^2=\rho^2$. Positive values represent the hyperbolae in - Figure \ref{fig:gr-6-hyperbolic-coordinates}: $\lvert X\rvert>\lvert T\rvert$ in the whole quadrant. If $\rho^2$, $\lvert X\rvert<\lvert T\rvert$ corresponds to the top quadrant. Figure \ref{fig:gr-6-cross-event-horizon} depicts an object crossing the event horizon. A spacelike coordinate $\xi$ has become timelike. What happens to $\omega$? Figure \ref{fig:gr-6-cross-event-horizon-omega} depicts a spacelike hyperbola becoming timelike (coordinates can do whatever they want to: physics limits physical objects only).
 
+\begin{figure}[H]
+	\caption{Crossing the event horizon}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Point comes in with $\omega=0$ and crosses event horizon.}\label{fig:gr-6-cross-event-horizon}
+		\includegraphics[width=\textwidth]{gr-6-cross-event-horizon}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Point comes in with $\omega=0$ and crosses event horizon.}\label{fig:gr-6-cross-event-horizon-omega}
+		\includegraphics[width=\textwidth]{gr-6-cross-event-horizon-omega}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{The singularity is not a place; it's a time} \label{fig:gr-6-singularity}
+		\includegraphics[width=\textwidth]{gr-6-singularity}
+	\end{subfigure}
+\end{figure}
 
-\url{https://youtu.be/yv2-KPagCQs?t=4957}
-
+So all that happens is $(\xi,\omega)$ interchange their roles. The same thing is true of the Schwarzschild coordinates. In Figure \ref{fig:gr-6-cross-event-horizon-omega}, as we decrease $r$ past the event horizon we follow the arrows, and turn up at the event horizon. We continue until $r=0$: then something nasty happens.
 
 \subsection{Black hole singularity}
 
+In Figure \ref{fig:gr-6-singularity} we see that the singularity is not a place; it's a time. The surface $r=0$ is spacelike, not timelike. You can't avoid it, because you can't avoid the future. If you are inside the event horizon, the singularity is in your future.
+
+We want to understand the discrepancy between the  time as perceived by an object falling  into a black hole, and the observer who is left behind. Figure \ref{fig:gr-6-alice-bob} depicts Alice throwing Bob into the Black Hole. Alice never sees Bob go throw the horizon, as this requires infinite $\omega$, hence infinite $t$. Bob just ticks off time and crosses the event horizon. Alice sees Bob slowed down: each heartbeat of Bob takes longer and longer. What does Bob see? Figure \ref{fig:gr-6-bobs-perspective} depicts the singularity. Anything that finds itself in the upper quadrant is doomed: it cannot escape the singularity. Anything in the right quadrant has the possibility of escaping, depending on the path.
+
+\begin{figure}[H]
+	\caption{Alice throws Bob into the Black Hole}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Bob just ticks off time and crosses the event horizon. Alice sees Bob slowed down: each heartbeat of Bob takes longer and longer.}\label{fig:gr-6-alice-bob}
+		\includegraphics[width=\textwidth]{gr-6-alice-bob}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Bob sees nothing special. He is able to see Alice as he falls, even though she can't see him past the event horizon. He sees her accelerating away from him, but otherwise noting special.}\label{fig:gr-6-bobs-perspective}
+		\includegraphics[width=\textwidth]{gr-6-bobs-perspective}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{When does Bob hit the singularity? By the time he gets there the tidal forces will be so large that Bob will have been pulled apart. He won't be with us any more, and we can't ask what he sees at the singularity. Bob will probably use $r$ for time. Singularity is a spacelike surface.}\label{fig:gr-6-bob-singularity}
+		\includegraphics[width=\textwidth]{gr-6-bob-singularity}
+	\end{subfigure}
+\end{figure}
+
+Remember:
+\begin{itemize}
+	\item Alice's clocks record coordinate time;
+	\item Bob's clicks record proper time.
+\end{itemize}
+
+This mismatch is the key to all the confusion surrounding black holes.
+
+What happens when a supernova collapses into a black hole? Alice sees the matter getting closer and closer to the event horizon, forming a structure that approached the black hole asymptotically. Light is red-shifted.
+
+\begin{figure}[H]
+	\caption[A massive object approaching the event horizon]{When a massive object approaches the event horizon, the horizon bulges out to meet it.}\label{fig:gr-6-massive-object}
+	\includegraphics{gr-6-massive-object}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Light rays and the Photonsphere}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{The photonsphere in detail. Light that is travelling parallel to the tangent (or inside it) cannot esacpe, but light travelling radially outwards will escape.}\label{fig:gr-6-photon-sphere1}
+		\includegraphics[width=\textwidth]{gr-6-photon-sphere1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{A light beam cannot enter photonsphere and escape the event horizon, as there will be some point where it is moving tangentially, and so will fall in.}\label{fig:gr-6-photon-sphere2}
+		\includegraphics[width=\textwidth]{gr-6-photon-sphere2}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{A doomed person can send a light ray beack from inside photonsphere, but not from inside event horizon.}\label{fig:gr-6-photon-sphere3}
+		\includegraphics[width=\textwidth]{gr-6-photon-sphere3}
+	\end{subfigure}
+\end{figure}
 \section{Falling into a black hole}
 
 TBP
