@@ -628,7 +628,7 @@ Given a vector field, move along curve. Does vector remain parallel to itself, i
 
 \begin{proof}
 	The result follows quickly from the following Lemma.
-	\begin{lemma}$D_pV^n=0 \implies \partial_p (g_{mn}V^mV^n)=0$\label{lemma:d:length}
+	\begin{lemma}[$D_pV^n=0 \implies \partial_p (g_{mn}V^mV^n)=0$]\label{lemma:d:length}
 	\end{lemma}
 	\begin{proof}
 		\begin{align*}
@@ -940,11 +940,20 @@ We return to geodesics. Consider the proper time interval between two points. We
  	\frac{d}{dt}\big(\frac{\partial \Lagr}{\partial \dot{x}}\big) =& \frac{\partial \Lagr}{\partial x} \numberthis \label{eq:euler:lagrange}
 \end{align*}
 
-\begin{thm}[(\ref{eq:euler:lagrange}) $\iff$ 	(\ref{eq:geodesic})]
+\begin{thm}[Euler Lagrange equation and geodesic]
 	If the action is defined by (\ref{eq:action:g}), the Euler Lagrange equation (\ref{eq:euler:lagrange}) is equivalent to the geodesic equation (\ref{eq:geodesic}).
 \end{thm}
 \begin{proof}
-	TBP
+	From (\ref{eq:action:g}):
+	\begin{align*}
+		\Lagr =& \sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }} \text{, now}\\
+		\frac{d}{dt}\big(\frac{\partial \Lagr}{\partial \dot{x}^\rho}\big) =& \frac{d}{dt} \big( \frac{-\frac{\cancel{2}}{\cancel{2}}g_{\rho\nu}(x) \frac{dx^\nu}{dt }}{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}}\big)\\
+		=&-\frac{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}\frac{d}{dt}\big(g_{\rho\nu}(x) \frac{dx^\nu}{dt}\big) - \big(g_{\rho\nu}(x) \frac{dx^\nu}{dt}\big) \frac{d}{dt} \sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }} }{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt}}\\
+		=&-\frac{\partial_\mu g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt } + g_{\rho\nu}(x) \frac{d^2x^\nu}{dt^2}}{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}} +
+	\end{align*}
+	\begin{align*}
+		\frac{\partial \Lagr}{\partial x^\rho}=& \frac{-\frac{1}{2}\frac{\partial g_{\mu\nu}(x)}{\partial_{x^\rho}} \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}}
+	\end{align*}
 \end{proof}
 
 \subsection{Schwarzschild metric}
@@ -1301,11 +1310,62 @@ What happens when a supernova collapses into a black hole? Alice sees the matter
 		\includegraphics[width=\textwidth]{gr-6-photon-sphere3}
 	\end{subfigure}
 \end{figure}
+
+
 \section{Falling into a black hole}
 
-TBP
+We start with the Schwarzschild metric:
+\begin{align*}
+	d\tau^2 =& \big(1-\frac{R_S}{r^\prime}\big)(d t^\prime)^2 - \frac{(d r^\prime)^2}{1-\frac{R_S}{r^\prime}} - (r^\prime)^2 d\Omega^2 \text{, where $R_S$ is the Schwartzchild radius }\\
+	=& \big(1-\frac{1}{r}\big)d t^2 R_S^2- \frac{d r^2 R_S^2}{1-\frac{1}{r}} - r^2 R_S^2 d\Omega^2 \text{, where $r=\frac{r^\prime}{R_S}, t=\frac{t^\prime}{R_S}$ }\\
+	=& R_S^2 \big[\big(1-\frac{1}{r}\big)d t^2 - \frac{d r^2 }{1-\frac{1}{r}} - r^2 d\Omega^2 \big]
+\end{align*}
 
-\section{Formation of a black hole}
+So all Schwarzschild metrics are the same, except for a factor of $R_S^2$. We will neglect this factor in the sequel.
+
+How big are the components of the curvature tensor near the horizon? First, what are the units?
+\begin{itemize}
+	\item $g_{\mu\nu}$ is dimensionless;
+	\item $[\Gamma] = [g^{-1}\frac{\partial g}{\partial x}]=\frac{1}{\mathfrak{l}}$
+	\item $[R] = [\frac{\partial \Gamma}{\partial x} + \Gamma \Gamma]=\frac{1}{\mathfrak{l}^2}$ 
+\end{itemize}
+
+At the event horizon, $r=1$, so the only possibility for the curvature is $\propto \frac{1}{R_S^2}$. Since $R_{horizon} \propto \frac{1}{R_S^2}$, the bigger the mass, the bigger the radius of the horizon, so the smaller the curvature. At the horizon, the tidal forces from a massive black hole are less than those from a light one.
+
+We will concentrate on the geometry of a unit black hole.
+\begin{align*}
+	d\tau^2 =& \big(1-\frac{1}{r}\big)d t^2 - \frac{d r^2 }{1-\frac{1}{r}} - r^2 d\Omega^2
+\end{align*}
+
+In Figure \ref{fig:gr-7-proper-distance} we depict the proper distance between two points along the r axis.
+\begin{figure}[H]
+	\caption{Proper Distance between two points along $r$: $ds^2 = \frac{dr^2}{1-\frac{1}{r}}$}\label{fig:gr-7-proper-distance}
+	\includegraphics{gr-7-proper-distance}
+\end{figure}
+
+\begin{align*}
+	ds =& \frac{dr}{\sqrt{\frac{r-1}{r}}}\\
+	=& \sqrt{\frac{r}{r-1}} dr \text{. Let $\rho$ denote the proper distance from the event horizon.} \\
+	\rho(r) =& \int_{1}^{r}\sqrt{\frac{r^\prime}{r^\prime-1}} dr^\prime \text{. We define} \\
+	F(\rho) \triangleq &\frac{r-1}{r} \text{ and } \\
+	\omega \triangleq & \frac{t}{2} \text{. Our metric becomes }\\
+	d\tau^2 =& F(\rho) \rho^2 d\omega^2 - d\rho^2 -r^2(\rho) d\Omega^2\text{, because $s$ is proper distance.}
+\end{align*}
+
+
+We can show that:
+\begin{align*}
+	\lim_{\rho \rightarrow \infty}F(\rho) \rho^2=&4\\
+	\lim_{\rho \rightarrow 0}F(\rho) \rho^2=&1
+\end{align*}
+
+\url{https://youtu.be/BdYtfYkdGDk?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=1812}
+
+
+
+
+
+\section{Formation of a black hole}.
 
 TBP
 
