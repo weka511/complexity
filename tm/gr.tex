@@ -1346,20 +1346,89 @@ In Figure \ref{fig:gr-7-proper-distance} we depict the proper distance between t
 \begin{align*}
 	ds =& \frac{dr}{\sqrt{\frac{r-1}{r}}}\\
 	=& \sqrt{\frac{r}{r-1}} dr \text{. Let $\rho$ denote the proper distance from the event horizon.} \\
-	\rho(r) =& \int_{1}^{r}\sqrt{\frac{r^\prime}{r^\prime-1}} dr^\prime \text{. We define} \\
-	F(\rho) \triangleq &\frac{r-1}{r} \text{ and } \\
-	\omega \triangleq & \frac{t}{2} \text{. Our metric becomes }\\
-	d\tau^2 =& F(\rho) \rho^2 d\omega^2 - d\rho^2 -r^2(\rho) d\Omega^2\text{, because $s$ is proper distance.}
+	\rho(r) =& \int_{1}^{r}\sqrt{\frac{r^\prime}{r^\prime-1}} dr^\prime  \numberthis \label{eq:rho_r}
 \end{align*}
 
-
-We can show that:
+We define $	F(\rho)$ so that:
 \begin{align*}
-	\lim_{\rho \rightarrow \infty}F(\rho) \rho^2=&4\\
-	\lim_{\rho \rightarrow 0}F(\rho) \rho^2=&1
+	F(\rho) \rho^2 = &\frac{r-1}{r} \text{ and } \\
+	\omega \triangleq & \frac{t}{2} \text{. Our metric becomes }\\
+	d\tau^2 =& F(\rho) \rho^2 d\omega^2 - \underbrace{d\rho^2}_\text{see (\ref{eq:dr:drho}) below} -r^2(\rho) d\Omega^2 \numberthis \label{eq:tau:rho:omega}
+\end{align*}
+The reason for this transformation is to simplify the coefficient of $d\rho^2$, which follows comes from this argument:
+\begin{align*}
+	\frac{d\rho}{dr}=& \sqrt{\frac{r}{r-1}} \text{, whence} \\
+	d\rho^2 =& \frac{r}{r-1}dr^2 \numberthis \label{eq:dr:drho}
 \end{align*}
 
-\url{https://youtu.be/BdYtfYkdGDk?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=1812}
+\begin{thm}[$\rho(r) = \ln \big( \sqrt{r}+ \sqrt{r-1}\big) + \sqrt{r-1} \sqrt{r}$]
+\end{thm}
+
+\begin{proof}
+	Substitute $r^\prime = \cosh^2 x$
+	\begin{align*}
+		\rho(r) =& \int_{x=0}^{\cosh^2 x=r}\sqrt{\frac{\cosh^2 x}{\cosh^2 x-1}} 2 \cosh {x}\; \sinh {x} \; dx\\
+		=& 2 \int_{x=0}^{\cosh^2 x=r}\sqrt{\frac{\cosh^2 x}{\sinh^2 x}}  \cosh {x}\; \sinh {x} \; dx\\
+		=& 2 \int_{x=0}^{\cosh^2 x=r}\frac{\cosh x}{\cancel{\sinh x}} \cosh {x}\; \cancel{\sinh {x}} \; dx\\
+		=& 2 \int_{x=0}^{\cosh^2 x=r} \cosh^2 {x} \; dx\\
+		=& \cancel{2} \int_{x=0}^{\cosh^2 x=r} \frac{1 + \cosh(2x)}{\cancel{2}} \; dx\\
+		=& \bigg[x + \frac{\sinh (2x)}{2}\bigg]_{x=0}^{\cosh^2 x=r} \numberthis \label{eq:thm:r}
+	\end{align*}
+	Now
+	\begin{align*}
+		\sinh (2x) =& 2 \sinh (x) \cosh(x) \text{, and}\\
+		\sinh^2(x) =& \cosh^2(x) - 1 \text{, whence }\\
+		\sinh (2x) =& 2 \sqrt{\cosh^2(x) - 1} \; \cosh(x)
+	\end{align*}
+	So (\ref{eq:thm:r}) becomes:
+	\begin{align*}
+		\rho(r) =&\bigg[x + \frac{\cancel{2} \sqrt{\cosh^2(x) - 1} \; \cosh(x)}{\cancel{2}}\bigg]_{x=0}^{\cosh x=\sqrt{r}} \\
+		=& \cosh^{-1} \sqrt{r} + \sqrt{r-1} \sqrt{r}\\
+		=& \ln \big( \sqrt{r}+ \sqrt{r-1}\big) + \sqrt{r-1} \sqrt{r} \text{, using $\cosh^{-1} x= \ln(x + \sqrt{x^2-1})$}
+	\end{align*}
+\end{proof}
+
+\begin{cor}[$\rho$ far away]
+	$\lim_{\rho \rightarrow \infty}F(\rho) \rho^2=4$
+\end{cor}
+
+\begin{proof}
+	From (\ref{eq:schwartzchild}) the coefficient of $d\omega^2$ is $4 \frac{r-1}{r}$, but from (\ref{eq:tau:rho:omega}) this is $F(\rho) \rho^2$. But $\lim_{\rho \rightarrow \infty} \frac{r-1}{r} = 1$.
+\end{proof}
+
+
+\begin{cor}[$\rho$ horizon]\label{cor:rho:horizon}
+	$\lim_{\rho \rightarrow 0}F(\rho) =1$
+\end{cor}
+\begin{proof}
+	TBP
+\end{proof}
+
+From Corollary \ref{cor:rho:horizon} and (\ref{eq:tau:rho:omega}), the metric becomes 
+\begin{align*}
+	d\tau^2 =&  \rho^2 d\omega^2 - d\rho^2 -r^2(\rho) d\Omega^2 \text{, near the horizon} \numberthis \label{eq:tau:near:horizon}
+\end{align*}
+
+\begin{cor}[r near horizon]
+	Near the horizon $r(\rho) \approxeq 1 + \frac{\rho^2}{4}$ and (\ref{eq:tau:near:horizon}) becomes flat space in hyperbolic coordinates--Figure \ref{fig:gr-7-flat-space-hyperbolic-coordinates}.
+\end{cor}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[The Light Cone and hyperbolic coordinates]{The Light Cone and hyperbolic coordinates, showing lines of constant $\rho$ and $\omega$. The curve $\omega=\infty$ lies along the light cone. In the top quadrant,  $r<1$ and the signs of first two terms in the metric change, and $\rho^2<0$. Nothing crazy hapens when we cross the event horizon: space has not become time, time has not become space, we have merely introduced coordinates where what was timelike outside becomes timelike behind the event horizon.}\label{fig:gr-7-flat-space-hyperbolic-coordinates}
+		\includegraphics[width=\textwidth]{gr-7-flat-space-hyperbolic-coordinates}
+	\end{center}
+\end{figure}
+
+
+
+
+
+
+
+
+
+\url{https://youtu.be/BdYtfYkdGDk?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2199}
 
 
 
