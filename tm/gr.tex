@@ -954,6 +954,7 @@ We return to geodesics. Consider the proper time interval between two points. We
 	\begin{align*}
 		\frac{\partial \Lagr}{\partial x^\rho}=& \frac{-\frac{1}{2}\frac{\partial g_{\mu\nu}(x)}{\partial_{x^\rho}} \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}}
 	\end{align*}
+	TBP
 \end{proof}
 
 \subsection{Schwarzschild metric}
@@ -1337,6 +1338,8 @@ We will concentrate on the geometry of a unit black hole.
 	d\tau^2 =& \big(1-\frac{1}{r}\big)d t^2 - \frac{d r^2 }{1-\frac{1}{r}} - r^2 d\Omega^2
 \end{align*}
 
+\subsection{Kruskal Coordinates}
+
 In Figure \ref{fig:gr-7-proper-distance} we depict the proper distance between two points along the r axis.
 \begin{figure}[H]
 	\caption{Proper Distance between two points along $r$: $ds^2 = \frac{dr^2}{1-\frac{1}{r}}$}\label{fig:gr-7-proper-distance}
@@ -1351,7 +1354,7 @@ In Figure \ref{fig:gr-7-proper-distance} we depict the proper distance between t
 
 We define $	F(\rho)$ so that:
 \begin{align*}
-	F(\rho) \rho^2 = &\frac{r-1}{r} \text{ and } \\
+	F(\rho) \rho^2 = &\frac{r-1}{r} \text{ and } \numberthis \label{eq:def:F}\\
 	\omega \triangleq & \frac{t}{2} \text{. Our metric becomes }\\
 	d\tau^2 =& F(\rho) \rho^2 d\omega^2 - \underbrace{d\rho^2}_\text{see (\ref{eq:dr:drho}) below} -r^2(\rho) d\Omega^2 \numberthis \label{eq:tau:rho:omega}
 \end{align*}
@@ -1388,7 +1391,7 @@ The reason for this transformation is to simplify the coefficient of $d\rho^2$, 
 	\end{align*}
 \end{proof}
 
-\begin{cor}[$\rho$ far away]
+\begin{cor}[$\rho$ far away]\label{cor:far:away}
 	$\lim_{\rho \rightarrow \infty}F(\rho) \rho^2=4$
 \end{cor}
 
@@ -1401,7 +1404,18 @@ The reason for this transformation is to simplify the coefficient of $d\rho^2$, 
 	$\lim_{\rho \rightarrow 0}F(\rho) =1$
 \end{cor}
 \begin{proof}
-	TBP
+	Let $r=1+\epsilon$. From (\ref{eq:rho_r})
+	\begin{align*}
+		\rho(1+\epsilon) =& \underbrace{\rho(1)}_\text{$=0$} + \epsilon \frac{d\rho}{dr} + O(\epsilon^2) \\
+		=& \sqrt{\frac{r}{r-1}}\rVert_{r=1+\epsilon} \epsilon + O(\epsilon^2) \\
+		=& \sqrt{\frac{1+\epsilon}{\epsilon}} + O(\epsilon^2) 
+	\end{align*}
+	Combining with (\ref{eq:def:F})	
+	\begin{align*}
+		F(\rho(1+\epsilon))\rho^2(1+\epsilon)=&\frac{\epsilon}{1+\epsilon}\frac{1+\epsilon}{\epsilon} + O(\epsilon^3)\\
+		=& 1  + O(\epsilon^3)
+	\end{align*}
+	And the result following on letting $\epsilon \rightarrow 0$.
 \end{proof}
 
 From Corollary \ref{cor:rho:horizon} and (\ref{eq:tau:rho:omega}), the metric becomes 
@@ -1413,6 +1427,11 @@ From Corollary \ref{cor:rho:horizon} and (\ref{eq:tau:rho:omega}), the metric be
 	Near the horizon $r(\rho) \approxeq 1 + \frac{\rho^2}{4}$ and (\ref{eq:tau:near:horizon}) becomes flat space in hyperbolic coordinates--Figure \ref{fig:gr-7-flat-space-hyperbolic-coordinates}.
 \end{cor}
 
+\begin{proof}
+	TBP
+	Check so see whether LS uses quadratic terms. 
+\end{proof}
+
 \begin{figure}[H]
 	\begin{center}
 		\caption[The Light Cone and hyperbolic coordinates]{The Light Cone and hyperbolic coordinates, showing lines of constant $\rho$ and $\omega$. The curve $\omega=\infty$ lies along the light cone. In the top quadrant,  $r<1$ and the signs of first two terms in the metric change, and $\rho^2<0$. Nothing crazy hapens when we cross the event horizon: space has not become time, time has not become space, we have merely introduced coordinates where what was timelike outside becomes timelike behind the event horizon.}\label{fig:gr-7-flat-space-hyperbolic-coordinates}
@@ -1420,15 +1439,19 @@ From Corollary \ref{cor:rho:horizon} and (\ref{eq:tau:rho:omega}), the metric be
 	\end{center}
 \end{figure}
 
+If we go far away we have to remember that $F(\rho)$ differs from flat space--Corollary \ref{cor:far:away}.
+
+As r decreases through 1, $\rho^2$ becomes negative. Eventually we get to $r=0$--Figure \ref{fig:gr-7-singularity}
+
+\begin{figure}[H]
+	\caption[The Singularity]{The Singularity is shown in green. It is a point of infinite curvature, infinite today forces, a place where "you wouldn't want to be". You can't avoid it, as it is a time.}\label{fig:gr-7-singularity}
+	\includegraphics{gr-7-singularity}
+\end{figure}
+
+In Figure \ref{fig:gr-7-flat-space-hyperbolic-coordinates}, as $\rho \rightarrow 0$, the hyperbolae tend towards the lightcone.
 
 
-
-
-
-
-
-
-\url{https://youtu.be/BdYtfYkdGDk?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2199}
+\url{https://youtu.be/BdYtfYkdGDk?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2628}
 
 
 
