@@ -946,15 +946,24 @@ We return to geodesics. Consider the proper time interval between two points. We
 \begin{proof}
 	From (\ref{eq:action:g}):
 	\begin{align*}
-		\Lagr =& \sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }} \text{, now}\\
-		\frac{d}{dt}\big(\frac{\partial \Lagr}{\partial \dot{x}^\rho}\big) =& \frac{d}{dt} \big( \frac{-\frac{\cancel{2}}{\cancel{2}}g_{\rho\nu}(x) \frac{dx^\nu}{dt }}{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}}\big)\\
-		=&-\frac{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}\frac{d}{dt}\big(g_{\rho\nu}(x) \frac{dx^\nu}{dt}\big) - \big(g_{\rho\nu}(x) \frac{dx^\nu}{dt}\big) \frac{d}{dt} \sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }} }{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt}}\\
-		=&-\frac{\partial_\mu g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt } + g_{\rho\nu}(x) \frac{d^2x^\nu}{dt^2}}{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}} +
+		\Lagr =& \sqrt{-g_{\mu\nu} \dot{x}^\mu \dot{x}^\nu} \text{, so}\\
+		\frac{d}{d\tau}\big(\frac{\partial \Lagr}{\partial \dot{x}^\rho}\big) =& \frac{d}{d\tau} \big( \frac{-\frac{\cancel{2}}{\cancel{2}}g_{\rho\nu}  \dot{x}^\nu}{\underbrace{\sqrt{-g_{\mu\nu} \dot{x}^\mu \dot{x}^\nu}}_\text{$=1$, since $d\tau^2=-g_{\mu\nu}dx^\mu dx^\nu$}}\big)\\
+		=&-\frac{d}{d\tau}\big[g_{\rho\nu}  \dot{x}^\nu\big]\\
+		=&- \partial_\sigma g_{\rho\nu}  \dot{x}^\nu \dot{x}^\sigma- g_{\rho\nu} \ddot{x}^\nu 
 	\end{align*}
+	
 	\begin{align*}
-		\frac{\partial \Lagr}{\partial x^\rho}=& \frac{-\frac{1}{2}\frac{\partial g_{\mu\nu}(x)}{\partial_{x^\rho}} \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}{\sqrt{-g_{\mu\nu}(x) \frac{dx^\mu}{dt} \frac{dx^\nu}{dt }}}
+		\frac{\partial \Lagr}{\partial x^\rho}=& \frac{-\frac{1}{2}{\partial_\rho g_{\mu\nu}} \dot{x}^\mu \dot{x}^\nu}{\underbrace{\sqrt{-g_{\mu\nu} \dot{x}^\mu \dot{x}^\nu}}_\text{$=1$, similarly}} 
 	\end{align*}
-	TBP
+	so the Euler Lagrange equations become
+	\begin{align*}
+		 g_{\rho\nu} \ddot{x}^\nu =& \frac{1}{2} \partial_\rho g_{\mu\nu} \dot{x}^\mu \dot{x}^\nu - \partial_\sigma g_{\rho\nu}  \dot{x}^\nu \dot{x}^\sigma\\
+		 =& \frac{1}{2} \partial_\rho g_{\mu\nu} \dot{x}^\mu \dot{x}^\nu - \frac{1}{2}\partial_\sigma g_{\rho\nu}  \dot{x}^\nu \dot{x}^\sigma - \frac{1}{2}\partial_\sigma g_{\rho\nu}  \dot{x}^\nu \dot{x}^\sigma\\
+		 =& \frac{1}{2} \partial_\rho g_{\mu\nu} \dot{x}^\mu \dot{x}^\nu - \frac{1}{2}\partial_\nu g_{\rho\mu}  \dot{x}^\mu \dot{x}^\nu - \frac{1}{2}\partial_\mu g_{\rho\nu}  \dot{x}^\nu \dot{x}^\mu\\
+		 =& \frac{1}{2} \big[ \partial_\rho g_{\mu\nu} - \partial_\nu g_{\rho\mu}  - \partial_\mu g_{\rho\nu} \big]  \dot{x}^\mu \dot{x}^\nu \\
+		g^{\sigma\rho} g_{\rho\nu} \ddot{x}^\nu =&\frac{1}{2}g^{\sigma\rho} \big[ \partial_\rho g_{\mu\nu} - \partial_\nu g_{\rho\mu}  - \partial_\mu g_{\nu\rho} \big]  \dot{x}^\mu \dot{x}^\nu\\
+		\ddot{x}^\sigma =& - \Gamma\indices{^\sigma_{\mu\nu}}\dot{x}^\mu \dot{x}^\nu \text{, which matches (\ref{eq:geodesic})}
+	\end{align*}
 \end{proof}
 
 \subsection{Schwarzschild metric}
