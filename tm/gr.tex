@@ -1551,10 +1551,11 @@ Inside the black hole there is no way out unless you exceed the speed of light--
 
 It is convenient to redraw this picture, as space is infinite. Even though time comes to an end at the singularity, the light-like directions are also infinite.
 
-\subsection{Penrose Diagrams}
+\subsection{Penrose-Carter Diagrams}
+
 We will start by recoordinatizing flat space-time.
 
-This is useful when we have rotational symmetry, when we dpn't want to think about the angular directions.
+This is useful when we have rotational symmetry, when we don't want to think about the angular directions.
 
 \begin{figure}[H]
 	\begin{center}
@@ -1597,13 +1598,32 @@ $T^\pm$ are both lightlike. We introduce two new coordinates, $u\pm = F(t\pm)$, 
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{New lightlike coordinates: $u\pm = F(t\pm)$}\label{fig:gr-8-F}
-		\includegraphics[width=0.5\textwidth]{gr-8-F}
+		\caption{Penrose-Carter coordinates}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Desired behaviour of $u\pm = F(t\pm)$}\label{fig:gr-8-F}
+			\includegraphics[width=\textwidth]{gr-8-F}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{$u\pm$ is confined to this region. Lightrays are confined to $T-R=const$ (outgoing) of $T+R=const$ (incoming), e.e. either $u^-$ or $u^+$ constant.}\label{fig:gr-8-uPM}
+			\includegraphics[width=\textwidth]{gr-8-uPM}
+		\end{subfigure}
+		\;
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Curves of constant time, meeting at spacelike infinity, and curves of constant radius running from past timelike infinity to future timelike infinity. The green lines represent light rays. The two bounding lines from which light originates and goes to are denoted $\mathscr{I}^-$ and $\mathscr{I}^+$ respectively.}\label{fig:gr-8-penrose-constant-time}
+			\includegraphics[width=\textwidth]{gr-8-penrose-constant-time}
+		\end{subfigure}
 	\end{center}
 \end{figure}
 
+\begin{align*}
+	u^\pm =& \tanh T^\pm\\
+	=& \tanh (T\pm R)
+\end{align*}
 
-\url{https://youtu.be/q6j180O9H84?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=1431}
+As Figure \ref{fig:gr-8-uPM} shows, we have mapped all of spacetime into a triangle that can be drawn on a blackboard. This process is called compactification, or making a Penrose-Carter diagram--Figures \ref{fig:gr-8-uPM} and \ref{fig:gr-8-penrose-constant-time}.
+
+\url{https://youtu.be/q6j180O9H84?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2020}
 
 \subsection{Formation of a black hole}.
 
