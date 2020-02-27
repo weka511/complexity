@@ -1732,6 +1732,8 @@ The following isn't intended as a rigorous argument, but it does suggest a conne
 
 Of course in relativity energy is mass, so the right hand side of the equation should be an energy density. What is energy density in relativity? We'll find out that it is part of a tensor whose other components have other meanings. We will start by looking at conservation of charge (which is simpler) and then energy.
 
+\subsection{Continuity Equation}
+
 Charge is normally denoted $Q$. We will call charge density $\sigma$, so we don't confuse it with mass density  $\rho$.
 
 \begin{align*}
@@ -1740,20 +1742,51 @@ Charge is normally denoted $Q$. We will call charge density $\sigma$, so we don'
 \end{align*}
 
 \begin{figure}[H]
-	\caption{Some charges flow through through marked volume, others don't.}\label{fig:qr-9-charge-density}
-	\includegraphics{qr-9-charge-density}
+	\caption{Charge}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Some charges flow through through marked volume, others don't.}\label{fig:qr-9-charge-density}
+		\includegraphics[width=\textwidth]{qr-9-charge-density}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Local continuity. Charge can increase or decrease only if it enter/leaves through walls.}\label{fig:gr-9-continuity}
+		\includegraphics[width=\textwidth]{gr-9-continuity}
+	\end{subfigure}
 \end{figure}
 
 We can think of $\sigma$ and $\mathscr{J}$ as components of a 3 vector: if we orient the Area suitably in $\mathscr{J}$ we have 3 components. Now replace time by a length to get $volume=area \times length$: $(\sigma,\mathscr{J}^m) \rightarrow 	\mathscr{J}^\mu$.
 
+Local conservation of charge: if a charge disappears from my laboratory it must pass through one of the walls. This is illustrated by Figure \ref{fig:gr-9-continuity}.
+
+\begin{align*}
+	- \dot{\sigma} =& \nabla \cdot \mathscr{J}\\
+	\partial_\mu \sigma^\mu=&0 \text{. It turns out that this gives the same answer as}\\
+	D_\mu \sigma^\mu=&0
+\end{align*}
 
 
+\subsection{Stress–energy tensor} 
+
+Energy and momentum are also conserved quantities, and we can regard each as the integral of a density. There is a difference, however: charge is an invariant, as the charge of an electron does not depend on its motion (density isn't, becasue of Lorentz transformation).
+
+Energy isn't an invariant: it is part of a 4-vector $P^\mu=(E,\vec{p})$. We will write the energy density as $T^{00}$, and use $T{01}$ for flow of energy along $x^1$, etc.
+\begin{align*}
+	D_\mu T^{0\mu} =& 0
+\end{align*}
+Now component $m$ of momentum also has a density $T^{m0}$ and a flow $T^{mi}$
+
+\begin{align*}
+	D_\mu T^{\nu\mu} =& 0
+\end{align*}
+
+It turns out that $T^{\nu\mu}$ is symmetric.
+
+\url{https://youtu.be/umdC_KD458g?t=2727}
 
 
+\subsection{Curvature scalar}
+\subsection{Ricci tensor}
+\subsection{Einstein tensor}
 
-
- 
-\url{https://youtu.be/umdC_KD458g?t=1401}
 
 \subsection{Einstein field equations}
 
