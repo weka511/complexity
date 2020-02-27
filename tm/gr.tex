@@ -4,7 +4,8 @@
 \usepackage[toc,nonumberlist]{glossaries}
 \usepackage{glossaries-extra,thmtools,gensymb,braket,bm,tensor}
 \usepackage[toc,page]{appendix}
-
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newcommand{\Lagr}{\mathscr{L}}
 \newtheorem{thm}{Theorem}
@@ -1801,7 +1802,7 @@ What kind of tensor can we make from the metric and two derivatives? We have tal
 \end{proof}
 
 \begin{align*}
-	R^{\mu\nu}=?& 8 \pi G T^{\mu\nu}
+	R^{\mu\nu}\overset{?}{=}& 8 \pi G T^{\mu\nu}
 \end{align*}
 
 \subsection{Curvature scalar}
@@ -1813,24 +1814,46 @@ There is another candidate tensor, $g^{\mu\nu}R$, where $R$ is given by:
 \end{defn}
 
 \begin{align*}
-	Rg^{\mu\nu}=?& 8 \pi G T^{\mu\nu}
+	Rg^{\mu\nu}\overset{?}{=}& 8 \pi G T^{\mu\nu}
 \end{align*}
 
 We have a constraint: the continuity equation (\ref{eq:continuity}) implies $D_\mu G^{\nu\mu}=0$.
 
 \begin{align*}
-	D_\mu(g^{\mu\nu}R) =&
+	D_\mu(g^{\mu\nu}R) =& \underbrace{D_\mu(g^{\mu\nu})}_\text{$=0$}R + g^{\mu\nu}\underbrace{D_\mu(R)}_\text{$=\partial_\mu R$}\\
+	=& g^{\mu\nu}\partial_\mu R
 \end{align*}
+We know that this isn't zero in general.
 
-\urlhttps://youtu.be/umdC_KD458g?t=3999}
+\begin{thm}
+	\begin{align*}
+		D_\mu R^{\mu\nu} =& \frac{1}{2} g^{\mu\nu}\partial_\mu R
+	\end{align*}
+\end{thm}
 
-
-
+\begin{proof}
+	TBP
+\end{proof}
 
 \subsection{Einstein tensor}
 
+\begin{cor}[Einstein Tensor]
+	\begin{align*}
+		G^{\mu\nu} = R^{\mu\nu} - \frac{1}{2} g^{\mu\nu} R
+	\end{align*}
+\end{cor}
+
+This is the only tensor that will work.
 
 \subsection{Einstein field equations}
+
+\begin{align*}
+	R^{\mu\nu} - \frac{1}{2} g^{\mu\nu} R =& 4 \pi G T^{\mu\nu}
+\end{align*}
+
+The source of curvature is not just energy density: it can involve energy flow, momentum flow, and momentum density. These other components are generally much smaller than the energy density in a frame of reference where things are moving slowly.
+
+\url{https://youtu.be/umdC_KD458g?t=4636}
 
 \section{Gravity Waves}
 
