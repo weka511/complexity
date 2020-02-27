@@ -1825,7 +1825,7 @@ We have a constraint: the continuity equation (\ref{eq:continuity}) implies $D_\
 \end{align*}
 We know that this isn't zero in general.
 
-\begin{thm}
+\begin{thm}[Covariant Derivative of Ricci Tensor]
 	\begin{align*}
 		D_\mu R^{\mu\nu} =& \frac{1}{2} g^{\mu\nu}\partial_\mu R
 	\end{align*}
@@ -1848,16 +1848,46 @@ This is the only tensor that will work.
 \subsection{Einstein field equations}
 
 \begin{align*}
-	R^{\mu\nu} - \frac{1}{2} g^{\mu\nu} R =& 4 \pi G T^{\mu\nu}
+	R^{\mu\nu} - \frac{1}{2} g^{\mu\nu} R =& 8 \pi G T^{\mu\nu} \numberthis \label{eq:einstein:field:equation}
 \end{align*}
 
 The source of curvature is not just energy density: it can involve energy flow, momentum flow, and momentum density. These other components are generally much smaller than the energy density in a frame of reference where things are moving slowly.
 
-\url{https://youtu.be/umdC_KD458g?t=4636}
+Suppose that we are in a region of space where $T^{\mu\nu}=0$. The \ref{eq:einstein:field:equation} becomes:
+\begin{align*}
+	R^{\mu\nu} - \frac{1}{2} g^{\mu\nu} R =&0\\
+	R\indices{^\mu_\nu} =& \frac{1}{2} g\indices{^\mu_\nu} R \\
+	=& \frac{1}{2} \delta\indices{^\mu_\nu} R\\
+	R =& R\indices{^\mu_\mu}\\
+	=&\frac{1}{2} \delta\indices{^\mu_\mu} R\\
+	=&\frac{1}{2}4 R\\
+	=&2R \text{, which implies}\\
+	R=&0 \text{, so the Einstein field equations become}\\
+	R^{\mu\nu}=& 0 \text{, in empty space}
+\end{align*}
+
+We can do something similar with $T^{\mu\nu}$. From (\ref{eq:einstein:field:equation}:
+\begin{align*}
+	R\indices{^\mu_\nu} - \frac{1}{2} \delta\indices{^\mu_\nu} R =& 8 \pi G T\indices{^\mu_\nu} \text{. Contracting}\\
+	\underbrace{R - 2 R}_\text{=-R} =& 8 \pi G \underbrace{T\indices{^\mu_\mu}}_\text{$\triangleq T$} \\
+	R =& -8 \pi G T \text{, so (\ref{eq:einstein:field:equation} becomes}\\
+	R\indices{_{\mu\nu}} + \frac{1}{2} g\indices{_{\mu\nu}} 8 \pi G T =& 8 \pi G T\indices{_{\mu\nu}} \text{, or}\\
+	R\indices{_{\mu\nu}}  =& 8 \pi G \big(T\indices{_{\mu\nu}} - \frac{1}{2} g\indices{_{\mu\nu}}  T\big)
+\end{align*}
+
+The trace of the energy-momentum tensor $T$ is zero for electromagnetic radiation, for massless particles like gravitons and photons.
+
+Ricci tensor may be zero without Riemann curvature being zero, e.g. gravitational waves, and the Schwarzschild metric. In 4D Ricci tensor contains less information than Riemann, in 3D they are equivalent, and in 2D scalar has all the information. 
+
+You can add gravitational waves to \emph{any} solution of Einstein Field equations.
+
 
 \section{Gravity Waves}
 
-TBP
+\subsection{Weak gravitational fields}
+\subsection{Gravitational radiation}
+\subsection{Gravity waves}
+\subsection{Einstein-Hilbert action for general relativity}
 
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{section}{Bibliography}
