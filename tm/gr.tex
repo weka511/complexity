@@ -1705,7 +1705,57 @@ These diagrams faithfully reflect causal behaviour, but they aren't to scale.
 
 \section{Einstein field equations}
 
-TBP
+\subsection{Newton's field equations}
+
+''Space tells matter how to move; Matter tells space how to curve''--John Archibald Wheeler
+
+\begin{align*}
+	\vec{F}=& -m \nabla \phi(\vec{x}) \text{. The field tells matter how to move}\\
+	\nabla^2 \phi =& 4 \pi G \rho(\vec{x}) \text{ Matter tells the field how to vary}
+\end{align*}
+
+If the mass is concentrated in a "star" which is symmetrical, but with arbitrary distribution of mass along the radius, and total mass $M$
+
+\begin{align*}
+	\phi(\vec{x}) = - \frac{MG}{r(\vec{x})}
+\end{align*} 
+
+This is what we want to replace by something that makes sense in relativity.
+
+The following isn't intended as a rigorous argument, but it does suggest a connection between geometry and mass. We recall the Schwarzschild solution, which includes:
+
+\begin{align*}
+	g_{00} =& 1-\frac{2MG}{r}\\
+	=& 1+2 \phi\\
+	\nabla^2 g_{00} =& 8 \pi G \rho
+\end{align*}
+
+Of course in relativity energy is mass, so the right hand side of the equation should be an energy density. What is energy density in relativity? We'll find out that it is part of a tensor whose other components have other meanings. We will start by looking at conservation of charge (which is simpler) and then energy.
+
+Charge is normally denoted $Q$. We will call charge density $\sigma$, so we don't confuse it with mass density  $\rho$.
+
+\begin{align*}
+	\sigma = \frac{Q}{V}\\
+	\mathscr{J} = \frac{Q}{Area\times time}
+\end{align*}
+
+\begin{figure}[H]
+	\caption{Some charges flow through through marked volume, others don't.}\label{fig:qr-9-charge-density}
+	\includegraphics{qr-9-charge-density}
+\end{figure}
+
+We can think of $\sigma$ and $\mathscr{J}$ as components of a 3 vector: if we orient the Area suitably in $\mathscr{J}$ we have 3 components. Now replace time by a length to get $volume=area \times length$: $(\sigma,\mathscr{J}^m) \rightarrow 	\mathscr{J}^\mu$.
+
+
+
+
+
+
+
+ 
+\url{https://youtu.be/umdC_KD458g?t=1401}
+
+\subsection{Einstein field equations}
 
 \section{Gravity Waves}
 
