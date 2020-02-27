@@ -1727,7 +1727,7 @@ The following isn't intended as a rigorous argument, but it does suggest a conne
 \begin{align*}
 	g_{00} =& 1-\frac{2MG}{r}\\
 	=& 1+2 \phi\\
-	\nabla^2 g_{00} =& 8 \pi G \rho
+	\nabla^2 g_{00} =& 8 \pi G \rho \numberthis \label{eq:incomplete:g:rho}
 \end{align*}
 
 Of course in relativity energy is mass, so the right hand side of the equation should be an energy density. What is energy density in relativity? We'll find out that it is part of a tensor whose other components have other meanings. We will start by looking at conservation of charge (which is simpler) and then energy.
@@ -1775,16 +1775,58 @@ Energy isn't an invariant: it is part of a 4-vector $P^\mu=(E,\vec{p})$. We will
 Now component $m$ of momentum also has a density $T^{m0}$ and a flow $T^{mi}$
 
 \begin{align*}
-	D_\mu T^{\nu\mu} =& 0
+	D_\mu T^{\nu\mu} =& 0 \numberthis \label{eq:continuity}
 \end{align*}
 
 It turns out that $T^{\nu\mu}$ is symmetric.
 
-\url{https://youtu.be/umdC_KD458g?t=2727}
+\subsection{Ricci tensor}
 
+Equation (\ref{eq:incomplete:g:rho}) is not a tensor equation!. It is incomplete. It doesn't make sense as a law of physics. Einstein's generalization must read:
+\begin{align*}
+	G^{\mu\nu}=& 8 \pi G g^{\mu\nu}
+\end{align*}
+where $G^{\mu\nu}$ is made from the metric somehow. It proably involves two derivatives of $g$ because of  (\ref{eq:incomplete:g:rho}).
+
+What kind of tensor can we make from the metric and two derivatives? We have talked about one, the curvature tensor, $R\indices{_{\mu\nu\tau}^\sigma}$, which has four components when we need two. We should consider contracting $\sigma$ with something. If we contract $\sigma$ with $\tau$ we get zero; we can contract with either $\mu$ or $\nu$, giving the same tensor within a factor of $\pm 1$.
+
+\begin{defn}[Ricci tensor]
+	 $R_{\mu\tau}=R\indices{_{\mu\sigma\tau}^\sigma}$
+\end{defn}
+\begin{thm}[$R_{\mu\tau}=R_{\tau\mu}$]
+	
+\end{thm}
+\begin{proof}
+	TBP
+\end{proof}
+
+\begin{align*}
+	R^{\mu\nu}=?& 8 \pi G T^{\mu\nu}
+\end{align*}
 
 \subsection{Curvature scalar}
-\subsection{Ricci tensor}
+
+There is another candidate tensor, $g^{\mu\nu}R$, where $R$ is given by:
+
+\begin{defn}[Curvature scalar]
+	$R = R_\mu^\mu = g^{\mu\nu}R^{\mu\nu}$
+\end{defn}
+
+\begin{align*}
+	Rg^{\mu\nu}=?& 8 \pi G T^{\mu\nu}
+\end{align*}
+
+We have a constraint: the continuity equation (\ref{eq:continuity}) implies $D_\mu G^{\nu\mu}=0$.
+
+\begin{align*}
+	D_\mu(g^{\mu\nu}R) =&
+\end{align*}
+
+\urlhttps://youtu.be/umdC_KD458g?t=3999}
+
+
+
+
 \subsection{Einstein tensor}
 
 
