@@ -1952,10 +1952,50 @@ There is another solution where $h_{xy}$ is non zero, so oscillation go down $45
 Gravitational waves may be produced by a binary pulsar. Near the pulsar (\ref{eq:linear:approx}) is a bad approximation, but it is good a long way away.
 
 
-\url{https://youtu.be/SwhOffh0kEE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=3990}
-
-
 \subsection{Einstein-Hilbert action for general relativity}
+
+The Principle of Least Action is the most central principle we have in physics. All systems that we know about--mechanical systems, electromagnetic systems, quantum field theory, the standard model--are all governed by an action principle. The action of a particles is an integral over time, the action of a field is an integral over spacetime--Figure \ref{fig:qf-10-field}.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Defining the action: $\phi$ represents a thinkable field.}\label{fig:qf-10-field}
+		\includegraphics{qf-10-field}
+	\end{center}
+\end{figure}  
+
+To the best of our knowledge, every field is governed by an action principle:
+\begin{align*}
+	S=&\int d^4x \Lagr(\phi,\partial_\mu \phi)
+\end{align*}
+We find the field configurations that minimize (make stationary) the action subject to a constraint: specify $\phi$ on the boundary.  We can find an action for general relativity.
+ 
+We start by considering the volume of ordinary space given a metric $g_{mn}$; suppose we are in 2 dimensions and want the area.
+
+\begin{align*}
+	ds^2 =& g_{mn} dx^m dx^n \text{, from Figure \ref{fig:gr-10-area}}\\
+	dA =& dx\sqrt{g_{xx}} dy \sqrt{g_{yy}}\\
+	=& \sqrt{g_{xx} g_{yy}} dx dy \text{ if off diagonal components zero. In general}\\
+	dA =& \sqrt{\lvert g \rvert} dx dy	\text{. Now in 4D we have}\\
+	dV =& \sqrt{\lvert g \rvert} d^4x
+\end{align*}
+$\lvert g \rvert$ is an invariant. Moreover, if S is a scalar field, the following integral is an invariant.
+\begin{align*}
+	\int \sqrt{\lvert g \rvert} d^4x S(x^\mu)
+\end{align*}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Area: product of proper distance along the two axes.}\label{fig:gr-10-area}
+		\includegraphics{gr-10-area}
+	\end{center}
+\end{figure}
+
+Action is supposed to be invariant, so laws of physics are covariant. We can derive Einstein's equation for the vacuum by minimizing the following action.
+
+\begin{align*}
+	S=&\int d^4x \sqrt{\lvert g \rvert} \big[R + \Lambda\big]
+\end{align*}
+
 
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{section}{Bibliography}
