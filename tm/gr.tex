@@ -740,7 +740,7 @@ So far we have discussed 3 dimensional space, as Riemann knew it. We now move to
 		0&0&1&0\\
 		0&0&0&1
 	\end{pmatrix} \numberthis \label{eq:minkowski:metric}\\
-	\triangleq& \eta_{\mu\nu} \text{, whence}\\
+	\triangleq& \eta_{\mu\nu} \text{, whence} \\
 	d \tau^2=& \eta_{\mu\nu} dx^\mu dx^\nu
 \end{align*}
 
@@ -1863,7 +1863,7 @@ Suppose that we are in a region of space where $T^{\mu\nu}=0$. The \ref{eq:einst
 	=&\frac{1}{2}4 R\\
 	=&2R \text{, which implies}\\
 	R=&0 \text{, so the Einstein field equations become}\\
-	R^{\mu\nu}=& 0 \text{, in empty space}
+	R^{\mu\nu}=& 0 \text{, in empty space} \numberthis \label{eq:einstein:empty:space}
 \end{align*}
 
 We can do something similar with $T^{\mu\nu}$. From (\ref{eq:einstein:field:equation}:
@@ -1885,6 +1885,25 @@ You can add gravitational waves to \emph{any} solution of Einstein Field equatio
 \section{Gravity Waves}
 
 \subsection{Weak gravitational fields}
+
+Weak gravitations fields are ones where the amplitude if small enough that we can ignore its square.  We will start with the field equations for empty space (\ref{eq:einstein:empty:space}), $R_{\mu\nu}=0$, and seek an equilibrium solution, i.e. one with no time dependence: the only possibility is empty flat space. Then there is a coordinate system in which:
+\begin{align*}
+	g_{\mu\nu} =& \eta_{\mu\nu} \text{, where}\\
+	\eta_{\mu\nu} =& \begin{pmatrix}
+						-1 &0&0&0  \\
+						0&1&0&0    \\
+						0&0&1&0    \\
+						0&0&0&1
+					\end{pmatrix}
+\end{align*}
+
+Imagine that something is happening a long way away. Locally the disturbance is small, so we can write:
+\begin{align*}
+	g_{\mu\nu} =& \eta_{\mu\nu} + h_{\mu\nu}(t,\vec{x})
+\end{align*}
+
+
+
 \subsection{Gravitational radiation}
 \subsection{Gravity waves}
 \subsection{Einstein-Hilbert action for general relativity}
