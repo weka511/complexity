@@ -1899,7 +1899,7 @@ Weak gravitations fields are ones where the amplitude if small enough that we ca
 
 Imagine that something is happening a long way away. Locally the disturbance is small, so we can write:
 \begin{align*}
-	g_{\mu\nu} =& \eta_{\mu\nu} + h_{\mu\nu}(t,\vec{x})\text{. Now, schematically,}\\
+	g_{\mu\nu} =& \eta_{\mu\nu} + h_{\mu\nu}(t,\vec{x})\text{. Now, schematically,} \numberthis \label{eq:linear:approx}\\
 	R =& \partial \Gamma + \Gamma \Gamma,\text{ and }\\
 	\Gamma =& \frac{1}{2} \underbrace{g^{-1}}_\text{$\approxeq\eta-h$} \partial g\\
 	\approxeq& (\eta-h)\partial h\\
@@ -1930,15 +1930,30 @@ The geometry hasn't changed; just the coordinates. So some perturbation to metri
 
 Once we have removed spurious solutions we get $\Box h_{\mu\nu}=0$, so $h_{\mu\nu}(x,t)=h^0_{\mu\nu} \sin\big(k(t-z)\big)$.
 
-For electromagnetic waves we have transversality constraints, so E, B, and direction of propagation perpendicular. Something similar happens for gravitational waves, so components of $h$ are zero along $t$ and $z$. At each $z$ we have $x$ and $y$ components only. We can also sow from the field equations that $h_xx+h_yy=0$. 
+For electromagnetic waves we have transversality constraints, so E, B, and direction of propagation perpendicular. Something similar happens for gravitational waves, so components of $h$ are zero along $t$ and $z$. At each $z$ we have $x$ and $y$ components only. We can also show from the field equations that $h_xx+h_yy=0$. The only non-zero components are:
+\begin{align*}
+	h_{xx}&\\
+	h_{xy}&\\
+	h_{yx}&=h_{xy}\\
+	h_{yy}&=-h_{xx}
+\end{align*}
+
+As we move down the $z$ axis at $t=0$ there is a little perturbation. $g_{xx}$ is a little different from 1, so proper distances along the $x$ axis are a little bit different: if distances are a little shorter along $x$, they are a little longer along $y$. The coordinates are a little different, and as time passes, the stretching becomes a compression and vice versa. Tidal forces pass down the $z$ axis.
+
+There is another solution where $h_{xy}$ is non zero, so oscillation go down $45^\circ$--see Figure \ref{fig:gr-10-2modes}.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Two modes of oscillation, perpendicular and diagonal]{Two modes of oscillation, perpendicular and diagonal. We can measure the stresses in the plane.}\label{fig:gr-10-2modes}
+		\includegraphics{gr-10-2modes}
+	\end{center}
+\end{figure}
+
+Gravitational waves may be produced by a binary pulsar. Near the pulsar (\ref{eq:linear:approx}) is a bad approximation, but it is good a long way away.
 
 
+\url{https://youtu.be/SwhOffh0kEE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=3990}
 
-
-
-\url{https://youtu.be/SwhOffh0kEE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2470}
-
-\subsection{Gravitational radiation}
 
 \subsection{Einstein-Hilbert action for general relativity}
 
