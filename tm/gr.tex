@@ -1899,13 +1899,47 @@ Weak gravitations fields are ones where the amplitude if small enough that we ca
 
 Imagine that something is happening a long way away. Locally the disturbance is small, so we can write:
 \begin{align*}
-	g_{\mu\nu} =& \eta_{\mu\nu} + h_{\mu\nu}(t,\vec{x})
+	g_{\mu\nu} =& \eta_{\mu\nu} + h_{\mu\nu}(t,\vec{x})\text{. Now, schematically,}\\
+	R =& \partial \Gamma + \Gamma \Gamma,\text{ and }\\
+	\Gamma =& \frac{1}{2} \underbrace{g^{-1}}_\text{$\approxeq\eta-h$} \partial g\\
+	\approxeq& (\eta-h)\partial h\\
+	\approxeq& \partial h \text{ so }\\
+	R \approxeq& \partial^2 h + (\partial h)^2\\
+	\approxeq & \partial^2 h
+\end{align*}
+$R$ is complicated, but it is built out of 2nd derivatives with respect to time and position--$\partial^2 h=0$. These sort of equations in relativity are generally wave equations. Because $g$ is symmetric and 2nd rank, we have 10 equations.
+
+Imagine a flat space with Cartesian coordinates, $X$ and $Y$, and perform a transformation into slightly wiggly coordinates--Figure \ref{gr-10-wiggly-coordinates}:
+\begin{align*}
+	X^\prime =& X + f_x(X,Y) \text{, where $f_x$ small}\\
+	Y^\prime =& Y + f_y(X,Y) \text{, where $f_y$ small}\\
+	(dX^\prime)^2 + (dY^\prime)^2=& (dX)^2 + (dY)^2 + \underbrace{h_{mn} dX^m dX^n }_\text{small correction}\\
+	h_{mn} =& \partial_m f_n + \partial_n f_m
 \end{align*}
 
+The geometry hasn't changed; just the coordinates. So some perturbation to metric are trivial. We need to impose more restrictions on metric to get rid of spurious solutions.
 
+\begin{figure}[H]
+	\begin{center}
+		\caption{New coordinates slightly wiggly}\label{fig:gr-10-wiggly-coordinates}
+		\includegraphics{gr-10-wiggly-coordinates}
+	\end{center}
+\end{figure}
+
+\subsection{Gravity waves}
+
+Once we have removed spurious solutions we get $\Box h_{\mu\nu}=0$, so $h_{\mu\nu}(x,t)=h^0_{\mu\nu} \sin\big(k(t-z)\big)$.
+
+For electromagnetic waves we have transversality constraints, so E, B, and direction of propagation perpendicular. Something similar happens for gravitational waves, so components of $h$ are zero along $t$ and $z$. At each $z$ we have $x$ and $y$ components only. We can also sow from the field equations that $h_xx+h_yy=0$. 
+
+
+
+
+
+\url{https://youtu.be/SwhOffh0kEE?list=PLpGHT1n4-mAvcXwzOIz3dHnGZaQP1LEib&t=2470}
 
 \subsection{Gravitational radiation}
-\subsection{Gravity waves}
+
 \subsection{Einstein-Hilbert action for general relativity}
 
 \bibliographystyle{unsrt}
