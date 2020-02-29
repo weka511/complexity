@@ -2087,19 +2087,22 @@ Action is supposed to be invariant, so laws of physics are covariant. We can der
 	\begin{align*}
 		\beta=&1,\delta=2\\
 		\implies&\\
-		0 =&	\sum_i\big[\partial_i\partial_\beta h_{i\delta} - \partial_i\partial_i h_{\beta\delta} -  \partial_\delta\partial_\beta h_{ii} + \partial_\delta\partial_i h_{\beta i}\big]-\partial_0\partial_\beta h_{0\delta} + \partial_0\partial_0 h_{\beta\delta} +  \partial_\delta\partial_\beta h_{00} - \partial_\delta\partial_0 h_{\beta 0}
+		0 =&	\sum_i\big[\partial_i\partial_x h_{iy} - \partial_i\partial_i h_{xy} -  \partial_y\partial_x h_{ii} + \partial_y\partial_i h_{x i}\big]-\partial_0\partial_x h_{0y} + \partial_0\partial_0 h_{xy} +  \partial_y\partial_x h_{00} - \partial_y\partial_0 h_{x 0}\\
+		=& - \partial_z\partial_z h_{xy}  + \partial_0\partial_0 h_{xy} \text{, which similarly adds no information}
 	\end{align*}
 	
 	\begin{align*}
 		\beta=&1,\delta=3\\
 		\implies&\\
-		0 =&	\sum_i\big[\partial_i\partial_\beta h_{i\delta} - \partial_i\partial_i h_{\beta\delta} -  \partial_\delta\partial_\beta h_{ii} + \partial_\delta\partial_i h_{\beta i}\big]-\partial_0\partial_\beta h_{0\delta} + \partial_0\partial_0 h_{\beta\delta} +  \partial_\delta\partial_\beta h_{00} - \partial_\delta\partial_0 h_{\beta 0}
+		0 =&\sum_i\big[\partial_x\partial_1 h_{iz} - \partial_i\partial_i h_{xz} -  \partial_z\partial_x h_{ii} + \partial_z\partial_i h_{x i}\big]-\partial_0\partial_x h_{0z} + \partial_0\partial_0 h_{xz} +  \partial_z\partial_x h_{00} - \partial_z\partial_0 h_{x 0}\\
+		=& - \cancel{\partial_z\partial_z h_{xz}}  + \cancel{\partial_z\partial_z h_{x z}} + \partial_0\partial_0 h_{xz}  - \partial_z\partial_0 h_{x 0}\\
+		=& \partial_0\partial_0 h_{xz}  - \partial_z\partial_0 h_{x 0}\\
+		=& - k^2 \big[ h^0_{xz}+ h^0_{x0}\big] \sin\big(k(t-z)\big)\\
+		0=& h^0_{xz}+ h^0_{x0} \numberthis \label{eq:h:13}
 	\end{align*}
 
 	\begin{align*}
-		\beta=&2,\delta=2\\
-		\implies&\\
-		0 =&	\sum_i\big[\partial_i\partial_\beta h_{i\delta} - \partial_i\partial_i h_{\beta\delta} -  \partial_\delta\partial_\beta h_{ii} + \partial_\delta\partial_i h_{\beta i}\big]-\partial_0\partial_\beta h_{0\delta} + \partial_0\partial_0 h_{\beta\delta} +  \partial_\delta\partial_\beta h_{00} - \partial_\delta\partial_0 h_{\beta 0}
+		\beta=&2,\delta=2 \text{ adds no information--symmetry with } \beta=1,\delta=1
 	\end{align*}
 	
 
@@ -2107,7 +2110,7 @@ Action is supposed to be invariant, so laws of physics are covariant. We can der
 	\begin{align*}
 		\beta=&2,\delta=3\\
 		\implies&\\
-		=0& 	\sum_i\big[\partial_i\partial_\beta h_{i\delta} - \partial_i\partial_i h_{\beta\delta} -  \partial_\delta\partial_\beta h_{ii} + \partial_\delta\partial_i h_{\beta i}\big]-\partial_0\partial_\beta h_{0\delta} + \partial_0\partial_0 h_{\beta\delta} +  \partial_\delta\partial_\beta h_{00} - \partial_\delta\partial_0 h_{\beta 0}
+		0=& h^0_{yz}+ h^0_{y0} \text{, similar to (\ref{eq:h:13})} \numberthis \label{eq:h:23}
 	\end{align*}
 	
 	
