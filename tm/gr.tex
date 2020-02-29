@@ -6,6 +6,7 @@
 \usepackage[toc,page]{appendix}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage[toc,page]{appendix}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newcommand{\Lagr}{\mathscr{L}}
 \newtheorem{thm}{Theorem}
@@ -1886,7 +1887,7 @@ You can add gravitational waves to \emph{any} solution of Einstein Field equatio
 
 \subsection{Weak gravitational fields}
 
-Weak gravitations fields are ones where the amplitude if small enough that we can ignore its square.  We will start with the field equations for empty space (\ref{eq:einstein:empty:space}), $R_{\mu\nu}=0$, and seek an equilibrium solution, i.e. one with no time dependence: the only possibility is empty flat space. Then there is a coordinate system in which:
+Weak gravitations fields are ones where the amplitude if small enough that we can ignore its square.  We will start with the field equations for empty space (\ref{eq:einstein:empty:space}), $R_{\mu\nu}=0$, and seek an equilibrium solution, i.e. one with no time dependence: the only possibility is \emph{empty flat space}. Then there is a coordinate system\footnote{This is not the same as saying it is true in all cordinate systems.} in which:
 \begin{align*}
 	g_{\mu\nu} =& \eta_{\mu\nu} \text{, where}\\
 	\eta_{\mu\nu} =& \begin{pmatrix}
@@ -1897,9 +1898,9 @@ Weak gravitations fields are ones where the amplitude if small enough that we ca
 					\end{pmatrix}
 \end{align*}
 
-Imagine that something is happening a long way away. Locally the disturbance is small, so we can write:
+Imagine that something is happening a very long way away. Locally the disturbance is small, so we can write:
 \begin{align*}
-	g_{\mu\nu} =& \eta_{\mu\nu} + h_{\mu\nu}(t,\vec{x})\text{. Now, schematically,} \numberthis \label{eq:linear:approx}\\
+	g_{\mu\nu} =& \eta_{\mu\nu} + h_{\mu\nu}(t,\vec{x})\text{, for small $h$. Schematically,} \numberthis \label{eq:linear:approx}\\
 	R =& \partial \Gamma + \Gamma \Gamma,\text{ and }\\
 	\Gamma =& \frac{1}{2} \underbrace{g^{-1}}_\text{$\approxeq\eta-h$} \partial g\\
 	\approxeq& (\eta-h)\partial h\\
@@ -1907,9 +1908,14 @@ Imagine that something is happening a long way away. Locally the disturbance is 
 	R \approxeq& \partial^2 h + (\partial h)^2\\
 	\approxeq & \partial^2 h
 \end{align*}
-$R$ is complicated, but it is built out of 2nd derivatives with respect to time and position--$\partial^2 h=0$. These sort of equations in relativity are generally wave equations. Because $g$ is symmetric and 2nd rank, we have 10 equations.
+$R$ is complicated, but it is built out of 2nd derivatives with respect to time and position, so (\ref{eq:einstein:empty:space}) reduces to:
+\begin{align*}
+	\partial^2 h=&0
+\end{align*}.
 
-Imagine a flat space with Cartesian coordinates, $X$ and $Y$, and perform a transformation into slightly wiggly coordinates--Figure \ref{gr-10-wiggly-coordinates}:
+These sort of equations in relativity are generally wave equations. Because $g$ is symmetric and 2nd rank, we have 10 equations.
+
+Imagine a flat space with Cartesian coordinates, $X$ and $Y$, and perform a transformation into slightly wiggly coordinates--Figure \ref{fig:gr-10-wiggly-coordinates}:
 \begin{align*}
 	X^\prime =& X + f_x(X,Y) \text{, where $f_x$ small}\\
 	Y^\prime =& Y + f_y(X,Y) \text{, where $f_y$ small}\\
@@ -1928,9 +1934,14 @@ The geometry hasn't changed; just the coordinates. So some perturbation to metri
 
 \subsection{Gravity waves}
 
-Once we have removed spurious solutions we get $\Box h_{\mu\nu}=0$, so $h_{\mu\nu}(x,t)=h^0_{\mu\nu} \sin\big(k(t-z)\big)$.
+Once we have removed spurious solutions we get:
+\begin{align*}
+	\Box h_{\mu\nu}=&0 \text{, so}\\
+	h_{\mu\nu}(x,t)=&h^0_{\mu\nu} \sin\big(k(t-z)\big) \text{ for some direction $z$ } \numberthis \label{eq:sine_wave}
+\end{align*}
 
-For electromagnetic waves we have transversality constraints, so E, B, and direction of propagation perpendicular. Something similar happens for gravitational waves, so components of $h$ are zero along $t$ and $z$. At each $z$ we have $x$ and $y$ components only. We can also show from the field equations that $h_xx+h_yy=0$. The only non-zero components are:
+
+For electromagnetic waves we have transversality constraints, so the electric field, the magnetic field, and direction of propagation perpendicular. Something similar happens for gravitational waves, so components of $h$ are zero along $t$ and $z$. At each $z$ we have $x$ and $y$ components only. We can also show from the field equations that $h_{xx}+h_{yy}=0$. The only (possibly) non-zero components are:
 \begin{align*}
 	h_{xx}&\\
 	h_{xy}&\\
@@ -1938,7 +1949,7 @@ For electromagnetic waves we have transversality constraints, so E, B, and direc
 	h_{yy}&=-h_{xx}
 \end{align*}
 
-As we move down the $z$ axis at $t=0$ there is a little perturbation. $g_{xx}$ is a little different from 1, so proper distances along the $x$ axis are a little bit different: if distances are a little shorter along $x$, they are a little longer along $y$. The coordinates are a little different, and as time passes, the stretching becomes a compression and vice versa. Tidal forces pass down the $z$ axis.
+Suppose that $h_{xx}$ and $h_{yy}$ are non zero. As we move down the $z$ axis at $t=0$ there is a little perturbation: $g_{xx}$ is a little different from 1, so proper distances along the $x$ axis are a little bit different; if distances are a little shorter along $x$, they are a little longer along $y$. The coordinates are a little different, and as time passes, the stretching becomes a compression and vice versa. Tidal forces pass down the $z$ axis.
 
 There is another solution where $h_{xy}$ is non zero, so oscillation go down $45^\circ$--see Figure \ref{fig:gr-10-2modes}.
 
@@ -1996,7 +2007,118 @@ Action is supposed to be invariant, so laws of physics are covariant. We can der
 	S=&\int d^4x \sqrt{\lvert g \rvert} \big[R + \Lambda\big]
 \end{align*}
 
+\begin{appendices}
+	\section{Gravitational waves}
 
+	\begin{align*}
+		\Gamma\indices{^{\tau}_{\mu\nu}} =&\frac{1}{2} \big[ \partial_\mu g_{\sigma\nu} + \partial_\nu g_{\mu\sigma} - \partial_\sigma g_{\mu\nu}\big] g^{\sigma\tau}\\
+		=& \frac{1}{2} \big[ \partial_\mu h_{\sigma\nu} + \partial_\nu h_{\mu\sigma} - \partial_\sigma h_{\mu\nu}\big] \big[\eta^{\sigma\tau }- O(h)\big]\\
+		=& \frac{1}{2} \big[ \partial_\mu h_{\sigma\nu} + \partial_\nu h_{\mu\sigma} - \partial_\sigma h_{\mu\nu}\big] \eta^{\sigma\tau }- O(h^2)
+	\end{align*}
+	\begin{align*}
+		R\indices{^\alpha_{\beta\gamma\delta}} =& \partial_\gamma\Gamma\indices{^\alpha_{\beta\delta}}-\partial_\delta\Gamma\indices{^\alpha_{\beta\gamma}} + O(\Gamma^2)\\
+		=& \frac{1}{2} \big[ \partial_\gamma\partial_\beta h_{\sigma\delta} + \partial_\gamma\partial_\delta h_{\beta\sigma} - \partial_\gamma\partial_\sigma h_{\beta\delta}\big] \eta^{\sigma\alpha }- \frac{1}{2} \big[ \partial_\delta\partial_\gamma h_{\sigma\beta} + \partial_\delta\partial_\beta h_{\gamma\sigma} - \partial_\delta\partial_\sigma h_{\beta\gamma}\big] \eta^{\sigma\alpha }+ O(h^2)\\
+		=& \frac{1}{2} \big[ \partial_\gamma\partial_\beta h_{\sigma\delta} + \partial_\gamma\partial_\delta h_{\beta\sigma} - \partial_\gamma\partial_\sigma h_{\beta\delta} - \partial_\delta\partial_\gamma h_{\sigma\beta} - \partial_\delta\partial_\beta h_{\gamma\sigma} + \partial_\delta\partial_\sigma h_{\beta\gamma}\big] \eta^{\sigma\alpha }+ O(h^2)
+	\end{align*}
+	Dropping $O(h^2)$ and contracting
+	\begin{align*}
+	R_{\beta\delta} =& 	R\indices{^\alpha_{\beta\alpha\delta}}\\
+	=& \frac{1}{2} \big[ \partial_\alpha\partial_\beta h_{\sigma\delta} + \cancel{\partial_\alpha\partial_\delta h_{\beta\sigma}} - \partial_\alpha\partial_\sigma h_{\beta\delta} - \cancel{\partial_\delta\partial_\alpha h_{\sigma\beta}} - \partial_\delta\partial_\beta h_{\alpha\sigma} + \partial_\delta\partial_\sigma h_{\beta\alpha}\big] \eta^{\sigma\alpha }
+	\\
+	=& \frac{1}{2} \big[ \partial_\alpha\partial_\beta h_{\sigma\delta} - \partial_\alpha\partial_\sigma h_{\beta\delta} -  \partial_\delta\partial_\beta h_{\alpha\sigma} + \partial_\delta\partial_\sigma h_{\beta\alpha}\big] \eta^{\sigma\alpha } \numberthis \label{eq:linearized}\\
+	=& 0 \text{ in empty space}.
+	\end{align*}
+	Now $\eta^{00}=-1$, $\eta^{ii}=+1$, and all other values are zero, so the expression in (\ref{eq:linearized}) becomes:
+	\begin{align*}
+		\sum_i\big[\partial_i\partial_\beta h_{i\delta} - \partial_i\partial_i h_{\beta\delta} -  \partial_\delta\partial_\beta h_{ii} + \partial_\delta\partial_i h_{\beta i}\big]-\partial_0\partial_\beta h_{0\delta} + \partial_0\partial_0 h_{\beta\delta} +  \partial_\delta\partial_\beta h_{00} - \partial_\delta\partial_0 h_{\beta 0} \numberthis \label{eq:expanded_h}
+	\end{align*}
+	We try the solution of (\ref{eq:sine_wave})
+	\begin{align*}
+		h_{\mu\nu}(x,t)=&h^0_{\mu\nu} \sin\big(k(t-z)\big)\\
+		\partial_0^2 h_{\mu\nu}=& -k^2 h_{\mu\nu}\\
+		\partial_z^2 h_{\mu\nu}=& -k^2 h_{\mu\nu}\\
+		\partial_0 \partial_z  h_{\mu\nu}=& k^2 h_{\mu\nu}\\
+		\partial_z \partial_0  h_{\mu\nu}=& k^2 h_{\mu\nu}
+	\end{align*}
+	All other partial derivatives are zero.
+	
+	\begin{align*}
+	\beta=&0,\delta=0\\
+	\implies&\\
+	0 =&\sum_i\big[\partial_i\partial_0 h_{i0} - \partial_i\partial_i h_{00} -  \partial_0\partial_0 h_{ii} + \partial_0\partial_i h_{0 i}\big]-\bcancel{\partial_0\partial_0 h_{00}} + \bcancel{\partial_0\partial_0 h_{00}} +  \cancel{\partial_0\partial_0 h_{00}} - \cancel{\partial_0\partial_0 h_{0 0}}\\
+	=& \partial_i\partial_0 h_{i0} - \partial_i\partial_i h_{00} -  \partial_0\partial_0 h_{ii} + \partial_0\partial_i h_{0 i}\\
+	=& k^2\big[h^0_{00} + h^0_{zz}+2h^0_{0z}\big]\sin\big(k(t-z)\big) \text{, whence }\\
+	0=&h^0_{00} + h^0_{zz}+2h^0_{0z} \numberthis \label{eq:h:00}
+	\end{align*}
+	
+	\begin{align*}
+	\beta=&0,\delta=1\\
+	\implies&\\
+	0 =&\sum_i\big[\partial_i\partial_0 h_{i1} - \partial_i\partial_i h_{01} -  \partial_1\partial_0 h_{ii} + \partial_1\partial_i h_{0 i}\big]-\partial_0\partial_0 h_{01} + \partial_0\partial_0 h_{01} +  \partial_1\partial_0 h_{00} - \partial_1\partial_0 h_{0 0}\\
+	=& - \partial_z\partial_z h_{01}-\cancel{\partial_0\partial_0 h_{01}} + \cancel{\partial_0\partial_0 h_{01}} +  \bcancel{\partial_1\partial_0 h_{00}} - \bcancel{\partial_1\partial_0 h_{0 0}} \text{, whence}\\
+	0=&h^0_{01} \numberthis \label{eq:h:01}
+	\end{align*}
+	
+	Similarly:
+	\begin{align*}
+		\beta=&0,\delta=2\\
+		\implies&\\
+		0=&h^0_{02} \numberthis \label{eq:h:02}
+	\end{align*}	
+	
+	\begin{align*}
+		\beta=&0,\delta=3\\
+		\implies&\\
+		0=&	\partial_i\partial_0 h_{iz} - \partial_i\partial_i h_{0z} -  \partial_z\partial_0 h_{ii} + \partial_z\partial_i h_{0 i}-\partial_0\partial_0 h_{0z} + \partial_0\partial_0 h_{0z} +  \partial_z\partial_0 h_{00} - \partial_z\partial_0 h_{0 0}\\
+		=&	\partial_z\partial_0 h_{zz} - \xcancel{\partial_z\partial_z h_{0z}} -  \partial_z\partial_0 \sum_i h_{ii} + \xcancel{\partial_z\partial_z h_{0 z}}-\cancel{\partial_0\partial_0 h_{0z}} + \cancel{\partial_0\partial_0 h_{0z}} +  \bcancel{\partial_z\partial_0 h_{00}} - \bcancel{\partial_z\partial_0 h_{0 0}}\\
+		=& -\partial_z\partial_0 h_{xx} -\partial_z\partial_0 h_{yy}\\
+		=& k^2 \big[ h^0_{xx}+ h^0_{yy}\big] \sin\big(k(t-z)\big) \text{, whence:}\\
+		=& h^0_{xx}+ h^0_{yy} \numberthis \label{eq:h:03}
+	\end{align*}	
+	
+	\begin{align*}
+		\beta=&1,\delta=1\\
+		\implies&\\
+		0 =& \sum_i\big[\partial_i\partial_x h_{ix} - \partial_i\partial_i h_{xx} -  \partial_x\partial_x h_{ii} + \partial_x\partial_i h_{x i}\big]-\partial_0\partial_x h_{0x} + \partial_0\partial_0 h_{xx} +  \partial_x\partial_x h_{00} - \partial_x\partial_0 h_{1 0}\\
+		=&  - \partial_z\partial_z h_{xx} + \partial_0\partial_0 h_{xx}  \\
+		=& - k^2 \big[ h^0_{xx}- h^0_{xx}\big] \sin\big(k(t-z)\big) \text{, which adds no information}
+	\end{align*}
+	
+	\begin{align*}
+		\beta=&1,\delta=2\\
+		\implies&\\
+		0 =&	\sum_i\big[\partial_i\partial_\beta h_{i\delta} - \partial_i\partial_i h_{\beta\delta} -  \partial_\delta\partial_\beta h_{ii} + \partial_\delta\partial_i h_{\beta i}\big]-\partial_0\partial_\beta h_{0\delta} + \partial_0\partial_0 h_{\beta\delta} +  \partial_\delta\partial_\beta h_{00} - \partial_\delta\partial_0 h_{\beta 0}
+	\end{align*}
+	
+	\begin{align*}
+		\beta=&1,\delta=3\\
+		\implies&\\
+		0 =&	\sum_i\big[\partial_i\partial_\beta h_{i\delta} - \partial_i\partial_i h_{\beta\delta} -  \partial_\delta\partial_\beta h_{ii} + \partial_\delta\partial_i h_{\beta i}\big]-\partial_0\partial_\beta h_{0\delta} + \partial_0\partial_0 h_{\beta\delta} +  \partial_\delta\partial_\beta h_{00} - \partial_\delta\partial_0 h_{\beta 0}
+	\end{align*}
+
+	\begin{align*}
+		\beta=&2,\delta=2\\
+		\implies&\\
+		0 =&	\sum_i\big[\partial_i\partial_\beta h_{i\delta} - \partial_i\partial_i h_{\beta\delta} -  \partial_\delta\partial_\beta h_{ii} + \partial_\delta\partial_i h_{\beta i}\big]-\partial_0\partial_\beta h_{0\delta} + \partial_0\partial_0 h_{\beta\delta} +  \partial_\delta\partial_\beta h_{00} - \partial_\delta\partial_0 h_{\beta 0}
+	\end{align*}
+	
+
+	
+	\begin{align*}
+		\beta=&2,\delta=3\\
+		\implies&\\
+		=0& 	\sum_i\big[\partial_i\partial_\beta h_{i\delta} - \partial_i\partial_i h_{\beta\delta} -  \partial_\delta\partial_\beta h_{ii} + \partial_\delta\partial_i h_{\beta i}\big]-\partial_0\partial_\beta h_{0\delta} + \partial_0\partial_0 h_{\beta\delta} +  \partial_\delta\partial_\beta h_{00} - \partial_\delta\partial_0 h_{\beta 0}
+	\end{align*}
+	
+	
+	\begin{align*}
+		\beta=&3,\delta=3\\
+		\implies&\\
+		0 =&\cancel{\partial_z\partial_z h_{zz}} - \cancel{\partial_z\partial_z h_{zz}} -  \partial_z\partial_z \big(h_{xx}+h_{yy}+\bcancel{h_{zz}}\big) + \bcancel{\partial_z\partial_z h_{z z}}-\partial_0\partial_z h_{0z} + \partial_0\partial_0 h_{zz} +  \partial_z\partial_z h_{00} - \partial_z\partial_0 h_{z 0}\\
+		=& k^2 \big[\underbrace{h^0_{xx} + h^0_{yy}}_\text{$=0$, from (\ref{eq:h:03})}\underbrace{-h^0_{00}-h^0_{zz}-2h^0_{0z}}_\text{$=0$, from (\ref{eq:h:00})}\big]\sin\big(k(t-z)\big) 
+	\end{align*}
+
+\end{appendices}
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{section}{Bibliography}
 \raggedright
