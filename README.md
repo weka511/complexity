@@ -13,7 +13,6 @@ Code inspired by [Complexity Explorer Courses](https://www.complexityexplorer.or
 |it|[Introduction to Information Theory](https://www.complexityexplorer.org/courses/55-introduction-to-information-theory)|
 |origins|[Origins of Life](https://www.complexityexplorer.org/courses/95-origins-of-life)|
 |rn|[Introduction to Renormalization](https://www.complexityexplorer.org/courses/67-introduction-to-renormalization)|
-|tm|[The Theoretical Minimum](http://theoreticalminimum.com/)|
 
 
 
