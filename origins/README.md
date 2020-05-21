@@ -1,6 +1,11 @@
 # origins 
 
-Code for [Origins of Life](https://www.complexityexplorer.org/courses/95-origins-of-life)
+My notes plus exploratory code for [Origins of Life](https://www.complexityexplorer.org/courses/103-origins-of-life). This material was created initially for an Code for [an earlier iteration of the course](https://www.complexityexplorer.org/courses/95-origins-of-life); it is now being updated.
+The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
+    These notes are distributed in the hope that they will be useful,
+    but without any warranty, and without even the implied warranty of
+     merchantability or fitness for a particular purpose. All feedback is welcome,
+    but I don't necessarily undertake to do anything with it.
 
 |#|File|Description|
 |---|------------------------------|-----------------------------------------------------------|
