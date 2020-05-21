@@ -14,7 +14,7 @@ The content and images contained herein are the intellectual property of the San
 |   |glossary.tex|Origins of Life Glossary|
 |   |glossary-entries.tex|Glossary entries used by _glossary.tex_|
 |   |origins.bib|Origins of Life Bibliography entries|
-|   |wikipedia.bib|Bibliography entries for Wikepedia enrtries that support glossary entries|
+|   |wikipedia.bib|Bibliography entries for Wikipedia entries that support glossary entries|
 |1|origins1.tex|My Lecture Notes - Introduction|
 ||error_catastrophe.py|Model for error catastrophe after [Manfred Eigen](https://www.pnas.org/content/99/21/13374.full) and Peter Schuster. See also [Slides for 1.9.3](https://complexityexplorer.s3.amazonaws.com/originsoflife/unit1/origin+quasispecie2s_fix_short+(1).pdf)|
 |2|origins2.tex|My Lecture Notes - Chemical Origins|
