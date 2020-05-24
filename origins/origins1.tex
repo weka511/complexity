@@ -6,7 +6,7 @@
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
 \graphicspath{{figs/}} 
-
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
@@ -522,7 +522,7 @@ Examples
 	\item Constrained Location Examples \begin{itemize}
 		\item Hydrothermal Vents\cite{martin2006origin}
 		\item Atmosphere (Impactor/Shock Synthesis, Lightning,
-		Insolation)\cite{chyba1992endogenous} and \cite{miller1959organic}
+		Insolation)\cite{chyba1992endogenous} \cite{miller1959organic}
 	\end{itemize}
 	\item Constrained Reactant Examples 
 	\begin{itemize}
@@ -532,9 +532,9 @@ Examples
 	\end{itemize}
 	\item Constrained Energy Examples
 	\begin{itemize}
-		\item \gls{gls:serpentinization}\cite{schrenk2013serpentinization}
+		\item \Gls{gls:serpentinization}\cite{schrenk2013serpentinization}
 		\item Solar flares\cite{airapetian2016prebiotic}
-		\item Radioactivity\cite{yi2018radiolytic} and \cite{adam2018estimating}
+		\item Radioactivity\cite{yi2018radiolytic} \cite{adam2018estimating}
 	\end{itemize}
 \end{itemize}
 \section{Geological Conditions, Change, and Chaos}
@@ -543,31 +543,32 @@ Zach Adam, University of Arizona\cite{spencer2017growth}
 
 What is the source of our understanding of conditions when we thought life originated?
 \begin{figure}[H]
-	\caption{Earth's Structure: includes everything in Figure, plus minerals, etc. Can only sample surface, plus a few km down.}\label{fig:EarthStructure} 
+	\caption{Earth's Structure: includes everything in Figure, plus minerals, etc. We can only sample surface, plus a few km down.}\label{fig:EarthStructure} 
 	\includegraphics[width=0.9\textwidth]{EarthStructure}
 \end{figure}
 
+Continents don't stay in the one place. So what we say today may not be what was there in the past.
 \begin{figure}[H]
 	\caption{Geologic Record is inseparable from history of life}\label{fig:GeologicRecord} 
 	
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
 		\caption{Great oxidation event changed all sorts of stuff. We need oxygen, but other critters had to adapt or die. Oxidation changed minerals.}
-		\includegraphics[width=\textwidth]{GeologicRecord}
+		\includegraphics[width=0.8\textwidth]{GeologicRecord}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\caption{Different models for crustal accumulation.}
+		\caption{How much change has been caused by weathering? There are different models for crustal accumulation. So how much crust has been produced over time?}
 		\includegraphics[width=\textwidth]{GeologicRecord1}
 	\end{subfigure}
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Another Level Down: different models for accumulation of crust. Not simple accumulation!}\label{fig:AnotherLevelDown} 
+	\caption{Another Level Down: different models for accumulation of crust. Not simple accumulation! There may have been periods where there was more crust than today.}\label{fig:AnotherLevelDown} 
 	\includegraphics[width=0.9\textwidth]{AnotherLevelDown}
 \end{figure}
 
-Only direct record for events that sow chaos and processes of prolonged gradual change
+Only direct record for events that sow chaos and processes of prolonged gradual change; much of the evidence for such events may have been lost.
 
 What does this mean for origins of life research?
 \begin{itemize}
@@ -594,17 +595,16 @@ What does this mean for origins of life research?
 	\end{itemize}
 \end{itemize}
 \section{Pattern Formation in Chemical Systems}
-Chris Kempes
+Lecturer: Chris Kempes
 
 \begin{itemize}
-	\item What properties and processes are easy to obtain through physical dynamics alone?
-	
+	\item What properties and processes are easy to obtain through physical dynamics alone?	
 	\item How might this make it easy for lifelike things to begin?
-	
-	\item Reaction Diffusion Equations\cite{sfi_grayscott2018}
 \end{itemize}
 
-Describe reaction of $U$ everywhere in space.
+We will look at pattern formation through the lens of Reaction Diffusion Equations\cite{sfi_grayscott2018}.
+
+Here is a very simple reaction diffusion equation. It relates the change in concentration of some chemical,  $U$, to a diffusion plus a reaction.
 \begin{align*}
 \frac{\partial U}{\partial t} =&   \underbrace{\overbrace{D_V}^\text{diffusivity} \underbrace{ \nabla^2 U }_\text{difference in fluxes}}_\text{diffusion term} + \underbrace{ F(U)}_\text{reaction term}
 \end{align*}
@@ -615,28 +615,45 @@ With two chemicals...
 \frac{\partial V}{\partial t} =&   D_V \nabla^2 V + G(U,V)
 \end{align*}
 
+Now let's consider a specific example.
 Consider two reacting species, $U$ and $V$, and an inert product $P$.
 \begin{align*}
 U + 2V \Longrightarrow& 3V\\
-V \Longrightarrow& P\\
-\frac{\partial U}{\partial t} =& -U V^2 + \overbrace{F}^\text{Fixed flow into system (chemostat)} (1 - U) + D_u \nabla^2 U \\
-\frac{\partial V}{\partial t} =& U V^2 - (F +\underbrace{f}_\text{loss to make $P$}) V + D_v \nabla^2 V 
+V \Longrightarrow& P
 \end{align*}
+
+\begin{enumerate}
+	\item The first term in (\ref{eq:U}) represents the reaction of $U$ with $2V$. 
+	\item We have chemostated the system, meaning there is some constant flux into the system and out of the system. $F(1 - U)$ represents flow in and out.
+	\item Middle term in (\ref{eq:V}) represents outflow of $V$ plus conversion to $P$.
+\end{enumerate}
+\begin{align*}
+	\frac{\partial U}{\partial t} =& -U V^2 + F(1 - U)  + D_u \nabla^2 U \numberthis \label{eq:U}\\
+	\frac{\partial V}{\partial t} =& U V^2 - (F +k) V + D_v \nabla^2 V \numberthis \label{eq:V}
+\end{align*}
+
+This set of equations gives rise to very interesting spatial patterns. Using stability analysis we can determine the range of $F$ and $k$ that allow interesting patterns to form--Figure \ref{fig:GreyScottRange}.
 
 \begin{figure}[H]
 	\caption{Grey Scott Reaction}
-	
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\caption{the range of $F$ and $k$ that allow interesting patterns to form.}\label{fig:GreyScottRange}
+		\includegraphics[width=\textwidth]{GreyScottRange}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\caption{Starting configuration}
 		\includegraphics[width=\textwidth]{GreyScottInitial}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
-		\caption{Evolves toward steady state,  where high concentration close to low concentration. Segregation.}
+		\caption{Evolves toward steady state,  where high concentration close to low concentration.}
 		\includegraphics[width=\textwidth]{GreyScottFinal}
 	\end{subfigure}
 \end{figure}
+
+What is very nice about this is it tells us that in a very simple context where we are combining this reaction with diffusion we see this very interesting pattern formation with strong spacial gradients: very high concentrations of $U$ and $V$ are separated by small distances and we see segregation. We can get very different concentrations very close to one another. This gives us hope, from an origins of life point of view, of getting complicated chemistry forming close to other complicated chemistry on small spatial scales in a way that is stable and segregated. 
 
 Other starting values give cell-like behaviour (including division), so maybe get some ''lifelike" behaviour from physics and simple chemistry.
 
