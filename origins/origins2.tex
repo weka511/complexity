@@ -286,12 +286,12 @@ This is pointing to impacts before 3.9 and after 3.9, so that narrow cataclysmic
 		\caption{Histogram showing probability of sample having a given age.}
 		\includegraphics[width=0.8\textwidth]{LunarFlux0}
 	\end{subfigure}
-\;
+	\;
 	\begin{subfigure}[t]{0.30\textwidth}
 		\caption{Suppressing the Imbrium contamination gives more of a sawtooth}
 		\includegraphics[width=0.8\textwidth]{LunarFluxWithoutImbrium}
 	\end{subfigure}
-\;
+	\;
 	\begin{subfigure}[t]{0.30\textwidth}
 		\caption{Impacts relatively quiet during Great Oxidation Event, and also during first whiffs of oxygen on earth. Has bombardment picked up on right, or is it just better preserved?}
 		\includegraphics[width=0.8\textwidth]{LunarGOE}
@@ -947,23 +947,32 @@ See also \cite{lazcano20031953}
 
 \section{Why Nature Chose Phosphates}
 
+Lecturer: Chris Butch
+
+The role of phosphate in biochemistry and the origins of life.
+
+\subsection{The roles of phosphate in biology}
+
 \begin{itemize}
 	\item Structural
-	\begin{itemize}
-		\item Nucleic Acid Backbones (Figure \ref{fig:PhosphoDiesterBond}-\ref{fig:PhosphoDiesterBond3})
-		\item Phospholipid Bilayers (Figure \ref{fig:PhosphoLipid1}-\ref{fig:PhosphoLipid3})
-	\end{itemize}
-
-	\item Physical\begin{itemize}
-		\item Compartmentalization
-		\item Signaling
-	\end{itemize}
+	\item Physical
 	\item Chemical
-	\begin{itemize}
-		\item Energy
-		\item Activation
-	\end{itemize}
 \end{itemize}
+
+\subsubsection{Structural role of phosphate}
+
+\begin{itemize}
+	\item Nucleic Acid Backbones. RNA and DNA are linked by phospho-diester bonds--Figure \ref{fig:PhosphoDiesterBond}. The reason is linked to a few properties of phosphorus and its negative charge.
+	\begin{itemize}
+		\item it repels negatively charged nucleophiles--Figure \ref{fig:PhosphoDiesterBond1}, which would try to break the bond. So the bond is very stable.
+		\item it is tunable. If the biochemistry requires the bond to be broken, all it needs to do is position something positive nearby--Figure \ref{fig:PhosphoDiesterBond2}. This is also how nucleic acids are synthesized--Figure \ref{fig:PhosphoDiesterBond3}.
+		\item Once the strands have been formed, the charge has an important role in the structure of RNA duplexes. It turns out that the phosphates on either strand repel each other, helping to keep the duplex more linear, and the phosphates on each strand repel the other one. This has an important role for keeping the nucleic acid soluble, by keeping them from collapsing in on themselves--Figure \ref{fig:PhosphoDiesterBond3}.
+	\end{itemize}
+	\item Phospholipid Bilayers. These have a hydrophobic end and a hydrophilic end--Figure \ref{fig:PhosphoLipid1}, which typically has a phosphate and a positively charge portion. Because of this split between hydrophobic and hydrophilic, Phospholipids have a tendency to form two dimensional structures--Figure \ref{fig:PhosphoLipid2}. Zooming out we see the phospholipid layer forming the outer wall of a cell--Figure \ref{fig:PhosphoLipid3}.
+\end{itemize}
+
+
+
 
 \begin{figure}[H]
 	\caption{Nucleic Acid Backbones}
@@ -992,43 +1001,84 @@ See also \cite{lazcano20031953}
 \end{figure}
 \begin{figure}[H]
 	\caption{Phospholipids}\label{fig:PhosphoLipids}
-	
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\caption{Phospho Diester Bond}\label{fig:PhosphoLipid1} 
+		\caption{Phospholipid Bilayers, showing hydrophobic end and a hydrophilic end.}\label{fig:PhosphoLipid1} 
 		\includegraphics[width=\textwidth]{PhosphoLipid1}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
+	\end{subfigure}\;
+	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\caption{Repels negatively charged nucleophiles which might break bond, so very stable}\label{fig:PhosphoLipid2} 
+		\caption{ Because of this split between hydrophobic and hydrophilic, Phospholipids have a tendency to form two dimensional structures}\label{fig:PhosphoLipid2} 
 		\includegraphics[width=\textwidth]{PhosphoLipid2}
-	\end{subfigure}
-	
-	\begin{subfigure}[b]{0.45\textwidth}
+	\end{subfigure}\;
+	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\caption{Repulsion keeps \gls{gls:DNA} soluble and prevents collapse}\label{fig:PhosphoLipid3} 
+		\caption{Zooming out we see the phospholipid layer forming the outwr wall of a cell.}\label{fig:PhosphoLipid3} 
 		\includegraphics[width=\textwidth]{PhosphoLipid3}
 	\end{subfigure}
 	
 \end{figure}
 
-Why wouldn't you use phosphate?
+\subsubsection{Physical}
 
 \begin{itemize}
-	\item Scarce
-	\item Insoluble, unreactive
+	\item Compartmentalization--Figure \ref{fig:Compartmentalization}. By having this charged barrier, biochemistry can determine what can and cannot go into a cell. An example is the reaction of 2 3Carbon to form a 6Carbon--Figure \ref{fig:CompartmentalizationExample}. Although phosphorus isn't involved--the atoms are at the opposite ends of the two chains--the phosphoralization is preserved, and this is a motif. It keeps the sugars inside the cell.
+	\item Signaling
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{Phosphates allow physical Compartmentalization}\label{fig:Compartmentalization}
+	\begin{subfigure}[t]{0.35\textwidth}
+		\caption{Charged molecules can be stopped, but not uncharged}
+		\includegraphics[width=\textwidth]{Compartmentalization}
+	\end{subfigure}\;
+	\begin{subfigure}[t]{0.5\textwidth}
+		\caption{Example: Glycolosis and Gluconeogenesis }\label{fig:CompartmentalizationExample}
+		\includegraphics[width=\textwidth]{CompartmentalizationExample}
+	\end{subfigure}
+\end{figure}
+\subsubsection{Chemical}
+
+\begin{itemize}
+	\item Energy--Figure \ref{fig:ATP}. ''On any given day you turn over your body weight equivalent in ATP, the principal energy currency of the cell''--\cite{tornroth2008opening}. The reason is the energy of the Triphosphate can be used to transfer phosphate to other molecules--Figure \ref{fig:ATP1}
+	\item Activation Once you have tranferred phosphorous, it can be used as leading group to promote a reaction that would not otherwise be favourable--Figure \ref{fig:Synthesis-beta-5-phosphorybosylamine}. 
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{Adenosine Triphosphate}\label{fig:ATP}
+	\includegraphics[width=0.8\textwidth]{ATP}
+\end{figure}
+
+\begin{figure}[H]
+	\caption[ATP transferring phosphate to other molecules]{The energy of the Triphosphate can be used to transfer phosphate to other molecules. Phosphate can also be used in polymerization.}\label{fig:ATP1}
+	\includegraphics[width=0.8\textwidth]{ATP1}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Synthesis of $\beta$-5 phosphorybosylamine}\label{fig:Synthesis-beta-5-phosphorybosylamine}
+	\includegraphics[width=0.8\textwidth]{Synthesis-beta-5-phosphorybosylamine}
+\end{figure}
+
+
+\subsection{Why wouldn't you use phosphate?}
+
+\subsubsection{Phosphate is quite scarce\cite{keefe1995polyphosphates}}
+\begin{itemize}
+	\item Insoluble, un-reactive (tied up in minerals that are not available for life)
 	\item No polyphosphate minerals
 	\item One pyrophosphate mineral
 	\item Limited geochemical production of reactive forms
 \end{itemize}
-Open Questions
+\subsubsection{Open Questions--\cite{life2017special}}
 
 \begin{itemize}
-	\item When did life begin to use 	phosphate?
-	\item If not at the very beginning, what 	came before?
-	\item Where did early phosphate come 	from?
+	\item How did life begin to use phosphate?
+	\item When did life begin to use phosphate?
+	\item If not at the very beginning, what came before?\cite{goldford2017remnants}
+	\item Where did early phosphate come from?
 \end{itemize}
 
+See also \cite{westheimer1987nature}
 \section{Why Water? Why Carbon?}
 Figures \ref{fig:abundances1} and \ref{fig:abundances2} show abundances. Figure \ref{fig:minerals} shows elements likely to be locked up in minerals, Figure \ref{fig:volatiles} shows elements that are likely to be in atmosphere or sea. Bonds are important - carbon has 4.
 
