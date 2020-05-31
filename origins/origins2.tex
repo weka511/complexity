@@ -1393,31 +1393,45 @@ Once we have the bases we can add them to our Ribose--Figure \ref{fig:Nucleotide
 
 Chris Kempes
 
-What properties and processes are “easy” to obtain
-through physical dynamics alone?
+\subsection{Introduction}
+
+What properties and processes are ''easy'' to obtain through physical dynamics alone?
 \begin{itemize}
-	\item Limit cycle
-	\item Chaotic Dynamics
+	\item Limit cycle--Figure \ref{fig:LimitCycle};
+	\item Chaotic Dynamics--Figure \ref{fig:ChaoticDynamics}.
 \end{itemize}
 
+\begin{figure}[H]
+	\caption{Processes that are easy to obtain through physical dynamics alone}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Limit Cycle}\label{fig:LimitCycle}
+		\includegraphics[width=0.8\textwidth]{LimitCycle}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Chaotic Dynamics}\label{fig:ChaoticDynamics}
+		\includegraphics[width=\textwidth]{ChaoticDynamics}
+	\end{subfigure}
+\end{figure}
 
-\textit{Brusselator} has this abstract set of chemical reactions.
+\subsection{Simulation}
+
+We've been talking about how limit cycles and chaotic dynamics naturally lead to cycling behaviour. The \textit{Brusselator} is an abstract set of chemical reactions that exhibits the behaviour.
 
 \begin{align*}
-A \rightarrow& X\\
-B + X \rightarrow& Y + D\\
-2X + Y \rightarrow& 3X \\
-X \rightarrow& E
+	A \rightarrow& X\\
+	B + X \rightarrow& Y + D\\
+	2X + Y \rightarrow& 3X \\
+	X \rightarrow& E
 \end{align*}
 
 These can be described by differential equations:
 
 \begin{align*}
 \dot X =& k_1 A - k_2 B X + k_3 X^2 Y -k_4 X\\
-\dot Y =& k_2 B X -k_3 X^2 Y\text{, assuming that we hold concentrations of $A$ and $B$ constant in system.}  
+\dot Y =& k_2 B X -k_3 X^2 Y  
 \end{align*}
 
-We can non-dimensionalize:
+Assuming that we hold concentrations of $A$ and $B$ constant in system. We can non-dimensionalize:
 \begin{align*}
 \dot x =& a - b x +x^2 y -x\\
 \dot y =& bx - x^2 y\text{, which has steady state}\\
@@ -1428,33 +1442,59 @@ y^* =& \frac{b}{a}
 Steady state is unstable for $b>a^2+1$. 
 
 \begin{figure}[H]
-	\caption{Brusselator Stability}\label{fig:BrusselatorStability}
+	\caption[Brusselator Stability and Phase Plane]{Brusselator Stability. Figures \ref{fig:BrusselatorPhase1} through \ref{fig:BrusselatorPhase3} show the behaviour in the Phase Plane}\label{fig:BrusselatorStability}
 	
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
-		\caption{ $b\ll a^2+1$}\label{fig:BrusselatorSteadyState1} 
+		\caption{ $b\ll a^2+1$--stable}\label{fig:BrusselatorSteadyState1} 
 		\includegraphics[width=\textwidth]{BrusselatorSteadyState1}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
-		\caption{$b<a^2+1$, but close!}\label{fig:BrusselatorSteadyState2} 
+		\caption{$b<a^2+1$, but close! Transient exhibits oscillations, which ring down to steady state.}\label{fig:BrusselatorSteadyState2} 
 		\includegraphics[width=\textwidth]{BrusselatorSteadyState2}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.3\textwidth}
-	\centering
-	\caption{$b>a^2+1$}\label{fig:BrusselatorChaos} 
-	\includegraphics[width=\textwidth]{BrusselatorChaos}
-\end{subfigure}
-	
-	
+		\centering
+		\caption{$b>a^2+1$}\label{fig:BrusselatorChaos} 
+		\includegraphics[width=\textwidth]{BrusselatorChaos}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\caption{ $b\ll a^2+1$--stable}\label{fig:BrusselatorPhase1} 
+		\includegraphics[width=\textwidth]{BrusselatorPhase1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\caption{$b<a^2+1$, but close!}\label{fig:BrusselatorPhase2} 
+		\includegraphics[width=\textwidth]{BrusselatorPhase2}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\caption{$b>a^2+1$--Limit Cycle}\label{fig:BrusselatorPhase3} 
+		\includegraphics[width=\textwidth]{BrusselatorPhase3}
+	\end{subfigure}
 \end{figure}
+
+The dynamics is completely deterministic.
 
 See also \cite{ault2003dynamics}.
 
+A classic system for chaos is the Lorentz system. Depending on the parameters the Lorentz system can exhibit stability--Figure \ref{fig:Lorentz}, Limit Cycles, or chaos--Figure \ref{fig:ChaoticDynamics}.
 
+\begin{align*}
+	\dot{x} =& \sigma (y-x)\\
+	\dot{y} =& x(\rho-z)-y\\
+	\dot{z} =& xy-\beta x
+\end{align*}
+
+\begin{figure}[H]
+	\caption{Stable configuration of Lorentz System}\label{fig:Lorentz}
+	\includegraphics[width=0.8\textwidth]{Lorentz}
+\end{figure}
 % end of text 
 
-% glossary : may need command makeglossaries.exe origins1
+% glossary : may need command makeglossaries.exe origins2
 \printglossaries
 
 % bibliography goes here
