@@ -471,6 +471,116 @@ W \Delta Z =& \underbrace{Cov(Z,W)}_\text{selection} + \underbrace{E(W \Delta Z)
 
 How species acquire that perfection of structure? Because traits increase in value if they help individuals who have them survive, compared to those they don't.
 
+\section{Selection Theory}
+Chris Kempes
+
+\subsection{Quasispecies equation}
+\begin{itemize}
+	\item How do we think about evolution in a simple, mathematical way?
+	\item Start with binary Genome. One string can change into another via point mutations.
+\end{itemize}
+
+
+\begin{figure}[H]
+	\caption{Topology of genome -- point mutations represent edges}\label{fig:GenomeTopology} 
+	\includegraphics[width=0.9\textwidth]{GenomeTopology}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Fitness Landscape, showing maximum fitness.}\label{fig:FitnessLandscape} 
+	\includegraphics[width=0.9\textwidth]{FitnessLandscape}
+\end{figure}
+
+Introduce \emph{Quasispecies equation}.
+\begin{align*}
+\dot x_i =& f_i x_i - \phi x_i \text{, where $x_i$ is frequency of sequence $i$, $f_i$ is fitness, $\phi$ is death term.}\\
+\sum_{i=1}^{n} \dot x_i =& 0 \text{, assume constant population}\\
+\sum_{i=1}^{n} f_i - \phi \sum_{i=1}^{n} x_i =& 0\\
+\phi =& \sum_{i=1}^{n}x_i f_i\text{, since $\sum_{i=1}^{n}x_i = 1$}
+\end{align*}
+Hence $\phi$ is \emph{average fitness}. But this leaves out \emph{mutation!} Include $q_{ij}$, the probability of mutation from $i$ to $j$.
+\begin{align*}
+\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\text{, full quasispecies equation} 
+\end{align*}
+
+NB. See Figure \ref{fig:GenomeTopology} - point mutations much more likely than 2-point, etc.
+
+\subsection{What are the basic ways in which we think about evolution?}
+
+\begin{itemize}
+	\item How do we generalize evolution?
+	\item How do we use this to think about origins of life? 
+\end{itemize}
+
+\begin{figure}[H]
+	\caption[Simplify to \emph{Master Sequence}]{Simplify to \emph{Master Sequence}, $f_0$ with all less fit sequences lumped as $f_1$.}\label{fig:SteadyStateSolution} 
+	\includegraphics[width=0.9\textwidth]{SteadyStateSolution}
+\end{figure}
+
+\begin{align*}
+\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\\
+f_0 >&1, f_1 = 1\\
+q_{00} =& (1-u)^L \triangleq q\text{, where $u$ is mutation rate, $L$ = length of genome}\\
+q_{01} =& 1-q\\
+q_{11} =& 1\text{, $L$ is large, so 1$\rightarrow$1} \\
+q_{10} =& 0\text{, $1\nrightarrow0$}\\
+\phi =& \sum_{i=1}^{n}x_i f_i\\
+\text{Whence,}\\
+\dot{x_0}=&f_0 q x_0 - \phi x_0\text{,}\\
+\dot{x_1}=&f_0 (1-q) x_0 + x_1 -\phi x_1\text{, and}\\
+\phi =& f_0 x_0 + x_1 \text{. But} \\
+x_0 + x_1 =& 1\text{, so we have}\\
+\dot{x_0}=& x_0 \big[f_0 q -1 - x_0 (f_0 - 1)\big]
+\end{align*}
+Now we can look for a steady state solution:
+\begin{align*}
+x_0^* =& \frac{f_0 q - 1}{f_0 - 1}\text{, se we need}\\
+f_0q >& 1 \text{, if the master sequence is to persist. I.e.}\\
+u <& log(f_0)\\
+log(f_0) >& -L log(1-u)\text{. Now we assume $L<<1$, and find}\\
+u <& \frac{log(f_0)}{L}\text{, which is known as the \emph{Error Threshold.}} 
+\end{align*}
+The Error Threshold is the \emph{maximum mutation rate that allows for adaptive evolution!} NB: it is more sensitive to $L$ than to $f_0$.
+
+\subsection{Quasispecies and Error Catastrophe}
+
+Michael Lachmann
+
+We look at growth of types, e.g.:
+\begin{itemize}
+	\item Genome in population
+	\item Molecule in test-tube.
+\end{itemize}
+
+\begin{align*}
+\vec{x}^{\,t} =& W M \vec{x}\text{, where M represents mutations, W growth, e.g.}\\
+M =& \begin{bmatrix}
+1-\mu & 0\\
+\mu& 1
+\end{bmatrix}&
+\end{align*}
+Let us diagonalize WM
+\begin{align*}
+WM =& VDV^{-1}\\
+(WM)^t =& V D^t V^{-1}
+\end{align*}
+So $D^t$ is dominated by its largest eigenvalue.
+
+Figures \ref{fig:ErrorCatastrophe1} and \ref{fig:ErrorCatastrophe2} show that master sequence lost if mutation rate is too high. 
+\begin{figure}[H]
+	\caption{Hamming Distance.}\label{fig:ErrorCatastrophe1} 
+	\includegraphics[width=0.9\textwidth]{ErrorCatastrophe1}
+\end{figure}
+\begin{figure}[H]
+	\caption{Error Catastrophe.}\label{fig:ErrorCatastrophe2} 
+	\includegraphics[width=0.9\textwidth]{ErrorCatastrophe2}
+\end{figure}
+
+
+See \cite{eigen1978hypercycle}, \cite{eigen1988molecular}, \cite{eigen2002error}, \cite{crotty2001rna}, and \cite{stadtler2002fitness_landscapes}.
+
+See also \cite{wessner2010origins}
+
 
 \section{Artificial Life Theory}
 
