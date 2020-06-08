@@ -44,7 +44,11 @@
 
 \section{Introduction}
 
-This week is a more detailed look at biochemistry: biological information encoded in chemistry; the chemical processes that drive organization; and how life extracts energy from its environment.
+This week is a more detailed look at biochemistry:\begin{itemize}
+	\item  biological information encoded in chemistry;
+	\item the chemical processes that drive organization; and
+	\item  how life extracts energy from its environment.
+\end{itemize}
 
 \section{DNA as Information}
 Lecturer: Michael Lachmann, \gls{gls:SFI}
@@ -52,18 +56,54 @@ Lecturer: Michael Lachmann, \gls{gls:SFI}
 \subsection{DNA Modification}
 
 \begin{figure}[H]
-	\caption{The 4 Nucleotides in DNA}\label{fig:Nucleotides} 
+	\begin{center}
+		\caption[DNA, pairing G/C, A/T.]{DNA, pairing G/C, A/T. Mutation rate $10^{-10}$ errors per rep.base. }\label{fig:DNA}
+		\includegraphics[width=0.1\textwidth]{DNA}
+	\end{center}
+\end{figure}
+We kind of imagine that
+somehow evolution met this magic
+molecule that has all these properties
+and that's how life emerged,
+or that's how we got DNA -
+just from the properties of the DNA.
+And, in these two lectures,
+I want to show you
+that this is not such a right -
+a correct - view,
+and DNA is much more noisy
+than we think
+and the pairing and their bases
+are much more noisy than that.
+
+DNA has a mutation rate
+of ten to the minus ten errors
+per replication per base,
+which is a really amazingly low rate,
+and I will go a bit into
+how we get such a low rate
+in the next lecture.
+
+In this lecture, I want to talk about
+the bases,
+and for this I need to go a bit into
+the structure of nucleotides.
+
+
+\begin{figure}[H]
+	\caption[The 4 Nucleotides in DNA]{The 4 Nucleotides in DNA--two \glspl{gls:purine} and two \glspl{gls:pyrimidine}.}\label{fig:Nucleotides} 
 	\includegraphics[width=0.9\textwidth]{Nucleotides}
 \end{figure}
 
+Let's have a closer look at one base, adenine--Figure \ref{fig:NucleotideAdenine}.
 \begin{figure}[H]
-	\caption{A closer look at one Nucleotide, Adenine}\label{fig:NucleotideAdenine} 
+	\caption[A closer look at one Nucleotide, Adenine]{A closer look at one Nucleotide, Adenine. In this lecture we won't be very concerned with the backbone.}\label{fig:NucleotideAdenine} 
 	\includegraphics[width=0.9\textwidth]{NucleotideAdenine}
 \end{figure}
 
-Figure \ref{fig:NucleotideDNARNA} shows the only chemical difference between DNA and RNA: the extra OH group in RNA, which makes the molecule more active. DNA is more stable.
+Figure \ref{fig:NucleotideDNARNA} depicts Adenine in RNA. It shows the only \emph{chemical} difference between DNA and RNA: the extra OH group in RNA, which makes the molecule more active. DNA is more stable.
 \begin{figure}[H]
-	\caption{The only chemical difference between DNA and RNA }\label{fig:NucleotideDNARNA} 
+	\caption{The only chemical difference between DNA and RNA is the extra oxygen in RNA. It causes RNA to be more active then DNA.}\label{fig:NucleotideDNARNA} 
 	\includegraphics[width=0.9\textwidth]{NucleotideDNARNA}
 \end{figure}
 
@@ -74,36 +114,81 @@ RNA uses Uracil instead of Thymine--Figure \ref{fig:NucleotideDNARNAThymineUraci
 	\includegraphics[width=0.9\textwidth]{NucleotideDNARNAThymineUracil}
 \end{figure}
 
+Figure \ref{fig:NucleotidesCounting} shows the way atoms are numbered in purines and pyrimidines.\begin{itemize}
+	\item The counting on thymine
+	and the other pyrimidines is very simple.
+	It starts from the nitrogen
+	that's closest to the ribose--
+	connects to the ribose--
+	and goes towards the other nitrogen,
+	in this case counterclockwise --
+	simply one, two, three, four, five, six
+	around the ring.
+	\item The counting on the purines
+	is a bit more complicated.
+	In this case, you start from the nitrogen
+	that's furthest away from the ribose
+	and count again towards
+	the other nitrogen around the ring.
+	And, when you finish the first ring -
+	one, two, three, four, five, six -
+	you go in the other ring...
+	again to the nitrogen
+	that furthest away from the ribose -
+	seven, eight, nine -
+	towards the nitrogen
+	that's connected to the ribose.
+	So, we see that
+	thymine is a modified uracil,
+	5-methyluracil.
+\end{itemize}
 \begin{figure}[H]
 	\caption{Numbering of carbon atoms in purines and pyrimidines. }\label{fig:NucleotidesCounting} 
 	\includegraphics[width=0.9\textwidth]{NucleotidesCounting}
 \end{figure}
+
+There are many modified nucleobases.
+In Figure \ref{fig:ModifiedBases}, I just listed twelve.
+So, here we have the five
+that we know already -
+the four on the DNA and uracil.
+In addition, I listed a couple more
+modified bases that you can see -
+one is xanthine - and several others.
 
 \begin{figure}[H]
 	\caption{A selection of 12 modified bases}\label{fig:ModifiedBases} 
 	\includegraphics[width=0.9\textwidth]{ModifiedBases}
 \end{figure}
 
-\gls{gls:deamination}
 
-Fugre \ref{fig:ModifiedDNA_Nucleobases} shows the 44 Modified DNA nucleobases that have actually been observed.\cite{sood2019dnamod},\cite{sood2019dnamod_website}
+There is actually a database online
+that lists
+all the known DNA modifications
+that have been observed
+actually in nature.
+Figure \ref{fig:ModifiedDNA_Nucleobases} includes 44 modified nucleobases
+that actually have been observed
+on DNA in nature.
+In addition, there is the few gray ones
+that have been produced artificially.
 
 \begin{figure}[H]
-	\caption{Modified DNA nucleobases } \label{fig:ModifiedDNA_Nucleobases} 
+	\caption[Modified DNA nucleobases]{Modified DNA nucleobases \cite{sood2019dnamod},\cite{sood2019dnamod_website}} \label{fig:ModifiedDNA_Nucleobases} 
 	\includegraphics[width=0.9\textwidth]{ModifiedDNA_Nucleobases}
 \end{figure}
 
 The are a couple of bacteriophages, PBS1 and PBS2, that contain Uracil instead of thymine in their DNA\cite{hemphill1975bacteriophages}. Either the thymine has been replaced, or these phages are more primitive, and never used thymine.
 
-When people talk about methylation of DNA, they usually mean $5-methylcytosine$, Figure \ref{fig:5methylcytosine}, even though there are many other ways to do it
+When people talk about \gls{gls:methylation} of DNA, they usually mean 5-methylcytosine, Figure \ref{fig:5methylcytosine}, even though there are many other ways to do it
 \begin{figure}[H]
-	\caption{$5-methylcytosine$ } \label{fig:5methylcytosine} 
+	\caption{5-methylcytosine } \label{fig:5methylcytosine} 
 	\includegraphics[width=0.9\textwidth]{5-methylcytosine}
 \end{figure}
 
-Methylation tends to occur when C is followed by G. The methylated versions are replicated us unmethylated C, but there is an enzyme, \gls{gls:DNAmethyltransferase}, which performs methylation, as shown in Figure \ref{fig:5-methylcytosine-in-action}. This can carry epigenetic changes across cell divisions, and sometimes across generations. This is important as it means that a lever cell can "remember" that is comes from a liver cell.
+\Gls{gls:methylation} tends to occur when C is followed by G. The methylated versions are replicated as unmethylated C, but there is an enzyme, \gls{gls:DNAmethyltransferase}, which performs methylation, as shown in Figure \ref{fig:5-methylcytosine-in-action}. This can carry epigenetic changes across cell divisions, and sometimes across generations. This is important as it means that a liver cell can "remember" that it came from a liver cell.
 \begin{figure}[H]
-	\caption{Methylation tends to occur when C is followed by G } \label{fig:5-methylcytosine-in-action} 
+	\caption{Methylation tends to occur when C is followed by G and vice versa} \label{fig:5-methylcytosine-in-action} 
 	\includegraphics[width=0.9\textwidth]{5-methylcytosine-in-action}
 \end{figure}
 
