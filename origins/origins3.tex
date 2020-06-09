@@ -186,7 +186,7 @@ When people talk about \gls{gls:methylation} of DNA, they usually mean 5-methylc
 	\includegraphics[width=0.9\textwidth]{5-methylcytosine}
 \end{figure}
 
-\Gls{gls:methylation} tends to occur when C is followed by G. The methylated versions are replicated as unmethylated C, but there is an enzyme, \gls{gls:DNAmethyltransferase}, which performs methylation, as shown in Figure \ref{fig:5-methylcytosine-in-action}. This can carry epigenetic changes across cell divisions, and sometimes across generations. This is important as it means that a liver cell can "remember" that it came from a liver cell.
+\Gls{gls:methylation} tends to occur when C is followed by G--known as \gls{gls:CpG}. The methylated versions are replicated as unmethylated C, but there is an enzyme, \gls{gls:DNAmethyltransferase}, which performs methylation, as shown in Figure \ref{fig:5-methylcytosine-in-action}. This can carry epigenetic changes across cell divisions, and sometimes across generations. This is important as it means that a liver cell can "remember" that it came from a liver cell.
 \begin{figure}[H]
 	\caption{Methylation tends to occur when C is followed by G and vice versa} \label{fig:5-methylcytosine-in-action} 
 	\includegraphics[width=0.9\textwidth]{5-methylcytosine-in-action}
@@ -211,8 +211,11 @@ The values in Figure \ref{fig:ModifiedRNAdatabase} have been taken from the Modi
 \begin{itemize}
 	\item There are 44 known DNA modifications
 	\item There are 112 known RNA modifications
-	\item Many DNA modifications survive replication
-	\item Some are replicated themselves
+	\item Many of these modifications on the DNA
+	survive replication. So, the polymerase can go across them
+	with no problem.
+	\item Some are even replicated
+	with additional enzymes.
 	\item Some modifications are functional:\begin{itemize}
 		\item 5-methylcytosine (5mC)
 		\item N6-methadenine (6mA)
@@ -232,37 +235,207 @@ Where did the modifications come from? They could be fairly new, and we use them
 
 \subsection{DNA base pairing}\label{section:DNAasInfo2}
 
-Sarah added (forum):\begin{quote}
-	The idea of Information part2 is that the thermodynamics alone cannot explain our high fidelity replication, and that our system of replicating DNA uses several compounding mechanisms to generate robust replication. While the first organisms likely lacked this process as the machinery to do this is very sophisticated, it is interesting to consider how early organisms would have survived with less controlled replication. Perhaps indicating that early organisms relied on gene products that had lower specificity?
-\end{quote}
-
-What generates and maintains the pairing rules?  How does DNA keep Error rate down to  $10^{-10}$ errors per (replication*base pair)?
-
-Different pairing proceed at different rates--Figures \ref{fig:RightWrong} and \ref{fig:BindingDifference}, but this won't explain error rate of $10^{-10}$. At best it gives a factor of 60.
-
-\gls{gls:arrheniusequation}
+In this lecture we discuss how pairing is controlled, and how the error rates is kept so low--$10^{-10}$ per (replication*base pair). Usually base pairs are presented as in Figure \ref{fig:BasePairsML}: A only fits T, and C only fits G. Figure \ref{fig:BasePairsML_hydrogen_bonds} shows how this is implemented with hydrogen bonds.
 \begin{figure}[H]
-	\caption{Different pairing proceed at different rates} \label{fig:RightWrong} 
+		\caption{Base Pairs}
+		\begin{subfigure}[t]{0.4\textwidth}
+			\caption{A only fits T; C only fits G.}\label{fig:BasePairsML}
+			\includegraphics[width=\textwidth]{BasePairsML}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.55\textwidth}
+			\caption{Figure \ref{fig:BasePairsML} with hydrogen bonds}\label{fig:BasePairsML_hydrogen_bonds}
+			\includegraphics[width=\textwidth]{BasePairsML_hydrogen_bonds}
+		\end{subfigure}
+\end{figure}
+
+\subsubsection{DNA polymerase}
+I will just talk about DNA polymerase,
+which allows DNA replication
+to achieve a very low rate.
+Let's look at the reaction.
+So, usually in any reaction
+we have reactants and products.
+And, we're interested in the rate of going
+from reactants to products...
+or both rates going forward
+and backward.
+Rate going forward usually is calculated
+by the \gls{gls:arrheniusequation},
+which gives us $e^{-\frac{E_A}{kT}}$--Figure \ref{fig:ArrheniusEquation}.
+So, the higher the activation energy,
+the slower the reaction will be.
+
+\begin{figure}[H]
+	\caption{The rate of going from reactants to products}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Rate going forward is calculated using the Arrhenius Equation}\label{fig:ArrheniusEquation}
+		\includegraphics[width=\textwidth]{ArrheniusEquation}
+	\end{subfigure}
+	\;
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{If reactants and products
+			have different free energy,
+			then there's also $\Delta G$}\label{fig:ArrheniusEquation2}
+		\includegraphics[width=\textwidth]{ArrheniusEquation2}
+	\end{subfigure}
+	\;
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{The right base versus the wrong base: $\Delta \Delta G$ gives us the ratio of the products, of the right or the wrong type}\label{fig:ArrheniusEquation3}
+		\includegraphics[width=\textwidth]{ArrheniusEquation3}
+	\end{subfigure}
+\end{figure}
+
+
+Activation energy is actually often what enzymes affect and also, in this case, what DNA polymerase affects. The reverse reaction will include the same activation energy often--so you will have to go over the same peak. But sometimes, if reactants and products
+have different free energy, then there's also $\Delta G$--Figure \ref{fig:ArrheniusEquation2}. So, the activation energy going backwards includes another term,$\Delta G$, and the rate going back could be slower or faster. The ratio between the two gives us then $e^{-\frac{\Delta G}{kT}}$.
+
+And, when we have a case where we are talking about the right base versus the wrong base
+we're looking at two different reactions--Figure \ref{fig:ArrheniusEquation3}.
+And then, what we're interested in is the $\Delta \Delta G$,
+the difference between the two $\Delta G$s, which then gives us the ratio of the products
+of the right or the wrong type.
+
+There's also... one can also talk about
+the difference in the activation energy,
+which is important in DNA polymerase
+and we'll talk about later.
+But, at first, we'll start with
+this $\Delta \Delta G$.
+So, does $\Delta \Delta G$,
+the difference in binding strength--
+difference in the hydrogen bonds--Figure \ref{fig:RightWrong}--does this explain how well DNA bonds? When we start with a certain ratio of right to wrong, then the reaction amplifies the ratio by $e^\frac{\Delta \Delta G}{kT}$
+
+
+\begin{figure}[H]
+	\caption[Start with a certain ratio of right to wrong]{Start with a certain ratio of right to wrong; the reaction amplifies the ratio by $e^\frac{\Delta \Delta G}{kT}$} \label{fig:RightWrong} 
 	\includegraphics[width=0.9\textwidth]{RightWrong}
 \end{figure}
 
+The base pairing energy actually depends on the neighbour bases--Figure \ref{fig:BindingDifference}.
 \begin{figure}[H]
-	\caption{Difference in Binding Energies for different pairings} \label{fig:BindingDifference} 
-	\includegraphics[width=0.9\textwidth]{BindingDifference}
+	\caption{Difference in Binding Energies for different pairings}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{The biggest difference between right and wrong is about 2.5 Kcal/mole.} \label{fig:BindingDifference} 
+		\includegraphics[width=\textwidth]{BindingDifference}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Calculation of $e^\frac{\Delta \Delta G}{kT}$. First term in denominator is Avogadro's number.} \label{fig:BindingDifference1} 
+		\includegraphics[width=\textwidth]{BindingDifference1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Next step} \label{fig:BindingDifference2} 
+		\includegraphics[width=\textwidth]{BindingDifference2}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Result is about 60.} \label{fig:BindingDifference3} 
+		\includegraphics[width=\textwidth]{BindingDifference3}
+	\end{subfigure}
 \end{figure}
- Kinetic proofreading?
- 
- 
-\textbf{Bases encountered by DNA polymerase}
+
+Figure \ref{fig:BindingDifference3} shows that the biggest difference that we would get
+just out of the binding energies of base pairs would be a sixty-fold difference,
+which is very far from ten to the ten.
+
+How can we get a better effective rate? One proposal that was brought forth is something called ''kinetic proofreading,'' whereby having non-reversible reactions we can actually enhance this ratio. Let's see how it works. We insert an irreversible reaction--Figure \ref{fig:kineticProofreading2}--for an improvement of 3600. Still far from $10^{10}$, but closer.
+\begin{figure}[H]
+	\caption{Kinetic Proofreading}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Reversible reactions--still gives $e^\frac{\Delta \Delta G}{kT}$}\label{fig:kineticProofreading}
+		\includegraphics[width=0.8\textwidth]{kineticProofreading}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Insert irreversible reaction--$\big(e^\frac{\Delta \Delta G}{kT}\big)^2$}\label{fig:kineticProofreading2}
+		\includegraphics[width=0.8\textwidth]{kineticProofreading2}
+	\end{subfigure}
+\end{figure}
+In the case of DNA polymerase,
+this is probably not what happens
+because we don't know of
+really an irreversible reaction
+that uses energy
+that goes on...
+when we attach another base
+Instead, it seems that,
+in the case of DNA polymerase,
+what's important is not really
+the difference in the free energies,
+but instead, the shape of the bases.
+So, let's look at
+what DNA polymerase does. 
+Figure \ref{fig:WhatDNApolymeraseDoes} is a schematic representation
+of DNA polymerase.
+
+\begin{figure}[H]
+	\caption{Schematic representation
+		of DNA polymerase}\label{fig:WhatDNApolymeraseDoes}
+	\includegraphics[width=0.8\textwidth]{WhatDNApolymeraseDoes}
+\end{figure} 
+
+Usually, it's thought of as something
+like a hand with fingers and... thumb,
+and at the bottom you see
+some DNA polymerases have also
+the gray exonuclease activity
+that we'll talk about in a second.
+So, dNTP arrives - dNTP is a single base
+of the DNA
+that still has the three
+phosphates attached.
+These three phosphates carry the energy
+that will be used to bind this base.
+Going forward,
+it seems like the rate of attaching
+the right base pair to the wrong one
+is about ten to the four.
+Again, we don't exactly understand
+why that is.
+Now, once... that base attached,
+there's two possibilities
+in the case where there is
+an exonuclease activity.
+We can either go forward
+and attach the next base
+or we can a go a bit backward,
+move the double-stranded DNA
+to a single-stranded DNA,
+and move that to the exonuclease part
+where the last base pair is removed.
+And here, the wrong base pair
+actually has an advantage
+although this happens...
+a hundred times more
+when the wrong base pair is then
+than the right one.
+This together seems to give us a rate
+that is close to ten to the ten.
+We still don't exactly understand
+how all these steps work.
+But, it seems what we see is that,
+when the base is in the pocket
+of the DNA polymerase,
+it seems that the shape of the base
+and where its every atom is exactly,
+determines whether the reaction
+will go forward
+or go towards the exonuclease activity.
+So, the exact shape
+of the DNA polymerase -
+here I showed  polymerase.
+The exact shape is important.
+What kind of shapes
+will the DNA polymerase encounter?
+
+
+\subsubsection{Bases encountered by DNA polymerase}
 	
 \begin{itemize}
 	\item Watson Crick pairs (CATG)
 	\begin{itemize}
 		\item  Only ~50 fold enrichment from pairing
-		\item  Right base at 3-fold disadvantage
+		\item  Right base at 3-fold disadvantage (compared to the 3 wrong ones)
 		\item  4 shapes valid
 	\end{itemize}
-	\item  “Valid” W-C extra bases (C*,6mA)
+	\item  “Valid” Watson Crick q extra bases (C*,6mA)
 	\begin{itemize}
 		\item Additional shapes valid
 	\end{itemize}
@@ -277,8 +450,13 @@ Different pairing proceed at different rates--Figures \ref{fig:RightWrong} and \
 	\end{itemize}
 \end{itemize}
 
+\subsection{DNA mismatch repair}
 
-Summary – it isn’t in the bases
+A molecule called \emph{MutS} recognizes places where DNA doesn't have the right shape.
+
+
+
+\subsubsection{Summary – it isn’t in the bases}
 \begin{itemize}
 	\item Many bases exist in DNA/RNA
 	\begin{itemize}
@@ -289,6 +467,10 @@ Summary – it isn’t in the bases
 	\item Large number of specific/general repair enzymes
 \end{itemize}
 \cite{kunkel2004dna}
+
+Sarah added (forum):\begin{quote}
+	The idea of Information part2 is that the thermodynamics alone cannot explain our high fidelity replication, and that our system of replicating DNA uses several compounding mechanisms to generate robust replication. While the first organisms likely lacked this process as the machinery to do this is very sophisticated, it is interesting to consider how early organisms would have survived with less controlled replication. Perhaps indicating that early organisms relied on gene products that had lower specificity?
+\end{quote}
 
 \section{Water as a Driving Force for Organization}
 
