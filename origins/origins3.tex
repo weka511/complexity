@@ -8,7 +8,7 @@
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
-
+\DeclareUnicodeCharacter{2192}{~}
 %opening
 \title{
 	Notes from Origins of Life\\
@@ -348,64 +348,66 @@ How can we get a better effective rate? One proposal that was brought forth is s
 		\includegraphics[width=0.8\textwidth]{kineticProofreading2}
 	\end{subfigure}
 \end{figure}
-In the case of DNA polymerase,
-this is probably not what happens
-because we don't know of
-really an irreversible reaction
-that uses energy
-that goes on...
-when we attach another base
-Instead, it seems that,
-in the case of DNA polymerase,
-what's important is not really
-the difference in the free energies,
-but instead, the shape of the bases.
-So, let's look at
-what DNA polymerase does. 
-Figure \ref{fig:WhatDNApolymeraseDoes} is a schematic representation
-of DNA polymerase.
+
+In the case of DNA polymerase, this is probably not what happens because we don't know of
+really an irreversible reaction that uses energy that goes on when we attach another base.
+Instead, it seems that, in the case of DNA polymerase, what's important is not really the difference in the free energies, but instead, the shape of the bases.
+So, let's look at what DNA polymerase does. 
+Figure \ref{fig:WhatDNApolymeraseDoes0} is a schematic representation of DNA polymerase. Usually, it's thought of as something like a hand with fingers and... thumb, and at the bottom you see some DNA polymerases have also the gray exonuclease activity that we'll talk about in a second.
 
 \begin{figure}[H]
-	\caption{Schematic representation
-		of DNA polymerase}\label{fig:WhatDNApolymeraseDoes}
-	\includegraphics[width=0.8\textwidth]{WhatDNApolymeraseDoes}
+	\caption{Schematic representation of DNA polymerase}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Usually, it's thought of as something like a hand with fingers and... thumb}\label{fig:WhatDNApolymeraseDoes0}
+		\includegraphics[width=0.8\textwidth]{WhatDNApolymeraseDoes0}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{dNTP arrives - dNTP is a single base of the DNA that still has the three phosphates attached}\label{fig:WhatDNApolymeraseDoes1}
+		\includegraphics[width=0.8\textwidth]{WhatDNApolymeraseDoes1}
+	\end{subfigure}
 \end{figure} 
 
-Usually, it's thought of as something
-like a hand with fingers and... thumb,
-and at the bottom you see
-some DNA polymerases have also
-the gray exonuclease activity
-that we'll talk about in a second.
-So, dNTP arrives - dNTP is a single base
-of the DNA
-that still has the three
-phosphates attached.
-These three phosphates carry the energy
-that will be used to bind this base.
-Going forward,
-it seems like the rate of attaching
+
+In Figure \ref{fig:WhatDNApolymeraseDoes1}, dNTP arrives - dNTP is a single base of the DNA that still has the three phosphates attached.
+These three phosphates carry the energy that will be used to bind this base.
+Going forward, it seems like the rate of attaching
 the right base pair to the wrong one
-is about ten to the four.
-Again, we don't exactly understand
+is about ten to the four. Again, we don't exactly understand
 why that is.
+
 Now, once... that base attached,
 there's two possibilities
 in the case where there is
 an exonuclease activity.
 We can either go forward
-and attach the next base
+and attach the next base--Figure \ref{fig:WhatDNApolymeraseDoes2}--
 or we can a go a bit backward,
 move the double-stranded DNA
 to a single-stranded DNA,
 and move that to the exonuclease part
-where the last base pair is removed.
+where the last base pair is removed--Figure \ref{fig:WhatDNApolymeraseDoes}.
 And here, the wrong base pair
 actually has an advantage
 although this happens...
 a hundred times more
 when the wrong base pair is then
 than the right one.
+\begin{figure}[H]
+	\caption{We can  go forward
+		and attach the next base}\label{fig:WhatDNApolymeraseDoes2}
+	\includegraphics[width=0.8\textwidth]{WhatDNApolymeraseDoes2}
+\end{figure} 
+
+\begin{figure}[H]
+	\caption{or we can a go a bit backward,
+		move the double-stranded DNA
+		to a single-stranded DNA,
+		and move that to the exonuclease part
+		where the last base pair is removed.}\label{fig:WhatDNApolymeraseDoes}
+	\includegraphics[width=0.8\textwidth]{WhatDNApolymeraseDoes}
+\end{figure} 
+
+
 This together seems to give us a rate
 that is close to ten to the ten.
 We still don't exactly understand
@@ -431,15 +433,14 @@ will the DNA polymerase encounter?
 \begin{itemize}
 	\item Watson Crick pairs (CATG)
 	\begin{itemize}
-		\item  Only ~50 fold enrichment from pairing
+		\item  Binding energy gives ~50 fold enrichment
 		\item  Right base at 3-fold disadvantage (compared to the 3 wrong ones)
-		\item  4 shapes valid
 	\end{itemize}
-	\item  “Valid” Watson Crick q extra bases (C*,6mA)
+	\item  ''Valid'' Watson Crick q extra bases (C*,6mA)--so DNA polymerase need to recognize 6 bases, not just 4.
 	\begin{itemize}
 		\item Additional shapes valid
 	\end{itemize}
-	\item NTP from RNA
+	\item \gls{gls:NTP} from RNA
 	\begin{itemize}
 		\item Frequent
 		\item Shape recognition
@@ -450,10 +451,10 @@ will the DNA polymerase encounter?
 	\end{itemize}
 \end{itemize}
 
-\subsection{DNA mismatch repair}
+\subsubsection{DNA mismatch repair}
 
 A molecule called \emph{MutS} recognizes places where DNA doesn't have the right shape.
-
+Repair mechanisms depend on the fact that information is duplicated, so if you know which stand is original you can fix the copy.
 
 
 \subsubsection{Summary – it isn’t in the bases}
