@@ -9,6 +9,8 @@
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
 \DeclareUnicodeCharacter{2192}{~}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
 %opening
 \title{
 	Notes from Origins of Life\\
@@ -41,6 +43,7 @@
 \tableofcontents
 
 \listoffigures
+\listoftables
 
 \section{Introduction}
 
@@ -50,14 +53,14 @@ This week is a more detailed look at biochemistry:\begin{itemize}
 	\item  how life extracts energy from its environment.
 \end{itemize}
 
-\section{\gls{gls:DNA} as Information}
+\section{DNA as Information}
 Lecturer: Michael Lachmann, \gls{gls:SFI}
 
-\subsection{\gls{gls:DNA} Modification}
+\subsection{DNA Modification}
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[\gls{gls:DNA}, pairing G/C, A/T.]{\gls{gls:DNA}, pairing G/C, A/T. Mutation rate $10^{-10}$ errors per rep.base. }\label{fig:DNA}
+		\caption[DNA, pairing G/C, A/T.]{DNA, pairing G/C, A/T. Mutation rate $10^{-10}$ errors per rep.base. }\label{fig:DNA}
 		\includegraphics[width=0.1\textwidth]{DNA}
 	\end{center}
 \end{figure}
@@ -103,7 +106,7 @@ Let's have a closer look at one base, adenine--Figure \ref{fig:NucleotideAdenine
 
 Figure \ref{fig:NucleotideDNARNA} depicts Adenine in \gls{gls:RNA}. It shows the only \emph{chemical} difference between \gls{gls:DNA} and \gls{gls:RNA}: the extra OH group in \gls{gls:RNA}, which makes the molecule more active. \gls{gls:DNA} is more stable.
 \begin{figure}[H]
-	\caption{The only chemical difference between \gls{gls:DNA} and \gls{gls:RNA} is the extra oxygen in \gls{gls:RNA}. It causes \gls{gls:RNA} to be more active then \gls{gls:DNA}.}\label{fig:NucleotideDNARNA} 
+	\caption[Chemical difference between DNA and RNA is the extra oxygen]{The only chemical difference between \gls{gls:DNA} and \gls{gls:RNA} is the extra oxygen in \gls{gls:RNA}. It causes \gls{gls:RNA} to be more active then \gls{gls:DNA}.}\label{fig:NucleotideDNARNA} 
 	\includegraphics[width=0.9\textwidth]{NucleotideDNARNA}
 \end{figure}
 
@@ -115,32 +118,14 @@ RNA uses Uracil instead of Thymine--Figure \ref{fig:NucleotideDNARNAThymineUraci
 \end{figure}
 
 Figure \ref{fig:NucleotidesCounting} shows the way atoms are numbered in purines and pyrimidines.\begin{itemize}
-	\item The counting on thymine
-	and the other pyrimidines is very simple.
-	It starts from the nitrogen
-	that's closest to the ribose--
-	connects to the ribose--
-	and goes towards the other nitrogen,
-	in this case counterclockwise --
-	simply one, two, three, four, five, six
-	around the ring.
-	\item The counting on the purines
-	is a bit more complicated.
-	In this case, you start from the nitrogen
-	that's furthest away from the ribose
-	and count again towards
-	the other nitrogen around the ring.
-	And, when you finish the first ring -
-	one, two, three, four, five, six -
-	you go in the other ring...
-	again to the nitrogen
-	that furthest away from the ribose -
-	seven, eight, nine -
-	towards the nitrogen
-	that's connected to the ribose.
-	So, we see that
-	thymine is a modified uracil,
-	5-methyluracil.
+	\item The counting on thymine and the other pyrimidines is very simple.
+	It starts from the nitrogen that's closest to the ribose--connects to the ribose--
+	and goes towards the other nitrogen, in this case counterclockwise --
+	simply one, two, three, four, five, six around the ring.
+	\item The counting on the purines is a bit more complicated.
+	In this case, you start from the nitrogen that's furthest away from the ribose 	and count again towards the other nitrogen around the ring.
+	And, when you finish the first ring -one, two, three, four, five, six - you go in the other ring... 	again to the nitrogen 	that furthest away from the ribose - 	seven, eight, nine - towards the nitrogen that's connected to the ribose.
+	So, we see that thymine is a modified uracil--5-methyluracil.
 \end{itemize}
 \begin{figure}[H]
 	\caption{Numbering of carbon atoms in purines and pyrimidines. }\label{fig:NucleotidesCounting} 
@@ -148,13 +133,9 @@ Figure \ref{fig:NucleotidesCounting} shows the way atoms are numbered in purines
 \end{figure}
 
 There are many modified nucleobases.
-In Figure \ref{fig:ModifiedBases}, I just listed twelve.
-So, here we have the five
-that we know already -
-the four on the DNA and uracil.
-In addition, I listed a couple more
-modified bases that you can see -
-one is xanthine - and several others.
+In Figure \ref{fig:ModifiedBases}, I just listed twelve. So, here we have the five
+that we know already - the four on the DNA and uracil.
+In addition, I listed a couple more modified bases that you can see - one is xanthine - and several others.
 
 \begin{figure}[H]
 	\caption{A selection of 12 modified bases}\label{fig:ModifiedBases} 
@@ -399,11 +380,7 @@ than the right one.
 \end{figure} 
 
 \begin{figure}[H]
-	\caption{or we can a go a bit backward,
-		move the double-stranded DNA
-		to a single-stranded DNA,
-		and move that to the exonuclease part
-		where the last base pair is removed.}\label{fig:WhatDNApolymeraseDoes}
+	\caption[Going backward a bit]{We can a go a bit backward, move the double-stranded DNA to a single-stranded DNA, and move that to the exonuclease part where the last base pair is removed.}\label{fig:WhatDNApolymeraseDoes}
 	\includegraphics[width=0.8\textwidth]{WhatDNApolymeraseDoes}
 \end{figure} 
 
@@ -541,10 +518,26 @@ Sarah added (forum):
 
 Lecturer: Sarah Maurer
 
-\begin{figure}[H]
-	\caption{Chemical Energetics} \label{fig:ChemicalEnergetics} 
-	\includegraphics[width=0.9\textwidth]{ChemicalEnergetics}
-\end{figure}
+To better understand how lining organisms are organized we first need to understand the thermodynamics of aggregation behaviours, and to do this we need to use the equation for thermodynamic free energy (\ref{eq:gibbs}).
+\begin{align*}
+	\Delta G =& \Delta H - T \Delta S \text{, where}\numberthis \label{eq:gibbs}\\
+	G =& \text{ Gibbs Free Energy}\\
+	H =& \text{ Enthalpy}\\
+	S =& \text{Entropy}
+\end{align*}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Chemical Energetics}\label{tab:chemical:energetics}
+		\begin{tabular}[pos]{|c|c|c|}\hline
+			Favourable&Unfavourable/spontaneous&Equilibrium/non-spontaneous\\\hline
+			$\Delta G<0$; exergonic&$\Delta G>0$;endergonic&$\Delta G=0$\\\hline
+			$\Delta H<0$; exothermic&$\Delta H>0$endothermic&\\\hline
+			$\Delta S>0$;less ordered&$\Delta S<0$; more ordered&\\\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
 
 \begin{itemize}
 	\item  Enthalpy is ”heat” energy, generally stored in bonds
@@ -560,21 +553,21 @@ Lecturer: Sarah Maurer
 	\includegraphics[width=0.9\textwidth]{EntropySugar}
 \end{figure}
 
-Very polar bonds can form hydrogen bonds (H-bonds): only F-H, N-H, or O-H, with
+The enthalpic contribution from water arises from hydrogen bonds, which are not like covalent bonds. They are considered to be intermolecular bonds, so they occur between molecules. They are transient, but they are very strong. They can only form because water is polar. In Figure \ref{fig:EnthalpyHydrogenBonds} the oxygen is negative, and the hydrogen positive. Figure \ref{fig:EnthalpyHydrogenBonds1} shows two water molecules bounds by a hydrogen bond. Very polar bonds can form hydrogen bonds (H-bonds): only F-H, N-H, or O-H, with
 N, F or O.
 
 \begin{figure}[H]
 	\centering
-		\caption{Very polar bonds can form hydrogen bonds} \label{fig:EnthalpyHydrogenBonds} 
+		\caption{Very polar bonds can form hydrogen bonds} 
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=.4\linewidth]{EnthalpyHydrogenBonds}
-		\caption{Oxygen accepts electrons from Hydrogen}
+		\caption{Oxygen accepts electrons from Hydrogen}\label{fig:EnthalpyHydrogenBonds} 
 	\end{subfigure}%
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=.4\linewidth]{EnthalpyHydrogenBondMore}
-		\caption{Positive ends bind to negative}
+		\caption{Positive ends bind to negative}\label{fig:EnthalpyHydrogenBonds1} 
 	\end{subfigure}
 \end{figure}
 
@@ -670,9 +663,7 @@ Water also organizes material through Protein Folding, Figure \ref{fig:ProteinFo
 	\item Is water necessary for life?
 \end{itemize}
 
-Even in the RNA world, where RNA can fold and catalyze reaction, folding would be driven by entropy in part. Water is only solvent that has this high entropy. Ammonia can form hydrogen bonds, but they aren't as strong as water. Maybe water is the favoured solvent for life everywhere.
-
-\cite{ball2017water}
+Even in the RNA world, where RNA can fold and catalyze reaction, folding would be driven by entropy in part. Water is only solvent that has this high entropy. Ammonia can form hydrogen bonds, but they aren't as strong as water. Maybe water is the favoured solvent for life everywhere--\cite{ball2017water}.
 
 \section{Kinetic vs. Thermodynamics – Assembly Constraints}
 
