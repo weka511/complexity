@@ -50,14 +50,14 @@ This week is a more detailed look at biochemistry:\begin{itemize}
 	\item  how life extracts energy from its environment.
 \end{itemize}
 
-\section{DNA as Information}
+\section{\gls{gls:DNA} as Information}
 Lecturer: Michael Lachmann, \gls{gls:SFI}
 
-\subsection{DNA Modification}
+\subsection{\gls{gls:DNA} Modification}
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[DNA, pairing G/C, A/T.]{DNA, pairing G/C, A/T. Mutation rate $10^{-10}$ errors per rep.base. }\label{fig:DNA}
+		\caption[\gls{gls:DNA}, pairing G/C, A/T.]{\gls{gls:DNA}, pairing G/C, A/T. Mutation rate $10^{-10}$ errors per rep.base. }\label{fig:DNA}
 		\includegraphics[width=0.1\textwidth]{DNA}
 	\end{center}
 \end{figure}
@@ -65,18 +65,18 @@ We kind of imagine that
 somehow evolution met this magic
 molecule that has all these properties
 and that's how life emerged,
-or that's how we got DNA -
-just from the properties of the DNA.
+or that's how we got \gls{gls:DNA} -
+just from the properties of the \gls{gls:DNA}.
 And, in these two lectures,
 I want to show you
 that this is not such a right -
 a correct - view,
-and DNA is much more noisy
+and \gls{gls:DNA} is much more noisy
 than we think
 and the pairing and their bases
 are much more noisy than that.
 
-DNA has a mutation rate
+\gls{gls:DNA} has a mutation rate
 of ten to the minus ten errors
 per replication per base,
 which is a really amazingly low rate,
@@ -91,7 +91,7 @@ the structure of nucleotides.
 
 
 \begin{figure}[H]
-	\caption[The 4 Nucleotides in DNA]{The 4 Nucleotides in DNA--two \glspl{gls:purine} and two \glspl{gls:pyrimidine}.}\label{fig:Nucleotides} 
+	\caption[The 4 Nucleotides in \gls{gls:DNA}]{The 4 Nucleotides in \gls{gls:DNA}--two \glspl{gls:purine} and two \glspl{gls:pyrimidine}.}\label{fig:Nucleotides} 
 	\includegraphics[width=0.9\textwidth]{Nucleotides}
 \end{figure}
 
@@ -101,9 +101,9 @@ Let's have a closer look at one base, adenine--Figure \ref{fig:NucleotideAdenine
 	\includegraphics[width=0.9\textwidth]{NucleotideAdenine}
 \end{figure}
 
-Figure \ref{fig:NucleotideDNARNA} depicts Adenine in RNA. It shows the only \emph{chemical} difference between DNA and RNA: the extra OH group in RNA, which makes the molecule more active. DNA is more stable.
+Figure \ref{fig:NucleotideDNARNA} depicts Adenine in \gls{gls:RNA}. It shows the only \emph{chemical} difference between \gls{gls:DNA} and \gls{gls:RNA}: the extra OH group in \gls{gls:RNA}, which makes the molecule more active. \gls{gls:DNA} is more stable.
 \begin{figure}[H]
-	\caption{The only chemical difference between DNA and RNA is the extra oxygen in RNA. It causes RNA to be more active then DNA.}\label{fig:NucleotideDNARNA} 
+	\caption{The only chemical difference between \gls{gls:DNA} and \gls{gls:RNA} is the extra oxygen in \gls{gls:RNA}. It causes \gls{gls:RNA} to be more active then \gls{gls:DNA}.}\label{fig:NucleotideDNARNA} 
 	\includegraphics[width=0.9\textwidth]{NucleotideDNARNA}
 \end{figure}
 
@@ -362,13 +362,13 @@ Figure \ref{fig:WhatDNApolymeraseDoes0} is a schematic representation of DNA pol
 		\includegraphics[width=0.8\textwidth]{WhatDNApolymeraseDoes0}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\textwidth}
-		\caption{dNTP arrives - dNTP is a single base of the DNA that still has the three phosphates attached}\label{fig:WhatDNApolymeraseDoes1}
+		\caption{\gls{gls:dNTP} arrives - dNTP is a single base of the DNA that still has the three phosphates attached}\label{fig:WhatDNApolymeraseDoes1}
 		\includegraphics[width=0.8\textwidth]{WhatDNApolymeraseDoes1}
 	\end{subfigure}
 \end{figure} 
 
 
-In Figure \ref{fig:WhatDNApolymeraseDoes1}, dNTP arrives - dNTP is a single base of the DNA that still has the three phosphates attached.
+In Figure \ref{fig:WhatDNApolymeraseDoes1}, \gls{gls:dNTP} arrives - dNTP is a single base of the DNA that still has the three phosphates attached.
 These three phosphates carry the energy that will be used to bind this base.
 Going forward, it seems like the rate of attaching
 the right base pair to the wrong one
@@ -443,7 +443,7 @@ will the DNA polymerase encounter?
 	\item \gls{gls:NTP} from RNA
 	\begin{itemize}
 		\item Frequent
-		\item Shape recognition
+		\item Shape recognition--DNA polymerase has a pocket that doesn't alow RNA to get in.
 	\end{itemize}
 	\item “Nonstandard” bases
 	\begin{itemize}
@@ -453,24 +453,88 @@ will the DNA polymerase encounter?
 
 \subsubsection{DNA mismatch repair}
 
-A molecule called \emph{MutS} recognizes places where DNA doesn't have the right shape.
-Repair mechanisms depend on the fact that information is duplicated, so if you know which stand is original you can fix the copy.
+A molecule called \emph{MutS} recognizes places where DNA doesn't have the right shape. Mistakes can be made by DNA polymerase, and UV and other external sources can interfere.
+\gls{gls:MMR} depends on a molecule, MutS, which looks for places where the DNA doesn't look right, e.g. it has a nick. Because the wrong base was inserted,
+it recognized these places.
+And then, another molecule, MutL,recognizes -- at least in prokaryotes --a location where
+there's a CTAG with 6mA, so a methylated amine--Figure \ref{fig:DNA-MMR}.
+When DNA replicates, this methylation is not replicated,
+and therefore it's possible to recognize where the old strand is the new strand --
+the new strand will not have the A methylated.
+And then, at that place... the new strand is nicked,
+this whole new strand is removed up to the mismatch,
+and then repolymerized by DNA polymerase -
+hopefully without an error. So, this is one thing that removes errors
+mainly during DNA replication.
 
 
-\subsubsection{Summary – it isn’t in the bases}
+\begin{figure}[H]
+	\caption{MutL recognizes a location where there's a CTAG with 6mA,}\label{fig:DNA-MMR}
+	\includegraphics[width=0.8\textwidth]{DNA-MMR}
+\end{figure}
+
+Two other mechanisms are
+direct reversal and base excision.
+So, you see here 24 bases that are
+pretty much specifically recognized
+for these mechanisms.
+\begin{itemize}
+	\item Direct reversal --Figure \ref{fig:MMR1} --you reverse exactly the high frequency errors
+	that can be introduced by chemistry or UV
+	and you revert them to the original base.
+    \item Bases excision repair --Figure \ref{fig:MMR2}--you remove again a recognized error, and then that - or a region around it - 	and then DNA polymerase replicates again.
+\end{itemize}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Direct Reversal]{Direct Reversal: you reverse exactly the high frequency errors 	that can be introduced by chemistry or UV}\label{fig:MMR1}
+		\includegraphics[width=0.8\textwidth]{MMR1}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Base excision repair: you remove again a recognized error}\label{fig:MMR2}
+		\includegraphics[width=0.8\textwidth]{MMR2}
+	\end{center}
+\end{figure}
+
+What we see in all these mechanisms
+is that DNA actually does
+error corrections through the fact that
+every bit of information appears twice
+on one strand and on the other strand.
+So, if you know -
+in the case of MutS -
+if you know which strand is old
+and which is new,
+you can copy the more correct information
+that doesn't have replication error again.
+And, in these cases of reversal
+or base excision,
+again, you recognize the error
+and through that are able to correct.
+So, the error correction here
+uses the fact that
+DNA is double-stranded.
+
+\subsubsection{Summary}
+ It isn’t the bases that make DNA so amazing.
 \begin{itemize}
 	\item Many bases exist in DNA/RNA
 	\begin{itemize}
 		\item Damage, modification, insertion
 	\end{itemize}
-	\item dNTP concentration is controlled
+	\item \gls{gls:dNTP} concentration is controlled
 	\item DNA polymerase controls	pairing
 	\item Large number of specific/general repair enzymes
 \end{itemize}
-\cite{kunkel2004dna}
 
-Sarah added (forum):\begin{quote}
-	The idea of Information part2 is that the thermodynamics alone cannot explain our high fidelity replication, and that our system of replicating DNA uses several compounding mechanisms to generate robust replication. While the first organisms likely lacked this process as the machinery to do this is very sophisticated, it is interesting to consider how early organisms would have survived with less controlled replication. Perhaps indicating that early organisms relied on gene products that had lower specificity?
+It is only these mechanisms, working together, that give rise to the high fidelity of DNA--\cite{kunkel2004dna}
+
+Sarah added (forum):
+\begin{quote}
+	The idea of Section \ref{section:DNAasInfo2} is that the thermodynamics alone cannot explain our high fidelity replication, and that our system of replicating DNA uses several compounding mechanisms to generate robust replication. While the first organisms likely lacked this process as the machinery to do this is very sophisticated, it is interesting to consider how early organisms would have survived with less controlled replication. Perhaps indicating that early organisms relied on gene products that had lower specificity?
 \end{quote}
 
 \section{Water as a Driving Force for Organization}
