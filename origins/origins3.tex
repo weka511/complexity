@@ -53,8 +53,7 @@ This week is a more detailed look at biochemistry:\begin{itemize}
 	\item  how life extracts energy from its environment.
 \end{itemize}
 
-\section{DNA as Information}
-Lecturer: Michael Lachmann, \gls{gls:SFI}
+\section[DNA as Information]{DNA as Information--Michael Lachmann}
 
 \subsection{DNA Modification}
 
@@ -497,11 +496,10 @@ Sarah added (forum):
 	The idea of Section \ref{section:DNAasInfo2} is that the thermodynamics alone cannot explain our high fidelity replication, and that our system of replicating DNA uses several compounding mechanisms to generate robust replication. While the first organisms likely lacked this process as the machinery to do this is very sophisticated, it is interesting to consider how early organisms would have survived with less controlled replication. Perhaps indicating that early organisms relied on gene products that had lower specificity?
 \end{quote}
 
-\section{Water as a Driving Force for Organization}
+\section[Water as a Driving Force for Organization]{Water as a Driving Force for Organization--Sarah Maurer
+}
 
-Lecturer: Sarah Maurer
-
-To better understand how lining organisms are organized we first need to understand the thermodynamics of aggregation behaviours, and to do this we need to use the equation for thermodynamic free energy (\ref{eq:gibbs}).
+To better understand how living organisms are organized we first need to understand the thermodynamics of aggregation behaviours, and to do this we need to use the equation for thermodynamic free energy (\ref{eq:gibbs}).
 \begin{align*}
 	\Delta G =& \Delta H - T \Delta S \text{, where}\numberthis \label{eq:gibbs}\\
 	G =& \text{ Gibbs Free Energy}\\
@@ -648,11 +646,7 @@ Water also organizes material through Protein Folding, Figure \ref{fig:ProteinFo
 
 Even in the RNA world, where RNA can fold and catalyze reaction, folding would be driven by entropy in part. Water is only solvent that has this high entropy. Ammonia can form hydrogen bonds, but they aren't as strong as water. Maybe water is the favoured solvent for life everywhere--\cite{ball2017water}.
 
-\section{Kinetic vs. Thermodynamics – Assembly Constraints}
-
-Lecturer: Chris Butch
-
-Definitions:
+\section[Kinetic vs. Thermodynamics – Assembly Constraints]{Kinetic vs. Thermodynamics – Assembly Constraints-- Chris Butch}
 
 \begin{itemize}
 	\item \gls{gls:kinetics}  \glsdesc{gls:kinetics}
@@ -706,9 +700,7 @@ This is also a question for origins of life--Figure \ref {fig:EnergyForOrigin}. 
 
 See \cite{pross2017and,semenov2016autocatalytic,pross2008can,pross2005emergence}.
 
-\section{Chemical Configurations: Proteins and DNA}
-
-Lecturer: Sarah Maurer
+\section[Chemical Configurations: Proteins and DNA]{Chemical Configurations: Proteins and DNA--Sarah Maurer}
 
 Figure \ref{fig:PrebioticMix} shows the chemicals observed in a Miller-Urey type experiment after \cite{podlech2001origin}. This list isn't what you'd expect to observe if you chopped up a modern cell.
 \begin{figure}[H]
@@ -902,9 +894,7 @@ Would it choose these twice?
 
 \section{Early Metabolisms}
 
-\subsection{Introduction}
-
-Lecturer: Kate Adamala
+\subsection[Introduction]{Introduction--Kate Adamala}
 
 All life comes from a starting population of cells--\gls{gls:LUCA}. These cells were the ancestors of all subsequent life, their metabolism shared similarities. We know that the earliest metabolism shared certain features(Figure \ref {fig:LUCA_cell}):
 \begin{itemize}
@@ -951,42 +941,60 @@ We don't know what the lipid synthesis pathway was in the earliest organisms, bu
 
 See also \cite{weiss2016physiology,bar2011survey,fuchs2011alternative}.
 
-\subsection{Energetics}
-
-Lecturer: Sarah Maurer
+\subsection[Energetics]{Energetics--Sarah Maurer}
 
 We look at early metabolisms, and how they evolved into those we see today. 
-Figure \ref{fig:ClassificationEnergyGeneration} shows various mechanisms for generating organisms. Chemoautotrophs convert $CO_2$ to reduced carbon; this lecture at the evolution of chemoautotrophy. We need to discuss redox reactions, as chemoautotrophs need to move electrons around.
+Figure \ref{fig:ClassificationEnergyGeneration} shows various mechanisms for generating organisms.
+\begin{itemize}
+	\item \Glspl{gls:chemotroph}--organisms that survive on chemical energy.
+	\begin{itemize}
+		\item \Glspl{gls:chemoautotroph}--carbon dioxide serves as our carbon source.
+		\item \Glspl{gls:chemoheterotroph}--depend on an electron acceptor that is usually oxygen.
+	\end{itemize}
+	\item \Glspl{gls:phototroph}--organisms that survive on chemical energy.
+	\begin{itemize}
+		\item \Glspl{gls:photoautotroph}
+		\item \Glspl{gls:photoheterotroph}
+	\end{itemize}
+\end{itemize}
+
+ \Glspl{gls:chemoautotroph} convert $CO_2$ to reduced carbon; this lecture at the evolution of chemoautotrophy. We need to discuss redox reactions, as \glspl{gls:chemoautotroph} need to move electrons around.
 
 \begin{figure}[H]
 	\caption{Classification of energy generation in organisms} \label{fig:ClassificationEnergyGeneration} 
 	\includegraphics[width=0.9\textwidth]{ClassificationEnergyGeneration}
 \end{figure}
 
-We'll think of primordial respiration as a process of electron transfer from sources, such as $Fe^{2+}$ to acceptors--Figure \ref{fig:EvolutionMetabolism}\footnote{In Figure \ref{fig:EvolutionMetabolism}, \textit{retinal} should read \textit{retinol}.}. Free Oxygen would not have been available. Primordial respiration serves as the bases for all later respirations, e.g. the branch for chlorophyll. Later organisms evolve a way of using oxygen as it becomes free.
+We'll think of primordial respiration as a process of electron transfer from sources, such as $Fe^{2+}$ to acceptors--Figure \ref{fig:EvolutionMetabolism}. Free Oxygen would not have been available. Primordial respiration serves as the bases for all later respirations, e.g. the branch for chlorophyll. Later organisms evolve a way of using oxygen as it becomes free.
 \begin{figure}[H]
-	\caption{Evolution of Metabolism} \label{fig:EvolutionMetabolism} 
-	\includegraphics[width=0.9\textwidth]{EvolutionMetabolism}
+	\begin{center}
+		\caption[Evolution of Metabolism]{Evolution of Metabolism (\textit{retinal} should read \textit{retinol})} \label{fig:EvolutionMetabolism} 
+		\includegraphics[width=0.9\textwidth]{EvolutionMetabolism}
+	\end{center}
 \end{figure}
 
-What would the first form of chemoautotrophy have looked like? Figure \ref{fig:Methanogenesis} \cite{costa2014metabolic} shows the reduction of carbon in $CO_2$ to $CH_4$. Figure \ref{fig:320px-Methanogenesis_cycle} \cite{wiki:methanogenesis} shows that this is accomplished by attaching $CO_2$ to a larger molecule, and then adding electrons until carbon arrives at its mot reduced form. 
+What would the first form of chemoautotrophy have looked like? We think of something like Methanogenesis--Figure \ref{fig:Methanogenesis}, which shows the reduction of carbon in $CO_2$ to $CH_4$. Figure \ref{fig:320px-Methanogenesis_cycle} \cite{wiki:methanogenesis} shows that this is accomplished by attaching $CO_2$ to a larger molecule, and then adding electrons until carbon arrives at its most reduced form. 
 
 \begin{figure}[H]
-	\caption{Methanogenesis: $CO_2$ acquires electrons--in red} \label{fig:Methanogenesis} 
+	\caption[Methanogenesis]{Methanogenesis: $CO_2$ acquires electrons--in red\cite{costa2014metabolic}} \label{fig:Methanogenesis} 
 	\includegraphics[width=0.9\textwidth]{Methanogenesis}
 \end{figure}
 
+This is a fairly complex process, as shown in Figure \ref{fig:320px-Methanogenesis_cycle}
 \begin{figure}[H]
-	\caption{Details of reduction of Carbon} \label{fig:320px-Methanogenesis_cycle} 
+	\caption[Details of reduction of Carbon]{Details of reduction of Carbon\cite{costa2014metabolic}} \label{fig:320px-Methanogenesis_cycle} 
 	\includegraphics[width=0.9\textwidth]{320px-Methanogenesis_cycle}
 \end{figure}
 
-How might the earliest carbon fixation have looked? Figure \ref{fig:CarbonFixationMinerals} \cite{varma2018native} depicts one mechanism for fixing carbon on a mineral surface. Note the presence of pyruvate, which we use to generate ATP. If there is a simple, mineral bound, mechanism for methanogenisis, we think we have a good chance of recreating the actual primordial metabolism for chemoautotrophy in our labs today.
+The mechanism for possible carbon fixation can occur on mineral surfaces. These experiments were specifically done on an iron sulphide surface. We take $CO_2$ and specifically bind it to our mineral surface--the $C\equiv O$ bond in Figure \ref{fig:CarbonFixationMinerals}. This mineral surface is going to act a bit like the methanofuran in methanogenesis, where our carbon dioxide slowly accepts electrons until it turns into the desired products. Here the observed products are formate, methanol, acetate and pyruvate. We don't see lactate.
   
 \begin{figure}[H]
-	\caption{Carbon Fixation on Minerals (upper path)} \label{fig:CarbonFixationMinerals} 
+	\caption[Carbon Fixation on Minerals]{Carbon Fixation on Minerals (upper path)\cite{varma2018native} } \label{fig:CarbonFixationMinerals} 
 	\includegraphics[width=0.9\textwidth]{CarbonFixationMinerals}
 \end{figure}
+
+This is exciting because we use pyruvate to generate ATP.
+If there is a simple, mineral bound, mechanism for methanogenisis, we think we have a good chance of recreating the actual primordial metabolism for chemoautotrophy in our labs today.
 
 How do electrons move when we have reduced carbon? Figure \ref{fig:ModernRedox} shows how this works today: a citric acid cycle, which generates FADH and $FADH_2$; we have fatty acid oxidation and glycolysis, protein degradation, etc. This all feeds electrons into our electron transport chain, which generates a proton gradient, eventually producing ATP. So essentially we want to take electrons and make a proton gradient that can be used later to drive ATP synthesis.
 
@@ -995,10 +1003,12 @@ How do electrons move when we have reduced carbon? Figure \ref{fig:ModernRedox} 
 	\includegraphics[width=0.9\textwidth]{ModernRedox}
 \end{figure}
 
-So what might our early redox chemistries have looked like? Figure \ref{fig:PrimordialRedox} \cite{sojo2016origin} depicts one proposal. At a hydrothermal group we could have a very fine layer of minerals that could act as a porous membrane or electron transfer membrane between alkaline hydrothermal vent and an acidic ocean. So there is already a proton gradient with a pH of 6. Electrons are transferred to $FeS$ and then onto $CO^2$. 
+So what might our early redox chemistries have looked like? Figure \ref{fig:PrimordialRedox} depicts one proposal. At a hydrothermal group we could have a very fine layer of minerals that could act as a porous membrane or electron transfer membrane between alkaline hydrothermal vent and an acidic ocean. So there is already a proton gradient with a pH of 6. Electrons are transferred to $FeS$ and then onto $CO^2$. 
+
+
 
 \begin{figure}[H]
-	\caption{Primordial Redox Chemistry?} \label{fig:PrimordialRedox} 
+	\caption[Primordial Redox Chemistry]{One possible mechanism for primordial Redox Chemistry--\cite{sojo2016origin}. } \label{fig:PrimordialRedox} 
 	\includegraphics[width=0.9\textwidth]{PrimordialRedox}
 \end{figure}
 
@@ -1016,9 +1026,7 @@ H_2 + Fd_{ox} \rightarrow & Fd^{2-}_{red} + 2H^+
 	\includegraphics[width=0.9\textwidth]{PrimordialRedox2}
 \end{figure}
 
-\section{Energy Harvesting}
-
-Lecturer: Shawn McGlynn
+\section[Energy Harvesting]{Energy Harvesting--Shawn McGlynn}
 
 \begin{itemize}
 	\item Chemical reactions occur when concentrations change to accommodate energy differences between molecules.
@@ -1041,10 +1049,7 @@ Lecturer: Shawn McGlynn
 
 \cite{simon2008organisation}
 
-\section{Systematics and Limits of Metabolic Rates}
-
-Lectrure: Chris Kempes
-
+\section{Systematics and Limits of Metabolic Rates--Chris Kempes}
 
 All present day life is encapsulated: bacteria are simple cells; eukaryotes have organelles, within cells, within multicellular organisms.
 \begin{itemize}
