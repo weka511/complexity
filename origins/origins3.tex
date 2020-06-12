@@ -1193,29 +1193,35 @@ See also \cite{alberts2013essential,simon2008organisation,weizmann2020eQuilibrat
 
 \section{Systematics and Limits of Metabolic Rates--Chris Kempes}
 
+Today we are going to talk about cellular metabolism, and we are going to treat cells in a very general way, mostly thinking just about encapsulation, and how we feed a metabolic rate inside these encapsulations.
+
 All present day life is encapsulated: bacteria are simple cells; eukaryotes have organelles, within cells, within multicellular organisms.
 \begin{itemize}
 	\item Which aspects of extant life are general and 	which are arbitrary?
 	\item What can be said about encapsulation in general?
+	\item If we look at very early encapsulation, what are the types of principle we might expect of it? This may be important as encapsulation may be a key step in the formation of life.
 \end{itemize}
 
 How do nutrients cross cell boundary to drive metabolism--Figure \ref{fig:Encapsulation1}?
 \begin{figure}[H]
-	\caption{Metabolism in Cells} \label{fig:Encapsulation1} 
+	\caption[Metabolism in Cells]{A cell, surrounded by nutrients that it needs. The orange dots symbolize some chemistry; the cell needs to bring in the blue dots to react with them.} \label{fig:Encapsulation1} 
 	\includegraphics[width=0.9\textwidth]{Encapsulation1}
 \end{figure}
 
+We will think not about what happens inside the cell, but how we create a flux of nutrients into the cell.
 We model this by the diffusion equation:
 \begin{align*}
-\frac{\partial C}{\partial t} =& \frac{D}{r^2} \frac{\partial}{\partial r}\big(r^2 \frac{\partial C}{\partial R} \big) \\
+\frac{\partial C}{\partial t} =& \frac{D}{r^2} \frac{\partial}{\partial r}\big(r^2 \frac{\partial C}{\partial R} \big) \text{, where}\\
+C=& \text{chemical concentration, }\\
+D=& \text{diffusion coefficient.}\\
 \frac{\partial C}{\partial t} =& 0 \text{, in the steady state.}\\
  \frac{D}{r^2} \frac{\partial}{\partial r}\big(r^2 \frac{\partial C}{\partial R} \big) =& 0 \text{, in the steady state.}\\
- r^2 \frac{\partial C}{\partial R} =& A {, say}\\
- C =& B - \frac{A}{r}\\
+ r^2 \frac{\partial C}{\partial R} =& A \text{, say}\\
+ C =& B - \frac{A}{r} \text{, for some constant $B$}\\
  \text{assume}& \\
  C =& C_{\infty}\text{, when $r=\infty$, then}\\
- C =& C_{\infty} - \frac{A}{r}
- \text{Further, assume}&\\
+ C =& C_{\infty} - \frac{A}{r} \text{. Further, }\\
+  \text{assume}& \\
  C =& 0\text{, when $r=a$, then we have}\\
  C =& c_{\infty}\big(1 - \frac{a}{r}\big) 
 \end{align*}
