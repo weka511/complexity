@@ -6,7 +6,9 @@ These notes are distributed in the hope that they will be useful,
 but without any warranty, and without even the implied warranty of
 merchantability or fitness for a particular purpose. All feedback is welcome,
 but I don't necessarily undertake to do anything with it.
+
 I have used [TexStudio](https://www.texstudio.org/) and the [JabRef](https://www.jabref.org/) to create the notes.
+
 [simon@greenweaves.nz](mailto:simon@greenweaves.nz)
 
 |#|File|Description|
