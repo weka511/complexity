@@ -37,24 +37,23 @@
 \listoffigures
 \section[Introduction]{Introduction--Chris Kempes}
 
-We'll discuss evolution in a pre-cellular world, chemical signatures of early life, protocells, and what the \gls{gls:LUCA} might have looked like.
+We'll discuss evolution in a pre-cellular world, including \glsdisp{gls:autocatalysis}{autocatalytic} networks and molecular evolution, chemical signatures of early life, \glspl{gls:protocell}, and what the \gls{gls:LUCA} might have looked like.
 
-\section{Protocells}
+\section[Protocells]{Protocells--Sarah Mauer}
 
-Lecturer: Sarah Mauer
-
-We'll look at Protocells as a model for the origins of life. Aggregates are important for the origins of life--Figure \ref{fig:ImportanceOfAggregation}.
+\subsection{Importance of aggregates to origins of life}
+We'll look at \glspl{gls:protocell} as a model for the origins of life. \glspl{gls:protocell} are important for the origins of life because they are aggregates --Figure \ref{fig:ImportanceOfAggregation} \cite{deamer2017role,maurer2011primitive,segre2001lipid}.
 
 \begin{itemize}
-	\item  Co-localize metabolic/genetic components
-	\item   Define the individual to allow for 	selection
-	\item   Direct involvement in metabolism
+	\item  Co-localize and protect metabolic/genetic components
+	\item  Define the individual to allow for 	selection
+	\item  Direct involvement in metabolism
 	\begin{itemize}
 		\item 	Chemical gradients
 		\item   Electron transfer reactions
-		\item   Catalytic
+		\item   Catalytic (e.g. when a reaction proceeds at a different rate in hydrophobic phase from hydrophilic.)
 	\end{itemize}
-	\item   Protect metabolic/genetic 	components
+	\item   Protect metabolic/genetic components
 \end{itemize}
 
 \begin{figure}[H]
@@ -62,17 +61,16 @@ We'll look at Protocells as a model for the origins of life. Aggregates are impo
 	\includegraphics[width=0.9\textwidth]{ImportanceOfAggregation}
 \end{figure}
 
-See  \cite{deamer2017role},\cite{maurer2011primitive}, \cite{segre2001lipid}
+\subsection{Self-assembled structures}
 
-Self-assembled structures
-
+The Aggregates that are used to model the origins of life fall into 3 or maybe 4 categories--Table \ref{table:aggregates}.
 Controlled by the hydrophobic effect (entropy) and non-bonding interactions (e.g., hydrogen bonds)
 
 \begin{table}[H]
-	\caption{Aggregates that are used to model the origins of life}
-	\begin{tabular}{l|p{4cm}|p{3cm}} \hline
+	\caption{Aggregates that are used to model the origins of life}\label{table:aggregates}
+	\begin{tabular}{|l|p{4cm}|p{3cm}|} \hline
 		Type & Definition &Biological example\\ \hline
-		Vesicle (Liposome)& Bilayer-enclosed aqueous compartment& Cells, membrane bound organelles,\\ \hline
+		\Gls{gls:vesicle} (\gls{gls:liposome})& \glsdesc{gls:vesicle}& Cells, membrane bound organelles,\\ \hline
 		Oil droplet&
 		Nonpolar bulk phase often stabilized by
 		amphiphiles&
@@ -87,7 +85,7 @@ Controlled by the hydrophobic effect (entropy) and non-bonding interactions (e.g
 
 \begin{figure}[H]
 	\centering
-	\caption{Self-assembled structures}
+	\caption[Self-assembled structures]{Self-assembled structures\cite{sojo2016origin}}
 	\label{fig:self-assembled-structures}
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
@@ -112,9 +110,8 @@ Controlled by the hydrophobic effect (entropy) and non-bonding interactions (e.g
 
 \end{figure}
 
-See \cite{sojo2016origin}
 
-Factors that affect aggregation:
+\subsection{Factors that affect aggregation}
 \begin{itemize}
 	\item concentration;
 	\item temperature;
@@ -122,7 +119,9 @@ Factors that affect aggregation:
 	\item pH.
 \end{itemize}
 
-What chemistries do protocells harbour? Figure \ref{fig:ProtocellsAndReactions1} shows several possibilities:
+\subsection{Protocells and Reactions}
+
+What chemistries do \glspl{gls:protocell} harbour? Figure \ref{fig:ProtocellsAndReactions1} shows several possibilities:
 \begin{itemize}
 	\item A molecules interact with surface of aggregate through electrostatic interactions or hydrogen bonding;
 	\item B hydrophobic effect sequestering non-polar molecule;
@@ -137,7 +136,7 @@ What chemistries do protocells harbour? Figure \ref{fig:ProtocellsAndReactions1}
 
 Figure \ref{fig:ProtocellsAndReactions2} depicts two locations for reactions.
 \begin{itemize}
-	\item A Surface associated reaction. Substrate becomes Product + Waste, and Waster drifts away. 
+	\item A Surface associated reaction. Substrate becomes Product + Waste, and Waste drifts away. 
 	\item B Catalytic network inside membrane, so we need to get rid of Waste.
 \end{itemize}
 \begin{figure}[H]
@@ -145,7 +144,7 @@ Figure \ref{fig:ProtocellsAndReactions2} depicts two locations for reactions.
 	\includegraphics[width=0.9\textwidth]{ProtocellsAndReactions2}
 \end{figure}
 
-Figure \ref{fig:ProtocellsAndReactions3} shows an example of a reaction:  the Hammerhead ribosome can self cleave at the red arrow. On the right we see that the reaction is not as fast when it is enclosed in a vesicle, because the waste products can't drain away.
+Figure \ref{fig:ProtocellsAndReactions3} shows an example of a reaction:  the Hammerhead ribosome can self cleave at the red arrow. On the right we see that the reaction is not as fast when it is enclosed in a \gls{gls:vesicle}, because the waste products can't drain away.
 
 
 \begin{figure}[H]
@@ -155,8 +154,9 @@ Figure \ref{fig:ProtocellsAndReactions3} shows an example of a reaction:  the Ha
 
 
 
-See \cite{adamala2016programmable} and \cite{monnard2015current}.
+See \cite{adamala2016programmable,monnard2015current}.
 
+\subsection{Protocell Growth and division}
 See movie, where we see growing vesicle stealing material from neighbour. 
 Figure \ref{fig:ProtocellGrowthDivision} illustrates Protocell Growth and division.  
 
@@ -165,7 +165,9 @@ Figure \ref{fig:ProtocellGrowthDivision} illustrates Protocell Growth and divisi
 	\includegraphics[width=0.9\textwidth]{ProtocellGrowthDivision}
 \end{figure}
 
-See  \cite{zhu2012photochemically} and   \cite{chen2004emergence}.
+See  \cite{zhu2012photochemically,chen2004emergence}.
+
+\subsection{Towards LUCA}
 
 In Figure \ref{fig:TowardsLUCA} we see a prebiotic soup, aggregating, decreasing molecular diversity and increasing functional complexity, and moving towards first life. First life can undergo Darwinian evolution towards \gls{gls:LUCA}.
 \begin{figure}[H]
@@ -798,7 +800,7 @@ Perhaps the first adaptive evolving systems were flat living systems--Figure \re
 	\includegraphics[width=0.9\textwidth]{Baum2018}
 \end{figure}
 
-Cells could have started as a transport mechanism--Figure \ref{fig:Baum2015}\cite{10.1093/biosci/biv063}--which enable certain types to spread.
+Cells could have started as a transport mechanism--Figure \ref{fig:Baum2015}\cite{baum2015selection}--which enable certain types to spread.
 
 \begin{figure}[H]
 	\caption{Adaptive evolution started before cells or genetics}\label{fig:Baum2015}

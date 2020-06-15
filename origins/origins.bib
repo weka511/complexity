@@ -8,6 +8,35 @@
   note         = {[Online; accessed 11-June-2020]},
 }
 
+@Article{abby2010detecting,
+  author    = {Abby, Sophie S and Tannier, Eric and Gouy, Manolo and Daubin, Vincent},
+  title     = {Detecting lateral gene transfers by statistical reconciliation of phylogenetic forests},
+  journal   = {BMC bioinformatics},
+  year      = {2010},
+  volume    = {11},
+  number    = {1},
+  pages     = {324},
+  abstract  = {Background: To understand the evolutionary role of Lateral Gene Transfer (LGT), accurate methods are needed to identify transferred genes and infer their timing of acquisition. Phylogenetic methods are particularly promising for this purpose, but the reconciliation of a gene tree with a reference (species) tree is computationally hard. In addition, the application of these methods to real data raises the problem of sorting out real and artifactual phylogenetic conflict.
+
+Results: We present Prunier, a new method for phylogenetic detection of LGT based on the search for a maximum statistical agreement forest (MSAF) between a gene tree and a reference tree. The program is flexible as it can use any definition of "agreement" among trees. We evaluate the performance of Prunier and two other programs (EEEP and RIATA-HGT) for their ability to detect transferred genes in realistic simulations where gene trees are reconstructed from sequences. Prunier proposes a single scenario that compares to the other methods in terms of sensitivity, but shows higher specificity. We show that LGT scenarios carry a strong signal about the position of the root of the species tree and could be used to identify the direction of evolutionary time on the species tree. We use Prunier on a biological dataset of 23 universal proteins and discuss their suitability for inferring the tree of life.
+
+Conclusions: The ability of Prunier to take into account branch support in the process of reconciliation allows a gain in complexity, in comparison to EEEP, and in accuracy in comparison to RIATA-HGT. Prunier's greedy algorithm proposes a single scenario of LGT for a gene family, but its quality always compares to the best solutions provided by the other algorithms. When the root position is uncertain in the species tree, Prunier is able to infer a scenario per root at a limited additional computational cost and can easily run on large datasets.Prunier is implemented in C++, using the Bio++ library and the phylogeny program Treefinder. It is available at: http://pbil.univ-lyon1.fr/software/prunier.
+},
+  publisher = {Springer},
+}
+
+@Article{abby2012lateral,
+  author    = {Abby, Sophie S and Tannier, Eric and Gouy, Manolo and Daubin, Vincent},
+  title     = {Lateral gene transfer as a support for the tree of life},
+  journal   = {Proceedings of the National Academy of Sciences},
+  year      = {2012},
+  volume    = {109},
+  number    = {13},
+  pages     = {4962--4967},
+  abstract  = {Lateral gene transfer (LGT), the acquisition of genes from other species, is a major evolutionary force. However, its success as an adaptive process makes the reconstruction of the history of life an intricate puzzle: If no gene has remained unaffected during the course of life's evolution, how can one rely on molecular markers to reconstruct the relationships among species? Here, we take a completely different look at LGT and its impact for the reconstruction of the history of life. Rather than trying to remove the effect of LGT in phylogenies, and ignoring as a result most of the information of gene histories, we use an explicit phylogenetic model of gene transfer to reconcile gene histories with the tree of species. We studied 16 bacterial and archaeal phyla, representing a dataset of 12,000 gene families distributed in 336 genomes. Our results show that, in most phyla, LGT provides an abundant phylogenetic signal on the pattern of species diversification and that this signal is robust to the choice of gene families under study. We also find that LGT brings an abundant signal on the location of the root of species trees, which has been previously overlooked. Our results quantify the great variety of gene transfer rates among lineages of the tree of life and provide strong support for the "complexity hypothesis," which states that genes whose products participate to macromolecular protein complexes are relatively resistant to transfer.},
+  publisher = {National Acad Sciences},
+}
+
 @Article{adam2018estimating,
   author    = {Adam, Zachary R and Hongo, Yayoi and Cleaves, H James and Yi, Ruiqin and Fahrenbach, Albert C and Yoda, Isao and Aono, Masashi},
   title     = {Estimating the capacity for production of formamide by radioactive minerals on the prebiotic {E}arth},
