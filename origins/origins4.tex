@@ -2,6 +2,7 @@
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
+
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
 \graphicspath{{figs/}}
@@ -220,7 +221,12 @@ When we consider the way that evolution went, from the simplest building blocks 
 	\includegraphics[width=0.9\textwidth]{LUCA_Attributes}
 \end{figure}
 
-We know quite a lot about LUCA, but much is still unknown. We can deduce much by studying biochemical evolution and the properties of modern cells to see what they share.
+We know quite a lot about LUCA, but much is still unknown. We can deduce much by studying:
+\begin{itemize}
+	\item biochemical evolution;
+	\item the properties of modern cells to see what they share;
+	\item geological records to deduce the environment in which LUCA lived.
+\end{itemize}
 
 References:
 \begin{itemize}
@@ -229,11 +235,8 @@ References:
 	\item \cite{torino2013piecing}--reconstruct LUCA in the lab.
 \end{itemize}
 
-\section{Chemical signatures for identifying life in the geological record}
+\section[Studying geological records to deduce the environment in which LUCA lived]{Chemical signatures for identifying life in the geological record--Mayuko Nakagawa}
 
-Lecturer: Mayuko Nakagawa
-
-Contents
 \begin{itemize}
 	\item About Biogeochemistry
 	\item Fingerprints of life and environment
@@ -245,19 +248,20 @@ Contents
 	\item How to use the signatures for identifying lives from 	Earth geological records?
 \end{itemize}
 
+\subsection{Biogeochemistry}
 Biogeochemistry--The study of:
 \begin{itemize}
-	\item How chemical elements flow through living systems and their physical environments--Figure \ref{fig:Biogeochemistry}\cite{linares-pasten_2018}.
+	\item How chemical elements flow through living systems and their physical environments--Figure \ref{fig:Biogeochemistry}.
 	\item Investigate the factors that influence cycles of key 	elements such as bioelements (C, H, N, O, S...).
 	
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{How chemical elements flow through living systems}\label{fig:Biogeochemistry}
+	\caption[How chemical elements flow through living systems]{How chemical elements flow through living systems\cite{linares-pasten_2018}}\label{fig:Biogeochemistry}
 	\includegraphics[width=0.9\textwidth]{Biogeochemistry}
 \end{figure}
 
-Fingerprints of Life
+\subsection{Fingerprints of Life}
 \begin{itemize}
 	\item  DNA information cannot be preserved over geologic time
 	scale (thousands ~ million years for eukaryotes' DNA)
@@ -269,20 +273,15 @@ Fingerprints of Life
 	\end{itemize}
 \end{itemize}
 
-Isotopic signatures: Isotope variants of a particular chemical element
-which differ in neutron number
+\subsubsection{Isotopic signatures}: Isotope variants of a particular chemical element
+which differ in neutron number--Figure \ref{fig:CarbonIsotopes}.
 \begin{itemize}
 	\item  Stable isotope
 	\begin{itemize}
-		\item do not decay into other
-		elements.
-		\item Behavior is slightly different by the
-		mass, useful for understanding
-		material cycle.
+		\item do not decay into other elements.
+		\item Behaviour is slightly different by the mass, useful for understanding 	material cycle--Figure \ref{fig:IsotopicEffects}.
 	\end{itemize}
-	\item Radioactive isotope: one having an unstable nucleus and
-	which emits characteristic radiation during
-	its decay to a stable form- e.g. $^3H$, $^14C$
+	\item Radioactive isotope: one having an unstable nucleus and which emits characteristic radiation during its decay to a stable form- e.g. $^3H$, $^14C$
 \end{itemize}
 
 \begin{figure}[H]
@@ -290,19 +289,36 @@ which differ in neutron number
 	\includegraphics[width=0.9\textwidth]{CarbonIsotopes}
 \end{figure}
 
-Isotopic Signatures
 
 \begin{itemize}
 	\item \textit{Kinetic isotopic effect}:
-	Isotope ratio is changed by kinetic reactions 	(e.g.) the isotopic ratios are changed between substrates and products reflecting the metabolic processes. \begin{align*}
+	Isotope ratio is changed by kinetic reactions 	(e.g.) the isotopic ratios are changed between substrates and products reflecting the metabolic processes--Figure \ref{fig:KineticIsotopicEffects}. \begin{align*}
 	^{12}CO_2 + H_2O \rightarrow&^{12}CH_2O + O_2 \text{, runs slightly faster than}\\
 	^{13}CO_2 + H_2O \rightarrow&^{13}CH_2O + O_2 
 	\end{align*}
 	\item \textit{Equilibrium isotopic effect}:
 	Isotope ratio is changed by equilibrium reactions.
 	e.g.) Temperature effect, phase (gas, liquid, solid)
-	$^{18}O$ ( $^{16}O$) is more (less) enriched in liquid than gas phase
+	$^{18}O$ ( $^{16}O$) is more (less) enriched in liquid than gas phase--Figure \ref{fig:EquilibriumIsotopicEffects}
 \end{itemize}
+
+\begin{figure}[H]
+	\caption{Isotopic Effects}\label{fig:IsotopicEffects}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Kinetic Isotopic Effect}\label{fig:KineticIsotopicEffects}
+		\includegraphics[width=\textwidth]{KineticIsotope1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Equilibrium Isotopic Effect}\label{fig:EquilibriumIsotopicEffects}
+		\includegraphics[width=\textwidth]{EquilibriumIsotopicEffect}
+	\end{subfigure}
+\end{figure}
+
+These isotopic effects provide a characteristic range of values on target compounds. Using these characteristics we can understand the sources and consumption for target compounds. In a natural environment environmental conditions interact with the players in the ecosystem. The isotopic signatures are investigated with a modern environment with varying conditions. The datasets investigated with a modern environment are utilized for decoding the geological record.
+\begin{figure}[H]
+	\caption{IsotopicSignatures}
+	\includegraphics[width=0.8\textwidth]{IsotopicSignatures}
+\end{figure}
 
 \begin{figure}[H]
 	\caption{Earth environment interacts with origin and evolution of life}\label{fig:Timeline}
@@ -361,17 +377,15 @@ Take Home Message: Signatures of life:
 
 Suggested Reading:
 
-\cite{sharp2017principles} and \cite{allegre2008isotope}
+\cite{sharp2017principles,allegre2008isotope}
 
 References:
-\cite{ueno2006evidence},
- \cite{bell2015potentially}, \cite{rosing199913c},  \cite{shen2001isotopic}, \cite{summons19992}, \cite{han1992megascopic}
+\cite{ueno2006evidence,bell2015potentially,rosing199913c,shen2001isotopic,summons19992,han1992megascopic}
 
 \section{RNA}
 
-\subsection{The RNA World}
+\subsection[The RNA World]{The RNA World--Tony Z. Jia}
 
-Lecturer: Tony Z. Jia
 
 Figure \ref{fig:ModernCellSchematic} shows the modern cell, with a lipid membrane and processes catalyzed by proteins and ribosomes. These process give rise to the Central Dogma--Figure \ref{fig:CentralDogmaModernCell}.
 \begin{figure}[H]
@@ -452,9 +466,8 @@ There are some outstanding issues:
 
 See \cite{robertson2012origins} and  \cite{joyce2018protocells} for details of the origins of the RNA world, and its processes, and \cite{hud2018searching} for information on the hypothetical pre-RNA world. Finally, it is possible to have living systems with more than 4 bases  \cite{hoshika2019hachimoji}.
 
-\subsection{Molecular Evolution in the Lab}
+\subsection[Molecular Evolution in the Lab]{Molecular Evolution in the Lab--Mark A. Ditzler}
 
-Lecturer: Mark A. Ditzler
 
 A method called In vitro evolution allows us to observe the evolution of molecules in a test tube. It has been used to study several classes of molecules:
 \begin{itemize}
@@ -527,14 +540,14 @@ Suggested Reading
 
 \section{Autocatalysis}
 
-\subsection{Autocatalytic Sets: A Cooperative Origin of Life}
+\subsection[Autocatalytic Sets: A Cooperative Origin of Life--Wim Hordijk
+]{Autocatalytic Sets: A Cooperative Origin of Life--Wim Hordijk}
 
-Lecturer: Wim Hordijk
 
 Which came first: DNA to store genetic information, or proteins to catalyze reactions? RNA can do both, giving rise to the idea of the RNA World--Figure \ref{fig:RNA}--a selfish world in which each molecule looks after itself and grabs as much resource as it can.
 
 \begin{figure}[H]
-	\caption{The dominant paradigm: the RNA World\\a tRNA molecule after x3dna.org}\label{fig:RNA}
+	\caption[The dominant paradigm: the RNA World]{The dominant paradigm: the RNA World--a tRNA molecule after \cite{x3dna.org}}\label{fig:RNA} 
 	\includegraphics[width=0.9\textwidth]{RNA}
 \end{figure}
 
@@ -589,9 +602,8 @@ Figure \ref{fig:AutoCatalyticSubsets} illustrates  the fact that Autocatalytic S
 
 \cite{wim2017origin},  \cite{wim2019wandering},    \cite{hordijk2012structure}, \cite{sousa2015autocatalytic}
 
-\subsection{Reaction Networks and Autocatalysis}
+\subsection[Reaction Networks and Autocatalysis]{Reaction Networks and Autocatalysis--Nathaniel Virgo}
 
-Lecturer: Nathaniel Virgo
 
 \Gls{gls:autocatalysis} is \glsdesc{gls:autocatalysis}. The ability to make more of itself is a key feature of all living systems, even those that don't reproduce. Under what circumstances can this occur in an abiotic system? 
 
@@ -678,9 +690,8 @@ Summary
 See also   \cite{king1977symbiosis}, \cite{king1982recycling}, \cite{szathmary2000evolution},   \cite{virgo2016complex}, 
 \section{Evolutionary Theory}
 
-\subsection{An Introduction}
+\subsection[An Introduction]{An Introduction-- Michael Travisano}
 
-Lecturer: Michael Travisano
 
 Evolutionary origin of three processes--Figure \ref{fig:EvolutionaryOrigin}.
 
@@ -750,9 +761,7 @@ Suggested Reading
 
 See also \cite{orgel2004prebiotic}, \cite{eigen1971selforganization}, \cite{kun2005real}, and \cite{ratcliff2014experimental}.
 
-\subsection{A Recipe for Adaptation}
-
-Lecturer: David Baum
+\subsection[A Recipe for Adaptation]{A Recipe for Adaptation-- David Baum}
 
 Since the capacity for ]Adaptive Evolution is central to almost any definition of life, we need to understand what is the simplest system capable of undergoing adaptive evolution. Life is too complex to explain without an adaptive
 process--Figure \ref{fig:LifeTooComplex}\cite{hoyle1983intelligent}. A cell is too complicated to  just emerge, so we need to think about how adaptation could start working on something simpler than a modern cell.
@@ -824,9 +833,8 @@ To summarize, Evolutionary theory plays a central role--Figure \ref{fig:Baum2018
 \end{figure}
 
 
-\subsection{Chance \& Change}
+\subsection[Chance \& Change]{Chance \& Change--Andrew Rominger}
 
-Lecturer: Andrew Rominger
 
 Evolution is a theory of chance events, and change through time.
 
@@ -900,9 +908,8 @@ Real World Complexities.
 
 Further reading: \cite{gillespie1984molecular}, \cite{kauffman1989nk}, \cite{kimura1983neutral}, \cite{kingman2000origins}, \cite{patwa2008fixation}, \cite{poelwijk2007empirical}, \cite{rosenberg2002genealogical}.
 
-\section{Niche Construction}
+\section[Niche Construction]{Niche Construction--Michael Travisano}
 
-Lecturer: Michael Travisano
 
 Environments can be harsh, as Figure \ref{fig:Harsh} shows, but living organisms can alter their environments, often for the better. Pioneer species break up the ground and allow others to colonize. 
 
