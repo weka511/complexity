@@ -316,7 +316,7 @@ which differ in neutron number--Figure \ref{fig:CarbonIsotopes}.
 
 These isotopic effects provide a characteristic range of values on target compounds. Using these characteristics we can understand the sources and consumption for target compounds. In a natural environment environmental conditions interact with the players in the ecosystem. The isotopic signatures are investigated with a modern environment with varying conditions. The datasets investigated with a modern environment are utilized for decoding the geological record.
 \begin{figure}[H]
-	\caption{IsotopicSignatures}
+	\caption{Isotopic Signatures}
 	\includegraphics[width=0.8\textwidth]{IsotopicSignatures}
 \end{figure}
 
@@ -489,7 +489,7 @@ There are still some outstanding issues:
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{Nonenzymatic RNA Polymerization}\label{fig:PrebioticRNA_StrandSeparation}
+	\caption{Prebiotic RNA strand separation}\label{fig:PrebioticRNA_StrandSeparation}
 	\includegraphics[width=0.9\textwidth]{PrebioticRNA_StrandSeparation}
 \end{figure}
 
@@ -643,11 +643,45 @@ A similar set of nine mutually catalytic peptides--or short proteins--was create
 	\includegraphics[width=0.9\textwidth]{MutualCatalysis3}
 \end{figure}
 
-Figures \ref{fig:MutualCatalysis1}, \ref{fig:MutualCatalysis2}, and \ref{fig:MutualCatalysis3} are examples of Autocatalytic Sets. An Autocatalytic Set--Figure \ref{fig:AutoCatalytic1}--is a chemical reaction network with:
+What these experimental systems--Figures \ref{fig:MutualCatalysis1}, \ref{fig:MutualCatalysis2}, and \ref{fig:MutualCatalysis3}--
+of mutually catalytic molecules
+have in common is that
+they are all instances
+of an \gls{gls:autocatalytic:set}--Figure \ref{fig:AutoCatalytic1}.
+An autocatalytic set is defined as
+a set of reactions
+and the molecules involved in them,
+such that:
+\begin{enumerate}
+	\item Each reaction in the set is catalyzed
+	by at least one of the molecules
+	from the set itself
+	and,
+	\item Each molecule in the set
+	can be produced
+	from a basic food source
+	through a sequence of reactions
+	from the set itself
+\end{enumerate}
+The food source consists of
+basic building blocks,
+such as the RNA or peptide fragments
+in the experimental examples,
+or the molecules that were present
+on the early Earth
+in a purely prebiotic setting.
+In other words, the food source
+consists of those elements
+that can be assumed to be available
+in the environment.
+
+Note that this concept of an autocatalytic set captures two essential properties of living systems.
+
 \begin{itemize}
-	\item Each reaction catalyzed by at least one molecule from the set.
-	\item Each molecule produced from the food set through reactions from the set.
-	\item Food = environment
+	\item all chemical reactions are facilitated and regulated by catalysts generated
+	within the network itself. In other words, the system is catalytically closed.
+
+	\item  it is self-sustaining from resources available in the environment.
 \end{itemize}
 
 \begin{figure}[H]
@@ -655,19 +689,198 @@ Figures \ref{fig:MutualCatalysis1}, \ref{fig:MutualCatalysis2}, and \ref{fig:Mut
 	\includegraphics[width=0.9\textwidth]{AutoCatalytic1}
 \end{figure}
 
-Figure \ref{fig:AutoCatalytic2} shows an autocalalytic network comprising strings of 1s and 0s\cite{hordijk2012structure}. It seems that autocalatytic sets have a high probability of existing in models of simple chemical reaction networks.
+Figure \ref{fig:AutoCatalytic2} shows a simple example
+of an autocatalytic set formed by a reaction network where the molecule types--
+the black dots--are represented by bit strings, that is, strings of zeros and ones.
+The food source consists of
+the monomers and dimers,
+or bit strings of length one and two.
+The longer molecules can be built up
+through ligation reactions--
+the white boxes--
+between two shorter bit strings.
+Solid black arrows indicate
+reactants going into
+and products coming out of
+a ligation reaction,
+and dashed gray arrows indicate which
+molecules catalyze which reactions.
+Given the definition
+of an autocatalytic set,
+it is easy to verify that this reaction
+network satisfies its two properties.
+
+Note that this simple example is similar to the experimental systems that have been constructed in the lab.
+This concept of autocatalytic sets was originally introduced by Stuart Kaufmann, in descriptive form already back in 1971 and more formally in 1986.
+
+More recently,
+my colleague Mike Steel and myself
+have done more detailed studies
+of autocatalytic sets,
+both mathematically
+and computationally.
+What these detailed studies have shown
+is that autocatalytic sets
+have a high probability of existing
+in simple models
+of chemical reaction networks--
+also for chemically plausible
+levels of catalysis.
+For example,
+in this simple bit string model--Figure \ref{fig:AutoCatalytic2}--
+where catalysis is assigned randomly,
+each molecule only needs to catalyze
+between one and two ligation
+reactions on average
+to already have a high probability
+of autocatalytic sets to exist
+in random instances of the model.
+Furthermore, it turns out that
+autocatalytic sets
+often consist of a hierarchy of smaller
+and smaller autocatalytic subsets.
+In other words,
+a given autocatalytic set
+often contains several smaller subsets
+that themselves also form
+autocatalytic sets.
+For example,
+this autocatalytic set of five reactions--Figure \ref{fig:AutoCatalytic2}--
+contains two smaller
+autocatalytic subsets -
+one of two reactions
+and one of three reactions.
+
 \begin{figure}[H]
-	\caption{An Autocatalytic Set}\label{fig:AutoCatalytic2}
+	\caption[Autocatalytic set 	with two smaller autocatalytic subsets]{This autocatalytic set of five reactions
+		contains two smaller
+		autocatalytic subsets\cite{hordijk2012structure}}\label{fig:AutoCatalytic2}
 	\includegraphics[width=0.9\textwidth]{AutoCatalytic2}
 \end{figure}
 
-Figure \ref{fig:AutoCatalyticSubsets} illustrates  the fact that Autocatalytic Sets can be built from Autocatalytic Subsets\cite{hordijk2017chasing}.
+Figure \ref{fig:AutoCatalyticSubsets} is another example
+from the same bit string model,
+which shows an autocatalytic set
+of eight reactions
+containing various smaller
+autocatalytic subsets,
+as indicated by the differently
+colored shapes.
+This hierarchical subset structure
+can enable the existence
+of different types of protocells.
+
 \begin{figure}[H]
-	\caption{An Autocatalytic Set made up of Autocatalytic Subsets}\label{fig:AutoCatalyticSubsets}
+	\caption[An Autocatalytic Set made up of Autocatalytic Subsets]{An Autocatalytic Set made up of Autocatalytic Subsets\cite{hordijk2017chasing}}\label{fig:AutoCatalyticSubsets}
 	\includegraphics[width=0.9\textwidth]{AutoCatalyticSubsets}
 \end{figure}
 
-\cite{wim2017origin},  \cite{wim2019wandering},    \cite{hordijk2012structure}, \cite{sousa2015autocatalytic}
+Imagine two compartments formed,
+for example, by lipid membranes,
+which have been shown to form,
+grow and divide spontaneously
+under appropriate circumstances.
+Now, assume that
+the same chemistry can take place
+in both of these compartments,
+but in one of them
+only the red autocatalytic subset
+is currently present,
+and in the other one
+only the blue autocatalytic subset.
+This would form two different types of protocells, which might compete with each other
+for food resources--in this case the monomers and dimers--and perhaps even give rise to
+some simple evolutionary dynamics.
+
+
+
+Computational studies have shown
+that autocatalytic sets
+are indeed able to evolve
+and become more complex over time,
+exactly because of this existence
+of multiple autocatalytic subsets.
+This is shown in Figure \ref{fig:EvolveableProtocells} with simulated
+protocells changing color over time,
+depending on which autocatalytic
+subsets they contain.
+These results are mostly based on
+computational models
+of chemical reaction networks
+such as the Bitstream model.
+However, the formal autocatalytic
+sets framework
+has also been used to study
+and understand
+the existing experimental networks
+in more detail,
+both the RNA one and the peptide one.
+
+\begin{figure}[H]
+	\caption[Computational studies of autocatalytic sets]{Computational studies have shown
+		that autocatalytic sets	
+		are indeed able to evolve
+		and become more complex over time\cite{hordijk2018population}}\label{fig:EvolveableProtocells}
+	\includegraphics[width=0.8\textwidth]{EvolveableProtocells}
+\end{figure}
+
+Moreover, we have shown that the metabolic network of \emph{E.coli} forms a large autocatalytic set--Figure \ref{fig:AutoCatalyticEcoli}.
+This supports the original claim
+that autocatalytic sets capture
+essential properties of living systems,
+in particular the catalytic closure
+and self-sustainability.
+So, autocatalytic sets are not just
+abstract mathematical constructs,
+but they do exist in real chemical
+and biological reaction networks
+and can be studied formally
+within those systems.
+\begin{figure}[H]
+	\caption[The metabolic network of \emph{E.coli}
+	forms a large autocatalytic set.]{The metabolic network of \emph{E.coli}
+		forms a large autocatalytic set\cite{sousa2015autocatalytic}}\label{fig:AutoCatalyticEcoli}
+	\includegraphics[width=\textwidth]{AutoCatalyticEcoli}
+\end{figure}
+
+In conclusion, given that autocatalytic
+sets are highly likely to exist
+in simulated chemical reaction networks,
+that they are able to evolve
+and become more complex,
+and that they actually exist
+in real chemical and biological
+networks as well,
+an alternative scenario emerges
+for a possible origin of life--Figure \ref{fig:CooperativeOrigin}.
+Perhaps life started
+with the spontaneous formation
+of one or more autocatalytic sets,
+which then gradually... diversified
+and evolved into more and more
+complex chemical networks,
+eventually leading to
+true metabolic networks.
+In other words,
+life arising as a cooperative effort
+among diverse molecule types
+and catalytically closed
+and self-sustaining
+chemical reaction networks.
+I believe there is grandeur
+in this view of the origin of life.
+
+\begin{figure}[H]
+	\caption[Life arising as a cooperative effort
+	among diverse molecule types]{Life arising as a cooperative effort
+		among diverse molecule types
+		and catalytically closed
+		and self-sustaining
+		chemical reaction networks}\label{fig:CooperativeOrigin}
+	\includegraphics[width=\textwidth]{CooperativeOrigin}
+\end{figure}
+
+References: \cite{wim2017origin,wim2019wandering,hordijk2012structure,sousa2015autocatalytic}
 
 \subsection[Reaction Networks and Autocatalysis]{Reaction Networks and Autocatalysis--Nathaniel Virgo}
 
