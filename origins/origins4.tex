@@ -884,35 +884,104 @@ References: \cite{wim2017origin,wim2019wandering,hordijk2012structure,sousa2015a
 
 \subsection[Reaction Networks and Autocatalysis]{Reaction Networks and Autocatalysis--Nathaniel Virgo}
 
+\subsubsection{Autocatalysis}
 
-\Gls{gls:autocatalysis} is \glsdesc{gls:autocatalysis}. The ability to make more of itself is a key feature of all living systems, even those that don't reproduce. Under what circumstances can this occur in an abiotic system? 
+\Gls{gls:autocatalysis} is chemical self-production: \glsdesc{gls:autocatalysis}. Why is it important? The ability to make more of itself is a key feature of all living systems, even those that don't reproduce--Figure \ref{fig:LifeMakesLife}. And do the question naturally arises: under what circumstances can this chemical self production occur in an a-biological system? Answering this is important for several reasons.\begin{itemize}
+	\item  It helps us to answer questions about the origin of metabolism: how did the molecules of life first get created before there was life to make them?
+	\item It also help us to answer questions about the origin of evolution: how did cells acquire the ability to produce not just more cells in general, but mroe of its own species with its own genetic make-up?
+\end{itemize}
+\begin{figure}[H]
+	\begin{center}
+		\caption{Life Makes Life}\label{fig:LifeMakesLife}
+		\includegraphics[width=0.8\textwidth]{LifeMakesLife}
+	\end{center}
+\end{figure}
 
-Figure \ref{fig:CatalysisReactionNetwork} is a simple example of Catalysis as a reaction network, including a Cycle for the \gls{gls:catalyst} C.
+The place to start is by thinking about chemical reactions. Figure \ref {fig:ChemicalReaction} illustrates the raction $2A \rightarrow B$.
 
 \begin{figure}[H]
-	\caption{Catalysis as a reaction network (Note Catalytic Cycle)}\label{fig:CatalysisReactionNetwork}
+	\caption{Chemical Reaction: $2A \rightarrow B$}\label{fig:ChemicalReaction}
+	\begin{subfigure}[m]{0.45\textwidth}
+		\caption{We have a whole lot of molecules $A$ rushing around}
+		\includegraphics[width=\textwidth]{ChemicalReaction1}
+	\end{subfigure}
+	\begin{subfigure}[m]{0.45\textwidth}
+		\caption{When two $A$s  collide they form $B$}
+		\includegraphics[width=\textwidth]{ChemicalReaction2}
+	\end{subfigure}
+\end{figure}
+
+Reactions generally happen faster the higher the concentration of reactants. One type of reaction that particularly interests us is catalysis, which is crucial in biology: it is what enzymes do.
+\begin{align*}
+	2A \xrightarrow{\text{C}}& B \text{, or}\\
+	2A + C \rightarrow& B +C \text{, if we prefer to think of $C$ as a product.}
+\end{align*}
+
+We will work through one example, which will serve as out first reaction network.
+
+\begin{align*}
+	2A + C \rightarrow& C2A \\
+	C2A \rightarrow& CB\\
+	CB \rightarrow& B + C \text{, so the nett reaction is:}\\
+	2A + C \rightarrow& B+C
+\end{align*}
+There are many ways to draw this as a reaction network. Figure \ref{fig:CatalysisReactionNetwork} is a simple example. The catalytic cycle is a common feature in reaction networks.
+
+\begin{figure}[H]
+	\caption{Catalysis as a reaction network, with \gls{gls:catalyst} C}\label{fig:CatalysisReactionNetwork}
 	\includegraphics[width=0.9\textwidth]{CatalysisReactionNetwork}
 \end{figure}
 
-\Gls{gls:reaction-network}: \glsdesc{gls:reaction-network}. Our first example is the Formose Reaction--Figure \ref{fig:Formose}\cite{andersen2013generic}, which is a way to convert formaldehyde to sugars. Here the key point it is autocatalytic. Figure \ref{fig:Formose1} shows a simplified form, emphasizing the autocalytic cycle, and Figure ref{fig:Formose2} shows the speed of the reaction: initially there very little $C_2$, and finally the reaction saturates.  
+\Gls{gls:reaction-network}: \glsdesc{gls:reaction-network}. Our first example is the Formose Reaction--Figure \ref{fig:Formose}, which is a way to convert formaldehyde to sugars. Here the key point it is autocatalytic.
 
 \begin{figure}[H]
-	\caption{The Formose Reaction}\label{fig:Formose}
+	\caption[The Formose Reaction]{The Formose Reaction\cite{andersen2013generic}}\label{fig:Formose}
 	\includegraphics[width=0.9\textwidth]{Formose}
 \end{figure}
 
+Figure \ref{fig:formose:simplified} shows a simplified version of the formose reaction.
 \begin{figure}[H]
-	\begin{subfigure}[b]{0.45\textwidth}
+	\caption{The Formose Reaction(simplified)}\label{fig:formose:simplified}
+	\begin{subfigure}[h]{0.45\textwidth}
+		\caption{First step: two molecules of formaldehyde fuse to acetaldehyde.}
+		\includegraphics[width=\textwidth]{FormoseStep1}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.45\textwidth}
+		\caption{For simplicity let's suppress every thing except carbon.}
+		\includegraphics[width=\textwidth]{FormoseStep1A}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.45\textwidth}
+		\caption{Once you have two carbons it is quickly converted to 3}
+		\includegraphics[width=\textwidth]{FormoseStep2}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.45\textwidth}
+		\caption{Then to 4. It can continue to grow, and to branch.}
+		\includegraphics[width=\textwidth]{FormoseStep3}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.45\textwidth}
+		\caption{Alternatively it can split in to two 2 carbon molecules.}
+		\includegraphics[width=\textwidth]{FormoseStep4}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.45\textwidth}
+		\caption{And the cycle repeats.}
+		\includegraphics[width=\textwidth]{FormoseStep5}
+	\end{subfigure}
+\end{figure}
+
+ Graphically the process looks like Figure \ref{fig:Formose1}. Figure \ref{fig:Formose2} shows the speed of the reaction: initially there very little $C_2$, but the branching step produces more (exponentially), until the reaction saturates.  
+ 
+\begin{figure}[H]
+	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{The Formose Reaction as an autocatalytic cycle with branching step}\label{fig:Formose1}
 		\includegraphics[width=\textwidth]{Formose1}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
-	\caption{Sugar concentration versus time: note Onset Delay and saturation.}\label{fig:Formose2}
-	\includegraphics[width=\textwidth]{Formose2}
-\end{subfigure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\caption{Sugar concentration versus time.}\label{fig:Formose2}
+		\includegraphics[width=\textwidth]{Formose2}
+	\end{subfigure}
 \end{figure}
 
-Experimental Autocatalysis \cite{carnall2010mechanosensitive}
+ Autocatalysis is a very active area of experimental research. One example is biological metabolites, or substances that may have played similar roles, such as the reverse citric acid cycle, which is important to most autotrophs. 
 
 \begin{itemize}
 	\item Reverse citric acid cycle--Figure \ref{fig:ReverseCitricAcidCycle}
@@ -925,11 +994,48 @@ Experimental Autocatalysis \cite{carnall2010mechanosensitive}
 	\includegraphics[width=0.9\textwidth]{ReverseCitricAcidCycle}
 \end{figure}
 
-Autocatalysis vs replication: at first site similar, but replication exhibits diversity. Template replicators\cite{von1986self}\cite{virgo2012evolvable}. Main problem: the monomers
-have to be quite complicated
-to avoid side reactions
+\subsubsection{Autocatalysis vs biological replication}
 
-Figure \ref{fig:EigensParadox} illustrates Eigen's paradox \cite{eigen1971selforganization} \cite{wiki:error-threshold}.
+At first sight these are similar, but replication exhibits diversity that is inherited--Figure \ref{fig:AutoCatalysisVsRepl}.
+
+\begin{figure}[H]
+	\caption{Autocatalysis vs biological replication}\label{fig:AutoCatalysisVsRepl}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Autocatalysis}
+		\includegraphics[width=\textwidth]{AutoCatalysisRepl1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Biological Replication:there is diversity in bilogy, and that tends to be inherited.}
+		\includegraphics[width=\textwidth]{AutoCatalysisRepl2}
+	\end{subfigure}
+\end{figure}
+
+One solution is Template Regulators--Figure \ref{fig:TemplateReplicators}. 
+
+\begin{figure}[H]
+	\caption[Template Regulators]{Template Regulators\cite{von1986self,virgo2012evolvable}}\label{fig:TemplateReplicators}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{First step}
+		\includegraphics[width=\textwidth]{TemplateReplicators1}
+	\end{subfigure}
+	\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{String has been copied}
+		\includegraphics[width=\textwidth]{TemplateReplicators2}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Two separate copies}
+		\includegraphics[width=\textwidth]{TemplateReplicators3}
+	\end{subfigure}
+	\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Modified RNA timers as replicators\cite{von1986self}. Main problem: the monomers have to be quite complicated to avoid side reactions.}
+		\includegraphics[width=\textwidth]{TemplateReplicators4}
+	\end{subfigure}
+\end{figure}
+
+
+This brings us to Eigen's paradox Figure \ref{fig:EigensParadox} \cite{eigen1971selforganization} \cite{wiki:error-threshold}.
 \begin{itemize}
 	\item Without error correction enzymes, the maximum size of a replicating molecule is about 100 base pairs.
 	\item For a replicating molecule to encode error correction enzymes, it must be substantially larger than 100 bases.
@@ -937,22 +1043,23 @@ Figure \ref{fig:EigensParadox} illustrates Eigen's paradox \cite{eigen1971selfor
 
  
 \begin{figure}[H]
-	\caption{Eigens Paradox}\label{fig:EigensParadox}
+	\caption[Eigen's Paradox]{If you look at DNA replication in the cell, it is quite a complex process. To get the complicated machines you need natural selection; to get natural selection you need high fidelity reproduction, hence the complicated machinery.}\label{fig:EigensParadox}
 	\includegraphics[width=0.9\textwidth]{EigensParadox}
 \end{figure}
 
+We need to think of simpler mechanisms for heredity than are now used in the cell.
 \begin{itemize}
 	\item Template replication
 	\item  Replicase-like RNAzyme that can copy itself
 	\begin{itemize}
 		\item similar issue: the molecule has to be quite complex
-		(but it’s a promising area of active study)
+		\item it’s a promising area of active study.
 	\end{itemize}
 	\item Compositional heredity - no heteropolymers,
-	information stored in composition of protocell instead\cite{vasas2012evolution} \cite{segre2000compositional}.
+	information stored in composition of protocell instead\cite{vasas2012evolution,segre2000compositional}.
 \end{itemize}
 
-Summary
+\subsubsection{Summary}
 
 \begin{itemize}
 	\item Autocatalysis is chemical self-production
@@ -967,7 +1074,9 @@ Summary
 	\end{itemize}
 \end{itemize}
 
-See also   \cite{king1977symbiosis}, \cite{king1982recycling}, \cite{szathmary2000evolution},   \cite{virgo2016complex}, 
+See also   \cite{carnall2010mechanosensitive,king1977symbiosis,king1982recycling,szathmary2000evolution,virgo2016complex}
+
+
 \section{Evolutionary Theory}
 
 \subsection[An Introduction]{An Introduction-- Michael Travisano}
