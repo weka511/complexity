@@ -2,13 +2,20 @@
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
-
+\usepackage{titling}
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
 \graphicspath{{figs/}}
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em} 
+\pretitle{
+	\begin{center}
+		\includegraphics[width=6cm]{KanjiLife}\\
+		
+	}
+\posttitle{\end{center}}
+
 %opening
 \title{Notes from Origins of Life\\Week4: Early Life}
 \author{Simon Crase (compiler)\\simon@greenweaves.nz}
@@ -1152,8 +1159,13 @@ See also \cite{eigen1971selforganization,orgel2004prebiotic,kun2005real,ratcliff
 
 \subsection[A Recipe for Adaptation]{A Recipe for Adaptation-- David Baum}
 
-Since the capacity for ]Adaptive Evolution is central to almost any definition of life, we need to understand what is the simplest system capable of undergoing adaptive evolution. Life is too complex to explain without an adaptive
-process--Figure \ref{fig:LifeTooComplex}\cite{hoyle1983intelligent}. A cell is too complicated to  just emerge, so we need to think about how adaptation could start working on something simpler than a modern cell.
+Since the capacity for Adaptive Evolution is central to almost any definition of life, we need to understand what is the simplest system capable of undergoing adaptive evolution. Life is too complex to explain without an adaptive
+process\cite{hoyle1983intelligent}--Figure \ref{fig:LifeTooComplex}. A cell is too complicated to  just emerge, so we need to think about:
+
+\begin{itemize}
+	\item  how does adaptation work?
+	\item could start working on something simpler than a modern cell?
+\end{itemize}.
 
 \begin{figure}[H]
 	\caption{Life is too complex to explain without an adaptive
@@ -1161,18 +1173,32 @@ process--Figure \ref{fig:LifeTooComplex}\cite{hoyle1983intelligent}. A cell is t
 	\includegraphics[width=0.9\textwidth]{LifeTooComplex}
 \end{figure}
 
-Figure \ref{fig:ReplicationMutationSelection} is a reminder of the way Darwinian Evolution works. Favoured variant \textit{could} be more complex. But, if you need cells and a genetic system to evolve adaptively it is hard to see how life can start--Figure \ref{fig:ChickenEgg}.
+Figure \ref{fig:ReplicationMutationSelection} is a reminder of the way Darwinian Evolution works. Favoured variant \textit{could} be more complex, but it doesn't need to be. Natural selection \emph{can} yield greater complexity, but it doesn't have to.
 \begin{figure}[H]
-	\caption{Darwinian evolution: Replication-Mutation- Selection}\label{fig:ReplicationMutationSelection}
+	\caption[Darwinian evolution: Replication--Mutation--Selection]{Darwinian evolution: Replication--Mutation--Selection. We start with a bacterium, which gives rise to two daughter cells. The DNA which it gives to the daughters controls the features of those cells. The DNA at the top left might have a mutation--red dot--which allows it to function differently, which \emph{might} allow its descendants to outcompete those that weren't mutated.}\label{fig:ReplicationMutationSelection}
 	\includegraphics[width=0.9\textwidth]{ReplicationMutationSelection}
 \end{figure}
 
+To get to the first cell we need some process of natural selection that could allow it to complexify.
+ But, if you need cells and a genetic system to evolve adaptively it is hard to see how life can start--Figure \ref{fig:ChickenEgg}.
 \begin{figure}[H]
 	\caption[If you need cells and a genetic system to evolve adaptively...]{If you need cells and a genetic system to evolve adaptively it is hard to see how life can start}\label{fig:ChickenEgg}
-	\includegraphics[width=0.9\textwidth]{ChickenEgg}
+	\begin{subfigure}[t]{\textwidth}
+		\caption{To get to the first cell we need some process of natural selection that could allow it to complexify}
+		\includegraphics[width=0.9\textwidth]{ChickenEgg}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{What is required for Natural Selection?--Replication.}
+		\includegraphics[width=0.9\textwidth]{ChickenEgg1}
+	\end{subfigure}
+	\;\;\;\;\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{The only process of replication that we know about today, that cells use, is a very complicated process.}
+		\includegraphics[width=0.9\textwidth]{ChickenEgg2}
+	\end{subfigure}
 \end{figure}
 
-There are a couple of ideas:
+Scientists have figured out a few ways out of this.
 
 \begin{itemize}
 	\item Cells could pass on their identity by passing on a
@@ -1181,46 +1207,60 @@ There are a couple of ideas:
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{Cells without genes}\label{fig:CellWithoutGenes}
+	\caption[Cells without genes]{Cells without genes: cells could pass on their identity by passing on a dynamically maintained chemical state }\label{fig:CellWithoutGenes}
 	\includegraphics[width=0.9\textwidth]{CellWithoutGenes}
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Genes without cells}\label{fig:GenesWithoutCells}
+	\caption[Genes without cells]{Genes without cells: Self-replicating molecules could give rise to cells}\label{fig:GenesWithoutCells}
 	\includegraphics[width=0.9\textwidth]{GenesWithoutCells}
 \end{figure}
 
-Is this still too complex? Dividing protocells and self-replicating RNA could
-be too complex to arise spontaneously. Nuclotides not likely to be sitting around in high abundance.
+Many people, including David Baum, are concerned that this is still too complex. The simplest \gls{gls:protocell} capable of dividing, and enclosing this dynamical system would still have to be pretty complicated.
+\begin{itemize}
+	\item It would have to arise spontaneously without any prior adaptive process;
+	\item it would need to be able to grow, regulate the transport of metabolites into and out of the cell;
+	\item it would have to be able to divide
+\end{itemize}
+ That seems unlikely to arise spontaneously. A single \gls{gls:RNA} molecule is unlikely to arise spontaneously. Nucleotides are not likely to be sitting around in the environment in high abundance.
 
-One possibility is no genetics and no cells. Adaptive material is possible if material in some sort of Spatial Structure--Figure \ref{fig:WangWang}\cite{wang2015evolution}.
+So some scientists have begun looking around for something simpler. 
+One possibility is no genetics and no cells. Adaptive material is possible if material in some sort of spatial structure--Figure \ref{fig:WangWang}.
 
 \begin{figure}[H]
-	\caption{Spatial structure does not require bounded cells}\label{fig:WangWang}
+	\caption[Spatial structure does not require bounded cells]{Spatial structure does not require bounded cells\cite{wang2015evolution}}\label{fig:WangWang}
 	\includegraphics[width=0.9\textwidth]{WangWang}
 \end{figure}
 
-Perhaps the first adaptive evolving systems were flat living systems--Figure \ref{fig:Baum2018}\cite{baum2018origin}--slime-like things that lived on surfaces, had a metabolism, maintained a dynamics state, that could grow and evolve adaptively, and later give rise to cells. A cell can be seen as a very good way for a surface dweller to get to another surface--Figure \ref{fig:Baum2018}. One can imagine a situation in which, in an ancient ocean, there were minimal surfaces coated with life-like systems that could grow, spread, and be subjected to selection.
+Perhaps the first adaptive evolving systems were flat living systems--Figure \ref{fig:Baum2018}--slime-like things that lived on surfaces, had a metabolism, maintained a dynamics state, that could grow and evolve adaptively, and later give rise to cells. A cell can be seen as a very good way for a surface dweller to get to another surface--Figure \ref{fig:Baum2018}. One can imagine a situation in which, in an ancient ocean, there were minimal surfaces coated with life-like systems that could grow, spread, and be subjected to selection.
 
 \begin{figure}[H]
-	\caption{Spatial structure does not require bounded cells}\label{fig:Baum2018}
+	\caption[A very good way for a surface dweller to get to another surface]{ A cell can be seen as a very good way for a surface dweller to get to another surface\cite{baum2018origin}}\label{fig:Baum2018}
 	\includegraphics[width=0.9\textwidth]{Baum2018}
 \end{figure}
 
-Cells could have started as a transport mechanism--Figure \ref{fig:Baum2015}\cite{baum2015selection}--which enable certain types to spread.
+Cells could have started as a transport mechanism--Figure \ref{fig:Baum2015}--which enable certain types to spread.
 
 \begin{figure}[H]
-	\caption{Adaptive evolution started before cells or genetics}\label{fig:Baum2015}
+	\caption[Cells could have started as a transport mechanism]{Adaptive evolution started before cells or genetics: cells could have started as a transport mechanism\cite{baum2015selection}}\label{fig:Baum2015}
 	\includegraphics[width=0.9\textwidth]{Baum2015}
 \end{figure}
 
-To summarize, Evolutionary theory plays a central role--Figure \ref{fig:Baum2018a}\cite{baum2018origin}. It seems that cells with genetics are too complex, and we need a theory of simpler evolving progenitors.
+To summarize:
+\begin{itemize}
+	\item Evolutionary theory plays a central role--Figure \ref{fig:Baum2018a};
+	\item  Evolutionary theory is a constantly changing field, and our models have become more and more sophisticated;
+	\item we now appreciate that a view of Evolution that requires cells and genetic encoding is perhaps too stringent;
+	\item it is becoming clear that in the origin of life field will come from appreciating the fact that very simple systems, much simpler than we are used to thinking about, could be the first evolving progenitors of life as we Know it.
+\end{itemize}
+
 
 \begin{figure}[H]
-	\caption{Evolutionary theory plays a central role}\label{fig:Baum2018a}
+	\caption[Evolutionary theory plays a central role]{Evolutionary theory plays a central role\cite{baum2018origin}}\label{fig:Baum2018a}
 	\includegraphics[width=0.9\textwidth]{Baum2018a}
 \end{figure}
 
+References: \cite{hoyle1983intelligent,wang2015evolution,baum2018origin,baum2015selection}.
 
 \subsection[Chance \& Change]{Chance \& Change--Andrew Rominger}
 
