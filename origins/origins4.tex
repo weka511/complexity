@@ -1264,37 +1264,65 @@ References: \cite{hoyle1983intelligent,wang2015evolution,baum2018origin,baum2015
 
 \subsection[Chance \& Change]{Chance \& Change--Andrew Rominger}
 
+\subsubsection{Introduction: Definition of Evolution}
 
-Evolution is a theory of chance events, and change through time.
-
-Evolution: Change in the heritable characteristics of
-a \textit{population} through time--Figure \ref{fig:ChangeThroughTime}.
+\Gls{gls:evolution} is a theory of chance events, and change through time. For this course it is defined in Figure \ref{fig:ChangeThroughTime}.
 \begin{figure}[H]
-	\caption[Evolution]{Evolution: Change in the heritable characteristics of
-		a population through time}\label{fig:ChangeThroughTime}
+	\caption[Evolution]{\Gls{gls:evolution}: \glsdesc{gls:evolution}}\label{fig:ChangeThroughTime}
 	\includegraphics[width=0.9\textwidth]{ChangeThroughTime}
 \end{figure}
 
-Four key evolutionary processes
+We will be talking about the 4 key processes that make evolution possible, and perspectives on origins--\gls{gls:LUCA} and the complexity of life.
+
+\subsubsection{4 key processes that make evolution possible}
+
 \begin{itemize}
-	\item Reproduction (+ heritability)
+	\item Reproduction (+ heritability)--Figure \ref{fig:Reproduction1}
 	\begin{itemize}
 		\item can ignore haploid/diploid if mating random
-		\item maximum population size is finite
-		\item Coalescence--Figure \ref{fig:Coalescence}
-		\item Because Earth is finite and very old, LUCA is less an
-		indication of the singularity of life’s origin and more a
-		statistical artifact related to “Gambler’s ruin” 
+		\item resources are finite $\implies$ maximum population size is finite
+		\item $\implies$ after a certain number of generations, everything that is alive can be traced back to a single ancestor--Figure \ref{fig:Coalescence}. This is called ''coalescence''.
+		\item Coalescence theory allows us to make simple mathematical predictions that are very powerful
+		\begin{itemize}
+			\item The probability of two individuals having a common ancestor one generation back is $\frac{1}{N}$
+			\item The probability of two individuals not having a common ancestor one generation back is $1-\frac{1}{N}$
+			\item The probability of two individuals having a common ancestor precisely $t$ generations back is $P_c(t)=\frac{1}{N}\big(1-\frac{1}{N}\big)^{t-1}$
+			\item For a very large population $\lim\limits_{N\rightarrow \infty} P_c(t)=\frac{1}{N}e^{-\frac{t-1}{N}}$
+			\item Because Earth is finite and very old, LUCA is less an
+			indication of the singularity of life’s origin and more a
+			statistical artifact related to ''Gambler’s ruin''
+		\end{itemize}
+	
 	\end{itemize}
-	\item Mutation
-	\item Drift -- The fate of mutations without fitness consequences--Figure \ref{fig:Neutral} 
-	\item Selection--The fate of mutations with fitness consequences--Figure \ref{fig:Selection}. Fitness is the differential reproductive
-	success conferred by the new mutation.
+	\item Mutation: this is how we get variation in a population. Figure \ref{fig:Mutation1} shows the substitution of a new base pair into the genetic sequence. It is very rare, but it is important. There are other sources of variation:
+	\begin{itemize}
+		\item  Insertion;
+		\item Deletion;
+		\item Inversion
+		\item Recombination;
+		\item Migration
+	\end{itemize}
+	These all depend on mutation to create variation in the first place.
+
+	\item Drift. This occurs when the new mutant doesn't have an advantage over the un-mutated form--Figure \ref{fig:Neutral}. It might die out, or it might drift to a higher frequency in the population. The probability of it becoming fixed is  $\frac{1}{N}$.
+	
+	\item Selection--The fate of mutations with fitness consequences--Figure \ref{fig:Selection}. \Gls{gls:fitness} is \glsdesc{gls:fitness}. The probability of a beneficial mutation becoming fixed is higher than that of a neutral one, and the probability of it being lost is correspondingly lower.
+
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{Populations are finite $\implies$ Coalescence}\label{fig:Coalescence}
+	\caption[Reproduction (+ heritability)]{Reproduction (+ heritability): Offspring inherits parent’s traits}\label{fig:Reproduction1}
+	\includegraphics[width=0.8\textwidth]{Reproduction1}
+\end{figure}
+
+\begin{figure}[H]
+	\caption[Coalescence]{Populations are finite $\implies$ after a certain number of generations, everything that is alive can be traced back to a single ancestor.}\label{fig:Coalescence}
 	\includegraphics[width=0.9\textwidth]{Coalescence}
+\end{figure}
+
+\begin{figure}[H]
+	\caption[Mutation]{Mutation: the substitution of a new base pair into the genetic sequence.}\label{fig:Mutation1}
+	\includegraphics[width=0.8\textwidth]{Mutation1}
 \end{figure}
 
 \begin{figure}[H]
@@ -1306,8 +1334,15 @@ Four key evolutionary processes
 \begin{figure}[H]
 	\caption{The fate of mutations with fitness
 		consequences}\label{fig:Selection}
-	\includegraphics[width=0.9\textwidth]{Selection}
+	\begin{subfigure}[t]{0.4\textwidth}
+		\includegraphics[width=0.9\textwidth]{Mutation2}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.55\textwidth}
+		\includegraphics[width=0.9\textwidth]{Selection}
+	\end{subfigure}
 \end{figure}
+
+\subsubsection{Sequence Space}
 
 Figure \ref{fig:MutationSpace} depicts \textit{Mutation Space}, a network of sequences connected by edges of single basepair mutations. Then we have a Fitness Landscape--Figure \ref{fig:FitnessLandscapeMovement}. Notice that probability of a mutation \textit{does not depend on fitness}, but fate does.
 \begin{figure}[H]
