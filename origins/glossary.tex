@@ -2,6 +2,7 @@
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage{titling}
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
 \graphicspath{{figs/}} 
@@ -9,7 +10,12 @@
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
 \DeclareUnicodeCharacter{2192}{~}
-
+\pretitle{
+	\begin{center}
+		\includegraphics[width=6cm]{KanjiLife}\\
+		
+	}
+	\posttitle{\end{center}}
 %opening
 \title{
 	Notes from Origins of Life\\
