@@ -1342,38 +1342,63 @@ We will be talking about the 4 key processes that make evolution possible, and p
 	\end{subfigure}
 \end{figure}
 
-\subsubsection{Sequence Space}
+\subsubsection{Mutation Space}
 
-Figure \ref{fig:MutationSpace} depicts \textit{Mutation Space}, a network of sequences connected by edges of single basepair mutations. Then we have a Fitness Landscape--Figure \ref{fig:FitnessLandscapeMovement}. Notice that probability of a mutation \textit{does not depend on fitness}, but fate does.
+This is a more interesting an nuanced view of selection and drift.
+Figure \ref{fig:MutationSpace} depicts \textit{Mutation Space}, a network of sequences connected by edges of single base-pair mutations.
 \begin{figure}[H]
-	\caption{Mutations and sequence spaces}\label{fig:MutationSpace}
+	\caption[Mutations and sequence spaces]{Mutations and sequence spaces:  a network of sequences connected by edges of single basepair mutations}\label{fig:MutationSpace}
 	\includegraphics[width=0.9\textwidth]{MutationSpace}
 \end{figure}
 
+ Over this space we can overlay a Fitness Landscape--Figure \ref{fig:FitnessLandscapeMovement}. Notice that probability of a mutation \textit{does not depend on fitness}, but the fate of the mutation does.
+ 
 \begin{figure}[H]
-	\caption{Fitness landscapes}\label{fig:FitnessLandscapeMovement}
+	\caption{Over this space we can overlay a Fitness Landscape}\label{fig:FitnessLandscapeMovement}
 	\includegraphics[width=0.9\textwidth]{FitnessLandscapeMovement}
 \end{figure}
 
-NB: fitness isn't necessarily related to complexity! A priori any relationship is possible. So where does complexity come from? Maybe just a random walk?
+It is obvious that life has differing levels of complexity--Figure \ref{fig:FitComplex}. At first blush is might seem that more complex organisms are somehow fitter--Figure \ref{fig:FitComplex1}, but this is far from universally true--Figure \ref{fig:FitComplex2}. Organizations that are very different in complexity are likely very different species--Figure \ref{fig:FitComplex3}. Everything that we have said about fitness applies only within a single population; the idea of fitness across species is very controversial. A priori any relation between fitness and species is \emph{possible}--increasing, decreasing, flat--Figure \ref{fig:FitComplex4}.
+ This leaves an open question: why did life become more complex? The answer possibly involves an entropic exploration of sequence space, some more complex, other less so. Maybe just a random walk?
 
-Real World Complexities.
+\begin{figure}[H]
+	\caption{Fitness and Complexity}\label{fig:FitComplex}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{At first blush is might seem that more complex organisms are somehow fitter}\label{fig:FitComplex1}
+		\includegraphics[width=\textwidth]{FitComplex1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{But this is far from universally true}\label{fig:FitComplex2}
+		\includegraphics[width=\textwidth]{FitComplex2}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Organizations that are very different in complexity are likely very different species}\label{fig:FitComplex3}
+		\includegraphics[width=\textwidth]{FitComplex3}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{ A priori any relation between fitness and species is \emph{possible}}\label{fig:FitComplex4}
+		\includegraphics[width=\textwidth]{FitComplex4}
+	\end{subfigure}
+\end{figure}
+
+
+\subsubsection{Real World Complexities}.
 
 \begin{itemize}
 	\item  Fluctuating population sizes
-	\item  Non-random mating
-	\item  Fluctuating environments and variable
-	selection
+	\item  Non-random mating (random mating allowed us to avoid considering diploids)
+	\item  Fluctuating environments and variable selection
 \end{itemize}
+
+These complexities are probably good, because they help answer the question if Figure \ref{fig:RealWorldComplexities}: how to cross a valley in the fitness landscape?
 \begin{figure}[H]
 	\caption{Real World Complexities: how to cross a valley?}\label{fig:RealWorldComplexities}
 	\includegraphics[width=0.9\textwidth]{RealWorldComplexities}
 \end{figure}
 
-Further reading: \cite{gillespie1984molecular}, \cite{kauffman1989nk}, \cite{kimura1983neutral}, \cite{kingman2000origins}, \cite{patwa2008fixation}, \cite{poelwijk2007empirical}, \cite{rosenberg2002genealogical}.
+Further reading: \cite{gillespie1984molecular,kauffman1989nk,kimura1983neutral,kingman2000origins,patwa2008fixation,poelwijk2007empirical,rosenberg2002genealogical}.
 
 \section[Niche Construction]{Niche Construction--Michael Travisano}
-
 
 Environments can be harsh, as Figure \ref{fig:Harsh} shows, but living organisms can alter their environments, often for the better. Pioneer species break up the ground and allow others to colonize. 
 
