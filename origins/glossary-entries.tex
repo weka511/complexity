@@ -26,6 +26,8 @@
 
 \newacronym{gls:LECA}{LECA}{Last Eukaryotic Common Ancestor}
 
+\newacronym[see={[Glossary:]{gls:Large:subunit:ribosomal:ribonucleic:acid}}]{gls:LSU}{LSU}{Large subunit ribosomal ribonucleic acid\glsadd{gls:Large:subunit:ribosomal:ribonucleic:acid}}
+
 \newacronym{gls:LUCA}{LUCA}{Last Universal Common Ancestor}
 
 \newacronym{gls:ML}{ML}{Maximum Likelihood}
@@ -34,13 +36,17 @@
 
 \newacronym{gls:MP}{MP}{Maximum Parsimony}
 
-\newacronym[see={[Glossary:]{gls:nucleoside-triphosphate}}]{gls:NTP}{NTP}{Nucleoside triphosphate\glsadd{gls:nucleoside-triphosphate}}
-
 \newacronym{gls:mRNA}{mRNA}{Messenger RNA}
+
+\newacronym[see={[Glossary:]{gls:nucleoside-triphosphate}}]{gls:NTP}{NTP}{Nucleoside triphosphate\glsadd{gls:nucleoside-triphosphate}}
 
 \newacronym{gls:RNA}{RNA}{Ribonucleic Acid}
 
+\newacronym[see={[Glossary:]{gls:Ribosomal:Ribonucleic:acid}}]{gls:rRNA}{rRNA}{Ribosomal Ribonucleic acid\glsadd{gls:Ribosomal:Ribonucleic:acid}}
+
 \newacronym{gls:SFI}{SFI}{Santa Fe Institute}
+
+\newacronym[see={[Glossary:]{gls:Small:subunit:ribosomal:ribonucleic:acid}}]{gls:SSU}{SSU}{Small subunit ribosomal ribonucleic acid\glsadd{gls:Small:subunit:ribosomal:ribonucleic:acid}}
 
 \newacronym{gls:TOL}{TOL}{Tree of Life}
 
@@ -87,6 +93,7 @@
 			from a basic food source through a sequence of reactions
 			from the set itself\cite[Lecture 4.6.1]{sfi2020}
 \end{enumerate}}}
+
 \newglossaryentry{gls:autocatalysis}{
 	name={autocatalysis},
 	description={Chemical self production: the ability of a set of chemical species to make more of that same set, by undergoing a series of chemical 	reactions\cite[Lecture 4.6.2]{sfi2020}}}
@@ -149,6 +156,10 @@
 	description={The separation into two liquid phases in colloidal
 		systems. The phase more concentrated in colloid
 		component is the coacervate, and the other phase is the equilibrium solution\cite{iupac2009goldbook}}}
+	
+\newglossaryentry{gls:cytoplasm}{
+	name={cytoplasm},
+	description={In cell biology, the cytoplasm is all of the material within a cell, enclosed by the cell membrane, except for the cell nucleus. The material inside the nucleus and contained within the nuclear membrane is termed the nucleoplasm. The main components of the cytoplasm are cytosol--a gel-like substance, the organelles--the cell's internal sub-structures, and various cytoplasmic inclusions. The cytoplasm is about 80\% water and usually colorless\cite{wiki:cytoplasm}}}
 
 \newglossaryentry{gls:cofactor}{
 	name={cofactor},
@@ -198,6 +209,10 @@
 	name={eocyte},
 	description={A proposed taxonomic revision that would replace the three-*domain classification with one of only two domains, Bacteria and Archaea, an idea first proposed in 1984 by James Lake and colleagues. Eocytes are sulphur-metabolizing, extreme thermophile organisms, placed within the Crenarchaeota in the three-domain taxonomic system, but recent genetic studies have shown eocytes to be very closely related to eukaryotes, suggesting that eukaryotes and Crenarchaeota share a common ancestor. This evidence supports the abandonment of the three-domain classification in favour of a two-domain classification comprising the Eubacteria and Archaea, with the Eukarya contained within the Archaea\cite{allaby2010eocyte}}}
 
+\newglossaryentry{gls:eukaryotic}{
+	name={eukaryotic},
+	description={Eukaryotic cells are cells that contain a nucleus and organelles, and are enclosed by a plasma membrane. Organisms that have eukaryotic cells include protozoa, fungi, plants and animals. These organisms are grouped into the biological domain Eukaryota. Eukaryotic cells are larger and more complex than prokaryotic cells, which are found in Archaea and Bacteria, the other two domains of life--\cite{biologydictionary2016eukaryotic}}}
+
 \newglossaryentry{gls:eukaryotic:signature:protein}{
 	name={Eukaryotic Signature Protein},
 	description={A protein that is found in eukaryotic cells but has no significant homology to proteins in Archaea and Bacteria--cite{hartman2002origin}}}
@@ -208,7 +223,7 @@
 
 \newglossaryentry{gls:fitness}{
 	name={fitness},
-	description={the differential reproductive success conferred by the new mutation-\cite[Lecture 4.7.3]{sfi2020}}}
+	description={the differential reproductive success conferred by the new mutation-\cite[Lecture 4.7.3]{sfi2020}. See also \cite[Chapter 10, An Agony in Five Fits]{dawkins1982extended}}}
 
 \newglossaryentry{gls:furan}{
 	name={furan},
@@ -258,7 +273,13 @@
 
 \newglossaryentry{gls:landauer_bound}{
 	name={Landauer Bound},
-	description={Landauer Bound: any logically irreversible manipulation of information, such as the erasure of a bit or the merging of two computation paths, must be accompanied by a corresponding entropy increase in non-information-bearing degrees of freedom of the information-processing apparatus or its environment--$kT(H_i - H_f)$, where $H_i$ represents the entropy of the initial state, $H_i$ of the final\cite{wiki:landauer}}}
+	description={Any logically irreversible manipulation of information, such as the erasure of a bit or the merging of two computation paths, must be accompanied by a corresponding entropy increase in non-information-bearing degrees of freedom of the information-processing apparatus or its environment--$kT(H_i - H_f)$, where $H_i$ represents the entropy of the initial state, $H_i$ of the final\cite{wiki:landauer,bennett2003notes,landauer1961irreversibility}}}
+
+
+
+\newglossaryentry{gls:Large:subunit:ribosomal:ribonucleic:acid}{
+	name={Large subunit ribosomal ribonucleic acid},
+	description={Large subunit ribosomal ribonucleic acid (LSU rRNA) is the largest of the two major RNA components of the ribosome. Associated with a number of ribosomal proteins, the LSU rRNA forms the large subunit of the ribosome. The LSU rRNA acts as a ribozyme, catalyzing peptide bond formation\cite{wiki:LSU}}}
 
 \newglossaryentry{gls:leaving group}{
 	name={leaving group},
@@ -333,9 +354,13 @@
 	name={photoheterotroph},
 	description={A heterotroph is an organism that depends on organic matter already produced by other organisms for its nourishment. Photoheterotrophs obtain their energy from sunlight and carbon from organic material and not carbon dioxide. Most of the well-recognized phototrophs are autotrophs, also known as photoautotrophs, and can fix carbon. They can be contrasted with chemotrophs that obtain their energy by the oxidation of electron donors in their environments. Photoheterotrophs produce ATP through photophosphorylation but use environmentally obtained organic compounds to build structures and other bio-molecules. Photoautotrophic organisms are sometimes referred to as holophytic\cite{libre2020biology}}}
 
+\newglossaryentry{gls:phylogeny}{
+	name={phylogeny},
+	description={The result of [phylogenetic inference] is a phylogeny (also known as a phylogenetic tree) – a diagrammatic hypothesis about the history of the evolutionary relationships of a group of organisms. The tips of a phylogenetic tree can be living organisms or fossils, and represent the "end", or the present, in an evolutionary lineage. A phylogenetic tree can be rooted or unrooted. A rooted tree indicates the common ancestor, or ancestral lineage, of the tree. An unrooted tree makes no assumption about the ancestral line, and does not show the origin or root of the gene or organism in question. Phylogenetic analyses have become central to understanding biodiversity, evolution, ecology, and genomes\cite{wiki:phylogenetics}}}
+
 \newglossaryentry{gls:phylogenetics}{
 	name={phylogenetics},
-	description={In biology, phylogenetics  is the study of the evolutionary history and relationships among individuals or groups of organisms (e.g. species, or populations). These relationships are discovered through phylogenetic inference methods that evaluate observed heritable traits, such as DNA sequences or morphology under a model of evolution of these traits. The result of these analyses is a phylogeny (also known as a phylogenetic tree) – a diagrammatic hypothesis about the history of the evolutionary relationships of a group of organisms. The tips of a phylogenetic tree can be living organisms or fossils, and represent the "end", or the present, in an evolutionary lineage. A phylogenetic tree can be rooted or unrooted. A rooted tree indicates the common ancestor, or ancestral lineage, of the tree. An unrooted tree makes no assumption about the ancestral line, and does not show the origin or root of the gene or organism in question. Phylogenetic analyses have become central to understanding biodiversity, evolution, ecology, and genomes\cite{wiki:phylogenetics}}}
+	description={In biology, phylogenetics  is the study of the evolutionary history and relationships among individuals or groups of organisms (e.g. species, or populations). These relationships are discovered through phylogenetic inference methods that evaluate observed heritable traits, such as DNA sequences or morphology under a model of evolution of these traits \cite{wiki:phylogenetics}}}
 
 
 \newglossaryentry{gls:poza}{
@@ -345,6 +370,10 @@
 \newglossaryentry{gls:price:equation}{
 	name={Price equation},
 	description={In the theory of evolution and natural selection, the Price equation (also known as Price's equation or Price's theorem) describes how a trait or gene changes in frequency over time. The equation uses a covariance between a trait and fitness, to give a mathematical description of evolution and natural selection. It provides a way to understand the effects that gene transmission and natural selection have on the proportion of genes within each new generation of a population. The Price equation was derived by George R. Price, working in London to re-derive W.D. Hamilton's work on kin selection. Examples of the Price equation have been constructed for various evolutionary cases. The Price equation also has applications in economics\cite{ wiki:price:equation}}}
+
+\newglossaryentry{gls:prokaryotic}{
+	name={prokaryotic},
+	description={A simple cellular structure that has a bounding membrane surrounding a living \gls{gls:cytoplasm}--\cite[Lecture 5.2]{sfi2020}}}
 
 \newglossaryentry{gls:Proteobacteria}{
 	name={proteobacteria},
@@ -361,8 +390,6 @@
 \newglossaryentry{gls:purine}{
 	name={purine},
 	description={Purine is a heterocyclic aromatic organic compound that consists of a pyrimidine ring fused to an imidazole ring. It is water-soluble. Purine also gives its name to the wider class of molecules, purines, which include substituted purines and their tautomers. They are the most widely occurring nitrogen-containing heterocycles in nature\cite{wiki:purine}}}
-
-
 
 \newglossaryentry{gls:PVC}{
 	name={PVC superphylum},
@@ -386,6 +413,10 @@
 	name={reaction network},
 	description={multiple chemical reactions that interact\cite[Lecture 4.6.2]{sfi2020}}}
 
+\newglossaryentry{gls:Ribosomal:Ribonucleic:acid}{
+	name={Ribosomal Ribonucleic acid},
+	description={Ribosomal ribonucleic acid (rRNA) is a type of non-coding RNA which is the primary component of ribosomes, essential to all cells. rRNA is a ribozyme which carries out protein synthesis in ribosomes\cite{wiki:Ribosomal:RNA}}}
+
 \newglossaryentry{gls:ribozyme}{
 	name={ribozyme},
 	description={Ribozymes (ribonucleic acid enzymes) are RNA molecules that are capable of catalyzing specific biochemical reactions, similar to the action of protein enzymes. The 1982 discovery of ribozymes demonstrated that RNA can be both genetic material (like DNA) and a biological catalyst (like protein enzymes), and contributed to the RNA world hypothesis, which suggests that RNA may have been important in the evolution of prebiotic self-replicating systems. The most common activities of natural or in vitro-evolved ribozymes are the cleavage or ligation of RNA and DNA and peptide bond formation. Within the ribosome, ribozymes function as part of the large subunit ribosomal RNA to link amino acids during protein synthesis. They also participate in a variety of RNA processing reactions, including RNA splicing, viral replication, and transfer RNA biosynthesis. Examples of ribozymes include the hammerhead ribozyme, the VS ribozyme, Leadzyme and the hairpin ribozyme\cite{wiki:ribozyme} }}
@@ -398,6 +429,10 @@
 	name={serpentinization},
 	description={A hydration and metamorphic transformation of ultramafic rock from the Earth's mantle\cite{wiki:serpentinization}}
 }
+
+\newglossaryentry{gls:Small:subunit:ribosomal:ribonucleic:acid}{
+	name={Small subunit ribosomal ribonucleic acid},
+	description={Small subunit ribosomal ribonucleic acid (SSU rRNA) is the smallest of the two major RNA components of the ribosome. Associated with a number of ribosomal proteins, the SSU rRNA forms the small subunit of the ribosome. It is encoded by the SSU-rDNA\cite{wiki:SSU}}}
 
 \newglossaryentry{gls:spliceosome}{
 	name={spliceosome},
