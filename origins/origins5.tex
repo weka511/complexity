@@ -136,7 +136,7 @@ Why eukaryotes? There are three ideas at present.
 		\item Multicellular organization requires communications between different cells, which express different genes and proteins.
 		\item The extra layers of regulation that eukaryotes have may explain why they, and not prokaryotes, have evolved complex multicellular organisms. 
 		\begin{itemize}
-			\item These layers deal with the genetic control by separating the transcription of a DNA sequence from the reading of the message--there are many steps where regulation can be imposed. 
+			\item These layers deal with the genetic control by separating the transcription of a \gls{gls:DNA} sequence from the reading of the message--there are many steps where regulation can be imposed. 
 			\item Additionally the \gls{gls:endomembrane} system can affect the secretion, degradation and recycling of proteins
 		\end{itemize}
 	\end{itemize}
@@ -220,7 +220,7 @@ Mysteries remain. They are generally structural problems. We can reconstruct the
 
 There are two extremes in a range of theories.
 \begin{itemize}
-	\item In the Outside-in Model, an ancestral archaeon had a membrane, Figure \ref{fig:outside:in1}, which became invaginated. It enveloped a bacterium in a mutualistic association--Figure \ref{fig:outside:in2}. Later it assembled membranes and vesicles to build a compartment to protect DNA from the activity (free oxygen) of the mitochondria--Figure \ref{fig:outside:in3}--until the nucleus was stabilized with the addition of the nuclear pores--Figure \ref{fig:outside:in4}.
+	\item In the Outside-in Model, an ancestral archaeon had a membrane, Figure \ref{fig:outside:in1}, which became invaginated. It enveloped a bacterium in a mutualistic association--Figure \ref{fig:outside:in2}. Later it assembled membranes and vesicles to build a compartment to protect \gls{gls:DNA} from the activity (free oxygen) of the mitochondria--Figure \ref{fig:outside:in3}--until the nucleus was stabilized with the addition of the nuclear pores--Figure \ref{fig:outside:in4}.
 	\item In the Inside-out Model--Figure \ref{fig:inside:out}--the archaeon host becomes associated with extra-cellular bacteria, which are gradually walled in.
 \end{itemize}
 
@@ -235,7 +235,7 @@ There are two extremes in a range of theories.
 		\includegraphics[width=\textwidth]{OutsideIn2}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{Cell later assembled membranes and vesicles to build a compartment to protect DNA from the activity (free oxygen) of the mitochondria}\label{fig:outside:in3}
+		\caption{Cell later assembled membranes and vesicles to build a compartment to protect \gls{gls:DNA} from the activity (free oxygen) of the mitochondria}\label{fig:outside:in3}
 		\includegraphics[width=\textwidth]{OutsideIn3}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
@@ -280,7 +280,7 @@ As different as they are, what do all these species have in common?
 		\includegraphics[width=0.8\textwidth]{WhatDoTheseSpeciesHaveInCommon}
 	\end{center}
 \end{figure}
-They all contain DNA
+They all contain \gls{gls:DNA}
 and they share a genetic code
 that programs for the different types
 and arrangements of molecules
@@ -569,17 +569,18 @@ of emergence and evolutionary innovation.
 
 See \cite{hillis1996molecular,zuckerkandl1965molecules,williams2006assessing,woese2002evolution}
 
-\subsection{A Deeper Dive into Phylogenetics--Andy Rominger}
+\subsection[A Deeper Dive into Phylogenetics]{A Deeper Dive into Phylogenetics--Andy Rominger}
 
+We will be talking about:
 \begin{itemize}
-	\item How to Infer a Phylogeny
-	\item Why is the Deep Past so difficult to Infer?
+	\item How to statistically infer a phylogeny from data on Species living in the present;
+	\item Why the Deep Past is so difficult to infer from this contemporary data.
 \end{itemize}
 
 \subsubsection{How to Infer a Phylogeny}
-We are going to focus on step 3 of Figure \ref{fig:MolecularPhylogeneticsProtocol}, finding the evolutionary process leading to the data we have. We start with homologous sequences, and we want to infer the speciation, extinction, and passing genes on to daughter lineages.
+We are going to focus on step 3 of Figure \ref{fig:MolecularPhylogeneticsProtocol}, finding the evolutionary process leading to the data we have. We start with \gls{gls:homologous} sequences, and we want to infer the speciation, extinction, and passing genes on to daughter lineages. This process also involves mutation, because the changes in \gls{gls:DNA} are what allow us to infer the past. Figure  \ref{fig:InferringPhylogeny} therefore shows a mutation rate matrix. 
 
-We have transition rates, topology, and sequence data--Figures \ref{fig:InferringPhylogeny} \& \ref{fig:InferringPhylogeny1}, and we want to choose transition rates and a topology to \textit{maximize the likelihood}--Figures \ref{fig:InferringPhylogeny2}. 
+We have transition rates, topology, and sequence data--Figure \ref{fig:InferringPhylogeny1}--and we want to choose transition rates and a topology to \textit{maximize the likelihood}--Figures \ref{fig:InferringPhylogeny2}. 
 
 \begin{figure}[H]
 	\caption{Inferring a phylogeny}\label{fig:InferringPhylogeny}
@@ -597,37 +598,34 @@ We have transition rates, topology, and sequence data--Figures \ref{fig:Inferrin
 \end{figure}
 
 \begin{itemize}
-	\item Maximum Likelihood Inference\cite{huelsenbeck1997phylogeny}
+	\item The inference procedure that we have described is called Maximum Likelihood Inference\cite{huelsenbeck1997phylogeny}--Figure \ref{fig:InferingPhylogeny}
 	\item Bayesian inference: traversing the complex topology and
 	rate matrix space lends itself to Bayesian algorithms\cite{huelsenbeck2001mrbayes,huelsenbeck2001introduction}
 \end{itemize}
-
-
-Two other means have been used historically:
+\begin{figure}[H]
+	\caption[Inferring Phylogeny]{Inferring Phylogeny: in practice topologies are not this simple.}\label{fig:InferingPhylogeny}
+	\includegraphics[width=0.8\textwidth]{InferingPhylogeny}
+\end{figure}
+Two other procedures have been used historically:
 \begin{itemize}
 	\item Parsimony
 	\item Distance based inference
 \end{itemize}
 
 \subsubsection{Why is the Deep Past so difficult to infer?}
-Caveats.
+Caveats: Inferring the past it hard.
 \begin{itemize}
-	\item Inferring the past it hard. Unrooted phylogeny arises because mutation process is reversible in our models--Figure \ref{fig:unrooted:phylogeny}. This is why the Banfield Tree of Life\cite{hug2016new}--Figure \ref{fig:banfield:tol}--has no root.
-	\item Rooting the Tree with an Outgoup
+	\item Unrooted phylogeny
+	\item \gls{gls:TOL} has no outgroup.
 	\item Time Calibration
 	\item \Gls{gls:long:branch:attraction}
 	\item What genetic information goes back to LUCA?
 \end{itemize}
 
-
-
+Unrooted phylogeny arises because mutation process is reversible in our models--Figure \ref{fig:unrooted:phylogeny}. We don't know where the ultimate ancestor is, and how it had led to the present tips. This is why the Banfield Tree of Life has no root--Figure \ref{fig:banfield:tol}.
+ 
 \begin{figure}[H]
-	\caption{Banfield Tree of Life}\label{fig:banfield:tol}
-	\includegraphics[width=0.9\textwidth]{TOL4}
-\end{figure}
-
-\begin{figure}[H]
-	\caption{Unrooted phylogeny arises because mutation process is reversible in our models}\label{fig:unrooted:phylogeny}
+	\caption[Unrooted phylogeny arises because mutation process is reversible]{Unrooted phylogeny arises because mutation process is reversible in our models}\label{fig:unrooted:phylogeny}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{InferringPastHard1}
 	\end{subfigure}
@@ -636,47 +634,74 @@ Caveats.
 	\end{subfigure}
 \end{figure}
 
-The best method for finding a root is to use an \gls{gls:outgroup}--Figure \ref{fig:bird:outgroup}--which then gives a temporal direction to the tree: the tree flows away from the hypothetical common ancestor. But the Tree of [all] Life, by definition, has no outgroup!
-
 \begin{figure}[H]
-	\caption{Using a Bird as an Outgroup for the Tree of Mammals}\label{fig:bird:outgroup}
-	\includegraphics[width=0.9\textwidth]{Outgroup}
+	\caption[Banfield Tree of Life]{Banfield Tree of Life\cite{hug2016new}}\label{fig:banfield:tol}
+	\includegraphics[width=0.9\textwidth]{TOL4}
 \end{figure}
 
-Another problem is that rate heterogeneity means that mutations are not clock like\cite{sanderson2003r8s,smit2007evolutionary}. Time in a phylogeny is measured in substitutions, not in years. Since the rate of mutation varies across lineages and across Earth's history, mutation events don't tell us the time on each branch. So species in the Banfield Tree of Life--Figure \ref{fig:banfield:tol}-- don't line up.
+The best method we have for rooting a tree is to use an \gls{gls:outgroup}. We can add a new group to the tree of mammals--Figures \ref{fig:bird:without:outgroup} and \ref{fig:bird:outgroup}. In Figure \ref{fig:bird:outgroup} the root is where the bird connects to the mammals: we have added temporal directionality to the tree.But the \gls{gls:TOL}, by definition, has no \gls{gls:outgroup}!
+
+\begin{figure}[H]
+	\caption{Adding an Outgroup to the Tree of Mammals}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{An unrooted tree of mammals}\label{fig:bird:without:outgroup}
+		\includegraphics[width=0.9\textwidth]{WithoutOutgroup}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Using a Bird as an Outgroup}\label{fig:bird:outgroup}
+		\includegraphics[width=0.9\textwidth]{Outgroup}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Tree of Mammals (plus outgroup)}\label{fig:bird-mammals}
+		\includegraphics[width=0.9\textwidth]{bird-mammals}
+	\end{subfigure}
+\end{figure}
+
+Another problem is that rate heterogeneity means that mutations are not clock like\cite{sanderson2003r8s,smit2007evolutionary}. Time in a phylogeny is measured in substitutions, not in years. Since the rate of mutation varies across lineages and across Earth's history, mutation events don't tell us the time on each branch. So species in the Banfield Tree of Life--Figure \ref{fig:banfield:tol}-- don't line up. We need additional information to calibrate substitution events against time.
 \begin{itemize}
-	\item We may be able to assign times from the fossil record.
+	\item We may be able to assign times from the fossil record--Figure \ref{fig:calibrating-time}.
 	\item In some cases we \textit{do} know the mutation rate and can use it like a clock.
 \end{itemize}
 
-Long branches attract each other\cite{philippe2005heterotachy}--Figure \ref{fig:long:branches}.
+\begin{figure}[H]
+	\caption{We must calibrate 	phylogenies with independent data, 	e.g. the fossil record, known mutation rates for specific groups.}\label{fig:calibrating-time}
+	\includegraphics[width=0.6\textwidth]{calibrating-time}
+\end{figure}
+Long branches attract each other\cite{philippe2005heterotachy}--Figure \ref{fig:long:branches}. The longer a lineage has been evolving, the more time there has been for mutations to accrue, and divergent sequences can, by chance, appear convergent, or else can evolve totally away. So our inference methods end up clustering data
 
 \begin{figure}[H]
-	\caption{Long branches attract each other}\label{fig:long:branches}
-	\begin{subfigure}[b]{0.45\textwidth}
+	\caption[Long branches attract each other]{Long branches attract each other. Where to group the lowest sequence?}\label{fig:long:branches}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{LongBranchAttraction0}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\includegraphics[width=\textwidth]{LongBranchAttraction1}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\includegraphics[width=\textwidth]{LongBranchAttraction2}
 	\end{subfigure}
 \end{figure}
 
- What genetic information goes back to LUCA--Figure \ref{fig:back_to_LUCA}? Ribosomal RNA and protein genes\cite{quast2012silva} and Figure \ref{fig:Ribosome-5-3-2}.
+ What genetic information goes back to LUCA? Figure \ref{fig:back_to_LUCA} illustrates that billions of years separate bacterial and human DNA. All life needs to translate DNA into proteins, and all of life uses ribosomes to do this. Therefore Ribosomal RNA and protein genes are exactly the genes that we can use to infer these deep phylogenetic relationships\cite{quast2012silva} and Figure \ref{fig:Ribosome-5-3-2}.
  
  \begin{figure}[H]
- 	\caption{What genetic information goes back to LUCA? }\label{fig:back_to_LUCA}
- 	\includegraphics[width=0.9\textwidth]{LUCA_what_goes_back}
+ 	\caption{What genetic information goes back to LUCA? }
+ 	\begin{subfigure}[t]{0.45\textwidth}
+ 		\caption{Billions of years separate bacterial and human DNA}
+ 		\includegraphics[width=\textwidth]{LUCA_what_goes_back}\label{fig:back_to_LUCA}
+ 	\end{subfigure}
+ 	\;\;\;
+	 \begin{subfigure}[t]{0.45\textwidth}
+	 	\caption{Ribosomal RNA and protein genes}\label{fig:Ribosome-5-3-2}
+	 	\includegraphics[width=0.45\textwidth]{Ribosome-5-3-2}
+	 \end{subfigure}
  \end{figure}
 
-\begin{figure}[H]
-	\caption{What genetic information goes back to LUCA? Ribosomal RNA and protein genes}\label{fig:Ribosome-5-3-2}
-	\includegraphics[width=0.9\textwidth]{Ribosome-5-3-2}
-\end{figure}
+Given these caveats, it is remarkable that different research groups have been able to reconstruct such detailed phylogenies for all life, and many of these phylogenies are robust because they have gone to great lengths to overcome these challenges.
 
 
-\section{Macroscopic Theories in Biology}
-
-Lecturer: Chris Kempes
+\section[Macroscopic Theories in Biology]{Macroscopic Theories in Biology--Chris Kempes}
+ 
 
 \begin{itemize}
 	\item Which aspects of extant life are general, and which are arbitrary?
@@ -898,7 +923,7 @@ Von Neumann's work on self reproducing automata \cite{neumann1966theory}  \cite{
 
 
 \begin{figure}[H]
-	\caption{Von Neumann's work on self reproducing automata is analogous to the architecture of a modern cell}\label{fig:VonNeumann}
+	\caption[Self reproducing automata and the architecture of a modern cell]{Von Neumann's work on self reproducing automata is analogous to the architecture of a modern cell}\label{fig:VonNeumann}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\caption{The ribosome + assisting biomolecules
 			act like a Universal Constructor}\label{fig:VonNeumann1}
