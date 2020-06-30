@@ -702,27 +702,63 @@ Given these caveats, it is remarkable that different research groups have been a
 
 \section[Macroscopic Theories in Biology]{Macroscopic Theories in Biology--Chris Kempes}
  
-
+One of the main questions from this course is: which aspects of extant life are general, and which are arbitrary? If we look at the diversity of life on this planet:
 \begin{itemize}
-	\item Which aspects of extant life are general, and which are arbitrary?
-	\item How much of what we see is peculiar to the trajectory of life on our own planet?
-	\item How much would be true of life anywhere?
+	\item how much of what we see is peculiar to the trajectory of life on our own planet?
+	\item how much would be true of life anywhere?
 \end{itemize}
 
-This matters not just for exobiology, but also for understanding early life and the origin of life in general.
+This matters not just for exobiology, but also for understanding what early life might have looked like, and the origin of life in general (not just our own planet).
 
 In this course we have covered:
 \begin{itemize}
 	\item Laws of chemistry
 	\item General processes of natural selection
 	\item Laws of physics
-	\item Laws of Life?
 \end{itemize}
 
-As an example of Laws of Life, Figure \ref{fig:allometric:scaling} shows the Relationship between peak postfeeding resting metabolic rate and body mass for mammals\cite{white2005allometric}--an approximate power law with an exponent of $\frac{3}{4}$. West, Brown and Enquist\cite{west1997general} have shown how this law follows from the fractal vascular structure of mammals--Figure \ref{fig:FractalBranching}. Optimize so it fills space and bring nutrients to all cells, taking into account hydrodynamics, then wh get the $\frac{3}{4}$ exponent. The same thing works for plants. So Body Plan + Constraints$\rightarrow$Law of Life.
+\subsection{Are there Laws of Life?} 
+
+There are certainly laws of physics and chemistry that apply to life, but are there distinct laws of life? We will talk about not only how the laws of physics and chemistry are coupled to the laws of life but also about how, once you have a particular biological structure, that determines a particular law of life. That law of life is about the evolutionary history that has brought you to a particular structure, and how that structure connects to the fundamental laws of physics, chemistry, and evolution.
+
+What do we mean by a law? The most well know example is Newton's Law of Gravitation:
+\begin{align*}
+	F =& \frac{G m_1 m_2}{r^2} \numberthis \label{eq:newton}
+\end{align*}
+
+This holds anywhere in the Universe, it holds for any two masses, and any distance between them. We can understand all sorts of planetary relationships based on this one law.
+
+\begin{itemize}
+	\item If we were trying to verify the Law experimentally, we might see data like Figure \ref{fig:Newton:Experimental}
+	\item \emph{Maybe} we'd observe a fundamental shift in physics for very small distances--Figure \ref{fig:Newton:Shift}--perhaps a quantum effect. 
+\end{itemize}
+\begin{figure}[H]
+	\caption{Newton's Law of Universal Gravitation}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{If we were trying to verify the Law experimentally, we might see data like this (masses have been randomized)}\label{fig:Newton:Experimental}
+		\includegraphics[width=\textwidth]{Newton}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{\emph{Maybe} we'd observe a fundamental shift in physics for very small distances(contrived example.)}\label{fig:Newton:Shift}
+		\includegraphics[width=\textwidth]{Newton2}
+	\end{subfigure}
+\end{figure}
+
+The question becomes: \begin{itemize}
+	\item are there laws in biology analogous to (\ref{eq:newton})? 
+	\item what do they look like?
+	\item where do they come from?
+\end{itemize}
+
+Why should we expect that there are laws in biology at all? Organisms evolve within the bounds of chemistry and physics; you should never see an organism disobeying any of the known rules of chemistry or physics. At a more subtle level, as organisms evolve they may be able to optimize their physiology with respect to one or more physical constraints. they may see some constraint as a detriment to \gls{gls:fitness}: evolution may select for organisms that are able to do a better job of dealing with the constraint in a way that makes them more fit--more likely to reproduce\cite[Chapter 10, An Agony in Five Fits]{dawkins1982extended}. They might, over time, optimize according to the most dominant constraints given their physiology.
+
+\subsection{An example: mammals}
+
+As an example of Laws of Life, Figure \ref{fig:allometric:scaling} shows the Relationship between peak postfeeding resting metabolic rate and body mass for mammals--an approximate power law with an exponent of $\frac{3}{4}$. West, Brown and Enquist\cite{west1997general} have shown how this law follows from the fractal vascular structure of mammals--Figure \ref{fig:FractalBranching}. Optimize so it fills space and bring nutrients to all cells, taking into account hydrodynamics, then wh get the $\frac{3}{4}$ exponent. The same thing works for plants. So Body Plan + Constraints$\rightarrow$Law of Life.
 
 \begin{figure}[H]
-	\caption{Relationship between peak postfeeding resting metabolic rate and body mass.}\label{fig:allometric:scaling}
+	\caption[Relationship between peak postfeeding resting metabolic rate and body mass]{Relationship between peak postfeeding resting metabolic rate and body mass-\cite{white2005allometric}}\label{fig:allometric:scaling}
 	\includegraphics[width=0.9\textwidth]{WhiteSeymour}
 \end{figure}
 
