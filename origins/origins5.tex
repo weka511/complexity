@@ -1,5 +1,5 @@
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
 \usepackage{titling}
@@ -664,7 +664,7 @@ Another problem is that rate heterogeneity means that mutations are not clock li
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{We must calibrate 	phylogenies with independent data, 	e.g. the fossil record, known mutation rates for specific groups.}\label{fig:calibrating-time}
+	\caption[We must calibrate 	phylogenies with independent data]{We must calibrate 	phylogenies with independent data, 	e.g. the fossil record, known mutation rates for specific groups.}\label{fig:calibrating-time}
 	\includegraphics[width=0.6\textwidth]{calibrating-time}
 \end{figure}
 Long branches attract each other\cite{philippe2005heterotachy}--Figure \ref{fig:long:branches}. The longer a lineage has been evolving, the more time there has been for mutations to accrue, and divergent sequences can, by chance, appear convergent, or else can evolve totally away. So our inference methods end up clustering data
@@ -753,42 +753,67 @@ The question becomes: \begin{itemize}
 
 Why should we expect that there are laws in biology at all? Organisms evolve within the bounds of chemistry and physics; you should never see an organism disobeying any of the known rules of chemistry or physics. At a more subtle level, as organisms evolve they may be able to optimize their physiology with respect to one or more physical constraints. they may see some constraint as a detriment to \gls{gls:fitness}: evolution may select for organisms that are able to do a better job of dealing with the constraint in a way that makes them more fit--more likely to reproduce\cite[Chapter 10, An Agony in Five Fits]{dawkins1982extended}. They might, over time, optimize according to the most dominant constraints given their physiology.
 
-\subsection{An example: mammals}
+\subsection{Examples of Laws of Life}
 
-As an example of Laws of Life, Figure \ref{fig:allometric:scaling} shows the Relationship between peak postfeeding resting metabolic rate and body mass for mammals--an approximate power law with an exponent of $\frac{3}{4}$. West, Brown and Enquist\cite{west1997general} have shown how this law follows from the fractal vascular structure of mammals--Figure \ref{fig:FractalBranching}. Optimize so it fills space and bring nutrients to all cells, taking into account hydrodynamics, then wh get the $\frac{3}{4}$ exponent. The same thing works for plants. So Body Plan + Constraints$\rightarrow$Law of Life.
+\subsubsection{Mammals}
+
+We will start with mammals. This is a very advanced place to start: these are some of the most complicated organism we know, that have had the most evolutionary time to reach the body plan they have. We'll look at Body mass and \gls{gls:BMR}.  Figure \ref{fig:allometric:scaling} shows the Relationship between peak post-feeding resting metabolic rate and body mass for mammals--an approximate power law with an exponent of $\frac{3}{4}$. Since this isn't a simple proportionality is shows that there may be something interesting going on: despite all this diversity of mammals, despite all their diverse strategies, there is this relationship, which we might call a law for mammals. What physics leads to this?
 
 \begin{figure}[H]
-	\caption[Relationship between peak postfeeding resting metabolic rate and body mass]{Relationship between peak postfeeding resting metabolic rate and body mass-\cite{white2005allometric}}\label{fig:allometric:scaling}
+	\caption[Relationship between BMR and body mass]{Relationship between peak postfeeding resting metabolic rate and body mass-\cite{white2005allometric}}\label{fig:allometric:scaling}
 	\includegraphics[width=0.9\textwidth]{WhiteSeymour}
 \end{figure}
+
+Geoffrey West, Jim Brown and Brian Enquist\cite{west1997general} have shown that if you: \begin{itemize}
+	\item consider the fractal vascular structure of mammals and plants--Figure \ref{fig:FractalBranching};
+	\item optimize it so it fills space and brings resources to all cells--or, in the case of plants, if we  fill canopy with leaves to so solar radiation can be absorbed;
+	\item think about hydrodynamic resistance, and consider the need to not buckle under the force of gravity in the case of a tree, and put all these physical constraints together;
+	\item minimize the energy required to distribute resources;
+\end{itemize}
+Then the optimization prodicts the $\frac{3}{4}$ exponent: Body Plan + Constraints$\rightarrow$Law of Life.
 
 \begin{figure}[H]
 	\caption{Power Law follows from the fractal vascular structure of mammals.}\label{fig:FractalBranching}
 	\includegraphics[width=0.9\textwidth]{FractalBranching}
 \end{figure}
 
-Example of a Fundamental Constraint: diffusion to a simple spherical cell drifting passively. Cell is living in a still fluid filled with nutrients, and we want to know how nutrients diffuse to cell. If we assume that cell uses all of nutrient, so concentration at surface is held at zero.
+This is a  way to take a body plan, couple it with constraints, and then predict some emergent law for a particular class of organisms.
+
+\subsubsection{Example of a Fundamental Constraint}
+
+The foregoing is a very complicated example, but there are examples of these types of laws at all scales of life, and there are some that connect to very fundamental constraints. We will discuss one example in the next section, but be aware that there is a very rich literature on different physical constraints.
+
+Diffusion to a simple spherical cell drifting passively. Cell is living in a still fluid filled with nutrients, and we want to know how nutrients diffuse to cell. We will solve the diffusion equation\footnote{\cite[Lecture 3.8: Systematics and Limits of Metabolic Rates]{sfi2020}}, and assume that the cell uses all of nutrients, so concentration at surface is held at zero.
 
 \begin{align*}
-C(r) =& C_{\infty}\big(1 - \frac{r_C}{r}\big)\text{, where}\\
-C_{\infty} =& \text{ concentartion at infinity}\\
-C(r) =& \text{ concentration at distance r}\\
-J(r) =& D\frac{\partial C}{\partial R} \text{ flux}\\
-  =& D C_{\infty} \frac{r_c}{r^2}\\
-U =& 4 \pi r_C^2 J(r_C) \text{ total uptake of nutrient}\\
-=&4 \pi D C_{\infty} r_C 
+	C(r) =& C_{\infty}\big(1 - \frac{r_c}{r}\big)\text{, where}\\
+	r_c=& \text{ radius of cell}\\
+	C_{\infty} =& \text{ concentration at infinity}\\
+	C(r) =& \text{ concentration at distance r. Then the flux in is given by}\\
+	J(r) =& D\frac{\partial C}{\partial R} \text{, where $D$ is the diffusion constant}\\
+	  =& D C_{\infty} \frac{r_c}{r^2}\text{. We can compute the total uptake of nutrient}\\
+	U =& 4 \pi r_c^2 J(r_c) \\
+	=& 4 \pi\cancel{ r_c^2} D C_{\infty} \frac{r_c}{\cancel{r_c^2}}\\
+	=&4 \pi D C_{\infty} r_c 
 \end{align*}
 
-No rate process within the cell can use the nutrient more quickly than $U$, so all processes must scale with $r$ at this rate or more slowly. If process want to go faster than $U$, the fluid needs to be disturbed, or the cell needs to move.
+This gives us a variety of physical and metabolic limitations, since no rate process within the cell can use the nutrient more quickly than $U$, so all processes must scale with $r$ at this rate or more slowly. If process want to go faster than $U$, the fluid needs to be disturbed, or the cell needs to move. This gives a very particular physiological outcome.
 
-Figure \ref{fig:BacterialPhysiology} shows the variation of component size with cell size\cite{kempes2016evolutionary}; it \textit{bounds} the cell size: at the large end and small end the cell runs out of space for components.
+\subsubsection{Bacterial Physiology}
+
+In Chris's own work, his team has looked at cell physiology across the entire range of cell sizes and found they can predict various volumes through power laws--Figure \ref{fig:BacterialPhysiology}. This shows the tradeoffs between quantities for small and large bacteria.
+\begin{itemize}
+	\item at the small end the cell runs out of space for DNA and protein;
+	\item at the large end it runs out of space for all the RNA components.
+\end{itemize}
 
 \begin{figure}[H]
-	\caption{BacterialPhysiology}\label{fig:BacterialPhysiology}
+	\caption[The variation of component size with cell size]{The variation of component size with cell size; it \textit{bounds} the cell size: at the large end and small end the cell runs out of space for fundamental components.\cite{kempes2016evolutionary}}\label{fig:BacterialPhysiology}
 	\includegraphics[width=0.9\textwidth]{BacterialPhysiology}
 \end{figure}
 
-We could see how the fundamental physiological constraint change for other conceivable forms of life.
+This set of physiological laws comes with a particular concept of optimization and physiological tradeoffs. We might play with how these laws might vary and create an abstract physiological space and look at all physiological possibilities. This might be more relevant in a variety of early life contexts before life reaches to degree of optimization discussed in this Section
+
 
 See also \cite{kempes2011predicting}.
 
