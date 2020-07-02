@@ -819,6 +819,7 @@ See also \cite{kempes2011predicting}.
 
 \section{Selection-- Michael Lachmann}
 
+\subsection{The Origin of Species}
 Charles Darwin laid out a careful and well thought argument--''A naturalist, reflecting on the mutual affinities of organic beings, on their embryological relations, their geographical distribution, geological succession, and other such facts, might come to the conclusion that each species had not been independently created, but had descended, like varieties, from other  species''\cite{darwin1859origin}.
 
 Darwin presented a phylogenetic Tree--\ref{fig:TOL:Darwin}. A modern view, Figure \ref{fig:TOL:Modern} is more like a web than a tree. Large parts of our genome came from viruses, and our bodies are full of bacteria and other symbionts. Some may stay for only a few weeks, but others might transmit vertically through the lineage. Out mitochondria, for example, who are responsible for out being able to live with oxygen and use it, were once free living, but, today, live in each cell and reproduce with it.
@@ -837,6 +838,7 @@ Darwin presented a phylogenetic Tree--\ref{fig:TOL:Darwin}. A modern view, Figur
 
 Darwin made the point that species evolved from one another, but: ''Nevertheless, such a conclusion, even if well founded, would be unsatisfactory, until it could be shown how the innumerable species inhabiting this world have been modified, so as to acquire that perfection of structure and coadaptation which most justly excites our admiration''--\cite{darwin1859origin}.
 
+\subsection{How do species acquire that perfection of structure?}
 How do species acquire that perfection of structure? There are three parts.
 \begin{itemize}
 	\item Variation: individuals in the population differ from one another.
@@ -844,11 +846,11 @@ How do species acquire that perfection of structure? There are three parts.
 	\item Selection: the variations affect the survival of some individuals.
 \end{itemize}
 
-For example, consider a butterfly population with differences in colour, some darker, some lighter, living on black trees--Figure \ref{fig:SelectionMoths}. Those whose colour blends in with the tree survive better; \emph{ if colour is inherited}, the differential survival will lead to an increase of the frequency of dark moths in the population--Figures \ref{fig:SelectionMoths1} and  \ref{fig:SelectionMoths2}. If this continues over many generations, only black butterflies will remain, and we will run out of variation in the population, and the butterflies will not be able to adapt to a new tree colour. Genetic mutation continually inject new variation onto the population, allowing further evolution
+For example, consider a butterfly population with differences in colour, some darker, some lighter, living on black trees--Figure \ref{fig:SelectionMoths0}. Those whose colour blends in with the tree survive better; \emph{ if colour is inherited}, the differential survival will lead to an increase of the frequency of dark moths in the population--Figures \ref{fig:SelectionMoths1} and  \ref{fig:SelectionMoths2}. If this continues over many generations, only black butterflies will remain, and we will run out of variation in the population, and the butterflies will not be able to adapt to a new tree colour. Genetic mutation continually inject new variation onto the population, allowing further evolution
 \begin{figure}[H]
-	\caption{Example of natural selection--light and dark butterflies}
+	\caption{Example of natural selection--light and dark butterflies}\label{fig:SelectionMoths}
 	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{Butterfly population with differences in colour}\label{fig:SelectionMoths}
+		\caption{Butterfly population with differences in colour}\label{fig:SelectionMoths0}
 		\includegraphics[width=0.8\textwidth]{SelectionMoths}
 	\end{subfigure}
 	\;\;\;
@@ -863,23 +865,48 @@ For example, consider a butterfly population with differences in colour, some da
 	\end{subfigure}
 \end{figure}
 
-The example examined survivability, but, in addition to survival, other traits are selected in populations, such as number of offspring produces, mating success, sexual selection--Fugure \ref{fig:BrightBird}. What exactly is selected for?
+The example examined survivability, but, in addition to survival, other traits are selected in populations, such as number of offspring produces, mating success, sexual selection--Figure \ref{fig:BrightBird}. What exactly is selected for? Some have looked at number of children, grand-children, etc. The trait that is actually selected is long-term survival of the lineage in question, as compared to other lineages.
 
 \begin{figure}[H]
 	\caption[What exactly is selected for?]{In addition to survival, other traits are selected in populations, such as number of offspring produces, mating success, sexual selection. What exactly is selected for?}\label{fig:BrightBird}
 	\includegraphics[width=0.8\textwidth]{BrightBird}
 \end{figure}
-\gls{gls:price:equation}--(\ref{eq:price:equation})
 
+\subsection{Variational versus Transformational Processes}
+Figure \ref{fig:SelectionMoths0} is a variational process. The average colour changed, not because of a change in individual butterflies, but because some butterflies survived more than others. Compare with a population of chameleons, where each chameleon will change colour if you put it on a dark tree--Figure \ref{fig:chamelion}.
+\begin{figure}[H]
+	\begin{center}
+		\caption[ Compare with a population of chameleons]{ Compare with a population of chameleons, where each chameleon will change colour if you put it on a dark tree.}\label{fig:chamelion}
+		\includegraphics[width=0.6\textwidth]{chamelion}
+	\end{center}
+\end{figure}
+
+Consider memes.
+\begin{itemize}
+	\item I can hear a joke and think how to make it funnier so it will spread better
+	\item or maybe jokes that seem funnier spread better
+\end{itemize}
+
+In both cases we end up with funny jokes: in the first can it depends on my ability to transform jokes, in the other we have differences in spreading.
+
+\subsection{The Price Equation}
+
+The \gls{gls:price:equation}\cite{gardner2020price} is a nice way to look at these two processes. It looks at the variation in survival when something happens.
 \begin{align*}
-\Delta Z =& \frac{Cov(Z,W) + E(W \Delta Z)}{W}\text{, where} \numberthis \label{eq:price:equation}\\
-Z=& \text{ some property, e.g. colour,}\\
-W=& \text{ survival.}\\
- & \textit{Rearranging, }\\
-W \Delta Z =& \underbrace{Cov(Z,W)}_\text{selection} + \underbrace{E(W \Delta Z)}_\text{transformation}
+	\Delta Z =& \frac{Cov(Z,W) + E(W \Delta Z)}{W}\text{, where} \numberthis \label{eq:price:equation}\\
+	Z=& \text{ some property, e.g. colour,}\\
+	W=& \text{ survival.}\\
+	 & \textit{Rearranging, }\\
+	W \Delta Z =& \underbrace{Cov(Z,W)}_\text{selection} + \underbrace{E(W \Delta Z)}_\text{transformation}
 \end{align*}
 
-How species acquire that perfection of structure? Because traits increase in value if they help individuals who have them survive, compared to those they don't.
+\begin{figure}[H]
+	\begin{center}
+		\caption[How do species acquire that perfection of structure? ]{How do species acquire that perfection of structure? Because traits increase in value if they help individuals who have them survive, compared to those they don't.}
+		\includegraphics[width=0.8\textwidth]{dolphin}
+	\end{center}
+\end{figure}
+
 
 \section{Selection Theory}
 Chris Kempes
