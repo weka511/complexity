@@ -891,13 +891,16 @@ In both cases we end up with funny jokes: in the first can it depends on my abil
 
 \subsection{The Price Equation}
 
-The \gls{gls:price:equation}\cite{gardner2020price} is a nice way to look at these two processes. It looks at the variation in survival when something happens.
+The \gls{gls:price:equation}\cite{gardner2020price,price1970selection,frank2012natural} is a nice way to look at these two processes. It looks at the change of something in the population, such as brightness of wing colour or funniness of jokes,  when something happens to a population, and a generation passes, or maybe just a day; some individuals survive, some reproduce. We look at the difference in the property over this time.
 \begin{align*}
-	\Delta Z =& \frac{Cov(Z,W) + E(W \Delta Z)}{W}\text{, where} \numberthis \label{eq:price:equation}\\
+	\Delta Z =& \frac{Cov(Z,W) + \mathop{\mathbb{E}}(w \Delta Z)}{\overline {W}}\text{, where} \numberthis \label{eq:price:equation}\\
 	Z=& \text{ some property, e.g. colour,}\\
 	W=& \text{ survival.}\\
+	\mathop{\mathbb{E}}(...) =& \text{ expected value}\\
+	Cov(Z,W)=&\text{ how much better high $Z$ individual survived compared to low $Z$}\\
+	\mathop{\mathbb{E}}(w \Delta Z)=&\text{ average change of $Z$ in the individuals that survived}\\
 	 & \textit{Rearranging, }\\
-	W \Delta Z =& \underbrace{Cov(Z,W)}_\text{selection} + \underbrace{E(W \Delta Z)}_\text{transformation}
+	\overline{W} \Delta Z =& \underbrace{Cov(Z,W)}_\text{selection} + \underbrace{\mathop{\mathbb{E}}(w \Delta Z)}_\text{transformation}
 \end{align*}
 
 \begin{figure}[H]
@@ -908,24 +911,27 @@ The \gls{gls:price:equation}\cite{gardner2020price} is a nice way to look at the
 \end{figure}
 
 
-\section{Selection Theory}
-Chris Kempes
+\section[Selection Theory]{Selection Theory--Chris Kempes}
+
+How do we think about evolution in a simple and mathematical way?
 
 \subsection{Quasispecies equation}
-\begin{itemize}
-	\item How do we think about evolution in a simple, mathematical way?
-	\item Start with binary Genome. One string can change into another via point mutations.
-\end{itemize}
+Let's begin by thinking of a genome. Instead of the 4 nucleotides, let's think about a binary genome, $0100001001$, say. A species would be a particular strong of 0s and 1s of distinct length. We can think about one species turning into another via point mutations, and this has an interesting topology--Figure \ref{fig:GenomeTopology}
 
 
 \begin{figure}[H]
-	\caption{Topology of genome -- point mutations represent edges}\label{fig:GenomeTopology} 
-	\includegraphics[width=0.9\textwidth]{GenomeTopology}
+	\begin{center}
+		\caption[Topology of genome]{Topology of genome--point mutations represent edges, This shows how one genome can turn into another, and it shows the distances between genomes.}\label{fig:GenomeTopology} 
+		\includegraphics[width=0.8\textwidth]{GenomeTopology}
+	\end{center}
 \end{figure}
 
+How do we get a handle on how evolution is selecting between individual genomes? We will use the idea of the fitness landscape, which maps each string of bits into a fitness in a fixed environment--Figure \ref{fig:FitnessLandscape}.
 \begin{figure}[H]
-	\caption{Fitness Landscape, showing maximum fitness.}\label{fig:FitnessLandscape} 
-	\includegraphics[width=0.9\textwidth]{FitnessLandscape}
+	\begin{center}
+		\caption{Fitness Landscape, showing maximum fitness. \gls{gls:fitness} here means relative growth rate.}\label{fig:FitnessLandscape} 
+		\includegraphics[width=0.8\textwidth]{FitnessLandscape}
+	\end{center}
 \end{figure}
 
 Introduce \emph{Quasispecies equation}.
@@ -955,19 +961,19 @@ NB. See Figure \ref{fig:GenomeTopology} - point mutations much more likely than 
 \end{figure}
 
 \begin{align*}
-\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\\
-f_0 >&1, f_1 = 1\\
-q_{00} =& (1-u)^L \triangleq q\text{, where $u$ is mutation rate, $L$ = length of genome}\\
-q_{01} =& 1-q\\
-q_{11} =& 1\text{, $L$ is large, so 1$\rightarrow$1} \\
-q_{10} =& 0\text{, $1\nrightarrow0$}\\
-\phi =& \sum_{i=1}^{n}x_i f_i\\
-\text{Whence,}\\
-\dot{x_0}=&f_0 q x_0 - \phi x_0\text{,}\\
-\dot{x_1}=&f_0 (1-q) x_0 + x_1 -\phi x_1\text{, and}\\
-\phi =& f_0 x_0 + x_1 \text{. But} \\
-x_0 + x_1 =& 1\text{, so we have}\\
-\dot{x_0}=& x_0 \big[f_0 q -1 - x_0 (f_0 - 1)\big]
+	\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\\
+	f_0 >&1, f_1 = 1\\
+	q_{00} =& (1-u)^L \triangleq q\text{, where $u$ is mutation rate, $L$ = length of genome}\\
+	q_{01} =& 1-q\\
+	q_{11} =& 1\text{, $L$ is large, so 1$\rightarrow$1} \\
+	q_{10} =& 0\text{, $1\nrightarrow0$}\\
+	\phi =& \sum_{i=1}^{n}x_i f_i\\
+	\text{Whence,}\\
+	\dot{x_0}=&f_0 q x_0 - \phi x_0\text{,}\\
+	\dot{x_1}=&f_0 (1-q) x_0 + x_1 -\phi x_1\text{, and}\\
+	\phi =& f_0 x_0 + x_1 \text{. But} \\
+	x_0 + x_1 =& 1\text{, so we have}\\
+	\dot{x_0}=& x_0 \big[f_0 q -1 - x_0 (f_0 - 1)\big]
 \end{align*}
 Now we can look for a steady state solution:
 \begin{align*}
