@@ -951,16 +951,16 @@ Then the growth of the $x_i$ with time is given by:
 	\dot{x_i} =& x_i f_i - \phi x_i \numberthis \label{eq:x:dot}\\
 	\sum_{i=1}^{n} \dot x_i =& 0 \text{, assume constant population. What should $\phi$ be?}\\
 	\sum_{i=1}^{n} f_i x_i - \phi \sum_{i=1}^{n} x_i =& 0 \text{, using (\ref{eq:x:dot})}\\
-	\phi =& \sum_{i=1}^{n}x_i f_i\text{, since $\sum_{i=1}^{n}x_i = 1$ from definition of symmetry.}
+	\phi =& \sum_{i=1}^{n}x_i f_i\text{, since $\sum_{i=1}^{n}x_i = 1$ from definition of symmetry.} \numberthis \label{eq:qs:norm}
 \end{align*}
 Hence $\phi$ is \emph{average fitness}. 
 
 But this leaves out \emph{mutation!} Include $q_{ij}$, the probability of mutation from $i$ to $j$, and (\ref{eq:x:dot}) becomes:
 \begin{align*}
-	\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\text{, \textbf{full quasispecies equation}} 
+	\dot x_i =& \sum_{j=1}^{n} f_j q_{j,i}x_j - \phi x_i\text{, \textbf{full quasispecies equation}} \numberthis \label{eq:quasispecies}
 \end{align*}
 
-The matrix $q_{ij}$ is complicated. We see from Figure \ref{fig:GenomeTopology} that point mutations much more likely than 2-point, etc.
+The matrix $q_{j,i}$, which gives the probability of species $j$ mutating to $i$, is complicated. We see from Figure \ref{fig:GenomeTopology} that point mutations much more likely than 2-point, etc.
 
 \subsection{What are the basic ways in which we think about evolution?}
 
@@ -969,39 +969,46 @@ The matrix $q_{ij}$ is complicated. We see from Figure \ref{fig:GenomeTopology} 
 	\item How do we use this to think about origins of life? 
 \end{itemize}
 
+We want to understand the dynamics of populations evolving in accordance with (\ref{eq:quasispecies}). The simplest case is a fitness landscape with one sequence, the "master sequence" with fitness $f_0>1$, competing against all other sequences, which share fitness $f_1=1$--Figure \ref{fig:SteadyStateSolution}. 
 \begin{figure}[H]
 	\caption[Simplify to \emph{Master Sequence}]{Simplify to \emph{Master Sequence}, $f_0$ with all less fit sequences lumped as $f_1$.}\label{fig:SteadyStateSolution} 
 	\includegraphics[width=0.9\textwidth]{SteadyStateSolution}
 \end{figure}
 
+We will lump all states, apart from $f_0$ into one state. Now for $q_{j,i}$ having the same meaning as in (\ref{eq:quasispecies}):
 \begin{align*}
-	\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\\
-	f_0 >&1, f_1 = 1\\
-	q_{00} =& (1-u)^L \triangleq q\text{, where $u$ is mutation rate, $L$ = length of genome}\\
-	q_{01} =& 1-q\\
-	q_{11} =& 1\text{, $L$ is large, so 1$\rightarrow$1} \\
-	q_{10} =& 0\text{, $1\nrightarrow0$}\\
-	\phi =& \sum_{i=1}^{n}x_i f_i\\
-	\text{Whence,}\\
+		q_{0,0} =& (1-u)^L \triangleq q \text{ say, where}\\
+		u =& \text{ mutation rate,}\\
+		L =& \text{ length of genome} \text{, and}\\
+		q_{0,1} =& 1-q_{0,0}\\
+		q_{11} =& 1\text{, $L$ is large, so 1$\rightarrow$1 almost always} \\
+		q_{10} =& 0\text{, $1\nrightarrow0$}
+\end{align*}
+
+
+Substituting the $q_j,i$ (\ref{eq:quasispecies}) becomes:
+\begin{align*}
 	\dot{x_0}=&f_0 q x_0 - \phi x_0\text{,}\\
-	\dot{x_1}=&f_0 (1-q) x_0 + x_1 -\phi x_1\text{, and}\\
+	\dot{x_1}=&f_0 (1-q) x_0 + x_1 -\phi x_1\text{, and (\ref{eq:qs:norm}) becomes}\\
 	\phi =& f_0 x_0 + x_1 \text{. But} \\
 	x_0 + x_1 =& 1\text{, so we have}\\
-	\dot{x_0}=& x_0 \big[f_0 q -1 - x_0 (f_0 - 1)\big]
+	\dot{x_0}=& x_0 \big[f_0 q -1 - x_0 (f_0 - 1)\big] \numberthis \label{eq:dx0}
 \end{align*}
-Now we can look for a steady state solution:
+
+Now we can look for a steady state solution to (\ref{eq:dx0}):
 \begin{align*}
-x_0^* =& \frac{f_0 q - 1}{f_0 - 1}\text{, se we need}\\
-f_0q >& 1 \text{, if the master sequence is to persist. I.e.}\\
-u <& log(f_0)\\
-log(f_0) >& -L log(1-u)\text{. Now we assume $L<<1$, and find}\\
-u <& \frac{log(f_0)}{L}\text{, which is known as the \emph{Error Threshold.}} 
+	x_0^* =& \frac{f_0 q - 1}{f_0 - 1} \text{, so the master sequnce will die out if}\\
+	f_0 q =& 1 \text{. We need}\\
+	f_0q >& 1 \text{, if the master sequence is to persist. I.e.}\\
+	log(f_0) >& -L\; log(1-u)\text{. Now we assume $L<<1$, and find}\\
+	u <& \frac{log(f_0)}{L}\text{, which is known as the \gls{gls:error:threshold}} 
 \end{align*}
-The Error Threshold is the \emph{maximum mutation rate that allows for adaptive evolution!} NB: it is more sensitive to $L$ than to $f_0$.
+The \gls{gls:error:threshold} is the \emph{maximum mutation rate that allows for adaptive evolution!} NB: it is more sensitive to $L$ than to $f_0$.
 
-\subsection{Quasispecies and Error Catastrophe}
+This \gls{gls:error:threshold} or "error catastrophe", as it is sometimes called, really defines the adaptive and mutational thresholds for all of life; it is a commonly used concept and is generally obeyed by all the species we know to exist. In the next lecture we'll connect this to a more chemical form of eveolution to see how it helps understand it also.
+\subsection[Quasispecies and Error Catastrophe]{Quasispecies and Error Catastrophe--Michael Lachmann}
 
-Michael Lachmann
+
 
 We look at growth of types, e.g.:
 \begin{itemize}
