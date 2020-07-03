@@ -916,6 +916,8 @@ The \gls{gls:price:equation}\cite{gardner2020price,price1970selection,frank2012n
 How do we think about evolution in a simple and mathematical way?
 
 \subsection{Quasispecies equation}
+
+\subsubsection{Introduction}
 Let's begin by thinking of a genome. Instead of the 4 nucleotides, let's think about a binary genome, $0100001001$, say. A species would be a particular strong of 0s and 1s of distinct length. We can think about one species turning into another via point mutations, and this has an interesting topology--Figure \ref{fig:GenomeTopology}
 
 
@@ -926,27 +928,39 @@ Let's begin by thinking of a genome. Instead of the 4 nucleotides, let's think a
 	\end{center}
 \end{figure}
 
-How do we get a handle on how evolution is selecting between individual genomes? We will use the idea of the fitness landscape, which maps each string of bits into a fitness in a fixed environment--Figure \ref{fig:FitnessLandscape}.
+How do we get a handle on how evolution is selecting between individual genomes? We will use the idea of the fitness landscape, which maps each string of bits into a fitness in a fixed environment--Figure \ref{fig:FitnessLandscape}. We've transformed the n-dimensional problem of the genomes--Figure \ref{fig:GenomeTopology} into a 1-dimensional problem. There is a peak fitness, so we might expect that the corresponding genome will eventually become the only one in the gene pool. There is any easy way to define this mathematically, and this is some of the most traditional mathematical biology that we know.
 \begin{figure}[H]
 	\begin{center}
-		\caption{Fitness Landscape, showing maximum fitness. \gls{gls:fitness} here means relative growth rate.}\label{fig:FitnessLandscape} 
+		\caption{Fitness Landscape, showing maximum fitness. \Gls{gls:fitness} here means relative growth rate of each genome--Fitness(3) in the language of \cite[Chapter 10]{dawkins1982extended}. }\label{fig:FitnessLandscape} 
 		\includegraphics[width=0.8\textwidth]{FitnessLandscape}
 	\end{center}
 \end{figure}
 
-Introduce \emph{Quasispecies equation}.
+\subsubsection{Quasispecies equation}.
+
+Consider the frequency of a particular sequence $i$.
 \begin{align*}
-\dot x_i =& f_i x_i - \phi x_i \text{, where $x_i$ is frequency of sequence $i$, $f_i$ is fitness, $\phi$ is death term.}\\
-\sum_{i=1}^{n} \dot x_i =& 0 \text{, assume constant population}\\
-\sum_{i=1}^{n} f_i - \phi \sum_{i=1}^{n} x_i =& 0\\
-\phi =& \sum_{i=1}^{n}x_i f_i\text{, since $\sum_{i=1}^{n}x_i = 1$}
-\end{align*}
-Hence $\phi$ is \emph{average fitness}. But this leaves out \emph{mutation!} Include $q_{ij}$, the probability of mutation from $i$ to $j$.
-\begin{align*}
-\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\text{, full quasispecies equation} 
+	\dot x_i =& f_i x_i - \phi x_i \text{, where }\\
+	x_i =& \text{ frequency of sequence $i$, }\\
+	f_i =&  \text{ fitness,} \\
+	\phi =& \text{ death term--makes sure population stays fixed.}
 \end{align*}
 
-NB. See Figure \ref{fig:GenomeTopology} - point mutations much more likely than 2-point, etc.
+Then the growth of the $x_i$ with time is given by:
+\begin{align*}
+	\dot{x_i} =& x_i f_i - \phi x_i \numberthis \label{eq:x:dot}\\
+	\sum_{i=1}^{n} \dot x_i =& 0 \text{, assume constant population. What should $\phi$ be?}\\
+	\sum_{i=1}^{n} f_i x_i - \phi \sum_{i=1}^{n} x_i =& 0 \text{, using (\ref{eq:x:dot})}\\
+	\phi =& \sum_{i=1}^{n}x_i f_i\text{, since $\sum_{i=1}^{n}x_i = 1$ from definition of symmetry.}
+\end{align*}
+Hence $\phi$ is \emph{average fitness}. 
+
+But this leaves out \emph{mutation!} Include $q_{ij}$, the probability of mutation from $i$ to $j$, and (\ref{eq:x:dot}) becomes:
+\begin{align*}
+	\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\text{, \textbf{full quasispecies equation}} 
+\end{align*}
+
+The matrix $q_{ij}$ is complicated. We see from Figure \ref{fig:GenomeTopology} that point mutations much more likely than 2-point, etc.
 
 \subsection{What are the basic ways in which we think about evolution?}
 
