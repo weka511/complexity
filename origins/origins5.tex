@@ -1005,10 +1005,8 @@ Now we can look for a steady state solution to (\ref{eq:dx0}):
 \end{align*}
 The \gls{gls:error:threshold} is the \emph{maximum mutation rate that allows for adaptive evolution!} NB: it is more sensitive to $L$ than to $f_0$.
 
-This \gls{gls:error:threshold} or "error catastrophe", as it is sometimes called, really defines the adaptive and mutational thresholds for all of life; it is a commonly used concept and is generally obeyed by all the species we know to exist. In the next lecture we'll connect this to a more chemical form of eveolution to see how it helps understand it also.
+This \gls{gls:error:threshold} or "error catastrophe", as it is sometimes called, really defines the adaptive and mutational thresholds for all of life; it is a commonly used concept and is generally obeyed by all the species we know to exist. In the next lecture we'll connect this to a more chemical form of evolution to see how it helps understand it also.
 \subsection[Quasispecies and Error Catastrophe]{Quasispecies and Error Catastrophe--Michael Lachmann}
-
-
 
 We look at growth of types, e.g.:
 \begin{itemize}
@@ -1016,17 +1014,56 @@ We look at growth of types, e.g.:
 	\item Molecule in test-tube.
 \end{itemize}
 
+We start with the growth of a single population:
 \begin{align*}
-\vec{x}^{\,t} =& W M \vec{x}\text{, where M represents mutations, W growth, e.g.}\\
-M =& \begin{bmatrix}
-1-\mu & 0\\
-\mu& 1
-\end{bmatrix}&
+	\dot{x} =& w \cdot x \text{, so if we want to look $t$ steps into the future:}\\
+	x_t =& w^t x_0
 \end{align*}
-Let us diagonalize WM
+Figure \ref{fig:growth} shows the growth of the population with time.
+\begin{figure}[H]
+	\caption{Growth of $x$}\label{fig:growth}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{$w=1.1$: population increases}\label{fig:growth1}
+		\includegraphics[width=\textwidth]{growth1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{$w=0.9$: population decreases when $w$ is below the extinction threshold..}\label{fig:growth2}
+		\includegraphics[width=\textwidth]{growth2}
+	\end{subfigure}
+\end{figure}
+
+We can represent two or more types as a vector.
+
 \begin{align*}
-WM =& VDV^{-1}\\
-(WM)^t =& V D^t V^{-1}
+	\vec{\dot{x}} =& W \vec{x} \text{, and we see}\\
+	\vec{x_t}=& W^t x_0 
+\end{align*}
+Figure \ref{eq:growth3} shows the growth for
+\begin{align*}
+	W=&\begin{bmatrix}
+		1.1&0\\
+		0&0.95
+	\end{bmatrix}
+\end{align*}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Growth of $\vec{\dot{x}} = W \vec{x}$}\label{eq:growth3}
+		\includegraphics[width=0.8\textwidth]{growth3}
+	\end{center}
+\end{figure}
+
+\begin{align*}
+	\vec{x}^{\,t} =& W M \vec{x}\text{, where M represents mutations, W growth, e.g.}\\
+	M =& \begin{bmatrix}
+	1-\mu & 0\\
+	\mu& 1
+	\end{bmatrix}&
+	\end{align*}
+	Let us diagonalize WM
+	\begin{align*}
+	WM =& VDV^{-1}\\
+	(WM)^t =& V D^t V^{-1}
 \end{align*}
 So $D^t$ is dominated by its largest eigenvalue.
 
