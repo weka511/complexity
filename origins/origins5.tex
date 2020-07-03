@@ -931,7 +931,7 @@ Let's begin by thinking of a genome. Instead of the 4 nucleotides, let's think a
 How do we get a handle on how evolution is selecting between individual genomes? We will use the idea of the fitness landscape, which maps each string of bits into a fitness in a fixed environment--Figure \ref{fig:FitnessLandscape}. We've transformed the n-dimensional problem of the genomes--Figure \ref{fig:GenomeTopology} into a 1-dimensional problem. There is a peak fitness, so we might expect that the corresponding genome will eventually become the only one in the gene pool. There is any easy way to define this mathematically, and this is some of the most traditional mathematical biology that we know.
 \begin{figure}[H]
 	\begin{center}
-		\caption{Fitness Landscape, showing maximum fitness. \Gls{gls:fitness} here means relative growth rate of each genome--Fitness(3) in the language of \cite[Chapter 10]{dawkins1982extended}. }\label{fig:FitnessLandscape} 
+		\caption[Fitness Landscape, showing maximum fitness]{Fitness Landscape, showing maximum fitness. \Gls{gls:fitness} here means relative growth rate of each genome--Fitness(3) in the language of \cite[Chapter 10]{dawkins1982extended}. }\label{fig:FitnessLandscape} 
 		\includegraphics[width=0.8\textwidth]{FitnessLandscape}
 	\end{center}
 \end{figure}
@@ -1038,6 +1038,7 @@ We can represent two or more types as a vector.
 	\vec{\dot{x}} =& W \vec{x} \text{, and we see}\\
 	\vec{x_t}=& W^t x_0 
 \end{align*}
+
 Figure \ref{eq:growth3} shows the growth for
 \begin{align*}
 	W=&\begin{bmatrix}
@@ -1048,25 +1049,111 @@ Figure \ref{eq:growth3} shows the growth for
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Growth of $\vec{\dot{x}} = W \vec{x}$}\label{eq:growth3}
-		\includegraphics[width=0.8\textwidth]{growth3}
+		\caption[Growth of $\vec{\dot{x}} = W \vec{x}$]{Growth of $\vec{\dot{x}} = W \vec{x}$: type 1 takes over the population!}\label{eq:growth3}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{$\vec{\dot{x}} = W $}
+			\includegraphics[width=\textwidth]{growth3}
+		\end{subfigure}
+		\;\;
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Log-log plot}
+			\includegraphics[width=\textwidth]{growth3-log-log}
+		\end{subfigure}
 	\end{center}
 \end{figure}
 
+A real population will not normally comprise one type that takes over while all other types die out: we had forgotten mutation. Let us add a mutation rate of $\mu$, say 1\%, from type 1 to 2, but type 2 doesn't mutate.
+
+
 \begin{align*}
-	\vec{x}^{\,t} =& W M \vec{x}\text{, where M represents mutations, W growth, e.g.}\\
+	\vec{\dot{x}} =& W M \vec{x} \\
+	\vec{x_t}=& ( M )^t x_0  \vec{x}\text{, where}\\
 	M =& \begin{bmatrix}
-	1-\mu & 0\\
+	1-\mu & 0 \numberthis \label{eq:M}\\
 	\mu& 1
-	\end{bmatrix}&
-	\end{align*}
-	Let us diagonalize WM
-	\begin{align*}
+	\end{bmatrix}
+\end{align*}
+
+The order of multiplying $M$ and $W$ doesn't matter, as $WMWMWMW...m\approxeq MWMW...W$ for large $t$. 	Let us diagonalize WM
+
+\begin{align*}
 	WM =& VDV^{-1}\\
 	(WM)^t =& V D^t V^{-1}
 \end{align*}
-So $D^t$ is dominated by its largest eigenvalue.
 
+So $D^t$ is dominated by its largest eigenvalue--Figure \ref{fig:growth4}. Notice that type 2 decreases at first, then it starts increasing exponentially, parallel to type 1. The eigenvalues are $\{1.089, 0.950\}$, and the eigenvectors $\{0.9976,0.0682\}$ and $\{0,1\}$. The first mixture of types is known as a quasispecies. Both types in the quasispecies grow exponentially. Figure \ref{fig:growth5} shows the effect of increasing the mutation rate. The eigenvalues are $\{1.012, 0.950\}$, and the eigenvector corresponding to $1.012$ is $\{0.632,0.775\}$. 
+
+Figure \ref{fig:growth6} shows the effect in increasing the mutation rate further: both types decline. The eigenvalues are $\{0.95, 0.88\}$. The crossing from Figure \ref{fig:growth5} to Figure \ref{fig:growth6} is what we call the \emph{error catastrophe}.
+
+\begin{figure}[H]
+	\caption{Log-log plot of $\vec{x}$}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{$\mu=0.01$. Notice that type 1 dominates; type 2 decreases at first, then it starts increasing exponentially, parallel to type 1.}\label{fig:growth4}
+		\includegraphics[width=\textwidth]{growth4}
+	\end{subfigure}
+	\;\;
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{$\mu=0.08$. Types $1$ and $2$ both increase, but $2$ increases faster.}\label{fig:growth5}
+		\includegraphics[width=\textwidth]{growth5}
+	\end{subfigure}
+	\;\;
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{$\mu=0.2$. Both types decrease}\label{fig:growth6}
+		\includegraphics[width=\textwidth]{growth6}
+	\end{subfigure}
+\end{figure}
+
+Figure \ref{fig:ErrorCatastropheMu} depicts the development of the error catastrophe as the mutation rate increases.
+\begin{figure}[H]
+	\caption[Development of Error Catastrophe]{Development of Error Catastrophe. The x-axis represents the mutation rate, the y-axis the largest eigenvalue. When the first eigenvalue dips below the second, 0.95, type 1 (the quasi-species) disappears from the population.}\label{fig:ErrorCatastropheMu}
+	\includegraphics[width=0.8\textwidth]{ErrorCatastropheMu}
+\end{figure}
+
+In (\ref{eq:M}) we allow type 1 to mutate to 2, but not back again (c.f. Figure \ref{fig:SteadyStateSolution}). Let us try the effect of allowing mutations back from type 2 to 1. Figure \ref{fig:ErrorCatastropheBackMutation} shows the effect if $M$ is as follows. The eigenvalues never cross: type 1 is not lost, as it is generated from type 2.
+
+\begin{align*}
+	M =& \begin{bmatrix}
+		1-\mu&\frac{\mu}{100}\\
+		\mu&1-\frac{\mu}{100}
+	\end{bmatrix}
+\end{align*}
+
+\begin{figure}[H]
+	\caption[The eigenvalues never cross]{The eigenvalues never cross}\label{eq:ErrorCatastropheBackMutation}
+	\includegraphics[width=0.8\textwidth]{ErrorCatastropheBackMutation}
+\end{figure}
+
+Let us derive the error catastrophe, assuming:
+\begin{align*}
+	M =& \begin{bmatrix}
+		1-\mu&0\\
+		\mu&1
+	\end{bmatrix}\\
+	W=& \begin{bmatrix}
+		w&0\\
+		0&1
+	\end{bmatrix} \text{, whence:}\\
+	WM =& \begin{bmatrix}
+		(1-\mu)w&0\\
+		\mu&1
+	\end{bmatrix} \text{. Now we look for an eingenvector. We want}\\
+	WM\begin{bmatrix}
+		1\\
+		\alpha
+	\end{bmatrix}=&\begin{bmatrix}
+				(1-\mu)w\\
+				\mu+\alpha
+			\end{bmatrix} \text{. In order for this to be an eigenvector, we need}\\
+	\frac{\mu+\alpha}{(1-\mu)w} =& \frac{\alpha}{1} \text{, whence}\\
+	\mu =& \alpha \big(w(1-\mu)-1\big) \text{, rearranging}\\
+	\alpha =& \frac{\mu}{w(1-\mu)-1}
+\end{align*}
+In order for $\alpha$ to be positive, so there is an eigenvector where both types are present, we need $w(1-\mu)-1>0 \equiv w(1-\mu)>1$. If we introduce $s$ such that:
+\begin{align*}
+	w =& 1+s \text{, we need}\\
+	(1+s)(1-\mu) >& 0 \text{, or}\\
+	s \gtrapprox& 0 \text{, for small $\mu$}
+\end{align*}
 Figures \ref{fig:ErrorCatastrophe1} and \ref{fig:ErrorCatastrophe2} show that master sequence lost if mutation rate is too high. 
 \begin{figure}[H]
 	\caption{Hamming Distance.}\label{fig:ErrorCatastrophe1} 
@@ -1083,9 +1170,8 @@ See \cite{eigen1978hypercycle}, \cite{eigen1988molecular}, \cite{eigen2002error}
 See also \cite{wessner2010origins}
 
 
-\section{Artificial Life Theory}
+\section[Artificial Life Theory]{Artificial Life Theory--Sara Imari Walker}
 
-Lecturer: Sara Imari Walker
 
 Figure \ref{fig:PhysicsvsBiology} compares the evolution of a physical system with a biological system. Even the laws evolve in biology. Also biological systems involve homeostasis.
 \begin{figure}[H]
