@@ -9,6 +9,7 @@
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
+\setcounter{MaxMatrixCols}{20}
 \pretitle{
 	\begin{center}
 		\includegraphics[width=6cm]{KanjiLife}\\
@@ -1150,24 +1151,139 @@ Let us derive the error catastrophe, assuming:
 \end{align*}
 In order for $\alpha$ to be positive, so there is an eigenvector where both types are present, we need $w(1-\mu)-1>0 \equiv w(1-\mu)>1$. If we introduce $s$ such that:
 \begin{align*}
-	w =& 1+s \text{, we need}\\
+	w =& 1+s \text{, we need} \numberthis \label{eq:s:w}\\
 	(1+s)(1-\mu) >& 0 \text{, or}\\
 	s \gtrapprox& 0 \text{, for small $\mu$}
 \end{align*}
-Figures \ref{fig:ErrorCatastrophe1} and \ref{fig:ErrorCatastrophe2} show that master sequence lost if mutation rate is too high. 
+
+
+The original presentation of the error catastrophe was by Manfred Eigen and Peter Schuster. They looked at a DNA genome of length $L$, assuming one optimal sequence, but we will simplify by working with a binary genome: 1 means a bit is identical to the optimum, 0 that it is different; $\nu$ is the mutation rate per site, $0\leftrightarrow1$. We shall assume one mutation per timestep, rate $L\nu$, and let $i$ denote the number of zeroes: this will be the type. The number of ones is $L-i$.
+
+\begin{align*}
+	p_{i\rightarrow i+1} =&\frac{L-i}{L}L\nu = (L-i)\nu \numberthis \label{eq:p:plus}\\
+	p_{i \rightarrow i-1}=& \frac{i}{L}L\nu = i\nu \numberthis \label{eq:p:minus}
+\end{align*}
+
+
+We set:
+\begin{align*}
+	\nu=&0.01\\
+	L=&10 
+\end{align*}
+then
+\begin{align*}
+	M =& \begin{bmatrix}
+		0.9 &0.01&   0&   0&   0&   0&   0&   0&   0&   0&   0\\
+		0.1 & 0.9&0.02&   0&   0&0    &0   &0   &0   &0   &0\\
+		0   &0.09&  .9&0.03& 0&   0&   0&   0&   0&   0&   0\\
+		0   &   0&0.08&  .9&0.04& 0&   0&   0&   0&   0&   0\\
+		0   &   0&   0&0.07&  .9&0.05& 0&  0&   0&   0&   0\\
+		0   &   0&   0&   0&0.06&  .9&0.06& 0&   0&   0&   0\\
+		0   &   0&   0&   0&   0&0.05&  .9&0.07& 0&   0&   0\\
+		0   &   0&   0&   0&   0&   0&0.04&  .9&0.08& 0&   0\\
+		0   &   0&   0&   0&   0&   0&   0&0.03&  .9&0.09& 0\\
+		0   &   0&   0&   0&   0&   0&   0&   0&0.02&0.9&0.1\\
+		0   &   0&   0&   0&   0&   0&   0&   0&   0& 0.01&0.9& 
+	\end{bmatrix}
+\end{align*}
+and, if we take $s=0.3$ in (\ref{eq:s:w}):
+\begin{align*}
+	W =& \begin{bmatrix}
+	    1.3 &0&   0&   0&   0&   0&   0&   0&   0&   0&   0\\
+		0 & 1&0&   0&   0&0    &0   &0   &0   &0   &0\\
+		0 & 0&1&   0&   0&0    &0   &0   &0   &0   &0\\
+		0 & 0&0&   1&   0&0    &0   &0   &0   &0   &0\\
+		0 & 0&0&   0&   1&0    &0   &0   &0   &0   &0\\
+		0 & 0&0&   0&   0&1    &0   &0   &0   &0   &0\\
+		0 & 0&0&   0&   0&0    &1   &0   &0   &0   &0\\
+		0 & 0&0&   0&   0&0    &0   &1   &0   &0   &0\\
+		0 & 0&0&   0&   0&0    &0   &0   &1   &0   &0\\
+		0 & 0&0&   0&   0&0    &0   &0   &0   &1   &0\\
+		0 & 0&0&   0&   0&0    &0   &0   &0   &0   &1\\
+	\end{bmatrix}
+\end{align*}
+We can show that the eigenvector with the largest eigenvalues is:
+\begin{align*}
+	\begin{bmatrix}
+	0.64\\
+	0.24\\
+	0.08\\
+	0.03\\
+	0.01\\
+	0\\
+	0\\
+	0\\
+	0\\
+	0\\
+	0\\
+	\end{bmatrix}
+\end{align*}
+
+This will be the quasispecies.
+Now, let us take $s=0.08$ in (\ref{eq:s:w}). The quasispecies becomes:
+
+\begin{align*}
+	\begin{bmatrix}
+		0.01\\
+		0.02\\
+		0.05\\
+		0.12\\
+		0.21\\
+		0.24\\
+		0.2\\
+		0.11\\
+		0.04\\
+		0.01\\
+		0\\
+	\end{bmatrix}
+\end{align*}
+The optimal type has quite a low frequency, and the sub-optimal types are better represented. Figure \ref{fig:QuasispeciesForDifferentS} shows the effect of varying $s$. Figure \ref{fig:ErrorCatastrophe2} rearranges this data to present frequency as a function of $s$.
+
 \begin{figure}[H]
-	\caption{Hamming Distance.}\label{fig:ErrorCatastrophe1} 
-	\includegraphics[width=0.9\textwidth]{ErrorCatastrophe1}
+	\caption{The effect of varying $s$ on the quasispecies}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{As $s$ decreases the distribution becomes more spread, and at 0.9 most sequences are sub-optimal.}\label{fig:QuasispeciesForDifferentS}
+		\includegraphics[width=0.8\textwidth]{QuasispeciesForDifferentS}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Frequencies of various types. The black line represents the optimal type. Notice the transition below which the optimal type no longer dominates. }\label{fig:ErrorCatastrophe2} 
+		\includegraphics[width=0.9\textwidth]{ErrorCatastrophe2}
+	\end{subfigure}
 \end{figure}
+
+We will calculate the transition of Figure \ref{fig:ErrorCatastrophe2}. From (\ref{eq:p:plus},\ref{eq:p:minus}):
+
+\begin{align*}
+	p_{i\rightarrow i+1} =& (L-i)\nu \\
+	p_{i \rightarrow i-1}=& i\nu \text{. We want to maintain type $0$}\\
+	p_{0\rightarrow 1} =& L \nu \text{. Now, since $\mu = L \nu$ we need}\\
+	s \gtrapprox& L\nu \numberthis \label{eq:error:threshold}
+\end{align*}
+
+Eigen and Schuster used (\ref{eq:error:threshold}) to compute the maximum length possible for a given error rate. You need to cross a threshold of fidelity for a given length molecule.
+
+(\ref{eq:error:threshold}) can also be used to distinguish neutral mutations from non-neutral. We will look at a case there there is more than one fitness--Figure \ref{fig:fitness-stairs}.
+
 \begin{figure}[H]
-	\caption{Error Catastrophe.}\label{fig:ErrorCatastrophe2} 
-	\includegraphics[width=0.9\textwidth]{ErrorCatastrophe2}
+	\caption{Distinguishing neutral mutations from non-neutral}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Fitness depends on number of mutations}\label{fig:fitness-stairs}
+		\includegraphics[width=0.8\textwidth]{fitness-stairs}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{In order to remain with a given number of mutations, the black line has to be above the red.}\label{fig:neutral-mutations}
+		\includegraphics[width=0.8\textwidth]{neutral-mutations}
+	\end{subfigure}
 \end{figure}
 
+From (\ref{eq:p:plus})
+\begin{align*}
+	p_{i\rightarrow i+1} =& (L-i)\nu \text{, so we need}\\
+	\Delta s_i > & (L-i)\nu
+\end{align*}
+In order to remain with a given number of mutations, the black line has to be above the red in Figure \ref{fig:neutral-mutations}.
 
-See \cite{eigen1978hypercycle}, \cite{eigen1988molecular}, \cite{eigen2002error}, \cite{crotty2001rna}, and \cite{stadtler2002fitness_landscapes}.
-
-See also \cite{wessner2010origins}
+See \cite{eigen1978hypercycle,eigen1988molecular,eigen2002error,crotty2001rna,stadtler2002fitness_landscapes,wessner2010origins}
 
 
 \section[Artificial Life Theory]{Artificial Life Theory--Sara Imari Walker}
