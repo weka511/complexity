@@ -803,9 +803,12 @@ See also \cite{kempes2011predicting}.
 \section{Selection-- Michael Lachmann}
 
 \subsection{The Origin of Species}
-Charles Darwin laid out a careful and well thought argument--''A naturalist, reflecting on the mutual affinities of organic beings, on their embryological relations, their geographical distribution, geological succession, and other such facts, might come to the conclusion that each species had not been independently created, but had descended, like varieties, from other  species''\cite{darwin1859origin}.
+Charles Darwin laid out a careful and well thought argument\cite{darwin1859origin}
+\begin{quote}
+	A naturalist, reflecting on the mutual affinities of organic beings, on their embryological relations, their geographical distribution, geological succession, and other such facts, might come to the conclusion that each species had not been independently created, but had descended, like varieties, from other  species.
+\end{quote}
 
-Darwin presented a phylogenetic Tree--\ref{fig:TOL:Darwin}. A modern view, Figure \ref{fig:TOL:Modern} is more like a web than a tree. Large parts of our genome came from viruses, and our bodies are full of bacteria and other symbionts. Some may stay for only a few weeks, but others might transmit vertically through the lineage. Out mitochondria, for example, who are responsible for out being able to live with oxygen and use it, were once free living, but, today, live in each cell and reproduce with it.
+Darwin presented a phylogenetic Tree--Figure \ref{fig:TOL:Darwin}. A modern view, Figure \ref{fig:TOL:Modern} is more like a web than a tree. Large parts of our genome came from viruses, and our bodies are full of bacteria and other symbionts. Some may stay for only a few weeks, but others might transmit vertically through the lineage. Out mitochondria, for example, who are responsible for out being able to live with oxygen and use it, were once free living, but, today, live in each cell and reproduce with it.
 
 \begin{figure}[H]
 	\caption{Two views of the Tree of Life}
@@ -819,17 +822,19 @@ Darwin presented a phylogenetic Tree--\ref{fig:TOL:Darwin}. A modern view, Figur
 	\end{subfigure}
 \end{figure}
 
-Darwin made the point that species evolved from one another, but: ''Nevertheless, such a conclusion, even if well founded, would be unsatisfactory, until it could be shown how the innumerable species inhabiting this world have been modified, so as to acquire that perfection of structure and coadaptation which most justly excites our admiration''--\cite{darwin1859origin}.
+Darwin made the point that species evolved from one another, but\cite{darwin1859origin}: \begin{quote}
+	Nevertheless, such a conclusion, even if well founded, would be unsatisfactory, until it could be shown how the innumerable species inhabiting this world have been modified, so as to acquire that perfection of structure and coadaptation which most justly excites our admiration.
+\end{quote}
 
 \subsection{How do species acquire that perfection of structure?}
-How do species acquire that perfection of structure? There are three parts.
+How do species acquire perfection of structure? There are three parts.
 \begin{itemize}
 	\item Variation: individuals in the population differ from one another.
 	\item Inheritance: the variation is passed from one generation to another.
 	\item Selection: the variations affect the survival of some individuals.
 \end{itemize}
 
-For example, consider a butterfly population with differences in colour, some darker, some lighter, living on black trees--Figure \ref{fig:SelectionMoths0}. Those whose colour blends in with the tree survive better; \emph{ if colour is inherited}, the differential survival will lead to an increase of the frequency of dark moths in the population--Figures \ref{fig:SelectionMoths1} and  \ref{fig:SelectionMoths2}. If this continues over many generations, only black butterflies will remain, and we will run out of variation in the population, and the butterflies will not be able to adapt to a new tree colour. Genetic mutation continually inject new variation onto the population, allowing further evolution
+For example, consider a butterfly population with differences in colour, some darker, some lighter, living on black trees--Figure \ref{fig:SelectionMoths0}. Those whose colour blends in with the tree survive better; \emph{ if colour is inherited}, the differential survival will lead to an increase of the frequency of dark butterflies in the population--Figures \ref{fig:SelectionMoths1} and  \ref{fig:SelectionMoths2}. If this continues over many generations, only black butterflies will remain, and we will run out of variation in the population, and the butterflies will not be able to adapt to a new tree colour. Genetic mutation continually inject new variation onto the population, allowing further evolution
 \begin{figure}[H]
 	\caption{Example of natural selection--light and dark butterflies}\label{fig:SelectionMoths}
 	\begin{subfigure}[t]{0.3\textwidth}
@@ -843,7 +848,7 @@ For example, consider a butterfly population with differences in colour, some da
 	\end{subfigure}
 	\;\;\;
 	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{ \emph{ If colour is inherited}, the frequency of dark moths in the population will increase}\label{fig:SelectionMoths2}
+		\caption{ \emph{ If colour is inherited}, the frequency of dark butterflies in the population will increase}\label{fig:SelectionMoths2}
 		\includegraphics[width=0.8\textwidth]{SelectionMoths2}
 	\end{subfigure}
 \end{figure}
@@ -874,18 +879,19 @@ In both cases we end up with funny jokes: in the first can it depends on my abil
 
 \subsection{The Price Equation}
 
-The \gls{gls:price:equation}\cite{gardner2020price,price1970selection,frank2012natural} is a nice way to look at these two processes. It looks at the change of something in the population, such as brightness of wing colour or funniness of jokes,  when something happens to a population, and a generation passes, or maybe just a day; some individuals survive, some reproduce. We look at the difference in the property over this time.
-\begin{align*}
-	\Delta Z =& \frac{Cov(Z,W) + \mathop{\mathbb{E}}(w \Delta Z)}{\overline {W}}\text{, where} \numberthis \label{eq:price:equation}\\
-	Z=& \text{ some property, e.g. colour,}\\
-	W=& \text{ survival.}\\
-	\mathop{\mathbb{E}}(...) =& \text{ expected value}\\
-	Cov(Z,W)=&\text{ how much better high $Z$ individual survived compared to low $Z$}\\
-	\mathop{\mathbb{E}}(w \Delta Z)=&\text{ average change of $Z$ in the individuals that survived}\\
-	 & \textit{Rearranging, }\\
-	\overline{W} \Delta Z =& \underbrace{Cov(Z,W)}_\text{selection} + \underbrace{\mathop{\mathbb{E}}(w \Delta Z)}_\text{transformation}
-\end{align*}
+The \gls{gls:price:equation}\cite{price1970selection} is a nice way to look at these two processes. It looks at the change of something in the population, such as brightness of wing colour or funniness of jokes,  when something happens to a population, and a generation passes, or maybe just a day; some individuals survive, some reproduce. We look at the difference in the property over this time.
 
+\begin{align*}
+	\Delta \mathbb{E}_{i\in I}(z_i) =& \underbrace{Cov_{i\in I}(w_i,z_i)}_\text{selection} + \underbrace{\mathbb{E}_{i\in I}(w_i \Delta z_i)}_{transformation} \text{ using the notation of \cite{gardner2020price}.}\\
+	\text{where:}& \numberthis \label{eq:price:equation}\\
+	I =& \text{parents--first generation}\\
+	z_i =& \text{ character value of $i$}\\
+	w_i =& \text{ the relative contribution of $i$ to the population--\gls{gls:fitness}}\\
+	\mathbb{E}_{i\in I}(z^\prime_i)=& \text{ character value of (possible multiple) offspring of $i$}\\
+	\Delta \mathbb{E}_{i\in I}(z_i)=& \mathbb{E}_{i\in I}(z^\prime_i)-\mathbb{E}_{i\in I}(z_i)
+\end{align*}
+ Equation (\ref{eq:price:equation}) shows that the change in character can be partitioned into selection and transformation. Frank \cite{frank2012natural} discusses the tautological nature of (\ref{eq:price:equation}), and explains whu the equation is still useful.
+ 
 \begin{figure}[H]
 	\begin{center}
 		\caption[How do species acquire that perfection of structure? ]{How do species acquire that perfection of structure? Because traits increase in value if they help individuals who have them survive, compared to those they don't.}
@@ -1004,13 +1010,14 @@ We start with the growth of a single population:
 \end{align*}
 Figure \ref{fig:growth} shows the growth of the population with time.
 \begin{figure}[H]
-	\caption{Growth of $x$}\label{fig:growth}
+	\caption{Growth of Population}\label{fig:growth}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{$w=1.1$: population increases}\label{fig:growth1}
 		\includegraphics[width=\textwidth]{growth1}
 	\end{subfigure}
+	\;\;\;
 	\begin{subfigure}[t]{0.45\textwidth}
-		\caption{$w=0.9$: population decreases when $w$ is below the extinction threshold..}\label{fig:growth2}
+		\caption{$w=0.9$: population decreases if $w$ is below the extinction threshold.}\label{fig:growth2}
 		\includegraphics[width=\textwidth]{growth2}
 	\end{subfigure}
 \end{figure}
@@ -1045,7 +1052,7 @@ Figure \ref{eq:growth3} shows the growth for
 	\end{center}
 \end{figure}
 
-A real population will not normally comprise one type that takes over while all other types die out: we had forgotten mutation. Let us add a mutation rate of $\mu$, say 1\%, from type 1 to 2, but type 2 doesn't mutate.
+A real population will not normally comprise one type that takes over while all other types die out. Let us add a mutation rate of $\mu$, say 1\%, from type 1 to 2, but type 2 doesn't mutate.
 
 
 \begin{align*}
@@ -1138,8 +1145,7 @@ In order for $\alpha$ to be positive, so there is an eigenvector where both type
 	s \gtrapprox& 0 \text{, for small $\mu$}
 \end{align*}
 
-
-The original presentation of the error catastrophe was by Manfred Eigen and Peter Schuster. They looked at a DNA genome of length $L$, assuming one optimal sequence, but we will simplify by working with a binary genome: 1 means a bit is identical to the optimum, 0 that it is different; $\nu$ is the mutation rate per site, $0\leftrightarrow1$. We shall assume one mutation per timestep, rate $L\nu$, and let $i$ denote the number of zeroes: this will be the type. The number of ones is $L-i$.
+The original presentation of the error catastrophe was by Manfred Eigen and Peter Schuster. They looked at a DNA genome of length $L$, assuming one optimal sequence, but we will simplify by working with a binary genome: 1 means a bit is identical to the optimum, 0 that it is different; $\nu$ is the mutation rate per site, $0\leftrightarrow1$. We shall assume one mutation per timestep, rate $L\nu$, and let $i$ denote the number of zeroes, i.e. the \emph{type}. The number of ones is $L-i$.
 
 \begin{align*}
 	p_{i\rightarrow i+1} =&\frac{L-i}{L}L\nu = (L-i)\nu \numberthis \label{eq:p:plus}\\
