@@ -1288,33 +1288,609 @@ See \cite{eigen1978hypercycle,eigen1988molecular,eigen2002error,crotty2001rna,st
 
 \section[Artificial Life Theory]{Artificial Life Theory--Sara Imari Walker}
 
+Tt's been really exciting
+to be an astrobiologist nowadays
+because astrobiology is starting to
+intersect a lot of other fields
+that care very deeply about
+understanding life -
+from the perspective of thinking about
+more general principles.
+And, one of those fields is
+the artificial life field,
+which has been exploring
+fundamental properties of life
+and evolving systems
+for a number of decades,
+and has made a lot of progress
+in computational models
+of living processes that are starting to
+be able to be used for thinking
+about problems relevant to astrobiology.
+So, I'm going to just talk about
+a little bit of where artificial life comes
+into providing some new insights
+into what biology might be,
+and how we might think about life
+as a broader class of phenomena
+from this astrobiological perspective--
+that we want to understand life, not just on Earth, but life as it might exist anywhere.
 
-Figure \ref{fig:PhysicsvsBiology} compares the evolution of a physical system with a biological system. Even the laws evolve in biology. Also biological systems involve homeostasis.
+And, one of the things
+that I always find really intriguing -
+being trained in physics -
+is that biology seems to necessitate
+a different kind of perspective
+on how we should think about
+the laws of nature,
+how we should think about dynamical systems.
+And, one of the things that's really
+a pretty interesting contrast
+between physics and biology is that -
+in physics, when we model systems,
+we always talk about like
+the initial state.
+Like, you could talk of the initial state
+of the universe
+or initial state of the solar system.
+And then, you have some fixed
+law of motion,
+like Newton's law of gravitation,
+or we could take Einstein's theory.
+And then, we can evolve our system
+forward in time
+and we can predict the final state--Figure \ref{fig:PhysicsvsBiology}.
 \begin{figure}[H]
 	\caption{Physics: fixed law of evolution to final State, vs. Biology}\label{fig:PhysicsvsBiology}
 	\includegraphics[width=0.9\textwidth]{PhysicsvsBiology}
 \end{figure}
 
-Von Neumann's work on self reproducing automata \cite{neumann1966theory}  \cite{neumann1958computer} is analogous to  the architecture of a modern cell--Figure \ref{fig:VonNeumann}. Note the instructional Tape in Figure  \ref{fig:VonNeumann1}--a small part of a larger biological algorithm. Note also that Von Neumann's work on cellular automata largely preceded our understanding of the translation from DNA to protein.
+In principle, we should be able
+to do that with...
+perfect prediction power if we had
+big enough supercomputers.
+But, there's nothing about the laws
+of motion that changes in time.
+So, Newton's law doesn't change -
+it's just the states that evolve
+forward in time.
+But, in biology,
+we have this really interesting case
+where we have an initial state,
+like that last universal common ancestor
+of life on Earth.
+And then, as that system evolves,
+it changes,
+and there's many possible final states--Figure \ref{fig:PhysicsvsBiology}
 
 
+So, even though we started
+from sort of a...
+shared cellular architecture
+and early history of life,
+because of the interaction of life
+and its environment
+and the change of information
+in those systems,
+we've ended up with many, many
+different final states for biology.
+
+So, I'm an organism that descended
+from that last universal
+common ancestor.
+And, so is the bacteria - you know -
+on the screen...
+the computer screen
+that I'm looking at right now.
+There's many final states
+possible in biology.
+And, one of the ways
+that we can talk about this
+is to even talk about the fact
+that in biology
+this - the states themselves -
+are not the only thing that's evolving,
+but the laws are too.
+We talk about state dependent rules
+or state dependent laws in biology,
+and this is the idea -
+that, as an organism evolves,
+its genetic information is changing.
+And, even as it...
+expresses that genetic information,
+it can actually dictate its own state.
+So, biology has its property
+of homeostasis
+and regulating its own state -
+that sort of a state control.
+And, this kind of like the rules
+are actually controlling this state,
+or the constraints
+are controlling the state.
+
+So, that seems really fundamentally
+different than the situation
+that we see in physics
+and how we model physical systems
+that aren't living.
+And the real story there is that -
+in biology -
+part of the dynamics is the information
+and how the information
+is changing in time.
+
+And so, in the artificial life field,
+people like to try to model
+these emergent properties,
+or what's going on in biology,
+using really simple systems
+that allow us to understand
+really basic things about life.
+
+One example that is used commonly
+in the artificial life field
+is cellular automata.
+And, one of the reasons
+that people really like those
+is because they have
+really simple local rules,
+just like the laws of physics do,
+but we see really interesting
+global patterns emerging.
+And so, for example,
+Figure \ref{fig:cellularAutomatonRule150} is an elementary
+cellular automaton ''Rule 150,''
+and you can see here
+what the pattern is for the rules.
 
 \begin{figure}[H]
-	\caption[Self reproducing automata and the architecture of a modern cell]{Von Neumann's work on self reproducing automata is analogous to the architecture of a modern cell}\label{fig:VonNeumann}
+	\caption[Cellular automaton ''Rule 150'']{Cellular automaton ''Rule 150''.  It has 	really simple local rules, just like the laws of physics do, but we see really interesting global patterns emerging}\label{fig:cellularAutomatonRule150}
+	\includegraphics[width=0.8\textwidth]{cellularAutomatonRule150}
+\end{figure}
+
+So, if you have three white cells
+it maps to one white cell.
+If you have three black cells,
+it maps to a black cell.
+And then, different patterns
+of whites and black cells
+will either map to a black
+or a white cell.
+So, it's a very simple rule,
+but you'll see that there's this
+really regular pattern that emerges
+when you run the dynamics
+that's not encoded in the rule at all.
+So, we talk about that
+as an emergent property.
+
+
+And, life has many emergent properties.
+So, one question is--
+would those emergent properties of life
+be explained by the structure
+of the laws of physics alone,
+or do we need additional principles,
+and do we really need something
+like state planet dynamics
+or information
+or any new principles
+that are uniquely biological
+to explain how biology has
+this sort of many paths
+that we observe
+through the evolutionary process?
+And, that's a great question
+for artificial life.
+People have thought about that
+from many different perspectives
+in addition to cellular automata.
+But, we'll talk about cellular automata
+just a little bit more
+because they're a really
+nice simple example.
+And so, as I said,
+this is an example of this idea in physics
+of starting with an initial state
+of fixed law of motion
+and evolving to some final state.
+
+The Game of Life< is perhaps
+one of the most famous examples
+of using this kind of construction
+to understand
+what emergent properties are
+and how complexity can emerge
+from simple rules--Figure \ref{fig:GameOfLife}.
+
+\begin{figure}[H]
+	\caption[Game of Life]{Game of Life\cite{wiki:game:life}}\label{fig:GameOfLife}
+	\includegraphics[width=0.8\textwidth]{GameOfLife}
+\end{figure}
+
+So, in The Game of Life,
+it's actually a two-dimensional
+cellular automaton
+as opposed to the one-dimensional one
+I showed on the previous slide.
+And, what you see is,
+with The Game of Life
+all kinds of emergent patterns
+appearing--
+from things that glide
+across your screen
+that look like little guns
+shooting things,
+to blinkers,
+to all kinds of different structures,
+and they can interact
+and make more complex structures.
+And so, people have actually...
+there's sort of a cottage industry
+of people studying different emergent
+patterns in The Game of Life,
+and under what conditions they emerge,
+what their computational capacity is.
+So, it's been a really great
+toy model system to explore this idea
+that we might be able to talk about
+emergent properties from simple rules.
+
+One of my favorite cellular automata
+was actually constructed
+by John von Neumann,
+and he was really interested in this idea
+of self-reproducing machines--Figure \ref{fig:VonNeumannSelfRep}.
+
+\begin{figure}[H]
+	\caption[John von Neumann: self-reproducing machines]{John von Neumann was really interested in this idea of self-reproducing machines\cite{neumann1966theory,neumann1958computer}}\label{fig:VonNeumannSelfRep}
+	\includegraphics[width=0.8\textwidth]{VonNeumannSelfRep}
+\end{figure}
+
+
+
+And so, a self-reproducing machine
+or automaton
+would be a system that could make
+a complete reproduction of itself.
+And, he was actually really inspired
+by Alan Turing
+and Turing's work
+on universal computation.
+So, Turing had been interested in
+whether you could build a machine
+that can compute
+any computable function.
+And, von Neumann asked the question,
+inspired by trying to understand life -
+so, this is very early work
+in the artificial life field -
+could you build a machine
+that could build any possible machine
+including itself?
+And, if it could do that,
+then it would be
+a self-reproducing machine.
+But, it would also be a machine
+that could--in principle--be capable of open-ended evolution,
+which is a really important question--
+in the artificial life field
+related to astrobiology--
+about the idea of whether or not evolving
+systems can keep evolving forever.
+
+So, if you had a self-reproducing
+machine that could build itself,
+but not build any arbitrary machine,
+it might stall out and not actually be
+an evolving system.
+And so, von Neumann had this condition
+that it should be able to build anything -
+so that the space of all possible things
+would be completely open,
+that it could potentially evolve into,
+as long as it could maintain the fact
+that it could reproduce itself.
+And so, he came up with
+a particular architecture
+that's necessary for such a machine--Figure \ref{fig:VonNeumann}.
+
+\begin{figure}[H]
+	\caption[Self reproducing automata and the architecture of a modern cell]{Von Neumann's work on self reproducing automata is analogous to the architecture of a modern cell\cite{neumann1966theory}}\label{fig:VonNeumann}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\caption{The ribosome + assisting biomolecules
 			act like a Universal Constructor}\label{fig:VonNeumann1}
 		\includegraphics[width=\textwidth]{VonNeumann1}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{Supervisory Unit}\label{fig:VonNeumann2}
+		\caption{Supervisory Unit  tells it when to copy the instructions just as instructions, rather than reading them out}\label{fig:VonNeumann2}
 		\includegraphics[width=\textwidth]{VonNeumann2}
 	\end{subfigure}
 \end{figure}
 
-“physical” universality: the ability to implement any transformation whatsoever on any finite region \cite{janzing2010there}, \cite{schaeffer2014physicallyuniversal}
+What he basically came up with is that
+you need to have some kind
+of information content -
+the instructions for specifying
+the design of the machine.
+The machine has to be able to read out
+those instructions to build itself,
+and then it has to be able to have
+something called a "supervisory unit"
+that tells it when to copy
+the instructions
+just as instructions,
+rather than reading them out.
+So, the instructions have to
+have a dual role.
+They have to be able to be copied
+to be able to reproduce the organism,
+but they also have to be read out
+to be able to be executed
+to construct the organism.
+And, the machine doing the construction
+is the part that can...
+is the machine that can build
+any possible machine.
+And, he called that
+a "universal constructor."
+And, there is a direct analogy
+with modern cellular architecture
+as we understand it,
+in that the translation machinery -
+ribosomes and all the associated
+tRNAs and translation machinery -
+could be thought of
+as a universal constructor
+that can construct any possible proteins.
+So, it's not a universal constructor
+in the sense that it can make
+any possible object,
+but it is a universal constructor
+in the sense
+that it can produce any possible protein.
+And, the instruction tape is DNA,
+which gets read out by the cell,
+but also gets blindly copied
+by the cell at other stages
+in cellular function.
+So, it does seem to be the case
+that this abstract idea
+from artificial life -
+von Neumann's idea of
+the self-reproducing automata -
+actually maps to some of the function
+that we see in biology.
+And so, this was a case where
+a cellular automata theory
+actually predicted some of the logical
+architecture of modern organisms.
 
-Are the ’laws of life’  the laws of information?
+And so, one of the things that's really
+interesting about von Neumann's idea
+was that he had envisioned
+the possibility of a machine
+that could build any possible machine,
+which means it could do any possible
+transformation on physical matter.
+And, most cellular automata
+actually can't do that.
+So, if you look at cellular automata
+and you evolve them forward in time -
+in the way that we do,
+where we have an initial condition
+and the cellular automata rule
+is fixed for all time -
+not every state transformation
+is possible.
+
+So, you can't move from every state
+to every other state.
+But, there is this idea
+that's implicit in von Neumann's theory
+for biological evolution -
+from this artificial life perspective -
+of \gls{gls:physical:universality},
+which is the ability to implement
+any transformation on any finite region.
+
+\begin{figure}[H]
+	\caption[Physical Universality]{Physical Universality\cite{janzing2010there,schaeffer2014physicallyuniversal}}\label{fig:physicalUniversality}
+	\includegraphics[width=0.8\textwidth]{physicalUniversality}
+\end{figure}
+
+The first physical universal
+cellular automata
+was actually just realized recently
+by Luke Schaeffer...
+and he actually demonstrated
+that it was possible
+to construct such a thing.
+And, he did so within this sort of
+traditional physics paradigm,
+where he started with an initial state
+and evolved the system
+according to a fixed rule,
+and the physical universality
+comes about by programming
+the initial state.
+
+Now if you're thinking about things
+like biological evolution,
+then we want to think about
+biological systems
+in this kind of very abstract way
+inspired by artificial life.
+And, think about von Neumann's theory
+and what it's really telling us
+about biology,
+one of the things we might hope for
+is that biology
+would actually be capable of
+performing any arbitrary transformation.
+And, a good example of that
+is modern technology.
+So, I think actually modern technology
+is a better approximation
+to a universal constructor
+than an interior of a cell,
+in the sense that technology enables
+lots of transformations to be possible.
+So, for example, we can launch
+satellites into space.
+And, that's not a transformation
+that would be able to be happening -
+we wouldn't be...
+our planet wouldn't be anti-accreting -
+launching things into planetary orbit
+without having technology.
+So, it does allow transformations
+and biology seems to do this in general.
+If you think about metabolism...
+allows chemical transformations
+that seem thermodynamically impossible.
+So, if you wanted to talk about
+those kind of properties
+from this cellular automata perspective,
+what you really would like
+is to be able to build
+a cellular automata
+that can perform
+any arbitrary transformation
+and has this kind of inspiration
+from biology.
+So, we've been kind of playing around
+with those in my group
+and this is just sort of an example of...
+an artificial life approach
+to astrobiology.
+Thinking about cellular automata
+with state-dependent laws...
+So, the idea here is that
+we go back to that difference
+that we were observing
+between physics and biology,
+and think about the fact that life
+seems to have this property
+where the rules and the states
+are very tightly coupled.
+So... the expression
+of my genetic information
+determines the state of the cells
+in my body.
+My mental state determines
+something about what I do.
+
+So, if you want to build
+systems that do that
+you can actually build cellular automata
+with state-dependent laws.
+And, you see lots of different
+rich structures emerging
+from these kind of systems,
+and they do have this property
+of physical universality
+that Schaeffer observed,
+but from this very different perspective.
+And so, these are just some examples
+to raise some questions for you
+about the kinds of things
+that we could be thinking about
+from more abstract models of life
+in the artificial life field
+to get at more general principles
+of living systems--Figure \ref{eq:StateDependentLaws}.
+
+\begin{figure}[H]
+	\caption{StateDependentLaws}\label{eq:StateDependentLaws}
+	\includegraphics[width=0.8\textwidth]{StateDependentLaws}
+\end{figure}
+
+
+
+
+\begin{figure}[H]
+	\caption{CA-Example}\label{fig:CA-Example}
+	\includegraphics[width=0.8\textwidth]{CA-Example}
+\end{figure}
+
+So, we have this idea in mind
+that information perhaps
+might be this unifying principle of life,
+and that really also comes from
+the inspiration of
+the artificial life field--
+because von Neumann was really interested
+in this idea of the instruction,
+the information content being what's
+specifying the design of the machine,
+and that the machine could actually
+implement those instructions--Figure \ref{fig:LawsLifeLawsInformation}.
+
+\begin{figure}[H]
+	\caption{Are the Laws of Life the Laws of Information?}\label{fig:LawsLifeLawsInformation}
+	\includegraphics[width=0.8\textwidth]{LawsLifeLawsInformation}
+\end{figure}
+
+And so, in some sense,
+what he's talking about
+is an algorithmic process
+existing in nature
+is necessary to have open-ended
+evolving systems.
+And so, we really don't understand
+the basic physical principles of that.
+And so, one of the things
+I think is incredibly exciting
+about working across the field
+of artificial life in astrobiology
+is that artificial life models have
+traditionally been these very abstract,
+cellular automata type models,
+or there's other things - like Avida -
+that are these digital systems
+that we program into computers
+and we study their properties
+and they tell us some things
+about emergent properties
+or how systems can evolve.
+But, astrobiology affords the opportunity
+of starting to think about
+those kind of things
+as chemically embodied systems,
+and how do we think about the fact
+that the origin of life transition
+actually did happen -
+these properties emerged
+in the natural world from chemistry.
+
+And so, that's really the challenge
+for astrobiology moving ahead...
+is to take the abstract ideas
+from artificial life
+and turn them into quantitative science
+for astrobiology to build new theories
+of what we think life is,
+and how the transition
+from simple molecules to something
+that has the sophisticated logical
+and informational architecture
+of something
+like a von Neumann machine
+actually emerged on our planet.
+And, what does that actually mean
+in the broadest sense?
+And, what are the kind of classes
+of phenomena
+that we might see in the world
+that could be inspired
+by that understanding...
+i.e. can we find aliens?
+
+And so, that's really a great thing
+to think about.
+
+
 % end of text 
 
 % glossary
