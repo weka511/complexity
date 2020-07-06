@@ -25,6 +25,7 @@ I have used [TexStudio](https://www.texstudio.org/) and the [JabRef](https://www
 |3|origins3.tex|My Lecture Notes - Chemical Commonalities|
 |4|origins4.tex|My Lecture Notes - Early Life|
 |5|origins5.tex|My Lecture Notes - Evolution|
+||price.Rmd|Examples illustrating Prices's equation|
 |6|origins6.tex|My Lecture Notes - Astrobiology & General Theories of Life|
 | |evolve_allometric_scaling.py|Evolve solution for  [West et al--A General Model for the Origin of Allometric Scaling Laws in Biology](http://hermes.ffn.ub.es/oscar/Biologia/Escala/Science_276_122_1997.pdf)|
 | | ga.py|Genetic algorithm framework|
