@@ -476,73 +476,80 @@ Earth-like enough for life.
 	\includegraphics[width=0.9\textwidth]{AreTheseEarthlike}
 \end{figure}
 
-So, in conclusion, we've discovered
-thousands of exoplanets,
-many of which are similar in size
-to the Earth.
-But, at the moment,
-we have no way of knowing
-what their surfaces are like.
-Note, in particular,
-that the Earth and Venus
-are both very similar in size -
-so, they are both Earth-sized planets.
-Our next generation of telescopes
-will be able to detect
-the atmosphere of these worlds
-and tell us something
-about their surfaces for the first time.
-The habitable zone is a useful concept
-for selecting planets
-for these new telescopes
-but it offers no guarantee
-that a planet is actually habitable.
+So, in conclusion,\begin{itemize}
+	\item  we've discovered thousands of exoplanets, many of which are similar in size to the Earth. 
+	\item But, at the moment, we have no way of knowing what their surfaces are like. Note, in particular, that the Earth and Venus are both very similar in size--so, they are both Earth-sized planets.
+	\item Our next generation of telescopes will be able to detect the atmosphere of these worlds and tell us something about their surfaces for the first time.
+	
+	\item The habitable zone is a useful concept for selecting planets for these new telescopes but it offers no guarantee that a planet is actually habitable.
+\end{itemize}
 
-If you'd like to try playing with
-a simple climate model
-of an Earth-like planet,
-you can head over to "earthlike.world"
-or the associated Twitter feed.
-This website lets you see
-how different a planet might be
-from our own world today,
-even if it did have the same
-geological cycles as our own.
+If you'd like to try playing with a simple climate model of an Earth-like planet, you can head over to "earthlike.world" or the associated Twitter feed. This website lets you see how different a planet might be from our own world today, even if it did have the same geological cycles as our own.
 
-The NASA NExSS "Many Worlds" blog
-covers the latest news for exoplanets
+The NASA NExSS "Many Worlds" blog covers the latest news for exoplanets
 and many origin of life stories.
-There's also a more technical overview
-of the search for biosignatures
-in a paper led by Yuka Fujii,
-published in "Astrobiology" last year.
-These are the references that were
-mentioned during the lecture.
+There's also a more technical overview of the search for biosignatures in a paper led by Yuka Fujii, published in "Astrobiology" last year.
+These are the references that were mentioned during the lecture.
 
+See also \cite{fujii2018exoplanet,villanueva2015unique}.
 
+\subsection[Exoplanet Atmospheric Characterization]{Exoplanet Atmospheric Characterization--Yuka Fujii}
 
-See also \cite{fujii2018exoplanet} and \cite{villanueva2015unique}.
-
-\subsection{Exoplanet Atmospheric Characterization}
-
-Lecturer: Yuka Fujii
-
-Exoplanet Discovery usually come with Size (mass and/or radius) and Orbit--Figure \ref{fig:discovered:exoplanets}.
+Astronomers have discovered
+thousands of extrasolar planets
+or exoplanets.
+Is any of them inhabited like the Earth?
+How can we search for it?
+In this lecture, I will talk about
+the techniques to study exoplanet
+atmospheres and possibly surfaces,
+which is an essential step towards
+finding life on exoplanets.
+Detection of exoplanets typically
+comes with two properties:
+the size and the orbit,
+including the distance from the host star--Figure \ref{fig:discovered:exoplanets}.
 
 \begin{figure}[H]
 	\caption{Discovered Exoplanets}\label{fig:discovered:exoplanets}
 	\includegraphics[width=0.9\textwidth]{ExoplanetCharacteristics}
 \end{figure} 
 
-Figure \ref{fig:spectrum:earth:twin} depicts the spectrum that we'd expect from a twin planet for Earth. At shorter wavelengths the planet scatters light--Figure \ref{fig:spectrum:earth:twin1}--and the spectrum depends on the composition of the surface; at longer wavelengths it emits infrared--Figure \ref{fig:spectrum:earth:twin2}-- and the spectrum depends on the temperature structure. Figure \ref{fig:spectrum:earth:twin3} depicts the effect of absorption by atmospheric species. For an Earth twin we'd expect to find biologically important molecules. We can scan the plant's surface as it rotates.
+
+For evaluating their potential for life,
+we definitely need to get
+more information.
+But, how?
+It has to be reminded that
+exoplanets are light-years away.
+This means that it's not realistic
+to actually visit there
+and it's not possible either
+to get the spatially resolved images,
+unlike the case of solar system planets.
+They are just point sources
+and we have to rely on remote
+observations of these faint dots.
+But, observations of these faint dots,
+if possible at all,
+can in principle give us hints
+about the nature of the planets.
+For example,
+if you observe an Earth Twin--Figure \ref{fig:spectrum:earth:twin0},
+Figure \ref{fig:spectrum:earth:twin} shows the overall spectrum
+you would get.
 
 \begin{figure}[H]
 	\caption{Spectrum of an earth twin}
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\caption{Spectrum of an earth twin}\label{fig:spectrum:earth:twin0}
+		\includegraphics[width=\textwidth]{Tellus}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\caption{Spectrum of an earth twin}\label{fig:spectrum:earth:twin}
 		\includegraphics[width=\textwidth]{SpectrumEarthTwin}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\caption{At shorter wavelengths the planet scatters light}\label{fig:spectrum:earth:twin1}
 		\includegraphics[width=\textwidth]{SpectrumEarthTwin1}
 	\end{subfigure}
@@ -556,45 +563,244 @@ Figure \ref{fig:spectrum:earth:twin} depicts the spectrum that we'd expect from 
 	\end{subfigure}
 \end{figure}
 
-Of course it is difficult to disentangle the light of the planet from the star--Figure \ref{fig:StarIsMuchBrighter}. We need to subtract the light of the star.
+
+At shorter wavelength,
+the planet illuminates
+by scattering the light
+from the host star--Figure \ref{fig:spectrum:earth:twin1}.
+And, it's blue features depend on,
+for example,
+surface composition,
+atmospheric pressures and clouds.
+On the other hand,
+in the invisible infrared range,
+the planet emits light
+because of its thermal energy--Figure \ref{fig:spectrum:earth:twin2}--
+and its baseline depends on
+the temperature structure
+of the surface layers.
+Imprinted in these baselines
+are the lower features
+due to absorption
+by atmospheric species--Figure \ref{fig:spectrum:earth:twin3}.
+In the case of an Earth Twin,
+they include astrobiologically important
+water vapor, oxygen
+and ozone features.
+
+We could also potentially use
+the time variation of these features
+due to planet rotation,
+which essentially allows us
+to scan the planet
+and highlight the regional features.
+However, it's not straightforward
+to detect the light from exoplanets.
+Seen from afar, an exoplanet is
+very close to its own host star,
+and the star is several to ten
+orders of magnitude brighter.
+It's equivalent to seeing a firefly
+right next to a lighthouse.
+Suppose you try to take a picture
+of an exoplanet.
+Then, the host star is always there,
+and, on the imaging plane,
+the star is blurred
+and the planet is in the skirt of it--Figure \ref{fig:StarIsMuchBrighter}.
 
 \begin{figure}[H]
-	\caption[the star is many orders of magnitude brighter than its planets]{Unfortunately the star is many orders of magnitude brighter than its planets}\label{fig:StarIsMuchBrighter}
+	\caption[The star is many orders of magnitude brighter than its planets]{Unfortunately the star is many orders of magnitude brighter than its planets}\label{fig:StarIsMuchBrighter}
 	\includegraphics[width=\textwidth]{StarIsMuchBrighter}
 \end{figure}
 
-In the past decade, Direct Imaging has been successful with young hot Jupiters in wide orbits--Figure \ref{fig:young:jupiter}. See  Figures  \ref{fig:young:jupiter1}\cite{marois2010images} and Figure \ref{fig:young:jupiter2}
-\cite{greenbaum2018gpi}. These planets, however, are an order of magnitude brighter than earthlike planets.
+Compared to the peak intensity,
+the skirt is orders of magnitude darker,
+but planets are often even fainter,
+so the signal is varied.
+In order to identify the planetary signal,
+we need to suppress the light
+from the host star
+using special instruments.
+The idea of such direct imaging
+observations of Earth-like planets
+dates back to the 1990s.
+But, the starlight suppression
+is technically challenging.
+
+In the past decade,
+direct imaging has been successful
+for young, luminous, giant,
+gaseous planets at wide orbits--Figure \ref{fig:young:jupiter0}.
+Earth-like planets are about
+ten times smaller in diameter
+and much fainter than
+these successful targets.
+The efforts are ongoing to achieve
+the hyper-suppression level
+to be able to detect an Earth Twin.
+
 
 \begin{figure}[H]
 	\caption{Success with Young Jupiter-like Planets in Distant Orbits}\label{fig:young:jupiter}
-	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{}\label{fig:young:jupiter1}
+	\begin{subfigure}[b]{0.25\textwidth}
+		\caption{Young Jupiter-like Planet}\label{fig:young:jupiter0}
+		\includegraphics[width=\textwidth]{young-hot-jupiter}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[b]{0.3\textwidth}
+		\caption{ Images of a fourth planet orbiting hr 8799\cite{marois2010images}}\label{fig:young:jupiter1}
 		\includegraphics[width=\textwidth]{DirectImaging1.jpg}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{}\label{fig:young:jupiter2}
+	\;\;\;
+	\begin{subfigure}[b]{0.35\textwidth}
+		\caption{Gpi spectra of hr 8799 c, d,
+			and e\cite{greenbaum2018gpi}}\label{fig:young:jupiter2}
 		\includegraphics[width=\textwidth]{DirectImaging2.jpg}
 	\end{subfigure}
 \end{figure}
 
-The discovery of transiting planets has opened up new prospects for studying exoplanet spectra--Figure \ref{fig:transiting:planets} without special instruments. A transiting planet is one that passes in front of the Star because its orbital plane is aligned with the telescope--Figure \ref{fig:transiting:planets2}. A small portion of the light is filtered through the planetary atmosphere--Figure \ref{fig:transiting:planets3}.
+Meanwhile, the discovery
+of transiting planets
+opened up new possibilities
+to study exoplanet atmospheres
+without using special instruments--Figure \ref{fig:transiting:planets}.
+
 \begin{figure}[H]
-	\caption{Transiting Planets}\label{fig:transiting:planets}
-	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{}\label{fig:transiting:planets1}
+	\caption[Transiting Planets]{The discovery
+		of transiting planets
+		opened up new possibilities
+		to study exoplanet atmospheres
+		without using special instruments}\label{fig:transiting:planets}
+	\begin{subfigure}[b]{0.2\textwidth}
+		\caption{A transiting planet}\label{fig:transiting:planets1}
 		\includegraphics[width=\textwidth]{TransitingPlanets1}
 	\end{subfigure}
-	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{Passing in front}\label{fig:transiting:planets2}
+	\;\;
+	\begin{subfigure}[b]{0.3\textwidth}
+		\caption{A planet which	passes right in front of the star
+			because its orbital plane is close to the line of sight}\label{fig:transiting:planets2}
 		\includegraphics[width=\textwidth]{TransitingPlanets2}
 	\end{subfigure}
-	\begin{subfigure}[t]{0.3\textwidth}
-		\caption{Transmission Spectroscopy}\label{fig:transiting:planets3}
+	\;\;
+	\begin{subfigure}[b]{0.31\textwidth}
+		\caption{During the transit, a small portion
+			of the stellar light
+			is filtered through
+			the planetary atmosphere}\label{fig:transiting:planets3}
 		\includegraphics[width=\textwidth]{TransitingPlanets3}
 	\end{subfigure}
 \end{figure}
-	
+
+A transiting planet is a planet which
+passes right in front of the star
+because its orbital plane
+is close to the line of sight--Figure \ref{fig:transiting:planets2}.
+During the transit, a small portion
+of the stellar light
+is filtered through
+the planetary atmosphere--Figure \ref{fig:transiting:planets3}.
+By analyzing the spectrum
+of this tiny portion
+and finding the scattering
+or absorption features in there,
+we can learn about
+the atmospheric composition
+and the presence of condensates
+such as clouds.
+This technique is called
+"transmission spectroscopy."
+
+In many cases, transiting planets also pass behind the host star
+and that's called "planetary" or "secondary" eclipse--Figure \ref{fig:secondary-eclipse}
+\begin{figure}[H]
+	\caption{Secondary Eclipse}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{In many cases, transiting planets also pass behind the host star
+			and that's called "planetary" or "secondary" eclipse}\label{fig:secondary-eclipse}
+		\includegraphics[width=\textwidth]{secondary-eclipse}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{The difference between
+			the out-of-eclipse total flux
+			and the in-eclipse flux
+			corresponds to the brightness
+			of the planetary dayside}\label{fig:secondary-eclipse1}
+		\includegraphics[width=\textwidth]{secondary-eclipse1}
+	\end{subfigure}
+\end{figure}
+At the time of the eclipse,
+the planetary flux is blocked by the star.
+So, the difference between
+the out-of-eclipse total flux
+and the in-eclipse flux
+corresponds to the brightness
+of the planetary dayside--Figure \ref{fig:secondary-eclipse1}.
+This way, using planetary eclipse,
+we can identify the spectrum
+of the planet
+without directly separating the star
+and the planet in the imaging plate.
+
+In addition, while the planet
+orbits the star,
+the varying portion of the planetary
+dayside faces us
+and the planetary flux
+changes in time accordingly--Figure \ref{fig:phase-variation}.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Phase Variation]{ while the planet orbits the star, the varying portion of the planetary dayside faces us 	and the planetary flux changes in time accordingly}\label{fig:phase-variation}
+		\includegraphics[width=0.8\textwidth]{phase-variation}
+	\end{center}
+\end{figure}
+In turn, although we cannot resolve
+the star and the planet,
+the time variation in the total flux
+can be attributed to
+the planetary component
+assuming that the star is stable.
+These three techniques
+have been successful
+with hot Jupiter-like planets
+and have revealed
+some of the atmospheric species
+and thermal structures.
+
+In order to apply them to smaller,
+potentially habitable planets, however,
+we need to push the current
+technology to its limit.
+The techniques introduced so far
+have pros and cons
+and the relevant targets vary.
+So, we will use all of them
+to study various aspects of exoplanets.
+In the next decade,
+new powerful observatories
+with spectroscopic capability
+will come into play.
+The main targets will probably be
+large gaseous planets
+but some basic investigations
+of terrestrial sized planets
+are also being attempted.
+Future missions aimed at
+the most detailed study
+of potentially habitable planets
+are currently under discussion.
+
+In this lecture,
+we discussed the key observations
+to study the nature of exoplanets
+beyond their size in the orbit.
+I encourage you to think further
+about how you would find life
+on an Earth Twin light-years away
+using these techniques.
+It will provide and unique view
+on Earth's biosphere.
 
 Summary: Key observations to characterize atmospheres (and surfaces) of exoplanets
 \begin{itemize}
@@ -605,20 +811,14 @@ Summary: Key observations to characterize atmospheres (and surfaces) of exoplane
 \end{itemize}
 Using these techniques, how would you find life on an Earth-twin?
 
-\cite{sagan1993search}
-\cite{kaltenegger2017characterize}
-\cite{fujii2018exoplanet}
 
-\cite{robinson2011earth}
+Here are some suggestions for further reading.
 
-\cite{deming2013infrared}
-\cite{knutson2007map}
+\cite{fujii2018exoplanet,sagan1993search,kaltenegger2017characterize,robinson2011earth,deming2013infrared,knutson2007map}
 
 
 
-\section{Abstract and general Models for Life}
-
-Lecturer: Sara Imari Walker
+\section[Abstract and general Models for Life]{Abstract and general Models for Life--Sara Imari Walker}
 
 See discussion in \cite{trifonov2011vocabulary}. We want a general definition so we can recognize and explain life elsewhere in the Universe.
 
