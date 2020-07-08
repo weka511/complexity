@@ -1442,51 +1442,234 @@ cultural forms, are essentially living.
 
 There's nothing special about the biochemical example, a replicated cell, because a replicating cell is simply a somewhat autonomous informational entity that is able to propagate itself forward in time, just like a Constitution can.
 But like a virus, the Constitution requires us. We are the vitamins of the Constitution.
-And this leads to a very open question that's worth debating.\begin{itemize}
-	\item  On one hand, we could be fundamentalist. We could say look, all of life depends on chemistry, and so finding the simplest chemistry that is capable of encoding adaptive information about the world is where life really started.
-	\item But another possibility say, well not really, because at any scale that you can find this basic set of mechanisms, you're entitled to call it life. And you're even entitled to call it an independent organ of life. So by analogy, someone might say, "To understand architecture, to understand Gothic and Renaissance, or Baroque, or Rococo architecture, you need understand quantum mechanics." And I think that would be foolish, because all of them ultimately depend on quantum mechanics, but it's not the differences in the physics that explain the differences in the architecture. That requires a higher level of understanding. And so the pluralist approach to the multiple origin of life says that every level, we need to find those unique mechanisms that can support propagation of information. And there isn't a "correct," most basic level. It depends on the question that you're asking and the variation that you're trying to explain.
+And this leads to a very open question that's worth debating.
+\begin{itemize}
+	\item  On one hand, we could be \emph{fundamentalist}. We could say look, all of life depends on chemistry, and so finding the simplest chemistry that is capable of encoding adaptive information about the world is where life really started.
+	\item But another possibility is to say, well not really, because at any scale that you can find this basic set of mechanisms, you're entitled to call it life. And you're even entitled to call it an independent organ of life. So by analogy, someone might say, ''To understand architecture, to understand Gothic and Renaissance, or Baroque, or Rococo architecture, you need understand quantum mechanics''. And I think that would be foolish, because all of them ultimately depend on quantum mechanics, but it's not the differences in the physics that explain the differences in the architecture. That requires a higher level of understanding. And so the \emph{pluralist} approach to the multiple origin of life says that every level, we need to find those unique mechanisms that can support propagation of information. And there isn't a "correct," most basic level. It depends on the question that you're asking and the variation that you're trying to explain.
 \end{itemize}
 
 \section[Evolutionary Computation]{Evolutionary Computation--Stephanie Forrest}
 
+Today we're going to talk about how these ideas about evolution look as computations and how we can use computations to understand and leverage 
+evolutionary ideas.
 
-Evolution as computation.
+Let's first review the three basic elements of Darwinian evolution, which you already learned about.
 
-Basic Principles of Evolution
 \begin{itemize}
-	\item Random variation
-	\item Selection
-	\item Inheritance
+	\item Random variation of individuals.
+
+	\item Selection of some of those individuals, based on differential fitness
+	
+	\item Inheritance of those variations into individuals of the next generation.
 \end{itemize}
 
-What are the genetic representations?
-\begin{itemize}
-	\item  Discrete units (genes)
-	\item Genotype vs. phenotype
-	\item Information stored in a linear array
+We also need to think a little bit about
+how those variations are represented
+and that really gets us into the field of genetics
+and we don't need to know very
+much about genetics, \begin{itemize}
+	\item we just need to know that the information, these variations, are represented as discrete units, which today are called genes.
+
+	\item And we need to know that the representation of the information in genes is separate from how it's expressed in the phenotype. So, we refer to this as the genotype versus phenotype mapping.
+
+	\item The final thing we need to know is that these genes are organized in a linear array, which today we call a chromosome.
 \end{itemize}
 
-Figure \ref{fig:GeneticAlgorithm} shows a Genetic Algorithm, as introduced by John Holland\cite{holland1992adaptation}, and Figure \ref{fig:GAfitness} shows a typical performance curve.
+And this understanding really started with Mendel in 1865 and the culmination of it was the Crick and Watson discovery of the structure of DNA.
+So, we're going to take those very simple
+elements and simple understandings and
+translate them into a computer algorithm.
+And the way we're going to do that is,
+instead of having chromosomes with genes
+on them, we're going to have strings with bits--Figure \ref{fig:GeneticAlgorithm}.
 
 \begin{figure}[H]
-	\caption{Genetic Algorithm, exhibiting Selection, Crossover, and Mutation}\label{fig:GeneticAlgorithm}
+	\caption[Genetic Algorithm, exhibiting Selection, Crossover, and Mutation]{Genetic Algorithm, exhibiting Selection, Crossover, and Mutation\cite{holland1992adaptation}}\label{fig:GeneticAlgorithm}
 	\includegraphics[width=0.9\textwidth]{GeneticAlgorithm}
 \end{figure}
+
+
+
+Bits are numbers that are either
+zero or one, they can only have two values,
+and we're going to have those strings of bits
+be our individuals in the population.
+So, imagine that we start out, and this is
+in the left-most panel of the figure.
+Imagine that we start out with a population
+of randomly generated individuals, or strings,
+and here we only have three shown and they
+each only have 5 bits, but in real genetic
+algorithms we would have more bits and
+larger populations.
+We also need a way to evaluate fitness
+and we do that by using a fitness function.
+In our example fitness function, we will assume
+that the values range from 0 to 1 and the
+higher value (1) is better.
+
+So, the first step is generate initial population,
+then we need to evaluate each individual
+in the population using our fitness function
+and use those fitness values to select
+the next generation.
+
+And so, you see that in the center panel
+where we have two copies of the highest
+fitness individual, no copies of the lowest
+fitness individual, and a single copy
+of the average individual.
+That's not very interesting because
+those individuals look exactly like their parents.
+And so, we take advantage of what are known as
+genetic operators to introduce new variations.
+And we do that using mutation that's shown
+in the top individual where the first bit (a one)
+is flipped to become a zero, and we do this
+not always in the first position, we do it
+randomly at different places in the string,
+and do it randomly throughout the strings
+of the population.
+
+Then we also use a process called:
+crossover, or recombination, where we take
+two individuals and exchange pieces of their
+DNA or pieces of their bit strings, and
+you see that in the second two individuals.
+
+So, now in the third panel, we have the
+
+true, new generation, Generation T+1, and
+we then need to repeat the cycle
+and evaluate those using the fitness function,
+do new selection, introduce new mutations
+and crossovers, and that is how
+the evolutionary process runs.
+This basic strategy, and basic idea of using
+bit strings to represent chromosomes was
+introduced by John Holland in the early 1960s.
+John was very interested in the
+populations level effects and in the
+impact of crossover.
+
+Coming back to the algorithm,
+what does it look like when we actually
+run this algorithm for multiple generations?
+So, I just showed you one generation in the previous slide,
+but we typically iterate these for hundreds
+or even thousands sometimes, of generations.
+And the way we look at it is by plotting time
+in terms of numbers of generations on the x-axis
+and the fitness, typically the average fitness
+of the population or the best fitness of
+the population. Those are the two values
+shown  on the y-axis-- Figure \ref{fig:GAfitness}.
 
 \begin{figure}[H]
 	\caption{Example Fitness Curve, with two plateaux}\label{fig:GAfitness}
 	\includegraphics[width=0.9\textwidth]{GAfitness}
 \end{figure}
+And so, this is a very typical kind of
+performance curve that we see with genetic
+algorithms, where the fitness of the population
+starts out very low initially, very quickly
+climbs up and improves as the really lousy
+individuals get deleted and the somewhat
+better individuals get copied, so the whole
+average fitness moves up.
+Then there's a little bit of searching around
+that we see, and we get another innovation.
+But eventually, the population gets stuck
+on what is known as a plateau.
+This is known as punctuated equilibrium.
+And when that happens, then the algorithm
+is affectively having to explore the space
+more widely to find a high fitness
+innovation and so that can take a varying
+amount of time, and we actually see two
+plateaus, the first plateau we see in the figure
+we see eventually and new innovation is found
+and the population jumps up in fitness
+and this is very typical of these
+genetic algorithms.
 
-Applications
-\begin{itemize}
-	\item  Engineering
-	\begin{itemize}
-		\item 	Multi-parameter function optimization\cite{marshall2014evolution}
-	\end{itemize}
-\end{itemize}
+Let's now talk about some applications.
+Genetic algorithms have been used widely
+in engineering applications and they've
+also been used for scientific modeling.
+First, we'll talk about the engineering
+applications, and of these by far the
+most common is what's known as
+multi-parameter function optimization--Figure \ref{fig:multi-parameter-optimization}.
 
-Origins of Evolutionary Computing
+\begin{figure}[H]
+	\caption[Multi Parameter Optimization]{Multi Parameter Optimization\cite{marshall2014evolution}}\label{fig:multi-parameter-optimization}
+	\begin{subfigure}[h]{0.5\textwidth}
+	\caption{2D fitness surface\cite{marshall2014evolution}}\label{fig:multi-parameter-optimization-2d}
+		\includegraphics[width=\textwidth]{multi-parameter-optimization}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.45\textwidth}
+		\caption{Example function}\label{fig:multi-parameter-optimization-example}
+		\includegraphics[width=\textwidth]{multi-parameter-optimization-example}
+	\end{subfigure}
+\end{figure}
+
+Figure \ref{fig:multi-parameter-optimization-2d} depicts
+a two-dimensional function,
+that is a function in two variables.
+And if a function is complex a lot of times
+we don't have analyticity methods to find mathematically
+what the maximum value of the function is
+and when that happens we have to resort to
+sampling and we can think of the genetic algorithm
+as a kind of biased sampling algorithm.
+And the goal, of course, would be to find
+in this multi-peaked surface points that
+are on the highest peak up at the top.
+Let's just go into a little bit more detail
+about how that works.
+Figure \ref{fig:multi-parameter-optimization-example} depicts an example of such a function and it's not trivial to analyze this mathematically,
+but suppose we want to find the x and y values
+for this function that produces the
+maximum F(x,y).
+
+So to do that, we take out bit strings and
+conceptually think of the first half of the
+string as being a representation of the
+value of x, and the second half of the string
+is being a representation of the value of y.
+Now, to evaluate fitness we then need to
+take these ones and zeros and interpret
+them as Base 2 numbers, translating them
+into their decimal equivalents, which is
+shown on the figure, and then take those
+decimal values and plug them into our
+fitness function, and in this case we get
+the value out 4.
+
+So, we would have to do that for every
+individual in the population.
+I just want to say a word about where
+these algorithms came from. I've mentioned
+John Holland. There were several other
+groups that were interested in similar
+kinds of algorithms and the first three main
+groups I've listed were all independent
+discoveries of similar and overlapping ideas.
+And then in the early 90s, John Koza\cite{koza1992genetic} came along
+and really blew open the field by showing
+how we could use genetic algorithms to
+evolve computer programs.
+These separate stream inventions are now
+lumped together and the field is called
+Evolutionary Computation.
+
+And needless to say, there's been
+a lot of recombination between these
+different origins.
+
+
+References
 
 \begin{itemize}
 	\item John Holland \cite{holland1992adaptation}
@@ -1495,13 +1678,9 @@ Origins of Evolutionary Computing
 	\item John Koza--evolving computer programs\cite{koza1992genetic}
 \end{itemize}
 
-See also \cite{mitchell1998introduction}, \cite{eiben2003introduction}, \cite{forrest1993genetic}, and \cite{ma2014novo}.
+See also \cite{mitchell1998introduction,eiben2003introduction,forrest1993genetic,ma2014novo}.
 
-
-
-\section{Scaling}
-
-Lecturer: Pablo Marquet
+\section[Scaling]{Scaling--Pablo Marquet}
 
 Why is scaling important?
 
