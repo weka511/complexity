@@ -1682,19 +1682,33 @@ See also \cite{mitchell1998introduction,eiben2003introduction,forrest1993genetic
 
 \section[Scaling]{Scaling--Pablo Marquet}
 
-Why is scaling important?
 
+So, why is scaling so important
+and why do you need to know about this?
 \begin{itemize}
-	\item Provides a way to deal with the diversity of scales and
-	organisms found in ecological systems
-	\item Makes apparent the fundamental similarity that
-	underlies diversity in nature and how this has been
-	molded by evolution
-	\item Provides a benchmark against which species,
-	populations and ecosystems can be compared
-\end{itemize}
+	\item Well, scalings provide a way to deal with the diversity of scales and also the... different type of organism that exists and becomes part of ecological systems.
+	\item Scaling also makes apparent the fundamental similarity that underlies the diversity in nature and how this has been molded by the action of natural selection. It's very important to realize that scalings point out that there are not many ways of actually having a real functioning organism in nature and provides you with the right way of understanding the constraints that are operating on diversity. And, since most organisms obey these constraints, it points to the fundamental similarity that they share.
 
-Many ecological attributes scale with size--(\ref{eq:PowerLawScaling}) and Figure \ref{fig:PowerLawScaling}.
+	\item Scaling provides us with a  benchmark against which we can compare different species, populations and ecosystems, and you can actually measure deviations from scaling relationships, and those deviations mean that there are some processes--some important biological processes--operating on these systems
+\end{itemize}.
+
+So, let's start by the most simple way
+of characterizing scaling in ecology.
+And, the characterization
+is a mathematical one - it's very simple.
+And usually, scaling relationships,
+as you have already heard,
+cannot be summarized with
+a relationship like a variable "y"
+or a trait of an organism.
+It is proportional to a variable "M"
+raised to a power.
+In this case, I'm talking about M
+as the mass of the organism
+or the size of the system -
+of the biological system.
+
+So, you can also represent this relationship as $y=c M^\alpha$ which actually allows you to take the logarithm of this relationship and transform something which is not linear into a linear equation--(\ref{eq:PowerLawScaling}) and Figure \ref{fig:PowerLawScaling} .
 \begin{align*}
 	y \propto& M^{\alpha}\text{, where $M$ represents mass, size, etc.}\numberthis\label{eq:PowerLawScaling}\\
 	=& c M^{\alpha}\\
@@ -1703,44 +1717,142 @@ Many ecological attributes scale with size--(\ref{eq:PowerLawScaling}) and Figur
 \end{align*}
 
 \begin{figure}[H]
-	\caption{Many ecological attributes scale with size}\label{fig:PowerLawScaling}
+	\caption[Many ecological attributes scale with size]{Many ecological attributes scale with size\cite{white2012methodological}}\label{fig:PowerLawScaling}
 	\includegraphics[width=0.9\textwidth]{PowerLawScaling}
 \end{figure}
 
-Figure \ref{fig:ScalingExamples} shows some examples, after \cite{sibly2012metabolic}. Mammals are in grey, marsupials in red. We can use this as a basis for investigating why mammals deviate.
+On the left you see scaling relationships that are in the nonlinearized way. And then, to the right you see the linear relationship that results after you take the logarithms
+of this relationship.
+That makes it easier to analyze.
+So, examples of scaling abound in nature
+and they affect the way organisms
+are put together and evolved
+through the action of natural selection.
+You can see, for example,
+relationships between
+the size of the organisms
+and weaning time,
+or also, the size of the organisms
+and longevity.
+
+And, you can use this relationship -
+as I show you here in Figure \ref{fig:ScalingExamples} -
+to compare different kinds of organisms.
 \begin{figure}[H]
-	\caption[Scaling of life-history events]{Scaling of life-history events: mammals are in grey, marsupials in red.}\label{fig:ScalingExamples}
+	\caption[Scaling of life-history events]{Scaling of life-history events: mammals are in grey, marsupials in red.\cite{sibly2012metabolic}}\label{fig:ScalingExamples}
 	\includegraphics[width=0.9\textwidth]{ScalingExamples}
 \end{figure}
+For example, the gray dots represent
+all mammalian species
+and the red dots represent
+one particular type of species,
+which are the marsupials.
+So, you can see the marsupials, they...
+in general, they follow the trend's line
+for longevity, for example,
+but they deviate in maturation time,
+for example.
+So, these scaling relationships
+allow you to compare
+and you can use them as a benchmark
+to try to understand what is going on
+with this particular species
+that they deviate.
+Is this because of
+their phylogenetic history?
+Or, is it because of the environment
+of the other kind of habits they have -
+what they eat and so on.
+So, you can answer
+meaningful questions
+using the scaling relationships.
 
-
-Figure \ref{fig:Scaling:individuals:ecosystems}	depicts Mean Carnivore Mass-- Figure \ref{fig:mcm} \cite{tucker2014evolutionary}; Carbon Turnover--Figure \ref {fig:ct} \cite{anderson2013altered}; and Primary Production--Figure \ref{fig:npp} \cite{enquist2012land}.
+In ecology,
+these relationships also affect,
+for example, things very fundamental,
+like the average prey mass
+that a particular carnivore species
+will eventually eat,
+or affect, as you can see in Figure \ref{fig:Scaling:individuals:ecosystems},
+the carbon turnover,
+or the time it takes,
+to replace one gram of carbon
+in a particular ecosystem
+and how that changes
+with the average mass of the plants
+in that ecosystem.
 
 \begin{figure}[H]
 	\caption{Scaling in individuals and	ecosystems}\label{fig:Scaling:individuals:ecosystems}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{Mean Carnivore Mass}\label{fig:mcm}
+		\caption{Mean Carnivore Mass\cite{tucker2014evolutionary}}\label{fig:mcm}
 		\includegraphics[width=\textwidth]{Scaling1}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{Carbon Turnover}\label{fig:ct}
+		\caption{Carbon Turnover\cite{anderson2013altered}}\label{fig:ct}
 		\includegraphics[width=\textwidth]{Scaling2}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{Primary Production}\label{fig:npp}
+		\caption{Primary Production\cite{enquist2012land}}\label{fig:npp}
 		\includegraphics[width=\textwidth]{Scaling3}
 	\end{subfigure}
 \end{figure}
 
-The central role of energy: the size ($M$) of an individual affects the amount
-of energy it requires to maintain itself (basal metabolism $B$)--Figure \ref{fig:Kleiber} \cite{schmidt1984scaling}.
+Or also, you can see scaling
+relationship in terms of
+the net primary productivity
+of an ecosystem
+and the total amount of
+plant biomass in that ecosystem.
+So, those are fundamental relationships
+that tell you something very... general
+about the way organisms
+and ecosystem work.
+
+So how do we understand
+the origin of this relationship?
+Well, let me tell you, the fundamental...
+kind of relationship I would say is
+the one that relates the organism
+and its energy requirement to its size--Figure \ref{fig:Kleiber}.
 
 \begin{figure}[H]
-	\caption{Kleiber's Law: $B \propto M^\frac{3}{4}$}\label{fig:Kleiber}
+	\caption[Kleiber's Law]{Kleiber's Law: $B \propto M^\frac{3}{4}$\cite{schmidt1984scaling}}\label{fig:Kleiber}
 	\includegraphics[width=0.9\textwidth]{Kleiber}
 \end{figure}
 
-Figure \ref{fig:Kleiber} suggest that somehow an elephant is just a large mouse! Natural Selection is not acting randomly, but is subject to constraints. The West, Brown \& Enquist developed a general model for the origin of allometric scaling laws in biology\cite{west1997general}.
+This is called "Kleiber's Law,"
+and it points out that
+the requirements of energy
+of an organism, its metabolism,
+which is the sum of
+all the biochemical reactions
+happening within the organism,
+scale with the size of the system -
+or mass -
+raised to a three-quarters power.
+And, you can see in the graph that
+this relationship describes very well
+how metabolism changes
+as you increase the mass of an organism
+from a mouse, for example,
+to an elephant.
+And, it tells you that somehow
+an elephant is just a variation
+on the same theme as a mouse is.
+So, it's this relationship that points out
+that there is a fundamental similarity
+among these different kinds of organisms.
+So, natural selection
+is not acting randomly -
+it's following some constraints or...
+so, what are those constraints?
+
+In 1997, Geoffrey West, Jim Brown and Brian Enquist, proposed a very simple and elegant model that points out to some fundamental principles acting and helping us to understand why metabolism changes in the way it does with the size of a system.
+And, I'm not going to explain to you
+all the details of the model.
+I'm just going to give you
+two major insights into it.
 \begin{itemize}
 	\item The properties of resource delivery networks determine
 	the properties of whole-organism metabolic rate.
@@ -1749,41 +1861,248 @@ Figure \ref{fig:Kleiber} suggest that somehow an elephant is just a large mouse!
 	minimize energy loss)
 \end{itemize}
 
-Some implications 
+Well, the major thing is that
+any organism that exists faces a problem
+and the problem is that
+you have to deliver energy -
+the resources that you get
+from the environment to live -
+you have to deliver it to
+all the different parts of your body.
+In a multicellular organism,
+this means that you have to deliver
+this energy to all the cells in your body--Figure\ref{fig:capillaries}.
+\begin{figure}[H]
+	\caption[The West, Brown, Enquist Model]{The West, Brown, Enquist Model; In a multicellular organism, you have to deliver energy to all the cells in your body.\cite{west1997general}}\label{fig:capillaries}
+	\includegraphics[width=0.8\textwidth]{capillaries}
+\end{figure}
+So, how do you do that?
+Well, the way you do that is
+you construct.
+I mean natural selection has molded
+the existence of networks
+to deliver this energy towards
+all the parts of your body.
+So, those networks
+actually generate constraints
+that manifest in this fundamental
+three-quarter scaling for metabolism.
 
-\begin{itemize}
-	\item What is the maximum number of individuals that can be found in a given area--(\ref{eq:max}) and Figure \ref{fig:MammalianHerbivores} \cite{damuth1981population}?
-	\begin{align*}
+Now, the way natural selection
+acts on this is
+by minimizing energy loss.
+So, it generates networks
+that minimize this energy -
+so efficient networks -
+when you take account of what
+you consider these two major insights,
+and they show
+in a mathematical model
+that this creates the three-quarter
+scaling relationship that we see.
+So, let me give you some example
+of the implications of this relationship
+in ecology.
+
+One simple one is that you can ask
+a very simple question like -
+what is the maximum number
+of individuals
+that can be found in a given area?
+So, to answer this question,
+which I think is a very fundamental one,
+you are just required to know
+the amount of energy or resources
+that are in a particular area,
+and the requirements of those resources
+by different kinds of individuals.
+So... we know that the scale
+with the size of the organisms
+rises through three-quarters.
+So, it's very simple then to compute
+the maximum number of individuals
+in a given area
+just by dividing the amount of resources
+over the requirements of each individual.
+And... what that gives you is
+another scaling relationship
+that says that the maximum number
+of individual scales with mass
+raised to minus three quarters.
+
+\begin{align*}
 	R=& \text{Energy or resources per unit area}\\
 	B=&\text{Individual resource requirements}\\
 	N_{max}\propto& R M^{-\frac{3}{4}}\label{eq:max}\numberthis
-	\end{align*}
-	\begin{figure}[H]
-		\caption{Mammalian Herbivores--$N_{max}\propto R M^{-\frac{3}{4}}$}\label{fig:MammalianHerbivores}
-		\includegraphics[width=0.9\textwidth]{MammalianHerbivores}
-	\end{figure}	
-	\item Populations of different organisms tend to use the same amount of energy--(\ref{eq:const}), Figure \ref{fig:PopulationEnergyUse} \cite{enquist1998allometric} 
-	\begin{align*}
+\end{align*}
+
+Now, let's see the empirical evidence.
+The empirical evidence on this,
+and I'm going to go back
+to a paper published by
+John Damuth in 1981
+where he made a compilation
+of the density
+of different mammal species
+around the world.
+And, these happened to be
+every [major] mammal...
+and he computed the density
+and size of each of these species,
+and he plotted this relationship,
+and, as you can see in  Figure \ref{fig:MammalianHerbivores},
+there's a negative slope and
+this slope is minus three quarters.
+
+\begin{figure}[H]
+	\caption[Mammalian Herbivores]{Mammalian Herbivores--$N_{max}\propto R M^{-\frac{3}{4}}$\cite{damuth1981population}}\label{fig:MammalianHerbivores}
+	\includegraphics[width=0.9\textwidth]{MammalianHerbivores}
+\end{figure}	
+
+So, right as predicted,
+the maximum number of individuals
+follow a minus three-quarter
+scaling law.
+The implications of this
+are very interesting
+because it means that mice actually...
+they achieved larger densities
+than elephants,
+but somehow they are the same,
+because they, as I will show you,
+they use the same amount of energy
+at the population level.
+And, how we can calculate that?
+Well, we call that
+the "population energy use."
+Population energy use - PEU -
+is proportionate to
+the number of individuals times
+the requirements for energy.
+So, that will be the total amount
+of energy required by a population.
+
+And, if we replace the known
+scaling relationships
+for number and for energy requirements,
+we know that population energy use
+will be proportional to
+mass raised to minus three quarters
+times mass raised to three quarters.
+As you can see from (\ref{eq:const}), these two exponents
+they kind of annihilate themselves
+and give you a population energy use
+that is proportional to
+mass raised to zero,
+meaning that population energy use
+tends to be invariant
+regarding the size of the organisms,
+meaning that elephants use
+the same amount of energy
+that mice use--Figure \ref{fig:PopulationEnergyUse}.
+\begin{align*}
 	E_{pop}\propto&N B\text{, Energy use for population}\\
 	\propto& M^{-\frac{3}{4}} M^{\frac{3}{4}}\\
 	\propto& 1\label{eq:const}\numberthis
-	\end{align*}
-	\begin{figure}[H]
-		\caption{Population Energy Use}\label{fig:PopulationEnergyUse}
-		\includegraphics[width=0.9\textwidth]{PopulationEnergyUse}
-	\end{figure}
-	\item Humans--the hyper-dense species--Figure \ref{fig:Hyperdense}
-	\begin{figure}[H]
-		\caption{Humans--the hyper-dense species}\label{fig:Hyperdense}
-		\includegraphics[width=0.9\textwidth]{Hyperdense}
-	\end{figure}
-\end{itemize}
+\end{align*}
+\begin{figure}[H]
+	\caption[Population Energy Use]{Population Energy Use\cite{enquist1998allometric} }\label{fig:PopulationEnergyUse}
+	\includegraphics[width=0.9\textwidth]{PopulationEnergyUse}
+\end{figure}
+
+So, this is a very fundamental
+invariant relationship.
+There are many more scaling relationships
+that show this kind of property
+of invariance,
+but it shows you that
+things can be different,
+but at the same,
+time things can be equal
+if you explore this relationship
+between the scalings.
+
+So, why is it fundamental?
+Why is this very important too
+is because it allows us to understand
+something about ourselves too.
+And here, I want to make the point that,
+using this relationship,
+you can understand that humans
+are a hyper-dense species--Figure \ref{fig:Hyperdense}.
+\begin{figure}[H]
+	\caption{Humans--the hyper-dense species}\label{fig:Hyperdense}
+	\includegraphics[width=0.9\textwidth]{Hyperdense}
+\end{figure}
+How do we know that?
+Because, we know the scaling
+relationship for all mammals.
+We know how density changes as you
+change the body size of the mammal.
+We are mammals.
+On average, a human being
+you can consider weighs around 70 kilos.
+And, you can try to plot which would be
+the density that we should achieve
+if we will kind of
+follow this relationship.
+And, our density will be around
+2.12 individuals per square kilometer.
+So, the realized density is
+5.8 raised to 10 to 4 [fourth power]
+meaning 58,000 times larger.
+
+So, this is a very significant deviation
+from the expected scaling relationship.
+And, this is a very meaningful one
+because
+you can now answer how it comes -
+what happens to humans
+that they could shift to
+such an extreme maximum density
+as it does these days.
+Well, let me tell you that
+when we were in a different kind of
+stage of development,
+a social stage of development -
+when we were hunter-gatherer -
+we really fit into this relationship.
+As we moved through time
+and social complexity,
+we were moving away
+from this relationship
+and now we are far away from it.
+And, this has impacts in terms of
+the amount of energy that we use
+and the impact of that amount of energy
+used by humans
+on the rest of the ecosystem.
+That is called, or is part of
+what we call "global change."
+We're not going to deal with this
+in this class,
+but it's important to keep it in mind.
+That's why scaling relationships help you
+to realize there are similarities,
+there are fundamental principles
+related to the way
+organisms deliver energy
+through networks
+that explain the amount of energy
+that different organisms require
+and this constrains the density
+and amount of energy
+their populations use.
+And... you can use them
+to understand deviations,
+like the humans' density extreme
+or hyper-density of humans now.
+
+
 
 See also \cite{marquet2005scaling}
 
-\section{Energy}
-
-Lecturer: Van Savage
+\section[Energy]{Energy--Van Savage}
 
 How is energy used in biology?
 
