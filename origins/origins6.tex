@@ -1,3 +1,25 @@
+% MIT License
+
+% Copyright (c) 2019-2020 Simon Crase
+
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
 \documentclass[]{article}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
 \usepackage[hidelinks]{hyperref}
@@ -9,7 +31,14 @@
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
+% I snarfed the next line from Stack exchange
+% https://tex.stackexchange.com/questions
+%    /42726/align-but-show-one-equation-number-at-the-end
+% It allows me to suppress equation numbers with align*,
+% then selectively add equation numbers
+% for lines that I want to reference slsewhere
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+% Add logo at start of document
 \pretitle{
 	\begin{center}
 		\includegraphics[width=6cm]{KanjiLife}\\	
@@ -41,8 +70,9 @@
    These notes are distributed in the hope that they will be useful,
    but without any warranty, and without even the implied warranty of
    merchantability or fitness for a particular purpose. All feedback is welcome,
-   but I don't necessarily undertake to do anything with it.
-
+   but I don't necessarily undertake to do anything with it.\\
+   \LaTeX source for this week's lectures can be found at\\
+   \url{https://github.com/weka511/complexity/tree/master/origins}.
 \end{abstract}
 
 \setcounter{tocdepth}{2}
@@ -2645,8 +2675,6 @@ References: \cite{sibly2012metabolic,battley1987energetics,odum1976energy,odum19
 
 \section[Nonequilibrium Physics]{Nonequilibrium Physics-- Eric Smith}
 
-\subsection{Phase Transitions}
-
 We will talk about how motion itself can freeze. Topics covered:
 \begin{itemize}
 	\item The equilibrium concept of phase transition
@@ -2658,7 +2686,9 @@ We will talk about how motion itself can freeze. Topics covered:
 	\item Phase transitions in dynamical systems--''frozen motion''
 \end{itemize}
 
-To understand what makes phase transitions special we have to start with the ''ordinary'' response of thermodynamic systems to controls. E.g. lava has viscosity, which increases smoothly as temperature is lowered--Figure\ref{fig:lava}.
+\subsection{Phase Transitions}
+
+To understand what makes phase transitions special we have to start with the ''ordinary'' response of thermodynamic systems to controls. E.g. lava has viscosity, which increases smoothly as temperature is lowered--Figure \ref{fig:lava}.
 
 \begin{figure}[H]
 	\begin{center}
@@ -2668,20 +2698,18 @@ To understand what makes phase transitions special we have to start with the ''o
 \end{figure}
 
 
- Phase transitions are different
-\begin{itemize}
+ Phase transitions are different:
+\begin{enumerate}
 	\item Water does not become harder as it is cooled
-	\item It turns to ice suddenly (critical temperature)--Figure \ref{fig:water-ice}.
-\end{itemize}
+	\item It turns to ice suddenly at a ''critical temperature''--Figure \ref{fig:water-ice}.
 
-\begin{figure}[H]
-	\begin{center}
-		\caption{Phase transitions are different}\label{fig:water-ice}
-		\includegraphics[width=0.8\textwidth]{water-ice}
-	\end{center}
-\end{figure}
+	\begin{figure}[H]
+		\begin{center}
+			\caption{Phase transitions are different}\label{fig:water-ice}
+			\includegraphics[width=0.8\textwidth]{water-ice}
+		\end{center}
+	\end{figure}
 
-\begin{itemize}
 	\item The average direction of pointing of the ice sharply increases from zero at the freezing temperature--Figure \ref{fig:water-ice1}.
 	\begin{figure}[H]
 		\begin{center}
@@ -2722,9 +2750,9 @@ To understand what makes phase transitions special we have to start with the ''o
 		\item Diamonds are hard because many atoms lock each other in place
 		\item The order of the crystal is a ''robust'' property of freezing
 	\end{itemize}
-\end{itemize}
+\end{enumerate}
 
-Evolution happens on a background of robust architectures--Figure \ref{fig:evolution-robust}.
+\subsection{Evolution happens on a background of robust architectures}
 
 \begin{figure}[H]
 	\caption{Evolution happens on a background of robust architectures}\label{fig:evolution-robust}
