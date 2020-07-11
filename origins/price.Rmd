@@ -50,7 +50,7 @@ This example is based on the E. long-term evolution experiment[@blount2008histor
 ## Assumptions
  1. The growth medium is perfectly mixed, so we can assume that bacteria will grow if the concentration is sufficient\label{assumption-mixed}
  1. The mutation that allows bacteria to use citrate is very rare[@blount2008historical]\label{assumption-rare}, so we need consider selection only.
- 1. The popluation is large enough that we can organize it into generations.
+ 1. The population is large enough that we can organize it into generations.
 
 ## Methods
 
@@ -68,14 +68,14 @@ By Assumption \ref{assumption-rare}, mutations are extremely rare, so we can wri
 
 
 \begin{align}
-  q_1^\prime =& q_1 c_g \label{eq-q1-prime}\\
-  q_2^\prime =& q_2 (c_g + c_c)
+  q_1^\prime =& \alpha q_1 c_g \label{eq-q1-prime}\\
+  q_2^\prime =& \alpha q_2 (c_g + c_c)
 \end{align}
 
 (\ref{eq-q1-prime}) shows that the decrease in glucose attributable to $q_1$ is $\Delta c_{g,1}$
 \begin{align}
-  q_1^\prime - q_1 =& k_1 \Delta c_{g,1}\\
-  q_2^\prime - q_2 =& k_1 \Delta c_{g,2} + k_2 \Delta c_{c,2}
+  q_1^\prime - q_1 =& - k_1 \Delta c_{g,1}\\
+  q_2^\prime - q_2 =&  - k_1 \Delta c_{g,2} + k_2 \Delta c_{c,2}
 \end{align}
 Assumption \ref{assumption-mixed} allows us to say:
 \begin{align}
