@@ -68,13 +68,15 @@
 
 \newacronym{gls:OEE}{OEE}{Open Ended Evolution}
 
+\newacronym[see={[Glossary:]{gls:operationaltaxonomicunit}}]{gls:OTU}{OTU}{Operational Taxonomic Unit\glsadd{gls:operationaltaxonomicunit}}
+
 \newacronym{gls:mRNA}{mRNA}{Messenger RNA}
 
-\newacronym[see={[Glossary:]{gls:nucleoside-triphosphate}}]{gls:NTP}{NTP}{Nucleoside triphosphate\glsadd{gls:nucleoside-triphosphate}}
+\newacronym[see={[Glossary:]{gls:nucleoside-triphosphate}}]{gls:NTP}{NTP}{Nucleoside triphosphate\glsadd{gls:nucleoside-triphosphate}\glsadd{gls:Large:subunit:ribosomal:ribonucleic:acid}}
 
 \newacronym{gls:RNA}{RNA}{Ribonucleic Acid}
 
-\newacronym[see={[Glossary:]{gls:Ribosomal:Ribonucleic:acid}}]{gls:rRNA}{rRNA}{Ribosomal Ribonucleic acid\glsadd{gls:Ribosomal:Ribonucleic:acid}}
+\newacronym[see={[Glossary:]{gls:Large:subunit:ribosomal:ribonucleic:acid}}]{gls:rRNA}{rRNA}{Ribosomal Ribonucleic acid\glsadd{gls:Large:subunit:ribosomal:ribonucleic:acid}}
 
 \newacronym{gls:SFI}{SFI}{Santa Fe Institute}
 
@@ -108,6 +110,10 @@
 \newglossaryentry{gls:alpha:carbon}{
 	name={$\alpha$ carbon},
 	description={The $\alpha$ carbon  in organic molecules refers to the first carbon atom that attaches to a functional group, such as a carbonyl. The second carbon atom is called the $\beta$ carbon, and the system continues naming in alphabetical order with Greek letters\cite{wiki:alpha:carbon} }}
+
+\newglossaryentry{gls:alphadiversity}{
+	name={alpha diversity},
+	description={the mean species diversity in sites or habitats at a local scale. The term was introduced by R. H. Whittaker together with the terms beta diversity  and gamma diversity. Whittaker's idea was that the total species diversity in a landscape (gamma diversity) is determined by two different things, the mean species diversity in sites or habitats at a more local scale (alpha diversity) and the differentiation among those habitats (beta diversity)\cite{wiki:Alphadiversity}}}
 
 \newglossaryentry{gls:amphiphile}{
 	name={amphiphile},
@@ -361,6 +367,8 @@
 	name={likelihood},
 	description={In statistics, the likelihood function (often simply called the likelihood) measures the goodness of fit of a statistical model to a sample of data for given values of the unknown parameters. It is formed from the joint probability distribution of the sample, but viewed and used as a function of the parameters only, thus treating the random variables as fixed at the observed values--\cite{wiki:likelihood}}}
 
+\newglossaryentry{gls:linkagedisequilibrium}{name={ linkage disequilibrium},description={the non-random association of alleles at different loci in a given population. Loci are said to be in linkage disequilibrium when the frequency of association of their different alleles is higher or lower than what would be expected if the loci were independent and associated randomly\cite{wiki:linkage:disequilibrium}}}
+
 \newglossaryentry{gls:lipid}{
 	name={lipid},
 	description={Lipids are amphiphilic molecules that  self-assemble into a hydrophobic barrier that surrounds a cell\cite[Lecture 2.7.1]{sfi2020}}}
@@ -397,6 +405,11 @@
 \newglossaryentry{gls:oligotroph}{
 	name={oligotroph},
 	description={An oligotroph is an organism that can live in an environment that offers very low levels of nutrients. They may be contrasted with copiotrophs, which prefer nutritionally rich environments. Oligotrophs are characterized by slow growth, low rates of metabolism, and generally low population density \cite{wiki:oligotroph}}}
+
+\newglossaryentry{gls:operationaltaxonomicunit}{
+	name={operational taxonomic unit},
+	description={An operational taxonomic unit (OTU) is an operational definition used to classify groups of closely related individuals. The term was originally introduced by Robert R. Sokal and Peter H. A. Sneath in the context of numerical taxonomy, where an "Operational Taxonomic Unit" is simply the group of organisms currently being studied. In this sense, an OTU is a pragmatic definition to group individuals by similarity, equivalent to but not necessarily in line with classical Linnaean taxonomy or modern evolutionary taxonomy\cite{wiki:OperationalTaxonomicUnit}\\
+	Nowadays, however, the term is also used in a different context and refers to clusters of (uncultivated or unknown) organisms, grouped by DNA sequence similarity of a specific taxonomic marker gene (originally coined as mOTU; molecular OTU). In other words, OTUs are pragmatic proxies for "species" (microbial or metazoan) at different taxonomic levels, in the absence of traditional systems of biological classification as are available for macroscopic organisms. For several years, OTUs have been the most commonly used units of diversity, especially when analysing small subunit 16S (for prokaryotes) or 18S rRNA (for eukaryotes ) marker gene sequence datasets. This appears to be the interpretation used in \cite{souza2018lost}.}}
 
 \newglossaryentry{gls:orthology}{
 	name={orthology},
@@ -510,6 +523,28 @@
 	name={saprotroph},
 	description={Saprotrophic nutrition  or lysotrophic nutrition is a process of chemoheterotrophic extracellular digestion involved in the processing of decayed (dead or waste) organic matter. It occurs in saprotrophs, and is most often associated with fungi (for example Mucor) and soil bacteria\cite{wiki:saprotroph}}}
 
+\newglossaryentry{gls:shannonIndex}{
+	name={Shannon diversity index},
+	description={The Shannon diversity index (H) is another index that is commonly used to characterize species diversity in a community. Like \gls{gls:simpsonsIndex}, Shannon's index accounts for both abundance and evenness of the species present\cite{beals2000diversity}
+		\begin{align*}
+			H =& \sum_{i=1}^{S}p_i \ln{p_i}\text{, Shannon's diversity index, where}\\
+			S =& \text{ total number of species in the community (richness)}\\
+			p_i =& \text{ proportion of $S$ made up of the $i$th species}
+		\end{align*}}}
+
+\newglossaryentry{gls:simpsonsIndex}{
+	name={Simpson's diversity index},
+	description={Simpson's diversity index (D) is a simple mathematical measure that characterizes species diversity in a community.\cite{beals2000diversity1}
+	\begin{align*}
+		D =& \frac{1}{\sum_{1}^{S} p_i^2}\text{, Simpson's diversity index, where}\\
+		S =& \text{ total number of species in the community (richness)}\\
+		p_i =& \text{ proportion of $S$ made up of the $i$th species}
+	\end{align*}}}
+
+\newglossaryentry{gls:selectivesweep}{
+	name={selective sweep},description={
+		the process through which a new beneficial mutation that increases its frequency and becomes fixed (i.e., reaches a frequency of 1) in the population leads to the reduction or elimination of genetic variation among nucleotide sequences that are near the mutation. In selective sweep, positive selection causes the new mutation to reach fixation so quickly that linked alleles can "hitchhike" and also become fixed\cite{wiki:selectivesweep}}}
+
 \newglossaryentry{gls:serpentinization}{
 	name={serpentinization},
 	description={A hydration and metamorphic transformation of ultramafic rock from the Earth's mantle\cite{wiki:serpentinization}}
@@ -530,6 +565,10 @@
 \newglossaryentry{gls:sympatric-speciation}{
 	name={sympatric speciation},
 	description={the evolution of a new species from a surviving ancestral species while both continue to inhabit the same geographic region\cite{wiki:Sympatric:speciation}}}
+
+\newglossaryentry{gls:stromatolite}{
+	name={stromatolite},
+	description={Stromatolites are layered mounds, columns, and sheet-like sedimentary rocks that were originally formed by the growth of layer upon layer of cyanobacteria, a single-celled photosynthesizing microbe. Fossilized stromatolites provide records of ancient life on Earth\cite{wiki:stromatolite}}}
 
 \newglossaryentry{gls:symplesiomorphy}{
 	name={symplesiomorphy},
