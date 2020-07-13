@@ -25,7 +25,7 @@ I have used [TexStudio](https://www.texstudio.org/) and the [JabRef](https://www
 |4|origins4.tex|My Lecture Notes - Early Life|
 |5|origins5.tex|My Lecture Notes - Evolution|
 ||price.Rmd|Examples illustrating Prices's equation|
-||catastrophe.py|Model for error catastrophe after [Manfred Eigen](https://www.pnas.org/content/99/21/13374.full) and Peter Schuster. See also [Slides for 1.9.3](https://complexityexplorer.s3.amazonaws.com/originsoflife/unit1/origin+quasispecie2s_fix_short+(1).pdf)|
+||catastrophe.py|Model for error catastrophe after [Manfred Eigen and Peter Schuster](https://www.pnas.org/content/99/21/13374.full). See also [Slides for 1.9.3](https://complexityexplorer.s3.amazonaws.com/originsoflife/unit1/origin+quasispecie2s_fix_short+(1).pdf)|
 |6|origins6.tex|My Lecture Notes - Astrobiology & General Theories of Life|
 | |allometric.py|Evolve solution for  [West et al--A General Model for the Origin of Allometric Scaling Laws in Biology](http://hermes.ffn.ub.es/oscar/Biologia/Escala/Science_276_122_1997.pdf)|
 | | ga.py|Genetic algorithm framework|
