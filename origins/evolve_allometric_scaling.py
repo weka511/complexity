@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Greenweaves Software Limited
+# Copyright (C) 2019-2020 Greenweaves Software Limited
 
 # This is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -70,7 +70,12 @@ def mutate_branching_network(individual,probability=0.5,sigma=0.5):
     return beta, gamma,n
 
 if __name__=='__main__':
-#    seed(1)
+    import argparse
+    
+    parser = argparse.ArgumentParser('Evolve branching network')
+    parser.add_argument('--seed', default=None,type=int, help='Seed for random number generation')
+    args = parser.parse_args()
+    seed(args.seed)
     
     population,statistics,indices = evolve(
         N         = 1000,
