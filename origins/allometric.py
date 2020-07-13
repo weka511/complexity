@@ -77,24 +77,33 @@ def mutate_branching_network(individual,probability=0.5,sigma=0.5):
 if __name__=='__main__':
     import argparse
     
+    from matplotlib import rc
+    rc('text', usetex=True)    
+    
     parser = argparse.ArgumentParser('Evolve branching network')
-    parser.add_argument('--seed', default=None,type=int, help='Seed for random number generation')
+    parser.add_argument('--seed',  default=None, type=int,   help='Seed for random number generation')
+    parser.add_argument('--N',     default=1000, type=int,   help='Number of generations')
+    parser.add_argument('--M',     default=100,  type=int,   help='Population size')
+    parser.add_argument('--c',     default=10,   type=int,   help='c')
+    parser.add_argument('--m',     default=0.1,  type=float, help='mutation probability')
+    parser.add_argument('--gamma', default=0.1,  type=float, help='Initial gamma')
     args = parser.parse_args()
     seed(args.seed)
     
     population,statistics,indices = evolve(
-        N         = 1000,
-        create    = lambda :create_branching_network(c=10),
+        N         = args.N,
+        M         = args.M,
+        create    = lambda :create_branching_network(c=args.c, gamma0=args.gamma),
         evaluate  = evaluate_branching_network,
-        mutate    = lambda individual:mutate_branching_network(individual,probability=0.1),
+        mutate    = lambda individual:mutate_branching_network(individual,probability=args.m),
         crossover = lambda population:population)
     beta,gamma,n = population[indices[-1]]
     print (std(n)/mean(n), std(beta)/mean(beta), std(gamma)/mean(gamma))
     plot_fitness(statistics,name='WBE')
     
     figure(figsize=(20,10))
-    plot([b/max(beta) for b in beta],'r',label='beta')
-    plot([g/max(gamma) for g in gamma],'g',label='gamma')
+    plot([b/max(beta) for b in beta],'r',label=r'$\beta$')
+    plot([g/max(gamma) for g in gamma],'g',label=r'$\gamma$')
     plot([n0/max(n) for n0 in n],'b',label='n')
     legend()
     
