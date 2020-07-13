@@ -28,13 +28,23 @@ from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, f
 from numpy import mean, std
 from math import sqrt
 
-def create_branching_network(c=10,gamma0=0.1):
+# create_branching_network
+#
+# Create a representation of flow though a network
+def create_branching_network(c      = 10, #Number of levels
+                             gamma0 = 0.1):
     gamma = [gamma0+(1-gamma0)*random() for _ in range(c)]
     n     = [choice([2,4,8,16,32])      for _ in range(c)]
     beta  = [1/sqrt(n0)                 for n0 in n]
     return (beta,gamma,n)
 
-def get_resistance(beta,gamma,n,r_c=1,l_c=1):
+# get_resistance
+
+def get_resistance(beta,
+                   gamma,
+                   n,
+                   r_c=1,
+                   l_c=1):
     r = r_c
     l = l_c
     R = []    
@@ -51,16 +61,29 @@ def get_resistance(beta,gamma,n,r_c=1,l_c=1):
         
     return Z
 
+# evaluate_branching_network
+#
+# The score is 1/resiatnce, as we want a network that minimizes resistance.
+
 def evaluate_branching_network(individual):
     beta, gamma,n = individual
     return 1/get_resistance(beta,gamma,n)
 
-def mutate_branching_network(individual,probability=0.5,sigma=0.5):
-    def perturb(x,sigma=0.1):
+# mutate_branching_network
+
+def mutate_branching_network(individual,
+                             probability=0.5,
+                             sigma=0.5):
+    # Mutate a continuous value
+    def perturb(x,
+                mean=1.0,
+                sigma=0.1,
+                minimum=0.05):
         if random()<probability:
-            return max(0.05,x*gauss(1,sigma))
+            return max(minimum,x*gauss(mean,sigma))
         return x
     
+    # Mutate a discrete value
     def perturb_n(n0):
         if random()<probability:
             n1 = n0 + choice([-1,+1])
