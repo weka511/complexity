@@ -31,20 +31,23 @@ from math import sqrt
 # create_branching_network
 #
 # Create a representation of flow though a network
+#
+
 def create_branching_network(c      = 10, #Number of levels
                              gamma0 = 0.1):
-    gamma = [gamma0+(1-gamma0)*random() for _ in range(c)]
-    n     = [choice([2,4,8,16,32])      for _ in range(c)]
-    beta  = [1/sqrt(n0)                 for n0 in n]
+    gamma = [gamma0+(1-gamma0)*random() for _ in range(c)] # scale factor for branching - lengths
+    n     = [choice([2,4,8,16,32])      for _ in range(c)] # number of branches at each level
+    beta  = [1/sqrt(n0)                 for n0 in n]       # scale factor for branching - radii
     return (beta,gamma,n)
 
 # get_resistance
-
-def get_resistance(beta,
-                   gamma,
-                   n,
-                   r_c=1,
-                   l_c=1):
+#
+# Calculate resistance using West et al equation (6)
+def get_resistance(beta,     # scale factor for branching - radii
+                   gamma,    # scale factor for branching - lengths
+                   n,        # number of branches at each level
+                   r_c=1,    # initial radius at root of tree
+                   l_c=1):   # initial length at root of tree
     r = r_c
     l = l_c
     R = []    
@@ -54,7 +57,8 @@ def get_resistance(beta,
         R.append(l * r**-4)
         
     Z = 0
-    N = 1    
+    N = 1
+    
     for k in range(len(beta)):
         Z += R[k]/N
         N *= n[k]
@@ -71,25 +75,28 @@ def evaluate_branching_network(individual):
 
 # mutate_branching_network
 
-def mutate_branching_network(individual,
-                             probability=0.5,
-                             sigma=0.5):
+def mutate_branching_network(individual,       # Individual to be mutated
+                             probability = 0.5,  # Probability of mutation
+                             sigma       = 0.5):       # standard deviation for mutating continuous values 
     # Mutate a continuous value
+    # 
     def perturb(x,
-                mean=1.0,
-                sigma=0.1,
-                minimum=0.05):
+                mean    = 1.0,
+                sigma   = 0.1,
+                minimum = 0.05):
         if random()<probability:
             return max(minimum,x*gauss(mean,sigma))
         return x
     
     # Mutate a discrete value
-    def perturb_n(n0):
+    def perturb_n(n,
+                  min_value=1,
+                  max_value=32):
         if random()<probability:
-            n1 = n0 + choice([-1,+1])
-            if 1<n1 and n1<32:
-                return n1
-        return n0
+            n_mutated = n + choice([-1,+1])
+            if min_value<n_mutated and n_mutated<max_value:
+                return n_mutated
+        return n
     
     beta,gamma,n = individual
     gamma        = [perturb(g) for g in gamma]
@@ -124,7 +131,8 @@ if __name__=='__main__':
     print (std(n)/mean(n), std(beta)/mean(beta), std(gamma)/mean(gamma))
     plot_fitness(statistics,name='WBE')
     
-    figure(figsize=(20,10))
+    figure(figsize=(10,10))
+    title('Evolution of Parameters')
     plot([b/max(beta) for b in beta],'r',label=r'$\beta$')
     plot([g/max(gamma) for g in gamma],'g',label=r'$\gamma$')
     plot([n0/max(n) for n0 in n],'b',label='n')
