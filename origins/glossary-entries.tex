@@ -38,6 +38,8 @@
 
 \newacronym{gls:dNTP}{dNTP}{Deoxynucleoside triphosphate}
 
+\newacronym{gls:ESO}{ESO}{European Southern Observatory}
+
 \newacronym{gls:ESP}{ESP}{Eukaryotic Signature Protein}
 
 \newacronym{gls:GI}{GI}{GenInfo Number}
@@ -72,6 +74,8 @@
 
 \newacronym{gls:mRNA}{mRNA}{Messenger RNA}
 
+\newacronym{gls:NExSS}{NExSS}{Nexus for Exoplanet System Science}
+
 \newacronym[see={[Glossary:]{gls:nucleoside-triphosphate}}]{gls:NTP}{NTP}{Nucleoside triphosphate\glsadd{gls:nucleoside-triphosphate}\glsadd{gls:Large:subunit:ribosomal:ribonucleic:acid}}
 
 \newacronym{gls:RNA}{RNA}{Ribonucleic Acid}
@@ -81,6 +85,8 @@
 \newacronym{gls:SFI}{SFI}{Santa Fe Institute}
 
 \newacronym[see={[Glossary:]{gls:Small:subunit:ribosomal:ribonucleic:acid}}]{gls:SSU}{SSU}{Small subunit ribosomal ribonucleic acid\glsadd{gls:Small:subunit:ribosomal:ribonucleic:acid}}
+
+\newacronym{gls:TESS}{TESS}{Transiting Exoplanet Survey Satellite}
 
 \newacronym{gls:TOL}{TOL}{Tree of Life}
 
@@ -326,6 +332,10 @@
 	name={hydrogenosome },
 	description={A hydrogenosome is a membrane-enclosed organelle of some anaerobic ciliates, trichomonads, fungi, and animals. The hydrogenosomes of trichomonads (the most studied of the hydrogenosome-containing microorganisms) produce molecular hydrogen, acetate, carbon dioxide and ATP by the combined actions of pyruvate:ferredoxin oxido-reductase, hydrogenase, acetate:succinate CoA transferase and succinate thiokinase. Superoxide dismutase, malate dehydrogenase (decarboxylating), ferredoxin, adenylate kinase and NADH:ferredoxin oxido-reductase are also localized in the hydrogenosome. It is nearly universally accepted that hydrogenosomes evolved from mitochondria\cite{wiki:hydrogenosome}}}
 
+\newglossaryentry{gls:insolation}{
+	name={insolation},
+	description={the amount of downward solar radiation energy incident on a plane surface\cite{hartmann2015global}}}
+
 \newglossaryentry{gls:isolated:representatives}{
 	name={isolated representatives},
 	description={(of a phylum) one or more species have been cultured individually in the laboratory\cite{taylor2016branching}}}
@@ -531,24 +541,6 @@
 	name={saprotroph},
 	description={Saprotrophic nutrition  or lysotrophic nutrition is a process of chemoheterotrophic extracellular digestion involved in the processing of decayed (dead or waste) organic matter. It occurs in saprotrophs, and is most often associated with fungi (for example Mucor) and soil bacteria\cite{wiki:saprotroph}}}
 
-\newglossaryentry{gls:shannonIndex}{
-	name={Shannon diversity index},
-	description={The Shannon diversity index (H) is another index that is commonly used to characterize species \gls{gls:alphadiversity} in a community. Like \gls{gls:simpsonsIndex}, Shannon's index accounts for both abundance and evenness of the species present\cite{beals2000diversity}
-		\begin{align*}
-			H =& \sum_{i=1}^{S}p_i \ln{p_i}\text{, Shannon's diversity index, where}\\
-			S =& \text{ total number of species in the community (richness)}\\
-			p_i =& \text{ proportion of $S$ made up of the $i$th species}
-		\end{align*}}}
-
-\newglossaryentry{gls:simpsonsIndex}{
-	name={Simpson's diversity index},
-	description={Simpson's diversity index (D) is a simple mathematical measure that characterizes species \gls{gls:alphadiversity} in a community.\cite{beals2000diversity1}
-	\begin{align*}
-		D =& \frac{1}{\sum_{1}^{S} p_i^2}\text{, Simpson's diversity index, where}\\
-		S =& \text{ total number of species in the community (richness)}\\
-		p_i =& \text{ proportion of $S$ made up of the $i$th species}
-	\end{align*}}}
-
 \newglossaryentry{gls:selectivesweep}{
 	name={selective sweep},description={
 		the process through which a new beneficial mutation that increases its frequency and becomes fixed (i.e., reaches a frequency of 1) in the population leads to the reduction or elimination of genetic variation among nucleotide sequences that are near the mutation. In selective sweep, positive selection causes the new mutation to reach fixation so quickly that linked alleles can "hitchhike" and also become fixed\cite{wiki:selectivesweep}}}
@@ -557,6 +549,26 @@
 	name={serpentinization},
 	description={A hydration and metamorphic transformation of ultramafic rock from the Earth's mantle\cite{wiki:serpentinization}}
 }
+
+\newglossaryentry{gls:shannonIndex}{
+	name={Shannon diversity index},
+	description={The Shannon diversity index (H) is another index that is commonly used to characterize species \gls{gls:alphadiversity} in a community. Like \gls{gls:simpsonsIndex}, Shannon's index accounts for both abundance and evenness of the species present\cite{beals2000diversity}
+		\begin{align*}
+		H =& - \sum_{i=1}^{S}p_i \ln{p_i}\text{, Shannon's diversity index, where}\\
+		S =& \text{ total number of species in the community (richness)}\\
+		p_i =& \text{ proportion of $S$ made up of the $i$th species}
+		\end{align*}}}
+
+\newglossaryentry{gls:simpsonsIndex}{
+	name={Simpson's diversity index},
+	description={Simpson's diversity index (D) is a simple mathematical measure that characterizes species \gls{gls:alphadiversity} in a community.\cite{beals2000diversity1}
+		\begin{align*}
+		D =& \frac{1}{\sum_{1}^{S} p_i^2}\text{, Simpson's diversity index, where}\\
+		S =& \text{ total number of species in the community (richness)}\\
+		p_i =& \text{ proportion of $S$ made up of the $i$th species}
+		\end{align*}}}
+
+
 
 \newglossaryentry{gls:Small:subunit:ribosomal:ribonucleic:acid}{
 	name={Small subunit ribosomal ribonucleic acid},
