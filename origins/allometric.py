@@ -24,7 +24,7 @@
 
 from random import random, seed, choice, gauss
 from ga import evolve,plot_fitness
-from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, figure, savefig
+from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, figure, savefig, subplot
 from numpy import mean, std
 from math import sqrt
 
@@ -111,12 +111,13 @@ if __name__=='__main__':
     rc('text', usetex=True)    
     
     parser = argparse.ArgumentParser('Evolve branching network')
-    parser.add_argument('--seed',  default=None, type=int,   help='Seed for random number generation')
-    parser.add_argument('--N',     default=1000, type=int,   help='Number of generations')
-    parser.add_argument('--M',     default=100,  type=int,   help='Population size')
-    parser.add_argument('--c',     default=10,   type=int,   help='c')
-    parser.add_argument('--m',     default=0.1,  type=float, help='mutation probability')
-    parser.add_argument('--gamma', default=0.1,  type=float, help='Initial gamma')
+    parser.add_argument('--seed',   default=None, type=int,   help='Seed for random number generation')
+    parser.add_argument('--N',      default=1000, type=int,   help='Number of generations')
+    parser.add_argument('--M',      default=100,  type=int,   help='Population size')
+    parser.add_argument('--c',      default=10,   type=int,   help='c')
+    parser.add_argument('--m',      default=0.1,  type=float, help='mutation probability')
+    parser.add_argument('--gamma',  default=0.1,  type=float, help='Initial gamma')
+    parser.add_argument('--savefig', default=None,             help='File name for saving plots')
     args = parser.parse_args()
     seed(args.seed)
     
@@ -129,13 +130,17 @@ if __name__=='__main__':
         crossover = lambda population:population)
     beta,gamma,n = population[indices[-1]]
     print (std(n)/mean(n), std(beta)/mean(beta), std(gamma)/mean(gamma))
-    plot_fitness(statistics,name='WBE')
     
-    figure(figsize=(10,10))
+    fig=figure(figsize=(10,10))
+    fig.tight_layout()
+    subplot(211)
+    plot_fitness(statistics,name='Fitness')
+    subplot(212)
     title('Evolution of Parameters')
-    plot([b/max(beta) for b in beta],'r',label=r'$\beta$')
-    plot([g/max(gamma) for g in gamma],'g',label=r'$\gamma$')
-    plot([n0/max(n) for n0 in n],'b',label='n')
+    plot([b/max(beta) for b in beta],   'r', label=r'$\beta$')
+    plot([g/max(gamma) for g in gamma], 'g', label=r'$\gamma$')
+    plot([n0/max(n) for n0 in n],       'b', label='n')
     legend()
-    
+    if args.savefig!=None:
+        savefig(args.savefig)
     show()

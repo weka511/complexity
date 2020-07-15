@@ -139,8 +139,7 @@ def evolve(N         = 100,
 #   Parameters:
 #      statistics
 #      name
-def plot_fitness(statistics,name='Exercise 1',figsize=(10,10)):
-    figure(figsize=figsize)
+def plot_fitness(statistics,name='Exercise 1'):
     maxima = [a for a,_,_ in statistics]
     plot(maxima,'r', label='Maximum Fitness')
     plot([b for _,b,_ in statistics],'g', label='Mean Fitness')
