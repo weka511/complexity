@@ -1,0 +1,113 @@
+% MIT License
+
+% Copyright (c) 2019-2020 Simon Crase
+
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+\documentclass[]{article}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel}
+\usepackage[hidelinks]{hyperref}
+\usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage{titling}
+\setacronymstyle{long-short}
+\usepackage{glossaries-extra}
+\graphicspath{{figs/}} 
+\setlength{\cftsubsecindent}{0em}
+\setlength{\cftsecnumwidth}{3em}
+\setlength{\cftsubsecnumwidth}{3em}
+% I snarfed the next line from Stack exchange
+% https://tex.stackexchange.com/questions
+%    /42726/align-but-show-one-equation-number-at-the-end
+% It allows me to suppress equation numbers with align*,
+% then selectively add equation numbers
+% for lines that I want to reference slsewhere
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+% Add logo at start of document
+
+
+%opening
+\title{
+	Notes from \\
+	Computation in Complex Systems
+}
+\author{Simon Crase (compiler)\\simon@greenweaves.nz}
+
+\makeglossaries
+
+
+%\loadglsentries{glossary-entries}
+
+\renewcommand{\glstextformat}[1]{\textbf{\em #1}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+   These are my notes from Computation in Complex Systems\
+   The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
+   These notes are distributed in the hope that they will be useful,
+   but without any warranty, and without even the implied warranty of
+   merchantability or fitness for a particular purpose. All feedback is welcome,
+   but I don't necessarily undertake to do anything with it.\\
+   \LaTeX source for this week's lectures can be found at\\
+   \url{https://github.com/weka511/complexity/tree/master/origins}.
+\end{abstract}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\listoffigures
+
+\section{Introduction}
+
+\newglossaryentry{gls:O}{
+	name={O},
+	description={$f(n)=O(n^3)$ means: when $n$ is large $f(n)$ scales as $n^3$ or less. Formally:
+	\begin{align*}
+		f(n) =& O(g(n))\\
+		\equiv&	\;\; \exists C, n_0 \text{ such that}\\
+		 \forall n>n_0, f(n) \le& Cg(n)
+	\end{align*}}}
+
+\newglossaryentry{gls:Omega}{
+	name={$\Omega$},
+	description={$f$ grows at least as fast as $g$: $g=O(f)$ : $f/g \cancel{\rightarrow} 0 \text{ as } n\rightarrow \infty$}}
+
+\newglossaryentry{gls:Theta}{
+	name={$\Theta$},
+	description={$f$ and $g$ grow the same way: $g=O(f)$ and $f=O(g)$ or $f/g \rightarrow C>0\text{ as } n\rightarrow \infty$}}
+
+\newglossaryentry{gls:o}{
+	name={o},
+	description={$f$ grows more slowly than $g$: $f/g \rightarrow 0 \text{ as } n\rightarrow \infty$}}
+
+% end of text 
+
+% glossary
+\glsaddall
+\printglossaries
+
+% bibliography go here
+ 
+%\bibliographystyle{unsrt}
+%\addcontentsline{toc}{section}{Bibliography}
+%\bibliography{origins,wikipedia}
+
+\end{document}
