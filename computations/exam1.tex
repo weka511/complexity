@@ -30,7 +30,9 @@
 
 \section{Polynomials \& Exponentials}
 
-Today, your computer can do $T$ steps in a week. According to Moore's law, next year, your computer will be able to do $2T$ steps in a week. How does doubling T change the n that can be computed in a week? 
+\begin{quotation}
+	Today, your computer can do $T$ steps in a week. According to Moore's law, next year, your computer will be able to do $2T$ steps in a week. How does doubling $T$ change the $n$ that can be computed in a week? 
+\end{quotation}
 
 a) This year $T = n^2$. Next year my (new) computer can do $2T$ steps. Let $n^\prime$ denote the size of problem I can handle next year. Then we have:
 \begin{align*}
@@ -39,7 +41,7 @@ a) This year $T = n^2$. Next year my (new) computer can do $2T$ steps. Let $n^\p
 	 (n^\prime)^2=& 2n^2 \text{, or, taking square roots of both sides}\\
 	n^\prime=& \sqrt{2} n
 \end{align*}
-So $n$ changes by a factor of $\sqrt(2)$.
+So $n$ changes by a factor of $\sqrt{2}$.
 
 b) This year $T = 2^n$. Next year my (new) computer can do $2T$ steps. Once again let $n^\prime$ denote the size of problem I can handle next year. Then we have:
 
@@ -54,46 +56,45 @@ b) This year $T = 2^n$. Next year my (new) computer can do $2T$ steps. Once agai
 \section{Divide \& Conquer}
 Given:
 \begin{align*}
-	f(0)=&1 \numberthis \label{eq:hypothesis}\\
+	f(1)=&1 \numberthis \label{eq:hypothesis}\\
 	f(n)=&2f(n-1)+1 \numberthis \label{eq:recurrence}
 \end{align*}
 I'll begin by computing the first few values:
 \begin{table}[H]
 	\begin{center}
-		\begin{tabular}{|l|r|}
-			n&$f(n)$\\
-			1&1\\
-			2&3\\
-			3&7\\
-			4&15\\
-			5&32\\
-			6&63
+		\begin{tabular}{|l|r|} \hline
+			n&$f(n)$\\\hline
+			1&1\\\hline
+			2&3\\\hline
+			3&7\\\hline
+			4&15\\\hline
+			5&32\\\hline
+			6&63\\\hline
 		\end{tabular}
 	\end{center}
 \end{table}
-We already have enough values to formulate a hypothesis\footnote{this sounds better than ''guess''}--$f(n)=2^{-+1}-1$:
+We already have enough values to formulate a hypothesis\footnote{this sounds better than ''guess''}--$f(n)=2^{n+1}-1$:
 \begin{table}[H]
 	\begin{center}
-		\begin{tabular}[H]{|l|r|r|}
-			n&$f(n)$&$2^n-1$\\
-			1&1&2-1\\
-			2&3&4-1\\
-			3&7&8-1\\
-			4&15&16-1\\
-			5&32&32-1\\
-			6&63&64-1
+		\begin{tabular}[H]{|l|r|r|}\hline
+			n&$f(n)$&$2^n-1$\\\hline
+			1&1&2-1\\\hline
+			2&3&4-1\\\hline
+			3&7&8-1\\\hline
+			4&15&16-1\\\hline
+			5&32&32-1\\\hline
+			6&63&64-1\\\hline
 		\end{tabular}
 	\end{center}
 \end{table}
 
 \begin{thm}
-	If $f$ satisfies (\ref{eq:hypothesis}) and (\ref{eq:recurrence}), and $n>1$, $f(n)=2^n-1$
+	If $f$ satisfies (\ref{eq:hypothesis}) and (\ref{eq:recurrence}), $f(n)=2^n-1$
 \end{thm}
 
-\begin{proof}
-	We will use mathematical induction. 
+\begin{proof}[Mathematical Induction]
 	
-	From (\ref{eq:hypothesis}), $f(0)=1$ and (\ref{eq:recurrence}) gives $f(1)= 2f(0)+1 = 2\cdot0+1 =1$. But if $n=1$, $2^n-1=2-1=1$, so the hypothesis is correct for $n=1$.
+	From (\ref{eq:hypothesis}), $f(1)=1$ and (\ref{eq:recurrence}) gives $f(2)= 2f(1)+1 = 2\cdot1+1 =3$. But if $n=2$, $2^n-1=4-1=3$, so the hypothesis is correct for $n=1$.
 	
 	Assume the hypothesis is correct for a particular $n$. We want to show it is correct for $n+1$, i.e. that $f(n+1)=2^{n+1}-1$.
 	\begin{align*}
@@ -101,13 +102,29 @@ We already have enough values to formulate a hypothesis\footnote{this sounds bet
 		f(n+1)=&2f(n) + 1 \\
 		=& 2(2^n-1) + 1\\
 		=& 2\cdot 2^n -2 +1\\
-		=& 2^{n+1} -1
+		=& 2^{n+1} -1 
 	\end{align*}
 \end{proof}
 
+Although this proof is valid, it doesn't shed much light on why $f$ should be close to an exact exponential. The following proof is motivated by the fact that \ref{eq:recurrence} is close to an exponential doubling assuming that $f(n)$ is large when $n$ is large. Can we find a quantity that is close to $f(n)$ and which satisfies an exact exponential recurrence relation. It turn out that we can.
+\begin{proof}[Alternative]
+	We define a new quantity:
+	\begin{align*}
+		g(n)\triangleq& f(n) +1 \\
+		g(n+1) = & f(n+1) +1 \text{, so (\ref{eq:recurrence}) gives:}\\
+		=& \big(2f(n)+1\big)+1\\
+		=& \big[2\big(g(n) -1\big) +1\big] +1\\
+		=& 2 g(n) \text{, so the exponential growth of $g(n)$ is obvious, i.e.} \\
+		g(n) =& C\cdot 2^n\text{, for some constant $C>0$. Now (\ref{eq:hypothesis}) becomes:}\\
+		g(1) =&2\text{, whence}\\
+		C=& 1 \text{, so}\\
+		g(n) =& 2^n \text{, and} \\
+		f(n) =& 2^n - 1
+	\end{align*}
+\end{proof}
 \begin{cor}
 	\begin{align*}
-		f(64) =& 2^{65}-1\\
+		f(64) =& 2^{64}-1\\
 		=& 36,893,488,147,419,103,231
 	\end{align*}
 \end{cor}
