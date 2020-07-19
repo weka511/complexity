@@ -15,6 +15,7 @@ I have used [TexStudio](https://www.texstudio.org/) and the [JabRef](https://www
 |---|------------------------------|-----------------------------------------------------------|
 |   |bibliography.tex|Origins of Life Bibliography - |uses _origins.bib_ and _wikipedia.bib_|
 |   |figs| Figures used by tex files |
+|   |full.tex| All six chapters as a single file |
 |   |glossary.tex|Origins of Life Glossary|
 |   |glossary-entries.tex|Glossary entries used by _glossary.tex_|
 |   |origins.bib|Origins of Life Bibliography entries|

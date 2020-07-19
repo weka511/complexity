@@ -20,7 +20,7 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 
-\documentclass[]{article}
+\documentclass[]{book}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
@@ -35,9 +35,9 @@
 % then selectively add equation numbers
 % for lines that I want to reference slsewhere
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
-\setlength{\cftsubsecindent}{0em}
-\setlength{\cftsecnumwidth}{3em}
-\setlength{\cftsubsecnumwidth}{3em}
+%\setlength{\cftsubsecindent}{0em}
+%\setlength{\cftsecnumwidth}{3em}
+%\setlength{\cftsubsecnumwidth}{3em}
 % Ignore garbage that the proprocessor picks up
 \DeclareUnicodeCharacter{2192}{~}
 % Need this because there is a big matrix in this document
@@ -51,8 +51,7 @@
 
 %opening
 \title{
-	Notes from Origins of Life\\
-	Week 1: Introduction
+	Notes from Origins of Life
 }
 
 \author{Simon Crase (compiler)\\simon@greenweaves.nz}
@@ -68,20 +67,25 @@
 
 \maketitle
 
-\begin{abstract}
-    These are my notes from the $1^{st}$ week of the Santa Fe Institute Origins of Life Course\cite{sfi2020}.\\
-    The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
-    These notes are distributed in the hope that they will be useful,
-    but without any warranty, and without even the implied warranty of
-     merchantability or fitness for a particular purpose. All feedback is welcome,
-    but I don't necessarily undertake to do anything with it.\\
-    \LaTeX source for this week's lectures can be found at\\
-    \url{https://github.com/weka511/complexity/tree/master/origins}.
-\end{abstract}
 
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
+
 \tableofcontents
 \listoffigures
+
+
+\chapter{Introduction}
+
+    These are my notes from the Santa Fe Institute Origins of Life Course\cite{sfi2020}.
+    
+The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
+These notes are distributed in the hope that they will be useful,
+but without any warranty, and without even the implied warranty of
+merchantability or fitness for a particular purpose. All feedback is welcome,
+but I don't necessarily undertake to do anything with it.
+
+\LaTeX source for this material can be found at
+\url{https://github.com/weka511/complexity/tree/master/origins}.
 
 \section[Welcome To The Course]{Welcome To The Course--Chris Kempes}
 
@@ -786,7 +790,7 @@ Open Questions
 	\item Would we recognize it?
 \end{itemize}
 
-
+\chapter{Chemical Origins}
 \section[Introduction]{Introduction--Chris Kempes}
 
 We will take a closer look at the detailed chemistry thought to be important to the origin of life. We will discuss
@@ -2136,10 +2140,13 @@ Nucleic acids can base-pair--Figure \ref{fig:BasePairs} to perform specific reco
 	
 	\cite[19.S, Nucleic Acids (Summary)]{brown2009chemistry} 
 	\cite{xu2020selective,bhowmik2019role}
+	
+
 	\section{Chemical Cycles and Chaos}
 	
 	Chris Kempes
-	
+
+
 	\subsection{Introduction}
 	
 	What properties and processes are ''easy'' to obtain through physical dynamics alone?
@@ -2243,7 +2250,7 @@ Nucleic acids can base-pair--Figure \ref{fig:BasePairs} to perform specific reco
 	
 	Additional references from Office Hours: \cite{maurer2017impact,forsythe2015ester,vincent2019chemical,mehta2018caveats}
 
-
+\chapter{Chemical Commonalities}	
 \section{Introduction}
 
 This week is a more detailed look at biochemistry:\begin{itemize}
@@ -3441,6 +3448,7 @@ J \triangleq& -D \frac{\partial C}{\partial R}\text{, definition of Flux}\\
 
 This gives a limit on the reaction rate of reactions within cells, and shows its dependence on the cell size. 
 
+\chapter{Early Life}
 \section[Introduction]{Introduction--Chris Kempes}
 
 We'll discuss evolution in a pre-cellular world, including \glsdisp{gls:autocatalysis}{autocatalytic} networks and molecular evolution, chemical signatures of early life, \glspl{gls:protocell}, and what the \gls{gls:LUCA} might have looked like.
@@ -4549,7 +4557,7 @@ There are precursors for all the mechanisms we need. The big challenge is puttin
 
 Suggested Reading
 \begin{itemize}
-	\item \cite{maynard1999origins} covers origins of life, eukaryotes, sex, society; 
+	\item \cite{maynard1999origins} covers life, eukaryotes, sex, society; 
 	\item \cite{sumper1975evidence} treats life more mechanistically, and shows how we can use chemistry to understand it.
 \end{itemize}
 
@@ -4881,7 +4889,7 @@ Suggested Reading \cite{kassen2014experimental,garland2009experimental}.
 
 References: \cite{escalante2015ecological,rainey1998adaptive,helling1987evolution,saxer2009spatial,dykhuizen1998santa,connell1961influence,hutchinson1959homage}.
 
-
+\chapter{Evolution}
 
 \section[Introduction]{Introduction--Chris Kempes}
 
@@ -6591,6 +6599,7 @@ i.e. can we find aliens?
 And so, that's really a great thing
 to think about.
 
+\chapter{Astrobiology \& General Theories of Life}
 \section[Introduction]{Introduction--Chris Kempes}
 
 Over the course of these lectures we have provided a range of tools and perspectives that would help us understand the origin of life on our own planet. These can be used to develop a general theory of life. Our ultimate goal is to provide a general theory of Life, one capable of uncovering the history we know about, but also bounding the possibilities for other types of life, and helping us recognize other forms of life. In this unit we'll discuss the search for life beyond Earth and how origins of life fits into this effort. We'll also discuss general evolutionary processes and abstract life. 
