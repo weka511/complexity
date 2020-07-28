@@ -1,0 +1,77 @@
+\documentclass[]{article}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,wasysym,amsthm,thmtools}
+\usepackage[hidelinks]{hyperref}
+\usepackage[toc,acronym,nonumberlist]{glossaries}
+\setacronymstyle{long-short}
+\usepackage{glossaries-extra}
+\graphicspath{{figs/}} 
+\setlength{\cftsubsecindent}{0em}
+\setlength{\cftsecnumwidth}{3em}
+\setlength{\cftsubsecnumwidth}{3em}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\setcounter{tocdepth}{1}
+%opening
+\title{
+	Computation in Complex Systems\\
+	Week 2\\
+	 Algorithms \& Landscapes
+}
+
+%\makeglossaries
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Maximum independent set}
+
+\subsection{What is the maximum value of the independent set?}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{What is the maximum value of the independent set?}
+		\includegraphics[width=0.6\textwidth]{mwisQ}
+	\end{center}
+\end{figure}
+
+Observations:
+\begin{enumerate}
+	\item A tree with $N$ nodes has $2^N-1$ non empty subsets, so a brute-force search is exponential. Let's not go there!
+	\item Either the maximal independent set includes the root of the tree, or it doesn't.
+	\item If the the maximal independent set doesn't include the root of the tree, each subtree must be maximal.
+	\item If the maximal independent set includes the root of the tree, each subtree must have a set that excludes the node.
+\end{enumerate}
+
+So we can solve this problem as follows:
+\begin{enumerate}
+	\item Either the root node, $3$ is in $M$ or it isn't.
+	\item If $3$ is in the tree, we have to exclude {4,1,5}, which gives a score of $3+(1+2)+2+(1+1)=9$
+	\item If $3$ isn't in the tree, the maximum is the sum of the maxima for the 4 subtrees:
+	\begin{enumerate}
+		\item (4,(1,2)): since $1+2<4$, the maximum value is 4.
+		\item (1,(2)): since $1<2$, the maximum value is 2. 
+		\item ((5),(1,1)): since $1+1<5$, the maximum value is 5.
+	\end{enumerate}
+	\item Putting this together, if $3$ isn't in the tree, the maximum is $4+2+5=10$
+\end{enumerate}
+
+\subsection{Algorithm for maximum independent set}
+Describe a dynamic programming algorithm that can find the maximum independent set from a tree - a rooted graph with no loops - of any size.
+
+\section{Reductions \& Translations }
+
+% glossary
+%\printglossaries
+
+% bibliography go here
+
+%\bibliographystyle{unsrt}
+%\addcontentsline{toc}{section}{Bibliography}
+%\bibliography{origins,wikipedia}
+
+\end{document}
