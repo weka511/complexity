@@ -2,6 +2,7 @@
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,wasysym,amsthm,thmtools}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage[]{algorithm2e}
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
 \graphicspath{{figs/}} 
@@ -27,7 +28,7 @@
 \maketitle
 
 \tableofcontents
-
+\listofalgorithms
 \section{Maximum independent set}
 
 \subsection{What is the maximum value of the independent set?}
@@ -61,7 +62,25 @@ So we can solve this problem as follows:
 \end{enumerate}
 
 \subsection{Algorithm for maximum independent set}
-Describe a dynamic programming algorithm that can find the maximum independent set from a tree - a rooted graph with no loops - of any size.
+
+See Algorithm \ref{alg:find:maximum:independent:set}.
+
+\begin{algorithm}[H]
+	\KwData{A binary tree $T$ with a value $V(n)$ assigned to each node $n$}
+	\KwResult{A set $S\subseteq N(T) | I(S) \land \sum_{s\in S} V(s) \ge \sum_{s\in S^\prime} V(s) \forall S^\prime \subset N(T) \text{ with } I(S^\prime)$  }
+	initialization\;
+	Starting at the root of the tree, traverse it top down to build two data structures: a stack \emph{unprocessed}, which has the \emph{root} at the bottom, and the $leaves$ at the top; and a dictionary \emph{score}, which is initially empty, but will map each node to the value of the maximum independent set starting at that node.\;
+	\While {$length(unprocessed)>0$}{
+		$node \leftarrow pop(unprocessed)$\;
+		\eIf {leaf(node)}{
+			$score(node)\leftarrow value(node)$ \;}{
+			$val_{out} \leftarrow \sum_{\forall child(node)} score(child)$\;
+			$val_{in} \leftarrow value(node) + \sum_{\forall grandchild(node)}  value(grandchild)$\;
+			$score(node)\leftarrow max(val_{out},val_{in})$\;
+		}
+	}
+	\caption{Find the maximum independent set from a tree}\label{alg:find:maximum:independent:set}
+\end{algorithm}
 
 \section{Reductions \& Translations }
 
