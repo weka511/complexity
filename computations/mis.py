@@ -2,16 +2,14 @@
 def mis(T):
     unprocessed = []
     score       = {}
-    weights  = {}
-    children = {}
+    weights     = {}
+    children    = {}
     def build_tree(T):
         if len(T)==0:
             return None
         else:
-            Head = T[0]
-            Tail = T[1:]
-            node = len(weights)
-            weights[node] = T[0]
+            node            = len(weights)
+            weights[node]   = T[0]
             children [node] = []
             unprocessed.append(node)
             for rest in T[1:]:
@@ -30,4 +28,4 @@ def mis(T):
                               weights[node]+sum([score[grandchild] for child in children[node] for grandchild in children[child]]))
     return score[0]
     
-print (mis([3,[4,[1],[2]],[1,[2]],[5,[1],[1]]]))
+print (f'Score for maximal independent set = {mis([3,[4,[1],[2]],[1,[2]],[5,[1],[1]]])}')
