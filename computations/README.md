@@ -1,6 +1,6 @@
 # Complexity Explorations
 
-Code inspired by [Computation in Complex Systems](https://www.complexityexplorer.org/courses/99-computation-in-complex-systems}
+Code inspired by [Computation in Complex Systems](https://www.complexityexplorer.org/courses/99-computation-in-complex-systems)
 
 | File|Description|
 |---------------------------|---------------------------------------------------------------------------|
