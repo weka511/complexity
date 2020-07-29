@@ -1,5 +1,8 @@
+# Calculate maximal independent set
 
 def mis(T):
+    # initialize dictionaries and stack
+    
     unprocessed = []
     score       = {}
     weights     = {}
@@ -19,13 +22,16 @@ def mis(T):
             return node
     build_tree(T)
  
+    # Calculate maximal independent set
+ 
     while len(unprocessed)>0:
-        node = unprocessed.pop()
-        if len(children[node])==0:
-            score[node]=weights[node]
-        else:
-            score[node] = max(sum([score[child] for child in children[node]]),
-                              weights[node]+sum([score[grandchild] for child in children[node] for grandchild in children[child]]))
+        node        = unprocessed.pop()
+        score[node] =\
+            weights[node] if len(children[node])==0  else max(sum([score[child] for child in children[node]]),
+                                                              weights[node]+sum([
+                                                                  score[grandchild]
+                                                                    for child in children[node]
+                                                                      for grandchild in children[child]]))
     return score[0]
     
 print (f'Score for maximal independent set = {mis([3,[4,[1],[2]],[1,[2]],[5,[1],[1]]])}')
