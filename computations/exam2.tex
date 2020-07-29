@@ -1,5 +1,5 @@
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,wasysym,amsthm,thmtools}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,wasysym,amsthm,thmtools,textcomp,listings}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
 \usepackage[]{algorithm2e}
@@ -13,6 +13,7 @@
 \newtheorem{thm}{Theorem}
 \newtheorem{cor}[thm]{Corollary}
 \setcounter{tocdepth}{1}
+\usepackage[toc,page]{appendix}
 %opening
 \title{
 	Computation in Complex Systems\\
@@ -63,7 +64,7 @@ So we can solve this problem as follows:
 
 \subsection{Algorithm for maximum independent set}
 
-See Algorithm \ref{alg:find:maximum:independent:set}.
+Algorithm \ref{alg:find:maximum:independent:set} is a description is pseudo-code, and Appendix \ref{sect:ref:implementation} provides a reference implementation in Python.
 
 \begin{algorithm}[H]
 	\KwData{A binary tree $T$ with a value $V(n)$ assigned to each node $n$}
@@ -84,6 +85,7 @@ See Algorithm \ref{alg:find:maximum:independent:set}.
 
 \section{Reductions \& Translations }
 
+
 % glossary
 %\printglossaries
 
@@ -92,5 +94,11 @@ See Algorithm \ref{alg:find:maximum:independent:set}.
 %\bibliographystyle{unsrt}
 %\addcontentsline{toc}{section}{Bibliography}
 %\bibliography{origins,wikipedia}
+
+\begin{appendices}
+	\section{Reference Implementation for Algorithm \ref{alg:find:maximum:independent:set}}\label{sect:ref:implementation}
+	\lstinputlisting[language=Python]{mis.py}
+\end{appendices}
+
 
 \end{document}
