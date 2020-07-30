@@ -1,5 +1,5 @@
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,wasysym,amsthm,thmtools,textcomp,listings}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,wasysym,amsthm,thmtools,textcomp,listings,amsfonts,cancel}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
 \usepackage[]{algorithm2e}
@@ -29,7 +29,7 @@
 \maketitle
 
 \tableofcontents
-\listofalgorithms
+%\listofalgorithms
 \section{Maximum independent set}
 
 \subsection{What is the maximum value of the independent set?}
@@ -83,8 +83,49 @@ Algorithm \ref{alg:find:maximum:independent:set} is a description is pseudo-code
 	\caption{Find the maximum independent set from a tree}\label{alg:find:maximum:independent:set}
 \end{algorithm}
 
-\section{Reductions \& Translations }
+\section{Reductions \& Translations}
 
+Table \ref{table:transform} illustrates the transformation of ASTRO to START. It exploits the common subsequence S-T-R to produce a minimum set of transformations.
+\begin{table}[H]
+	\begin{center}
+		\caption{Transforming ASTRO to START}\label{table:transform}
+		\begin{tabular}{|c|c|c|c|c|c|c|l|l|} \hline
+			\textbf{\cancel{A}}&S&T&&R&O&&delete&$\rightarrow$\\\hline
+			&\textbf{S}&T&&R&O&&match&$\searrow$\\\hline
+			&S&\textbf{T}&&R&O&&match&$\searrow$\\\hline
+			&S&T&\textbf{A}&R&O&&insert&$\downarrow$\\\hline
+			&S&T&A&\textbf{R}&O&&match&$\searrow$\\\hline
+			&S&T&A&R&\textbf{\cancel{O}}&&delete&$\rightarrow$\\\hline
+			&S&T&A&R&&\textbf{T}&insert&$\downarrow$\\\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\subsection{Assign Weights}
+
+Figure \ref{fig:Shortest:path} shows the path that gives rise to the transformations in Table \ref{table:transform}. In order to make this the shortest path we need the following rules:
+\begin{itemize}
+	\item If two symbols are equal, accept them and mover diagonally;
+	\item If two symbols don't match, insert or delete; disfavour mismatches (point mutations). 
+\end{itemize}
+
+The simplest way to achieve this is with the weights shown in Figure \ref{fig:weights}.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Weights}\label{fig:weights}
+		\includegraphics[width=\textwidth]{q2-weights}
+	\end{center}
+\end{figure}
+
+\subsection{Shortest path}
+
+Copying the weights from Figure \ref{fig:weights} we get Figure \ref{fig:Shortest:path}. The shorted path has length $1+0+0+1+0+1+1=4$. 
+\begin{figure}[H]
+	\begin{center}
+		\caption{Shortest path}\label{fig:Shortest:path}
+		\includegraphics[width=0.6\textwidth]{q2-path}
+	\end{center}
+\end{figure}
 
 % glossary
 %\printglossaries
@@ -97,6 +138,7 @@ Algorithm \ref{alg:find:maximum:independent:set} is a description is pseudo-code
 
 \begin{appendices}
 	\section{Reference Implementation for Algorithm \ref{alg:find:maximum:independent:set}}\label{sect:ref:implementation}
+	One way to implement Algorithm \ref{alg:find:maximum:independent:set} is with the following code.
 	\lstinputlisting[language=Python]{mis.py}
 \end{appendices}
 

@@ -27,11 +27,23 @@ def mis(T):
     while len(unprocessed)>0:
         node        = unprocessed.pop()
         score[node] =\
-            weights[node] if len(children[node])==0  else max(sum([score[child] for child in children[node]]),
-                                                              weights[node]+sum([
-                                                                  score[grandchild]
-                                                                    for child in children[node]
-                                                                      for grandchild in children[child]]))
+            weights[node] if len(children[node])==0\
+            else max(sum([score[child] for child in children[node]]),
+                     weights[node]+sum([
+                         score[grandchild]
+                         for child in children[node]
+                         for grandchild in children[child]]))
     return score[0]
+
+if __name__=='__main__': 
+    T = [3,
+         [4,
+          [1],
+          [2]],
+         [1,
+          [2]],
+         [5,
+          [1],
+          [1]]] 
     
-print (f'Score for maximal independent set = {mis([3,[4,[1],[2]],[1,[2]],[5,[1],[1]]])}')
+    print (f'Score for maximal independent set = {mis(T)}')
