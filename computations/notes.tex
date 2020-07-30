@@ -76,7 +76,29 @@
 
 \listoffigures
 
+\newglossaryentry{gls:eulerian:path}{
+	name={Eulerian path},
+	description={In graph theory, an Eulerian path is a path in a finite graph that visits every edge exactly once (allowing for revisiting vertices) }}
 
+\newglossaryentry{gls:eulerian:cycle}{
+	name={Eulerian cycle},
+	description={Similarly, an Eulerian circuit or Eulerian cycle is an \gls{gls:eulerian:path} that starts and ends on the same vertex. }}
+
+\newglossaryentry{gls:Hamiltonian:cycle}{
+	name={Hamiltonian cycle},
+	description={If a \gls{gls:Hamiltonian:path} exists whose endpoints are adjacent, then the resulting graph cycle is called a Hamiltonian cycle (or Hamiltonian cycle) }}
+
+\newglossaryentry{gls:Hamiltonian:path}{
+	name={Hamiltonian path},
+	description={A Hamiltonian path, also called a Hamilton path, is a graph path between two vertices of a graph that visits each vertex exactly once }}
+
+\newglossaryentry{gls:NonDP}{
+	name={Non-deterministic Polynomial Time},
+	description={we can \emph{check} a solution efficiently}}
+
+\newglossaryentry{gls:NP:complete}{
+	name={NP-Complete},
+	description={It turns out that there are problems $B$ in \gls{gls:NP} such that any other problem $A$  in \gls{gls:NP} can be \gls{gls:reduced} to $B$: $A \le B \forall A \in NP$. Such a $B$ is said to be NP-Complete}}
 
 \newglossaryentry{gls:O}{
 	name={O},
@@ -87,17 +109,30 @@
 		 \forall n>n_0, f(n) \le& Cg(n)
 	\end{align*}}}
 
+\newglossaryentry{gls:o}{
+	name={o},
+	description={$f$ grows more slowly than $g$: $f/g \rightarrow 0 \text{ as } n\rightarrow \infty$}}
+
 \newglossaryentry{gls:Omega}{
 	name={$\Omega$},
 	description={$f$ grows at least as fast as $g$: $g=O(f)$ : $f/g \cancel{\rightarrow} 0 \text{ as } n\rightarrow \infty$}}
+
+\newglossaryentry{gls:Polynomial}{
+	name={Polynomial Time},
+	description={we can find a solution efficiently}}
+
+\newglossaryentry{gls:reduced}{
+	name={reduced},
+	description={$A$ can be \emph{reduced} to $B$, or $A \le B$, if there is a polynomial algorithm that translated instances of $A$ to instances of $B$, so the yes/no answer stays the same. }}
 
 \newglossaryentry{gls:Theta}{
 	name={$\Theta$},
 	description={$f$ and $g$ grow the same way: $g=O(f)$ and $f=O(g)$ or $f/g \rightarrow C>0\text{ as } n\rightarrow \infty$}}
 
-\newglossaryentry{gls:o}{
-	name={o},
-	description={$f$ grows more slowly than $g$: $f/g \rightarrow 0 \text{ as } n\rightarrow \infty$}}
+
+\newacronym[see={[Glossary:]{gls:Polynomial}}]{gls:P}{P}{Polynomial\glsadd{gls:Polynomial}}
+
+\newacronym[see={[Glossary:]{gls:NonDP}}]{gls:NP}{NP}{Non-deterministic Polynomial\glsadd{gls:NonDP}}
 
 \section{Easy \& Hard}
 
@@ -106,6 +141,25 @@
 For theorists, polynomial vs. exponential is the mark of insight: we have found some structure in the problem that we can use.
 
 \subsection{Two Kinds of Paths}
+
+\begin{figure}[H]
+	\caption{Eulerian paths}
+	\begin{subfigure}[t]{0.54\textwidth}
+		\caption{The 7 bridges of K\"onigsberg: can we cross each bridge only once? One strategy is brute force search.}
+		\includegraphics[width=\textwidth]{euler}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.54\textwidth}
+		\caption{Euler: if a tour exists, at most 2 noded can have an odd number of bridges, so no tour is possible. Much faster.}
+		\includegraphics[width=\textwidth]{euler2}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Hamiltonian Path: visit each node once}
+		\includegraphics[width=\textwidth]{Hamiltonian}
+	\end{center}
+\end{figure}
 
 \subsection{Polynomials vs. Exponentials}
 
@@ -280,6 +334,35 @@ In terms of complexity, Bipartite Matching $\le$ Max Flow.
 \cite[Chapters 4-6]{moore2011nature}, \cite{sep-computability}
 
 \subsection{Finding versus Checking}
+
+Some problems can be solved in polynomial time, while other require a brute-force search, which is typically exponential. In the P vs. NP question we deal with ''needles in haystacks'': finding a solution, or telling whether there is one seems hard, by checking a solution is easy.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Hamiltonian path. We don't know how to solve it in polynomial time, but we can easily check a putative solution.}\label{fig:PNP1}
+		\includegraphics[width=0.8\textwidth]{PNP1}
+	\end{center}
+\end{figure} 
+
+\begin{itemize}
+	\item \gls{gls:P}: \glsdesc{gls:Polynomial}
+	\item \gls{gls:NP}: \glsdesc{gls:NonDP}
+\end{itemize}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Complexity Classes. We \emph{know} that $P \subseteq NP$, and we \emph{believe} that $P \subset NP$}\label{fig:PNP2}
+		\includegraphics[width=0.8\textwidth]{PNP2}
+	\end{center}
+\end{figure}
+
+We'll focus on classes of decision problems: not does this graphs have a Hamiltonian path, but can we find a Hamiltonian graph for any graph. We consider \gls{gls:NP:complete} problems.
+
+We say that \glsdesc{gls:reduced} \glsdesc{gls:NP:complete}
+
+But if $A \le B$ and $A$ is hard, them $B$ must be hard too: so $B$ is one of the hardest problems in \gls{gls:NP}. We can therefore focus on one  \gls{gls:NP}: if $B\in NP$ we would know that $P=NP$. Conversely, if $P \ne NP$, $B$ cannot be solved in polynomial time.
+
+Now the Hamiltonian Path problem is NP-Complete: how can such a simple problem represent all \gls{gls:NP} problems?
 
 \subsection{Circuits and Formulae}
 
