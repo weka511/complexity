@@ -190,7 +190,7 @@ Greed isn't always good, or even very often good--Figures \ref{fig:greedy:tsp} a
 
 \subsection{Landscapes}
 
-
+\subsubsection{Greedy Algorithms and the Fitness Landscape}
 
 \begin{figure}[H]
 	\caption{Greedy Algorithms and the Fitness Landscape}
@@ -200,10 +200,40 @@ Greed isn't always good, or even very often good--Figures \ref{fig:greedy:tsp} a
 	\end{subfigure}
 	\;\;\;
 	\begin{subfigure}[t]{0.55\textwidth}
-		\caption{A Greedy solution doesn't work well if there are many local optima where we can get stuck.}
+		\caption{A Greedy solution doesn't work well if there are many local optima where we can get stuck: it cannot cross a valley to get to a higher peak.}
 		\includegraphics[width=\textwidth]{rockies}
 	\end{subfigure}
 \end{figure}
+
+\subsubsection{Reorganizing the Landscape}
+
+What defines the neighbourhood? When is one solution close to another?
+
+\begin{figure}[H]
+	\caption{Maxflow: take a network such as \ref{fig:maxflow1} and determine the maximum flow from $s$ to $t$. We can see that we can eliminate local optima by allowing a new kind of move. By expanding our idea of what kins of solutions are neighbours we reorganize the landscape!}
+	\begin{subfigure}[t]{0.4\textwidth}
+		\caption{Each edge has a capacity}\label{fig:maxflow1}
+		\includegraphics[width=\textwidth]{maxflow1}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.55\textwidth}
+		\caption{Greedy: push more flow along a channel with excess capacity. But we can get stuck at a local optimum. Here we have three units flowing--we are at a local optimum.}\label{fig:maxflow2}
+		\includegraphics[width=\textwidth]{maxflow2}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{We should have done this instead}\label{fig:maxflow3}
+		\includegraphics[width=\textwidth]{maxflow3}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Allow reverse edges to cancel previous flow: now if we add to Figure \ref{fig:maxflow2} we get the optimum--Figure \ref{fig:maxflow3}. If we allow this type of move we can never get stuck: there are no local optima.}
+		\includegraphics[width=\textwidth]{maxflow4}
+	\end{subfigure}
+\end{figure}
+
+This won't always work. Some problems are inherently bumpy.
+
 \subsection{Reductions and Translations}
 
 \begin{figure}[H]
