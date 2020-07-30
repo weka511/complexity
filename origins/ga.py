@@ -25,7 +25,7 @@
 # [2]  Werner Krauth. Statistical mechanics: algorithms and computations. OUP Oxford, 2006.
 
 from numpy import mean, std, argsort, searchsorted
-from random import random, choice, sample
+from random import random, choice, sample, gauss
 from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, figure, savefig
 
 # roulette
@@ -150,6 +150,28 @@ def plot_fitness(statistics,name='Exercise 1'):
     ylim((0,max(maxima)+1))    
     legend(loc='center')
    
+# Mutate a continuous value
+# 
+def perturb(x,
+            probability = 0.5,  # Probability of mutation
+            mean    = 1.0,
+            sigma   = 0.1,
+            minimum = 0.05,
+            maximum = 0.95):
+    if random()<probability:
+        return min(maximum,max(minimum,x*gauss(mean,sigma)))
+    return x
+
+# Mutate a discrete value
+def perturb_n(n,
+               probability = 0.5,  # Probability of mutation
+              min_value=1,
+              max_value=32):
+    if random()<probability:
+        n_mutated = n + choice([-1,+1])
+        if min_value<n_mutated and n_mutated<max_value:
+            return n_mutated
+    return n
 
 if __name__=='__main__':    # Test, based on exercise 1 in [1]
     

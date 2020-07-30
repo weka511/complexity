@@ -22,8 +22,8 @@
 # A General Model for the Origin of Allometric Scaling Laws in Biology
 # http://hermes.ffn.ub.es/oscar/Biologia/Escala/Science_276_122_1997.pdf
 
-from random import random, seed, choice, gauss
-from ga import evolve,plot_fitness
+from random import random, seed, choice
+from ga import evolve,plot_fitness, perturb, perturb_n
 from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, figure, savefig, subplot
 from numpy import mean, std
 from math import sqrt
@@ -78,29 +78,11 @@ def evaluate_branching_network(individual):
 def mutate_branching_network(individual,       # Individual to be mutated
                              probability = 0.5,  # Probability of mutation
                              sigma       = 0.5):       # standard deviation for mutating continuous values 
-    # Mutate a continuous value
-    # 
-    def perturb(x,
-                mean    = 1.0,
-                sigma   = 0.1,
-                minimum = 0.05):
-        if random()<probability:
-            return max(minimum,x*gauss(mean,sigma))
-        return x
-    
-    # Mutate a discrete value
-    def perturb_n(n,
-                  min_value=1,
-                  max_value=32):
-        if random()<probability:
-            n_mutated = n + choice([-1,+1])
-            if min_value<n_mutated and n_mutated<max_value:
-                return n_mutated
-        return n
+
     
     beta,gamma,n = individual
-    gamma        = [perturb(g) for g in gamma]
-    n            = [perturb_n(n0)  for n0 in n]
+    gamma        = [perturb(g,probability=probability) for g in gamma]
+    n            = [perturb_n(n0,probability=probability)  for n0 in n]
     beta         = [1/sqrt(n0) for n0 in n]
     return beta, gamma,n
 
