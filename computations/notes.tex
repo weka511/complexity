@@ -38,6 +38,7 @@
 % then selectively add equation numbers
 % for lines that I want to reference slsewhere
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newtheorem{thm}{Theorem}
 % Add logo at start of document
 
 
@@ -235,6 +236,26 @@ What defines the neighbourhood? When is one solution close to another?
 This won't always work. Some problems are inherently bumpy.
 
 \subsection{Reductions and Translations}
+
+\begin{figure}[H]
+	\caption{Reducing one problem into another. We want a perfect bipartite matching, where everyone has a partner. This is a subset of the edges of this graph, so everyone on one side is connected to exactly one person on the other. There are $n!$ possible matchings.}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Bipartite Graph. }
+		\includegraphics[width=\textwidth]{bpg1}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.65\textwidth}
+		\caption{We can transform the problem to max flow. Each compatible couple becomes an edge with flow 1.}
+		\includegraphics[width=\textwidth]{bpg2}
+	\end{subfigure}
+\end{figure}
+
+\begin{thm}
+	If all the flows have integral capacities, the solution is also integral.
+\end{thm}
+
+In terms of complexity, Bipartite Matching $\le$ Max Flow.
+
 
 \begin{figure}[H]
 	\caption{Shortest Path}
