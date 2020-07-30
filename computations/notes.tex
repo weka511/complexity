@@ -121,11 +121,95 @@ For theorists, polynomial vs. exponential is the mark of insight: we have found 
 
 \subsection{Dynamic Programming}
 
+\begin{align*}
+	d(s,t)=& \min(d(s^\prime,t)+1, d(s,t^\prime)+1,d(s^\prime,t^\prime) + \delta(s_1,t_1)) \text{ , where}\\
+	d(s,t)=& \text{ number of changes to convert $s$ to $d$}\\
+	s^\prime=& \text{ string $s$ with 1st character, $s_1$ removed}\\
+	t^\prime=& \text{ string $t$ with 1st character, $t_1$ removed}
+\end{align*}
+
+There are only $n^2$ sub-problems: polynomial time.
+
 \subsection{Greedy Algorithms}
+
+\begin{figure}[H]
+	\caption{Minimum Spanning Tree}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{e.g. power lines}
+		\includegraphics[width=\textwidth]{mst1}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Start by adding the shortest edge}
+		\includegraphics[width=\textwidth]{mst2}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{At each step, add the shortest edge that doesn't complete a cycle}
+		\includegraphics[width=\textwidth]{mst3}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{The complete tree}\label{fig:mst4}
+		\includegraphics[width=\textwidth]{mst4}
+	\end{subfigure}
+\end{figure}
+
+Clearly Figure \ref{fig:mst4} is \emph{a} spanning tree, but how do we know it is minimal?
+
+\begin{figure}[H]
+	\caption{How do we know Figure \ref{fig:mst4} is minimal?}
+	\begin{subfigure}[b]{0.30\textwidth}
+		\caption{Let $e$ be the shortest edge that doesn't complete a cycle, and suppose that the minimum spanning tree $T$ doesn't contain $e$}
+		\includegraphics[width=\textwidth]{mst5}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[b]{0.30\textwidth}
+		\caption{Then there must be some other path from one end of $e$ to another that goes through a longer edge $e^\prime$.}
+		\includegraphics[width=\textwidth]{mst6}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[b]{0.30\textwidth}
+		\caption{But then we could reduce the total length by deleting $e^\prime$ and adding $e$--a contradiction.}
+		\includegraphics[width=\textwidth]{mst7}
+	\end{subfigure}
+\end{figure}
+
+Greed isn't always good, or even very often good--Figures \ref{fig:greedy:tsp} and \ref{fig:lessgreedy:tsp}.
+\begin{figure}[H]
+	\caption{Travelling Salesman Problem}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Greedy solution to Travelling Salesman Problem}\label{fig:greedy:tsp}
+		\includegraphics[width=\textwidth]{tsp1}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{A less Greedy solution is somewhat better}\label{fig:lessgreedy:tsp}
+		\includegraphics[width=\textwidth]{tsp2}
+	\end{subfigure}
+\end{figure}
 
 \subsection{Landscapes}
 
+
+
+\begin{figure}[H]
+	\caption{Greedy Algorithms and the Fitness Landscape}
+	\begin{subfigure}[t]{0.4\textwidth}
+		\caption{A greedy algorithm works well if the Fitness Landscape looks like Fuji-San}
+		\includegraphics[width=\textwidth]{fujisan}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.55\textwidth}
+		\caption{A Greedy solution doesn't work well if there are many local optima where we can get stuck.}
+		\includegraphics[width=\textwidth]{rockies}
+	\end{subfigure}
+\end{figure}
 \subsection{Reductions and Translations}
+
+\begin{figure}[H]
+	\caption{Shortest Path}
+	\includegraphics[width=0.8\textwidth]{sp1}
+\end{figure}
 
 \subsection{Lessons So Far}
 
@@ -133,8 +217,16 @@ For theorists, polynomial vs. exponential is the mark of insight: we have found 
 
 \subsection{Complexity Wrap-Up}
 
+\begin{itemize}
+	\item \emph{Systems} aren't simple or complex; questions about them are.
+	\item Intrinsic complexity of a problem: the running time, or memory, or other resource, of the \emph{best possible algorithm}; an objective mathematical fact.
+	\item Upper bounds are easy: just give an algorithm.
+	\item Lower bounds are hard.
+	\item Lower bounds show that one problem is at least as easy (or hard) as another. 
+\end{itemize}
+
 \section{P versus NP}
-\cite[Chapters 4-6]{moore2011nature}
+\cite[Chapters 4-6]{moore2011nature}, \cite{sep-computability}
 
 \subsection{Finding versus Checking}
 
