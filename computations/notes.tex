@@ -21,7 +21,7 @@
 % SOFTWARE.
 
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel,amsthm}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
 \usepackage{titling}
@@ -75,6 +75,14 @@
 \tableofcontents
 
 \listoffigures
+
+\newglossaryentry{gls:3:SAT}{
+	name={$3-SAT$},
+	description={Given a set of \glspl{gls:clause} with 3 variables (or negated variables) each, e.g. $(x_1 \lor \bar{x_2} \lor x_3) \land (x_2 \lor x_{17} \lor \bar{x_{23}}) \land...$ is there a set $\{x_i\}$ such that all clauses are satisfied?}}
+
+\newglossaryentry{gls:clause}{
+	name={clause},
+	description={In logic, a clause is an expression formed from a finite collection of literals (atoms or their negations) }}
 
 \newglossaryentry{gls:eulerian:path}{
 	name={Eulerian path},
@@ -265,7 +273,7 @@ Greed isn't always good, or even very often good--Figures \ref{fig:greedy:tsp} a
 What defines the neighbourhood? When is one solution close to another?
 
 \begin{figure}[H]
-	\caption{Maxflow: take a network such as \ref{fig:maxflow1} and determine the maximum flow from $s$ to $t$. We can see that we can eliminate local optima by allowing a new kind of move. By expanding our idea of what kins of solutions are neighbours we reorganize the landscape!}
+	\caption[Maxflow: determine the maximum flow from $s$ to $t$]{Maxflow: take a network such as \ref{fig:maxflow1} and determine the maximum flow from $s$ to $t$. We can see that we can eliminate local optima by allowing a new kind of move. By expanding our idea of what kins of solutions are neighbours we reorganize the landscape!}
 	\begin{subfigure}[t]{0.4\textwidth}
 		\caption{Each edge has a capacity}\label{fig:maxflow1}
 		\includegraphics[width=\textwidth]{maxflow1}
@@ -292,7 +300,7 @@ This won't always work. Some problems are inherently bumpy.
 \subsection{Reductions and Translations}
 
 \begin{figure}[H]
-	\caption{Reducing one problem into another. We want a perfect bipartite matching, where everyone has a partner. This is a subset of the edges of this graph, so everyone on one side is connected to exactly one person on the other. There are $n!$ possible matchings.}
+	\caption[Reducing one problem into another]{Reducing one problem into another. We want a perfect bipartite matching, where everyone has a partner. This is a subset of the edges of this graph, so everyone on one side is connected to exactly one person on the other. There are $n!$ possible matchings.}
 	\begin{subfigure}[t]{0.3\textwidth}
 		\caption{Bipartite Graph. }
 		\includegraphics[width=\textwidth]{bpg1}
@@ -339,7 +347,7 @@ Some problems can be solved in polynomial time, while other require a brute-forc
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Hamiltonian path. We don't know how to solve it in polynomial time, but we can easily check a putative solution.}\label{fig:PNP1}
+		\caption[Hamiltonian path]{\gls{gls:Hamiltonian:path}. We don't know how to solve it in polynomial time, but we can easily check a proposed solution.}\label{fig:PNP1}
 		\includegraphics[width=0.8\textwidth]{PNP1}
 	\end{center}
 \end{figure} 
@@ -351,12 +359,12 @@ Some problems can be solved in polynomial time, while other require a brute-forc
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Complexity Classes. We \emph{know} that $P \subseteq NP$, and we \emph{believe} that $P \subset NP$}\label{fig:PNP2}
+		\caption[Complexity Classes]{Complexity Classes. We \emph{know} that $P \subseteq NP$, and we \emph{believe} that $P \subset NP$}\label{fig:PNP2}
 		\includegraphics[width=0.8\textwidth]{PNP2}
 	\end{center}
 \end{figure}
 
-We'll focus on classes of decision problems: not does this graphs have a Hamiltonian path, but can we find a Hamiltonian graph for any graph. We consider \gls{gls:NP:complete} problems.
+We'll focus on classes of decision problems: not \emph{does this graphs have a \gls{gls:Hamiltonian:path}}, but \emph{can we find a \gls{gls:Hamiltonian:path} for \emph{\gls{gls:Hamiltonian:path}} graph}. We consider \gls{gls:NP:complete} problems.
 
 We say that \glsdesc{gls:reduced} \glsdesc{gls:NP:complete}
 
@@ -366,6 +374,50 @@ Now the Hamiltonian Path problem is NP-Complete: how can such a simple problem r
 
 \subsection{Circuits and Formulae}
 
+Figure \ref{fig:satisfying} illustrates how the question ''is there a \gls{gls:Hamiltonian:path}'' can be transformed to ''are there values for the inputs that make to output \textbf{true}?''
+\begin{figure}[H]
+	\begin{center}
+		\caption{Satisfying a circuit}
+		\begin{subfigure}[b]{0.45\textwidth}
+			\caption{Satisfying a circuit: any program that tests solutions--e.g. to \gls{gls:Hamiltonian:path}--can be compiled into a Boolean circuit--bits!}\label{fig:satisfying}
+			\includegraphics[width=\textwidth]{satisfy}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.45\textwidth}
+			\caption{Add variables representing the truth values of the wires.}\label{fig:add:variables}
+			\includegraphics[width=\textwidth]{add-variables}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+\begin{align*}
+	y = x_1 \land& x_2 \equiv (x_1\lor \bar{y_1}) \land (x_1\lor \bar{y_2}) \land (\bar{x_1} \lor \bar{x_2} \lor y_1)
+\end{align*}
+
+We have converted the problem of checking a problem to a program, and than into a problem of checking Boolean expressions. We have therefore reduced out original problem to an instance of \gls{gls:3:SAT}, one of the original 6 \gls{gls:NP:complete} problems.
+\glsdesc{gls:3:SAT} k-SAT is ($k$ variables per clause) is \gls{gls:NP:complete} $\forall k \ge 3$.
+
+If \gls{gls:3:SAT} were easy:
+\begin{itemize}
+	\item we could take any \gls{gls:NP} problem;
+	\item write a program that checks a solution;
+	\item convert to a circuit;
+	\item convert to a 3-SAT formula;
+	\item use our efficient 3-SAT solver to solve the original problem;
+	\item so if $3-SAT \in P$ then $P=NP$.
+	\item If $P\ne NP$, 3-SAT cannot be solved in polynomial time.
+\end{itemize}
+
+\begin{thm}
+	k-SAT $\le$ 3-SAT
+\end{thm}
+
+\begin{proof}
+	We can break k-clauses down into 3-clauses, by adding new variables $\{z_i\}$, e.g.:
+	\begin{align*}
+		(x_1 \lor x_2 \lor x_3 \lor x_4 \lor x_5) =& (x_1 \lor x_2 \lor z_1) \land (\bar{z_1} \lor x_3 \lor z_2) \land (\bar{z_2} \lor x_4 \lor x_5)
+	\end{align*}
+	so we get 3-SAT clauses. They are good logical building blocks: this isn't true for 2-SAT clauses. A 3-SAT clause has ''chemistry'' and triggers a search. 2-SAT $\in$ P.
+\end{proof}
 \subsection{More NP-complete Problems}
 
 \subsection{P versus NP Problem}
