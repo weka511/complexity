@@ -173,6 +173,7 @@ For theorists, polynomial vs. exponential is the mark of insight: we have found 
 
 \subsection{Divide and Conquer}
 
+
 \subsection{Big O and All that}
 
 \subsection{When the details don't matter}
@@ -181,6 +182,36 @@ For theorists, polynomial vs. exponential is the mark of insight: we have found 
 \cite[Chapter 2]{moore2011nature}
 
 \subsection{Divide and Conquer Redux}
+
+How long does it take to sort a list of $n$ numbers? We could think of this as a search through $n!$ possibilities.
+
+\begin{figure}[H]
+	\caption{Mergesort: recursively split list in half, sort the halves, and merge.}\label{fig:mergesort}
+	\includegraphics[width=0.8\textwidth]{mergesort}
+\end{figure}
+
+Estimate the time to sort n items by $T(n)$, the number of comparisons.
+\begin{align*}
+T(1) =& 0 \text{. already sorted}\\
+T(n) =&\underbrace{ 2T(\frac{n}{2})}_\text{Two sorts of hald length} + \underbrace{n}_\text{Merge} \text{, hence}\\
+=& n \log_2(n)
+\end{align*}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Number of comparisons for mergesort}
+		\begin{tabular}{|r|r|} \hline
+			$n$&$T(n)$  \\ \hline
+			1& 0\\ \hline
+			2&2 \\ \hline
+			4&8 \\ \hline
+			8& 24\\ \hline
+			16& 64\\ \hline
+			32& 160\\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
 
 \subsection{Dynamic Programming}
 
@@ -326,7 +357,60 @@ In terms of complexity, Bipartite Matching $\le$ Max Flow.
 
 \subsection{Lessons So Far}
 
+We have just a few techniques that are guaranteed to be efficient:
+\begin{itemize}
+	\item divide and conquer;
+	\item dynamic programming;
+	\item greedy (local search);
+	\item linear programming, convex programming and duality (max-flow and min-cut).
+\end{itemize}
+These are essentially all we know about: is that all there is?
+
 \subsection{The Best of All Possible Algorithms}
+
+How do we know whether an algorithm is optimal? How long does it take to multiply two $n$ digit numbers? The algorithm we learned in primary school takes time $\propto n^2$. 
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{What if we try divide and conquer?}
+		\includegraphics[width=0.6\textwidth]{dc-mult}
+	\end{center}
+\end{figure}
+
+\begin{align*}
+	x=& 10^\frac{n}{2}a+b\\
+	y =& 10^\frac{n}{2}c+d\\
+	xy=& 10^n a c + 10^\frac{n}{2}(ad+bc) + bd \numberthis \label{eq:xy}
+\end{align*}
+Multiplication is typically slower than add and shifting. We replace one multiplication of $n$ digit numbers with 4 multiplications of $\frac{n}{2}$ numbers: $T(n) \approx 4T(\frac{n}{2})$. But maybe we can be a bit more clever.
+
+\begin{align*}
+	(a+b)(c+d) -ac -bd =& ad+bc 
+\end{align*}
+
+We can evaluate (\ref{eq:xy}) with only 3 multiplications, and the running time is now governed by $T(n) \approx 3T(\frac{n}{2})$.
+
+We will solve the equation for T.
+\begin{align*}
+	T(n) =&3T(\frac{n}{2}) \text{, we want a solution of the form}\\
+	T(n) \propto& n^\alpha \text{, whence}\\
+	\cancel{n}^\alpha =& 3\big(\frac{\cancel{n}}{2}\big)^\alpha\\
+	2^\alpha =& 3\\
+	\alpha \log(2) =& \log(3)\\
+	\alpha =& \frac{\log(3)}{\log(2)}\\
+	\approxeq& 1.585\\
+	T(n) \propto n^{1.585} 
+\end{align*}
+It turns out that we can get $\alpha$ down as close to 1 as we want.
+
+How does mergesort $n \log_2(n)$ compare with best possible algorithm? Figure \ref{fig:dt-sort} illustrates the decision table for searching. There needs to be  $\log_2(n!) \approx n \log_2(n)$ comparisons: merge sort is about as good as it gets.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Decision Table for Sort}\label{fig:dt-sort}
+		\includegraphics[width=0.6\textwidth]{dt-sort}
+	\end{center}
+\end{figure}
 
 \subsection{Complexity Wrap-Up}
 
@@ -416,8 +500,17 @@ If \gls{gls:3:SAT} were easy:
 	\begin{align*}
 		(x_1 \lor x_2 \lor x_3 \lor x_4 \lor x_5) =& (x_1 \lor x_2 \lor z_1) \land (\bar{z_1} \lor x_3 \lor z_2) \land (\bar{z_2} \lor x_4 \lor x_5)
 	\end{align*}
-	so we get 3-SAT clauses. They are good logical building blocks: this isn't true for 2-SAT clauses. A 3-SAT clause has ''chemistry'' and triggers a search. 2-SAT $\in$ P.
+	so we get 3-SAT clauses. They are good logical building blocks: this isn't true for 2-SAT clauses. A 3-SAT clause has ''chemistry'' and triggers a search. 
 \end{proof}
+
+\begin{thm}
+	2-SAT $\in$ P.
+\end{thm}
+
+\begin{proof}
+	TBP
+\end{proof}
+
 \subsection{More NP-complete Problems}
 
 \subsection{P versus NP Problem}
