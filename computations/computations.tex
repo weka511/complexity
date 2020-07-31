@@ -51,9 +51,6 @@
 
 \makeglossaries
 
-
-%\loadglsentries{glossary-entries}
-
 \renewcommand{\glstextformat}[1]{\textbf{\em #1}}
 
 \begin{document}
@@ -100,6 +97,12 @@
 	name={Hamiltonian path},
 	description={A Hamiltonian path, also called a Hamilton path, is a graph path between two vertices of a graph that visits each vertex exactly once }}
 
+\newglossaryentry {gls:NAESAT} {
+	name={NAESAT},
+	description={An NAESAT clause is one of the form: $$
+		(x_1 \lor x_2 \lor x_3) \land (\bar{x_1} \lor \bar{x_2} \lor \bar{x_3})
+		$$}}
+	
 \newglossaryentry{gls:NonDP}{
 	name={Non-deterministic Polynomial Time},
 	description={we can \emph{check} a solution efficiently}}
@@ -198,6 +201,13 @@ Polynomials don't grow too fast Figure \ref{fig:polynomial} compared to exponent
 
 
 \subsection{Big O and All that}
+
+\begin{itemize}
+	\item \gls{gls:O} \glsdesc{gls:O}
+	\item \gls{gls:Omega} \glsdesc{gls:Omega}
+	\item \gls{gls:o} \glsdesc{gls:o}
+	\item \gls{gls:Theta} \glsdesc{gls:Theta}
+\end{itemize}
 
 \subsection{When the details don't matter}
 
@@ -536,6 +546,22 @@ If \gls{gls:3:SAT} were easy:
 
 \subsection{More NP-complete Problems}
 
+\begin{itemize}
+	\item Polynomial time reduction is transitive: $A \le B \land B \le C\implies A \le C$.
+	\item So we can prove a problem is NP-complete by reducing any other problem to it.
+	\item e.g. Circuit satisfiability $\le$ 3-SAT.
+	\item 3-SAT $\le$ \gls{gls:NAESAT}--\glsdesc{gls:NAESAT}
+\end{itemize}
+
+We need to be careful when we reduce to know which direction we are going.
+Can we build \gls{gls:3:SAT} out of \gls{gls:NAESAT} building blocks?
+\begin{itemize}
+	\item \gls{gls:3:SAT} is symmetric: can we build it out of asymmetric parts?
+	\item Add a global variable $s$ to break the symmetry.
+	\item Consider the NAE-4-SAT clause $(x_1,x_2,x_3,s)$: what if $s$ false? what if it is true?
+	\item This translates  \gls{gls:3:SAT} to NAE-4-SAT. Then we can use the same trick we used above for k-SAT to reduce  NAE-4-SAT to NAE-3-SAT.
+\end{itemize}
+
 \subsection{P versus NP Problem}
 
 \subsection{Existence and Nonexistence }
@@ -549,7 +575,7 @@ If \gls{gls:3:SAT} were easy:
 % end of text 
 
 % glossary
-\glsaddall
+
 \printglossaries
 
 % bibliography go here
