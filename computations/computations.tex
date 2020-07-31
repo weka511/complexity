@@ -67,8 +67,8 @@
    but without any warranty, and without even the implied warranty of
    merchantability or fitness for a particular purpose. All feedback is welcome,
    but I don't necessarily undertake to do anything with it.\\
-   \LaTeX source for this week's lectures can be found at\\
-   \url{https://github.com/weka511/complexity/tree/master/origins}.
+   \LaTeX source for the notes can be found at\\
+   \url{https://github.com/weka511/complexity/tree/master/computations}.
 \end{abstract}
 
 \setcounter{tocdepth}{2}
@@ -77,7 +77,7 @@
 \listoffigures
 
 \newglossaryentry{gls:3:SAT}{
-	name={$3-SAT$},
+	name={3-SAT},
 	description={Given a set of \glspl{gls:clause} with 3 variables (or negated variables) each, e.g. $(x_1 \lor \bar{x_2} \lor x_3) \land (x_2 \lor x_{17} \lor \bar{x_{23}}) \land...$ is there a set $\{x_i\}$ such that all clauses are satisfied?}}
 
 \newglossaryentry{gls:clause}{
@@ -171,6 +171,29 @@ For theorists, polynomial vs. exponential is the mark of insight: we have found 
 
 \subsection{Polynomials vs. Exponentials}
 
+Polynomials don't grow too fast Figure \ref{fig:polynomial} compared to exponential \ref{fig:exponential}.
+\begin{figure}[H]
+	\caption{Polynomials don't grow too fast}\label{fig:polynomial} 
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{}
+		\includegraphics[width=\textwidth]{n1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{}
+		\includegraphics[width=\textwidth]{n2}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{}
+		\includegraphics[width=\textwidth]{n3}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Exponential Growth: this is what we don't want.}\label{fig:exponential}
+		\includegraphics[width=0.8\textwidth]{exponential}
+	\end{center}
+\end{figure}
 \subsection{Divide and Conquer}
 
 
