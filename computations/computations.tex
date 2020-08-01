@@ -58,7 +58,7 @@
 \maketitle
 
 \begin{abstract}
-   These are my notes from Computation in Complex Systems\
+   These are my notes from Computation in Complex Systems\cite{sfi2020computation}\\
    The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
    These notes are distributed in the hope that they will be useful,
    but without any warranty, and without even the implied warranty of
@@ -241,11 +241,18 @@ Polynomials vs. Exponentials.
 	\item releases us from many of the details.
 	\begin{itemize}
 		\item The size of an instance is the number of bits to describe it, e.g. the number of bits in an email.
-		\item For polynomial versus exponential, the description format doesn't matter,
+		\item For polynomial versus exponential, the description format doesn't matter: e.g. we can describe a network as an $n^2$ adjacency matrix, or as notes with links $n\log(n)$, but this just changes one polynomial to another.
+		\item Data storage formats don't turn polynomial into exponential, e.g. linear list ($n$) versus tree ($\log(n)$) 
+		\item Neither does technology--e.g. RAM vs. magnetic tape--Figure \ref{fig:imb729mtu}--$T$ vs. $T^2$.
 	\end{itemize}
 \end{itemize}
 
-
+\begin{figure}[H]
+	\begin{center}
+		\caption{IBM 729 Magnetic Tape Unit}\label{fig:imb729mtu}
+		\includegraphics[width=0.6\textwidth]{imb729mtu}
+	\end{center}
+\end{figure}
 \section{Algorithms and Landscapes}
 \cite[Chapter 2]{moore2011nature}
 
