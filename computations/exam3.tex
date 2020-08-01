@@ -30,7 +30,7 @@
 Table \ref{table:truth} is the truth table for the two formulae. I have used the symbol $\top$ to show that a formula evaluates to true, $\bot$ for false. The column headed ''AND'' denotes the truth value of $y_1 = x_1 \land x_2$, and that headed ''3-SAT'' denotes the truth value of $ (x_1\lor \bar{y_1}) \land (x_1\lor \bar{y_2}) \land (\bar{x_1} \lor \bar{x_2} \lor y_1)$. The demonstrandum asserts that these two columns are equal. Since the 3-clause is a conjunction, one 'F' in any of the 3 preceding columns is enough to falsify the clause.
 
 \begin{table}[H]
-	\caption{Truth Table}\label{table:truth}
+	\caption{Truth Table--Circuits \& Formulae}\label{table:truth}
 	\begin{center}
 		\begin{tabular}{|c|c|c||c|c|c|c||c|}\hline
 			$x_1$&$x_2$&$y_1$&AND&$x_1 \lor \bar{y_1}$&$x_2 \lor \bar{y_1}$&$\bar{x_1}\lor\bar{x_2}\lor y_1$&3-clause\\ \hline
@@ -59,11 +59,28 @@ Table \ref{table:truth} is the truth table for the two formulae. I have used the
 \section{Travelling Salesperson}
 
 \begin{enumerate}
-	\item Is D less than 10,000 miles?
+	\item Is $D<10,000$ (miles)?
+	\begin{enumerate}
+		\item Suppose someone presents we with a collection of edges,$W$, say, which she asserts is a witness.
+		\item I can easily check that is includes all node and returns to the origin, so it is a path.
+		\item can easily verify that the length of $W$, $L(W)$, say, is less than 10,000. Now there are two possibilities:
+		\begin{enumerate}
+			\item W is the shortest path, so  $L(D)=L(W)<10000$, or
+			\item W is not the shortest path, so $\exists D \mid L(D)<L(W)<10000$.
+		\end{enumerate}
+		Either way $L(D)<10000$.
+		\item This problem is therefore in NP.
+	\end{enumerate}
 	
 	\item Is D more than 8,000 miles?
+		\begin{enumerate}
+		\item 
+	\end{enumerate}
 	
 	\item Is D exactly 9,219 miles? 
+		\begin{enumerate}
+		\item 
+	\end{enumerate}
 \end{enumerate}
 
 \section{Complexity Hierarchy}
