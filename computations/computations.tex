@@ -21,7 +21,7 @@
 % SOFTWARE.
 
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel,amsthm}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel,amsthm,thmtools}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
 \usepackage{titling}
@@ -72,6 +72,7 @@
 \tableofcontents
 
 \listoffigures
+\listoftheorems[ignoreall,onlynamed]
 
 \newglossaryentry{gls:3:SAT}{
 	name={3-SAT},
@@ -199,8 +200,30 @@ Polynomials don't grow too fast Figure \ref{fig:polynomial} compared to exponent
 \end{figure}
 \subsection{Divide and Conquer}
 
+\begin{figure}[H]
+	\begin{center}
+		\caption[Towers of Hanoi]{Towers of Hanoi. Figure \ref{fig:towers-hanoi-rb} shows how to break the problem--Figure \ref{fig:towers-hanoi}--down recursively.}\label{fig:toh}
+		\begin{subfigure}[t]{0.35\textwidth}
+			\caption{The problem}\label{fig:towers-hanoi}
+			\includegraphics[width=\textwidth]{towers-hanoi}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.6\textwidth}
+			\caption{Recursive breakdown}\label{fig:towers-hanoi-rb}
+			\includegraphics[width=\textwidth]{towers-hanoi-breakdown}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+How many moves are needed for $n$ disks?
+\begin{align*}
+	f(0) =& 0 \\
+	f(n) =& 2f(n-1) + 1\\
+	=& 2^n -1
+\end{align*}
 
 \subsection{Big O and All that}
+
+In computer science, a real problem is an infinite family of examples or instances. How much of some resource--time, memory, etc--do we need as a function of $n$?
 
 \begin{itemize}
 	\item \gls{gls:O} \glsdesc{gls:O}
@@ -210,6 +233,18 @@ Polynomials don't grow too fast Figure \ref{fig:polynomial} compared to exponent
 \end{itemize}
 
 \subsection{When the details don't matter}
+
+Polynomials vs. Exponentials.
+
+\begin{itemize}
+	\item relates to whether we can exploit some feature or are just searching;
+	\item releases us from many of the details.
+	\begin{itemize}
+		\item The size of an instance is the number of bits to describe it, e.g. the number of bits in an email.
+		\item For polynomial versus exponential, the description format doesn't matter,
+	\end{itemize}
+\end{itemize}
+
 
 \section{Algorithms and Landscapes}
 \cite[Chapter 2]{moore2011nature}
@@ -376,7 +411,7 @@ This won't always work. Some problems are inherently bumpy.
 	\end{subfigure}
 \end{figure}
 
-\begin{thm}
+\begin{thm}[Maxflow]
 	If all the flows have integral capacities, the solution is also integral.
 \end{thm}
 
@@ -524,7 +559,7 @@ If \gls{gls:3:SAT} were easy:
 	\item If $P\ne NP$, 3-SAT cannot be solved in polynomial time.
 \end{itemize}
 
-\begin{thm}
+\begin{thm}[k-SAT $\le$ 3-SAT]
 	k-SAT $\le$ 3-SAT
 \end{thm}
 
@@ -536,7 +571,7 @@ If \gls{gls:3:SAT} were easy:
 	so we get 3-SAT clauses. They are good logical building blocks: this isn't true for 2-SAT clauses. A 3-SAT clause has ''chemistry'' and triggers a search. 
 \end{proof}
 
-\begin{thm}
+\begin{thm}[2-SAT $\in$ P.]
 	2-SAT $\in$ P.
 \end{thm}
 
@@ -553,6 +588,8 @@ If \gls{gls:3:SAT} were easy:
 	\item 3-SAT $\le$ \gls{gls:NAESAT}--\glsdesc{gls:NAESAT}
 \end{itemize}
 
+\subsubsection{Not All Equal SAT}
+
 We need to be careful when we reduce to know which direction we are going.
 Can we build \gls{gls:3:SAT} out of \gls{gls:NAESAT} building blocks?
 \begin{itemize}
@@ -561,6 +598,40 @@ Can we build \gls{gls:3:SAT} out of \gls{gls:NAESAT} building blocks?
 	\item Consider the NAE-4-SAT clause $(x_1,x_2,x_3,s)$: what if $s$ false? what if it is true?
 	\item This translates  \gls{gls:3:SAT} to NAE-4-SAT. Then we can use the same trick we used above for k-SAT to reduce  NAE-4-SAT to NAE-3-SAT.
 \end{itemize}
+
+\subsubsection{Map Colouring Problem}
+\begin{figure}[H]
+	\begin{center}
+		\caption[Map Colouring Problem]{Given a map of countries and borders between them,what is the smallest number of countries we need?}\label{fig:MapColouring}
+		\includegraphics[width=0.8\textwidth]{MapColouring}
+	\end{center}
+\end{figure}
+
+We know that 4 colours are enough: it turns out that the 3-Colour problem is \gls{gls:NP:complete}--Figure \ref{fig:naesat3colour}.
+\begin{figure}[H]
+	\caption[NAESAT $\le$ Graph 3-Colour]{NAESAT $\le$ Graph 3-Colour: each node is a country, and each border an edge; two nodes are connected \emph{iff} the two countries share a border.}\label{fig:naesat3colour}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=0.8\textwidth]{naesat3colour}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=0.8\textwidth]{naesat3solution}
+	\end{subfigure}
+\end{figure}
+
+\begin{thm}[NAESAT $\le$ Graph 3-Colour]
+	NAESAT $\le$ Graph 3-Colour
+\end{thm}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Use gadgets to encode variables and enforce constraints.
+		\item If there are two ways to colour something we call the colours ''true'' and ''false''--e.g. the triangles at the top.
+		\item Assign an arbitrary colour to the topmost node.
+		\item TBP
+	\end{enumerate}
+\end{proof}
+
+3 colouring can be a disguise for any search problem--Hamiltonian path, TSP,...
 
 \subsection{P versus NP Problem}
 
