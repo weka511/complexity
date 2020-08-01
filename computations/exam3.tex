@@ -58,11 +58,16 @@ Table \ref{table:truth} is the truth table for the two formulae. I have used the
 
 \section{Travelling Salesperson}
 
+I shall use this criterion: \begin{quotation}
+	A yes/no question is in NP if, whenever the answer is "yes", there is an easily checked proof or "witness" to that fact\cite[Lecture 3.5]{sfi2020computation}.
+\end{quotation}
+
 \begin{enumerate}
 	\item Is $D<10,000$ (miles)?
 	\begin{enumerate}
-		\item Suppose someone presents we with a collection of edges,$W$, say, which she asserts is a witness.
-		\item I can easily check that is includes all node and returns to the origin, so it is a path.
+		\item Suppose someone presents we with a collection of edges, 
+			$W$, say, which she asserts is a witness.
+		\item I can easily check that it includes all node and returns to the origin, so it is a path.
 		\item can easily verify that the length of $W$, $L(W)$, say, is less than 10,000. Now there are two possibilities:
 		\begin{enumerate}
 			\item W is the shortest path, so  $L(D)=L(W)<10000$, or
@@ -74,12 +79,14 @@ Table \ref{table:truth} is the truth table for the two formulae. I have used the
 	
 	\item Is D more than 8,000 miles?
 		\begin{enumerate}
-		\item 
+		\item The previous argument does not work in this case. If someone produces a path that is more 8,000 miles, I have no way of easily knowing whether or not there the minimum path is or less than this one. I can test all possible paths to see whether or not they are shorted than 8,000, and I can save a bit of time by rejecting a path as soon as I find a partial length over 8,000: at best this makes an exponential process a little shorter.
+		\item IMHO this decision is not NP.  
 	\end{enumerate}
 	
 	\item Is D exactly 9,219 miles? 
 		\begin{enumerate}
-		\item 
+		\item This is not NP.
+		\item The argument is similar to the "more than 8,000" argument. Although I might get lucky and discredit the witness if I stumble across a path that is shorter than 9,219, this doesn't make the task of verifying a correct solution any easier. 
 	\end{enumerate}
 \end{enumerate}
 
@@ -92,4 +99,11 @@ Table \ref{table:truth} is the truth table for the two formulae. I have used the
 	\item On a lattice of infinite size, will s ever die out?
 	
 \end{enumerate}
+
+% bibliography go here
+
+\bibliographystyle{unsrt}
+\addcontentsline{toc}{section}{Bibliography}
+\bibliography{computations}
+
 \end{document}
