@@ -17,7 +17,8 @@
 %opening
 \title{Computation in Complex Systems\\
 	Week 3\\
-	P \& NP}
+	P or NP? That is the Question.
+	}
 
 
 \begin{document}
@@ -26,9 +27,52 @@
 
 \section{Circuits \& Formulae}
 
+Table \ref{table:truth} is the truth table for the two formulae. I have used the symbol $\top$ to show that a formula evaluates to true, $\bot$ for false. The column headed ''AND'' denotes the truth value of $y_1 = x_1 \land x_2$, and that headed ''3-SAT'' denotes the truth value of $ (x_1\lor \bar{y_1}) \land (x_1\lor \bar{y_2}) \land (\bar{x_1} \lor \bar{x_2} \lor y_1)$. The demonstrandum asserts that these two columns are equal. Since the 3-clause is a conjunction, one 'F' in any of the 3 preceding columns is enough to falsify the clause.
+
+\begin{table}[H]
+	\caption{Truth Table}\label{table:truth}
+	\begin{center}
+		\begin{tabular}{|c|c|c||c|c|c|c||c|}\hline
+			$x_1$&$x_2$&$y_1$&AND&$x_1 \lor \bar{y_1}$&$x_2 \lor \bar{y_1}$&$\bar{x_1}\lor\bar{x_2}\lor y_1$&3-clause\\ \hline
+			F&F&F&$\top$&T&T&T&$\top$\\ \hline
+			F&F&T&$\bot$&F&F&T&$\bot$\\ \hline
+			F&T&F&$\top$&T&T&T&$\top$\\ \hline
+			F&T&T&$\bot$&F&&&$\bot$\\ \hline
+			T&F&F&$\top$&T&T&T&$\top$\\ \hline
+			T&F&T&$\bot$&T&F&&$\bot$\\ \hline
+			T&T&F&$\bot$&T&T&F&$\bot$\\ \hline
+			T&T&T&$\top$&T&T&T&$\top$\\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{enumerate}
+	\item Given than the three clauses are linked by logical AND statements, all three clauses must be true, or else the clause is false.
+	
+	\item If $x_1$ is false, $y_1$ must be false.
+	
+	\item If $x_2$ is false, $y_1$ must be false.
+	
+	\item If $x_1$ is true and $x_2$ is true, $y_1$ must be true.
+\end{enumerate}
+
 \section{Travelling Salesperson}
+
+\begin{enumerate}
+	\item Is D less than 10,000 miles?
+	
+	\item Is D more than 8,000 miles?
+	
+	\item Is D exactly 9,219 miles? 
+\end{enumerate}
 
 \section{Complexity Hierarchy}
 
-
+\begin{enumerate}
+	\item What will the state be at tn+x ?
+	\item Does s have a predecessor?
+	\item On a lattice of size n, is s on a periodic orbit?
+	\item On a lattice of infinite size, will s ever die out?
+	
+\end{enumerate}
 \end{document}
