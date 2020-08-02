@@ -133,6 +133,10 @@
 	name={Polynomial Time},
 	description={we can find a solution efficiently}}
 
+\newglossaryentry{gls:PSPACE}{
+	name={PSPACE},
+	description={problems we can solve with a polynomial amout of memory, even if they take an infinire amount of time.}}
+
 \newglossaryentry{gls:reduced}{
 	name={reduced},
 	description={$A$ can be \emph{reduced} to $B$, or $A \le B$, if there is a polynomial algorithm that translated instances of $A$ to instances of $B$, so the yes/no answer stays the same. }}
@@ -654,15 +658,63 @@ A yes/no question is in NP if, whenever the answer is "yes", there is an easily 
 
 \subsection{Above and Beyond}
 
+The class NP is about the existence of things: if it exists, and it is easy to check if you show it to me, then its in NP. As we go to deeper and more tangled relationships we find ourselves climbing through an infinite hierarchy--Figure \ref{fig:complexity:hierarchy}.
+
+\begin{figure}[H]
+	\caption{Complexity Hierarchy}\label{fig:complexity:hierarchy}
+	\includegraphics[width=0.8\textwidth]{hierarchy}
+\end{figure}
+
+Strategies are larger than Hamiltonian Paths: to prove that one side has a winning strategy I need to check an exponential path--Figure \ref{fig:PSPACE}. Playing games perfectly lives higher up in the complexity hierarchy--Figure \ref{fig:complexity:hierarchy}. 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Rule 110}
+		\caption{Strategies are larger than Hamiltonian Paths}\label{fig:PSPACE}
+		\includegraphics[width=0.6\textwidth]{PSPACE}
+	\end{center}
+\end{figure}
+
+Exploring the tree could take exponential time, but, if the length of the game is polynomial, we only need polynomial space. We have another complexity class: \gls{gls:PSPACE}--\glsdesc{gls:PSPACE}
+
+\begin{thm}
+	$P \subseteq NP \subseteq PSPACE$
+\end{thm}
+
+\begin{proof}
+	TBP
+\end{proof}
+
+We have a language to draw qualitative distinctions between problems, to locate them in the hierarchy of--Figure \ref{fig:complexity:hierarchy}.
+\begin{quotation}
+	Computers play the same role in complexity that clocks, trains, and elevators play on relativity--Scott Aaronson.
+\end{quotation}
+
+Computer science is not the study of computers, it is the study of computation.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Rule 110 is universal]{Rule 110 is universal\cite{cook2004universality}}
 		\includegraphics[width=0.8\textwidth]{rule110}
 	\end{center}
 \end{figure}
 
+Given a cellular automaton, what questions can we ask about it?
+
+\begin{enumerate}
+	\item What will the state be at $t_{n+x}$?
+
+	\item Does s have a predecessor?
+
+	\item On a lattice of size $n$, is $s$ on a periodic orbit?
+
+	\item On a lattice of infinite size, will $s$ ever die out?
+	
+\end{enumerate}
+
+These all live at different levels of Figure \ref{fig:complexity:hierarchy}.
+
 \section{Worst-case, Natural, and Random}
 \cite[Chapters 5,10]{moore2011nature}
+
 \section{Computation Everywhere}
 \cite[Chapter 7]{moore2011nature}
 % end of text 
