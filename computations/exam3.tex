@@ -102,42 +102,40 @@ I am going to assume that I know the rule each cell uses to update its state, th
 \end{thm}
 
 \begin{proof}
-	
+	I need to apply the rule $n$ times to $m$ cells, i.e. $m \cdot n$ times. 
+	This is linear in $n$ and $m$, i.e. polynomial, so the problem is in P. 
+\end{proof}
+
+
+\begin{thm}
+	The problem "Does s have a predecessor?" is in NP.
+\end{thm}
+
+\begin{proof}
+	I can test for the existence of a predecessor by applying the rule to $2^m$ possible states and checking the result, to see whether it matches $s$, st which point I can stop and answer \emph{yes}. This process can require time $\propto 2^m$, so it is exponential.
+
+	OTOH if someone offers me a state which they claim to be a witness that there is a predecessor,  I can test it in time $\propto m$, so the problem is in NP. 
+
+\end{proof}
+
+\begin{thm}
+	The problem "On a lattice of size $n$, is $s$ on a periodic orbit $stuvw...s...$?" is in PSPACE\footnote{I am discounting the possibility that s \emph{leads in to} a periodic orbit, $stuvwx...u...$}.
+\end{thm}
+
+\begin{proof}
 	\begin{enumerate}
-		\item I need to apply the rule $n$ times to $m$ cells, i.e. $m \cdot n$ times. \item This is linear in $n$ and $m$, i.e. polynomial, so the problem is in P. 
+		\item On a lattice of size $n$ there are $2^n$ possible states. Therefore if I am presented with $s$ it could  $2^n$ steps. So we are dealing with exponential time.
+		\item Even if someone presents we with a path that is allegedly a witness, it still could potentially have $2^n$ steps, so I cannot claim that test in polynomial time. So we can't say that the problem is in $NP$.
+		\item Let us assume that I iterate through all states, starting with $n*'0'$ (i.e. all states zero) and ending with $n*'1'$, working from right to left: I iterate until I return to the initial state $s$, or I reach $n*'1'$. Then I need $n$ memory locations to keep track of where I am in the iteration, so the memory requirement is polynomial. 
 	\end{enumerate}
 \end{proof}
 
-
 \begin{thm}
-	The problem " Does s have a predecessor?" is in NP.
+	The problem " On a lattice of infinite size, will $s$ ever\footnote{''Eternity is awful long time, especially towards the end.''-Woody Allen} die out?" is undecidable.
 \end{thm}
 
 \begin{proof}
 		\begin{enumerate}
-		\item I can test for the existence of a predecessor by applying the rule to $2^m$ possible states and checking the result, which is exponential.
-		\item OTOH if someone offers me a state which they claim to be a witness there being a predecessor, then I can test it in time $\propto m$, so the problem is in NP. 
-	\end{enumerate}
-\end{proof}
-
-\begin{thm}
-	The problem "On a lattice of size $n$, is $s$ on a periodic orbit?" is in PSPACE.
-\end{thm}
-
-\begin{proof}
-			\begin{enumerate}
-		\item On a lattice of size $n$ there are $2^n$ possible states. Therefore if I am presented with $s$ it could  $2^n$ steps.
-		\item We are dealing with exponential time. 
-	\end{enumerate}
-\end{proof}
-
-\begin{thm}
-	The problem " On a lattice of infinite size, will $s$ ever die out?" is undecidable.
-\end{thm}
-
-\begin{proof}
-		\begin{enumerate}
-		\item ''Eternity is awful long time, especially towards the end.''-Woody Allen
 		\item I claim that this is undecidable\label{sec:undecidable}.
 		\item All we need to do is show that this is un-computable for a particular finite automaton and a particular $s$. We will chose Rule 110, since we know it is universal--\cite{cook2004universality}.
 		\item  I assert that \ref{sec:undecidable} is equivalent to the halting problem. Since Rule 110 is universal, we can encode the halting problem for any Turing machine by a state, and ask whether it will ever die out. 
