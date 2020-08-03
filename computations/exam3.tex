@@ -30,7 +30,7 @@
 Table \ref{table:truth} is the truth table for the two formulae. I have used the symbol $\top$ to show that a formula evaluates to true, $\bot$ for false. The column headed ''AND'' denotes the truth value of $y_1 = x_1 \land x_2$, and that headed ''3-SAT'' denotes the truth value of $ (x_1\lor \bar{y_1}) \land (x_1\lor \bar{y_2}) \land (\bar{x_1} \lor \bar{x_2} \lor y_1)$. The demonstrandum asserts that these two columns are equal. Since the 3-clause is a conjunction, one 'F' in any of the 3 preceding columns is enough to falsify the clause.
 
 \begin{table}[H]
-	\caption{Truth Table--Circuits \& Formulae}\label{table:truth}
+	\caption{Truth Table--Circuits \& Formulae, showing that the columns headed "AND" and "3-clause" are identical. Symbols $\top$ and $\bot$ are used to denote True and False, respectively.}\label{table:truth}
 	\begin{center}
 		\begin{tabular}{|c|c|c||c|c|c|c||c|}\hline
 			$x_1$&$x_2$&$y_1$&AND&$x_1 \lor \bar{y_1}$&$x_2 \lor \bar{y_1}$&$\bar{x_1}\lor\bar{x_2}\lor y_1$&3-clause\\ \hline
@@ -58,6 +58,7 @@ Table \ref{table:truth} is the truth table for the two formulae. I have used the
 
 \section{Travelling Salesperson}
 
+My reading of this question is that I am supplied with a witness--a path that is alleged to solve the problem.
 I shall use this criterion: \begin{quotation}
 	A yes/no question is in NP if, whenever the answer is "yes", there is an easily checked proof or "witness" to that fact\cite[Lecture 3.5]{sfi2020computation}.
 \end{quotation}
@@ -67,8 +68,8 @@ I shall use this criterion: \begin{quotation}
 	\begin{enumerate}
 		\item Suppose someone presents we with a collection of edges, 
 			$W$, say, which she asserts is a witness.
-		\item I can easily check that it includes all node and returns to the origin, so it is a path.
-		\item can easily verify that the length of $W$, $L(W)$, say, is less than 10,000. Now there are two possibilities:
+		\item I can easily check that it includes all nodes and returns to the origin, so it is a path.
+		\item I can easily verify that the length of $W$, $L(W)$, say, is less than 10,000. Now there are two possibilities:
 		\begin{enumerate}
 			\item W is the shortest path, so  $L(D)=L(W)<10000$, or
 			\item W is not the shortest path, so $\exists D \mid L(D)<L(W)<10000$.
@@ -79,8 +80,8 @@ I shall use this criterion: \begin{quotation}
 	
 	\item Is D more than 8,000 miles?
 		\begin{enumerate}
-		\item The previous argument does not work in this case. If someone produces a path that is more 8,000 miles, I have no way of easily knowing whether or not there the minimum path is or less than this one. I can test all possible paths to see whether or not they are shorted than 8,000, and I can save a bit of time by rejecting a path as soon as I find a partial length over 8,000: at best this makes an exponential process a little shorter.
-		\item IMHO this decision is not NP.  
+		\item The previous argument does not work in this case. If someone produces a path that is more 8,000 miles, I have no way of easily knowing whether or not there the minimum path is or less than this one. I can test all possible paths to see whether or not they are shorter than 8,000, and I can save a bit of time by rejecting a path as soon as I find a partial length over 8,000: this may make the process a little shorter, but it remains exponential.
+		\item IMHO this decision problem is not NP.  
 	\end{enumerate}
 	
 	\item Is D exactly 9,219 miles? 
@@ -119,28 +120,41 @@ I am going to assume that I know the rule each cell uses to update its state, th
 \end{proof}
 
 \begin{thm}
-	The problem "On a lattice of size $n$, is $s$ on a periodic orbit $stuvw...s...$?" is in PSPACE\footnote{I am discounting the possibility that s \emph{leads in to} a periodic orbit, $stuvwx...u...$}.
+	The problem "On a lattice of size $n$, is $s$ on a periodic orbit $stuvw...s...$?" is in PSPACE\footnote{I am discounting the possibility that s \emph{leads in to} a periodic orbit, $stuvwx...u...$, which would require each successor to be tested against $s,t,u,v,w,x...$}.
 \end{thm}
 
 \begin{proof}
 	\begin{enumerate}
 		\item On a lattice of size $n$ there are $2^n$ possible states. Therefore if I am presented with $s$ it could  $2^n$ steps. So we are dealing with exponential time.
-		\item Even if someone presents we with a path that is allegedly a witness, it still could potentially have $2^n$ steps, so I cannot claim that test in polynomial time. So we can't say that the problem is in $NP$.
+		\item Even if someone presents we with a path that is allegedly a witness, it still could potentially have $2^n$ steps, so I cannot test in polynomial time. So we can't say that the problem is in $NP$.
 		\item Let us assume that I iterate through all states, starting with $n*'0'$ (i.e. all states zero) and ending with $n*'1'$, working from right to left: I iterate until I return to the initial state $s$, or I reach $n*'1'$. Then I need $n$ memory locations to keep track of where I am in the iteration, so the memory requirement is polynomial. 
 	\end{enumerate}
 \end{proof}
 
-\begin{thm}
-	The problem " On a lattice of infinite size, will $s$ ever\footnote{''Eternity is awful long time, especially towards the end.''-Woody Allen} die out?" is undecidable.
+\begin{thm}\label{thm:undecideable}
+	The problem ''On a lattice of infinite size, will $s$ ever die out?'' is undecidable.
 \end{thm}
 
 \begin{proof}
-		\begin{enumerate}
-		\item I claim that this is undecidable\label{sec:undecidable}.
-		\item All we need to do is show that this is un-computable for a particular finite automaton and a particular $s$. We will chose Rule 110, since we know it is universal--\cite{cook2004universality}.
-		\item  I assert that \ref{sec:undecidable} is equivalent to the halting problem. Since Rule 110 is universal, we can encode the halting problem for any Turing machine by a state, and ask whether it will ever die out. 
-	\end{enumerate}
+	All we need to do is show that this is undecidable for a particular finite automaton and a particular $s$. We will chose Rule 110--Table \ref{table:rule110}-- since we know it is universal--\cite{cook2004universality}. It is also clear that "dying out" actually makes sense, as Table \ref{table:rule110} shows that $0\rightarrow 0$: we can interpret "dies out" to mean "all zeroes".
+	\begin{table}[H]
+		\begin{center}
+			\caption{Rule 110\cite{wiki:rule:110}}\label{table:rule110}
+			\begin{tabular}{|c|c|c|c|c|c|c|c|}\hline
+				111 &110&101&100&011&010&001&000\\ \hline
+				0 &	1& 	1& 	0&	1 &	1 &	1& 	0 \\ \hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+	
+	I assert that Theorem \ref{thm:undecideable} is equivalent to the halting problem. Since Rule 110 is universal, we can encode the halting problem for any Turing machine by a state, and ask whether it will ever die out. The assumption is that "dying out" is somehow equivalent to "halting", which appears to be to be equivalent to Cook's observation: \cite[page 38]{cook2004universality}
+	\begin{quotation}
+		All of the above machines had a way of halting, whereas the Turing machines presented here do not, since they emulate Rule 110, which, being a 	cellular automaton, does not have an explicit mode of halting. However, the machines presented here are certainly capable of “effective computation” in the sense of Minsky, and so questions about their behavior, 	such as “Will this sequence of symbols ever appear on the tape?”, are undecidable.
+	\end{quotation}
+
+	(I am aware that there is still some hand-waving here, but I don't believe I can do better without thoroughly digesting \cite{cook2004universality}.)
 \end{proof}
+
 
 
 
