@@ -749,8 +749,10 @@ Some real world problems are easy because of the structure of the landscape.
 If you define clustering as optimization it is a hard problem, but it is one we solve every day. Why? Because of local minima. Maybe we are asking the wrong question: if there is one true clustering, it should be shouting at us, and there should not be other clustering that are almost as good but very different.
 
 \begin{figure}[H]
-	\caption{Landscapes are not as bumpy as they could be: if all good solutions are close to the optimum, cluster is easy. But if the landscape is really bumpy, maybe the pattern that we are looking for isn't really there.}\label{fig:rw-problems-easy}
-	\includegraphics[width=0.6\textwidth]{rw-problems-easy}
+	\begin{center}
+		\caption[Some landscapes are not as bumpy as they could be]{Some landscapes are not as bumpy as they could be: if all good solutions are close to the optimum, cluster is easy. But if the landscape is really bumpy, maybe the pattern that we are looking for isn't really there.}\label{fig:rw-problems-easy}
+		\includegraphics[width=0.6\textwidth]{rw-problems-easy}
+	\end{center}
 \end{figure}
 
 Suppose the instance in front of you has the following structural property to its landscape of solutions:suppose that any local optimum that is almost as good as the global optimum is also close to the global optimum and agrees with it on most points. So there might be local foothills to the global optimum, but the global optimum dominates the landscape: you don't have another peak far away that is almost as high. Under this structural assumption Balcan, Blum and Gupta\cite{balcan2013clustering} showed that a certain clustering algorithm, similar to the k-means algorithm works very well and very quickly.
@@ -760,6 +762,26 @@ Another example of why real-world problems might be easy is protein folding. We 
 So real world problems mostly have nicer landscapes than we'd expect from a diabolical adversary.
   
 \subsection{Phase Transitions}
+
+We have talked about the contrast between worst case problems that are designed by a nasty adversary and natural problems that we might encounter in the real world. It turns out that physics, especially statistical physics gives us a lot of machinery and mathematical techniques for thinking about the range of problems that we might encounter, and how the problems might get harder and their landscapes change as we increase the strength of their interactions and constraints. There are phase transitions between easy, hard, and insoluble.
+
+We'll consider the Ising model.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Ising Model: Atoms in a block of iron interact with their neighbours]{Ising Model: Atoms in a block of iron interact with their neighbours $\uparrow\uparrow\uparrow\downarrow\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow\uparrow\uparrow$.}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{When these interactions are strong enough and the temperature is low enough, the atoms line up and form a magnetic field.}
+			\includegraphics[width=\textwidth]{permanent-magnet}
+		\end{subfigure}
+		\;\;\;
+		\begin{subfigure}[t]{0.6\textwidth}
+			\caption{When iron is heated beyond the critical temperature, it suddenly loses its ability for hold a magnetic field. Below $T_c$ there is a clear majority of atoms favouring one direction, and they are organized into small islands; above $T_c$ the islands merge and the directions are random.}
+			\includegraphics[width=\textwidth]{curie-temperature}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
 
 \subsection{Random Problems}
 
@@ -781,6 +803,7 @@ So real world problems mostly have nicer landscapes than we'd expect from a diab
 % bibliography go here
  
 \bibliographystyle{unsrt}
+\raggedright
 \addcontentsline{toc}{section}{Bibliography}
 \bibliography{computations}
 
