@@ -1,0 +1,66 @@
+\documentclass[]{article}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,wasysym,amsthm,thmtools,textcomp,listings,amsfonts,cancel}
+\usepackage[hidelinks]{hyperref}
+\usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage[]{algorithm2e}
+\setacronymstyle{long-short}
+\usepackage{glossaries-extra}
+\graphicspath{{figs/}} 
+\setlength{\cftsubsecindent}{0em}
+\setlength{\cftsecnumwidth}{3em}
+\setlength{\cftsubsecnumwidth}{3em}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\setcounter{tocdepth}{1}
+
+%opening
+\title{Computation in Complex Systems\\
+	Week 4\\Worst-case, Natural, and Random
+	}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Phase Transitions}
+
+Referring to the Ising Model interactive in this unit:
+
+a) What is the critical temperature (± 0.1)?
+
+b) Describe the relationship between spin correlation and lattice length (L/2) at the critical point. (No equations needed, simply provide a phrase describing the general relationship.)
+
+Referring to the Percolation interactive in this unit:
+
+c) What is the critical site occupancy probability p (± 0.02)?
+
+d) Describe the relationship of non-giant component sizes and their frequency at the critical point.
+
+
+\section{Landscapes, Clustering, Freezing and Hardness}
+
+Recall SAT (SATisfiability) problems like this one: “You are hosting a party for your Computation in Complex Systems classmates. Cris wants you to invite either Priyanka or to exclude Esteban. John asks you to invite either Esteban or Xiaojie or both. Isa does not want Xiaojie or Priyanka or both to attend. Is there a guest list that will satisfy everyone?”
+k-SAT for k $\ge$ 3 is NP-complete but is computable. The satisfiability of a SAT problem relates to the ratio, $\alpha$, of constraints, M, eg. "Priyanka OR not-Esteban" to variables, N, eg. Priyanka, Esteban, and Xiaojie.
+
+Based on the plot below showing percent satisfiability (SAT) relative to $\alpha$ for two different N:
+
+a) Generally speaking, what happens in the solvability space of SAT problems?
+
+b) What does the vertical red dashed line indicate?
+
+c) Where do you expect the computational time would be largest along the $\alpha$ axis?
+
+d - BONUS*) Is the SAT party problem above satisfiable?
+
+
+
+% bibliography go here
+
+\bibliographystyle{unsrt}
+\raggedright
+\addcontentsline{toc}{section}{Bibliography}
+\bibliography{computations}
+
+\end{document}
