@@ -715,6 +715,61 @@ These all live at different levels of Figure \ref{fig:complexity:hierarchy}.
 \section{Worst-case, Natural, and Random}
 \cite[Chapters 5,10]{moore2011nature}
 
+\subsection{Real World Problems}
+
+There are some gaps or bridges to cross between this theory and real world problems. \gls{gls:NP:complete}ness is a worst-case notion. Computer science assumes that instances are designed by a clever adversary to encode hard problems. For example, we showed that we could design a particularly hard graph colouring problem; this is good in cryptography, but not necessary in science. The solution to many physics problems are the simplest, most optimistic equation.
+
+\begin{quote}
+	The scientist is always working to discover the order and organization of the universe, and is thus playing a game against the arch enemy, disorganization. Is this devil Manichaean or Augustininan? Is it a contrary force opposed to order or is it the very absence of order itself?--Norbert Wiener, Cybernetics.
+\end{quote}
+
+Many algorithms that take exponential time in the worst case are efficient in practice.
+Linear programming problems are a large class of optimization problems that include max flow and min cut. Solving them is like climbing to the top of a high dimensional jewel. There is an old algorithm, the simplex method, which is a simple greedy algorithm. People have dreamed up problems where the simplex method is exponential, but, in practice, real problems are typically tractable.
+
+Spielman and Teng\cite{spielman2004smoothed} realized that noise foils the adversary, making a smoother problem: the number of facets goes down, and the path to the top get shorter. In the real world you never know the coefficients exactly, you never know exactly what the right hand side is. In the real world things are a wee bit noisy. Spielman and Teng observed that adding noise almost always makes the problem simpler. It greatly reduces the number of vertices on the path to the top, so the simplex algorithm will work efficiently (almost always).
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Smoothed Analysis}\label{fig:hs-jewel}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Optimization problems are like exploring a high dimensional jewel}
+			\includegraphics[width=\textwidth]{hs-jewel}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Noise foils the adversary}
+			\includegraphics[width=\textwidth]{hd-jewel2}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+There are hard examples of this problem, but they are rare and they are fragile. The adversary has to fine-tune the problem to make it hard. But there are other problems where we think hard problems are common and robust--e.g. cryptosystems.
+
+Some real world problems are easy because of the structure of the landscape.
+
+If you define clustering as optimization it is a hard problem, but it is one we solve every day. Why? Because of local minima. Maybe we are asking the wrong question: if there is one true clustering, it should be shouting at us, and there should not be other clustering that are almost as good but very different.
+
+\begin{figure}[H]
+	\caption{Landscapes are not as bumpy as they could be: if all good solutions are close to the optimum, cluster is easy. But if the landscape is really bumpy, maybe the pattern that we are looking for isn't really there.}\label{fig:rw-problems-easy}
+	\includegraphics[width=0.6\textwidth]{rw-problems-easy}
+\end{figure}
+
+Suppose the instance in front of you has the following structural property to its landscape of solutions:suppose that any local optimum that is almost as good as the global optimum is also close to the global optimum and agrees with it on most points. So there might be local foothills to the global optimum, but the global optimum dominates the landscape: you don't have another peak far away that is almost as high. Under this structural assumption Balcan, Blum and Gupta\cite{balcan2013clustering} showed that a certain clustering algorithm, similar to the k-means algorithm works very well and very quickly.
+
+Another example of why real-world problems might be easy is protein folding. We have co-evolved the  sequences and the algorithms. If you look at energy, there is a nice deep bowl surrounding the correct conformation. Organism that live at higher temperatures have deeper bowls so the proteins won't accidentally get kicked out. 
+
+So real world problems mostly have nicer landscapes than we'd expect from a diabolical adversary.
+  
+\subsection{Phase Transitions}
+
+\subsection{Random Problems}
+
+\subsection{Solvability Threshold}
+
+\subsection{Modeling Differential Equations}
+
+\subsection{Landscapes, Clustering, Freezing, and Hardness }
+
+
 \section{Computation Everywhere}
 \cite[Chapter 7]{moore2011nature}
 % end of text 
