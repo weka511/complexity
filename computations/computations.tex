@@ -1,6 +1,6 @@
 % MIT License
 
-% Copyright (c) 2019-2020 Simon Crase
+% Copyright (c) 2020 Simon Crase
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -39,8 +39,7 @@
 % for lines that I want to reference slsewhere
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newtheorem{thm}{Theorem}
-% Add logo at start of document
-
+\newtheorem{conj}{Conjecture}
 
 %opening
 \title{
@@ -769,9 +768,9 @@ We'll consider the Ising model.
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Ising Model: Atoms in a block of iron interact with their neighbours]{Ising Model: Atoms in a block of iron interact with their neighbours $\uparrow\uparrow\uparrow\downarrow\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow\uparrow\uparrow$.}
-		\begin{subfigure}[t]{0.3\textwidth}
-			\caption{When these interactions are strong enough and the temperature is low enough, the atoms line up and form a magnetic field.}
+		\caption{Ising Model}
+		\begin{subfigure}[t]{0.35\textwidth}
+			\caption{: Atoms in a block of iron interact with their neighbours $\uparrow\uparrow\uparrow\downarrow\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow\uparrow\uparrow$. When these interactions are strong enough and the temperature is low enough, the atoms line up and form a magnetic field.}
 			\includegraphics[width=\textwidth]{permanent-magnet}
 		\end{subfigure}
 		\;\;\;
@@ -784,6 +783,41 @@ We'll consider the Ising model.
 
 
 \subsection{Random Problems}
+
+For NP problems, what happens when we pile up more and more constraints at random? At what point does it break so there is no longer a solution? We will focus on \gls{gls:3:SAT} with $n$ variables, $m$ clauses. For each clause choose a random triplet of variables and negate each with probability $\frac{1}{2}$. The interesting case is the sparse case $m=\alpha n$, for some constant density $\alpha$--analogous to spin glasses and random graphs. As we add constraints the probability of contradictions increases--Figure \ref{fig:trans}.
+
+\begin{figure}[H]
+	\caption[Transition from solvability to unsolvability]{Transition from solvability to unsolvability.}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{When the density of constraints is too high we can no longer satisfy them all at once.}\label{fig:trans}
+		\includegraphics[width=\textwidth]{trans}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Showing log of number of steps using the Davis Putnam search algorithm. Light grey dots correspond to satisfiable formulae, dark grey to unsatisfiable.\cite{davis1960computing}}\label{fig:dpll}
+		\includegraphics[width=\textwidth]{dpll}
+	\end{subfigure}
+\end{figure}
+
+\begin{conj}[Threshold Conjecture]
+	Let $F_k(n,m) = $ random k-SAT formula with n variables and m clauses. Then $\forall k \ge 3, \exists \alpha_k$ such that:
+	\begin{align*}
+		\lim_{n \rightarrow \infty} Pr\big[F_k(n,m=\alpha n)\big]\text{ is satisfiable}=&\begin{cases}
+		1 \text{ if } \alpha<\alpha_k\\
+		0  \text{ if } \alpha>\alpha_k
+		\end{cases}
+	\end{align*}
+\end{conj}
+
+If $k=2$ we can prove this from random graph theory.
+
+In 2014 Jian Ding, Allan Sly, and Nike Sun proved that this is a theorem for $k$ sufficiently large\cite{ding2015proof}.
+
+Fugure \ref{fig:dpll} depicts the difficulty of solving SAT problems as a function of $\alpha$. \begin{itemize}
+	\item For small $\alpha$ it is easy, with hardly any backtracking.
+	\item As $\alpha$ we have to work harder to find a solution.
+	\item Maximum search time happens when we transition to unsolvability.
+	\item As density continues to increase it gets easier to show that it is unsatisfiable. Contradicts arise and prune tree.
+\end{itemize}
 
 \subsection{Solvability Threshold}
 
