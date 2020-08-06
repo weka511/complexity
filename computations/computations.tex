@@ -821,11 +821,209 @@ Fugure \ref{fig:dpll} depicts the difficulty of solving SAT problems as a functi
 
 \subsection{Solvability Threshold}
 
-\subsection{Modeling Differential Equations}
+\subsubsection{Bounding the threshold}
+\begin{itemize}
+	\item How many solutions does a random \gls{gls:3:SAT} formula have on average?
+	\item There are $2^n$ vectors $X=(x_i)$. 
+	\item Focus on one vector: for any particular random clause, the probability of it being satisfied is $\frac{2^3-1}{2^3} = \frac{7}{8}$.
+	\item Since there are $m$ clauses, the probability of a random formula being satisfied is  $\big(\frac{7}{8}\big)^m$
+	\item So the average number of solutions is $s^n\big(\frac{7}{8}\big)^m=\big[2\big(\frac{7}{8}\big)^\alpha\big]^n$
+	\item This is exponentially small if $\alpha \ge \log_{\frac{7}{8}}2\approx5.15$
+\end{itemize}
+
+\begin{itemize}
+	\item Let Z be the number of solutions.
+	\item The average $E(Z)$ is exponentially small when  $\alpha \ge \log_{\frac{7}{8}}2\approx5.15$.
+	\item Then Markov's inequality\cite{wiki:markov:inequality} tells us that $Pr\big(Z>0\big) \le E(Z)$ 
+	\item So is $E(Z)$ is exponentially small, so is the probability of satisfiability.
+	\item This proves that $\alpha_3<5.19$. But the true 3-SAT threshold is 4.27 (measured).
+	\item In the gap $[4.27,5.19]$ we'd expect exponentially many solutions, but actually there aren't any! Why?
+\end{itemize}
+
+Figure \ref{fig:heavy-tail} depicts a Heavy Tail Distribution for Z: $E(Z)\ne$ typical value. This is the opposite of most classical statistics.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Heavy Tail Distribution: $E(Z)\ne$ typical value}\label{fig:heavy-tail}
+		\includegraphics[width=0.6\textwidth]{heavy-tail}
+	\end{center}
+\end{figure}
+
+Inequality is a one way street: $Pr\big(Z>0\big) \le E(Z)$, so if the expectation is small, so it the probability; but if the expectation is large, it does not imply that the probability is large. $E(Z)$ does not help us find a lower bound on the threshold.
+
+Let us generalize from \gls{gls:3:SAT} to k-SAT, because it is interesting to ask how the threshold scales with $k$.
+
+A random k-SAT clause is satisfied with probability $1-2^{-k}$. Following the same argument as before, $\alpha_k\le\frac{\log 2}{-\log (1-2^{-k})} \approx 2^k \ln(2)$. This is an upper bound, but it turns out to be pretty close: $\alpha_k=2^k \ln 2-O(1)$. Can we find solutions algorithmically all the way up to the threshold? Is there a zone where solutions exist but are hard to find?
+
+\subsubsection{A simple search}
+
+\begin{itemize}
+	\item Setting a variable either satisfies a clause or shortens it.
+	\item Setting $x$ false turns $(x\lor y \lor z)$ into $y \lor z$
+	\item Setting $y$ false turns $(y \lor z)$ into $(z)$
+	\item setting $z$ false turns $(z)$ into $()$--a contradiction.
+\end{itemize}
+
+A backtracking search would try another branch of the tree, but let's charge ahead and set variables permanently. We try another random branch instead. Maybe it will work if the density is low enough. We will try only one smart thing: if there is a unit clause, satisfy it. If there is no unit clause, choose a variable  with equal probability and give it a random value.
+
+\subsection{Modelling Differential Equations}
 
 \subsection{Landscapes, Clustering, Freezing, and Hardness }
 
+There is more to say about what's going on
+as we increase the density.
 
+As you might imagine,
+the hardness of the problem has to do
+with the structure of the landscape.
+So remember how many optimization problems
+are hard once their landscapes,
+instead of having a single big peak
+have lots of local optima.
+
+Well, what happens in random set is
+very similar.
+Imagine taking a topographic map
+of a mountain range
+and kind of slicing it off at a particular
+altitude
+perhaps the altitude, where indeed, all
+of the clauses are satisfied.
+If you have that Mount Fuji landscape, and
+you slice it off,
+then you get a nice big plateau of 
+solutions.
+And any solution in this rough area does
+pretty well
+and moreover, the set of solutions is
+connected to each other.
+You could walk from any to any other by
+changing one variable at a time.
+And there would be a way to do that
+while
+continuing to satisfy the entire formula.
+Well, guess what?
+As we increase the density,
+there is something called Clustering
+Transition.
+There are still many solutions
+but now, just as you get many
+mountain peaks in a hard problem,
+you now have little clusters of solutions,
+exponentially many clusters of solutions
+and not only are these separated from
+each other,
+but in order to get from one to the other,
+you would have to go down through a
+valley
+where you unsatisfy, dissatisfy, a large
+number of clauses
+in order to travel from this cluster
+to that cluster.
+Physicists would say that this system
+has become glassy.
+And that you would have to cross over a
+difficult energy barrier
+to get from one cluster to another.
+At that point, an algorithm which is
+trying to sample fairly,
+from all possible solutions,
+would have real trouble
+because, for instance, it was the kind
+of
+Monte Carlo algorithm, which is popular
+in many sciences, which runs
+around the space of possible
+solutions by flipping individual variables
+Well it would be stuck in whatever cluster
+it started out in.
+It would be very unwilling to pass through
+this zone of really bad nonsolutions
+in order to get to another cluster
+over there.
+As we increase the density further,
+more structural transitions happen.
+Again, these formulas are still 
+satisfiable,
+but more things are happening to the set,
+the structure, of solutions.
+
+Above the clustering transition is another
+transition
+called the Condensation Transition.
+At this point, a few of the clusters
+dominate the set of possible solutions.
+And if you're not lucky enough to start
+out in one of them,
+then in some sense you're not dealing
+with a typical solution.
+
+Beyond that is yet another transition,
+called the Freezing,
+or Rigidity Transition.
+Now, things are starting to get 
+very brittle,
+very tight.
+Now, in almost all clusters,
+most of the variables have to be set in
+a specific way.
+If they're not set in that way, there are
+contradictions.
+If you think about it, it is intuitive
+that now a search algorithm
+is in real trouble.
+
+Let's say you start out kind of looking
+down on this
+vast space of possible solutions, if you
+have no idea which way to go
+you start setting variables and zooming
+in on part of the solution space
+hoping to find a viable cluster of
+solutions there.
+But, these clusters are frozen so that,
+for instance, half their variables
+have to be set precisely.
+To particular values, or all solutions in
+that vicinity will be disqualified.
+Well, as you travel down your search tree
+zooming in on parts of the space
+you're setting more and more variables.
+If you get even a single variable wrong,
+setting it to the value that is opposite
+to the one that's frozen into
+that cluster then you're going to miss
+that cluster completely.
+You've gone down a branch of the
+search tree below which there are no
+solutions at all.
+But you don't know that yet,
+you're going to have to explore
+that sub-tree and that will take you
+exponential time.
+
+So our current belief is that this 
+Freezing Transition
+is when this problem really gets hard.
+That it really takes exponential time for
+the types of algorithms that
+anyone has been able to think of so far
+to find even a single solution to the
+random set problem.
+
+So what's the lesson of all this?
+It's not just this one transition at
+the top
+that takes us from satisfiable to
+unsatisfiable,
+there is a whole host of structural
+changes that the landscape undergoes
+some of which make it hard to sample
+fairly
+from the space of possible solutions
+and some of it, some of which
+we believe, make it hard even to
+find a single solution
+or tell if there is one.
 \section{Computation Everywhere}
 \cite[Chapter 7]{moore2011nature}
 % end of text 
