@@ -144,6 +144,9 @@
 	name={$\Theta$},
 	description={$f$ and $g$ grow the same way: $g=O(f)$ and $f=O(g)$ or $f/g \rightarrow C>0\text{ as } n\rightarrow \infty$}}
 
+\newglossaryentry{gls:xorsat}{
+	name={XORSAT},
+	description={Similar to SAT, except we demand that an odd number of terms in each clause be true}}
 
 \newacronym[see={[Glossary:]{gls:Polynomial}}]{gls:P}{P}{Polynomial\glsadd{gls:Polynomial}}
 
@@ -910,7 +913,10 @@ Unit clauses reproduce through the 1-variable clauses: $\bar{x}\land(x \lor y)\i
 	\item For k-SAT we can \emph{find} solutions up to a density of $\alpha = \Theta\big(\frac{2^k}{k}\big)$
 	\item But we know there are solutions up to $\alpha_k=\Theta(2^k)$, some there is a gap between end of region where we can find solutions and where we know there are solutions--$\big[\frac{2^k}{k},2^k\big]$. Solutions exist, but maybe they are hard to find.
 \end{itemize}
+
 \subsection{Landscapes, Clustering, Freezing, and Hardness }
+
+\subsubsection{Landscapes, Clustering, Freezing, and Hardness }
 
 There is more to say about what's going on as we increase the density.
 As you might imagine, the hardness of the problem has to do with the structure of the landscape. 
@@ -926,10 +932,10 @@ Well, guess what?
 As we increase the density, there is something called Clustering Transition--Figure \ref{fig:clustering-transition}. 
 
 \begin{figure}[H]
-	\caption{Clustering
-		Transition}\label{fig:clustering-transition}
+	\caption{Clustering	Transition}\label{fig:clustering-transition}
 	\includegraphics[width=\textwidth]{clustering-transition}
 \end{figure}
+
 There are still many solutions but now, just as you get many mountain peaks in a hard problem, you now have little clusters of solutions, exponentially many clusters of solutions and not only are these separated from each other, but in order to get from one to the other, you would have to go down through a valley where you unsatisfy, dissatisfy, a large number of clauses in order to travel from this cluster to that cluster.
 
 Physicists would say that this system has become glassy, and that you would have to cross over a difficult energy barrier to get from one cluster to another.
@@ -1015,10 +1021,65 @@ we believe, make it hard even to
 find a single solution
 or tell if there is one.
 
+\subsubsection{Solutions hidden behind energy barriers: glasses}
+
+Imagine melting some silicon dioxide and cooling it down to make glass. At an atomic level the silicon dioxide is very amorphous--it looks more like a liquid than a crystal. The lowest possible energy is a perfect crystal, but they never get there. Little bits of crystal form in different places, but they conflict as they meet each other. As Figure \ref{fig:glass} depicts there is a very high energy barrier to the perfect configuration, and we are in a very high dimensional space, so it isn't clear what moved to make.
+
 \begin{figure}[H]
-	\caption{Solutions hidden behind energy barriers: glasses}\label{fig:glass}
-	\includegraphics[width=0.8\textwidth]{glass}
+	\begin{center}
+		\caption[Solution hidden behind an energy barrier]{Solutions hidden behind an energy barrier with a narrow basin of attraction}\label{fig:glass}
+		\includegraphics[width=0.8\textwidth]{glass}
+	\end{center}
 \end{figure}
+
+The crystaline solution is an exponentially narrow fraction of all possible states. A glassy material can stay stuck in an amorphous state for exponential time, even though the minimum energy configuration is crystalline.
+
+The same thing an happen to a search algorithm. It starts in a random state, and explores the space by flipping variables. There is a perfect solution in some tiny corner, but it will take exponential time to find it. The structure of these landscapes is what make these problems hard.
+
+\subsubsection{XORSAT}
+
+Returning to Figure \ref{fig:clustering-transition}:
+\begin{itemize}
+	\item all known algorithms for k-SAT atop working at $\alpha_{rigid}\approx \frac{2^k \log{k}}{k}$
+	\item in between $\alpha_{rigid}$ and $\alpha_k=2^k \log(k)$, satisfiable but (we believe) exponentially hard.
+\end{itemize}
+
+Can this be made into a proof that $P\ne NP$? Actually, we don't \emph{know} that any of the above take exponential time, because we don't know whether $P$ and $NP$ are the same. People have tried to use the fitness landscape to prove that $P\ne NP$, but is doesn't really work. We can see this by introducing one more constraint satisfaction problem--\gls{gls:xorsat}.
+\begin{align*}
+	x_1 \oplus x_2 \oplus x_3 =& 1\\
+	x_1 \oplus x_2 \oplus x_4 =& 0\\
+	x_2 \oplus x_3 \oplus x_4 =& 1
+\end{align*}
+
+Random instances have many of the same problems as \gls{gls:3:SAT}: clustering, freezing, and a transition to unsatisfiability. But \gls{gls:xorsat} is easy: it is just a system of linear equations--because $\oplus$ is just a sum mod 2.
+\begin{align*}
+	\begin{pmatrix}
+		1&1&1&0\\
+		1&1&0&1\\
+		0&1&1&1
+	\end{pmatrix}\begin{pmatrix}
+		x_1\\
+		x_2\\
+		x_3\\
+		x_4
+	\end{pmatrix}=&\begin{pmatrix}
+		1\\
+		0\\
+		1
+	\end{pmatrix}
+\end{align*}
+
+How is \gls{gls:xorsat} like \gls{gls:3:SAT}, and how is it different?
+\begin{itemize}
+	\item Clustering: local search algorithms can't explore the space, and global search algorithms get stuck in local optima.
+	\item Freezing: backtracking algorithms take exponential time, repeatedly setting frozen variables the wrong way.
+	\item 	But Gaussian elimination is a global change of variables, letting us turn a hard looking problem into an easy one.
+	\item \gls{gls:xorsat} is in \gls{gls:P}!
+	\item If SAT has a similar kind of rearrangement--something totally different from backtracking or local search $P=NP$!
+	\item Proving that it doesn't is hard.
+\end{itemize}
+
+The landscapes for \gls{gls:xorsat} and \gls{gls:3:SAT} look similar, but solving linear equations involves a global rewrite of the system. The algoritms that fail for \gls{gls:3:SAT} fail for \gls{gls:xorsat} also.
 \section{Computation Everywhere}
 \cite[Chapter 7]{moore2011nature}
 % end of text 
