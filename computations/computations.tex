@@ -867,6 +867,49 @@ A backtracking search would try another branch of the tree, but let's charge ahe
 
 \subsection{Modelling Differential Equations}
 
+\subsubsection{Modelling Differential Equations}
+Following on from the algorithm at the end of the previous section, let's try to track the density of clauses of different lengths. We hope this very naive algorithm will find solutions for low enough density.
+
+Since the formula is random, satisfying a unit clause has the same effect as giving a random variable a random value. It turns out that for random formulae we can analyze to process using differential equations.
+
+We will track the number of clauses of different lengths: initially all clauses have the same length, but as we set variables clauses get shorter or disappear.
+
+Imagine a variable in one clause being set to a value: either this clause demands that value, or some other clause does so. Probability that the variable gets the value that this clause demands in 0.5, so there are equal probabilities for eliminating or shortening clause. 
+
+Let us say that there are $s_3n$ clauses of length 3, $s_2n$ of length 2, and we have set $tn$ variables so far. The expected values satisfy the following differential equations.
+
+\begin{align*}
+	\frac{d s_3}{dt} =& - \frac{3 s_3}{1-t}\\
+	\frac{d s_2}{dt} =& \frac{\frac{3}{2}s_3-2s_2}{1-t}\\
+	s_3(0)=& \alpha\\
+	s_s(0)=& 0
+\end{align*}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Solving the Differential Equations}
+		\includegraphics[width=0.8\textwidth]{solving-de}
+	\end{center}
+\end{figure}
+
+From the Birthday Paradox, if we have $\sqrt{n}$ unit clauses it is likely that there is a contradiction. We don't want the number of unit clauses $\propto n$.
+
+\subsubsection{Unit Clauses}
+
+Unit clauses reproduce through the 1-variable clauses: $\bar{x}\land(x \lor y)\implies(y)$. We need the branching ratio (number of new clauses created when we satisfy one) or reproductive number.
+\begin{align*}
+	\lambda =& \frac{1}{2} \frac{2 s_2}{1-t}\\
+	=& \frac{3}{2} \alpha t (1-t)
+\end{align*}
+
+\begin{itemize}
+	\item If $\lambda>1$ the unit clauses reproduce faster than we can satisfy them.
+	\item If $\lambda<1$ throughout, they stay under control and we can satisfy the entire formula. 
+	\item $\lambda$ is maximized when $t=\frac{1}{2}$, $\lambda = \frac{3}{8} \alpha$
+	\item $\alpha_3\ge\frac{8}{3}\approxeq2.667$ (Constructive proof)
+	\item For k-SAT we can \emph{find} solutions up to a density of $\alpha = \Theta\big(\frac{2^k}{k}\big)$
+	\item But we know there are solutions up to $\alpha_k=\Theta(2^k)$, some there is a gap between end of region where we can find solutions and where we know there are solutions--$\big[\frac{2^k}{k},2^k\big]$. Solutions exist, but maybe they are hard to find.
+\end{itemize}
 \subsection{Landscapes, Clustering, Freezing, and Hardness }
 
 There is more to say about what's going on
