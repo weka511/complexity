@@ -912,87 +912,35 @@ Unit clauses reproduce through the 1-variable clauses: $\bar{x}\land(x \lor y)\i
 \end{itemize}
 \subsection{Landscapes, Clustering, Freezing, and Hardness }
 
-There is more to say about what's going on
-as we increase the density.
+There is more to say about what's going on as we increase the density.
+As you might imagine, the hardness of the problem has to do with the structure of the landscape. 
+So remember how many optimization problems are hard once their landscapes, instead of having a single big peak, have lots of local optima.
 
-As you might imagine,
-the hardness of the problem has to do
-with the structure of the landscape.
-So remember how many optimization problems
-are hard once their landscapes,
-instead of having a single big peak
-have lots of local optima.
-
-Well, what happens in random set is
-very similar.
-Imagine taking a topographic map
-of a mountain range
-and kind of slicing it off at a particular
-altitude
-perhaps the altitude, where indeed, all
-of the clauses are satisfied.
-If you have that Mount Fuji landscape, and
-you slice it off,
-then you get a nice big plateau of 
-solutions.
-And any solution in this rough area does
-pretty well
-and moreover, the set of solutions is
-connected to each other.
-You could walk from any to any other by
-changing one variable at a time.
-And there would be a way to do that
-while
-continuing to satisfy the entire formula.
+Well, what happens in random SAT is very similar.
+Imagine taking a topographic map of a mountain range and kind of slicing it off at a particular altitude, perhaps the altitude where indeed all of the clauses are satisfied.
+If you have that Mount Fuji landscape, and you slice it off, then you get a nice big plateau of solutions.
+And any solution in this rough area does pretty well and moreover, the set of solutions is connected to each other.
+You could walk from any to any other by changing one variable at a time.
+And there would be a way to do that while continuing to satisfy the entire formula.
 Well, guess what?
-As we increase the density,
-there is something called Clustering
-Transition.
-There are still many solutions
-but now, just as you get many
-mountain peaks in a hard problem,
-you now have little clusters of solutions,
-exponentially many clusters of solutions
-and not only are these separated from
-each other,
-but in order to get from one to the other,
-you would have to go down through a
-valley
-where you unsatisfy, dissatisfy, a large
-number of clauses
-in order to travel from this cluster
-to that cluster.
-Physicists would say that this system
-has become glassy.
-And that you would have to cross over a
-difficult energy barrier
-to get from one cluster to another.
-At that point, an algorithm which is
-trying to sample fairly,
-from all possible solutions,
-would have real trouble
-because, for instance, it was the kind
-of
-Monte Carlo algorithm, which is popular
-in many sciences, which runs
-around the space of possible
-solutions by flipping individual variables
-Well it would be stuck in whatever cluster
-it started out in.
-It would be very unwilling to pass through
-this zone of really bad nonsolutions
-in order to get to another cluster
-over there.
-As we increase the density further,
-more structural transitions happen.
-Again, these formulas are still 
-satisfiable,
-but more things are happening to the set,
+As we increase the density, there is something called Clustering Transition--Figure \ref{fig:clustering-transition}. 
+
+\begin{figure}[H]
+	\caption{Clustering
+		Transition}\label{fig:clustering-transition}
+	\includegraphics[width=\textwidth]{clustering-transition}
+\end{figure}
+There are still many solutions but now, just as you get many mountain peaks in a hard problem, you now have little clusters of solutions, exponentially many clusters of solutions and not only are these separated from each other, but in order to get from one to the other, you would have to go down through a valley where you unsatisfy, dissatisfy, a large number of clauses in order to travel from this cluster to that cluster.
+
+Physicists would say that this system has become glassy, and that you would have to cross over a difficult energy barrier to get from one cluster to another.
+At that point, an algorithm which is trying to sample fairly, from all possible solutions, would have real trouble because, for instance, it was the kind of Monte Carlo algorithm, which is popular in many sciences, which runs around the space of possible solutions by flipping individual variables
+Well it would be stuck in whatever cluster it started out in.
+It would be very unwilling to pass through this zone of really bad nonsolutions in order to get to another cluster over there.
+As we increase the density further, more structural transitions happen.
+Again, these formulas are still satisfiable, but more things are happening to the set,
 the structure, of solutions.
 
-Above the clustering transition is another
-transition
-called the Condensation Transition.
+Above the clustering transition is another transition called the Condensation Transition--Figure \ref{fig:clustering-transition}.
 At this point, a few of the clusters
 dominate the set of possible solutions.
 And if you're not lucky enough to start
@@ -1000,9 +948,8 @@ out in one of them,
 then in some sense you're not dealing
 with a typical solution.
 
-Beyond that is yet another transition,
-called the Freezing,
-or Rigidity Transition.
+Beyond that is yet another transition, called the Freezing,
+or Rigidity Transition--Figure \ref{fig:clustering-transition}.
 Now, things are starting to get 
 very brittle,
 very tight.
@@ -1067,6 +1014,11 @@ and some of it, some of which
 we believe, make it hard even to
 find a single solution
 or tell if there is one.
+
+\begin{figure}[H]
+	\caption{Solutions hidden behind energy barriers: glasses}\label{fig:glass}
+	\includegraphics[width=0.8\textwidth]{glass}
+\end{figure}
 \section{Computation Everywhere}
 \cite[Chapter 7]{moore2011nature}
 % end of text 
