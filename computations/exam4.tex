@@ -32,7 +32,7 @@
 		\item What is the critical temperature ($\pm0.1$)? \textbf{2.265}
 		
 		Table \ref{eq:ising} records the result of executing the Ising Model Interactive. If the magnetization stabilizes at a positive or negative value--Figure \ref{fig:tLtTc}--we know $T<T_C$; otherwise --Figure \ref{fig:tGtTc}--$T>T_C$. I have used a binary search, so the error is divided by 2 at each step. The final step--$T=2.27$--was very slow, as we'd expect close to the critical point, so I went to the kitchen and prepared lunch to give it plenty of time.
-		\item  Describe the relationship between spin correlation and lattice length (L/2) at the critical point. (No equations needed, simply provide a phrase describing the general relationship.)
+		\item  Describe the relationship between spin correlation and lattice length $\frac{L}{2}$ at the critical point. Figures \ref{fig:correlation1} \& \ref{fig:correlation2} depict this relationship for a range of $T$. Figure \ref{fig:correlation1} is quite closer to $T_C$, and Figure \ref{fig:correlation2} is more distant.
 	\end{enumerate}
 	
 	\item 	Referring to the Percolation interactive in this unit:
@@ -74,7 +74,7 @@
 \end{table}
 
 \begin{figure}[H]
-	\caption{Correlation}
+	\caption{Correlation close to $R=T_c$}\label{fig:correlation1}
 	\begin{subfigure}[t]{0.24\textwidth}
 		\caption{$T=2.27$}
 		\includegraphics[width=\textwidth]{ising-correlation1}
@@ -93,9 +93,29 @@
 	\end{subfigure}
 \end{figure}
 
+\begin{figure}[H]
+	\caption{Correlation  $R<T_c$}\label{fig:correlation2}
+	\begin{subfigure}[t]{0.24\textwidth}
+		\caption{$T=2.20$}
+		\includegraphics[width=\textwidth]{ising-correlation-20}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.24\textwidth}
+		\caption{$T=2.21$}
+		\includegraphics[width=\textwidth]{ising-correlation-21}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.24\textwidth}
+		\caption{$T=2.22$}
+		\includegraphics[width=\textwidth]{ising-correlation-22}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.24\textwidth}
+		\caption{$T=2.26$}
+		\includegraphics[width=\textwidth]{ising-correlation-26}
+	\end{subfigure}
+\end{figure}
+
 \begin{table}[H]
 	\begin{center}
-		\caption{foo}\label{eq:foo}
+		\caption{Percolation Model Interactive}\label{eq:percolation}
 		\begin{tabular}{|c|c|}\hline
 			&\\ \hline
 		\end{tabular}
@@ -113,7 +133,23 @@ Based on the plot below--Figure \ref{fig:content_SATalpha}--showing percent sati
 
 	\item   Where do you expect the computational time would be largest along the $\alpha$ axis?
 
-	\item   BONUS*) Is the SAT party problem above satisfiable?
+	\item   Is the SAT party problem above satisfiable?
+	
+	\begin{align*}
+		p =& \text{Invite Priyanka}\\
+		e =& \text {Invite Esatban}\\
+		x =& \text{Invite Xiaojie. Then the constraints are:}\\
+		p \lor& \bar{e} \text{: Chris} \numberthis \label{eq:chris}\\
+		e \lor& x \text{: John} \numberthis \label{eq:john}\\
+		\bar{x} \lor& \bar{p} \text{: Isa} \numberthis \label{eq:isa}
+	\end{align*}
+	Suppose $p$ is true($p=\top$). Then (\ref{eq:chris}) is satisfied, and (\ref{eq:isa}) yields:
+	\begin{align*}
+		\bar{x}=\top& \text{, so}\\
+		x =& \bot \text{. and (\ref{eq:john}) is satisfied iff:}\\
+		e =& \top 
+	\end{align*}
+	Hence we have a solution that satisfies (\ref{eq:chris}-\ref{eq:isa}): invite Priyanka only.
 \end{enumerate}
 
 
