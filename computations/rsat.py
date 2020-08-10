@@ -20,14 +20,22 @@
 
 import random
 
-# We will represent the variables x1, x2, ... as successive elemts in a Python list, so x1 is the zeroth element, and so on.
-# We represent True by +1, False by -1. So x1=True, x2=False, x3=True, x4=True,... would be [+1,-1, +1, +1, ...]
 
-# A single clause is a list of values, e.g. 
-# [x1, not x5, x17] would be represented [+1, -5, +17]
+
+# create_environment
+#
+# Create one set of variables.
+# We will represent the variables x1, x2, ... as successive elements in a Python list, so x1 is the zeroth element, and so on.
+# We represent True by +1, False by -1. So x1=True, x2=False, x3=True, x4=True,... would be [+1,-1, +1, +1, ...]
 
 def create_environment(n=100):
     return [random.choice([-1,1]) for i in range(n)]
+
+# create_clauses
+#
+# Create one set of clauses
+# A single clause is a list of values, e.g. 
+# [x1, not x5, x17] would be represented [+1, -5, +17]
 
 def  create_clauses(n=100,m=5,k=3):
     def create_one_clause():
@@ -35,22 +43,37 @@ def  create_clauses(n=100,m=5,k=3):
     
     return [create_one_clause() for i in range(m)]
 
+# evaluate
+#
+# Evaluate a set of clauses in specified environment
 def evaluate(clauses=[],environment=[]):
-    def isTrue(var):
-        assert(var != 0)
-        return var * environment[abs(var)-1]>0
-        
-    def isFalse(clause):
-        for var in clause:
-            if isTrue(var):
+    # isTrue
+    #
+    # Test one term to see whether or not it is satisfied. 
+    # From the description of the enviornmant and clauses given above,
+    # both variable and term will have the same sign if term is satisfied
+    # i.e. if x5 is False, environment[4]==-1, and this will satisfy the term -5 (Not x5).
+    def isTrue(term):
+        assert(term != 0)
+        return term * environment[abs(term)-1]>0
+    
+    # isSatisfied
+    #
+    # REturns true if any term in clause is satisfied
+    def isSatisfied(clause):
+        for term in clause:
+            if isTrue(term):
                 return True
         return False
     
     for clause in clauses:
-        if isFalse(clause):
+        if not isSatisfied(clause):
             return False
     return True
 
+# solve
+#
+# Try to satusfy a set of clauses
 def solve(clauses,M=100,n=100):
     for i in range(M):
         if evaluate(clauses=clauses,environment=create_environment(n=n)):
@@ -90,10 +113,7 @@ if __name__=='__main__':
                               M=args.M,
                               n=n) for i in range(args.N)])/args.N for alpha in alphas],
                  label=f'n={n}')
-        #plt.plot(alphas,
-                 #[sum([evaluate(create_clauses(m=int(alpha*n),k=args.k,n=n),
-                                #create_environment(n=n)) for i in range(args.N)])/args.N for alpha in alphas],
-                 #label=f'n={n}')        
+     
     plt.title(f'{args.k}-SAT: N={args.N}')
     plt.xlabel(r'$\alpha$')
     plt.ylabel('Satisfiability')
