@@ -35,7 +35,7 @@ def  create_clauses(n=100,m=5,k=3):
     
     return [create_one_clause() for i in range(m)]
 
-def evaluate(clauses,environment):
+def evaluate(clauses=[],environment=[]):
     def isTrue(var):
         assert(var != 0)
         return var * environment[abs(var)-1]>0
@@ -51,8 +51,17 @@ def evaluate(clauses,environment):
             return False
     return True
 
-def solve():
-    pass
+def solve(clauses,M=100,n=100):
+    for i in range(M):
+        if evaluate(clauses=clauses,environment=create_environment(n=n)):
+            return True
+    return False    
+
+# coerce_list
+#
+# Used with a command line parameter that has nargs='*' to force the argument to be a list
+def coerce_list(x):
+    return x if type(x)==list else [x]
 
 if __name__=='__main__':
     import matplotlib.pyplot as plt
@@ -65,20 +74,26 @@ if __name__=='__main__':
     }) 
     
     parser = argparse.ArgumentParser('Investigate dependence of satisfaibility on alpha')
-    parser.add_argument('--seed', type=int,                         help='Seed for random number generator')
-    parser.add_argument('--k',    type=int,              default=3, help='Number of terms in each clause: default to 3-SAT')
-    parser.add_argument('--N',    type=int,              default=100)
-    parser.add_argument('--n',    type=int,  nargs='*',  default=100, help='Number of variables')
+    parser.add_argument('--seed', type=int,                             help='Seed for random number generator')
+    parser.add_argument('--k',    type=int,              default=3,     help='Number of terms in each clause: default to 3-SAT')
+    parser.add_argument('--N',    type=int,              default=25,    help='Number of sets of clauses to solve for')
+    parser.add_argument('--M',    type=int,              default=100,   help='Number of attempts to solve for each set')
+    parser.add_argument('--n',    type=int,  nargs='*',  default=100,   help='Number of variables')
     parser.add_argument('--show', action='store_true',   default=False, help='Show plot')
     args = parser.parse_args();
     
     random.seed(args.seed)
     alphas =[0.005*i for i in range(100)]
-    for n in args.n:
+    for n in coerce_list(args.n):
         plt.plot(alphas,
-                 [sum([evaluate(create_clauses(m=int(alpha*n),k=args.k,n=n),
-                                create_environment(n=n)) for i in range(args.N)])/args.N for alpha in alphas],
+                 [sum ([solve(clauses=create_clauses(m=int(alpha*n),k=args.k,n=n),
+                              M=args.M,
+                              n=n) for i in range(args.N)])/args.N for alpha in alphas],
                  label=f'n={n}')
+        #plt.plot(alphas,
+                 #[sum([evaluate(create_clauses(m=int(alpha*n),k=args.k,n=n),
+                                #create_environment(n=n)) for i in range(args.N)])/args.N for alpha in alphas],
+                 #label=f'n={n}')        
     plt.title(f'{args.k}-SAT: N={args.N}')
     plt.xlabel(r'$\alpha$')
     plt.ylabel('Satisfiability')
