@@ -20,8 +20,6 @@
 
 import random
 
-
-
 # create_environment
 #
 # Create one set of variables.
@@ -46,6 +44,9 @@ def  create_clauses(n=100,m=5,k=3):
 # evaluate
 #
 # Evaluate a set of clauses in specified environment
+#
+# Returns True iff all clauses satisified in specified environment
+
 def evaluate(clauses=[],environment=[]):
     # isTrue
     #
@@ -59,7 +60,7 @@ def evaluate(clauses=[],environment=[]):
     
     # isSatisfied
     #
-    # REturns true if any term in clause is satisfied
+    # Returns true if any term in clause is satisfied
     def isSatisfied(clause):
         for term in clause:
             if isTrue(term):
@@ -73,7 +74,15 @@ def evaluate(clauses=[],environment=[]):
 
 # solve
 #
-# Try to satusfy a set of clauses
+# Try to satisfy a set of clauses
+#
+# Parameters:
+#      clauses List of clauses to be satisified
+#      M       Number of attempts to satisfy clauses, each with a defferent assignmnet to variables
+#      n       Number of varaibles to be set
+# Returns:
+#      True iff the clauses are satisfied for at least one assignment of values
+
 def solve(clauses,M=100,n=100):
     for i in range(M):
         if evaluate(clauses=clauses,environment=create_environment(n=n)):
@@ -86,6 +95,28 @@ def solve(clauses,M=100,n=100):
 def coerce_list(x):
     return x if type(x)==list else [x]
 
+# estimate_solvability
+#
+# Work out which fraction of clauses is solveable
+#
+# Parameters:
+#     m   Number of clauses in each set
+#     k   Number of terms in each clause: default to 3-SAT
+#     n   Number of variables
+#     M   Number of attempts to solve for each set
+#     N   Number of sets of clauses to solve for
+#
+# Returns: fraction of clauses that can be solved. Generate N sets of clauses, 
+#          and make up to M attempts to solve, with a new set of variables each time.
+
+def estimate_solvability(m=10,k=3,n=100,M=100,N=25):
+    return sum(
+        [solve(clauses=create_clauses(m = m, k = k, n = n),
+               M = M,
+               n = n)
+         for i in range(N)]
+        )/N
+
 if __name__=='__main__':
     import matplotlib.pyplot as plt
     import matplotlib as mpl
@@ -97,27 +128,32 @@ if __name__=='__main__':
     }) 
     
     parser = argparse.ArgumentParser('Investigate dependence of satisfaibility on alpha')
-    parser.add_argument('--seed', type=int,                             help='Seed for random number generator')
-    parser.add_argument('--k',    type=int,              default=3,     help='Number of terms in each clause: default to 3-SAT')
-    parser.add_argument('--N',    type=int,              default=25,    help='Number of sets of clauses to solve for')
-    parser.add_argument('--M',    type=int,              default=100,   help='Number of attempts to solve for each set')
-    parser.add_argument('--n',    type=int,  nargs='*',  default=100,   help='Number of variables')
-    parser.add_argument('--show', action='store_true',   default=False, help='Show plot')
+    parser.add_argument('--seed',   type=int,                             help='Seed for random number generator')
+    parser.add_argument('--dalpha', type=float,            default=0.005, help='Stepsize for iterating alpha')
+    parser.add_argument('--k',      type=int,              default=3,     help='Number of terms in each clause: default to 3-SAT')
+    parser.add_argument('--N',      type=int,              default=25,    help='Number of sets of clauses to solve for')
+    parser.add_argument('--M',      type=int,              default=100,   help='Number of attempts to solve for each set')
+    parser.add_argument('--n',      type=int,  nargs='*',  default=100,   help='Number of variables')
+    parser.add_argument('--show', action='store_true',     default=False, help='Show plot')
     args = parser.parse_args();
     
-    random.seed(args.seed)
-    alphas =[0.005*i for i in range(100)]
+    random.seed(args.seed) # Used system time if no seed specified through command line
+    
+    alphas = [args.dalpha*i for i in range(int(1.0/args.dalpha))]
+    
     for n in coerce_list(args.n):
-        plt.plot(alphas,
-                 [sum ([solve(clauses=create_clauses(m=int(alpha*n),k=args.k,n=n),
-                              M=args.M,
-                              n=n) for i in range(args.N)])/args.N for alpha in alphas],
-                 label=f'n={n}')
+        plt.plot(alphas, 
+                 [estimate_solvability(m = int(alpha*n),
+                                       k = args.k,
+                                       n = n,
+                                       M = args.M,
+                                       N = args.N) for alpha in alphas],
+                 label=f'{n}')
      
-    plt.title(f'{args.k}-SAT: N={args.N}')
+    plt.title(f'{args.k}-SAT: N={args.N}, M={args.M}')
     plt.xlabel(r'$\alpha$')
     plt.ylabel('Satisfiability')
-    plt.legend()
+    plt.legend(title='Number of variables')
     plt.savefig(f'{args.k}-SAT')
     if args.show:
         plt.show()
