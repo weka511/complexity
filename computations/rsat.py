@@ -20,15 +20,12 @@
 
 import random
 
-k     = 3
-n     = 100
-alpha = 0.01
-N     = 100              # trials
 
-def create_environment(n=n):
+
+def create_environment(n=100):
     return [random.choice([-1,1]) for i in range(n)]
 
-def  create_clauses(n=n,m=int(alpha*n),k=k):
+def  create_clauses(n=100,m=5,k=3):
     def create_one_clause():
         return [i * random.choice([-1,1]) for i in sorted(random.sample(range(1,n+1),k))]
     
@@ -53,22 +50,30 @@ def evaluate(clauses,environment):
 if __name__=='__main__':
     import matplotlib.pyplot as plt
     import matplotlib as mpl
+    import argparse
     plt.rcParams.update({
         "text.usetex": True,
         "font.family": "serif",
         "font.serif": ["Palatino"],
-    })    
-    random.seed(1)
+    }) 
+    
+    parser = argparse.ArgumentParser('Investigate dependence of satisfaibility on alpha')
+    parser.add_argument('--seed', type=int)
+    parser.add_argument('--k',    type=int, default=3)
+    parser.add_argument('--N',    type=int, default=100)
+    parser.add_argument('--n',    type=int, default=100)
+    args = parser.parse_args();
+    
+    random.seed(args.seed)
     alphas =[0.005*i for i in range(100)]
     for n in [100,200,500]:
-        ys = []
-        for alpha in alphas:
-            count = sum([1 for i in range(N) if evaluate(create_clauses(m=int(alpha*n)),create_environment())])
-            ys.append(count/N)
-        plt.plot(alphas,ys,label=f'n={n}')
-    plt.title(f'k={k}')
+        plt.plot(alphas,
+                 [sum([evaluate(create_clauses(m=int(alpha*n),k=args.k,n=n),
+                                create_environment(n=n)) for i in range(args.N)])/args.N for alpha in alphas],
+                 label=f'n={n}')
+    plt.title(f'k={args.k}, N={args.N}')
     plt.xlabel(r'$\alpha$')
     plt.ylabel('Satisfiability')
     plt.legend()
-    plt.savefig(f'{k}-SAT')
+    plt.savefig(f'{args.k}-SAT')
     plt.show()
