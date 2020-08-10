@@ -31,15 +31,15 @@
 	\begin{enumerate}
 		\item What is the critical temperature ($\pm0.1$)? \textbf{2.265}
 		
-		Table \ref{eq:ising} records the result of executing the Ising Model Interactive. If the magnetization stabilizes at a positive or negative value--Figure \ref{fig:tLtTc}--we know $T<T_C$; otherwise --Figure \ref{fig:tGtTc}--$T>T_C$. I have used a binary search, so the error is divided by 2 at each step. The final step--$T=2.27$--was very slow, as we'd expect close to the critical point, so I went to the kitchen and prepared lunch to give it plenty of time.
-		\item  Describe the relationship between spin correlation and lattice length $\frac{L}{2}$ at the critical point. Figures \ref{fig:correlation1} \& \ref{fig:correlation2} depict this relationship for a range of $T$. Figure \ref{fig:correlation1} is quite closer to $T_C$, and Figure \ref{fig:correlation2} is more distant.
+		\textbf{Table \ref{eq:ising} records the result of executing the Ising Model Interactive. If the magnetization stabilizes at a positive or negative value--Figure \ref{fig:tLtTc}--we know $T<T_C$; otherwise --Figure \ref{fig:tGtTc}--$T>T_C$. I have used a binary search, so the error is divided by 2 at each step. The final step--$T=2.27$--was very slow, as we'd expect close to the critical point, so I went to the kitchen and prepared lunch to give it plenty of time.}
+		\item  Describe the relationship between spin correlation and lattice length $\frac{L}{2}$ at the critical point. \textbf{Figures \ref{fig:correlation1} \& \ref{fig:correlation2} depict this relationship for a range of $T$. Figure \ref{fig:correlation1} is quite closer to $T_C$, and Figure \ref{fig:correlation2} is more distant.}
 	\end{enumerate}
 	
 	\item 	Referring to the Percolation interactive in this unit:
 	\begin{enumerate}
-		\item What is the critical site occupancy probability p ($\pm0.02$ )?
+		\item What is the critical site occupancy probability p?\textbf{ 0.571--see justification in Table \ref{table:percolation}}.
 		
-		\item Describe the relationship of non-giant component sizes and their frequency at the critical point.
+		\item Describe the relationship of non-giant component sizes and their frequency at the critical point. \textbf{Figure \ref{fig:percolation} shows that this is a power law: the log of the frequency against log component size is a descending straight line. }
 	\end{enumerate}
 \end{enumerate}
 
@@ -115,12 +115,24 @@
 
 \begin{table}[H]
 	\begin{center}
-		\caption{Percolation Model Interactive}\label{eq:percolation}
-		\begin{tabular}{|c|c|}\hline
-			&\\ \hline
+		\caption{Percolation Model Interactive. When applying percolation theory to graphs, Flory's and Stockmeyer's critical concentration for polymer gelation can be thought of as the critical probability density of occupied sites in a lattice that allows for a continuous path from one side of the lattice to the opposite side.
+			I have interpreted "allows" to mean that there is a continuous path sometimes. I therefore make several attempt to construct a path: if I find a path within 100, say, attempts with the same value of $p$ I conclude that a path is allowed, otherwise not.  }\label{table:percolation}
+		\begin{tabular}{|c|c|c|}\hline
+			p&&N\\ \hline
+			0.550&N&50\\ \hline
+			0.564&N&50\\ \hline
+			0.568&N&100\\ \hline
+			0.571&Y&16\\ \hline
 		\end{tabular}
 	\end{center}
 \end{table}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Critical point for Percolation. The plot at the top right shows that  the log of the frequency against log component size is a descending straight line--hence we have a power law.}\label{fig:percolation}
+		\includegraphics[width=0.8\textwidth]{percolation}
+	\end{center}
+\end{figure}
 
 \section{Landscapes, Clustering, Freezing and Hardness}
 
@@ -131,7 +143,7 @@ Based on the plot below--Figure \ref{fig:content_SATalpha}--showing percent sati
 
 	\item  What does the vertical red dashed line indicate? \textbf{The transition from "most problems solvable" to "most not solvable".}
 
-	\item   Where do you expect the computational time would be largest along the $\alpha$ axis?
+	\item   Where do you expect the computational time would be largest along the $\alpha$ axis? \textbf{I'd expect it to be high for the highest values of $\alpha$, as we have to work harder (backtracking) to show that constraints can't be satisfied.}
 
 	\item   Is the SAT party problem above satisfiable? \textbf{Yes: see below}
 	
