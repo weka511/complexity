@@ -20,7 +20,11 @@
 
 import random
 
+# We will represent the variables x1, x2, ... as successive elemts in a Python list, so x1 is the zeroth element, and so on.
+# We represent True by +1, False by -1. So x1=True, x2=False, x3=True, x4=True,... would be [+1,-1, +1, +1, ...]
 
+# A single clause is a list of values, e.g. 
+# [x1, not x5, x17] would be represented [+1, -5, +17]
 
 def create_environment(n=100):
     return [random.choice([-1,1]) for i in range(n)]
@@ -47,6 +51,9 @@ def evaluate(clauses,environment):
             return False
     return True
 
+def solve():
+    pass
+
 if __name__=='__main__':
     import matplotlib.pyplot as plt
     import matplotlib as mpl
@@ -58,22 +65,24 @@ if __name__=='__main__':
     }) 
     
     parser = argparse.ArgumentParser('Investigate dependence of satisfaibility on alpha')
-    parser.add_argument('--seed', type=int)
-    parser.add_argument('--k',    type=int, default=3)
-    parser.add_argument('--N',    type=int, default=100)
-    parser.add_argument('--n',    type=int, default=100)
+    parser.add_argument('--seed', type=int,                         help='Seed for random number generator')
+    parser.add_argument('--k',    type=int,              default=3, help='Number of terms in each clause: default to 3-SAT')
+    parser.add_argument('--N',    type=int,              default=100)
+    parser.add_argument('--n',    type=int,  nargs='*',  default=100, help='Number of variables')
+    parser.add_argument('--show', action='store_true',   default=False, help='Show plot')
     args = parser.parse_args();
     
     random.seed(args.seed)
     alphas =[0.005*i for i in range(100)]
-    for n in [100,200,500]:
+    for n in args.n:
         plt.plot(alphas,
                  [sum([evaluate(create_clauses(m=int(alpha*n),k=args.k,n=n),
                                 create_environment(n=n)) for i in range(args.N)])/args.N for alpha in alphas],
                  label=f'n={n}')
-    plt.title(f'k={args.k}, N={args.N}')
+    plt.title(f'{args.k}-SAT: N={args.N}')
     plt.xlabel(r'$\alpha$')
     plt.ylabel('Satisfiability')
     plt.legend()
     plt.savefig(f'{args.k}-SAT')
-    plt.show()
+    if args.show:
+        plt.show()
