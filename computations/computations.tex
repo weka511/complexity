@@ -110,6 +110,10 @@
 	name={Hamiltonian path},
 	description={A Hamiltonian path, also called a Hamilton path, is a graph path between two vertices of a graph that visits each vertex exactly once }}
 
+\newglossaryentry{gls:k:SAT}{
+	name={k-SAT},
+	description={Given a set of \glspl{gls:clause} with $k$ variables (or negated variables) each, is there a set $\{x_i\}$ such that all clauses are satisfied?}}
+
 \newglossaryentry {gls:NAESAT} {
 	name={NAESAT},
 	description={An NAESAT clause is one of the form: $$
@@ -572,7 +576,7 @@ Figure \ref{fig:satisfying} illustrates how the question ''is there a \gls{gls:H
 \end{align*}
 
 We have converted the problem of checking a problem to a program, and than into a problem of checking Boolean expressions. We have therefore reduced out original problem to an instance of \gls{gls:3:SAT}, one of the original 6 \gls{gls:NP:complete} problems.
-\glsdesc{gls:3:SAT} k-SAT is ($k$ variables per clause) is \gls{gls:NP:complete} $\forall k \ge 3$.
+\glsdesc{gls:3:SAT} \Gls{gls:k:SAT} is ($k$ variables per clause) is \gls{gls:NP:complete} $\forall k \ge 3$.
 
 If \gls{gls:3:SAT} were easy:
 \begin{itemize}
@@ -586,7 +590,7 @@ If \gls{gls:3:SAT} were easy:
 \end{itemize}
 
 \begin{thm}[k-SAT $\le$ 3-SAT]
-	k-SAT $\le$ 3-SAT
+	\gls{gls:k:SAT} $\le$ \gls{gls:3:SAT}
 \end{thm}
 
 \begin{proof}
@@ -622,7 +626,7 @@ Can we build \gls{gls:3:SAT} out of \gls{gls:NAESAT} building blocks?
 	\item \gls{gls:3:SAT} is symmetric: can we build it out of asymmetric parts?
 	\item Add a global variable $s$ to break the symmetry.
 	\item Consider the NAE-4-SAT clause $(x_1,x_2,x_3,s)$: what if $s$ false? what if it is true?
-	\item This translates  \gls{gls:3:SAT} to NAE-4-SAT. Then we can use the same trick we used above for k-SAT to reduce  NAE-4-SAT to NAE-3-SAT.
+	\item This translates  \gls{gls:3:SAT} to NAE-4-SAT. Then we can use the same trick we used above for \gls{gls:k:SAT} to reduce  NAE-4-SAT to NAE-3-SAT.
 \end{itemize}
 
 \subsubsection{Map Colouring Problem}
@@ -815,7 +819,7 @@ For NP problems, what happens when we pile up more and more constraints at rando
 \end{figure}
 
 \begin{conj}[Threshold Conjecture]
-	Let $F_k(n,m) = $ random k-SAT formula with n variables and m clauses. Then $\forall k \ge 3, \exists \alpha_k$ such that:
+	Let $F_k(n,m) = $ random \gls{gls:k:SAT} formula with n variables and m clauses. Then $\forall k \ge 3, \exists \alpha_k$ such that:
 	\begin{align*}
 		\lim_{n \rightarrow \infty} Pr\big[F_k(n,m=\alpha n)\big]\text{ is satisfiable}=&\begin{cases}
 		1 \text{ if } \alpha<\alpha_k\\
@@ -866,9 +870,9 @@ Figure \ref{fig:heavy-tail} depicts a Heavy Tail Distribution for Z: $E(Z)\ne$ t
 
 Inequality is a one way street: $Pr\big(Z>0\big) \le E(Z)$, so if the expectation is small, so it the probability; but if the expectation is large, it does not imply that the probability is large. $E(Z)$ does not help us find a lower bound on the threshold.
 
-Let us generalize from \gls{gls:3:SAT} to k-SAT, because it is interesting to ask how the threshold scales with $k$.
+Let us generalize from \gls{gls:3:SAT} to \gls{gls:k:SAT}, because it is interesting to ask how the threshold scales with $k$.
 
-A random k-SAT clause is satisfied with probability $1-2^{-k}$. Following the same argument as before, $\alpha_k\le\frac{\log 2}{-\log (1-2^{-k})} \approx 2^k \ln(2)$. This is an upper bound, but it turns out to be pretty close: $\alpha_k=2^k \ln 2-O(1)$. Can we find solutions algorithmically all the way up to the threshold? Is there a zone where solutions exist but are hard to find?
+A random \gls{gls:k:SAT} clause is satisfied with probability $1-2^{-k}$. Following the same argument as before, $\alpha_k\le\frac{\log 2}{-\log (1-2^{-k})} \approx 2^k \ln(2)$. This is an upper bound, but it turns out to be pretty close: $\alpha_k=2^k \ln 2-O(1)$. Can we find solutions algorithmically all the way up to the threshold? Is there a zone where solutions exist but are hard to find?
 
 \subsubsection{A simple search}
 
@@ -923,7 +927,7 @@ Unit clauses reproduce through the 1-variable clauses: $\bar{x}\land(x \lor y)\i
 	\item If $\lambda<1$ throughout, they stay under control and we can satisfy the entire formula. 
 	\item $\lambda$ is maximized when $t=\frac{1}{2}$, $\lambda = \frac{3}{8} \alpha$
 	\item $\alpha_3\ge\frac{8}{3}\approxeq2.667$ (Constructive proof)
-	\item For k-SAT we can \emph{find} solutions up to a density of $\alpha = \Theta\big(\frac{2^k}{k}\big)$
+	\item For \gls{gls:k:SAT} we can \emph{find} solutions up to a density of $\alpha = \Theta\big(\frac{2^k}{k}\big)$
 	\item But we know there are solutions up to $\alpha_k=\Theta(2^k)$, some there is a gap between end of region where we can find solutions and where we know there are solutions--$\big[\frac{2^k}{k},2^k\big]$. Solutions exist, but maybe they are hard to find.
 \end{itemize}
 
@@ -1047,7 +1051,7 @@ Imagine melting some silicon dioxide and cooling it down to make glass. At an at
 	\end{center}
 \end{figure}
 
-The crystaline solution is an exponentially narrow fraction of all possible states. A glassy material can stay stuck in an amorphous state for exponential time, even though the minimum energy configuration is crystalline.
+The crystalline solution is an exponentially narrow fraction of all possible states. A glassy material can stay stuck in an amorphous state for exponential time, even though the minimum energy configuration is crystalline.
 
 The same thing an happen to a search algorithm. It starts in a random state, and explores the space by flipping variables. There is a perfect solution in some tiny corner, but it will take exponential time to find it. The structure of these landscapes is what make these problems hard.
 
@@ -1055,7 +1059,7 @@ The same thing an happen to a search algorithm. It starts in a random state, and
 
 Returning to Figure \ref{fig:clustering-transition}:
 \begin{itemize}
-	\item all known algorithms for k-SAT atop working at $\alpha_{rigid}\approx \frac{2^k \log{k}}{k}$
+	\item all known algorithms for \gls{gls:k:SAT} atop working at $\alpha_{rigid}\approx \frac{2^k \log{k}}{k}$
 	\item in between $\alpha_{rigid}$ and $\alpha_k=2^k \log(k)$, satisfiable but (we believe) exponentially hard.
 \end{itemize}
 
