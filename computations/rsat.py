@@ -25,6 +25,12 @@ import random
 # Create one set of variables.
 # We will represent the variables x1, x2, ... as successive elements in a Python list, so x1 is the zeroth element, and so on.
 # We represent True by +1, False by -1. So x1=True, x2=False, x3=True, x4=True,... would be [+1,-1, +1, +1, ...]
+#
+# Parameters:
+#      n        Number of variables
+#
+# Returns:
+#     An array of n variables, set either to +1 (True) or -1 (False)
 
 def create_environment(n=100):
     return [random.choice([-1,1]) for i in range(n)]
@@ -34,8 +40,20 @@ def create_environment(n=100):
 # Create one set of clauses
 # A single clause is a list of values, e.g. 
 # [x1, not x5, x17] would be represented [+1, -5, +17]
+#
+# Parameters:
+#
+#    n    Number of variables
+#    m    Number of clauses in a set
+#    k    Number of terms (including negated terms) in a clause
+#
+#    Returns:
+#        a List containing m clauses
 
-def  create_clauses(n=100,m=5,k=3):
+def  create_clauses(n=100,m=100,k=3):
+    # create_one_clause
+    #
+    # Create one clause with k terms
     def create_one_clause():
         return [i * random.choice([-1,1]) for i in sorted(random.sample(range(1,n+1),k))]
     
@@ -118,26 +136,22 @@ def estimate_solvability(m=10,k=3,n=100,M=100,N=25):
         )/N
 
 if __name__=='__main__':
-    import matplotlib.pyplot as plt
-    import matplotlib as mpl
-    import argparse
+    import matplotlib.pyplot as plt, matplotlib as mpl, argparse
     plt.rcParams.update({
-        "text.usetex": True,
-        "font.family": "serif",
-        "font.serif": ["Palatino"],
+        "text.usetex": True
     }) 
     
-    parser = argparse.ArgumentParser('Investigate dependence of satisfaibility on alpha')
+    parser = argparse.ArgumentParser('Investigate dependence of satisfiability on alpha')
     parser.add_argument('--seed',   type=int,                             help='Seed for random number generator')
-    parser.add_argument('--dalpha', type=float,            default=0.005, help='Stepsize for iterating alpha')
+    parser.add_argument('--dalpha', type=float,            default=0.01,  help='Stepsize for iterating alpha')
     parser.add_argument('--k',      type=int,              default=3,     help='Number of terms in each clause: default to 3-SAT')
-    parser.add_argument('--N',      type=int,              default=25,    help='Number of sets of clauses to solve for')
+    parser.add_argument('--N',      type=int,              default=100,   help='Number of sets of clauses to solve for')
     parser.add_argument('--M',      type=int,              default=100,   help='Number of attempts to solve for each set')
     parser.add_argument('--n',      type=int,  nargs='*',  default=100,   help='Number of variables')
     parser.add_argument('--show', action='store_true',     default=False, help='Show plot')
     args = parser.parse_args();
     
-    random.seed(args.seed) # Used system time if no seed specified through command line
+    random.seed(args.seed) # Uses system time if no seed specified through command line
     
     alphas = [args.dalpha*i for i in range(int(1.0/args.dalpha))]
     
@@ -155,5 +169,6 @@ if __name__=='__main__':
     plt.ylabel('Satisfiability')
     plt.legend(title='Number of variables')
     plt.savefig(f'{args.k}-SAT')
+    
     if args.show:
         plt.show()
