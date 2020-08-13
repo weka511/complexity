@@ -1146,15 +1146,59 @@ Are there total function (always defined) that are partial recursive but not pri
 	A(4,x,y) = x^{x^x} \rbrace \text{ $y$ times}
 \end{align*} 
 
-$A(n,x,y)$ requires $n$ nested for loops, se we need \emph{while}.
+$A(n,x,y)$ requires $n$ nested for loops, so we need \emph{while}.
 
 \subsection{$\lambda$ Calculus}
+
+A system based entirely on strings and substitution. $\lambda x$ means "replace every occurrence of $x$ with a copy of the following string". E.g.
+
+\begin{align*}
+	(\lambda x.xx)a=&aa\\
+	(\lambda x.xx)(ab)=&(ab)(ab)
+\end{align*}
+
+We can form functions of several variable, e.g.
+\begin{align*}
+	(\lambda xy.xyx)(ab)(c) =& (\lambda y.(ab)y(ab))c \text{, substituting $x$}\\
+	=& (ab)c(ab) \text{, on substituting $y$}
+\end{align*}
+
+In the $\lambda$ Calculus there is no distinction between functions and data. $\lambda fx.f(fx)$ takes a function $f(x)$ and returns $f(f(x))$.
+
+In chemistry RNA and proteins can take each other as input, acting both as functions and data--Walter Fontana.
+
+We need a way to encode the integers (Church numerals):
+\begin{align*}
+	0=&\lambda fx.x\\
+	1=&\lambda fx.fx\\
+	2=&\lambda fx.f(fx)\\
+	3=&\lambda fx.f(f(fx))
+\end{align*}
+
+Sometimes substitution never ends:
+\begin{align*}
+	(\lambda x.xx)	(\lambda x.xx) =& (\lambda x.xx)	(\lambda x.xx)\\
+	=&...
+\end{align*}
+
+\begin{itemize}
+	\item Self reproduction, like a program printing its own source. 
+	\item A program that never halts, or an undefined function.
+	\item Can we tell whether a string will ever settle down?
+\end{itemize}
 \subsection{Turing Machines}
+\subsubsection{Turing Machines}
+\subsubsection{Universal Turing Machines}
 \subsection{The Halting Problem}
+
 \subsection{The Grand Unified Theory of Computation}
+
 \subsection{The Analytical Engine}
+
 \subsection{Cellular Automata}
+
 \subsection{Tile-Based Computation}
+
 \subsection{Dynamical Systems} 
 
 
