@@ -1112,8 +1112,7 @@ References: \cite[Chapters 5,10]{moore2011nature}
 
 \section{Computation Everywhere}
 
-
-What is computation anyway? What are the basic building blocks you need to perform computation? What does a complex system need to possess in order to compute? What are the simplest object that suffice?
+What is computation anyway? What are the basic building blocks you need to perform computation? What does a complex system need to possess in order to compute? What are the simplest object that suffices?
 \subsection{Building Blocks: Recursive Functions}
 We will start with David Hilbert's Entscheidungsproblem, 1928: is there an effective procedure which, given a set of axioms and a mathematical problem, can decide whether the proposition is provable from the axioms? Unfolding the definition of an  effective procedure was one of the major issues in 20th century mathematics.
 
@@ -1133,6 +1132,22 @@ Axioms: let is assume that $0(x)=0$, $(x)=x$, and $S(x)=x+1$ are computable. The
 \glsdesc{gls:pr} The \glspl{gls:pr} already include a large group of functions.
 
 \subsection{Building Blocks: Partial Recursive Functions}
+
+Do we really need while loops?
+
+Minimization or $\mu$-recursion: $h(x)=$ the smallest $y$ such that $f(x,y)=0$. What if $f(x,y)>0 \; \forall y$? Then loop never returns--$h$ undefined. Partial function.
+
+Are there total function (always defined) that are partial recursive but not primitive recursive? Consider the Ackermann function
+
+\begin{align*}
+	A(1,x,y) =& x+y\\
+	A(2,x,y) =& x \cdot y\\
+	A(3,x,y) = x^y\\
+	A(4,x,y) = x^{x^x} \rbrace \text{ $y$ times}
+\end{align*} 
+
+$A(n,x,y)$ requires $n$ nested for loops, se we need \emph{while}.
+
 \subsection{$\lambda$ Calculus}
 \subsection{Turing Machines}
 \subsection{The Halting Problem}
