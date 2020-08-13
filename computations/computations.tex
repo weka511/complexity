@@ -145,6 +145,9 @@
 	name={$\Omega$},
 	description={$f$ grows at least as fast as $g$: $g=O(f)$ : $f/g \cancel{\rightarrow} 0 \text{ as } n\rightarrow \infty$}}
 
+\newglossaryentry{gls:pr}{
+	name={primitive recursive function},description={Primitive recursive functions are those defined by composition and primitive recursion.}}
+
 \newglossaryentry{gls:Polynomial}{
 	name={Polynomial Time},
 	description={we can find a solution efficiently}}
@@ -171,7 +174,6 @@
 
 \section{Easy \& Hard}
 
-\cite[Chapters 1,2,4]{moore2011nature}
 
 For theorists, polynomial vs. exponential is the mark of insight: we have found some structure in the problem that we can use.
 
@@ -276,8 +278,11 @@ Polynomials vs. Exponentials.
 		\includegraphics[width=0.6\textwidth]{imb729mtu}
 	\end{center}
 \end{figure}
+
+References: \cite[Chapters 1,2,4]{moore2011nature}
+
 \section{Algorithms and Landscapes}
-\cite[Chapter 2]{moore2011nature}
+
 
 \subsection{Divide and Conquer Redux}
 
@@ -520,8 +525,10 @@ How does mergesort $n \log_2(n)$ compare with best possible algorithm? Figure \r
 	\item Lower bounds show that one problem is at least as easy (or hard) as another. 
 \end{itemize}
 
+References: \cite[Chapter 2]{moore2011nature}
+
 \section{P versus NP}
-\cite[Chapters 4-6]{moore2011nature}, \cite{sep-computability}
+
 
 \subsection{Finding versus Checking}
 
@@ -665,7 +672,7 @@ We know that 4 colours are enough: it turns out that the 3-Colour problem is \gl
 
 \subsection{P versus NP Problem}
 
-If any NP problem can be solved in polynomial time, then they all can, and $P=NP$. This would mean that any problem that is easy to check would also be easy to find.
+If any NP problem can be solved in polynomial time, then they all can, and $P=NP$. This would mean that any problem that is easy to check would also be easy to solve.
 
 The question is still open, because we don't know all the possible ways to solve problems in polynomial time.
 
@@ -731,8 +738,9 @@ Given a cellular automaton, what questions can we ask about it?
 
 These all live at different levels of Figure \ref{fig:complexity:hierarchy}.
 
+References: \cite[Chapters 4-6]{moore2011nature}, \cite{sep-computability}
 \section{Worst-case, Natural, and Random}
-\cite[Chapters 5,10]{moore2011nature}
+
 
 \subsection{Real World Problems}
 
@@ -1099,8 +1107,44 @@ How is \gls{gls:xorsat} like \gls{gls:3:SAT}, and how is it different?
 \end{itemize}
 
 The landscapes for \gls{gls:xorsat} and \gls{gls:3:SAT} look similar, but solving linear equations involves a global rewrite of the system. The algoritms that fail for \gls{gls:3:SAT} fail for \gls{gls:xorsat} also.
+
+References: \cite[Chapters 5,10]{moore2011nature}
+
 \section{Computation Everywhere}
-\cite[Chapter 7]{moore2011nature}
+
+
+What is computation anyway? What are the basic building blocks you need to perform computation? What does a complex system need to possess in order to compute? What are the simplest object that suffice?
+\subsection{Building Blocks: Recursive Functions}
+We will start with David Hilbert's Entscheidungsproblem, 1928: is there an effective procedure which, given a set of axioms and a mathematical problem, can decide whether the proposition is provable from the axioms? Unfolding the definition of an  effective procedure was one of the major issues in 20th century mathematics.
+
+What functions of the natural numbers are computable? Major players: Richard Dedekind, Thoralf Skolem, R\'osza P\'eter
+
+Axioms: let is assume that $0(x)=0$, $(x)=x$, and $S(x)=x+1$ are computable. Then we form new computable functions recursively from the old ones. What rules should we allow?
+
+\begin{itemize}
+	\item Composition: if $f$ and $g$ are computable, $h(x) = f(g(x))$ is computable.
+	\item Primitive recursion: if $f$ and $g$ are computable, then $h$ is computable, where:
+	\begin{align*}
+			h(x,0) =& f(x) \text{, base case}\\
+			h(x,y+1) =& g(x,y,h(x,y))
+	\end{align*}
+\end{itemize}
+
+\glsdesc{gls:pr} The \glspl{gls:pr} already include a large group of functions.
+
+\subsection{Building Blocks: Partial Recursive Functions}
+\subsection{$\lambda$ Calculus}
+\subsection{Turing Machines}
+\subsection{The Halting Problem}
+\subsection{The Grand Unified Theory of Computation}
+\subsection{The Analytical Engine}
+\subsection{Cellular Automata}
+\subsection{Tile-Based Computation}
+\subsection{Dynamical Systems} 
+
+
+References: \cite[Chapter 7]{moore2011nature}.
+
 % end of text 
 
 % glossary
