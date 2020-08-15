@@ -16,7 +16,7 @@
 
 %opening
 \title{Computation in Complex Systems\\
-	Week 4
+	Week 5
 	}
 
 
@@ -24,9 +24,20 @@
 
 \maketitle
 
+\section{Recursive Functions}
 
+\begin{table}[H]
+	\begin{tabular}{|c|c|l|l|}\hline
+		&Function&Base case&General\\ \hline
+		a&exp&$exp(x,0)=1$&$exp(x,y+1)=mult(exp(x,y),x)$\\ \hline
+		b&pred&$pred(0)=0$&$pred(x+1) =x$\\ \hline
+		c&sub&$sub(x, 0) $&$sub(x, y+1)=pred(sub(x,y)) $\\ \hline
+		d&min&$min(x,0)$&\\ \hline
+		e&max&$max(x,0)$&\\ \hline
+	\end{tabular}
+\end{table}
 
-
+\section{Turing Machines}
 
 % bibliography go here
 
