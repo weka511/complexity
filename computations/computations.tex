@@ -27,6 +27,8 @@
 \usepackage{titling}
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
+\usepackage[]{algorithm2e}
+
 \graphicspath{{figs/}} 
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
@@ -1297,36 +1299,17 @@ representing an integer, it could be a string of letters or whatever, on its tap
 We then set it up in a special initialized state--I guess that's another special state--
 and we let it go and it does whatever it's going to do, reading and writing, shuttling back and forth, until it reaches the halt state, and then its output is what is then written on the tape.
 
+
+
 \subsubsection{Universal Turing Machines}
 
-So,
-Turing machines,
-we just saw,
-can compute the successor function.
-It's intuitively clear
-that they can also carry out composition.
-If I have
-a Turing machine which computes
-one function, <i>f</i>,
-and then halts,
-and another Turing machine
-which computes another function, <i>g</i>,
-and then halts,
-well I can compose these two functions
-by running one of these Turing machines
-and then running the other one.
-And what I really mean
-ls I would build
-a third Turing machine
-where it has the combination
-of the two Turing machines state spaces
-and, when the first one halts
-and completes its work,
-that makes the transition
-to the initial state
-of the second Turing machine,
-which then goes to work
-until it halts.
+So, Turing machines, we just saw, can compute the successor function.
+It's intuitively clear that they can also carry out composition.
+If I have a Turing machine which computes
+one function, $f$, and then halts, and another Turing machine which computes another function, $g$, and then halts, well I can compose these two functions by running one of these Turing machines and then running the other one.
+And what I really mean is I would build a third Turing machine
+where it has the combination of the two Turing machines state spaces and, when the first one halts and completes its work, that makes the transition to the initial state
+of the second Turing machine, which then goes to work until it halts.
 
 In fact, it might not surprise you
 that Turing machines can do
@@ -1444,349 +1427,219 @@ to be capable of universality.
 
 \subsection{The Halting Problem}
 
+Is there a computer program that predicts (in finite time) whether any other program eventually halts? This would help answer unsolved mathematical problems such as Goldbach's conjecture: just write a program to find a counterexample, then check whether it halts--Figure \ref{fig:midgard-serpent}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{The Midgard Serpent}\label{fig:midgard-serpent}
+		\includegraphics[width=0.8\textwidth]{midgard-serpent}
+	\end{center}
+\end{figure}
+Is there a program (a computable function) $Halts(P,x)$ that predicts, in finite time, whether program $P$ halts given input $x$? If there were, we could ask it about itself--Algorithm \ref{alg:mobius}.
+
+\begin{algorithm}[H]
+	\caption{M\"obius}
+	\KwData{P}
+	\KwResult{whether P halts }
+	 \eIf {Halts(P,P)} {run forever:}
+	 {Halt}\label{alg:mobius}
+\end{algorithm} 
+
+Does M\"obius(M\"obius) halt or not?
+\begin{itemize}
+	\item if it halts it runs forever;
+	\item if ir runs forever it halts!
+\end{itemize}
+
+The only way out of this contradiction is if halts is undecidable: $Halts$ does not exist! There is a question about computer programs which no well-defined program can answer.
+
+\begin{thm}[Rice]
+	Any question about the long term behaviour of a Turing Machine is undecidable, since we can reduce the Halting problem to it.
+\end{thm}
+
 \subsection{The Grand Unified Theory of Computation}
 
 \subsection{The Analytical Engine}
 
 \subsection{Cellular Automata}
 So,
-
 Babbage's machine,
-
 if he could have built it,
-
 would have been able
-
 to carry out
-
 any computation that modern computers can
-
 although it would have needed
-
 a lot of space and a lot of steam.
-
 What else is capable
-
 of universal computation?
 
 Well, in complex systems
-
 we kind of enjoy
-
 and love
-
 these little examples,
-
 these toy universes,
-
 cellular automata.
-
 So, a cellular automaton is something
-
 typically a 1- or 2-dimensional grid
-
 and at each grid location
-
 we have a finite set of states,
-
 and one of our favorite examples
-
 also a popular screensaver
-
 is The Game of Life
-
 invented by John Conway.
 
 So in The Game of Life,
-
 each grid square can be alive or dead.
-
 Here the alive things are black
-
 and the dead things are white.
-
 And, as in all cellular automata,
-
 there is a simple, local rule
-
 where each grid point,
-
 at each step, looks at
-
 its own state and those of its neighbors
-
 and then computes its new state
-
 and everything gets updated in parallel.
 
 In this particular rule,
-
 the neighbors are the 8 locations
-
 in the grid that you could move to
-
 with the move of a chess king
-
 and the rule goes like this:
-
 if you are alive,
-
 and 2 or 3 of your 8 neighbors are alive,
-
 you stay alive.
-
 If fewer than 2 are alive,
-
 you die of loneliness.
-
 If 4 or more are alive,
-
 you die of overpopulation,
-
 goes the story.
-
 This isn't really a biological model,
-
 but. Okay, and
-
 if you are dead, your square is empty,
-
 and you have exactly 3 neighbors
-
 that are alive,
-
 then on the next step
-
 you will be alive.
-
 That's the whole rule.
-
 And Conway played with these
-
 numbers, these thresholds, for
-
 being alive or dead until
-
 it did something fun and interesting,
-
 basically.
 
 So one of the things that happens
-
 in The Game of Life is
-
 a little thing we call a "glider."
-
 It's this little wiggly animal
-
 which travels across diagonally,
-
 and it will keep traveling until it
-
 bumps into something.
-
 Then, there's another thing
-
 called a "glider gun,"
-
 which shuffles back and forth,
-
 and produces a stream of gliders.
-
 And moreover it's possible
-
 to carefully design collisons
-
 between the gliders,
-
 to build small objects,
-
 or even to carry out logical operations.
-
 We can use the gliders,
-
 a stream of gliders,
-
 almost like a wire,
-
 to carry a bit of information.
-
 Well, if you combine
-
 all of these elements,
-
 and you're extremely clever
-
 and you have an abundance of free time,
-
 you can build a Turing machine
-
 out of The Game of Life.
 
 So here we have
-
 a very complicated configuration
-
 in which the pixels are
-
 almost too small to see.
-
 I've zoomed in on
-
 one of the glider guns there,
-
 where, across the diagonal here
-
 we have the Turing machine's tape,
-
 and here we have the head
-
 of the Turing machine.
 
 And so The Game of Life
-
 with a large enough initial configuration,
-
 can simulate a Turing machine.
-
 There are some interesting questions
-
 here about is it okay
-
 to start with a configuration
-
 which is infinite, but periodic.
-
 That gives you all the tape
-
 you could ever possibly need,
-
 or, perhaps there's a clever way
-
 to have glider guns build the tape
-
 over time, starting with
-
 an initial configuration which is blank,
-
 outside of a finite area.
 
 But, anyway.
-
 The Game of Life can compute.
-
 It can compute because I just showed you
-
 how to build a computer in it.
-
 Remember a long time ago
-
 when we were talking about
-
 the NP-Completeness of certain problems
-
 like, ah, like the tiling problem,
-
 fitting in puzzle tiles
-
 into a certain shape,
-
 or the Hamiltonian path problem,
-
 and I emphasized
-
 that these problems are hard because
-
 you can build computers out of them.
 
 Well, here we're building
-
 universal computers,
-
 and given enough space and time,
-
 in a cellular automaton,
-
 we can carry out
-
 <i>any</i> computation at all,
-
 not just one in say,
-
 polynomial time or exponential time,
-
 the way we were talking about before.
-
 The Game of Life is a 2-dimensional
-
 cellular automaton,
-
 in which it's fairly easy
-
 to set up a tape,
-
 and a head which moves back and forth
-
 on that tape.
-
 So what about 1-dimensional
-
 cellular automata?
-
 Well, here is a particular
-
 1-dimensional cellular automaton.
-
 Again, we just have 2 states,
-
 0 and 1, or black and white,
-
 at each location,
-
 and, again,
-
 we look at our nearest neighbors
-
 as well as our own state,
-
 and this is the update rule
-
 where I'm showing you
-
 what the new state will be
-
 for the 8 possible neighborhoods,
-
 combinations of your own state
-
 and those of your neighbors.
-
 In fact, this is cellular automaton
-
 Rule 110
-
 because, if these black squares are ones
-
 in the rule
-
 and the white squares are zeroes,
-
 then in binary,
-
 this spells out 110.
 
 And Stephen Wolfram invented
-
 that numbering scheme
-
 as a way of exploring
-
 all cellular automaton rules
-
 of a given size.
-
 So, here is a space-time diagram
-
 of a typical run of Rule 110.
 
 At the top we have
