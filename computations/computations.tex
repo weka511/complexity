@@ -1459,6 +1459,18 @@ The only way out of this contradiction is if halts is undecidable: $Halts$ does 
 
 \subsection{The Grand Unified Theory of Computation}
 
+In 1936 these three definitions were shown to be equivalent:
+
+\begin{itemize}
+	\item partial recursive functions;
+	\item the $\lambda$ calculus;
+	\item Turing machines.
+\end{itemize}
+
+Each of them can simulate the others; they all have an undecidable Halting Problem.
+
+The Church-Turing Thesis: this definition of "computable function" captures any reasonable model.
+
 \subsection{The Analytical Engine}
 
 \subsection{Cellular Automata}
@@ -1643,435 +1655,227 @@ So, here is a space-time diagram
 of a typical run of Rule 110.
 
 At the top we have
-
 the top row is some initial
-
 setting, of all the cells in the grid,
-
 and time goes downward.
-
 And when you look at this,
-
 what immediately jumps out at you
-
 is there are all kinds of gliders.
-
 There are all sorts of different
-
 particles, if you will, analogous to
-
 the glider in The Game of Life,
-
 but with many types,
-
 which, as we move down,
-
 may move left or right
-
 at various velocities,
-
 and you can see that
-
 when they bump into each other,
-
 complicated things happen.
 
 So, it's tempting to think
-
 that we can build a Turing machine
-
 out of this.
-
 This was conjectured by Stephen Wolfram
-
 and then proved by Matthew Cook,
-
 and the two of them published this paper
-
 and showed that indeed, Rule 110
-
 is capable of universal computation
-
 and, therefore,
-
 its long-term behavior,
-
 what will eventually happen
-
 from some initial state,
-
 is undecidable.
 
 And Turlough Neary and Damien Woods
-
 improved their simulation,
-
 and showed that, in fact, it can simulate
-
 Turing machines with only
-
 polynomial overhead; in other words,
-
 it can simulate t steps
-
 of a Turing machine
-
 with an amount of time
-
 which is only polynomial NT.
-
 That means that predicting it,
-
 even for finite time,
-
 requires you to do a fair amount of work,
-
 about as much work as you
-
 would need to run a Turing machine
-
 for that amount of time.
 
 \subsection{Tile-Based Computation}
 
 In, in this one-dimensional Turing machine
-
 each row is another time step,
-
 and so the space-time diagram
-
 is two-dimensional.
-
 We have one space dimension
-
 and one time dimension.
-
 So, what about another question
-
 in two dimensions,
-
 which is analagous
-
 to our NP-Complete question
-
 that we had of whether
-
 tiles of a certain shape
-
 can be placed
-
 to fill in with no gaps or overlaps
-
 a certain target overall shape.
-
 But let's ask an infinite version
-
 of this question.
-
 So, Wang tiles
-
 are little squares
-
 where on each of their edges
-
 there is a color,
-
 and, when we stick them together,
-
 these colors have to match
-
 along their shared edge.
-
 So, there's a nice question here,
-
 if I give you
-
 a finite set of these Wang tiles,
-
 I can ask you,
-
 can you cover the entire
-
 two-dimensional plane with them--
-
 an infinite configuration
-
 where every place where two tiles meet,
-
 their colors match.
-
 In this particular example,
-
 we can cover this 3x3 square
-
 and then we notice something nice:
-
 the colors along the top row
-
 match those along the bottom row,
-
 and the colors along the left edge
-
 match those along the right edge,
-
 which means that we can repeat
-
 this configuration infinitely
-
 and cover the entire plane
-
 with this periodic configuration.
 
 All right.
-
 But, when can you do this
-
 and when can't you?
-
 Well, guess what?
-
 Wang tiles can simulate a Turing machine.
-
 Here's a little sketch of how to do this.
-
 Some of our tiles represent
-
 tape symbols,
-
 and they're colored in such a ways
-
 that we go from one row to the next,
-
 they simply repeat that tape symbol,
-
 carrying it across to the next step
-
 of the computation.
-
 Some other tiles
-
 represent a combination
-
 of a tape symbol and a head,
-
 the head of the Turing machine,
-
 which is in a particular state.
-
 And, we again arrange the colors
-
 so that the only way to continue
-
 the tiling from one row to the next
-
 is to carry out one step
-
 of the Turing machine,
-
 both updating the tape symbol
-
 and updating the state.
-
 So, this means
-
 that asking whether I can tile
-
 the entire plane,
-
 corresponds to the halting problem
-
 because if each row is a new step
-
 of the Turing machine,
-
 suppose I arrange things so that
-
 the halting state
-
 is some kind of gap
-
 with no allowed tile
-
 that I can fit in there.
-
 Well, then, the question of whether
-
 I can continue the tiling forever
-
 and cover the entire plane
-
 is exactly the question of whether
-
 the Turing machine will run forever
-
 and never halt.
-
 Now, there is a catch,
-
 which you may have already noticed.
-
 If you hand me this bunch of tiles,
-
 and ask me whether I can tile the plane,
-
 why can't I cheat,
-
 and just avoid the head of the
-
 Turing machine completely,
-
 and cover the entire plane
-
 with just an empty tape,
-
 which is repeating the same symbol
-
 over and over,
-
 with no Turing machine in sight
-
 reading or writing anything
-
 or with any danger of halting.
 
 Well, this is a good point,
-
 and, in fact, when the Wang tiles
-
 were first invented, it was conjectured
-
 that any set of tiles
-
 that could tile the plane at all,
-
 could do so periodically.
-
 And if you think about it,
-
 if that were so,
-
 then the tiling problem would be
-
 decidable.
-
 Because we would just look at
-
 larger and larger areas,
-
 and we would eventually
-
 either find an area which we could tile
-
 in a way that we can repeat everywhere,
-
 because the colors match along,
-
 just as before,
-
 match along the top and bottom edges
-
 and the left and right edges,
-
 or,
-
 we would reach a finite area
-
 which can't be tiled at all,
-
 and one way or the other
-
 we would know.
 
 But that conjecture was wrong.
-
 There are <i>aperiodic</i> tilings.
-
 There are sets of tiles that can cover
-
 the entire plane,
-
 but only do so
-
 in a funky way
-
 which never quite repeats.
-
 So here is a picture
-
 of the classic Penrose tiles,
-
 with these kites and darts
-
 which, because of their local
-
 5-way symmetry
-
 have to tile the plane aperiodically,
-
 because there's no periodic tiling
-
 with perfect 5-way symmetry.
-
 Now, I wanted to show you these
-
 because they're beautiful,
-
 but,
-
 the Wang tiles is really more of
-
 a question about square grid,
-
 so, can we do something similar,
-
 with tiles that line up with each other
-
 on a square grid,
-
 but somehow because of their colors,
-
 or their shapes,
-
 or maybe little doodads we add to them,
-
 they <i>only</i> tile the grid
-
 in an aperiodic way.
-
 Well indeed this is possible,
-
 and this is a particular setup
-
 discovered by the logician
-
 Raphael Robinson.
-
 These tiles can only cover the grid
-
-in a particular fractal pattern,
-
+n a particular fractal pattern,
 and so with this fractal pattern
-
 we can with a little work
-
 force
-
 the Turing machine we're simulating
-
 to first of all, exist
-
 by demanding that there is a head
-
 there at the upper left-hand corner,
-
 and we can force it to attempt
-
 longer and longer computations
-
 until if at some point it halts,
-
 there will be a place in the tiling
-
 that we cannot fill in.
 
 \subsection{Dynamical Systems} 
