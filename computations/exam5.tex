@@ -26,14 +26,25 @@
 
 \section{Recursive Functions}
 
+In Table \ref{fig:recursive}, the first column contains either a reference to the exercise in the Exam, or a '-' for auxiliary functions:
+\begin{itemize}
+	\item \emph{trunc} is our entre to the world of Boolean functions;
+	\item \emph{not} is our first Boolean function;
+	\item \emph{gt} is used, alongside \emph{not} to define \emph{max} \& \emph{min}.
+\end{itemize}
+
 \begin{table}[H]
+	\caption{Recursive Functions}\label{fig:recursive}
 	\begin{tabular}{|c|c|l|l|}\hline
-		&Function&Base case&General\\ \hline
+		&&Base case&General\\ \hline
 		a&exp&$exp(x,0)=1$&$exp(x,y+1)=mult(exp(x,y),x)$\\ \hline
 		b&pred&$pred(0)=0$&$pred(x+1) =x$\\ \hline
-		c&sub&$sub(x, 0) $&$sub(x, y+1)=pred(sub(x,y)) $\\ \hline
-		d&min&$min(x,0)$&\\ \hline
-		e&max&$max(x,0)$&\\ \hline
+		c&sub&$sub(x, 0)=x $&$sub(x, y+1)=pred(sub(x,y)) $\\ \hline
+		-&trunc&$trunc(0)=0$&$trunc(x+1)=1$ \\ \hline
+		-&not&$not(0)=1$&$not(x+1)=0$ \\ \hline
+		-&gt&&$gt(x,y)=trunc(sub(x,y))$\\ \hline
+		d&min&-&min(x,y)=add(mult(gt(x,y),x),mult(not(gt(x,y)),y))\\ \hline
+		e&max&-&max(x,y)=add(mult(gt(x,y),y),mult(not(gt(x,y)),x))\\ \hline
 	\end{tabular}
 \end{table}
 
