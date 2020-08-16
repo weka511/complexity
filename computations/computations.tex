@@ -1684,23 +1684,9 @@ with perfect 5-way symmetry.
 		\includegraphics[width=0.8\textwidth]{aperiodic}
 	\end{center}
 \end{figure}
-Now, I wanted to show you these
-because they're beautiful,
-but,
-the Wang tiles is really more of
-a question about square grid,
-so, can we do something similar,
-with tiles that line up with each other
-on a square grid,
-but somehow because of their colors,
-or their shapes,
-or maybe little doodads we add to them,
-they <i>only</i> tile the grid
-in an aperiodic way.
-Well indeed this is possible,
-and Figure \ref{fig:robinsons} is a particular setup
-discovered by the logician
-Raphael Robinson.
+Now, I wanted to show you these because they're beautiful, but the Wang tiles is really more of a question about square grid,
+so, can we do something similar, with tiles that line up with each other on a square grid, but somehow because of their colours, or their shapes, or maybe little doodads we add to them, they only tile the grid in an aperiodic way.
+Well indeed this is possible, and Figure \ref{fig:robinsons} is a particular setup discovered by the logician Raphael Robinson.
 
 \begin{figure}[H]
 	\begin{center}
@@ -1708,26 +1694,48 @@ Raphael Robinson.
 		\includegraphics[width=0.8\textwidth]{robinsons}
 	\end{center}
 \end{figure}
-These tiles can only cover the grid
-n a particular fractal pattern,
-and so with this fractal pattern
-we can with a little work
-force
-the Turing machine we're simulating
-to first of all, exist
-by demanding that there is a head
-there at the upper left-hand corner,
-and we can force it to attempt
-longer and longer computations
-until if at some point it halts,
-there will be a place in the tiling
-that we cannot fill in.
+These tiles can only cover the grid in a particular fractal pattern, and so with this fractal pattern we can with a little work force the Turing machine we're simulating
+to first of all, exist by demanding that there is a head there at the upper left-hand corner, and we can force it to attempt longer and longer computations until if at some point it halts, there will be a place in the tiling that we cannot fill in.
 
 \subsection{Dynamical Systems} 
 
-\subsubsection{Dynamical Systems} 
+Figure \ref{fig:bakers-map} depicts the Baker's Map, which is defined by the following equations. 
 
-\subsubsection{Baker's Map}
+\begin{align*}
+	y \rightarrow& 2y \mod 1 \\
+	x \rightarrow &\begin{cases}
+		\frac{x}{2} &\mbox{if } y<\frac{1}{2}\\
+		\frac{x}{2} +1	&\mbox{if } y>\frac{1}{2} 
+	\end{cases}
+\end{align*}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Baker's Map]{Baker's Map: stretch vertically, cut off top, move to left}\label{fig:bakers-map}
+		\includegraphics[width=0.8\textwidth]{bakers-map}
+	\end{center}
+\end{figure}
+
+The Baker's map is chaotic: two points that are initially close get exponentially amplified over time. This is a particularly simple Turing machine.
+
+\begin{align*}
+	...y_3 y_2 y_1.x_1 x_2 x_3... \rightarrow ...y_3y_2.y_1x_1x_2x_3...
+\end{align*}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{baker-turing}\label{fig:baker-turing}
+		\includegraphics[width=0.8\textwidth]{baker-turing}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{wild-problems}\label{fig:wild-problems}
+		\includegraphics[width=0.8\textwidth]{wild-problems}
+	\end{center}
+\end{figure}
+
 
 References: \cite[Chapter 7]{moore2011nature}.
 
