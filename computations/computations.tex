@@ -720,7 +720,7 @@ Computer science is not the study of computers, it is the study of computation.
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Rule 110 is universal]{Rule 110 is universal\cite{cook2004universality}}
+		\caption[Rule 110 is universal]{Rule 110 is universal\cite{cook2004universality}}\label{fig:rule110}
 		\includegraphics[width=0.8\textwidth]{rule110}
 	\end{center}
 \end{figure}
@@ -1518,138 +1518,45 @@ Then, there's another thing called a "glider gun," which shuffles back and forth
 
 And moreover it's possible to carefully design collisions between the gliders, to build small objects, or even to carry out logical operations. We can use the gliders, a stream of gliders, almost like a wire, to carry a bit of information. Well, if you combine all of these elements, and you're extremely clever and you have an abundance of free time, you can build a Turing machine out of The Game of Life.
 
-So here we have a very complicated configuration in which the pixels are almost too small to see. In Figure \ref{fig:complicated-configuration} I've zoomed in on one of the glider guns there, where, across the diagonal here we have the Turing machine's tape, and here we have the head of the Turing machine.
+In Figure \ref{fig:gol-turing} we have a very complicated configuration in which the pixels are almost too small to see. In Figure \ref{fig:complicated-configuration} I've zoomed in on one of the glider guns there, where, across the diagonal here we have the Turing machine's tape, and here we have the head of the Turing machine.
+
+\begin{figure}[H]
+	\caption{Game of Life simulating a Turing Machine}\label{fig:gol-turing}
+	\includegraphics[width=\textwidth]{gol-turing}
+\end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Game of Life simulating a Turing Machine]{Game of Life simulating a Turing Machine (zoomed in on one of the glider guns)}\label{fig:complicated-configuration}
+		\caption[Game of Life simulating a Turing Machine (detail)]{Game of Life simulating a Turing Machine (zoomed in on one of the glider guns)}\label{fig:complicated-configuration}
 		\includegraphics[width=0.8\textwidth]{complicated-configuration}
 	\end{center}
 \end{figure}
-And so The Game of Life
-with a large enough initial configuration,
-can simulate a Turing machine.
-There are some interesting questions
-here about is it okay
-to start with a configuration
-which is infinite, but periodic.
-That gives you all the tape
-you could ever possibly need,
-or, perhaps there's a clever way
-to have glider guns build the tape
-over time, starting with
-an initial configuration which is blank,
-outside of a finite area.
+And so The Game of Life with a large enough initial configuration, can simulate a Turing machine. There are some interesting questions here about whether it OK to start with a configuration which is infinite, but periodic. That gives you all the tape
+you could ever possibly need, or, perhaps there's a clever way to have glider guns build the tape over time, starting with an initial configuration which is blank, outside of a finite area.
 
-But, anyway.
-The Game of Life can compute.
-It can compute because I just showed you
-how to build a computer in it.
-Remember a long time ago
-when we were talking about
-the NP-Completeness of certain problems
-like, ah, like the tiling problem,
-fitting in puzzle tiles
-into a certain shape,
-or the Hamiltonian path problem,
-and I emphasized
-that these problems are hard because
-you can build computers out of them.
+The Game of Life can compute. It can compute because I just showed you how to build a computer in it. Remember a long time ago when we were talking about the NP-Completeness of certain problems like, ah, like the tiling problem, fitting in puzzle tiles into a certain shape, or the Hamiltonian path problem, and I emphasized that these problems are hard because you can build computers out of them.
 
-Well, here we're building
-universal computers,
-and given enough space and time,
-in a cellular automaton,
-we can carry out
-<i>any</i> computation at all,
-not just one in say,
-polynomial time or exponential time,
-the way we were talking about before.
-The Game of Life is a 2-dimensional
-cellular automaton,
-in which it's fairly easy
-to set up a tape,
-and a head which moves back and forth
-on that tape.
-So what about 1-dimensional
-cellular automata?
-Well, here is a particular
-1-dimensional cellular automaton.
-Again, we just have 2 states,
-0 and 1, or black and white,
-at each location,
-and, again,
-we look at our nearest neighbors
-as well as our own state,
-and this is the update rule
-where I'm showing you
-what the new state will be
-for the 8 possible neighborhoods,
-combinations of your own state
-and those of your neighbors.
-In fact, this is cellular automaton
-Rule 110
-because, if these black squares are ones
-in the rule
-and the white squares are zeroes,
-then in binary,
-this spells out 110.
+Well, here we're building universal computers, and given enough space and time, in a cellular automaton, we can carry out any computation at all, not just one in say,
+polynomial time or exponential time, the way we were talking about before. The Game of Life is a 2-dimensional cellular automaton, in which it's fairly easy to set up a tape,
+and a head which moves back and forth on that tape.
 
-And Stephen Wolfram invented
-that numbering scheme
-as a way of exploring
-all cellular automaton rules
-of a given size.
-So, here is a space-time diagram
-of a typical run of Rule 110.
+So what about 1-dimensional cellular automata? Well, Figure \ref{fig:rule110rule} is a particular 1-dimensional cellular automaton. Again, we just have 2 states, 0 and 1, or black and white, at each location, and, again, we look at our nearest neighbours as well as our own state, and this is the update rule where I'm showing you what the new state will be for the 8 possible neighbourhoods--combinations of your own state and those of your neighbours. In fact, this is cellular automaton Rule 110 because, if these black squares are ones in the rule and the white squares are zeroes, then in binary, this spells out 110.
+\begin{figure}[H]
+	\begin{center}
+		\caption[Rule 110]{Rule 110: $2^1 + 2^2+2^3+2^5+2^6=2+4+8+32+64=110$}\label{fig:rule110rule}
+		\includegraphics[width=0.8\textwidth]{rule110rule}
+	\end{center}
+\end{figure}
 
-At the top we have
-the top row is some initial
-setting, of all the cells in the grid,
-and time goes downward.
-And when you look at this,
-what immediately jumps out at you
-is there are all kinds of gliders.
-There are all sorts of different
-particles, if you will, analogous to
-the glider in The Game of Life,
-but with many types,
-which, as we move down,
-may move left or right
-at various velocities,
-and you can see that
-when they bump into each other,
-complicated things happen.
+Stephen Wolfram invented that numbering scheme as a way of exploring all cellular automaton rules of a given size. Figure \ref{fig:rule110} is a space-time diagram of a typical run of Rule 110.
 
-So, it's tempting to think
-that we can build a Turing machine
-out of this.
-This was conjectured by Stephen Wolfram
-and then proved by Matthew Cook,
-and the two of them published this paper
-and showed that indeed, Rule 110
-is capable of universal computation
-and, therefore,
-its long-term behavior,
-what will eventually happen
-from some initial state,
-is undecidable.
+At the top we have the top row is some initial setting, of all the cells in the grid, and time goes downward. And when you look at this, what immediately jumps out at you
+is there are all kinds of gliders. There are all sorts of different particles, if you will, analogous to the glider in The Game of Life, but with many types, which, as we move down, may move left or right at various velocities, and you can see that when they bump into each other, complicated things happen.
 
-And Turlough Neary and Damien Woods
-improved their simulation,
-and showed that, in fact, it can simulate
-Turing machines with only
-polynomial overhead; in other words,
-it can simulate t steps
-of a Turing machine
-with an amount of time
-which is only polynomial NT.
-That means that predicting it,
-even for finite time,
-requires you to do a fair amount of work,
-about as much work as you
-would need to run a Turing machine
-for that amount of time.
+So, it's tempting to think that we can build a Turing machine out of this.
+This was conjectured by Stephen Wolfram and then proved by Matthew Cook\cite{cook2004universality}, and the two of them published this paper and showed that indeed, Rule 110 is capable of universal computation and, therefore, its long-term behaviour, what will eventually happen from some initial state, is undecidable.
+
+And Turlough Neary and Damien Woods improved their simulation, and showed that, in fact, it can simulate Turing machines with only polynomial overhead\cite{neary2009small}; in other words, it can simulate $t$ steps of a Turing machine with an amount of time which is only polynomial in $t$. That means that predicting it, even for finite time, requires you to do a fair amount of work, about as much work as you would need to run a Turing machine for that amount of time.
 
 \subsection{Tile-Based Computation}
 
