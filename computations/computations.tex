@@ -1473,110 +1473,59 @@ The Church-Turing Thesis: this definition of "computable function" captures any 
 
 \subsection{The Analytical Engine}
 
+\begin{figure}[H]
+	\begin{center}
+		\caption[Ada Lovelace, Charles Babbage, and the Analytical Engine]{Ada Lovelace, Charles Babbage, and the Analytical Engine. Ada Lovelace wrote the first computer program (2 nested for loops); she also envisaged encoding text or musical notes as numbers, and manipulating them.}\label{fig:BabbageLovelace}
+		\includegraphics[width=0.8\textwidth]{BabbageLovelace}
+	\end{center}
+\end{figure}
+
 \subsection{Cellular Automata}
-So,
-Babbage's machine,
-if he could have built it,
-would have been able
-to carry out
-any computation that modern computers can
-although it would have needed
-a lot of space and a lot of steam.
-What else is capable
-of universal computation?
 
-Well, in complex systems
-we kind of enjoy
-and love
-these little examples,
-these toy universes,
-cellular automata.
-So, a cellular automaton is something
-typically a 1- or 2-dimensional grid
-and at each grid location
-we have a finite set of states,
-and one of our favorite examples
-also a popular screensaver
-is The Game of Life
-invented by John Conway.
+Babbage's machine, if he could have built it, would have been able to carry out any computation that modern computers can although it would have needed a lot of space and a lot of steam. What else is capable of universal computation?
 
-So in The Game of Life,
-each grid square can be alive or dead.
-Here the alive things are black
-and the dead things are white.
-And, as in all cellular automata,
-there is a simple, local rule
-where each grid point,
-at each step, looks at
-its own state and those of its neighbors
-and then computes its new state
-and everything gets updated in parallel.
+Well, in complex systems we kind of enjoy and love these little examples, these toy universes, cellular automata. So, a cellular automaton is something typically a 1- or 2-dimensional grid and at each grid location we have a finite set of states, and one of our favourite examples also a popular screen-saver is The Game of Life invented by John Conway.
 
-In this particular rule,
-the neighbors are the 8 locations
-in the grid that you could move to
-with the move of a chess king
-and the rule goes like this:
-if you are alive,
-and 2 or 3 of your 8 neighbors are alive,
-you stay alive.
-If fewer than 2 are alive,
-you die of loneliness.
-If 4 or more are alive,
-you die of overpopulation,
-goes the story.
-This isn't really a biological model,
-but. Okay, and
-if you are dead, your square is empty,
-and you have exactly 3 neighbors
-that are alive,
-then on the next step
-you will be alive.
-That's the whole rule.
-And Conway played with these
-numbers, these thresholds, for
-being alive or dead until
-it did something fun and interesting,
-basically.
+So in The Game of Life, each grid square can be alive or dead. Here the alive things are black and the dead things are white. And, as in all cellular automata, there is a simple, local rule where each grid point, at each step, looks at
+its own state and those of its neighbours and then computes its new state and everything gets updated in parallel. In this particular rule, the neighbours are the 8 locations
+in the grid that you could move to with the move of a chess king and the rule goes like this:
+\begin{itemize}
+	\item if you are alive, and 2 or 3 of your 8 neighbours are alive, you stay alive;
+	\item if fewer than 2 are alive, you die of loneliness;
+	\item if 4 or more are alive, you die of overpopulation.
+	\item if you are dead, your square is empty, and you have exactly 3 neighbours 	that are alive, then on the next step 	you will be alive.
+\end{itemize}
 
-So one of the things that happens
-in The Game of Life is
-a little thing we call a "glider."
-It's this little wiggly animal
-which travels across diagonally,
-and it will keep traveling until it
-bumps into something.
-Then, there's another thing
-called a "glider gun,"
-which shuffles back and forth,
-and produces a stream of gliders.
-And moreover it's possible
-to carefully design collisons
-between the gliders,
-to build small objects,
-or even to carry out logical operations.
-We can use the gliders,
-a stream of gliders,
-almost like a wire,
-to carry a bit of information.
-Well, if you combine
-all of these elements,
-and you're extremely clever
-and you have an abundance of free time,
-you can build a Turing machine
-out of The Game of Life.
+Conway played with these numbers, these thresholds, for being alive or dead until it did something fun and interesting.
 
-So here we have
-a very complicated configuration
-in which the pixels are
-almost too small to see.
-I've zoomed in on
-one of the glider guns there,
-where, across the diagonal here
-we have the Turing machine's tape,
-and here we have the head
-of the Turing machine.
+One of the things that happens in The Game of Life is a little thing we call a "glider." It's this little wiggly animal which travels across diagonally, and it will keep travelling until it bumps into something--Figure \ref{fig:life-glider}.
 
+\begin{figure}[H]
+	\begin{center}
+		\caption[Glider]{A Glider\cite{dorin2012framework}}\label{fig:life-glider}
+		\includegraphics[width=0.8\textwidth]{life-glider}
+	\end{center}
+\end{figure}
+
+Then, there's another thing called a "glider gun," which shuffles back and forth, and produces a stream of gliders--Figure \ref{fig:glider-gun}.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Glider Gun]{Glider Gun\cite{wiki:glider:gun}}\label{fig:glider-gun}
+		\includegraphics[width=0.8\textwidth]{glider-gun}
+	\end{center}
+\end{figure}
+
+And moreover it's possible to carefully design collisions between the gliders, to build small objects, or even to carry out logical operations. We can use the gliders, a stream of gliders, almost like a wire, to carry a bit of information. Well, if you combine all of these elements, and you're extremely clever and you have an abundance of free time, you can build a Turing machine out of The Game of Life.
+
+So here we have a very complicated configuration in which the pixels are almost too small to see. In Figure \ref{fig:complicated-configuration} I've zoomed in on one of the glider guns there, where, across the diagonal here we have the Turing machine's tape, and here we have the head of the Turing machine.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Game of Life simulating a Turing Machine]{Game of Life simulating a Turing Machine (zoomed in on one of the glider guns)}\label{fig:complicated-configuration}
+		\includegraphics[width=0.8\textwidth]{complicated-configuration}
+	\end{center}
+\end{figure}
 And so The Game of Life
 with a large enough initial configuration,
 can simulate a Turing machine.
