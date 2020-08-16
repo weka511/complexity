@@ -1560,60 +1560,36 @@ And Turlough Neary and Damien Woods improved their simulation, and showed that, 
 
 \subsection{Tile-Based Computation}
 
-In, in this one-dimensional Turing machine
-each row is another time step,
-and so the space-time diagram
-is two-dimensional.
-We have one space dimension
-and one time dimension.
-So, what about another question
-in two dimensions,
-which is analagous
-to our NP-Complete question
-that we had of whether
-tiles of a certain shape
-can be placed
-to fill in with no gaps or overlaps
-a certain target overall shape.
-But let's ask an infinite version
-of this question.
-So, Wang tiles
-are little squares
-where on each of their edges
-there is a color,
-and, when we stick them together,
-these colors have to match
-along their shared edge.
-So, there's a nice question here,
-if I give you
-a finite set of these Wang tiles,
-I can ask you,
-can you cover the entire
-two-dimensional plane with them--
-an infinite configuration
-where every place where two tiles meet,
-their colors match.
-In this particular example,
-we can cover this 3x3 square
-and then we notice something nice:
-the colors along the top row
-match those along the bottom row,
-and the colors along the left edge
-match those along the right edge,
-which means that we can repeat
-this configuration infinitely
-and cover the entire plane
-with this periodic configuration.
+In, in this one-dimensional Turing machine each row is another time step,
+and so the space-time diagram is two-dimensional.
+We have one space dimension and one time dimension. So, what about another question
+in two dimensions, which is analogous to our NP-Complete question that we had of whether
+tiles of a certain shape can be placed to fill in with no gaps or overlaps a certain target overall shape. But let's ask an infinite version of this question.
+So, Wang tiles are little squares where on each of their edges there is a colour, and, when we stick them together, these colours have to match along their shared edge--Figure \ref{fig:wang1}`.
 
-All right.
-But, when can you do this
-and when can't you?
-Well, guess what?
-Wang tiles can simulate a Turing machine.
-Here's a little sketch of how to do this.
+\begin{figure}[H]
+	\caption{Wang Tiles}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Wang tiles are little squares where on each of their edges there is a color}\label{fig:wang1}
+		\includegraphics[width=\textwidth]{wang1}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{When we stick them together, these colours have to match along their shared edge}\label{fig:wang2}
+		\includegraphics[width=\textwidth]{wang2}
+	\end{subfigure}
+\end{figure}
+So, there's a nice question here, if I give you a finite set of these Wang tiles, I can ask you, can you cover the entire two-dimensional plane with them--an infinite configuration where every place where two tiles meet, their colors match.
+In this particular example, we can cover this 3x3 square--Figure \ref{fig:wang2}--and then we notice something nice: the colors along the top row match those along the bottom row, and the colors along the left edge match those along the right edge, which means that we can repeat this configuration infinitely and cover the entire plane with this periodic configuration.
+
+All right. But, when can you do this and when can't you? Well, guess what? Wang tiles can simulate a Turing machine. Figure \ref{fig:wang-turing} is a little sketch of how to do this.
+
+\begin{figure}[H]
+	\caption{Wang tiles can simulate a Turing machine}\label{fig:wang-turing}
+	\includegraphics[width=0.8\textwidth]{wang-turing}
+\end{figure}
 Some of our tiles represent
 tape symbols,
-and they're colored in such a ways
+and they're coloured in such a ways
 that we go from one row to the next,
 they simply repeat that tape symbol,
 carrying it across to the next step
@@ -1694,7 +1670,7 @@ the entire plane,
 but only do so
 in a funky way
 which never quite repeats.
-So here is a picture
+Figure \ref{fig:aperiodic} is a picture
 of the classic Penrose tiles,
 with these kites and darts
 which, because of their local
@@ -1702,6 +1678,12 @@ which, because of their local
 have to tile the plane aperiodically,
 because there's no periodic tiling
 with perfect 5-way symmetry.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Penrose Tiles}\label{fig:aperiodic}
+		\includegraphics[width=0.8\textwidth]{aperiodic}
+	\end{center}
+\end{figure}
 Now, I wanted to show you these
 because they're beautiful,
 but,
@@ -1716,9 +1698,16 @@ or maybe little doodads we add to them,
 they <i>only</i> tile the grid
 in an aperiodic way.
 Well indeed this is possible,
-and this is a particular setup
+and Figure \ref{fig:robinsons} is a particular setup
 discovered by the logician
 Raphael Robinson.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Robinson's Tiles}\label{fig:robinsons}
+		\includegraphics[width=0.8\textwidth]{robinsons}
+	\end{center}
+\end{figure}
 These tiles can only cover the grid
 n a particular fractal pattern,
 and so with this fractal pattern
