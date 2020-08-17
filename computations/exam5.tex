@@ -26,29 +26,78 @@
 
 \section{Recursive Functions}
 
-In Table \ref{fig:recursive}, the first column contains either a reference to the exercise in the Exam, or a '-' for auxiliary functions:
+In Table \ref{table:recursive}, the first column contains either a reference to the exercise in the Exam, or a '-' for auxiliary functions:
 \begin{itemize}
-	\item \emph{trunc} is our entre to the world of Boolean functions;
+	\item \emph{bool} takes us into to the world of Boolean functions\footnote{\emph{mul} can serve as a replacement for \emph{and}; $bool(add)$ replaces \emph{or}};
 	\item \emph{not} is our first Boolean function;
-	\item \emph{gt} is used, alongside \emph{not} to define \emph{max} \& \emph{min}.
+	\item \emph{gt} is used, alongside \emph{not}, to define \emph{max} \& \emph{min}.
 \end{itemize}
 
 \begin{table}[H]
-	\caption{Recursive Functions}\label{fig:recursive}
+	\caption{Recursive Functions}\label{table:recursive}
 	\begin{tabular}{|c|c|l|l|}\hline
 		&&Base case&General\\ \hline
 		a&exp&$exp(x,0)=1$&$exp(x,y+1)=mult(exp(x,y),x)$\\ \hline
 		b&pred&$pred(0)=0$&$pred(x+1) =x$\\ \hline
 		c&sub&$sub(x, 0)=x $&$sub(x, y+1)=pred(sub(x,y)) $\\ \hline
-		-&trunc&$trunc(0)=0$&$trunc(x+1)=1$ \\ \hline
+		-&bool&$bool(0)=0$&$bool(x+1)=1$ \\ \hline
 		-&not&$not(0)=1$&$not(x+1)=0$ \\ \hline
-		-&gt&&$gt(x,y)=trunc(sub(x,y))$\\ \hline
-		d&min&-&min(x,y)=add(mult(gt(x,y),x),mult(not(gt(x,y)),y))\\ \hline
-		e&max&-&max(x,y)=add(mult(gt(x,y),y),mult(not(gt(x,y)),x))\\ \hline
+		-&gt&&$gt(x,y)=bool(sub(x,y))$\\ \hline
+		d&min&-&min(x,y)=add(mult(gt(x,y),y),mult(not(gt(x,y)),x))\\ \hline
+		e&max&-&max(x,y)=add(mult(gt(x,y),x),mult(not(gt(x,y)),y))\\ \hline
 	\end{tabular}
 \end{table}
 
 \section{Turing Machines}
+
+Table \ref{table:successor} shows the rules for a Turing machine for the successor function, and Tables  \ref{table:carry}--\ref{table:halt} show the rules through the three component Turing Machines from the exam. I have assumed that all Turing machines start in a special state \includegraphics[width=9pt]{gosign} and halt in state \includegraphics[width=9pt]{stop}: there are no rules that more the Turing machine into \includegraphics[width=9pt]{gosign} or out of \includegraphics[width=9pt]{stop}.
+\begin{table}[H]
+	\begin{center}
+		\caption{Successor. There are two states, apart from the special states: in the \emph{Carrying} state we move to the left, setting 1s to 0s as we go, until we find a 0; in the \emph{Halting} state we }\label{table:successor}
+		\begin{tabular}{|c|c||c|c|c|} \hline
+			$\bullet$ &\includegraphics[width=9pt,height=7pt]{gosign}&$\bullet$ &Carrying&$\leftarrow$ \\ \hline
+			1&Carrying&0&Carrying&$\leftarrow$ \\ \hline
+			0&Carrying&1&Halting&$\rightarrow$ \\ \hline
+			0&Halting&1&Halting&$\rightarrow$ \\ \hline
+			1&Halting&1&Halting&$\rightarrow$ \\ \hline
+			$\bullet$ &Halting&	$\bullet$&\includegraphics[width=9pt,height=7pt]{stop}& \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Carry}\label{table:carry}
+		\begin{tabular}{|c|c||c|c|c|} \hline
+			0&&&& \\ \hline
+			1&&&& \\ \hline
+			$\bullet$ &&&& \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Return}\label{table:return}
+		\begin{tabular}{|c|c||c|c|c|} \hline
+			0&&&& \\ \hline
+			1&&&& \\ \hline
+			$\bullet$ &&&& \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Halt}\label{table:halt}
+		\begin{tabular}{|c|c||c|c|c|} \hline
+			0&&&& \\ \hline
+			1&&&& \\ \hline
+			$\bullet$ &&&& \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
 
 % bibliography go here
 
