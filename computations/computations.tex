@@ -1502,7 +1502,7 @@ One of the things that happens in The Game of Life is a little thing we call a "
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Glider]{A Glider\cite{dorin2012framework}}\label{fig:life-glider}
+		\caption[Game of Life Glider]{Game of Life Glider\cite{dorin2012framework}}\label{fig:life-glider}
 		\includegraphics[width=0.8\textwidth]{life-glider}
 	\end{center}
 \end{figure}
@@ -1511,7 +1511,7 @@ Then, there's another thing called a "glider gun," which shuffles back and forth
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Glider Gun]{Glider Gun\cite{wiki:glider:gun}}\label{fig:glider-gun}
+		\caption[Game of Life Glider Gun]{Game of Life Glider Gun\cite{wiki:glider:gun}}\label{fig:glider-gun}
 		\includegraphics[width=0.8\textwidth]{glider-gun}
 	\end{center}
 \end{figure}
@@ -1699,7 +1699,9 @@ to first of all, exist by demanding that there is a head there at the upper left
 
 \subsection{Dynamical Systems} 
 
-Figure \ref{fig:bakers-map} depicts the Baker's Map, which is defined by the following equations. 
+\subsubsection{The Baker's Map}
+
+We have seen that mechanical devices can computer, as can cellular automata and Wang tile. What about dynamical systems? Figure \ref{fig:bakers-map} depicts the Baker's Map, which is defined by the following equations. 
 
 \begin{align*}
 	y \rightarrow& 2y \mod 1 \\
@@ -1711,31 +1713,41 @@ Figure \ref{fig:bakers-map} depicts the Baker's Map, which is defined by the fol
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Baker's Map]{Baker's Map: stretch vertically, cut off top, move to left}\label{fig:bakers-map}
+		\caption[Baker's Map]{Baker's Map: squeeze horizontally, stretch vertically, cut off top, move to left}\label{fig:bakers-map}
 		\includegraphics[width=0.8\textwidth]{bakers-map}
 	\end{center}
 \end{figure}
 
-The Baker's map is chaotic: two points that are initially close get exponentially amplified over time. This is a particularly simple Turing machine.
+The Baker's map is chaotic: two points that are initially close have their $x$ distance exponentially amplified over time; (\ref{eq:baker:turing}) illustrates the operation of a particularly simple Turing machine that realizes the Baker's map and Figure \ref{fig:baker-turing} specifies a Universal Turing machine.
 
 \begin{align*}
-	...y_3 y_2 y_1.x_1 x_2 x_3... \rightarrow ...y_3y_2.y_1x_1x_2x_3...
+	...y_3 y_2 y_1.x_1 x_2 x_3... \rightarrow ...y_3y_2.y_1x_1x_2x_3...\numberthis\label{eq:baker:turing}
 \end{align*}
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{baker-turing}\label{fig:baker-turing}
+		\caption{A Universal Turing machine that realizes the Baker's map}\label{fig:baker-turing}
 		\includegraphics[width=0.8\textwidth]{baker-turing}
 	\end{center}
 \end{figure}
 
+Given a piecewise linear map in two dimensions and an initial point $x$,  it is undecidable whether:
+\begin{itemize}
+	\item $x$ will ever fall into a particular region;
+	\item $x$ is periodic;
+	\item $x$ lies on a chaotic trajectory;
+\end{itemize}
+--since all of these questions correspond to the Halting Problem. This is worse than chaos! It holds even if $x$ is rational and known exactly. 
+
+\subsubsection{Wild Problems}
+There's a lot of naturally occurring dynamical systems  which seem difficult to classify computationally. Figure \ref{fig:wild-problems} shows a 2-dimensional chaotic system called the Standard Map\cite{wiki:standard:map}. It seems hard to predict. It is difficult to imagine an algorithm that can look forward in time and make predicts faster than predicting step by step. It's messy, but there is no obvious way to build a computer out of it. 
 \begin{figure}[H]
 	\begin{center}
-		\caption{wild-problems}\label{fig:wild-problems}
+		\caption{The Standard Map: $p_{t+1} =p_t + K \sin(\theta_t) \text{; }\theta_{t+1}= \theta_t + p_{t+1}$}\label{fig:wild-problems}
 		\includegraphics[width=0.8\textwidth]{wild-problems}
 	\end{center}
 \end{figure}
-
+It's \emph{possible} that the long term behaviour of the standard map is undecidable but not universal. There may be no way to reduce the Halting Problem to the standard map. Maybe many real world systems are in this messy middle ground. Maybe we can't predict them, but we can't \emph{prove} it.
 
 References: \cite[Chapter 7]{moore2011nature}.
 
