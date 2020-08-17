@@ -50,40 +50,42 @@ In Table \ref{table:recursive}, the first column contains either a reference to 
 
 \section{Turing Machines}
 
-Table \ref{table:successor} shows the rules for a Turing machine for the successor function, and Tables  \ref{table:carry}--\ref{table:halt} show the rules through the three component Turing Machines from the exam. I have assumed that all Turing machines start in a special state \includegraphics[width=9pt]{gosign} and halt in state \includegraphics[width=9pt]{stop}: there are no rules that more the Turing machine into \includegraphics[width=9pt]{gosign} or out of \includegraphics[width=9pt]{stop}.
+Table \ref{table:successor} shows the rules for a Turing machine for the successor function, and Tables  \ref{table:carry}--\ref{table:halt} show the rules through the three component Turing Machines from the exam. I have assumed that all Turing machines start in a special state \includegraphics[width=9pt]{gosign} and halt in state \includegraphics[width=9pt]{stop}: there are no rules that more the Turing machine into \includegraphics[width=9pt]{gosign} or out of \includegraphics[width=9pt]{stop}. Each table comprises two columns for the character under the head and the state, followed by three columns--the character to be written, the new state, and the movement of the head.
 \begin{table}[H]
 	\begin{center}
-		\caption{Successor. There are two states, apart from the special states: in the \emph{Carrying} state we move to the left, setting 1s to 0s as we go, until we find a 0; in the \emph{Halting} state we }\label{table:successor}
+		\caption{Successor. There are two states, apart from the special states: in the \emph{Carrying} state we move to the left, setting 1s to 0s as we go, until we find a 0; in the \emph{Returning} state we }\label{table:successor}
 		\begin{tabular}{|c|c||c|c|c|} \hline
 			$\bullet$ &\includegraphics[width=9pt,height=7pt]{gosign}&$\bullet$ &Carrying&$\leftarrow$ \\ \hline
 			1&Carrying&0&Carrying&$\leftarrow$ \\ \hline
-			0&Carrying&1&Halting&$\rightarrow$ \\ \hline
-			0&Halting&1&Halting&$\rightarrow$ \\ \hline
-			1&Halting&1&Halting&$\rightarrow$ \\ \hline
-			$\bullet$ &Halting&	$\bullet$&\includegraphics[width=9pt,height=7pt]{stop}& \\ \hline
+			0&Carrying&1&Returning&$\rightarrow$ \\ \hline
+			0&Returning&1&Returning&$\rightarrow$ \\ \hline
+			1&Returning&1&Returning&$\rightarrow$ \\ \hline
+			$\bullet$ &Returning&	$\bullet$&\includegraphics[width=9pt,height=7pt]{stop}& \\ \hline
 		\end{tabular}
 	\end{center}
 \end{table}
 
+The machine described in Table \ref{table:successor} is equivalent to the combination of the following 3 machines: $Halt(Return(Carry(x)))$.
 
 \begin{table}[H]
 	\begin{center}
-		\caption{Carry}\label{table:carry}
+		\caption{Carry: move left, replacing 1 by 0, until we find a  0.}\label{table:carry}
 		\begin{tabular}{|c|c||c|c|c|} \hline
-			0&&&& \\ \hline
-			1&&&& \\ \hline
-			$\bullet$ &&&& \\ \hline
+			$\bullet$ &\includegraphics[width=9pt,height=7pt]{gosign}&$\bullet$ &Carrying&$\leftarrow$ \\ \hline
+			1&Carrying&0&Carrying&$\leftarrow$ \\ \hline
+			0&Carrying&1&\includegraphics[width=9pt,height=7pt]{stop}&$\rightarrow$ \\ \hline
 		\end{tabular}
 	\end{center}
 \end{table}
 
 \begin{table}[H]
 	\begin{center}
-		\caption{Return}\label{table:return}
+		\caption{Return: move the head back to the final position}\label{table:return}
 		\begin{tabular}{|c|c||c|c|c|} \hline
-			0&&&& \\ \hline
-			1&&&& \\ \hline
-			$\bullet$ &&&& \\ \hline
+			0&\includegraphics[width=9pt,height=7pt]{gosign}&1&Returning&$\rightarrow$ \\ \hline
+			0&Returning&0&Returning&$\rightarrow$ \\ \hline
+			1&Returning&1&Returning&$\rightarrow$ \\ \hline
+			$\bullet$ &Returning&	$\bullet$&\includegraphics[width=9pt,height=7pt]{stop}& \\ \hline
 		\end{tabular}
 	\end{center}
 \end{table}
@@ -92,9 +94,7 @@ Table \ref{table:successor} shows the rules for a Turing machine for the success
 	\begin{center}
 		\caption{Halt}\label{table:halt}
 		\begin{tabular}{|c|c||c|c|c|} \hline
-			0&&&& \\ \hline
-			1&&&& \\ \hline
-			$\bullet$ &&&& \\ \hline
+			$\bullet$ &\includegraphics[width=9pt,height=7pt]{gosign}&$\bullet$ &\includegraphics[width=9pt,height=7pt]{stop}& \\ \hline
 		\end{tabular}
 	\end{center}
 \end{table}
