@@ -1,23 +1,56 @@
+% MIT License
+
+% Copyright (c) 2019-2020 Simon Crase
+
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
 \documentclass[]{article}
-\usepackage{url}
+\usepackage{url,graphicx,float,titling}
+\graphicspath{{figs/}}
+
+% Show logo in header
+
+\pretitle{
+	\begin{center}
+		\includegraphics[width=6cm]{KanjiLife}\\
+	}
+	\posttitle{\end{center}}
 
 %opening
 \title{
 	Bibliography for Origins of Life
 }
 
-\author{Simon Crase}
+\author{Simon Crase (compiler)\\simon@greenweaves.nz}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-	These is the complete list of references for the SFI Origins of Life Course. The course aims to push the field of Origins of Life research forward by bringing new and synthetic thinking to the question of how life emerged from an abiotic world.\\
+	These is the complete list of references for the SFI Origins of Life Course. 
 	The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
-	These notes are distributed in the hope that they will be useful,
+	This bibliography is distributed in the hope that it will be useful,
 	but without any warranty, and without even the implied warranty of
 	merchantability or fitness for a particular purpose. All feedback is welcome,
-	but I don't necessarily undertake to do anything with it.
+	but I don't necessarily undertake to do anything with it.\\
+	\LaTeX source for this bibliography can be found at\\
+	\url{https://github.com/weka511/complexity/tree/master/origins}.
 \end{abstract}
 
 \nocite{*}

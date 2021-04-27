@@ -1,17 +1,22 @@
-# Copyright (C) 2019 Greenweaves Software Limited
+# Copyright (C) 2019-2020 Greenweaves Software Limited
 
-# This is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 
-# This software is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 
-# You should have received a copy of the GNU General Public License
-# along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
 # Evolve a solution using a Genetic Algorithm
 
@@ -20,7 +25,7 @@
 # [2]  Werner Krauth. Statistical mechanics: algorithms and computations. OUP Oxford, 2006.
 
 from numpy import mean, std, argsort, searchsorted
-from random import random, choice, sample
+from random import random, choice, sample, gauss
 from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, figure, savefig
 
 # roulette
@@ -32,20 +37,17 @@ from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, f
 
 def roulette(population,fitness):
     # Select one element from population using Tower Sampling [2]
-    def select():
+    def select(T=None,breaks=[],indices=[]):
         return indices[searchsorted(breaks,T * random())]
     
-    # Organize fitness in ascending order. We will save
-    # this permutation so we know which individual corresponds to
-    # a particlar value
-    indices = argsort(fitness)
-    fitness = [fitness[i] for i in indices]
+    indices = argsort(fitness)              # Used to order fitnesses
+    fitness = [fitness[i] for i in indices] # Organize fitness in ascending order
      
-    T       = sum(fitness) #Normalizing value, so we can treat fitnesses as probabilities
+    T       = sum(fitness)                  # Normalizing value, so we can treat fitnesses as probabilities
     
     breaks  = [sum(fitness[:i]) for i in range(1,len(fitness))] # Subtotals for use in tower sampling[2].
     
-    return [population[select()] for _ in population]   # Select new population
+    return [population[select(T=T,breaks=breaks,indices=indices)] for _ in population]   # Select new population
 
 # mutate_bit_string
 #
@@ -141,23 +143,47 @@ def plot_fitness(statistics,name='Exercise 1'):
     maxima = [a for a,_,_ in statistics]
     plot(maxima,'r', label='Maximum Fitness')
     plot([b for _,b,_ in statistics],'g', label='Mean Fitness')
-    plot([c for _,_,c in statistics],'b',label='Standard Deviation')
+    plot([c for _,_,c in statistics],'b',label=r'$\sigma$')
     title(name)
     ylabel('Fitness')
     xlabel('Generation')
     ylim((0,max(maxima)+1))    
     legend(loc='center')
    
+# Mutate a continuous value
+# 
+def perturb(x,
+            probability = 0.5,  # Probability of mutation
+            mean    = 1.0,
+            sigma   = 0.1,
+            minimum = 0.05,
+            maximum = 0.95):
+    if random()<probability:
+        return min(maximum,max(minimum,x*gauss(mean,sigma)))
+    return x
+
+# Mutate a discrete value
+def perturb_n(n,
+               probability = 0.5,  # Probability of mutation
+              min_value=1,
+              max_value=32):
+    if random()<probability:
+        n_mutated = n + choice([-1,+1])
+        if min_value<n_mutated and n_mutated<max_value:
+            return n_mutated
+    return n
 
 if __name__=='__main__':    # Test, based on exercise 1 in [1]
     
     from argparse import ArgumentParser
+    from matplotlib import rc
+    rc('text', usetex=True)
     
     parser = ArgumentParser('Genetic Algorithm Demo')
-    parser.add_argument('--pc',default=0.7,type=float,nargs='+',help='Crossover rate')
-    parser.add_argument('--pm',default=0.001,type=float,nargs='+',help='Mutation probability')
-    parser.add_argument('-n', default=20,type=int,help='Number of Trials')
-    parser.add_argument('-N', default=1000,type=int,help='Number of generations')
+    parser.add_argument('--pc', default=0.7,   type=float, nargs='+', help='Crossover rate')
+    parser.add_argument('--pm', default=0.001, type=float, nargs='+', help='Mutation probability')
+    parser.add_argument('-n',   default=20,    type=int,              help='Number of Trials')
+    parser.add_argument('-N',   default=1000,  type=int,              help='Number of generations')
     args = parser.parse_args();
     
     pcs = args.pc if type(args.pc)==list else [args.pc]
@@ -185,15 +211,15 @@ if __name__=='__main__':    # Test, based on exercise 1 in [1]
 #   0.7      0.001    224         110
 #   0.0      0.001    235          62
 #   0.3      0.001    250         112
-0.0, 0.001, 285, 111
-0.0, 0.002, 196, 70
-0.0, 0.005, 109, 45
-0.1, 0.001, 267, 82
-0.1, 0.002, 164, 76
-0.1, 0.005, 111, 52
-0.3, 0.001, 250, 91
-0.3, 0.002, 190, 72
-0.3, 0.005, 107, 51
-0.7, 0.001, 217, 72
-0.7, 0.002, 171, 77
-0.7, 0.005, 98, 45
+#0.0, 0.001, 285, 111
+#0.0, 0.002, 196, 70
+#0.0, 0.005, 109, 45
+#0.1, 0.001, 267, 82
+#0.1, 0.002, 164, 76
+#0.1, 0.005, 111, 52
+#0.3, 0.001, 250, 91
+#0.3, 0.002, 190, 72
+#0.3, 0.005, 107, 51
+#0.7, 0.001, 217, 72
+#0.7, 0.002, 171, 77
+#0.7, 0.005, 98, 45

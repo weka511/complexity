@@ -1,19 +1,52 @@
+% MIT License
+
+% Copyright (c) 2019-2010 Simon Crase
+
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
 % Glossary entries
 
 \newacronym{gls:ATP}{ATP}{Adenosine triphosphate}
 
-\newacronym{gls:BLAST}{BLAST}{Basic Local Alignment Search Tool}
+\newacronym{gls:BLAST}{BLAST}{Basic Local Alignment Search Tool\cite{altschul1990basic}}
+
+\newacronym{gls:BMR}{BMR}{Basal Metabolic Rate}
+
+\newacronym{gls:CA}{CA}{Cellular Automaton}
 
 \newacronym{gls:CPR}{CPR}{Candidate Phyla Radiation}
 
 \newacronym{gls:CSS}{CSS}{Cellular Signature Structure}
 
-\newacronym{gls:DNA}{DNA}{Deoxyribonucleinc Acid}
+\newacronym{gls:DNA}{DNA}{Deoxyribonucleic Acid}
+
+\newacronym{gls:dNTP}{dNTP}{Deoxynucleoside triphosphate}
+
+\newacronym{gls:ESO}{ESO}{European Southern Observatory}
 
 \newacronym{gls:ESP}{ESP}{Eukaryotic Signature Protein}
 
-
 \newacronym{gls:GI}{GI}{GenInfo Number}
+
+\newacronym{gls:GRAIL}{GRAIL}{Gravity Recovery and Interior Laboratory}
+
+\newacronym{gls:Gya}{Gya}{billion years ago}
 
 \newacronym{gls:LAWKI}{LAWKI}{Life as we know it}
 
@@ -23,63 +56,133 @@
 
 \newacronym{gls:LECA}{LECA}{Last Eukaryotic Common Ancestor}
 
+\newacronym[see={[Glossary:]{gls:Large:subunit:ribosomal:ribonucleic:acid}}]{gls:LSU}{LSU}{Large subunit ribosomal ribonucleic acid\glsadd{gls:Large:subunit:ribosomal:ribonucleic:acid}}
+
 \newacronym{gls:LUCA}{LUCA}{Last Universal Common Ancestor}
 
 \newacronym{gls:ML}{ML}{Maximum Likelihood}
 
+\newacronym{gls:MMR}{MMR}{DNA Mismatch Repair}
+
 \newacronym{gls:MP}{MP}{Maximum Parsimony}
 
-\newacronym{gls:RNA}{RNA}{Ribonucleinc Acid}
+\newacronym{gls:Mya}{Mya}{million years ago}
+
+\newacronym{gls:OEE}{OEE}{Open Ended Evolution}
+
+\newacronym[see={[Glossary:]{gls:operationaltaxonomicunit}}]{gls:OTU}{OTU}{Operational Taxonomic Unit\glsadd{gls:operationaltaxonomicunit}}
+
+\newacronym{gls:mRNA}{mRNA}{Messenger RNA}
+
+\newacronym{gls:NExSS}{NExSS}{Nexus for Exoplanet System Science}
+
+\newacronym[see={[Glossary:]{gls:nucleoside-triphosphate}}]{gls:NTP}{NTP}{Nucleoside triphosphate\glsadd{gls:nucleoside-triphosphate}\glsadd{gls:Large:subunit:ribosomal:ribonucleic:acid}}
+
+\newacronym{gls:RNA}{RNA}{Ribonucleic Acid}
+
+\newacronym[see={[Glossary:]{gls:Large:subunit:ribosomal:ribonucleic:acid}}]{gls:rRNA}{rRNA}{Ribosomal Ribonucleic acid\glsadd{gls:Large:subunit:ribosomal:ribonucleic:acid}}
 
 \newacronym{gls:SFI}{SFI}{Santa Fe Institute}
 
+\newacronym[see={[Glossary:]{gls:Small:subunit:ribosomal:ribonucleic:acid}}]{gls:SSU}{SSU}{Small subunit ribosomal ribonucleic acid\glsadd{gls:Small:subunit:ribosomal:ribonucleic:acid}}
+
+\newacronym{gls:TESS}{TESS}{Transiting Exoplanet Survey Satellite}
+
 \newacronym{gls:TOL}{TOL}{Tree of Life}
+
+\newacronym{gls:tRNA}{tRNA}{Transfer RNA}
+
+\newacronym{gls:SAM}{SAM}{S-Adenosyl methionine}
+
+\newacronym{gls:UNAM}{UNAM}{the National University of Mexico}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \newglossaryentry{gls:16S-ribosomal-RNA}{
 	name={16S ribosomal RNA},
-	description={16S ribosomal RNA (or 16S rRNA) is the component of the 30S small subunit of a prokaryotic ribosome that binds to the Shine-Dalgarno sequence. The genes coding for it are referred to as 16S rRNA gene and are used in reconstructing phylogenies, due to the slow rates of evolution of this region of the gene. Carl Woese and George E. Fox were two of the people who pioneered the use of 16S rRNA in phylogenetics in 1977--\cite{wiki:16SrRNA}.}}
+	description={16S ribosomal RNA (or 16S rRNA) is the component of the 30S small subunit of a prokaryotic ribosome that binds to the Shine-Dalgarno sequence. The genes coding for it are referred to as 16S rRNA gene and are used in reconstructing phylogenies, due to the slow rates of evolution of this region of the gene. Carl Woese and George E. Fox were two of the people who pioneered the use of 16S rRNA in phylogenetics in 1977\cite{wiki:16SrRNA}}}
+
+\newglossaryentry{gls:aldehyde}{
+	name={aldehyde},
+	description={An aldehyde  is a compound containing a functional group with the structure -CHO, consisting of a carbonyl center (a carbon double-bonded to oxygen) with the carbon atom also bonded to hydrogen and to an R group, which is any generic alkyl or side chain\cite{wiki:aldehyde} }}
 
 \newglossaryentry{gls:aldose} {
-	name=aldose,
-	description={An aldose is a monosaccharide (a simple sugar) with a carbon backbone chain with a carbonyl group on the endmost carbon atom, making it an aldehyde, and hydroxyl groups connected to all the other carbon atoms. Aldoses can be distinguished from \glspl{gls:ketose}, which have the carbonyl group away from the end of the molecule, and are therefore ketones--\cite{ wiki:aldose}}
+	name={aldose},
+	description={An aldose is a monosaccharide (a simple sugar) with a carbon backbone chain with a carbonyl group on the endmost carbon atom, making it an aldehyde, and hydroxyl groups connected to all the other carbon atoms. Aldoses can be distinguished from \glspl{gls:ketose}, which have the carbonyl group away from the end of the molecule, and are therefore ketones\cite{ wiki:aldose}}
 }
+
+\newglossaryentry{gls:alpha:carbon}{
+	name={$\alpha$ carbon},
+	description={The $\alpha$ carbon  in organic molecules refers to the first carbon atom that attaches to a functional group, such as a carbonyl. The second carbon atom is called the $\beta$ carbon, and the system continues naming in alphabetical order with Greek letters\cite{wiki:alpha:carbon} }}
+
+\newglossaryentry{gls:alphadiversity}{
+	name={alpha diversity},
+	description={the mean species diversity in sites or habitats at a local scale. The term was introduced by R. H. Whittaker together with the terms beta diversity  and gamma diversity. Whittaker's idea was that the total species diversity in a landscape (gamma diversity) is determined by two different things, the mean species diversity in sites or habitats at a more local scale (alpha diversity) and the differentiation among those habitats (beta diversity)\cite{wiki:Alphadiversity}  \gls{gls:simpsonsIndex} \&\gls{gls:shannonIndex} are common measures of alpha diversity.}}
 
 \newglossaryentry{gls:amphiphile}{
 	name={amphiphile},
-	description={An amphiphile is a chemical compound possessing both hydrophilic (water-loving, polar) and lipophilic (fat-loving) properties. Such a compound is called amphiphilic or amphipathic--\cite{wiki:amphiphile}}}
+	description={An amphiphile is a chemical compound possessing both hydrophilic (water-loving, polar) and lipophilic (fat-loving) properties. Such a compound is called amphiphilic or amphipathic\cite{wiki:amphiphile}}}
+
+\newglossaryentry{gls:archean}{
+	name={Archaen},
+	description={Eon from 4.0 \gls{gls:Gya} to 2.5 \gls{gls:Gya}\cite{stratigraphy2020chart}}}
 
 \newglossaryentry{gls:arrheniusequation}{
 	name={Arrhenius Equation},
-	description={In physical chemistry, the Arrhenius equation is a formula for the temperature dependence of reaction rates. The equation was proposed by Svante Arrhenius in 1889, based on the work of Dutch chemist Jacobus Henricus van 't Hoff who had noted in 1884 that van 't Hoff equation for the temperature dependence of equilibrium constants suggests such a formula for the rates of both forward and reverse reactions--\cite{wiki:arrheniusequation}
-	\begin{align*}
-	k =& e^{\frac{-E_a}{k_B T}}\text{, where}\\
-	k =& \text{rate constant,}\\
-	T =& \text{the absolute temperature (in Kelvin),}\\
-	A =& \text{the pre-exponential factor, a constant for each chemical reaction. According to collision theory, A is the frequency of collisions in the correct orientation,}\\
-	E_a =& \text{the activation energy for the reaction,}\\
-	k_B =& \text{the Boltzmann constant.}
-	\end{align*}
+	description={a formula for the temperature dependence of reaction rates\cite{wiki:arrheniusequation}
 }}
+
+\newglossaryentry{gls:autocatalytic:set}{
+	name={autocatalytic set},
+	description={An autocatalytic set is defined as
+		a set of reactions
+		and the molecules involved in them,
+		such that:
+		\begin{enumerate}
+			\item Each reaction in the set is catalyzed by at least one of the molecules
+			from the set itself and,
+			\item Each molecule in the set 	can be produced
+			from a basic food source through a sequence of reactions
+			from the set itself\cite[Lecture 4.6.1]{sfi2020}
+\end{enumerate}}}
 
 \newglossaryentry{gls:autocatalysis}{
 	name={autocatalysis},
-	description={Chemical self production: the ability of a set of chemical species to make more of that same set, by undergoing a series of chemical 	reactions--\cite{sfi2019}}}
+	description={Chemical self production: the ability of a set of chemical species to make more of that same set, by undergoing a series of chemical 	reactions\cite[Lecture 4.6.2]{sfi2020}}}
 
 \newglossaryentry{gls:autocatalyst}{
 	name={autocatalyst},
 	description={Something that acts as a \gls{gls:catalyst} for its own production}}
 
+\newglossaryentry{gls:autopoiesis}{
+	name={autopoiesis},
+	description={An autopoietic machine is a machine organized (defined as a unity) as a network of processes of production (transformation and destruction) of components which: (i) through their interactions and transformations continuously regenerate and realize the network of processes (relations) that produced them; and (ii) constitute it (the machine) as a concrete unity in space in which they (the components) exist by specifying the topological domain of its realization as such a network\cite{maturana1991autopoiesis}}}
+
 \newglossaryentry{gls:autotroph}{
 	name={autotroph},
-	description={An autotroph or primary producer, is an organism that produces complex organic compounds (such as carbohydrates, fats, and proteins) from simple substances present in its surroundings, generally using energy from light (photosynthesis) or inorganic chemical reactions (chemosynthesis). They are the producers in a food chain, such as plants on land or algae in water (in contrast to \glspl{gls:heterotroph} as consumers of autotrophs). They do not need a living source of energy or organic carbon. Autotrophs can reduce carbon dioxide to make organic compounds for biosynthesis and also create a store of chemical energy. Most autotrophs use water as the reducing agent, but some can use other hydrogen compounds such as hydrogen sulfide. Some autotrophs, such as green plants and algae, are phototrophs, meaning that they convert electromagnetic energy from sunlight into chemical energy in the form of reduced carbon--\cite{wiki:autotroph} }}
+	description={An autotroph or primary producer, is an organism that produces complex organic compounds (such as carbohydrates, fats, and proteins) from simple substances present in its surroundings, generally using energy from light (photosynthesis) or inorganic chemical reactions (chemosynthesis)\cite{wiki:autotroph} }}
+
+\newglossaryentry{gls:bacteriorhodopsin}{
+	name={bacteriorhodopsin},
+	description={a protein used by Archaea, most notably by halobacteria, a class of the Euryarchaeota. It acts as a proton pump; that is, it captures light energy and uses it to move protons across the membrane out of the cell. The resulting proton gradient is subsequently converted into chemical energy--\cite{ wiki:bacteriorhodopsin}}}
+
+\newglossaryentry{gls:beta:anomer}{
+	name={$\beta$-anomer},
+	description={The configuration at the anomeric centre (that derived from the carbonyl carbon) is denoted $\alpha$ or $\beta$ by reference to the stereocentre that determines the absolute configuration. In a Fischer projection, if the substituent off the anomeric centre is on the same side as the oxygen of the configurational (D- or L-) carbon, then it is the $\alpha$--anomer. If it is directed in the opposite direction it is the $\beta$-anomer\cite{wiki:anomeric:centre}}}
+
+\newglossaryentry{gls:blackqueen}{
+	name={Black Queen},
+	description={... the black queen refers to a playing card, in this case the queen of spades in the game Hearts. In Hearts the goal is to score as few points as possible. The queen of spades, however, is worth as many points as all other cards combined, and therefore a central goal of the game is to not be the player that ends up with that card.  In the context of evolution, the Black Queen posits that certain genes, or more broadly, biological functions, are analogous to the queen of spades. Such functions are costly and therefore undesirable, leading to a selective advantage for organisms that stop performing them. At the same time, the function must provide an indispensable public good, necessitating its retention by at least a subset of the individuals in the community--after all, one cannot play Hearts without a queen of spades\cite{morris2012black}}}
 
 \newglossaryentry{gls:Candidate:Phyla:Radiation}{
 	name={Candidate Phyla Radiation},
-	description={The Candidate Phyla Radiation (CPR) comprises a huge group of bacteria that have small genomes that rarely encode CRISPR-Cas systems for phage defense--\cite{chen2019candidate}}}
+	description={The Candidate Phyla Radiation (CPR) comprises a huge group of bacteria that have small genomes that rarely encode CRISPR-Cas systems for phage defense\cite{chen2019candidate}}}
 
 \newglossaryentry{gls:candidatus}{
 	name={candidatus},
-	description={In prokaryote nomenclature, Candidatus (Latin for candidate of Roman office, named after the white gown worn by Roman senators) is a component of the taxonomic name for a bacterium or other prokaryote, that cannot be maintained in a microbiological culture collection. It is an interim taxonomic status for yet-to-be-cultured microorganisms--\cite{wiki:2018candidatus}''..., we propose the category Candidatus (L. candidatus, a candidate, to indicate that the assignment is provisional) followed by a descriptive vernac- ular epithet and then the available  essential  information''--\cite{murray1994taxonomic}}}
+	description={In prokaryote nomenclature, Candidatus is a component of the taxonomic name for a bacterium or other prokaryote, that cannot be maintained in a microbiological culture collection. It is an interim taxonomic status for yet-to-be-cultured microorganisms\cite{wiki:2018candidatus,murray1994taxonomic}}}
 
 \newglossaryentry{gls:catalyst}{
 	name={catalyst},
@@ -89,81 +192,169 @@
 	name={Cellular Signature Structures},
 	description={A cellular compartment that  distinguished  eukaryotes  from  prokaryotes.\cite{kurland2006genomics}}}
 
+\newglossaryentry{gls:chemoautotroph}{
+	name={chemoautotroph},
+	description={Chemoautotrophs are able to synthesize their own organic molecules from the fixation of carbon dioxide. These organisms are able to produce their own source of food, or energy. The energy required for this process comes from the oxidation of inorganic molecules such as iron, sulfur or magnesium. Chemoautotrophs are able to thrive in very harsh environments, such as deep sea vents, due to their lack of dependence on outside sources of carbon other than carbon dioxide. Chemoautotrophs include nitrogen fixing bacteria located in the soil, iron oxidizing bacteria located in the lava beds, and sulfur oxidizing bacteria located in deep sea thermal vents\cite{libre2020biology}}}
+
+\newglossaryentry{gls:chemoheterotroph}{
+	name={chemoheterotroph},
+	description={Chemoheterotrophs, unlike \glspl{gls:chemoautotroph}, are unable to synthesize their own organic molecules. Instead, these organisms must ingest preformed carbon molecules, such as carbohydrates and lipids, synthesized by other organisms. They do, however, still obtain energy from the oxidation of inorganic molecules like the chemoautotrophs. Chemoheterotrophs are only able to thrive in environments that are capable of sustaining other forms of life due to their dependence on these organisms for carbon sources. Chemoheterotrophs are the most abundant type of chemotrophic organisms and include most bacteria, fungi and protozoa\cite{libre2020biology}}}
+
+\newglossaryentry{gls:chemotroph}{
+	name={chemotroph},
+	description={Chemotrophs are a class of organisms that obtain their energy through the oxidation of inorganic molecules, such as iron and magnesium. The most common type of chemotrophic organisms are prokaryotic and include both bacteria and fungi. All of these organisms require carbon to survive and reproduce. The ability of chemotrophs to produce their own organic or carbon-containing molecules differentiates these organisms into two different classifications–-\glspl{gls:chemoautotroph} and \glspl{gls:chemoheterotroph}\cite{libre2020biology}}}
+
+\newglossaryentry{gls:chirality}{
+	name={chirality},
+	description={An object or a system is chiral if it is distinguishable from its mirror image; that is, it cannot be superimposed onto it. As polarized light passes through a chiral molecule, the plane of polarization, when viewed along the axis toward the source, will be rotated clockwise (to the right) or anticlockwise (to the left). A right handed rotation is dextrorotary (d); that to the left is levorotary (l). The d- and l-isomers are the same compound but are called \glspl{gls:enantiomer} . An equimolar mixture of the two optical isomers will produce no net rotation of polarized light as it passes through. Left handed molecules have l- prefixed to their names; d- is prefixed to right handed molecules\cite{wiki:chirality}}}
+
 \newglossaryentry{gls:clathrate}{
 	name={clathrate},
 	description={Inclusion compound in which the guest molecule is in a cage
-		formed by the host molecule or by a lattice of host molecules--\cite{iupac2009goldbook}}}
+		formed by the host molecule or by a lattice of host molecules\cite{iupac2009goldbook}}}
 
 \newglossaryentry{gls:coacervate}{
 	name={coacervate},
 	description={The separation into two liquid phases in colloidal
 		systems. The phase more concentrated in colloid
-		component is the coacervate, and the other phase is the equilibrium solution--\cite{iupac2009goldbook}}}
+		component is the coacervate, and the other phase is the equilibrium solution\cite{iupac2009goldbook}}}
+	
+\newglossaryentry{gls:cytoplasm}{
+	name={cytoplasm},
+	description={In cell biology, the cytoplasm is all of the material within a cell, enclosed by the cell membrane, except for the cell nucleus. The material inside the nucleus and contained within the nuclear membrane is termed the nucleoplasm. The main components of the cytoplasm are cytosol--a gel-like substance, the organelles--the cell's internal sub-structures, and various cytoplasmic inclusions. The cytoplasm is about 80\% water and usually colorless\cite{wiki:cytoplasm}}}
+
+\newglossaryentry{gls:cytosol}{
+	name={cytosol},
+	description={the liquid found inside cells\cite{wiki:cytosol}}}
+
+\newglossaryentry{gls:cofactor}{
+	name={cofactor},
+	description={A cofactor is a non-protein chemical compound or metallic ion that is required for an enzyme's activity as a catalyst, a substance that increases the rate of a chemical reaction. Cofactors can be considered ''helper molecules'' that assist in biochemical transformations\cite{wiki:cofactor}}}
+	
+\newglossaryentry{gls:CpG}{
+	name={CpG},
+	description={The CpG sites or CG sites are regions of DNA where a cytosine nucleotide is followed by a guanine nucleotide in the linear sequence of bases along its 5' → 3' direction\cite{wiki:CpG}}}
 
 \newglossaryentry{gls:deamination}{
 	name={deamination},
-	description={Deamination is the removal of an amino group from a molecule. Enzymes that catalyse this reaction are called deaminases--\cite{wiki:deamination}}}
+	description={Deamination is the removal of an amino group from a molecule. Enzymes that catalyse this reaction are called deaminases\cite{wiki:deamination}}}
 
-\newglossaryentry{gls:DNAmethyltransferase}
-	{name={DNAmethyltransferase},
-	description={In biochemistry, the DNA methyltransferase (DNA MTase) family of enzymes catalyze the transfer of a methyl group to DNA. DNA methylation serves a wide variety of biological functions. All the known DNA methyltransferases use S-adenosyl methionine (SAM) as the methyl donor--\cite{wiki:DNAmethyltransferase}}}
+\newglossaryentry{gls:derivatization}{
+	name={derivatization},
+	description={Derivatization is a technique used in chemistry which converts a chemical compound into a product (the reaction's derivate) of similar chemical structure, called a derivative\cite{ wiki:derivatization} }}
+
+\newglossaryentry{gls:DNAmethyltransferase}	{
+	name={DNAmethyltransferase},
+	description={In biochemistry, the DNA methyltransferase (DNA MTase) family of enzymes catalyze the transfer of a methyl group to DNA. DNA methylation serves a wide variety of biological functions. All the known DNA methyltransferases use S-adenosyl methionine (SAM) as the methyl donor\cite{wiki:DNAmethyltransferase}}}
+
+\newglossaryentry{gls:ediacaran}{
+	name={Ediacaran},
+	description={Period from 635 \gls{gls:Mya} to 541 \gls{gls:Mya}, immediately preceding the Cambrian\cite{stratigraphy2020chart}}}
+
+\newglossaryentry{gls:emergence}{
+	name={emergence},
+	description={A process by which a system of interacting subunits acquires qualitatively new properties that cannot be understood as the simple addition of their individual contributions--\cite{sfi2020glossary}}}
+
+\newglossaryentry{gls:enantiomer}{
+	name={enantiomer},
+	description={In chemistry, an enantiomer is one of two stereoisomers that are mirror images of each other that are non-superposable (not identical), much as one's left and right hands are mirror images of each other that cannot appear identical simply by reorientation. A single chiral atom or similar structural feature in a compound causes that compound to have two possible structures which are non-superposable, each a mirror image of the other. Each member of the pair is termed an enantiomorph (enantio = opposite; morph = form); the structural property is termed enantiomerism. The presence of multiple chiral features in a given compound increases the number of geometric forms possible, though there may still be some perfect-mirror-image pairs\cite{wiki:enantiomer} }}
+
+\newglossaryentry{gls:enantiomeric-excess}{
+	name={enantiomeric excess},
+	description={Enantiomeric excess (ee) is a measurement of purity used for chiral substances. It reflects the degree to which a sample contains one \gls{gls:enantiomer} in greater amounts than the other\cite{wiki:enantiomericexcess} }}
+
+\newglossaryentry{gls:endocytosis}{
+	name={endocytosis},
+	description={a cellular process in which substances are brought into the cell. The material to be internalized is surrounded by an area of cell membrane, which then buds off inside the cell to form a vesicle containing the ingested material. Endocytosis includes pinocytosis (cell drinking) and \gls{gls:phagocytosis} (cell eating). It is a form of active transport\cite{wiki:endocytosis}}}
 
 \newglossaryentry{gls:endomembrane}{
 	name={endomembrane},
-	description={The endomembrane system is composed of the different membranes that are suspended in the cytoplasm within a eukaryotic cell. These membranes divide the cell into functional and structural compartments, or organelles. In eukaryotes the organelles of the endomembrane system include: the nuclear membrane, the endoplasmic reticulum, the Golgi apparatus, lysosomes, vesicles, endosomes, and plasma (cell) membrane among others. The system is defined more accurately as the set of membranes that form a single functional and developmental unit, either being connected directly, or exchanging material through vesicle transport. Importantly, the endomembrane system does not include the membranes of chloroplasts or mitochondria, but might have evolved from the latter--\cite{wiki:endomembrane}}}
+	description={The endomembrane system is composed of the different membranes that are suspended in the cytoplasm within a eukaryotic cell. These membranes divide the cell into functional and structural compartments, or organelles. In eukaryotes the organelles of the endomembrane system include: the nuclear membrane, the endoplasmic reticulum, the Golgi apparatus, lysosomes, vesicles, endosomes, and plasma (cell) membrane among others. The system is defined more accurately as the set of membranes that form a single functional and developmental unit, either being connected directly, or exchanging material through vesicle transport. Importantly, the endomembrane system does not include the membranes of chloroplasts or mitochondria, but might have evolved from the latter\cite{wiki:endomembrane}}}
 
 \newglossaryentry{gls:enthalpy}{
 	name={enthalpy},
 	description={Internal energy
-		of a system plus the product of pressure and volume. Its change in a system is equal to the heat brought to the system at constant pressure.--\cite{iupac2009goldbook}}}
+		of a system plus the product of pressure and volume. Its change in a system is equal to the heat brought to the system at constant pressure.\cite{iupac2009goldbook}}}
 
 \newglossaryentry{gls:eocyte}{
 	name={eocyte},
-	description={Eocytes are sulphur-metabolizing, extreme thermophile organisms, placed within the Crenarchaeota in the three-domain taxonomic system, but recent genetic studies have shown eocytes to be very closely related to eukaryotes, suggesting that eukaryotes and Crenarchaeota share a common ancestor. This evidence supports the abandonment of the three-domain classification in favour of a two-domain classification comprising the Eubacteria and Archaea, with the Eukarya contained within the Archaea--\cite{allaby2010eocyte}}}
+	description={Eocytes are sulphur-metabolizing, extreme thermophile organisms, placed within the Crenarchaeota in the three-domain taxonomic system, but recent genetic studies have shown eocytes to be very closely related to eukaryotes, suggesting that eukaryotes and Crenarchaeota share a common ancestor. This evidence supports the abandonment of the three-domain classification in favour of a two-domain classification comprising the Eubacteria and Archaea, with the Eukarya contained within the Archaea\cite{allaby2010eocyte}}}
+
+\newglossaryentry{gls:error:threshold}{
+	name={Error Threshold},
+	description={The Error Threshold is the \emph{maximum mutation rate that allows for adaptive evolution--\cite[Lecture 5.6.2]{sfi2020}}}}
 
 \newglossaryentry{gls:gammaproteobacteria}{
 	name={gammaproteobacteria},
-	description={Gammaproteobacteria are a class of bacteria. Several medically, ecologically, and scientifically important groups of bacteria belong to this class. Like all Proteobacteria, the Gammaproteobacteria are Gram-negative. --\cite{wiki:gammaproteobacteria}}}
+	description={Gammaproteobacteria are a class of bacteria. Several medically, ecologically, and scientifically important groups of bacteria belong to this class. Like all Proteobacteria, the Gammaproteobacteria are Gram-negative. \cite{wiki:gammaproteobacteria}}}
 
 
 \newglossaryentry{gls:eocyte:hypothesis}{
 	name={eocyte},
-	description={A proposed taxonomic revision that would replace the three-*domain classification with one of only two domains, Bacteria and Archaea, an idea first proposed in 1984 by James Lake and colleagues. Eocytes are sulphur-metabolizing, extreme thermophile organisms, placed within the Crenarchaeota in the three-domain taxonomic system, but recent genetic studies have shown eocytes to be very closely related to eukaryotes, suggesting that eukaryotes and Crenarchaeota share a common ancestor. This evidence supports the abandonment of the three-domain classification in favour of a two-domain classification comprising the Eubacteria and Archaea, with the Eukarya contained within the Archaea--\cite{allaby2010eocyte}}}
+	description={A proposed taxonomic revision that would replace the three-*domain classification with one of only two domains, Bacteria and Archaea, an idea first proposed in 1984 by James Lake and colleagues. Eocytes are sulphur-metabolizing, extreme thermophile organisms, placed within the Crenarchaeota in the three-domain taxonomic system, but recent genetic studies have shown eocytes to be very closely related to eukaryotes, suggesting that eukaryotes and Crenarchaeota share a common ancestor. This evidence supports the abandonment of the three-domain classification in favour of a two-domain classification comprising the Eubacteria and Archaea, with the Eukarya contained within the Archaea\cite{allaby2010eocyte}}}
+
+\newglossaryentry{gls:eukaryotic}{
+	name={eukaryotic},
+	description={Eukaryotic cells are cells that contain a nucleus and organelles, and are enclosed by a plasma membrane. Organisms that have eukaryotic cells include protozoa, fungi, plants and animals. These organisms are grouped into the biological domain Eukaryota. Eukaryotic cells are larger and more complex than prokaryotic cells, which are found in Archaea and Bacteria, the other two domains of life--\cite{biologydictionary2016eukaryotic}}}
 
 \newglossaryentry{gls:eukaryotic:signature:protein}{
 	name={Eukaryotic Signature Protein},
 	description={A protein that is found in eukaryotic cells but has no significant homology to proteins in Archaea and Bacteria--cite{hartman2002origin}}}
 
+\newglossaryentry{gls:evolution}{
+	name={evolution},
+	description={Change in the heritable characteristics of a \textit{population} through time--\cite[Lecture 4.7.3]{sfi2020}. It is important that this is at a population level; for an individual we call it ''development''. Characteristics need to be heritable, as this allows evolution to act on them.}}
+
+\newglossaryentry{gls:fitness}{
+	name={fitness},
+	description={the differential reproductive success conferred by the new mutation-\cite[Lecture 4.7.3]{sfi2020}. See also \cite[Chapter 10, An Agony in Five Fits]{dawkins1982extended}}}
+
 \newglossaryentry{gls:furan}{
 	name={furan},
-	description={Furan is a heterocyclic organic compound, consisting of a five-membered aromatic ring with four carbon atoms and one oxygen. Chemical compounds containing such rings are also referred to as furans--\cite{wiki:furan}}
+	description={Furan is a heterocyclic organic compound, consisting of a five-membered aromatic ring with four carbon atoms and one oxygen. Chemical compounds containing such rings are also referred to as furans\cite{wiki:furan}}
 }
 
 \newglossaryentry{gls:gibbs-free}{
 	name={Gibbs free energy},
-	description={A thermodynamic potential that can be used to calculate the maximum of reversible work that may be performed by a thermodynamic system at a constant temperature and pressure (isothermal, isobaric). The Gibbs free energy is the maximum amount of non-expansion work that can be extracted from a thermodynamically closed system (one that can exchange heat and work with its surroundings, but not matter); this maximum can be attained only in a completely reversible process--\cite{wiki:gibbs-free}}}
+	description={A thermodynamic potential that can be used to calculate the maximum of reversible work that may be performed by a thermodynamic system at a constant temperature and pressure (isothermal, isobaric). The Gibbs free energy is the maximum amount of non-expansion work that can be extracted from a thermodynamically closed system (one that can exchange heat and work with its surroundings, but not matter); this maximum can be attained only in a completely reversible process\cite{wiki:gibbs-free}}}
 
 
 
 \newglossaryentry{gls:heterotachy}{
 	name={heterotachy},
-	description={Heterotachy refers to variations in lineage-specific evolutionary rates over time. In the field of molecular evolution, the principle of heterotachy states that the substitution rate of sites in a gene can change through time--\cite{lopez2002heterotachy}}}
+	description={Heterotachy refers to variations in lineage-specific evolutionary rates over time. In the field of molecular evolution, the principle of heterotachy states that the substitution rate of sites in a gene can change through time\cite{lopez2002heterotachy}}}
 
 \newglossaryentry{gls:heterotroph}{
 	name={heterotroph},
-	description={A heterotroph is an organism that cannot produce its own food, relying instead on the intake of nutrition from other sources of organic carbon, mainly plant or animal matter. In the food chain, heterotrophs are primary, secondary and tertiary consumers, but not producers. Living organisms that are heterotrophic include all animals and fungi, some bacteria and protists, and parasitic plants. The term heterotroph arose in microbiology in 1946 as part of a classification of microorganisms based on their type of nutrition. The term is now used in many fields, such as ecology in describing the food chain--\cite{wiki:heterotroph} }}
+	description={A heterotroph is an organism that cannot produce its own food, relying instead on the intake of nutrition from other sources of organic carbon, mainly plant or animal matter. In the food chain, heterotrophs are primary, secondary and tertiary consumers, but not producers. Living organisms that are heterotrophic include all animals and fungi, some bacteria and protists, and parasitic plants. The term heterotroph arose in microbiology in 1946 as part of a classification of microorganisms based on their type of nutrition. The term is now used in many fields, such as ecology in describing the food chain\cite{wiki:heterotroph} }}
+
+\newglossaryentry{gls:homeostasis}{
+	name={homeostasis},
+	description={the state of steady internal, physical, and chemical conditions maintained by living systems. This is the condition of optimal functioning for the organism and includes many variables, such as body temperature and fluid balance, being kept within certain pre-set limits (homeostatic range). Other variables include the pH of extracellular fluid, the concentrations of sodium, potassium and calcium ions, as well as that of the blood sugar level, and these need to be regulated despite changes in the environment, diet, or level of activity. Each of these variables is controlled by one or more regulators or homeostatic mechanisms, which together maintain life\cite{wiki:homeostasis}}}
+
+\newglossaryentry{gls:homologous}{
+	name={homologous},
+	description={Homologous means this part of two genomes does the same thing, has the same function, most importantly has the same evolutionary origin--\cite[Lecture 5.3.2]{sfi2020}}}
 
 \newglossaryentry{gls:hydrogenosome }{
 	name={hydrogenosome },
-	description={A hydrogenosome is a membrane-enclosed organelle of some anaerobic ciliates, trichomonads, fungi, and animals. The hydrogenosomes of trichomonads (the most studied of the hydrogenosome-containing microorganisms) produce molecular hydrogen, acetate, carbon dioxide and ATP by the combined actions of pyruvate:ferredoxin oxido-reductase, hydrogenase, acetate:succinate CoA transferase and succinate thiokinase. Superoxide dismutase, malate dehydrogenase (decarboxylating), ferredoxin, adenylate kinase and NADH:ferredoxin oxido-reductase are also localized in the hydrogenosome. It is nearly universally accepted that hydrogenosomes evolved from mitochondria--\cite{wiki:hydrogenosome}}}
+	description={A hydrogenosome is a membrane-enclosed organelle of some anaerobic ciliates, trichomonads, fungi, and animals. The hydrogenosomes of trichomonads (the most studied of the hydrogenosome-containing microorganisms) produce molecular hydrogen, acetate, carbon dioxide and ATP by the combined actions of pyruvate:ferredoxin oxido-reductase, hydrogenase, acetate:succinate CoA transferase and succinate thiokinase. Superoxide dismutase, malate dehydrogenase (decarboxylating), ferredoxin, adenylate kinase and NADH:ferredoxin oxido-reductase are also localized in the hydrogenosome. It is nearly universally accepted that hydrogenosomes evolved from mitochondria\cite{wiki:hydrogenosome}}}
+
+\newglossaryentry{gls:insolation}{
+	name={insolation},
+	description={the amount of downward solar radiation energy incident on a plane surface\cite{hartmann2015global}}}
 
 \newglossaryentry{gls:isolated:representatives}{
 	name={isolated representatives},
-	description={(of a phylum) one or more species have been cultured individually in the laboratory--\cite{taylor2016branching}.}}
+	description={(of a phylum) one or more species have been cultured individually in the laboratory\cite{taylor2016branching}}}
+
+\newglossaryentry{gls:ketone}{
+	name={ketone},
+	description={In chemistry, a ketone is a functional group with the structure RC(=O)R', where R and R' can be a variety of carbon-containing substituents. Ketones contain a carbonyl group (a carbon-oxygen double bond)\cite{wiki:ketone} }}
 
 \newglossaryentry{gls:ketose}{
 	name={ketose},
-	description={A ketose is a monosaccharide containing one ketone group per molecule. The simplest ketose is dihydroxyacetone, which has only three carbon atoms, and it is the only one with no optical activity. All monosaccharide ketoses are reducing sugars, because they can tautomerize into \glspl{gls:aldose} via an aldol intermediate, and the resulting aldehyde group can be oxidised, for example in the Tollens' test or Benedict's test. Ketoses that are bound into glycosides, for example in the case of the fructose moiety of sucrose, are nonreducing sugars--\cite{wiki:ketose}}
+	description={A ketose is a monosaccharide containing one \gls{gls:ketone} group per molecule\cite{wiki:ketose}}
 }
 
 \newglossaryentry{gls:kinetic:isotope:effect}{
@@ -178,11 +369,35 @@
 
 \newglossaryentry{gls:landauer_bound}{
 	name={Landauer Bound},
-	description={Landauer Bound: any logically irreversible manipulation of information, such as the erasure of a bit or the merging of two computation paths, must be accompanied by a corresponding entropy increase in non-information-bearing degrees of freedom of the information-processing apparatus or its environment--$kT(H_i - H_f)$, where $H_i$ represents the entropy of the initial state, $H_i$ of the final\cite{wiki:landauer}}}
+	description={Any logically irreversible manipulation of information, such as the erasure of a bit or the merging of two computation paths, must be accompanied by a corresponding entropy increase in non-information-bearing degrees of freedom of the information-processing apparatus or its environment--$kT(H_i - H_f)$, where $H_i$ represents the entropy of the initial state, $H_i$ of the final\cite{wiki:landauer,bennett2003notes,landauer1961irreversibility}}}
+
+
+
+\newglossaryentry{gls:Large:subunit:ribosomal:ribonucleic:acid}{
+	name={Large subunit ribosomal ribonucleic acid},
+	description={Large subunit ribosomal ribonucleic acid (LSU rRNA) is the largest of the two major RNA components of the ribosome. Associated with a number of ribosomal proteins, the LSU rRNA forms the large subunit of the ribosome. The LSU rRNA acts as a ribozyme, catalyzing peptide bond formation\cite{wiki:LSU}}}
+
+\newglossaryentry{gls:leaving group}{
+	name={leaving group},
+	description={A leaving group is a molecular fragment that departs with a pair of electrons in heterolytic bond cleavage. Leaving groups can be anions, cations or neutral molecules, but in either case it is crucial that the leaving group be able to stabilize the additional electron density that results from bond heterolysis--\cite{ wiki:leaving:group} }}
 
 \newglossaryentry{gls:life}{
 	name={Life},
-	description={Life is a self-propagating chemical system capable of undergoing adaptive evolution--adapted from \cite{deamer1994origins}}}
+	description={a self-propagating chemical system capable of undergoing adaptive evolution--adapted from \cite{deamer1994origins}}}
+
+\newglossaryentry{gls:likelihood}{
+	name={likelihood},
+	description={In statistics, the likelihood function (often simply called the likelihood) measures the goodness of fit of a statistical model to a sample of data for given values of the unknown parameters. It is formed from the joint probability distribution of the sample, but viewed and used as a function of the parameters only, thus treating the random variables as fixed at the observed values--\cite{wiki:likelihood}}}
+
+\newglossaryentry{gls:linkagedisequilibrium}{name={ linkage disequilibrium},description={the non-random association of alleles at different loci in a given population. Loci are said to be in linkage disequilibrium when the frequency of association of their different alleles is higher or lower than what would be expected if the loci were independent and associated randomly\cite{wiki:linkage:disequilibrium}}}
+
+\newglossaryentry{gls:lipid}{
+	name={lipid},
+	description={Lipids are amphiphilic molecules that  self-assemble into a hydrophobic barrier that surrounds a cell\cite[Lecture 2.7.1]{sfi2020}}}
+
+\newglossaryentry{gls:liposome}{
+	name={liposome},
+	description={See \gls{gls:vesicle}}}
 
 \newglossaryentry{gls:lokiarchaeota}{
 	name={Lokiarchaeota},
@@ -190,24 +405,41 @@
 
 \newglossaryentry{gls:long:branch:attraction}{
 	name={long branch attraction},
-	description={In phylogenetics, long branch attraction is a form of systematic error whereby distantly related lineages are incorrectly inferred to be closely related. Long branch attraction arises when the amount of molecular or morphological change accumulated within a lineage is sufficient to cause that lineage to appear similar (thus closely related) to another long-branched lineage, solely because they have both undergone a large amount of change, rather than because they are related by descent. Such bias is more common when the overall divergence of some taxa results in long branches within a phylogeny. Long-branches are often attracted to the base of a phylogenetic tree, because the lineage included to represent an outgroup is often also long-branched--\cite{wiki:long:branch:attraction}}}
+	description={In phylogenetics, long branch attraction is a form of systematic error whereby distantly related lineages are incorrectly inferred to be closely related. Long branch attraction arises when the amount of molecular or morphological change accumulated within a lineage is sufficient to cause that lineage to appear similar (thus closely related) to another long-branched lineage, solely because they have both undergone a large amount of change, rather than because they are related by descent. Such bias is more common when the overall divergence of some taxa results in long branches within a phylogeny. Long-branches are often attracted to the base of a phylogenetic tree, because the lineage included to represent an outgroup is often also long-branched\cite{wiki:long:branch:attraction}}}
+
+\newglossaryentry{gls:methylation}{
+	name={methylation},
+	description={DNA methylation is a biological process by which methyl groups are added to the DNA molecule. Methylation can change the activity of a DNA segment without changing the sequence. When located in a gene promoter, DNA methylation typically acts to repress gene transcription. In mammals, DNA methylation is essential for normal development and is associated with a number of key processes including genomic imprinting, X-chromosome inactivation, repression of transposable elements, aging, and carcinogenesis\cite{wiki:methylation} }}
 
 \newglossaryentry{gls:mitosome}{
 	name={mitosome},
-	description={An organelle found in "amitochondrial" unicellular organisms which do not have the capability of gaining energy from oxidative phosphorylation. Mitosomes are almost certainly derived from mitochondria, they have a double membrane and most proteins are delivered to them by a targeting sequence. Unlike mitochondria, mitosomes do not contain any DNA. The mitosome functions in iron-sulphur cluster assembly--\cite{uniprot2009mitosome}}}
+	description={An organelle found in "amitochondrial" unicellular organisms which do not have the capability of gaining energy from oxidative phosphorylation. Mitosomes are almost certainly derived from mitochondria, they have a double membrane and most proteins are delivered to them by a targeting sequence. Unlike mitochondria, mitosomes do not contain any DNA. The mitosome functions in iron-sulphur cluster assembly\cite{uniprot2009mitosome}}}
 
 \newglossaryentry{gls:nucleolus}{
 	name={nucleolus},
 	plural={nucleoli},
 	description={The nuclear site of rRNA transcription, processing, and ribosome assembly\cite{cooper2000sinauer}}}
 
+\newglossaryentry{gls:nucleoside-triphosphate}{
+	name={nucleoside triphosphate},
+	description={A nucleoside triphosphate is a molecule containing a nitrogenous base bound to a 5-carbon sugar (either ribose or deoxyribose), with three phosphate groups bound to the sugar\cite{wiki:nucleoside:triphosphate}}}
+
 \newglossaryentry{gls:oligotroph}{
 	name={oligotroph},
-	description={An oligotroph is an organism that can live in an environment that offers very low levels of nutrients. They may be contrasted with copiotrophs, which prefer nutritionally rich environments. Oligotrophs are characterized by slow growth, low rates of metabolism, and generally low population density --\cite{wiki:oligotroph}}}
+	description={An oligotroph is an organism that can live in an environment that offers very low levels of nutrients. They may be contrasted with copiotrophs, which prefer nutritionally rich environments. Oligotrophs are characterized by slow growth, low rates of metabolism, and generally low population density \cite{wiki:oligotroph}}}
+
+\newglossaryentry{gls:operationaltaxonomicunit}{
+	name={operational taxonomic unit},
+	description={An operational taxonomic unit (OTU) is an operational definition used to classify groups of closely related individuals. The term was originally introduced by Robert R. Sokal and Peter H. A. Sneath in the context of numerical taxonomy, where an "Operational Taxonomic Unit" is simply the group of organisms currently being studied. In this sense, an OTU is a pragmatic definition to group individuals by similarity, equivalent to but not necessarily in line with classical Linnaean taxonomy or modern evolutionary taxonomy\cite{wiki:OperationalTaxonomicUnit}\\
+	Nowadays, however, the term is also used in a different context and refers to clusters of (uncultivated or unknown) organisms, grouped by DNA sequence similarity of a specific taxonomic marker gene (originally coined as mOTU; molecular OTU). In other words, OTUs are pragmatic proxies for "species" (microbial or metazoan) at different taxonomic levels, in the absence of traditional systems of biological classification as are available for macroscopic organisms. For several years, OTUs have been the most commonly used units of diversity, especially when analysing small subunit 16S (for prokaryotes) or 18S rRNA (for eukaryotes ) marker gene sequence datasets. This appears to be the interpretation used in \cite{souza2018lost}.}}
+
+\newglossaryentry{gls:organelle}{
+	name={organelle},
+	description={a specialized subunit, usually within a cell, that has a specific function. Organelles are either separately enclosed within their own lipid bilayers (also called membrane-bound organelles) or are spatially distinct functional units without a surrounding lipid bilayer (non-membrane bound organelles). Although most organelles are functional units within cells, some functional units that extend outside of cells are often termed organelles, such as cilia, the flagellum and archaellum, and the trichocyst\cite{wiki:organelle}}}
 
 \newglossaryentry{gls:orthology}{
 	name={orthology},
-	description={Where the homology is the result of speciation so that the history of the gene reflects the history of the species (for example $\alpha$ haemoglobin in man and mouse) the genes should be called \textit{orthologous}--\cite{fitch1970distinguishing}}}
+	description={Where the homology is the result of speciation so that the history of the gene reflects the history of the species (for example $\alpha$ haemoglobin in man and mouse) the genes should be called \textit{orthologous}\cite{fitch1970distinguishing}}}
 
 \newglossaryentry{gls:outgroup}{
 	name={outgroup},
@@ -217,67 +449,158 @@
 	name={parology},
 	description={Where the hology is the result of gene duplication so that both copies have descended side by side during the history of an organism (for example $\alpha$ and $\beta$ hemoglobin)  the genese should be called paralogous\cite{fitch1970distinguishing}}}
 
+\newglossaryentry{gls:phagocytosis}{
+	name={phagocytosis},
+	description={
+		the process by which a cell uses its plasma membrane to engulf a large particle ($\ge 0.5 \mu m$ ), giving rise to an internal compartment called the phagosome. It is one type of \gls{gls:endocytosis}--\cite{wiki:phagocytosis}}}
+	
+\newglossaryentry{gls:phospholipid}{
+	name={phospholipid},
+	description={Phospholipids (PL) are a class of lipids that are a major component of all cell membranes. They can form lipid bilayers because of their amphiphilic characteristic. The structure of the phospholipid molecule generally consists of two hydrophobic fatty acid "tails" and a hydrophilic "head" consisting of a phosphate group. The two components are usually joined together by a glycerol molecule. The phosphate groups can be modified with simple organic molecules such as choline, ethanolamine or serine\cite{wiki:phospholipid}}}
+
+\newglossaryentry{gls:phototroph}{
+	name={phototroph},
+	description={Phototrophs are organisms that use light as their source of energy to produce ATP and carry out various cellular processes. Not all phototrophs are photosynthetic but they all constitute a food source for heterotrophic organisms. All phototrophs either use electron transport chain or direct proton pumping to establish an electro-chemical gradient utilized by ATP synthase to provide molecular energy for the cell. Phototrophs can be of two types based on their metabolism\cite{libre2020biology}}}
+
+\newglossaryentry{gls:photoautotroph}{
+	name={photoautotroph},
+	description={An autotroph is an organism able to make its own food. Photoautotrophs are organisms that carry out photosynthesis. Using energy from sunlight, carbon dioxide and water are converted into organic materials to be used in cellular functions such as biosynthesis and respiration. In an ecological context, they provide nutrition for all other forms of life (besides other autotrophs such as chemotrophs ). In terrestrial environments plants are the predominant variety, while aquatic environments include a range of phototrophic organisms such as algae, protists, and bacteria. In photosynthetic bacteria and cyanobacteria that build up carbon dioxide and water into organic cell materials using energy from sunlight, starch is produced as final product. This process is an essential storage form of carbon, which can be used when light conditions are too poor to satisfy the immediate needs of the organism\cite{libre2020biology}}}
+
+\newglossaryentry{gls:photoheterotroph}{
+	name={photoheterotroph},
+	description={A heterotroph is an organism that depends on organic matter already produced by other organisms for its nourishment. Photoheterotrophs obtain their energy from sunlight and carbon from organic material and not carbon dioxide. Most of the well-recognized phototrophs are autotrophs, also known as photoautotrophs, and can fix carbon. They can be contrasted with chemotrophs that obtain their energy by the oxidation of electron donors in their environments. Photoheterotrophs produce ATP through photophosphorylation but use environmentally obtained organic compounds to build structures and other bio-molecules. Photoautotrophic organisms are sometimes referred to as holophytic\cite{libre2020biology}}}
+
+\newglossaryentry{gls:phylogeny}{
+	name={phylogeny},
+	description={The result of [phylogenetic inference] is a phylogeny (also known as a phylogenetic tree) – a diagrammatic hypothesis about the history of the evolutionary relationships of a group of organisms. The tips of a phylogenetic tree can be living organisms or fossils, and represent the "end", or the present, in an evolutionary lineage. A phylogenetic tree can be rooted or unrooted. A rooted tree indicates the common ancestor, or ancestral lineage, of the tree. An unrooted tree makes no assumption about the ancestral line, and does not show the origin or root of the gene or organism in question. Phylogenetic analyses have become central to understanding biodiversity, evolution, ecology, and genomes\cite{wiki:phylogenetics}}}
+
 \newglossaryentry{gls:phylogenetics}{
 	name={phylogenetics},
-	description={In biology, phylogenetics  is the study of the evolutionary history and relationships among individuals or groups of organisms (e.g. species, or populations). These relationships are discovered through phylogenetic inference methods that evaluate observed heritable traits, such as DNA sequences or morphology under a model of evolution of these traits. The result of these analyses is a phylogeny (also known as a phylogenetic tree) – a diagrammatic hypothesis about the history of the evolutionary relationships of a group of organisms. The tips of a phylogenetic tree can be living organisms or fossils, and represent the "end", or the present, in an evolutionary lineage. A phylogenetic tree can be rooted or unrooted. A rooted tree indicates the common ancestor, or ancestral lineage, of the tree. An unrooted tree makes no assumption about the ancestral line, and does not show the origin or root of the gene or organism in question. Phylogenetic analyses have become central to understanding biodiversity, evolution, ecology, and genomes\cite{wiki:phylogenetics}}}
+	description={In biology, phylogenetics  is the study of the evolutionary history and relationships among individuals or groups of organisms (e.g. species, or populations). These relationships are discovered through phylogenetic inference methods that evaluate observed heritable traits, such as DNA sequences or morphology under a model of evolution of these traits \cite{wiki:phylogenetics}}}
 
-
+\newglossaryentry{gls:physical:universality}{
+	name={physical universality},
+	description={the ability to implement any
+		transformation whatsoever on any finite region\cite[Lecture 5.7]{sfi2020}}}
+	
 \newglossaryentry{gls:poza}{
 	name={poza},
-	description={Earth bordered basins for water (commonly used for irrigation in the Andes)--\cite{denevan2003cultivated}}}
-
-
-
-\newglossaryentry{gls:Proteobacteria}{
-	name={proteobacteria},
-	description={Proteobacteria is a major phylum of gram-negative bacteria. They include a wide variety of pathogens, such as Escherichia, Salmonella, Vibrio, Helicobacter, Yersinia, Legionellales and many other notable genera. Others are free-living (non-parasitic) and include many of the bacteria responsible for nitrogen fixation.--\cite{stackebrandt1988proteobacteria}}}
+	description={Earth bordered basins for water (commonly used for irrigation in the Andes)\cite{denevan2003cultivated}}}
 
 \newglossaryentry{gls:price:equation}{
 	name={Price equation},
-	description={In the theory of evolution and natural selection, the Price equation (also known as Price's equation or Price's theorem) describes how a trait or gene changes in frequency over time. The equation uses a covariance between a trait and fitness, to give a mathematical description of evolution and natural selection. It provides a way to understand the effects that gene transmission and natural selection have on the proportion of genes within each new generation of a population. The Price equation was derived by George R. Price, working in London to re-derive W.D. Hamilton's work on kin selection. Examples of the Price equation have been constructed for various evolutionary cases. The Price equation also has applications in economics--\cite{ wiki:price:equation}}}
+	description={Price's equation provides a very simple—and very general—encapsulation of evolutionary change. It forms the mathematical foundations of several topics in evolutionary biology, and has also been applied outwith evolutionary biology to a wide range of other scientific disciplines.\cite{gardner2020price}}}
+
+\newglossaryentry{gls:prokaryotic}{
+	name={prokaryotic},
+	description={A simple cellular structure that has a bounding membrane surrounding a living \gls{gls:cytoplasm}--\cite[Lecture 5.2]{sfi2020}}}
+
+\newglossaryentry{gls:Proteobacteria}{
+	name={proteobacteria},
+	description={Proteobacteria is a major phylum of gram-negative bacteria. They include a wide variety of pathogens, such as Escherichia, Salmonella, Vibrio, Helicobacter, Yersinia, Legionellales and many other notable genera. Others are free-living (non-parasitic) and include many of the bacteria responsible for nitrogen fixation.\cite{stackebrandt1988proteobacteria}}}
+
+\newglossaryentry{gls:protocell}{
+	name={protocell},
+	description={''I will apply the terms cell and protocell to lipid-bound compartments containing \gls{gls:protoplasm} that have the ability to grow and divide.  Whereas cells have an encoded genetic inheritance system (based on nucleic acids in all cells we know of), protocells do not''--\cite{baum2015selection}}}
+
+\newglossaryentry{gls:protoplasm}{
+	name={protoplasm},
+	description={Protoplasm refers to a mixture of chemicals that can collectively use sources of energy and chemical building blocks in a suitable environment to synthesize or assimilate more of the same set of chemicals----\cite{baum2015selection}}}
+
+\newglossaryentry{gls:purine}{
+	name={purine},
+	description={Purine is a heterocyclic aromatic organic compound that consists of a pyrimidine ring fused to an imidazole ring. It is water-soluble. Purine also gives its name to the wider class of molecules, purines, which include substituted purines and their tautomers. They are the most widely occurring nitrogen-containing heterocycles in nature\cite{wiki:purine}}}
 
 \newglossaryentry{gls:PVC}{
 	name={PVC superphylum},
-	description={The PVC superphylum is a grouping of distinct phyla of the domain bacteria proposed initially on the basis of 16S rRNA gene sequence analysis. It consists of a core of phyla Planctomycetes, Verrucomicrobia and Chlamydiae, but several other phyla have been considered to be members, including phylum Lentisphaerae and several other phyla consisting only of yet-to-be cultured members. The genomics-based links between Planctomycetes, Verrucomicrobia and Chlamydiae have been recently strengthened, but there appear to be other features which may confirm the relationship at least of Planctomycetes, Verrucomicrobia and Lentisphaerae. Remarkably these include the unique planctomycetal compartmentalized cell plan differing from the cell organization typical for bacteria. Such a shared cell plan suggests that the common ancestor of the PVC superphylum members may also have been compartmentalized, suggesting this is an evolutionarily homologous feature at least within the superphylum. Both the PVC endomembranes and the eukaryote-homologous membrane-coating MC proteins linked to endocytosis ability in Gemmata obscuriglobus and shared by PVC members suggest such homology may extend beyond the bacteria to the Eukarya. If so, either our definition of bacteria may have to change or PVC members admitted to be exceptions.--\cite{fuerst2013pvc}}}
+	description={The PVC superphylum is a grouping of distinct phyla of the domain bacteria proposed initially on the basis of 16S rRNA gene sequence analysis. It consists of a core of phyla Planctomycetes, Verrucomicrobia and Chlamydiae, but several other phyla have been considered to be members, including phylum Lentisphaerae and several other phyla consisting only of yet-to-be cultured members. The genomics-based links between Planctomycetes, Verrucomicrobia and Chlamydiae have been recently strengthened, but there appear to be other features which may confirm the relationship at least of Planctomycetes, Verrucomicrobia and Lentisphaerae. Remarkably these include the unique planctomycetal compartmentalized cell plan differing from the cell organization typical for bacteria. Such a shared cell plan suggests that the common ancestor of the PVC superphylum members may also have been compartmentalized, suggesting this is an evolutionarily homologous feature at least within the superphylum. Both the PVC endomembranes and the eukaryote-homologous membrane-coating MC proteins linked to endocytosis ability in Gemmata obscuriglobus and shared by PVC members suggest such homology may extend beyond the bacteria to the Eukarya. If so, either our definition of bacteria may have to change or PVC members admitted to be exceptions.\cite{fuerst2013pvc}}}
 
 \newglossaryentry{gls:pyran}{
 	name={pyran},
-	description={In chemistry, pyran, or oxine, is a six-membered heterocyclic, non-aromatic ring, consisting of five carbon atoms and one oxygen atom and containing two double bonds. The molecular formula is C5H6O. There are two isomers of pyran that differ by the location of the double bonds. In 2H-pyran, the saturated carbon is at position 2, whereas, in 4H-pyran, the saturated carbon is at position 4--\cite{wiki:pyran} }
+	description={In chemistry, pyran, or oxine, is a six-membered heterocyclic, non-aromatic ring, consisting of five carbon atoms and one oxygen atom and containing two double bonds. The molecular formula is C5H6O. There are two isomers of pyran that differ by the location of the double bonds. In 2H-pyran, the saturated carbon is at position 2, whereas, in 4H-pyran, the saturated carbon is at position 4\cite{wiki:pyran} }
 }
+
+\newglossaryentry{gls:pyrimidine}{
+	name={pyrimidine},
+	description={Pyrimidine is an aromatic heterocyclic organic compound similar to pyridine. One of the three diazines (six-membered heterocyclics with two nitrogen atoms in the ring), it has the nitrogen atoms at positions 1 and 3 in the ring. The other diazines are pyrazine (nitrogen atoms at the 1 and 4 positions) and pyridazine (nitrogen atoms at the 1 and 2 positions). In nucleic acids, three types of nucleobases are pyrimidine derivatives: cytosine (C), thymine (T), and uracil (U)\cite{wiki:pyrimidine}}}
 
 \newglossaryentry{gls:r-K-selection}{
 	name={r/K selection},
-	description={In ecology, r/K selection theory relates to the selection of combinations of traits in an organism that trade off between quantity and quality of offspring. The focus on either an increased quantity of offspring at the expense of individual parental investment of r-strategists, or on a reduced quantity of offspring with a corresponding increased parental investment of K-strategists, varies widely, seemingly to promote success in particular environments--\cite{wiki:k-r-selection}}}
+	description={In ecology, r/K selection theory relates to the selection of combinations of traits in an organism that trade off between quantity and quality of offspring. The focus on either an increased quantity of offspring at the expense of individual parental investment of r-strategists, or on a reduced quantity of offspring with a corresponding increased parental investment of K-strategists, varies widely, seemingly to promote success in particular environments\cite{wiki:k-r-selection}}}
 
 
 \newglossaryentry{gls:reaction-network}{
 	name={reaction network},
-	description={multiple chemical reactions that interact}}
+	description={multiple chemical reactions that interact\cite[Lecture 4.6.2]{sfi2020}}}
+
+\newglossaryentry{gls:redqueen}{
+	name={Red Queen},
+	description={One well-known theory of coevolution, the Red Queen Hypothesis, uses a metaphor derived from Lewis Carroll’s Through the Looking-Glass \cite{carroll1917through}--''it takes all the running you can do, to keep in the same place,'' spoken by the (red) Queen\footnote{The two sides in the chess game are called Red and White in \cite{carroll1917through}, so I assume this was the Victorian convention.}-—to describe the evolutionary race between ecological antagonists, such as parasites and their hosts. This hypothesis sought to explain the surprising prevalence of extinction in the fossil record, and it posited that all species experience a constantly deteriorating environment as a consequence of coevolution with other species.\cite{morris2012black,van1973new}}}
+
+\newglossaryentry{gls:Ribosomal:Ribonucleic:acid}{
+	name={Ribosomal Ribonucleic acid},
+	description={Ribosomal ribonucleic acid (rRNA) is a type of non-coding RNA which is the primary component of ribosomes, essential to all cells. rRNA is a ribozyme which carries out protein synthesis in ribosomes\cite{wiki:Ribosomal:RNA}}}
 
 \newglossaryentry{gls:ribozyme}{
 	name={ribozyme},
-	description={Ribozymes (ribonucleic acid enzymes) are RNA molecules that are capable of catalyzing specific biochemical reactions, similar to the action of protein enzymes. The 1982 discovery of ribozymes demonstrated that RNA can be both genetic material (like DNA) and a biological catalyst (like protein enzymes), and contributed to the RNA world hypothesis, which suggests that RNA may have been important in the evolution of prebiotic self-replicating systems. The most common activities of natural or in vitro-evolved ribozymes are the cleavage or ligation of RNA and DNA and peptide bond formation. Within the ribosome, ribozymes function as part of the large subunit ribosomal RNA to link amino acids during protein synthesis. They also participate in a variety of RNA processing reactions, including RNA splicing, viral replication, and transfer RNA biosynthesis. Examples of ribozymes include the hammerhead ribozyme, the VS ribozyme, Leadzyme and the hairpin ribozyme--\cite{wiki:ribozyme} }}
+	description={Ribozymes (ribonucleic acid enzymes) are RNA molecules that are capable of catalyzing specific biochemical reactions, similar to the action of protein enzymes. The 1982 discovery of ribozymes demonstrated that RNA can be both genetic material (like DNA) and a biological catalyst (like protein enzymes), and contributed to the RNA world hypothesis, which suggests that RNA may have been important in the evolution of prebiotic self-replicating systems. The most common activities of natural or in vitro-evolved ribozymes are the cleavage or ligation of RNA and DNA and peptide bond formation. Within the ribosome, ribozymes function as part of the large subunit ribosomal RNA to link amino acids during protein synthesis. They also participate in a variety of RNA processing reactions, including RNA splicing, viral replication, and transfer RNA biosynthesis. Examples of ribozymes include the hammerhead ribozyme, the VS ribozyme, Leadzyme and the hairpin ribozyme\cite{wiki:ribozyme} }}
 
 \newglossaryentry{gls:saprotroph}{
 	name={saprotroph},
-	description={Saprotrophic nutrition  or lysotrophic nutrition is a process of chemoheterotrophic extracellular digestion involved in the processing of decayed (dead or waste) organic matter. It occurs in saprotrophs, and is most often associated with fungi (for example Mucor) and soil bacteria--\cite{wiki:saprotroph}}}
+	description={Saprotrophic nutrition  or lysotrophic nutrition is a process of chemoheterotrophic extracellular digestion involved in the processing of decayed (dead or waste) organic matter. It occurs in saprotrophs, and is most often associated with fungi (for example Mucor) and soil bacteria\cite{wiki:saprotroph}}}
+
+\newglossaryentry{gls:selectivesweep}{
+	name={selective sweep},description={
+		the process through which a new beneficial mutation that increases its frequency and becomes fixed (i.e., reaches a frequency of 1) in the population leads to the reduction or elimination of genetic variation among nucleotide sequences that are near the mutation. In selective sweep, positive selection causes the new mutation to reach fixation so quickly that linked alleles can "hitchhike" and also become fixed\cite{wiki:selectivesweep}}}
 
 \newglossaryentry{gls:serpentinization}{
 	name={serpentinization},
-	description={A hydration and metamorphic transformation of ultramafic rock from the Earth's mantle--\cite{wiki:serpentinization}}
+	description={A hydration and metamorphic transformation of ultramafic rock from the Earth's mantle\cite{wiki:serpentinization}}
 }
+
+\newglossaryentry{gls:shannonIndex}{
+	name={Shannon diversity index},
+	description={The Shannon diversity index (H) is another index that is commonly used to characterize species \gls{gls:alphadiversity} in a community. Like \gls{gls:simpsonsIndex}, Shannon's index accounts for both abundance and evenness of the species present\cite{beals2000diversity}
+		\begin{align*}
+		H =& - \sum_{i=1}^{S}p_i \ln{p_i}\text{, Shannon's diversity index, where}\\
+		S =& \text{ total number of species in the community (richness)}\\
+		p_i =& \text{ proportion of $S$ made up of the $i$th species}
+		\end{align*}}}
+
+\newglossaryentry{gls:simpsonsIndex}{
+	name={Simpson's diversity index},
+	description={Simpson's diversity index (D) is a simple mathematical measure that characterizes species \gls{gls:alphadiversity} in a community.\cite{beals2000diversity1}
+		\begin{align*}
+		D =& \frac{1}{\sum_{1}^{S} p_i^2}\text{, Simpson's diversity index, where}\\
+		S =& \text{ total number of species in the community (richness)}\\
+		p_i =& \text{ proportion of $S$ made up of the $i$th species}
+		\end{align*}}}
+
+
+
+\newglossaryentry{gls:Small:subunit:ribosomal:ribonucleic:acid}{
+	name={Small subunit ribosomal ribonucleic acid},
+	description={Small subunit ribosomal ribonucleic acid (SSU rRNA) is the smallest of the two major RNA components of the ribosome. Associated with a number of ribosomal proteins, the SSU rRNA forms the small subunit of the ribosome. It is encoded by the SSU-rDNA\cite{wiki:SSU}}}
 
 \newglossaryentry{gls:spliceosome}{
 	name={spliceosome},
-	description={Large complex of snRNAs and proteins that catalyzes the splicing of pre-mRNAs--\cite{cooper2000sinauer}}}
+	description={Large complex of snRNAs and proteins that catalyzes the splicing of pre-mRNAs\cite{cooper2000sinauer}}}
+
+\newglossaryentry{gls:stoichiometry}{
+	name={stoichiometry},
+	description={Stoichiometry is a section of chemistry that involves using relationships between reactants and/or products in a chemical reaction to determine desired quantitative data. In Greek, stoikhein means element and metron means measure, so stoichiometry literally translated means the measure of elements. In order to use stoichiometry to run calculations about chemical reactions, it is important to first understand the relationships that exist between products and reactants and why they exist, which require understanding how to balance reactions--\cite{libre2020chemistry}}}
 
 \newglossaryentry{gls:sympatric-speciation}{
 	name={sympatric speciation},
-	description={the evolution of a new species from a surviving ancestral species while both continue to inhabit the same geographic region--\cite{wiki:Sympatric:speciation}}}
+	description={the evolution of a new species from a surviving ancestral species while both continue to inhabit the same geographic region\cite{wiki:Sympatric:speciation}}}
+
+\newglossaryentry{gls:stromatolite}{
+	name={stromatolite},
+	description={Stromatolites are layered mounds, columns, and sheet-like sedimentary rocks that were originally formed by the growth of layer upon layer of cyanobacteria, a single-celled photosynthesizing microbe. Fossilized stromatolites provide records of ancient life on Earth\cite{wiki:stromatolite}}}
 
 \newglossaryentry{gls:symplesiomorphy}{
 	name={symplesiomorphy},
-	description={In phylogenetics, a plesiomorphy, symplesiomorphy or symplesiomorphic character is an ancestral character (trait state) shared by two or more taxa - but also with other taxa linked earlier in the clade (that is, having an earlier last common ancestor, with them, than theirs)--\cite{wiki:symplesiomorphy} }}
+	description={In phylogenetics, a plesiomorphy, symplesiomorphy or symplesiomorphic character is an ancestral character (trait state) shared by two or more taxa - but also with other taxa linked earlier in the clade (that is, having an earlier last common ancestor, with them, than theirs)\cite{wiki:symplesiomorphy} }}
 
 \newglossaryentry{gls:synapomorphy}{
 	name={synapomorphy},
@@ -287,6 +610,19 @@
 	name={thermodynamics},
 	description={Concerning the flow of energy between states. Thermodynamic stability refers to being in a low energy state}}
 
+\newglossaryentry{gls:transcription}{
+	name={transcription},
+	description={Transcription is the first of several steps of \gls{gls:DNA} based gene expression in which a particular segment of DNA is copied into \gls{gls:RNA} (especially \gls{gls:mRNA}) by the enzyme RNA polymerase--\cite{wiki:transcription} }}
+
+\newglossaryentry{gls:translation}{
+	name={translation},
+	description={In molecular biology and genetics, translation is the process in which ribosomes in the cytoplasm or ER synthesize proteins after the process of \gls{gls:transcription} of DNA to RNA in the cell's nucleus--\cite{wiki:translation} }}
+
+\newglossaryentry{gls:vesicle}{
+	name={vesicle},
+	description={A vesicle or liposime is a clear membrane bilayer that has an aqueous interior and an aqueous exterior, with the interior and exterior separated by a hydrophobic barrier.--\cite[Lecture 4.2]{sfi2020}}}
+
+
 \newglossaryentry{gls:zwitterion}{
 	name={zwitterion},
-	description={In chemistry, a zwitterion is a molecule with two or more functional groups, of which at least one has a positive and one has a negative electrical charge and the net charge of the entire molecule is zero--\cite{wiki:zwitterion}}}
+	description={In chemistry, a zwitterion is a molecule with two or more functional groups, of which at least one has a positive and one has a negative electrical charge and the net charge of the entire molecule is zero\cite{wiki:zwitterion}}}

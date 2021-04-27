@@ -1,21 +1,51 @@
+% MIT License
+
+% Copyright (c) 2019-2020 Simon Crase
+
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
 \documentclass[]{article}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage{titling}
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
 \graphicspath{{figs/}} 
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
-
+% preprocessor is picking up garbage --ignore it
+\DeclareUnicodeCharacter{2192}{~}
+% Add logo to header
+\pretitle{
+	\begin{center}
+		\includegraphics[width=6cm]{KanjiLife}\\
+	}
+	\posttitle{\end{center}}
 %opening
 \title{
 	Notes from Origins of Life\\
 	Glossary
 }
 
-\author{Simon Crase}
+\author{Simon Crase (compiler) \\simon@greenweaves.nz}
 
 \makeglossaries
 
@@ -26,10 +56,12 @@
 
 \begin{abstract}
 	These is my glossary for the SFI Origins of Life Course. I have put it together from terms that I have needed to look up as part of the course.
-	This glossary is distributed in the hope that they will be useful,
+	This glossary is distributed in the hope that it will be useful,
 	but without any warranty, and without even the implied warranty of
 	merchantability or fitness for a particular purpose. All feedback is welcome,
-	but I don't necessarily undertake to do anything with it.
+	but I don't necessarily undertake to do anything with it\\
+	\LaTeX source for this glossary can be found at\\
+	\url{https://github.com/weka511/complexity/tree/master/origins}.
 \end{abstract}
 	
 	% glossary

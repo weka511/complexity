@@ -1,0 +1,83 @@
+---
+title: "Price's Equation Examples"
+author: "Simon Crase"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+header-includes: 
+- \usepackage{float}
+- \floatplacement{figure}{p}
+- \usepackage[nomarkers,figuresonly,nolists]{endfloat}
+- \usepackage{amsmath,url}
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \usepackage{lastpage}
+  \fancyhead[L]{}
+  \fancyhead[C]{Price's Equation Examples} 
+  \fancyhead[R]{}
+  \fancyfoot[L]{}
+  \fancyfoot[C]{Page \thepage \ of  \pageref{LastPage}}
+  \fancyfoot[R]{`r format(Sys.time(), '%d %b %Y')`}
+  \renewcommand{\footrulewidth}{0.4pt}
+output:
+  pdf_document:
+    toc : true
+    toc_depth: 2
+    fig_caption: yes
+    number_sections: true
+    keep_tex: false
+geometry: margin=3cm
+bibliography: origins.bib
+csl: ieee-with-url.csl
+abstract: "I have constructed an example illustrating Price's Equation."
+---
+\fontfamily{cmr}
+\fontsize{11}{22}
+\fontseries{m}
+\selectfont
+---
+
+\listoffigures
+\listoftables
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(deSolve)
+library(float)
+```
+# Eschericia coli long-term evolution experiment
+
+This example is based on the E. long-term evolution experiment[@blount2008historical].
+
+## Assumptions
+ 1. The growth medium is perfectly mixed, so we can assume that bacteria will grow if the concentration is sufficient\label{assumption-mixed}
+ 1. The mutation that allows bacteria to use citrate is very rare[@blount2008historical]\label{assumption-rare}, so we need consider selection only.
+ 1. The population is large enough that we can organize it into generations.
+
+## Methods
+
+The Price equation is given in [@frank2012natural] as:
+\begin{equation}
+\label{eq-price}
+\bar{w}\Delta(\bar{z}) = Cov(w,z) + E(w\Delta z)
+\end{equation}
+
+By Assumption \ref{assumption-rare}, mutations are extremely rare, so we can write (\ref{eq-price}) as:
+\begin{equation}
+\label{eq-price-reduced}
+\bar{w}\Delta(\bar{z}) = Cov(w,z) 
+\end{equation}
+
+
+\begin{align}
+  q_1^\prime =& \alpha q_1 c_g \label{eq-q1-prime}\\
+  q_2^\prime =& \alpha q_2 (c_g + c_c)
+\end{align}
+
+(\ref{eq-q1-prime}) shows that the decrease in glucose attributable to $q_1$ is $\Delta c_{g,1}$
+\begin{align}
+  q_1^\prime - q_1 =& - k_1 \Delta c_{g,1}\\
+  q_2^\prime - q_2 =&  - k_1 \Delta c_{g,2} + k_2 \Delta c_{c,2}
+\end{align}
+Assumption \ref{assumption-mixed} allows us to say:
+\begin{align}
+  \frac{\Delta c_{g,2}}{c_{g,2}} =& \frac{\Delta c_{c,2}}{c_{c,2}}
+\end{align}

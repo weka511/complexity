@@ -1,24 +1,63 @@
 % Encoding: UTF-8
 
+@Misc{libre2020biology,
+  author       = {{LibreTexts contributors}},
+  title        = {Biology {L}ibre{T}exts},
+  howpublished = {\url{https://bio.libretexts.org/}},
+  year         = {2020},
+  note         = {[Online; accessed 11-June-2020]},
+}
+
+@Article{abby2010detecting,
+  author    = {Abby, Sophie S and Tannier, Eric and Gouy, Manolo and Daubin, Vincent},
+  title     = {Detecting lateral gene transfers by statistical reconciliation of phylogenetic forests},
+  journal   = {BMC bioinformatics},
+  year      = {2010},
+  volume    = {11},
+  number    = {1},
+  pages     = {324},
+  abstract  = {Background: To understand the evolutionary role of Lateral Gene Transfer (LGT), accurate methods are needed to identify transferred genes and infer their timing of acquisition. Phylogenetic methods are particularly promising for this purpose, but the reconciliation of a gene tree with a reference (species) tree is computationally hard. In addition, the application of these methods to real data raises the problem of sorting out real and artifactual phylogenetic conflict.
+
+Results: We present Prunier, a new method for phylogenetic detection of LGT based on the search for a maximum statistical agreement forest (MSAF) between a gene tree and a reference tree. The program is flexible as it can use any definition of "agreement" among trees. We evaluate the performance of Prunier and two other programs (EEEP and RIATA-HGT) for their ability to detect transferred genes in realistic simulations where gene trees are reconstructed from sequences. Prunier proposes a single scenario that compares to the other methods in terms of sensitivity, but shows higher specificity. We show that LGT scenarios carry a strong signal about the position of the root of the species tree and could be used to identify the direction of evolutionary time on the species tree. We use Prunier on a biological dataset of 23 universal proteins and discuss their suitability for inferring the tree of life.
+
+Conclusions: The ability of Prunier to take into account branch support in the process of reconciliation allows a gain in complexity, in comparison to EEEP, and in accuracy in comparison to RIATA-HGT. Prunier's greedy algorithm proposes a single scenario of LGT for a gene family, but its quality always compares to the best solutions provided by the other algorithms. When the root position is uncertain in the species tree, Prunier is able to infer a scenario per root at a limited additional computational cost and can easily run on large datasets.Prunier is implemented in C++, using the Bio++ library and the phylogeny program Treefinder. It is available at: http://pbil.univ-lyon1.fr/software/prunier.
+},
+  publisher = {Springer},
+}
+
+@Article{abby2012lateral,
+  author    = {Abby, Sophie S and Tannier, Eric and Gouy, Manolo and Daubin, Vincent},
+  title     = {Lateral gene transfer as a support for the tree of life},
+  journal   = {Proceedings of the National Academy of Sciences},
+  year      = {2012},
+  volume    = {109},
+  number    = {13},
+  pages     = {4962--4967},
+  abstract  = {Lateral gene transfer (LGT), the acquisition of genes from other species, is a major evolutionary force. However, its success as an adaptive process makes the reconstruction of the history of life an intricate puzzle: If no gene has remained unaffected during the course of life's evolution, how can one rely on molecular markers to reconstruct the relationships among species? Here, we take a completely different look at LGT and its impact for the reconstruction of the history of life. Rather than trying to remove the effect of LGT in phylogenies, and ignoring as a result most of the information of gene histories, we use an explicit phylogenetic model of gene transfer to reconcile gene histories with the tree of species. We studied 16 bacterial and archaeal phyla, representing a dataset of 12,000 gene families distributed in 336 genomes. Our results show that, in most phyla, LGT provides an abundant phylogenetic signal on the pattern of species diversification and that this signal is robust to the choice of gene families under study. We also find that LGT brings an abundant signal on the location of the root of species trees, which has been previously overlooked. Our results quantify the great variety of gene transfer rates among lineages of the tree of life and provide strong support for the "complexity hypothesis," which states that genes whose products participate to macromolecular protein complexes are relatively resistant to transfer.},
+  publisher = {National Acad Sciences},
+}
+
 @Article{adam2018estimating,
   author    = {Adam, Zachary R and Hongo, Yayoi and Cleaves, H James and Yi, Ruiqin and Fahrenbach, Albert C and Yoda, Isao and Aono, Masashi},
-  title     = {Estimating the capacity for production of formamide by radioactive minerals on the prebiotic Earth},
+  title     = {Estimating the capacity for production of formamide by radioactive minerals on the prebiotic {E}arth},
   journal   = {Scientific reports},
   year      = {2018},
   volume    = {8},
   number    = {1},
   pages     = {265},
+  abstract  = {Water creates special problems for prebiotic chemistry, as it is thermodynamically favorable for amide and phosphodiester bonds to hydrolyze. The availability of alternative solvents with more favorable properties for the formation of prebiotic molecules on the early Earth may have helped bypass this so-called “water paradox”. Formamide (FA) is one such solvent, and can serve as a nucleobase precursor, but it is difficult to envision how FA could have been generated in large quantities or accumulated in terrestrial surface environments. We report here the conversion of aqueous acetonitrile (ACN) via hydrogen cyanide (HCN) as an intermediate into FA by γ-irradiation under conditions mimicking exposure to radioactive minerals. We estimate that a radioactive placer deposit could produce 0.1‒0.8 mol FA km−2 year−1. A uraninite fission zone comparable to the Oklo reactors in Gabon can produce 0.1‒1 mol m−2 year−1, orders of magnitude greater than other scenarios of FA production or delivery for which reaching sizeable concentrations of FA are problematic. Radioactive mineral deposits may be favorable settings for prebiotic compound formation through emergent geologic processes and FA-mediated organic chemistry.},
   publisher = {Nature Publishing Group},
 }
 
 @Article{adamala2016programmable,
   author    = {Adamala, Katarzyna P and Martin-Alarcon, Daniel A and Boyden, Edward S},
-  title     = {Programmable RNA-binding protein composed of repeats of a single modular unit},
+  title     = {Programmable {RNA}-binding protein composed of repeats of a single modular unit},
   journal   = {Proceedings of the National Academy of Sciences},
   year      = {2016},
   volume    = {113},
   number    = {19},
   pages     = {E2579--E2588},
+  abstract  = {The ability to monitor and perturb RNAs in living cells would benefit greatly from a modular protein architecture that targets unmodified RNA sequences in a programmable way. We report that the RNA-binding protein PumHD (Pumilio homology domain), which has been widely used in native and modified form for targeting RNA, can be engineered to yield a set of four canonical protein modules, each of which targets one RNA base. These modules (which we call Pumby, for Pumilio-based assembly) can be concatenated in chains of varying composition and length, to bind desired target RNAs. The specificity of such Pumby-RNA interactions was high, with undetectable binding of a Pumby chain to RNA sequences that bear three or more mismatches from the target sequence. We validate that the Pumby architecture can perform RNA-directed protein assembly and enhancement of translation of RNAs. We further demonstrate a new use of such RNA-binding proteins, measurement of RNA translation in living cells. Pumby may prove useful for many applications in the measurement, manipulation, and biotechnological utilization of unmodified RNAs in intact cells and systems.},
   publisher = {National Acad Sciences},
 }
 
@@ -29,6 +68,7 @@
   year          = {2015},
   pages         = {arXiv:1506.06988},
   month         = jun,
+  abstract      = {The origin of life can be understood mathematically to be the origin of information that can replicate. The likelihood that entropy spontaneously becomes information can be calculated from first principles, and depends exponentially on the amount of information that is necessary for replication. We do not know what the minimum amount of information for self-replication is because it must depend on the local chemistry, but we can study how this likelihood behaves in different known chemistries, and we can study ways in which this likelihood can be enhanced. Here we present evidence from numerical simulations (using the digital life chemistry "Avida") that using a biased probability distribution for the creation of monomers (the "biased typewriter") can exponentially increase the likelihood of spontaneous emergence of information from entropy. We show that this likelihood may depend on the length of the sequence that the information is embedded in, but in a non-trivial manner: there may be an optimum sequence length that maximizes the likelihood. We conclude that the likelihood of spontaneous emergence of self-replication is much more malleable than previously thought, and that the biased probability distributions of monomers that are the norm in biochemistry may significantly enhance these likelihoods},
   adsnote       = {Provided by the SAO/NASA Astrophysics Data System},
   adsurl        = {https://ui.adsabs.harvard.edu/abs/2015arXiv150606988A},
   archiveprefix = {arXiv},
@@ -38,12 +78,22 @@
   primaryclass  = {q-bio.PE},
 }
 
+@InCollection{adams2017situation,
+  author    = {Adams, Marilyn Jager and Tenney, Yvette J and Pew, Richard W},
+  title     = {Situation awareness and the cognitive management of complex systems},
+  booktitle = {Situational Awareness},
+  publisher = {Routledge},
+  year      = {2017},
+  pages     = {43--62},
+}
+
 @Misc{agriss2019RNA,
-  author       = {Agris, Paul and Crain,Pamela F. and Rozenski, Jef and Fabris, Daniele and Vendeix, Franck A.P. and Ranganathan, Srivathsan V.},
-  title        = {the RNA modification database},
+  author       = {Agris, Paul and Crain,Pamela F and Rozenski, Jef and Fabris, Daniele and Vendeix, Franck A P and Ranganathan, Srivathsan V},
+  title        = {the {RNA} modification database},
   howpublished = {\url{https://mods.rna.albany.edu/}},
   year         = {2019},
   note         = {[Online; accessed 6-July-2019]},
+  abstract     = {The RNA modification database provides a comprehensive listing of post-transcriptionally modified nucleosides from RNA and is maintained as an updated version of the initial printed report. Information provided includes: type(s) of RNA in which found and phylogenetic distribution; common chemical names and symbols; Chemical Abstracts registry numbers and index names; chemical structures; initial literature citations for structural characterization or occurrence and chemical synthesis. The data are available through the World Wide Web, anonymous ftp or from the authors in printed form.},
 }
 
 @Article{airapetian2016prebiotic,
@@ -54,7 +104,15 @@
   volume    = {9},
   number    = {6},
   pages     = {452},
+  abstract  = {Nitrogen is a critical ingredient of complex biological molecules. Molecular nitrogen, however, which was outgassed into the Earth’s early atmosphere, is relatively chemically inert and nitrogen fixation into more chemically reactive compounds requires high temperatures. Possible mechanisms of nitrogen fixation include lightning, atmospheric shock heating by meteorites, and solar ultraviolet radiation. Here we show that nitrogen fixation in the early terrestrial atmosphere can be explained by frequent and powerful coronal mass ejection events from the young Sun—so-called superflares. Using magnetohydrodynamic simulations constrained by Kepler Space Telescope observations, we find that successive superflare ejections produce shocks that accelerate energetic particles, which would have compressed the early Earth’s magnetosphere. The resulting extended polar cap openings provide pathways for energetic particles to penetrate into the atmosphere and, according to our atmospheric chemistry simulations, initiate reactions converting molecular nitrogen, carbon dioxide and methane to the potent greenhouse gas nitrous oxide as well as hydrogen cyanide, an essential compound for life. Furthermore, the destruction of N2, CO2 and CH4 suggests that these greenhouse gases cannot explain the stability of liquid water on the early Earth. Instead, we propose that the efficient formation of nitrous oxide could explain a warm early Earth.},
   publisher = {Nature Publishing Group},
+}
+
+@Book{alberts2013essential,
+  title     = {Essential cell biology},
+  publisher = {Garland Science},
+  year      = {2013},
+  author    = {Alberts, Bruce and Bray, Dennis and Hopkin, Karen and Johnson, Alexander D and Lewis, Julian and Raff, Martin and Roberts, Keith and Walter, Peter},
 }
 
 @Misc{allaby2010eocyte,
@@ -176,6 +234,13 @@
   publisher = {American Association for the Advancement of Science},
 }
 
+@Book{battley1987energetics,
+  title     = {Energetics of {M}icrobial {G}rowth},
+  publisher = {Wiley},
+  year      = {1987},
+  author    = {Battley, {E}dwin {H}.},
+}
+
 @Article{baum2015selection,
   author   = {Baum, David A.},
   title    = {Selection and the Origin of Cells},
@@ -224,6 +289,22 @@
   publisher = {Springer},
 }
 
+@Misc{beals2000diversity,
+  author       = {Beals, M and Gross, L and Harrell,S},
+  title        = {Diversity {I}ndices: {S}hannon's {H} and {E}},
+  howpublished = {\url{http://www.tiem.utk.edu/~gross/bioed/bealsmodules/shannonDI.html}},
+  year         = {2000},
+  note         = {[Online; accessed 12-July-2020]},
+}
+
+@Misc{beals2000diversity1,
+  author       = {Beals, M and Gross, L and Harrell,S},
+  title        = {Diversity {I}ndices: {S}impson's {D} and {E}},
+  howpublished = {\url{http://www.tiem.utk.edu/~gross/bioed/bealsmodules/simpsonDI.html}},
+  year         = {1999},
+  note         = {[Online; accessed 12-July-2020]},
+}
+
 @Article{bell2015potentially,
   author    = {Bell, Elizabeth A and Boehnke, Patrick and Harrison, T Mark and Mao, Wendy L},
   title     = {Potentially biogenic carbon preserved in a 4.1 billion-year-old zircon},
@@ -235,10 +316,21 @@
   publisher = {National Acad Sciences},
 }
 
+@Article{benner2012asphalt,
+  author    = {Benner, Steven A and Kim, Hyo-Joong and Carrigan, Matthew A},
+  title     = {Asphalt, water, and the prebiotic synthesis of ribose, ribonucleosides, and RNA},
+  journal   = {Accounts of chemical research},
+  year      = {2012},
+  volume    = {45},
+  number    = {12},
+  pages     = {2025--2034},
+  publisher = {ACS Publications},
+}
+
 @Article{bennett2003notes,
   author    = {Bennett, Charles H},
-  title     = {Notes on Landauer's principle, reversible computation, and Maxwell's Demon},
-  journal   = {Studies In History and Philosophy of Science Part B: Studies In History and Philosophy of Modern Physics},
+  title     = {Notes on {L}andauer's principle, reversible computation, and {M}axwell's {D}emon},
+  journal   = {Studies In {H}istory and {P}hilosophy of {S}cience Part {B}: {S}tudies In {H}istory and {P}hilosophy of {M}odern {P}hysics},
   year      = {2003},
   volume    = {34},
   number    = {3},
@@ -279,6 +371,29 @@
   publisher = {National Academy of Sciences},
 }
 
+@Article{bhowmik2019role,
+  author    = {Bhowmik, Subhendu and Krishnamurthy, Ramanarayanan},
+  title     = {The role of sugar-backbone heterogeneity and chimeras in the simultaneous emergence of RNA and DNA},
+  journal   = {Nature chemistry},
+  year      = {2019},
+  volume    = {11},
+  number    = {11},
+  pages     = {1009--1018},
+  abstract  = {Hypotheses of the origins of RNA and DNA are generally centred on the prebiotic synthesis of a pristine system (pre-RNA or RNA),  which  gives  rise  to  its  descendent.  However,  a  lack  of  specificity  in  the  synthesis  of  genetic  polymers  would  probably  result  in  chimeric  sequences;  the  roles  and  fate  of  such  sequences  are  unknown.  Here,  we  show  that  chimeras,  exemplified  by  mixed  threose  nucleic  acid  (TNA)–RNA  and  RNA–DNA  oligonucleotides,  preferentially  bind  to,  and  act  as  templates  for,  homogeneous TNA, RNA and DNA ligands. The chimeric templates can act as a catalyst that mediates the ligation of oligomers to  give  homogeneous  backbone  sequences,  and  the  regeneration  of  the  chimeric  templates  potentiates  a  scenario  for  a  pos-sible cross-catalytic cycle with amplification. This process provides a proof-of-principle demonstration of a heterogeneity-to-homogeneity scenario and also gives credence to the idea that DNA could appear concurrently with RNA, instead of being its later descendent.},
+  publisher = {Nature Publishing Group},
+}
+
+@Article{bitzek2015atomistic,
+  author    = {Bitzek, Erik and Kermode, James R and Gumbsch, Peter},
+  title     = {Atomistic aspects of fracture},
+  journal   = {International Journal of Fracture},
+  year      = {2015},
+  volume    = {191},
+  number    = {1-2},
+  pages     = {13--30},
+  publisher = {Springer},
+}
+
 @Article{blain2014progress,
   author    = {Blain, J Craig and Szostak, Jack W},
   title     = {Progress toward synthetic cells},
@@ -287,6 +402,17 @@
   volume    = {83},
   pages     = {615--640},
   publisher = {Annual Reviews},
+}
+
+@Article{blount2008historical,
+  author    = {Blount, Zachary D and Borland, Christina Z and Lenski, Richard E},
+  title     = {Historical contingency and the evolution of a key innovation in an experimental population of Escherichia coli},
+  journal   = {Proceedings of the National Academy of Sciences},
+  year      = {2008},
+  volume    = {105},
+  number    = {23},
+  pages     = {7899--7906},
+  publisher = {National Acad Sciences},
 }
 
 @Article{blum2009ecophysiology,
@@ -329,6 +455,13 @@
   publisher = {Elsevier},
 }
 
+@Misc{sfi_grayscott2018,
+  author       = {Brockmann, Dirk and Maier,Benjamin F.},
+  title        = {Hopfed Turingles: Pattern Formation in a simple reaction-diffusion system},
+  howpublished = {\url{http://www.complexity-explorables.org/explorables/grayscott/}},
+  year         = {2018},
+}
+
 @Article{brown2004toward,
   author    = {Brown, James H and Gillooly, James F and Allen, Andrew P and Savage, Van M and West, Geoffrey B},
   title     = {Toward a metabolic theory of ecology},
@@ -349,7 +482,7 @@
 }
 
 @Article{cafferty2016spontaneous,
-  author    = {Cafferty, Brian J and Fialho, David M and Khanam, Jaheda and Krishnamurthy, Ramanarayanan and Hud, Nicholas V},
+  author    = {Cafferty, Brian and Fialho, David and Khanam, Jaheda and Krishnamurthy, Ramanarayanan and Hud, Nicholas},
   title     = {Spontaneous formation and base pairing of plausible prebiotic nucleotides in water},
   journal   = {Nature communications},
   year      = {2016},
@@ -367,6 +500,20 @@
   number    = {5972},
   pages     = {1502--1506},
   publisher = {American Association for the Advancement of Science},
+}
+
+@Book{carroll1898alice,
+  title     = {Alice's {A}dventures in {W}onderland},
+  publisher = {Macmillan},
+  year      = {1898},
+  author    = {Carroll, Lewis},
+}
+
+@Book{carroll1917through,
+  title     = {Through the looking glass: And what Alice found there},
+  publisher = {Rand, McNally},
+  year      = {1917},
+  author    = {Carroll, Lewis},
 }
 
 @Article{cejkova2014dynamics,
@@ -432,6 +579,23 @@
   publisher = {Nature Publishing Group},
 }
 
+@InCollection{Clark2017-CLAHTK,
+  author    = {Clark, Andy},
+  title     = {How to {K}nit {Y}our {O}wn {M}arkov {B}lanket},
+  booktitle = {Philosophy and Predictive Processing},
+  publisher = {PhilArchive},
+  year      = {2017},
+  editor    = {Thomas Metzinger and Wanja Wiese},
+  abstract  = {Hohwy (Hohwy 2016, Hohwy 2017) argues there is a tension between the free energy principle and leading depictions of mind as embodied, enactive, and ex-tended (so-called ‘EEE1 cognition’). The tension is traced to the importance, in free energy formulations, of a conception of mind and agency that depends upon the presence of a ‘Markov blanket’ demarcating the agent from the surrounding world. In what follows I show that the Markov blanket considerations do not, in fact, lead to the kinds of tension that Hohwy depicts. On the contrary, they ac-tively favour the EEE story. This is because the Markov property, as exemplified in biological agents, picks out neither a unique nor a stationary boundary. It is this multiplicity and mutability– rather than the absence of agent-environment boundaries as such - that EEE cognition celebrates},
+}
+
+@Misc{nasa2011tyche,
+  author       = {Clavin, Whitney},
+  title        = {Can {WISE} Find the {H}ypothetical '{T}yche'?},
+  howpublished = {\url{https://www.nasa.gov/mission_pages/WISE/news/wise20110218.html}},
+  note         = {[Online; accessed 12-July-2019]},
+}
+
 @Article{cleaves2010origin,
   author    = {Cleaves II, H James},
   title     = {The origin of the biologically coded amino acids},
@@ -441,6 +605,17 @@
   number    = {4},
   pages     = {490--498},
   publisher = {Elsevier},
+}
+
+@Article{cleland2002defining,
+  author    = {Cleland, Carol E and Chyba, Christopher F},
+  title     = {Defining ‘life’},
+  journal   = {Origins of Life and Evolution of the Biosphere},
+  year      = {2002},
+  volume    = {32},
+  number    = {4},
+  pages     = {387--393},
+  publisher = {Springer},
 }
 
 @Article{connell1961influence,
@@ -564,6 +739,13 @@
   author    = {Darwin, Charles},
 }
 
+@Book{dawkins1982extended,
+  title     = {The {E}xtended {P}henotype},
+  publisher = {Oxford University Press Oxford},
+  year      = {1982},
+  author    = {Dawkins, Richard},
+}
+
 @Article{deamer2017role,
   author    = {Deamer, David},
   title     = {The role of lipid membranes in life’s origin},
@@ -629,13 +811,6 @@
   author    = {Deutsch, David},
 }
 
-@Misc{sfi_grayscott2018,
-  author       = {Dirk Brockmann ,and Benjamin F. Maier},
-  title        = {Hopfed Turingles: Pattern Formation in a simple reaction-diffusion system},
-  howpublished = {\url{http://www.complexity-explorables.org/explorables/grayscott/}},
-  year         = {2018},
-}
-
 @Article{dobzhansky2013nothing,
   author    = {Dobzhansky, Theodosius},
   title     = {Nothing in biology makes sense except in the light of evolution},
@@ -693,6 +868,15 @@
   publisher = {CUP Archive},
   year      = {1939},
   author    = {Eddington, Arthur Stanley},
+}
+
+@Misc{biologydictionary2016eukaryotic,
+  author       = {Biologydictionary.net {E}ditors},
+  title        = {Eukaryotic {C}ell},
+  howpublished = {\url{https://biologydictionary.net/eukaryotic-cell/}},
+  month        = dec,
+  year         = {2016},
+  note         = {[Online; accessed 29-June-2020]},
 }
 
 @Article{ehrenfreund2002astrophysical,
@@ -756,6 +940,17 @@
   number    = {24},
   pages     = {6881--6891},
   publisher = {ACS Publications},
+}
+
+@Article{elser2006early,
+  author    = {Elser, James J and Watts, James and Schampel, John H and Farmer, Jack},
+  title     = {Early Cambrian food webs on a trophic knife-edge? A hypothesis and preliminary data from a modern stromatolite-based ecosystem},
+  journal   = {Ecology Letters},
+  year      = {2006},
+  volume    = {9},
+  number    = {3},
+  pages     = {295--303},
+  publisher = {Wiley Online Library},
 }
 
 @Article{enquist2012land,
@@ -829,6 +1024,28 @@
   publisher = {Mary Ann Liebert, Inc. 140 Huguenot Street, 3rd Floor New Rochelle, NY 10801 USA},
 }
 
+@Article{fang2010animals,
+  author    = {Fang, Janet},
+  title     = {Animals thrive without oxygen at sea bottom},
+  journal   = {Nature},
+  year      = {2010},
+  volume    = {464},
+  number    = {7290},
+  pages     = {825--826},
+  publisher = {Nature Publishing Group},
+}
+
+@Article{ferus2017formation,
+  author    = {Ferus, Martin and Pietrucci, Fabio and Saitta, Antonino Marco and Kn{\'\i}{\v{z}}ek, Anton{\'\i}n and Kubel{\'\i}k, Petr and Ivanek, Ond{\v{r}}ej and Shestivska, Violetta and Civi{\v{s}}, Svatopluk},
+  title     = {Formation of nucleobases in a Miller--Urey reducing atmosphere},
+  journal   = {Proceedings of the National Academy of Sciences},
+  year      = {2017},
+  volume    = {114},
+  number    = {17},
+  pages     = {4306--4311},
+  publisher = {National Acad Sciences},
+}
+
 @Book{fisher1930genetical,
   title     = {The Genetical Theory of Natural Selection},
   publisher = {The Clarendon Press},
@@ -876,6 +1093,18 @@
   publisher = {American Association for the Advancement of Science},
 }
 
+@Article{forsythe2015ester,
+  author    = {Forsythe, Jay G and Yu, Sheng-Sheng and Mamajanov, Irena and Grover, Martha A and Krishnamurthy, Ramanarayanan and Fern{\'a}ndez, Facundo M and Hud, Nicholas V},
+  title     = {Ester-mediated amide bond formation driven by wet--dry cycles: A possible path to polypeptides on the prebiotic Earth},
+  journal   = {Angewandte Chemie International Edition},
+  year      = {2015},
+  volume    = {54},
+  number    = {34},
+  pages     = {9871--9875},
+  abstract  = {Although it is generally accepted that amino acids were present on the prebiotic Earth, the mechanism by which α‐amino acids were condensed into polypeptides before the emergence of enzymes remains unsolved. Here, we demonstrate a prebiotically plausible mechanism for peptide (amide) bond formation that is enabled by α‐hydroxy acids, which were likely present along with amino acids on the early Earth. Together, α‐hydroxy acids and α‐amino acids form depsipeptides—oligomers with a combination of ester and amide linkages—in model prebiotic reactions that are driven by wet–cool/dry–hot cycles. Through a combination of ester–amide bond exchange and ester bond hydrolysis, depsipeptides are enriched with amino acids over time. These results support a long‐standing hypothesis that peptides might have arisen from ester‐based precursors},
+  publisher = {Wiley Online Library},
+}
+
 @Article{forterre2006three,
   author    = {Forterre, Patrick},
   title     = {Three RNA cells for ribosomal lineages and three DNA viruses to replicate their genomes: a hypothesis for the origin of cellular domain},
@@ -896,6 +1125,43 @@
   number    = {9},
   pages     = {a003483},
   publisher = {Cold Spring Harbor Lab},
+}
+
+@Article{frank2012natural,
+  author    = {Frank, Steven A},
+  title     = {Natural selection. {IV}. The {P}rice {e}quation},
+  journal   = {Journal of evolutionary biology},
+  year      = {2012},
+  volume    = {25},
+  number    = {6},
+  pages     = {1002--1019},
+  publisher = {Wiley Online Library},
+}
+
+@Article{friston2013life,
+  author    = {Friston, Karl},
+  title     = {Life as we know it},
+  journal   = {Journal of the Royal Society Interface},
+  year      = {2013},
+  volume    = {10},
+  number    = {86},
+  pages     = {20130475},
+  abstract  = {This paper presents a heuristic proof (and simulations of a primordial soup)
+suggesting that life—or biological self-organization—is an inevitable and
+emergent property of any (ergodic) random dynamical system that possesses
+a Markov blanket. This conclusion is based on the following arguments: if
+the coupling among an ensemble of dynamical systems is mediated by
+short-range forces, then the states of remote systems must be conditionally
+independent. These independencies induce a Markov blanket that separates
+internal and external states in a statistical sense. The existence of a Markov
+blanket means that internal states will appear to minimize a free energy
+functional of the states of their Markov blanket. Crucially, this is the same
+quantity that is optimized in Bayesian inference. Therefore, the internal
+states (and their blanket) will appear to engage in active Bayesian inference.
+In other words, they will appear to model—and act on—their world to pre-
+serve their functional and structural integrity, leading to homoeostasis and a
+simple form of autopoiesis.},
+  publisher = {The Royal Society},
 }
 
 @Article{fuchs2011alternative,
@@ -931,6 +1197,17 @@
   publisher = {Mary Ann Liebert, Inc. 140 Huguenot Street, 3rd Floor New Rochelle, NY 10801 USA},
 }
 
+@Article{gardner2020price,
+  author    = {Gardner, Andy},
+  title     = {Price's equation made clear},
+  journal   = {Philosophical Transactions of the Royal Society B},
+  year      = {2020},
+  volume    = {375},
+  number    = {1797},
+  pages     = {20190361},
+  publisher = {The Royal Society},
+}
+
 @Article{germot1996presence,
   author    = {Germot, Agn{\`e}s and Philippe, Herv{\'e} and Le Guyader, Herv{\'e}},
   title     = {Presence of a mitochondrial-type 70-kDa heat shock protein in Trichomonas vaginalis suggests a very early mitochondrial endosymbiosis in eukaryotes},
@@ -961,12 +1238,17 @@
   volume    = {3},
   number    = {1},
   pages     = {29},
-  publisher = {BioMed Central},
+  abstract  = {Since the reclassification of all life forms in three Domains (Archaea, Bacteria, Eukarya), the identity of their alleged forerunner (Last Universal Common Ancestor or LUCA) has been the subject of extensive controversies: progenote or already complex organism, prokaryote or protoeukaryote, thermophile or mesophile, product of a protracted progression from simple replicators to complex cells or born in the cradle of "catalytically closed" entities? We present a critical survey of the topic and suggest a scenario.
+
+LUCA does not appear to have been a simple, primitive, hyperthermophilic prokaryote but rather a complex community of protoeukaryotes with a RNA genome, adapted to a broad range of moderate temperatures, genetically redundant, morphologically and metabolically diverse. LUCA's genetic redundancy predicts loss of paralogous gene copies in divergent lineages to be a significant source of phylogenetic anomalies, i.e. instances where a protein tree departs from the SSU-rRNA genealogy; consequently, horizontal gene transfer may not have the rampant character assumed by many. Examining membrane lipids suggest LUCA had sn1,2 ester fatty acid lipids from which Archaea emerged from the outset as thermophilic by "thermoreduction," with a new type of membrane, composed of sn2,3 ether isoprenoid lipids; this occurred without major enzymatic reconversion. Bacteria emerged by reductive evolution from LUCA and some lineages further acquired extreme thermophily by convergent evolution. This scenario is compatible with the hypothesis that the RNA to DNA transition resulted from different viral invasions as proposed by Forterre. Beyond the controversy opposing "replication first" to metabolism first", the predictive arguments of theories on "catalytic closure" or "compositional heredity" heavily weigh in favour of LUCA's ancestors having emerged as complex, self-replicating entities from which a genetic code arose under natural selection.
+
+Life was born complex and the LUCA displayed that heritage. It had the "body "of a mesophilic eukaryote well before maturing by endosymbiosis into an organism adapted to an atmosphere rich in oxygen. Abundant indications suggest reductive evolution of this complex and heterogeneous entity towards the "prokaryotic" Domains Archaea and Bacteria. The word "prokaryote" should be abandoned because epistemologically unsound.},
+  publisher = {Springer},
 }
 
 @Misc{biobyte2019phylot,
-  author       = {{biobyte solutions GmbH}},
-  title        = {phyloT: A phylogenetic tree generator, based on NCBI taxonomy},
+  author       = {{Biobyte Solutions {G}mb{H}}},
+  title        = {phyloT: A phylogenetic tree generator, based on {NCBI} taxonomy},
   howpublished = {\url{https://phylot.biobyte.de/}},
   year         = {2019},
   note         = {[Online; accessed 13-August-2019]},
@@ -981,6 +1263,24 @@
   number    = {3},
   pages     = {a003582},
   publisher = {Cold Spring Harbor Lab},
+}
+
+@Book{goldenfeld2018lectures,
+  title     = {Lectures on phase transitions and the renormalization group},
+  publisher = {CRC Press},
+  year      = {2018},
+  author    = {Goldenfeld, Nigel},
+}
+
+@Article{goldford2017remnants,
+  author    = {Goldford, Joshua E and Hartman, Hyman and Smith, Temple F and Segr{\`e}, Daniel},
+  title     = {Remnants of an ancient metabolism without phosphate},
+  journal   = {Cell},
+  year      = {2017},
+  volume    = {168},
+  number    = {6},
+  pages     = {1126--1134},
+  publisher = {Elsevier},
 }
 
 @Article{gomes2005origin,
@@ -1038,6 +1338,14 @@
   publisher = {American Association for the Advancement of Science},
 }
 
+@Article{hao2020cycling,
+  author    = {Hao, Jihua and Knoll, Andrew H and Huang, Fang and Schieber, Juergen and Hazen, Robert M and Daniel, Isabelle},
+  title     = {Cycling phosphorus on the Archean Earth: Part II. Phosphorus limitation on primary production in Archean ecosystems},
+  journal   = {Geochimica et Cosmochimica Acta},
+  year      = {2020},
+  publisher = {Pergamon},
+}
+
 @Misc{hardest2015automatic,
   author       = {Hardesty, Larry},
   title        = {Automatic bug repair},
@@ -1055,6 +1363,44 @@
   number    = {3},
   pages     = {1420--1425},
   publisher = {National Acad Sciences},
+}
+
+@Book{hartmann2015global,
+  title     = {Global physical climatology},
+  publisher = {Newnes},
+  year      = {2015},
+  author    = {Hartmann, Dennis L},
+  volume    = {103},
+}
+
+@Article{hartmann2000time,
+  author  = {Hartmann, WK and Ryder, Graham and Dones, Luke and Grinspoon, David},
+  title   = {The time-dependent intense bombardment of the primordial Earth/Moon system},
+  journal = {Origin of the Earth and Moon},
+  year    = {2000},
+  pages   = {493--512},
+}
+
+@Article{hartmann1970lunar,
+  author    = {Hartmann, William K},
+  title     = {Lunar cratering chronology},
+  journal   = {Icarus},
+  year      = {1970},
+  volume    = {13},
+  number    = {2},
+  pages     = {299--301},
+  publisher = {Elsevier},
+}
+
+@Article{hartmann1965terrestrial,
+  author    = {Hartmann, William K},
+  title     = {Terrestrial and lunar flux of large meteorites in the last two billion years},
+  journal   = {Icarus},
+  year      = {1965},
+  volume    = {4},
+  number    = {2},
+  pages     = {157--165},
+  publisher = {Elsevier},
 }
 
 @Article{helling1987evolution,
@@ -1118,6 +1464,36 @@
   howpublished = {\url{https://www.worldwidewanderings.net/}},
   year         = {2019},
   note         = {[Online; accessed 26-June-2019]},
+}
+
+@Article{hordijk2018population,
+  author    = {Hordijk, Wim and Naylor, Jonathan and Krasnogor, Natalio and Fellermann, Harold},
+  title     = {Population dynamics of autocatalytic sets in a compartmentalized spatial world},
+  journal   = {Life},
+  year      = {2018},
+  volume    = {8},
+  number    = {3},
+  pages     = {33},
+  abstract  = {Autocatalytic sets are self-sustaining and collectively catalytic chemical reaction networks
+which are believed to have played an important role in the origin of life. Simulation studies have
+shown that autocatalytic sets are, in principle, evolvable if multiple autocatalytic subsets can exist in
+different combinations within compartments, i.e., so-called protocells. However, these previous studies
+have so far not explicitly modeled the emergence and dynamics of autocatalytic sets in populations of
+compartments in a spatial environment. Here, we use a recently developed software tool to simulate
+exactly this scenario, as an important first step towards more realistic simulations and experiments
+on autocatalytic sets in protocells.},
+  publisher = {Multidisciplinary Digital Publishing Institute},
+}
+
+@Article{Hordijk2018,
+  author    = {Hordijk, Wim and Naylor, Jonathan and Krasnogor, Natalio and Fellermann, Harold},
+  title     = {Population dynamics of autocatalytic sets in a compartmentalized spatial world},
+  journal   = {Life},
+  year      = {2018},
+  volume    = {8},
+  number    = {3},
+  pages     = {33},
+  publisher = {Multidisciplinary Digital Publishing Institute},
 }
 
 @Article{hordijk2017chasing,
@@ -1242,6 +1618,19 @@
   publisher    = {Cold Spring Harbor Laboratory},
 }
 
+@Misc{sfi2020glossary,
+  author       = {Santa {F}e {I}nstitute},
+  title        = {Complexity {G}lossary},
+  howpublished = {\url{https://www.complexityexplorer.org/explore/glossary/}},
+  note         = {[Online; accessed 8-July-2020]},
+}
+
+@Misc{earthlike.world,
+  author       = {Ishimaru, {K}ana and Tasker, {E}lizabeth and Guttenberg, {N}icholas and Foriel, Julien},
+  title        = {Earthlike {W}orld},
+  howpublished = {\url{http://earthlike.world/}},
+}
+
 @Article{janzing2010there,
   author  = {Janzing, Dominik},
   title   = {Is there a physically universal cellular automaton or Hamiltonian?},
@@ -1340,6 +1729,24 @@
   publisher = {Elsevier},
 }
 
+@Misc{life2017special,
+  author       = {Kee, Terry (ed).},
+  title        = {Special Issue "Phosphorus (P) and the Origins of Life"},
+  howpublished = {\url{https://www.mdpi.com/journal/life/special_issues/origins_life}},
+  year         = {2017},
+}
+
+@Article{keefe1995polyphosphates,
+  author    = {Keefe, Anthony D and Miller, Stanley L},
+  title     = {Are polyphosphates or phosphate esters prebiotic reagents?},
+  journal   = {Journal of molecular evolution},
+  year      = {1995},
+  volume    = {41},
+  number    = {6},
+  pages     = {693--702},
+  publisher = {Springer},
+}
+
 @Article{kempes2016evolutionary,
   author    = {Kempes, Christopher P and Wang, Lawrence and Amend, Jan P and Doyle, John and Hoehler, Tori},
   title     = {Evolutionary tradeoffs in cellular composition across diverse bacteria},
@@ -1433,6 +1840,32 @@
   number    = {4},
   pages     = {1461--1463},
   publisher = {Genetics Soc America},
+}
+
+@Article{kirchhoff2018markov,
+  author    = {Kirchhoff, Michael and Parr, Thomas and Palacios, Ensor and Friston, Karl and Kiverstein, Julian},
+  title     = {The Markov blankets of life: autonomy, active inference and the free energy principle},
+  journal   = {Journal of The royal society interface},
+  year      = {2018},
+  volume    = {15},
+  number    = {138},
+  pages     = {20170792},
+  abstract  = {This work addresses the autonomous organization of biological systems. It
+does so by considering the boundaries of biological systems, from individual
+cells to Home sapiens, in terms of the presence of Markov blankets under the
+active inference scheme—a corollary of the free energy principle. A Markov
+blanket defines the boundaries of a system in a statistical sense. Here we con-
+sider how a collective of Markov blankets can self-assemble into a global
+system that itself has a Markov blanket; thereby providing an illustration
+of how autonomous systems can be understood as having layers of nested
+and self-sustaining boundaries. This allows us to show that: (i) any living
+system is a Markov blanketed system and (ii) the boundaries of such systems
+need not be co-extensive with the biophysical boundaries of a living organ-
+ism. In other words, autonomous systems are hierarchically composed of
+Markov blankets of Markov blankets—all the way down to individual
+cells, all the way up to you and me, and all the way out to include elements
+of the local environment.},
+  publisher = {The Royal Society},
 }
 
 @Article{kitadai2018origins,
@@ -1529,6 +1962,13 @@
   publisher = {American Association for the Advancement of Science},
 }
 
+@Misc{weizmann2020eQuilibrator,
+  author       = {Milo {L}ab},
+  title        = {e{Q}uilibrator: a simple web interface designed to enable easy thermodynamic analysis of biochemical systems.},
+  howpublished = {\url{https://http://equilibrator.weizmann.ac.il/}},
+  note         = {[Online; accessed 11-June-2020]},
+}
+
 @Article{landauer1961irreversibility,
   author    = {Landauer, Rolf},
   title     = {Irreversibility and heat generation in the computing process},
@@ -1542,7 +1982,7 @@
 
 @Article{lane2008eukaryotic,
   author    = {Lane, Christopher E and Archibald, John M},
-  title     = {The eukaryotic tree of life: endosymbiosis takes its TOL},
+  title     = {The eukaryotic tree of life: endosymbiosis takes its {TOL}},
   journal   = {Trends in ecology \& evolution},
   year      = {2008},
   volume    = {23},
@@ -1561,6 +2001,17 @@
   number    = {7318},
   pages     = {929},
   publisher = {Nature Publishing Group},
+}
+
+@Article{lazcano20031953,
+  author    = {Lazcano, Antonio and Bada, Jeffrey L},
+  title     = {The 1953 Stanley L. Miller experiment: fifty years of prebiotic organic chemistry},
+  journal   = {Origins of Life and Evolution of the Biosphere},
+  year      = {2003},
+  volume    = {33},
+  number    = {3},
+  pages     = {235--242},
+  publisher = {Springer},
 }
 
 @InProceedings{levin2019planarian,
@@ -1582,6 +2033,12 @@
   number    = {5},
   pages     = {1810--1813},
   publisher = {ACS Publications},
+}
+
+@Misc{libre2020chemistry,
+  author       = {UC Davis Office Library},
+  title        = {LibreTexts--Chemistry},
+  howpublished = {\url{https://chem.libretexts.org/}},
 }
 
 @Misc{linares-pasten_2018,
@@ -1643,6 +2100,13 @@ acquired control of the planetary environment and that this homeostasis by and f
 the biosphere has persisted ever since. Historic and contemporary evidence and argu-
 ments for this hypothesis will be presented.},
   publisher = {Taylor \& Francis},
+}
+
+@Misc{x3dna.org,
+  author       = {Lu, {X}iang-{J}un},
+  title        = {RNA cartoon-block representations with {P}y{MOL} and {DSSR}},
+  howpublished = {\url{http://forum.x3dna.org/dssr-nar-paper/rna-cartoon-block-representations-with-pymol-and-dssr/msg1921}},
+  note         = {[Online; accessed 16-June-2020]},
 }
 
 @Article{lyons2014rise,
@@ -1734,6 +2198,17 @@ ments for this hypothesis will be presented.},
   publisher = {The Royal Society London},
 }
 
+@Article{martin2015endosymbiotic,
+  author    = {Martin, William F and Garg, Sriram and Zimorski, Verena},
+  title     = {Endosymbiotic theories for eukaryote origin},
+  journal   = {Philosophical Transactions of the Royal Society B: Biological Sciences},
+  year      = {2015},
+  volume    = {370},
+  number    = {1678},
+  pages     = {20140330},
+  publisher = {The Royal Society},
+}
+
 @Article{mast2013escalation,
   author    = {Mast, Christof B and Schink, Severin and Gerland, Ulrich and Braun, Dieter},
   title     = {Escalation of polymerization in a thermal gradient},
@@ -1745,11 +2220,31 @@ ments for this hypothesis will be presented.},
   publisher = {National Acad Sciences},
 }
 
-@Misc{sfi2019,
+@Book{maturana1991autopoiesis,
+  title     = {Autopoiesis and cognition: The realization of the living},
+  publisher = {Springer Science \& Business Media},
+  year      = {1991},
+  author    = {Maturana, Humberto R and Varela, Francisco J},
+  volume    = {42},
+}
+
+@Article{maurer2017impact,
+  author    = {Maurer, Sarah},
+  title     = {The impact of salts on single chain amphiphile membranes and implications for the location of the origin of life},
+  journal   = {Life},
+  year      = {2017},
+  volume    = {7},
+  number    = {4},
+  pages     = {44},
+  abstract  = {One of the key steps in the origins of life was the formation of a membrane to separate protocells from their environment. These membranes are proposed to have been formed out of single chain amphiphiles, which are less stable than the dialkyl lipids used to form modern membranes. This lack of stability, specifically for decanoate, is often used to refute ocean locations for the origins of life. This review addresses the formation of membranes in hydrothermal-vent like conditions, as well as other environmental constraints. Specifically, single chain amphiphiles can form membranes at high sea salt concentrations (150 g/L), high temperatures (65 °C), and a wide pH range (2 to 10). It additionally discusses the major challenges and advantages of membrane formation in both ocean and fresh water locations.},
+  publisher = {Multidisciplinary Digital Publishing Institute},
+}
+
+@Misc{sfi2020,
   author       = {Sarah Maurer and Chris Kempes},
   title        = {Origins Of Life},
-  howpublished = {\url{https://www.complexityexplorer.org/courses/95-origins-of-life}},
-  year         = {2019},
+  howpublished = {\url{https://www.complexityexplorer.org/courses/103-origins-of-life}},
+  year         = {2020},
 }
 
 @Article{maurer2011primitive,
@@ -1791,6 +2286,18 @@ ments for this hypothesis will be presented.},
   publisher = {Cambridge University Press},
 }
 
+@Article{mehta2018caveats,
+  author    = {Mehta, Chris and Perez, Anthony and Thompson, Glenn and Pasek, Matthew A},
+  title     = {Caveats to exogenous organic delivery from ablation, dilution, and thermal degradation},
+  journal   = {Life},
+  year      = {2018},
+  volume    = {8},
+  number    = {2},
+  pages     = {13},
+  abstract  = {A hypothesis in prebiotic chemistry argues that organics were delivered to the early Earth in abundance by meteoritic sources. This study tests that hypothesis by measuring how the transfer of organic matter to the surface of Earth is affected by energy-dissipation processes such as ablation and airbursts. Exogenous delivery has been relied upon as a source of primordial material, but it must stand to reason that other avenues (i.e., hydrothermal vents, electric discharge) played a bigger role in the formation of life as we know it on Earth if exogenous material was unable to deliver significant quantities of organics. For this study, we look at various properties of meteors such as initial velocity and mass of the object, and atmospheric composition to see how meteors with different initial velocities and masses ablate. We find that large meteors do not slow down fast enough and thus impact the surface, vaporizing their components; fast meteors with low masses are vaporized during entry; and meteors with low velocities and high initial masses reach the surface. For those objects that survive to reach the surface, about 60 to >99% of the mass is lost by ablation. Large meteors that fragment are also shown to spread out over increasingly larger areas with increasing mass, and small meteors (~1 mm) are subjected to intense thermal heating, potentially degrading intrinsic organics. These findings are generally true across most atmospheric compositions. These findings provide several caveats to extraterrestrial delivery models that—while a viable point source of organics—likely did not supply as much prebiotic material as an effective endogenous production route},
+  publisher = {Multidisciplinary Digital Publishing Institute},
+}
+
 @Article{mehta2019essential,
   author    = {Mehta, Heer H and Prater, Amy G and Beabout, Kathryn and Elworth, Ryan AL and Karavis, Mark and Gibbons, Henry S and Shamoo, Yousif},
   title     = {The essential role of hypermutation in rapid adaptation to antibiotic stress},
@@ -1801,6 +2308,16 @@ ments for this hypothesis will be presented.},
   pages     = {e00744--19},
   abstract  = {A common outcome of antibiotic exposure in patients and in vitro is the evolution of a hypermutator phenotype that enables rapid adaptation by pathogens. While hypermutation is a robust mechanism for rapid adaptation, it requires trade-offs between the adaptive mutations and the more common “hitchhiker” mutations that accumulate from the increased mutation rate. Using quantitative experimental evolution, we examined the role of hypermutation in driving the adaptation of Pseudomonas aeruginosa to colistin. Metagenomic deep sequencing revealed 2,657 mutations at ≥5% frequency in 1,197 genes and 761 mutations in 29 endpoint isolates. By combining genomic information, phylogenetic analyses, and statistical tests, we showed that evolutionary trajectories leading to resistance could be reliably discerned. In addition to known alleles such as pmrB, hypermutation allowed identification of additional adaptive alleles with epistatic relationships. Although hypermutation provided a short-term fitness benefit, it was detrimental to overall fitness. Alarmingly, a small fraction of the colistin-adapted population remained colistin susceptible and escaped hypermutation. In a clinical population, such cells could play a role in reestablishing infection upon withdrawal of colistin. We present here a framework for evaluating the complex evolutionary trajectories of hypermutators that applies to both current and emerging pathogen populations.},
   publisher = {Am Soc Microbiol},
+}
+
+@Article{miller1953production,
+  author  = {Miller, Stanley L and others},
+  title   = {A production of amino acids under possible primitive earth conditions},
+  journal = {Science},
+  year    = {1953},
+  volume  = {117},
+  number  = {3046},
+  pages   = {528--529},
 }
 
 @Article{miller1959organic,
@@ -1861,6 +2378,16 @@ ments for this hypothesis will be presented.},
   number    = {9-10},
   pages     = {651--659},
   publisher = {Elsevier},
+}
+
+@Article{morris2012black,
+  author    = {Morris, J Jeffrey and Lenski, Richard E and Zinser, Erik R},
+  title     = {The Black Queen Hypothesis: evolution of dependencies through adaptive gene loss},
+  journal   = {MBio},
+  year      = {2012},
+  volume    = {3},
+  number    = {2},
+  publisher = {Am Soc Microbiol},
 }
 
 @Article{munoz2018colloquium,
@@ -2033,6 +2560,15 @@ ments for this hypothesis will be presented.},
   publisher = {Elsevier},
 }
 
+@Misc{perezortega2020pools,
+  author       = {Pérez {O}rtega, {R}odrigo},
+  title        = {Pools in the {M}exican desert are a window into {E}arth’s early life},
+  howpublished = {\url{https://www.sciencemag.org/news/2020/06/pools-mexican-desert-are-window-earth-s-early-life}},
+  month        = jun,
+  year         = {2020},
+  note         = {[Online; accessed 12-July-2020]},
+}
+
 @Article{petrie2014limits,
   author    = {Petrie, Katherine L and Joyce, Gerald F},
   title     = {Limits of neutral drift: Lessons from the in vitro evolution of two ribozymes},
@@ -2063,6 +2599,7 @@ ments for this hypothesis will be presented.},
   volume    = {112},
   number    = {50},
   pages     = {15396--15401},
+  abstract  = {We present a molecular-level model for the origin and evolution of the translation system, using a 3D comparative method. In this model, the ribosome evolved by accretion, recursively adding expansion segments, iteratively growing, subsuming, and freezing the rRNA. Functions of expansion segments in the ancestral ribosome are assigned by correspondence with their functions in the extant ribosome. The model explains the evolution of the large ribosomal subunit, the small ribosomal subunit, tRNA, and mRNA. Prokaryotic ribosomes evolved in six phases, sequentially acquiring capabilities for RNA folding, catalysis, subunit association, correlated evolution, decoding, energy-driven translocation, and surface proteinization. Two additional phases exclusive to eukaryotes led to tentacle-like rRNA expansions. In this model, ribosomal proteinization was a driving force for the broad adoption of proteins in other biological processes. The exit tunnel was clearly a central theme of all phases of ribosomal evolution and was continuously extended and rigidified. In the primitive noncoding ribosome, proto-mRNA and the small ribosomal subunit acted as cofactors, positioning the activated ends of tRNAs within the peptidyl transferase center. This association linked the evolution of the large and small ribosomal subunits, proto-mRNA, and tRNA.},
   publisher = {National Acad Sciences},
 }
 
@@ -2076,6 +2613,14 @@ ments for this hypothesis will be presented.},
   pages     = {50},
   file      = {:document.pdf:PDF},
   publisher = {BioMed Central},
+}
+
+@Book{elke2019planetary,
+  title     = {Planetary {H}abitability in {B}inary {S}ystems},
+  publisher = {World Scientific},
+  year      = {2019},
+  author    = {Pilat-lohinger, Elke and Egg, Siegfried and Bazso, Akos},
+  volume    = {4},
 }
 
 @Article{pinheiro2012synthetic,
@@ -2153,6 +2698,17 @@ ments for this hypothesis will be presented.},
   publisher = {ACS Publications},
 }
 
+@Article{price1970selection,
+  author    = {Price, George R},
+  title     = {Selection and covariance},
+  journal   = {Nature},
+  year      = {1970},
+  volume    = {227},
+  number    = {5257},
+  pages     = {520--521},
+  publisher = {Springer},
+}
+
 @Article{pross2008can,
   author    = {Pross, Addy},
   title     = {How can a chemical system act purposefully? Bridging between life and non-life},
@@ -2206,6 +2762,23 @@ ments for this hypothesis will be presented.},
   number    = {6688},
   pages     = {69},
   publisher = {Nature Publishing Group},
+}
+
+@Article{ramstead2018answering,
+  author    = {Ramstead, Maxwell James D{\'e}sormeau and Badcock, Paul Benjamin and Friston, Karl John},
+  title     = {Answering {S}chr{\"o}dinger's question: {A} free-energy formulation},
+  journal   = {Physics of life reviews},
+  year      = {2018},
+  volume    = {24},
+  pages     = {1--16},
+  abstract  = {The free-energy principle (FEP) is a formal model of neuronal processes that is widely recognised in neuroscience as a unifying
+theory of the brain and biobehaviour. More recently, however, it has been extended beyond the brain to explain the dynamics of liv-
+ing systems, and their unique capacity to avoid decay. The aim of this review is to synthesise these advances with a meta-theoretical
+ontology of biological systems called variational neuroethology, which integrates the FEP with Tinbergen’s four research questions
+to explain biological systems across spatial and temporal scales. We exemplify this framework by applying it to Homo sapiens,
+before translating variational neuroethology into a systematic research heuristic that supplies the biological, cognitive, and social
+sciences with a computationally tractable guide to discovery.},
+  publisher = {Elsevier},
 }
 
 @Article{ratcliff2014experimental,
@@ -2279,6 +2852,22 @@ ments for this hypothesis will be presented.},
   number    = {5402},
   pages     = {674--676},
   publisher = {American Association for the Advancement of Science},
+}
+
+@Article{rovelli2017time,
+  author    = {Rovelli, Carlo},
+  title     = {Is time’s arrow perspectival},
+  journal   = {The Philosophy of Cosmology},
+  year      = {2017},
+  pages     = {285--296},
+  publisher = {Cambridge University Press Cambridge},
+}
+
+@Book{rovelli2019order,
+  title     = {The order of time},
+  publisher = {Riverhead books},
+  year      = {2019},
+  author    = {Rovelli, Carlo},
 }
 
 @Article{sagan1993search,
@@ -2472,6 +3061,7 @@ ments for this hypothesis will be presented.},
   volume    = {1777},
   number    = {12},
   pages     = {1480--1490},
+  abstract  = {Respiration is fundamental to the aerobic and anaerobic energy metabolism of many prokaryotic and mosteukaryotic organisms. In principle, the free energy of a redox reaction catalysed by a membrane-boundelectron transport chain is transduced via the generation of an electrochemical ion (usually proton) gradientacross a coupling membrane that drives ATP synthesis. The proton motive force (pmf) can be built up bydifferent mechanisms like proton pumping, quinone/quinol cycling or by a redox loop. The latter coupleselectron transport to a net proton transfer across the membrane without proton pumping. Instead, chargeseparation is achieved by quinone-reactive enzymes or enzyme complexes whose active sites for substratesand quinones are situated on different sides of the coupling membrane. The necessary transmembraneelectron transport is usually accomplished by the presence of two haem groups that face opposite sides of themembrane. There are many different enzyme complexes that are part of redox loops and their catalysedredox reactions can be either electrogenic, electroneutral (non-proton motive) or evenpmf-consuming. Thisarticle gives conceptual classification of different operational organisations of redox loops and uses this as aplatform from which to explore the biodiversity of quinone/quinol-cycling redox systems.},
   publisher = {Elsevier},
 }
 
@@ -2486,6 +3076,31 @@ ments for this hypothesis will be presented.},
   publisher = {Oxford University Press},
 }
 
+@Article{smith2011large,
+  author    = {Smith, Eric},
+  title     = {Large-deviation principles, stochastic effective actions, path entropies, and the structure and meaning of thermodynamic descriptions},
+  journal   = {Reports on Progress in Physics},
+  year      = {2011},
+  volume    = {74},
+  number    = {4},
+  pages     = {046601},
+  publisher = {IOP Publishing},
+}
+
+@Misc{smith2015new,
+  author       = {Smith, {E}rik},
+  title        = {New {T}heories on the {O}rigin of {L}ife},
+  howpublished = {\url{https://www.youtube.com/watch?v=0cwvj0XBKlE}},
+  note         = {[Online; accessed 11-July-2020]},
+}
+
+@Book{smith2016origin,
+  title     = {The origin and nature of life on earth: the emergence of the fourth geosphere},
+  publisher = {Cambridge University Press},
+  year      = {2016},
+  author    = {Smith, Eric and Morowitz, Harold J},
+}
+
 @Article{soai2019role,
   author    = {Soai, Kenso and Kawasaki, Tsuneomi and Matsumoto, Arimasa},
   title     = {Role of Asymmetric Autocatalysis in the Elucidation of Origins of Homochirality of Organic Compounds},
@@ -2497,6 +3112,14 @@ ments for this hypothesis will be presented.},
   publisher = {Multidisciplinary Digital Publishing Institute},
 }
 
+@Misc{soderberg2019organic,
+  author       = {Soderberg, Timothy},
+  title        = {Organic Chemistry With a Biological Emphasis - Volume I},
+  howpublished = {\url{https://open.bccampus.ca/browse-our-collection/find-open-textbooks/?uuid=f01f98b4-925d-4e94-bc82-c1d707e6280e&contributor&keyword&subject=Chemistry}},
+  year         = {2019},
+  note         = {[Online; accessed 4-June-2020]},
+}
+
 @Article{sojo2016origin,
   author    = {Sojo, Victor and Herschy, Barry and Whicher, Alexandra and Camprubi, Eloi and Lane, Nick},
   title     = {The origin of life in alkaline hydrothermal vents},
@@ -2505,6 +3128,7 @@ ments for this hypothesis will be presented.},
   volume    = {16},
   number    = {2},
   pages     = {181--197},
+  abstract  = {Over the last 70 years, prebiotic chemists have been very successful in synthesizing the molecules of life, from amino acids to nucleotides. Yet there is strikingly little resemblance between much of this chemistry and the metabolic pathways of cells, in terms of substrates, catalysts, and synthetic pathways. In contrast, alkalinehydrothermal vents offer conditions similar to those harnessed by modern autotrophs, but there has been limitedexperimental evidence that such conditions could drive prebiotic chemistry. In the Hadean, in the absence ofoxygen, alkaline vents are proposed to have acted as electrochemical flow reactors, in which alkaline fluidssaturated in H2mixed with relatively acidic ocean waters rich in CO2, through a labyrinth of interconnectedmicropores with thin inorganic walls containing catalytic Fe(Ni)S minerals. The difference in pH across thesethin barriers produced natural proton gradients with equivalent magnitude and polarity to the proton-motiveforce required for carbon fixation in extant bacteria and archaea. How such gradients could have poweredcarbon reduction or energy flux before the advent of organic protocells with genes and proteins is unknown. Work over the last decade suggests several possible hypotheses that are currently being tested in laboratoryexperiments, field observations, and phylogenetic reconstructions of ancestral metabolism. We analyze theperplexing differences in carbon and energy metabolism in methanogenic archaea and acetogenic bacteria topropose a possible ancestral mechanism of CO2reduction in alkaline hydrothermal vents. Based on thismechanism, we show that the evolution of active ion pumping could have driven the deep divergence ofbacteria and archaea. },
   publisher = {Mary Ann Liebert, Inc. 140 Huguenot Street, 3rd Floor New Rochelle, NY 10801 USA},
 }
 
@@ -2602,6 +3226,12 @@ ments for this hypothesis will be presented.},
   howpublished = {\urlhttps://complexityexplorer.s3.amazonaws.com/supplemental_materials/1.9+Selection+Theory/01-pfs-004.pdf},
 }
 
+@Misc{stratigraphy2020chart,
+  author       = {International {C}ommission on {S}tratigraphy},
+  title        = {International {C}hronostratigraphic {C}hart},
+  howpublished = {\url{https://stratigraphy.org/icschart/ChronostratChart2020-01.pdf}},
+}
+
 @Article{stueken2013did,
   author    = {St{\"u}eken, EE and Anderson, RE and Bowman, JS and Brazelton, WJ and Colangelo-Lillis, J and Goldman, AD and Som, SM and Baross, JA},
   title     = {Did life originate from a global chemical reactor?},
@@ -2633,6 +3263,12 @@ ments for this hypothesis will be presented.},
   number    = {1},
   pages     = {162--166},
   publisher = {National Acad Sciences},
+}
+
+@Misc{susskind2013time,
+  author       = {Susskind, Leonard},
+  title        = {Why is {T}ime a {One}-{Way} {Street}},
+  howpublished = {\url{https://www.youtube.com/watch?v=jhnKBKZvb_U}},
 }
 
 @Article{szathmary2000evolution,
@@ -2682,6 +3318,23 @@ ments for this hypothesis will be presented.},
   note         = {[Online; accessed 31-July-2019]},
 }
 
+@Misc{nexss.info,
+  author       = {The {NE}x{SS} Team},
+  title        = {The {N}exus for {E}xoplanet {S}ystem {S}cience ({NE}x{SS})},
+  howpublished = {\url{https://nexss.info/}},
+}
+
+@Article{tera1974isotopic,
+  author    = {Tera, Fouad and Papanastassiou, DA and Wasserburg, GJ},
+  title     = {Isotopic evidence for a terminal lunar cataclysm},
+  journal   = {Earth and Planetary Science Letters},
+  year      = {1974},
+  volume    = {22},
+  number    = {1},
+  pages     = {1--21},
+  publisher = {Elsevier},
+}
+
 @Article{thiergart2012evolutionary,
   author    = {Thiergart, Thorsten and Landan, Giddy and Schenk, Marc and Dagan, Tal and Martin, William F},
   title     = {An evolutionary network of genes present in the eukaryote common ancestor polls genomes on eukaryotic and mitochondrial origin},
@@ -2702,6 +3355,17 @@ ments for this hypothesis will be presented.},
   number    = {16},
   pages     = {1751--1757},
   publisher = {Bentham Science Publishers},
+}
+
+@Article{tornroth2008opening,
+  author    = {T{\"o}rnroth-Horsefield, Susanna and Neutze, Richard},
+  title     = {Opening and closing the metabolite gate},
+  journal   = {Proceedings of the National Academy of Sciences},
+  year      = {2008},
+  volume    = {105},
+  number    = {50},
+  pages     = {19565--19566},
+  publisher = {National Acad Sciences},
 }
 
 @Article{trifonov2011vocabulary,
@@ -2764,6 +3428,16 @@ ments for this hypothesis will be presented.},
   publisher = {Frontiers},
 }
 
+@Misc{van1973new,
+  author       = {Van Valen, L},
+  title        = {A new evolutionary law.},
+  howpublished = {\url{https://www.mn.uio.no/cees/english/services/van-valen/evolutionary-theory/volume-1/vol-1-no-1-pages-1-30-l-van-valen-a-new-evolutionary-law.pdf}},
+  year         = {1973},
+  note         = {[Online; accessed 12-July-2020]},
+  abstract     = {A11 groups for   which data exist go extinct     at   a  rate   that    is   constant for a given group. When this is   recast in ecological for:n (the effectiveenvironment of any homogeneous group of   organisms deteriorates at   a  stochastica11y constant rate),     no tlefinite exceptions exist    although   a  fev   are possible.Extinction "ates are   similar within some very broad   categories    ancl vary regularly with size of   area inhablted.. A new unit of rates for discrete phenomena, the macarthur, is   introduced.. Laws  are appropriate in evolutionary biology. Truth needs more than   correct pred.ictions. The  Law of Extinction is evidence for ecological slgnifieance and. comparability of   taxa. A  ncn-Markovian   hypothesis to   explain the   law   invokes   mutually incompatible optima within an  adaptive zone. A self-perpetuating fluctuation results which can be stated  in terms of an  unstudied aspect   of zero-sun gnrns theory.  The hypothesis can  be derived from   a  view that    momentary fitness is   the amount of   control of   resources, which rernain  eonstant   in   total- anount. The hypothesis implies that    long-term fitness has only two eomponents and. that events of mutualism   are rare. The hypothesis largely explains    the   observed pattern of molecular evolution.},
+  publisher    = {Theory},
+}
+
 @Article{varma2018native,
   author    = {Varma, Sreejith J and Muchowska, Kamila B and Chatelain, Paul and Moran, Joseph},
   title     = {Native iron reduces CO 2 to intermediates and end-products of the acetyl-CoA pathway},
@@ -2772,6 +3446,7 @@ ments for this hypothesis will be presented.},
   volume    = {2},
   number    = {6},
   pages     = {1019},
+  abstract  = {Autotrophic theories for the origin of life propose that CO2 was the carbon source for primordial biosynthesis. Among the six known CO2 fixation pathways in nature, the acetyl-CoA (AcCoA; or Wood–Ljungdahl) pathway is the most ancient, and relies on transition metals for catalysis. Modern microbes that use the AcCoA pathway typically fix CO2 with electrons from H2, which requires complex flavin-based electron bifurcation. This presents a paradox: how could primitive metabolic systems have fixed CO2  before  the  origin  of  proteins?  Here,  we  show  that  native  transition  metals  (Fe0,  Ni0  and  Co0)  selectively  reduce  CO2  to  acetate and pyruvate—the intermediates and end-products of the AcCoA pathway—in near millimolar concentrations in water over  hours  to  days  using  1–40 bar  CO2  and  at  temperatures  from  30  to  100 °C.  Geochemical  CO2  fixation  from  native  metals  could have supplied critical C2 and C3 metabolites before the emergence of enzymes.},
   publisher = {Nature Publishing Group},
 }
 
@@ -2791,6 +3466,18 @@ ments for this hypothesis will be presented.},
   title   = {Unique Spectroscopy and Imaging of Mars with JWST},
   journal = {arXiv preprint arXiv:1510.04619},
   year    = {2015},
+}
+
+@Article{vincent2019chemical,
+  author    = {Vincent, Lena and Berg, Michael and Krismer, Mitchell and Saghafi, Samuel T and Cosby, Jacob and Sankari, Talia and Vetsigian, Kalin and Cleaves, H James and Baum, David A},
+  title     = {Chemical Ecosystem Selection on Mineral Surfaces Reveals Long-Term Dynamics Consistent with the Spontaneous Emergence of Mutual Catalysis},
+  journal   = {Life},
+  year      = {2019},
+  volume    = {9},
+  number    = {4},
+  pages     = {80},
+  abstract  = {How did chemicals first become organized into systems capable of self-propagation and adaptive evolution? One possibility is that the first evolvers were chemical ecosystems localized on mineral surfaces and composed of sets of molecular species that could catalyze each other’s formation. We used a bottom-up experimental framework, chemical ecosystem selection (CES), to evaluate this perspective and search for surface-associated and mutually catalytic chemical systems based on the changes in chemistry that they are expected to induce. Here, we report the results of preliminary CES experiments conducted using a synthetic “prebiotic soup” and pyrite grains, which yielded dynamical patterns that are suggestive of the emergence of mutual catalysis. While more research is needed to better understand the specific patterns observed here and determine whether they are reflective of self-propagation, these results illustrate the potential power of CES to test competing hypotheses for the emergence of protobiological chemical systems.},
+  publisher = {Multidisciplinary Digital Publishing Institute},
 }
 
 @Article{virgo2012evolvable,
@@ -2900,6 +3587,7 @@ ments for this hypothesis will be presented.},
   volume    = {1},
   number    = {9},
   pages     = {16116},
+  abstract  = {The concept of a last universal common ancestor of all cells (LUCA, or the progenote) is central to the study of early evolution and life’s origin, yet information about how and where LUCA lived is lacking. We investigated all clusters andphylogenetic trees for 6.1 million protein coding genes from sequenced prokaryotic genomes in order to reconstruct themicrobial ecology of LUCA. Among 286,514 protein clusters, we identified 355 protein families (∼0.1%) that trace toLUCA by phylogenetic criteria. Because these proteins are not universally distributed, they can shed light on LUCA’sphysiology. Their functions, properties and prosthetic groups depict LUCA as anaerobic, CO2-fixing, H2-dependent with aWood–Ljungdahl pathway, N2-fixing and thermophilic. LUCA’s biochemistry was replete with FeS clusters and radicalreaction mechanisms. Its cofactors reveal dependence upon transition metals,flavins,S-adenosyl methionine, coenzyme A,ferredoxin, molybdopterin, corrins and selenium. Its genetic code required nucleoside modifications andS-adenosylmethionine-dependent methylations. The 355 phylogenies identify clostridia and methanogens, whose modern lifestylesresemble that of LUCA, as basal among their respective domains. LUCA inhabited a geochemically active environment richin H2,CO2and iron. The data support the theory of an autotrophic origin of life involving the Wood–Ljungdahl pathway ina hydrothermal sett},
   publisher = {Nature Publishing Group},
 }
 
@@ -2914,6 +3602,18 @@ ments for this hypothesis will be presented.},
   publisher = {Nature Publishing Group},
 }
 
+@Article{wessner2010origins,
+  author       = {Wessner, David R},
+  title        = {The origins of viruses},
+  journal      = {Nature Education},
+  year         = {2010},
+  volume       = {3},
+  number       = {9},
+  pages        = {37},
+  note         = {[Online; accessed 20-May-2020]},
+  howpublished = {\url{http://oer2go.org/mods/en-learnsaylor/course/theoriginsofviruses14398218.pdf}},
+}
+
 @Article{west1997general,
   author    = {West, Geoffrey B and Brown, James H and Enquist, Brian J},
   title     = {A general model for the origin of allometric scaling laws in biology},
@@ -2922,6 +3622,17 @@ ments for this hypothesis will be presented.},
   volume    = {276},
   number    = {5309},
   pages     = {122--126},
+  publisher = {American Association for the Advancement of Science},
+}
+
+@Article{westheimer1987nature,
+  author    = {Westheimer, Frank H},
+  title     = {Why nature chose phosphates},
+  journal   = {Science},
+  year      = {1987},
+  volume    = {235},
+  number    = {4793},
+  pages     = {1173--1178},
   publisher = {American Association for the Advancement of Science},
 }
 
@@ -2934,6 +3645,17 @@ ments for this hypothesis will be presented.},
   number    = {9},
   pages     = {1611--1619},
   publisher = {The Company of Biologists Ltd},
+}
+
+@InBook{white2012methodological,
+  pages     = {9--20},
+  title     = {Methodological {T}ools},
+  publisher = {Wiley},
+  year      = {2012},
+  author    = {White, Ethan and Xiao, Xiao and Isaac, Nick and Sibly, Richard},
+  month     = mar,
+  doi       = {10.1002/9781119968535.ch1},
+  journal   = {Metabolic ecology/a scaling approach},
 }
 
 @Article{williams2006assessing,
@@ -2956,14 +3678,25 @@ ments for this hypothesis will be presented.},
 }
 
 @Article{woese2002evolution,
-  author    = {Woese, Carl R},
+  author    = {Woese, Carl Richard},
   title     = {On the evolution of cells},
   journal   = {Proceedings of the National Academy of Sciences},
   year      = {2002},
   volume    = {99},
   number    = {13},
   pages     = {8742--8747},
+  abstract  = {A theory for the evolution of cellular organization is presented. The model is based on the (data supported) conjecture that the dynamic of horizontal gene transfer (HGT) is primarily determined by the organization of the recipient cell. Aboriginal cell designs are taken to be simple and loosely organized enough that all cellular componentry can be altered and/or displaced through HGT, making HGT the principal driving force in early cellular evolution. Primitive cells did not carry a stable organismal genealogical trace. Primitive cellular evolution is basically communal. The high level of novelty required to evolve cell designs is a product of communal invention, of the universal HGT field, not intralineage variation. It is the community as a whole, the ecosystem, which evolves. The individual cell designs that evolved in this way are nevertheless fundamentally distinct, because the initial conditions in each case are somewhat different. As a cell design becomes more complex and interconnected a critical point is reached where a more integrated cellular organization emerges, and vertically generated novelty can and does assume greater importance. This critical point is called the “Darwinian Threshold” for the reasons given.},
   publisher = {National Acad Sciences},
+}
+
+@Article{xu2020selective,
+  author   = {Xu, Jianfeng and Chmela, Václav and Green,Nicholas J and Russell,David A and Janicki , Mikołaj J. and Góra ,Robert W and Szabla,Rafał and Bond,Andrew D and Sutherland, John D},
+  title    = {Selective prebiotic formation of RNA pyrimidine and DNA purine nucleosides.},
+  journal  = {Nature},
+  year     = {2020},
+  volume   = {582},
+  pages    = {60--66},
+  abstract = {The nature of the first genetic polymer is the subject of major debate. Although the ‘RNA world’ theory suggests that RNA was the first replicable information carrier of the prebiotic era—that is, prior to the dawn of life—other evidence implies that life may have started with a heterogeneous nucleic acid genetic system that included both RNA and DNA. Such a theory streamlines the eventual ‘genetic takeover’ of homogeneous DNA from RNA as the principal information-storage molecule, but requires a selective abiotic synthesis of both RNA and DNA building blocks in the same local primordial geochemical scenario. Here we demonstrate a high-yielding, completely stereo-, regio- and furanosyl-selective prebiotic synthesis of the purine deoxyribonucleosides: deoxyadenosine and deoxyinosine. Our synthesis uses key intermediates in the prebiotic synthesis of the canonical pyrimidine ribonucleosides (cytidine and uridine), and we show that, once generated, the pyrimidines persist throughout the synthesis of the purine deoxyribonucleosides, leading to a mixture of deoxyadenosine, deoxyinosine, cytidine and uridine. These results support the notion that purine deoxyribonucleosides and pyrimidine ribonucleosides may have coexisted before the emergence of life.},
 }
 
 @Article{yamaguchi2012prokaryote,
@@ -2999,6 +3732,13 @@ ments for this hypothesis will be presented.},
   publisher = {International Press of Boston},
 }
 
+@Article{zellner2002geochemistry,
+  author  = {Zellner, Nicolle Elisabeth Brigitte},
+  title   = {Geochemistry of the Apollo landing sites and evidence for lunar impacts before 3.9 Ga ago},
+  journal = {PhDT},
+  year    = {2002},
+}
+
 @Article{zhu2012photochemically,
   author    = {Zhu, Ting F and Adamala, Katarzyna and Zhang, Na and Szostak, Jack W},
   title     = {Photochemically driven redox chemistry induces protocell membrane pearling and division},
@@ -3019,6 +3759,13 @@ ments for this hypothesis will be presented.},
   number    = {2},
   pages     = {357--366},
   publisher = {Elsevier},
+}
+
+@Book{huxley1954evolution,
+  title     = {Evolution as a {P}rocess},
+  publisher = {Allen and {U}nwin},
+  year      = {1954},
+  editor    = {Huxley, {J} {S} and Hardy {A} {C} and Ford {E} {B}},
 }
 
 @Book{garland2009experimental,

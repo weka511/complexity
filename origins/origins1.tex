@@ -1,26 +1,65 @@
+% MIT License
+
+% Copyright (c) 2019-2020 Simon Crase
+
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
 \documentclass[]{article}
 \usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage{titling}
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
 \graphicspath{{figs/}} 
-
+% I snarfed the next line from Stack exchange
+% https://tex.stackexchange.com/questions
+%    /42726/align-but-show-one-equation-number-at-the-end
+% It allows me to suppress equation numbers with align*,
+% then selectively add equation numbers
+% for lines that I want to reference slsewhere
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
+% Ignore garbage that the proprocessor picks up
+\DeclareUnicodeCharacter{2192}{~}
+
+% Add logo st start of document
+\pretitle{
+	\begin{center}
+		\includegraphics[width=6cm]{KanjiLife}\\
+	}
+	\posttitle{\end{center}}
 
 %opening
 \title{
 	Notes from Origins of Life\\
 	Week 1: Introduction
 }
-\author{Simon Crase\\simon@greenweaves.nz}
+
+\author{Simon Crase (compiler)\\simon@greenweaves.nz}
 
 \makeglossaries
 
 \loadglsentries{glossary-entries}
-
+% Prefix section numbers with week number
 \renewcommand{\thesection}{1.\arabic{section}}
 \renewcommand{\glstextformat}[1]{\textbf{\em #1}}
 
@@ -29,206 +68,273 @@
 \maketitle
 
 \begin{abstract}
-    These are my notes from the $1^{st}$ week of the Santa Fe Institute Origins of Life Course\cite{sfi2019}.\\
+    These are my notes from the $1^{st}$ week of the Santa Fe Institute Origins of Life Course\cite{sfi2020}.\\
     The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
     These notes are distributed in the hope that they will be useful,
     but without any warranty, and without even the implied warranty of
      merchantability or fitness for a particular purpose. All feedback is welcome,
-    but I don't necessarily undertake to do anything with it.
+    but I don't necessarily undertake to do anything with it.\\
+    \LaTeX source for this week's lectures can be found at\\
+    \url{https://github.com/weka511/complexity/tree/master/origins}.
 \end{abstract}
 
 \setcounter{tocdepth}{2}
 \tableofcontents
 \listoffigures
 
-\section{Welcome To The Course}
+\section[Welcome To The Course]{Welcome To The Course--Chris Kempes}
+
+How life originated is one of the most interesting, complicated, difficult, and still open questions in modern science. Throughout this course, we're going to
+introduce to you to why it's such a tricky question, and all the different ways that people are trying to solve this unanswered question.	
+
+Since the time of Darwin, we've come to understand how life progresses, changes, diversifies, finds new niches, evolves greater complexity And yet we still don't understand how to take that back to the original formation and initiation and origin of life.
+
+It's important to recognize that life lives on a spectrum--Figure \ref{fig:lifesTransitions}.
+
+\begin{figure}[H]
+	\caption[Life lives on a spectrum]{Life lives on a spectrum, which goes from a completely abiotic world
+		all the way up to multicellular creatures like us, and on toentire societies.}\label{fig:lifesTransitions}
+	\includegraphics[width=0.9\textwidth]{lifesTransitions}
+\end{figure}
+At some point along this trajectory, we have this transition into something
+that we would call life. How is it that we go from this
+abiotic world to a biotic world, understanding that this is all part of one
+evolutionary continuum. Why is that question so challenging?
+
+Well, one of the things that makes it challenging is that it requires a lot of diverse types of knowledge to begin to understand this process and to answer this question;those types of knowledge draw from a variety of different disciplines--Figure \ref{fig:tradional:disciplines}.
+\begin{figure}[H]
+	\begin{center}
+		\caption[Traditional disciplines needed for Origin of Life]{We need to understand something about Earth science, biology, chemistry, and physics and how all of these different concept areas intersect with one another and help us to understand exactly what happened when life first formed.}\label{fig:tradional:disciplines}
+		\includegraphics[width=0.9\textwidth]{4mainAreas}
+	\end{center}
+\end{figure}
+
+Throughout this course, we will introduce you to the main questions in each of these concept areas and how they relate to the origins of life. And we will also start to begin to paint a picture of where the intersection and synthesis of these different concepts live, hopefully moving towards a better theory of how life started and evolved into greater complexity.
+
+What are the main questions within these concept areas? 
+
+\subsection{Earth Science}
+
 \begin{itemize}
-	\item Dr. Sarah Maurer, Co-creator, video lecturer, and live instructor
-	\item Dr. Chris Kempes, Co-creator and video lecture
-	\item Maria Kalambokidis, Course materials developer and teaching assistant
-	\item Linden Schneider, Online education coordinator and executive producer
-	\item Nate Kitchens, Video Editor
+	\item What was the environment like during the time when life originated?
+	We understand that the early Earth was 	very different from the modern Earth.
+	\item What chemistry was possible on the early Earth? We need to understand something about what chemistry was possible then and how that might come together to help 	life form in the first place.
+	\item What was the diversity and complexity of various micro-environments on the early Earth? If we think about the early Earth, not only as a different average chemical space from what we currently have, but	also having lots of different unique types of micro-environments in this very different planetary environment, which of those micro-environments were most likely to give us life in the first place or to have the right type of chemical complexity 	to at least start down that trajectory towards a living organism?
+	
+	\item How did early life and the geosphere co-evolve? 
+	We understand, in the modern Earth, how life interacts with the overall planetary	system; we understand, through lots of the history of life how life interacts, has a large feedback width, and modifies	the geological environment and the geosphere. And the question is: when life first started, what did	that feedback look like and how did this coevolution happen, and how important was that for the	specific trajectory that life took once it was formed?
 \end{itemize}
 
-    This course aims to push the field of Origins of Life research forward by bringing new and synthetic thinking to the question of how life emerged from an abiotic world.
 
-This course begins by examining the chemical, geological, physical, and biological principles that give us insight into origins of life research. We look at the chemical and geological environment of early Earth from the perspective of likely environments for life to originate.
+\subsection{Biology}
+\begin{itemize}
+	\item How do we wind the clock back from modern life to early life? From a biological perspective, the questions we're interested in are mostly how do we take everything we know about modern life and try to work as far back in time as we can? How do we wind back the clock on modern life to understand what early life might have looked like?
+	This involves taking a lot of phylogenetic or genetic perspectives to
+	look back in time.
+	\item  What does the composition, structure, and function of modern life tell us about the origin?
+	\item  Which aspects of extant life are general and which are arbitrary?
+	\item How do we apply modern evolutionary theory to the proto-life? Also in that vein, how do we take everything we know about modern evolutionary theory and start to apply that to things like protolife which might have a much less formal version of
+	inheritance or genetics.
+	\item How can we use evolutionary theory to think about the simplest early life which
+	might be radically different but also is almost certainly undergoing some sort of
+	evolutionary process. So, what are the features that we see in 	modern life that are really essential to life through any origin and trajectory and 	which are contingent on the particular evolutionary history that we happened to
+	have seen for more recent life?
+\end{itemize}	
 
-Taking a look at modern life we ask what it can tell us about the origin of life by winding the clock backwards. We explore what elements of modern life are absolutely essential for life, and ask what is arbitrary? We ponder how life arose from the huge chemical space and what this early 'living chemistry' may have looked like.
 
-We examine phenomena, that may seem particularly life like, but are in fact likely to arise given physical dynamics alone. We analyze what physical concepts and laws bound the possibilities for life and its formation.
+\subsection{Chemistry}
+\begin{itemize}
+	\item How does life arise from the huge space of chemical reactions and compounds? 
+	We understand that chemistry gives us 	this really vast set of possibilities, 	this really rich high-dimensional space, which is great for allowing something 	like life to form but it makes it very complicated to understand exactly what combinations and processes and trajectories are actually necessary or were the ones that led to the life that we have.
+	\item What was early “living” chemistry like? How was that possible in early Earth? How do 	we start to define sort of living chemistry that isn't quite life?
+	\item How do we go from complicated chemistry in an environment to the amazing chemical complexity of even the simplest cells? Even the simplest cells have a set of chemistry and feedback and dynamics and interconnections that is much more 
+	complicated than things that we see in the environment and so how do we make that
+	transition?
+\end{itemize}
 
-Insights gained from modern evolutionary theory will be applied to proto-life. Once life emerges, we consider how living systems impact the geosphere and evolve complexity. 
+	
+\subsection{Physics}
 
-The study of Origins of Life is highly interdisciplinary - touching on concepts and principles from earth science, biology, chemistry, and physics.  With this we hope that the course can bring students interested in a broad range of fields to explore how life originated. 
+\begin{itemize}
+	\item How do physical constraints, such as the laws of thermodynamics, bound the possibilities for life? How do we take everything we know about physics and use that to say what is and 	isn't possible for life, especially for the	first forms?
+	\item What properties and processes are ''easy'' to obtain through physical dynamics alone?	So for example, we understand that in 	purely physical systems, it's possible to get very rich pattern information and 	dynamics and so how much-- how important 	are those sorts of naturally emergent--	occurring phenomena to thinking about the first formation of life and how we start 	to apply some of those concepts of 	emergence and simple pattern formation to 	interact with
+	how life began in the first place.
+	\item How do we generalize physical concepts to understand life’s formation? How do we port physical concepts over 	to biology in general and in particular, how do we port those ideas over to the origins of life?
+\end{itemize}	
 
-The course will make use of basic algebra, chemistry, and biology but potentially difficult topics will be reviewed, and help is available in the course discussion forum and instructor email. There will be pointers to additional resources for those who want to dig deeper.
+As you can see this is a very rich set of questions coming out of a variety of concept spaces across a huge range of science and in this course we've gathered people from this wide diversity of scientific perspectives to really lay out the details of each of these questions in specific ways and then bring those details together in a way that we have a broader and more complete understanding of how life might have formed in the first place.
 
-This course is Complexity Explorer's first Frontiers Course.  A Frontiers Course gives students a tour of an active interdisciplinary research area. The goals of a Frontiers Course are to share the excitement and uncertainty of a scientific area, inspire curiosity, and possibly draw new people into the research community who can help this research area take shape!
 
-\section{Life}
-Lecturer: David Baum
+\section[Life]{Life--David Baum}
+
 \subsection{Easy or hard?}
+A key initial consideration is how easy, or hard, is it for life to emerge?
 The extremes:
 \begin{itemize}
 	\item We need to wait billions of years for specific conditions: even hospitable planets lack life--Figure \ref{fig:luca}.
 	\item New life can evolve quickly whenever conditions are ripe:  New life could emerge in the lab--Figure \ref{fig:zircons}.
 \end{itemize}
 
+Of course this isn't really a dichotomy, as there is a continuum from easy to hard.
+
 \begin{figure}[H]
-	\caption{Life is hard: All life we know of traces back to a single 		ancestor--\gls{gls:LUCA}}\label{fig:luca} 
+	\caption[Life is hard.]{Life is hard; Time is long. A key piece of evidence comes from looking at cellular life and tracing it back to a single ancestor--\gls{gls:LUCA}. If life were easy one might expect multiple independent trees.}\label{fig:luca} 
 	\includegraphics[width=0.9\textwidth]{Luca}
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Life emerged quickly: The oldest rocks that could have retained evidence of life do have evidence of life\cite{bell2015potentially}}\label{fig:zircons} 
+	\caption[Life emerged quickly]{Life emerged quickly: The oldest rocks that could have retained evidence of life do have evidence of life. We now don't know any rock formation that doesn't have evidence of life. This figure depicts some inclusions in zircons\cite{bell2015potentially}, and the isotopic ratios suggest the carbon was from life.}\label{fig:zircons} 
 	\includegraphics[width=0.9\textwidth]{Zircons}
 \end{figure}
 
+ Even if life arose only once, it nevertheless happened remarkably early, since Figure \ref{fig:zircons} dates from shortly after the planet had cooled enough to provide liquid water. To help us think about that we can turn to Charles Darwin.
 \begin{itemize}
-	\item Life preempts Life: ''But if (\& oh what a big if) we could conceive in some warm little pond with all sorts of ammonia \& phosphoric salts,—light, heat, electricity \&c present, that a protein compound was chemically formed, ready to undergo still more complex changes, at the present day such matter would be instantly devoured, or absorbed, which would not have been the case before living creatures were formed''--Charles Darwin\cite{darwin1871letter}.
+	\item Life pre-empts Life: \begin{quotation}
+		But if (and oh! what a big if!) we could conceive in some warm little pond with all sorts of ammonia and phosphoric salts,—light, heat, electricity etc present, that a protein compound was chemically formed, ready to undergo still more complex changes, at the present day such matter would be instantly devoured, or absorbed, which would not have been the case before living creatures were formed--Charles Darwin\cite{darwin1871letter}. 
+	\end{quotation}So the fact that life only emerged once does not necessarily mean that life is hard.
 	
-	\item Would we recognize alt-life?
+	\item Do we know that all life on this planet is cellular? Would we recognize alt-life?
 	
 	\item Some theories allow life to originate easily\cite{wachtershauser1988before}
 \end{itemize}
 
 \subsection{The meaning of ''life''}
+In everyday discourse the term "life" is not ambiguous.
+When we point at something and label it "alive," or an "instance of life," we usually know what we mean.
+But, when it comes to the science and the philosophy of life, this is not so trivial.
+And, in fact, scientists and philosophers have debated for a long time what we really mean by the term "life."
+
+And, of course, we have a very clear reference point.
+The reference point is cellular life--\gls{gls:LAWKI} on this planet,
+which shares a number of distinctive features.
+And, we can make a very long list of the features that all life as we know it share, and some of them are very specific.
+
 \gls{gls:LAWKI} shares many features
 \begin{itemize}
-	\item \gls{gls:DNA}/\gls{gls:RNA} (A,T/U,C, G)
-	\item Proteins with the same 20 L amino acids
-	\item Genetic Code
-	\item Ribosomes
-	\item Biochemistry (e.g. \gls{gls:ATP})
-	\item Particular genes
+	\item They all use a nucleic acid code 	with the same bases-- (A,T/U,C, G)
+	\item they all use the same 20 amino acids 	to make their proteins;
+	\item they're always the left-handed variants.
+	\item they will have a very similar genetic code,
+	\item they all have similar machinery--ribosomes--for making proteins,
+	\item they have similar biochemistry, (e.g. \gls{gls:ATP})
+	\item they even share particular genes.
 \end{itemize}
 
+It's kind of exciting to realize that all life has these unique
+and shared properties, because it tells us something fundamental about life as we know it, which is that life as we know it traces back to a single common ancestor--Figure \ref{fig:LUCA_common}.
 \begin{figure}[H]
-	\caption{\acrfull{gls:LAWKI}}\label{fig:LUCA_figs} 
-	
-	\begin{subfigure}[b]{0.45\textwidth}
-		\centering
-		\caption{A reflection of common ancestry}\label{fig:LUCA_common} 
-		\includegraphics[width=\textwidth]{LUCA_common}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
-		\centering
-		\caption{Focus on generic features...but which?}\label{fig:lawki-focus} 
-		\includegraphics[width=\textwidth]{lawki-focus}
-	\end{subfigure}
+	\caption{Life as we know it traces back to a single common ancestor}\label{fig:LUCA_common} 
+	\includegraphics[width=\textwidth]{LUCA_common}
 \end{figure}
+So, there was, at some point in the past, an ancestral lineage that gave rise to
+all three branches of life that we know of today--bacteria, archaea and eukaryotes.
 
-\gls{gls:life} is a self-propagating chemical system capable of undergoing adaptive evolution--adapted from \cite{deamer1994origins}
-\begin{itemize}
-	\item ''Self-propagating'' includes growth and cellular reproduction 
-	\item ''Adaptive evolution'' entails the potential to complexify and become more out-of-equilibrium--Figure \ref{fig:AdaptiveEvolution}
-	\item Self-propagation and evolution are key
-\end{itemize}
+And, the traits that we see in all life as we know it--that list I just gave you and more--all predate the last universal common ancestor, the last organism that was ancestral to all three of those lineages.
+So, that's an exciting and important insight, but it also poses a slight problem, which is--life as we know it has a very long list of shared traits.
+But, it doesn't necessarily guide us as to ask the question--suppose you found some other lifelike system,maybe on another planet or in some strange environment,you wanted to decide--''Is this thing alive? Is it an instance of life?''--you presumably wouldn't care about this full laundry list.These particular traits are the result of the historical factors that occurred in the origins of this life. and we want some more general understanding of life to answer the question - is something else another instance of life?
+
+So, people have tried to approach this by whittling down those specific traits
+to generalities -- general features -- that life seems to have
+that distinguish these instances of life from instances of non-life --
+inanimate matter. And if, you open any sort of biology textbook, you'll have a list of the features of life, and they vary in number from five, seven, eight, whatever--Figure \ref{fig:lawki-focus}.
 
 \begin{figure}[H]
-	\caption{''Adaptive evolution'' entails the potential to complexify and become more out-of-equilibrium}\label{fig:AdaptiveEvolution} 
+	\caption{Focus on generic features...but which?}\label{fig:lawki-focus} 
+	\includegraphics[width=\textwidth]{lawki-focus}
+\end{figure}
+And, this has been the starting point for a process in the origin of life field of thinking about - how low can we go? 
+What, at core, are the essential features of something to be considered to be an instance of life in the general sense?
+
+Now, there might be some difference of opinion, but, by and large, the field has converged on two key features, which are captured in this definition I've given here.
+\gls{gls:life} is \glsdesc{gls:life}.
+
+This definition is based on one that was kind of established by NASA to help guide them in the question of looking on other planets and deciding whether there is life there.
+
+\begin{itemize}
+	\item life is a self-propagating chemical system, meaning it's a system that makes more of itself over time--or least can;
+	\item  we expect  that this system 	is capable of undergoing
+	adaptive evolution--Figure \ref{fig:AdaptiveEvolution}.
+	\item \emph{self-propagation} and \emph{evolution} are key
+\end{itemize}
+
+So, let's look at those two pieces in turn.
+
+
+The idea of self-propagation is that you have some kind of chemical system that can make more of itself and occupy additional areas of space. It doesn't much matter whether we're thinking about growth, which is where we have a single, living protoplasm that expands to encompass more space, or if we're thinking about the process of making multiple cells from a single parent cell.
+The only difference between these phenomena is whether or not the newly formed protoplasm--living material --either is not sort of packaged up into cells.
+And so, what we expect of anything that we would label to be "alive"--is that it has some capacity to propagate itself spatially.
+But, of course, that isn't really enough because we know of quite a few systems that can self-propagate,
+but we usually wouldn't call them "alive"--for example, a crystallization process.
+\begin{figure}[H]
+	\caption[Adaptive Evolution]{Adaptive evolution entails the potential to complexify and become more out-of-equilibrium. Surface \gls{gls:protoplasm} ulimately evolves to a \gls{gls:protocell}, as described in \cite{baum2015selection}}\label{fig:AdaptiveEvolution} 
 	\includegraphics[width=0.9\textwidth]{AdaptiveEvolution}
 \end{figure}
 
-\section{Nonequilibrium Physics}
+And, that's where the second part
+of the definition comes in -
+and that is this idea that things
+that we want to consider to be alive
+also have the capacity
+for adaptive evolution...
+which means that
+they have the capacity
+to get better at
+self-propagating over time.
+This is an important idea
+and something that we don't see in,
+for example, crystallization processes,
+because it explains
+how it is that life as we know it
+became so complicated
+and out of equilibrium
+with their chemical environments.
+Cells and living systems that we know
+are quite sophisticated
+and certainly far from being typical of
+the chemical environment around them.
+And, this is possible because,
+during the adaptive process,
+the variants arise,
+and the fate of those variants
+is independent of whether they are
+of raised or lower complexity.
+Natural selection,
+the driving force of adaptive evolution,
+will select the trait that
+confers higher fitness
+whether or not
+it's a more complicated trait.
+Furthermore, there are many instances
+in which we know
+that the more complicated variants
+have an advantage.
+As a result,
+over long, long periods of time,
+adaptive evolution can explain
+how a simple self-propagating system
+can become more and more complex.
 
-Lecturer: Eric Smith, External Professor, Santa Fe Institute.\\
-\\
-Topics covered:
-\begin{itemize}
-	\item The equilibrium concept of phase transition
-	
-	\item How phase transitions explain robust patterns
-	
-	\item Why equilibrium isn’t enough to understand life
-	\item Phase transitions in dynamical systems ''frozen motion''
-\end{itemize}
-
-The ''ordinary'' response of thermodynamic systems to controls. E.g. lava: Viscosity increases smoothly as temperature is lowered. Phase transitions are different
-\begin{itemize}
-	\item Water does not become harder as it is cooled
-	\item It turns to ice suddenly (critical temperature)
-	\item The average direction of pointing of the ice sharply increases from zero at the freezing temperature
-	\item The direction and strength of the crystal is called the ''Order 	Parameter'' of the transition
-	\item Change is sudden because ''you can’t have half a symmetry''
-	\begin{itemize}
-		\item A direction either exists or it doesn’t
-		\item All frozen directions are equivalent
-	\end{itemize}
-	\item Phase transitions, cooperatively-maintained states, and robustness
-	\begin{itemize}
-		\item Diamonds are hard because many atoms lock each other in place
-		\item The order of the crystal is a ''robust'' property of freezing
-	\end{itemize}
-\end{itemize}
-
-Evolution happens on a background of robust architectures
-\begin{itemize}
-	\item Universal small metabolites
-	\item RNA and proteins
-	\item Cellular and genomic individuality
-\end{itemize}
-
-Equilibrium ideas are not enough to explain the robust order of life (Chicken vs. chicken soup)
-
-
-The Miller-Urey synthesis of amino acids\cite{miller1959organic}
-
-Life is made of interlocking structures and processes: can phase transition ideas
-be applied to these?
-
-What might be the order parameters of life?
-
-\begin{itemize}
-	\item They would be chemical and energetic
-	\item They would involve interdependent	structure and process
-\end{itemize}
-
-The characteristic molecules
-\begin{itemize}
-	\item Unchanging universal roles 	for small metabolites
-	\item Key macromolecules such as RNA
-\end{itemize}
-
-The great biogeochemical cycles
-\begin{itemize}
-	\item Life alters cycling of Carbon, Nitrogen, Sulfur, and more
-	\item New compounds are also formed of 	these elements
-\end{itemize}
-
-\begin{figure}[H]
-	\caption{The great biogeochemical cycles\cite{falkowski2008microbial}}\label{fig:biogeochemical} 
-	\includegraphics[width=0.9\textwidth]{biogeochemical}
-\end{figure}
+So, putting these
+two pieces together,
+it's fair to say that
+the origin of life field,
+in general, has a great deal
+of attention...
+that it pays to these two properties -
+self-propagation and adaptive evolution.
+We try and understand
+how they come about,
+and we try and understand the kinds
+of planetary or chemical conditions
+in which we might expect
+self-propagation and evolution
+to emerge spontaneously.
 
 
 
-\begin{figure}[H]
-	\caption{Earth’s energy throughput: the Biosphere changes the way a planet converts sunlight into heat.\cite{meadows2005modelling}}\label{fig:EnergyThroughput} 
-	\includegraphics[width=0.9\textwidth]{EnergyThroughput}
-\end{figure}
+\section[Constraining Chemical Complexity to Form Life]{Constraining Chemical Complexity to Form Life--Zach Adam}
 
-The emergences of individualities
-\begin{itemize}
-	\item Individuality takes many 	forms
-	\item The order parameters in individual-based systems 	are proper names
-\end{itemize}
-
-Take-home messages from the lecture:
-\begin{itemize}
-	\item Phase transitions are one way natural systems  spontaneously form order
-	\item The order is robust due to mutual reinforcement
-	\item Phase transitions can also lead to spontaneous order in processes like fractures
-	\item Candidates for living order parameters include chemical cycles and individuality
-\end{itemize}
-
-\section{Constraining Chemical Complexity to Form Life}
-
-Zach Adam
-University of Arizona
-
-Most matter isn't live: how to bridge?
+We'll be talking about huge chemical complexity, and constraining the complexity to form life. When we look at the deep past we find some interesting challenges regarding how life could have originated from a non-living environment. Most matter isn't alive: how to bridge the two states of matter?
 
 \begin{figure}[H]
 	\caption{Chemical Complexity}\label{fig:ChemicalComplexity} 
@@ -240,46 +346,49 @@ Most matter isn't live: how to bridge?
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\caption{But atoms really have many levels, all interacting}
+		\caption{But atoms really have many levels, all interacting. The outer layers of electrons give rise to the "sticks" in the na\"ive model.}
 		\includegraphics[width=\textwidth]{ChemicalComplexity1}
 	\end{subfigure}
 \end{figure}
 
-
+Let's start with a canonical type of molecule--Figure \ref{fig:NucleotideMolecule}. When we zoom in a bead we see that it represents three molecules. If we change even one atom, or link the atoms differently, the molecule may not function.
 \begin{figure}[H]
-	\caption{{Nucleotide Molecule}\label{fig:{NucleotideMolecule} }}
+	\caption{Nucleotide Molecule }\label{fig:NucleotideMolecule}
 	
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\caption{Nucleotide Molecule: one bead expands to 3 molecules. Change one atom, likely to change behaviour of entire molecule!}
+		\caption{RNA Molecule: one bead expands to 3 molecules. Change one atom, likely to change behaviour of entire molecule!}
 		\includegraphics[width=\textwidth]{NucleotideMolecule}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\caption{Zoom into Adenine Molecule: change one thing, not adenine any more!}
-		\includegraphics[width=\textwidth]{AdenineMolecule}
+		\caption{Zoom into Adenine Molecule: change one thing, not adenine any more!}\label{fig:adenine}
+		\includegraphics[width=0.6\textwidth]{AdenineMolecule}
 	\end{subfigure}
 \end{figure}
 
+Let's zoom in further on the Adenine molecule, Figure \ref{fig:adenine}: change any atom and it wouldn't be adenine; now zoom in even further, Figure \ref{fig:MolecularInteractions}, and we see more interactions between atoms and with solvent.
 
 \begin{figure}[H]
-	\caption{Zoom in further, and atoms interact with each other, and with solvents!}\label{fig:MolecularInteractions} 
-	\includegraphics[width=0.9\textwidth]{MolecularInteractions}
+	\begin{center}
+		\caption[Zoom in further, and atoms interact with each other]{Zoom in further, and atoms interact with each other, and with solvents!}\label{fig:MolecularInteractions} 
+		\includegraphics[width=0.9\textwidth]{MolecularInteractions}
+	\end{center}
 \end{figure}
+
+If you want to think about generating these molecules from scratch, you need to think about all these interactions and their effects.
+
+There are a number of ways origins of life researchers try to navigate this complexity and design experiments that get to the root of how life could have originated from a non-living state.
 
 \begin{itemize}
 	\item Constrain Location 
 	\begin{itemize}
 		\item Advantages
 		\begin{itemize}
-			\item Many possibilities for
-			complex interactions
-			\item Experiments can be
-			designed by analogy
+			\item Many possibilities for complex interactions
+			\item Experiments can be designed by analogy with modern environments.
 		\end{itemize}
-		\item Disadvantages: mostly implausible to
-		assume pure reactants in
-		natural settings
+		\item Disadvantages: mostly implausible to assume pure reactants in natural settings
 	\end{itemize}
 	\item Constrain Reactants
 	\begin{itemize}
@@ -288,13 +397,9 @@ Most matter isn't live: how to bridge?
 	\end{itemize}	
 	\item Constrain Energy Sources
 		\begin{itemize}
-		\item Advantages: processes are not location-
-		or reactant-specific; many
-		outcomes are possible
-		\item Disadvantages: Difficult or impossible to
-		predict outcomes of
-		processes that cross
-		multiple object levels
+		\item Advantages: processes are not location- or reactant-specific; many 		outcomes are possible
+		\item Disadvantages: Difficult or impossible to predict outcomes of
+		processes that cross multiple object levels
 	\end{itemize}
 \end{itemize}
 
@@ -303,7 +408,7 @@ Examples
 	\item Constrained Location Examples \begin{itemize}
 		\item Hydrothermal Vents\cite{martin2006origin}
 		\item Atmosphere (Impactor/Shock Synthesis, Lightning,
-		Insolation)\cite{chyba1992endogenous} and \cite{miller1959organic}
+		Insolation)\cite{chyba1992endogenous} \cite{miller1959organic}
 	\end{itemize}
 	\item Constrained Reactant Examples 
 	\begin{itemize}
@@ -313,42 +418,42 @@ Examples
 	\end{itemize}
 	\item Constrained Energy Examples
 	\begin{itemize}
-		\item \gls{gls:serpentinization}\cite{schrenk2013serpentinization}
+		\item \Gls{gls:serpentinization}\cite{schrenk2013serpentinization}
 		\item Solar flares\cite{airapetian2016prebiotic}
-		\item Radioactivity\cite{yi2018radiolytic} and \cite{adam2018estimating}
+		\item Radioactivity\cite{yi2018radiolytic} \cite{adam2018estimating}
 	\end{itemize}
 \end{itemize}
-\section{Geological Conditions, Change, and Chaos}
 
-Zach Adam, University of Arizona\cite{spencer2017growth}
+\section[Geological Conditions, Change, and Chaos]{Geological Conditions, Change, and Chaos--Zach Adam}
 
 What is the source of our understanding of conditions when we thought life originated?
 \begin{figure}[H]
-	\caption{Earth's Structure: includes everything in Figure, plus minerals, etc. Can only sample surface, plus a few km down.}\label{fig:EarthStructure} 
+	\caption[Earth's Structure]{Earth's Structure: includes everything in Figure, plus minerals, etc. We can only sample surface, plus a few km  down.}\label{fig:EarthStructure} 
 	\includegraphics[width=0.9\textwidth]{EarthStructure}
 \end{figure}
 
+Continents don't stay in the one place. So what we say today may not be what was there in the past.
 \begin{figure}[H]
 	\caption{Geologic Record is inseparable from history of life}\label{fig:GeologicRecord} 
 	
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
 		\caption{Great oxidation event changed all sorts of stuff. We need oxygen, but other critters had to adapt or die. Oxidation changed minerals.}
-		\includegraphics[width=\textwidth]{GeologicRecord}
+		\includegraphics[width=0.8\textwidth]{GeologicRecord}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\caption{Different models for crustal accumulation.}
+		\caption{How much change has been caused by weathering? There are different models for crustal accumulation. So how much crust has been produced over time?}
 		\includegraphics[width=\textwidth]{GeologicRecord1}
 	\end{subfigure}
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Another Level Down: different models for accumulation of crust. Not simple accumulation!}\label{fig:AnotherLevelDown} 
+	\caption[Another Level Down: different models for accumulation of crust.]{Another Level Down: different models for accumulation of crust. Not simple accumulation! There may have been periods where there was more crust than today\cite{spencer2017growth}.}\label{fig:AnotherLevelDown} 
 	\includegraphics[width=0.9\textwidth]{AnotherLevelDown}
 \end{figure}
 
-Only direct record for events that sow chaos and processes of prolonged gradual change
+Only direct record for events that sow chaos and processes of prolonged gradual change; much of the evidence for such events may have been lost.
 
 What does this mean for origins of life research?
 \begin{itemize}
@@ -374,18 +479,17 @@ What does this mean for origins of life research?
 		constructive than destructive.
 	\end{itemize}
 \end{itemize}
-\section{Pattern Formation in Chemical Systems}
-Chris Kempes
+
+\section[Pattern Formation in Chemical Systems]{Pattern Formation in Chemical Systems-- Chris Kempes}
 
 \begin{itemize}
-	\item What properties and processes are easy to obtain through physical dynamics alone?
-	
+	\item What properties and processes are easy to obtain through physical dynamics alone?	
 	\item How might this make it easy for lifelike things to begin?
-	
-	\item Reaction Diffusion Equations\cite{sfi_grayscott2018}
 \end{itemize}
 
-Describe reaction of $U$ everywhere in space.
+We will look at pattern formation through the lens of Reaction Diffusion Equations\cite{sfi_grayscott2018}.
+
+Here is a very simple reaction diffusion equation. It relates the change in concentration of some chemical,  $U$, to a diffusion plus a reaction.
 \begin{align*}
 \frac{\partial U}{\partial t} =&   \underbrace{\overbrace{D_V}^\text{diffusivity} \underbrace{ \nabla^2 U }_\text{difference in fluxes}}_\text{diffusion term} + \underbrace{ F(U)}_\text{reaction term}
 \end{align*}
@@ -396,101 +500,142 @@ With two chemicals...
 \frac{\partial V}{\partial t} =&   D_V \nabla^2 V + G(U,V)
 \end{align*}
 
+Now let's consider a specific example.
 Consider two reacting species, $U$ and $V$, and an inert product $P$.
 \begin{align*}
 U + 2V \Longrightarrow& 3V\\
-V \Longrightarrow& P\\
-\frac{\partial U}{\partial t} =& -U V^2 + \overbrace{F}^\text{Fixed flow into system (chemostat)} (1 - U) + D_u \nabla^2 U \\
-\frac{\partial V}{\partial t} =& U V^2 - (F +\underbrace{f}_\text{loss to make $P$}) V + D_v \nabla^2 V 
+V \Longrightarrow& P
 \end{align*}
+
+\begin{enumerate}
+	\item The first term in (\ref{eq:U}) represents the reaction of $U$ with $2V$. 
+	\item We have chemostated the system, meaning there is some constant flux into the system and out of the system. $F(1 - U)$ represents flow in and out.
+	\item Middle term in (\ref{eq:V}) represents outflow of $V$ plus conversion to $P$.
+\end{enumerate}
+\begin{align*}
+	\frac{\partial U}{\partial t} =& -U V^2 + F(1 - U)  + D_u \nabla^2 U \numberthis \label{eq:U}\\
+	\frac{\partial V}{\partial t} =& U V^2 - (F +k) V + D_v \nabla^2 V \numberthis \label{eq:V}
+\end{align*}
+
+This set of equations gives rise to very interesting spatial patterns. Using stability analysis we can determine the range of $F$ and $k$ that allow interesting patterns to form--Figure \ref{fig:GreyScottRange}.
 
 \begin{figure}[H]
 	\caption{Grey Scott Reaction}
-	
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\caption{the range of $F$ and $k$ that allow interesting patterns to form.}\label{fig:GreyScottRange}
+		\includegraphics[width=\textwidth]{GreyScottRange}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\caption{Starting configuration}
 		\includegraphics[width=\textwidth]{GreyScottInitial}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
-		\caption{Evolves toward steady state,  where high concentration close to low concentration. Segregation.}
+		\caption{Evolves toward steady state,  where high concentration close to low concentration.}
 		\includegraphics[width=\textwidth]{GreyScottFinal}
 	\end{subfigure}
 \end{figure}
 
+What is very nice about this is it tells us that in a very simple context where we are combining this reaction with diffusion we see this very interesting pattern formation with strong spacial gradients: very high concentrations of $U$ and $V$ are separated by small distances and we see segregation. We can get very different concentrations very close to one another. This gives us hope, from an origins of life point of view, of getting complicated chemistry forming close to other complicated chemistry on small spatial scales in a way that is stable and segregated. 
+
 Other starting values give cell-like behaviour (including division), so maybe get some ''lifelike" behaviour from physics and simple chemistry.
 
-\section{The Central Dogma of Biology}
+\section[The Central Dogma of Biology]{The Central Dogma of Biology--Chris Kempes}
 
 
 \subsection{The Central Dogma of Biology}
 
-How do we unwind present day life to learn about origins? Focus on most common properties of all life, especially the Central Dogma.\cite{crick1958biological} \cite{crick1970central}
+One of the overarching questions of this class is how do we unwind present day life to learn about origins? Focus on most common properties of all life, especially the Central Dogma.\cite{crick1958biological} \cite{crick1970central}
 
 \begin{figure}[H]
-	\caption{The Central Dogma after \cite{crick1970central}}\label{fig:CentralDogma} 
+	\caption[The Central Dogma]{The Central Dogma after \cite{crick1970central}}\label{fig:CentralDogma} 
 	\includegraphics[width=0.9\textwidth]{CentralDogma}
 \end{figure}
 
 
 \begin{figure}[H]
-	\caption{Ribosome is conserved across life, but appears to have onion structure, built up by evolution. Ribosome started with common core, and more added.\cite{hsiao2009peeling}.}\label{fig:Ribosome} 
+	\caption[Ribosome is conserved across life]{Ribosome is conserved across life, but appears to have onion structure, built up by evolution. Ribosome started with common core, and more added.\cite{hsiao2009peeling}.}\label{fig:Ribosome} 
 	\includegraphics[width=0.9\textwidth]{Ribosome}
 \end{figure}
-Williams argues that we can use the onion, Figure \ref{fig:Ribosome}, to unwind evolution.
+Williams argues that we can use the onion, Figures \ref{fig:Ribosome} and \ref{fig:RibosomePhases}, to unwind evolution.
 
 \begin{figure}[H]
-	\caption{Ribosome Phases after \cite{petrov2015history}}\label{fig:RibosomePhases} 
+	\caption[Ribosome Phases]{Ribosome Phases after \cite{petrov2015history}, illustrating evolution of  \gls{gls:LSU} and \gls{gls:SSU}}\label{fig:RibosomePhases} 
 	\includegraphics[width=0.5\textwidth]{RibosomePhases}
 \end{figure}
 
-Carl Woese used this to build new Tree of Life.
+Carl Woese used this to build new a Tree of Life.
 
 \begin{figure}[H]
-	\caption{\gls{gls:TOL}}\label{fig:TOL} 
+	\caption[Tree of Life]{\gls{gls:TOL}\cite{nair2012woese}}\label{fig:TOL} 
 	\includegraphics[width=0.9\textwidth]{TOL}
 \end{figure}
 
-
-
 \subsection{The Efficiency of the Central Dogma of Biology}
 
-\gls{gls:landauer_bound} \glsdesc{gls:landauer_bound}\cite{bennett2003notes}\cite{landauer1961irreversibility}. 
+\gls{gls:landauer_bound}: \glsdesc{gls:landauer_bound}. 
 
 \begin{figure}[H]
-	\caption{Take unordered set of letters and try to write as specific string.}\label{fig:LandauerRibosome} 
+	\caption[Take unordered set of letters and try to write as specific string]{Take unordered set of letters and try to write as specific string\cite{kempes2017thermodynamic}}\label{fig:LandauerRibosome} 
 	\includegraphics[width=0.9\textwidth]{LandauerRibosome}
 \end{figure}
 
 \begin{itemize}
 	\item Life is only 20 times less efficient that physical limit\cite{kempes2017thermodynamic}
-	\item Computers are 20 times worse than Landauer's bound!
+	\item Computers are 100,000,000 times worse than Landauer's bound!
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{For small cell, \gls{gls:DNA} and proteins take up (nearly) entire volume; for large cells, Ribosome does same thing! So we have bounds on allowable volume.\cite{kempes2016evolutionary}}\label{fig:RibosomeTradeoffs} 
-	\includegraphics[width=0.9\textwidth]{RibosomeTradeoffs}
+	\caption{Ribosome Tradeoffs}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{For a small cell, DNA and proteins take up (nearly) entire volume; for large cells, Ribosome does same thing! So we have bounds on allowable volume.\cite{kempes2016evolutionary}}\label{fig:RibosomeTradeoffs} 
+		\includegraphics[width=\textwidth]{RibosomeTradeoffs}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{A more efficient ribosome would allow larger cells; less efficient might not work at all.}\label{fig:RibosomeTradeoffsEarly} 
+		\includegraphics[width=\textwidth]{RibosomeTradeoffsEarly}
+	\end{subfigure}
 \end{figure}
+\section[Biological Similarity]{Biological Similarity--Sarah Mauer}
 
-\begin{figure}[H]
-	\caption{A more efficient ribosome would allow larger cells; less efficient might not work at all.}\label{fig:RibosomeTradeoffsEarly} 
-	\includegraphics[width=0.9\textwidth]{RibosomeTradeoffsEarly}
-\end{figure}
+We will use a top-down approach.
 
-\section{Biological Similarity}
-
-Sarah Mauer: ''By examining and deconstructing the commonalities between modern living organisms, we can understand the requirements of first life.''
+ ''By examining and deconstructing the commonalities between modern living organisms, we can better understand the requirements of first life.''
 
 \begin{itemize}
-	\item L-amino acids for all proteins;
-	\item D-sugars for all sugars and nucleic acids.
-	\item Use membranes: amphiphilic molecules with hydrophobic tail and hydrophilic end.
-	\item All cells use proteins, same 20 amino acids.
+	\item \Gls{gls:chirality}--Figure \ref{fig:Chirality}
+	\begin{itemize}
+		\item L-amino acids for all proteins;
+		\item D-sugars for all sugars and nucleic acids.
+	\end{itemize}
+	\item The next thing that all living organisms have in common
+	is that they use membranes to separate themselves from the environment--Figure \ref{fig:Membranes}--and these membranes are composed of amphiphilic molecules which have two parts:  a hydrophobic tail that aggregates between itself and a hydrophilic head group that interact with the water phase. This creates a barrier to the environment and also helps to keep important molecules inside the cell.
+	Many/membranes are used to separate cells from one another they are also used
+	to separate \glspl{gls:organelle} from other parts of the cell;
+	one organelle is the nuclear membrane which separates the nucleic acid from the \gls{gls:cytosol}.
+	\item The nucleic acids are another component that all living things have in common. The small chemical structures that you see here are very highly conserved between all nucleic acids. DNA similarities:\begin{itemize}
+		\item little difference in chemical structure between organisms
+		\item some difference in packing
+		\item large difference in the size of genome
+	\end{itemize}
+	\item All cells use proteins, made from the same 20 amino acids.
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{Comparison of similarity allows for the
+	\caption[L-amino acids and D-sugars]{L-amino acids for all proteins; D-sugars for all sugars and nucleic acids}\label{fig:Chirality}
+	\includegraphics[width=0.8\textwidth]{Chirality}
+\end{figure}
+
+\begin{figure}[H]
+	\caption[All living organisms use membranes]{All living organisms use membranes to separate themselves from the environment}\label{fig:Membranes}
+	\includegraphics[width=0.8\textwidth]{Membranes}
+\end{figure}
+\begin{figure}[H]
+	\caption[Comparison of similarity allows for the
+		construction of a tree]{Comparison of similarity allows for the
 		construction of a tree, outlining evolution. Large part of conserved set involved in Central Dogma, and also metabolic.}\label{fig:Phylogeny} 
 	\includegraphics[width=0.9\textwidth]{Phylogeny}
 \end{figure}
@@ -500,113 +645,145 @@ Sarah Mauer: ''By examining and deconstructing the commonalities between modern 
 	\includegraphics[width=0.9\textwidth]{PhylogenyHorizontal}
 \end{figure}
 
-\section{Selection Theory}
-Chris Kempes
 
-\subsection{Quasispecies equation}
+
+\section{What is Life?}
+
+\subsection[Constraining the Definition of Life]{Constraining the Definition of Life--Sara Imari Walker}
+
+Schrödinger wondered whether we could explain life using physics as currently known.
+
+''... living matter, while not eluding the laws of physics as established up to date, is likely to involve other laws of physics hitherto unknown''--Erwin Schrödinger\cite{schrodinger1944life}.
+
+WE don't really know what life looks like, but we might ask critically what are the examples of life on Earth, and how we can use them to build a unified theory of what life is--a real predictive theory that allows us to understand nit just life on this planet, but also life on other worlds. In physics we have this wonderful hierarchy of theories--Figure \ref{fig:physics:unifications}, but it doesn't have anything to say about complex systems or about us: ''The theory of everything is a theory of everything except of those things that theorize''--David Krakauer.
+
+So the challenge is how can we think about how we can approach an explanatory theory for life, and whether we can draw inspiration from the history of physics. So it is constructive to look at examples of life on earth. Is life really a natural kind? Are some systems more alive than others?
+
+\begin{figure}[H]
+	\caption{History of Unifications in Physics}
+	\includegraphics[width=0.9\textwidth]{Unifications}\label{fig:physics:unifications}
+\end{figure}
+
+
+Examples of "Life"
 \begin{itemize}
-	\item How do we think about evolution in a simple, mathematical way?
-	\item Start with binary Genome. One string can change into another via point mutations.
+	\item The Cell as a unit of Life--Figure \ref{fig:cell}
+	\item Metabolism--Figure \ref{fig:metabolism}
+	\item Tardigrade--an extremophile that can live in space--Figure \ref{fig:tardigrade}. Maybe we should think about the widest set of conditions under which life \textit{can} exist.
+	\item Two-headed planarian worms--Figure \ref{fig:2headed:planaria}. What is the limit for viable life?\cite{levin2019planarian}
+	\item What if we replace RNA/DNA with XNA?
+	\item We can consider scales of organization, as with Social Insects--Figure \ref{fig:social:insects}. Is the super-organism, the colony, "alive"? Is life something that emerges in chemistry, but can exist at higher levels?\cite{pratt2015psychology}
+	\item Is a City alive--Figure \ref{fig:city}?
+	\item Is there life on the scale of the Planet\cite{lovelock1974atmospheric}--Figure \ref{fig:gaia}?
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{The Cell as a unit of Life}\label{fig:cell}
+	\includegraphics[width=0.9\textwidth]{Cell}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Metabolism}\label{fig:metabolism}
+	\includegraphics[width=0.9\textwidth]{Metabolism}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Tardigrade--an extremophile that can live in space}\label{fig:tardigrade}
+	\includegraphics[width=0.9\textwidth]{Tardigrade}
+\end{figure}
+
+
+\begin{figure}[H]
+	\caption{Two Headed Planaria}\label{fig:2headed:planaria}
+	\includegraphics[width=0.9\textwidth]{TwoHeadedPlanaria}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Social Insects: is the super-organism "alive"?}\label{fig:social:insects}
+	\includegraphics[width=0.9\textwidth]{SocialInsects}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{City}\label{fig:city}
+	\includegraphics[width=0.9\textwidth]{City}
+\end{figure}
+
+\begin{figure}[H]
+	\caption{Is there Life on the scale of a Planet?}\label{fig:gaia}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Gaia}
+		\includegraphics[width=\textwidth]{Globe1}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Network representation of the global inventory of
+			enzymatically catalyzed biochemical reactions}
+		\includegraphics[width=\textwidth]{Globe2}
+	\end{subfigure}
+\end{figure}
+
+
+\subsection[Weird Life]{Weird Life--Sarah Maurer}
+
+The material in this section is entirely speculative.
+
+\begin{itemize}
+	\item No Cells--diffusion systems. But it is very restrained: have to get the right values for parameters.
+	\item Membrane-less Cells? Organization of 	chemical gradients\cite{hollants2011life}\cite{kim2001life}
+	\begin{itemize}
+		\item Mineral surfaces
+		\item Coacervates
+		\item Oil droplets
+		\item Aerosols
+	\end{itemize}
+	\item No water? 
+	\begin{itemize}
+		\item Polar solvents\cite[Chapter 6]{board2007limits}--Figure \ref{fig:no:water}. Water, ammonia, and sulphuric acid can:
+		\begin{itemize}
+			\item drive formation of carbon-carbon bonds;
+			\item hydrogen bond.
+		\end{itemize}
+		\item Non-polar solvents\cite{cejkova2014dynamics}--Figure \ref{fig:non:polar}.
+	\end{itemize}
+	\item No liquid?\cite[Chapter 6]{board2007limits}
+	\begin{itemize}
+		\item Solids
+		\begin{itemize}
+			\item Ices?
+			\item Very slow metabolic rates (longer time scales)
+		\end{itemize}
+		\item Gases
+		\begin{itemize}
+			\item Higher temperatures
+			\item Less stable large molecules
+			\item Much larger (galaxy level?)
+		\end{itemize}
+	\end{itemize}
 \end{itemize}
 
 
 \begin{figure}[H]
-	\caption{Topology of genome -- point mutations represent edges}\label{fig:GenomeTopology} 
-	\includegraphics[width=0.9\textwidth]{GenomeTopology}
+	\caption{No Water? Polar solvents}\label{fig:no:water}
+	\includegraphics[width=0.9\textwidth]{NoWater}
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Fitness Landscape, showing maximum fitness.}\label{fig:FitnessLandscape} 
-	\includegraphics[width=0.9\textwidth]{FitnessLandscape}
+	\caption{No water? Non-polar solvents}\label{fig:non:polar}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\caption{Titan--liquid ethane/methane--very cold}
+		\includegraphics[width=\textwidth]{Titan}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\caption{Io--liquid sulfur--Hotter than Earth}
+		\includegraphics[width=\textwidth]{Io}
+	\end{subfigure}
 \end{figure}
 
-Introduce \emph{Quasispecies equation}.
-\begin{align*}
-\dot x_i =& f_i x_i - \phi x_i \text{, where $x_i$ is frequency of sequence $i$, $f_i$ is fitness, $\phi$ is death term.}\\
-\sum_{i=1}^{n} \dot x_i =& 0 \text{, assume constant population}\\
-\sum_{i=1}^{n} f_i - \phi \sum_{i=1}^{n} x_i =& 0\\
-\phi =& \sum_{i=1}^{n}x_i f_i\text{, since $\sum_{i=1}^{n}x_i = 1$}
-\end{align*}
-Hence $\phi$ is \emph{average fitness}. But this leaves out \emph{mutation!} Include $q_{ij}$, the probability of mutation from $i$ to $j$.
-\begin{align*}
-\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\text{, full quasispecies equation} 
-\end{align*}
-
-NB. See Figure \ref{fig:GenomeTopology} - point mutations much more likely than 2-point, etc.
-
-\subsection{What are the basic ways in which we think about evolution?}
+Open Questions
 
 \begin{itemize}
-	\item How do we generalize evolution?
-	\item How do we use this to think about origins of life? 
+	\item What other substrates could life exist in?
+	\item Would we recognize it?
 \end{itemize}
-
-\begin{figure}[H]
-	\caption{Simplify to \emph{Master Sequence}, $f_0$ with all less fit sequences lumped as $f_1$.}\label{fig:SteadyStateSolution} 
-	\includegraphics[width=0.9\textwidth]{SteadyStateSolution}
-\end{figure}
-
-\begin{align*}
-\dot x_i =& \sum_{j=1}^{n} f_j q_{ij}x_j - \phi x_i\\
-f_0 >&1, f_1 = 1\\
-q_{00} =& (1-u)^L \triangleq q\text{, where $u$ is mutation rate, $L$ = length of genome}\\
-q_{01} =& 1-q\\
-q_{11} =& 1\text{, $L$ is large, so 1$\rightarrow$1} \\
-q_{10} =& 0\text{, $1\nrightarrow0$}\\
-\phi =& \sum_{i=1}^{n}x_i f_i\\
-\text{Whence,}\\
-\dot{x_0}=&f_0 q x_0 - \phi x_0\text{,}\\
-\dot{x_1}=&f_0 (1-q) x_0 + x_1 -\phi x_1\text{, and}\\
-\phi =& f_0 x_0 + x_1 \text{. But} \\
-x_0 + x_1 =& 1\text{, so we have}\\
-\dot{x_0}=& x_0 \big[f_0 q -1 - x_0 (f_0 - 1)\big]
-\end{align*}
-Now we can look for a steady state solution:
-\begin{align*}
-x_0^* =& \frac{f_0 q - 1}{f_0 - 1}\text{, se we need}\\
-f_0q >& 1 \text{, if the master sequence is to persist. I.e.}\\
-u <& log(f_0)\\
-log(f_0) >& -L log(1-u)\text{. Now we assume $L<<1$, and find}\\
-u <& \frac{log(f_0)}{L}\text{, which is known as the \emph{Error Threshold.}} 
-\end{align*}
-The Error Threshold is the \emph{maximum mutation rate that allows for adaptive evolution!} NB: it is more sensitive to $L$ than to $f_0$.
-
-\subsection{Quasispecies and Error Catastrophe}
-
-Michael Lachmann
-
-We look at growth of types, e.g.:
-\begin{itemize}
-	\item Genome in population
-	\item Molecule in test-tube.
-\end{itemize}
-
-\begin{align*}
-\vec{x}^{\,t} =& W M \vec{x}\text{, where M represents mutations, W growth, e.g.}\\
-M =& \begin{bmatrix}
-1-\mu & 0\\
-\mu& 1
-\end{bmatrix}&
-\end{align*}
-Let us diagonalize WM
-\begin{align*}
-WM =& VDV^{-1}\\
-(WM)^t =& V D^t V^{-1}
-\end{align*}
-So $D^t$ is dominated by its largest eigenvalue.
-
-Figures \ref{fig:ErrorCatastrophe1} and \ref{fig:ErrorCatastrophe2} show that master sequence lost if mutation rate is too high. 
-\begin{figure}[H]
-	\caption{Hamming Distance.}\label{fig:ErrorCatastrophe1} 
-	\includegraphics[width=0.9\textwidth]{ErrorCatastrophe1}
-\end{figure}
-\begin{figure}[H]
-	\caption{Error Catastrophe.}\label{fig:ErrorCatastrophe2} 
-	\includegraphics[width=0.9\textwidth]{ErrorCatastrophe2}
-\end{figure}
-
-
-See \cite{eigen1978hypercycle}, \cite{eigen1988molecular}, \cite{eigen2002error}, \cite{crotty2001rna}, and \cite{stadtler2002fitness_landscapes}.
 
 
 % end of text 
@@ -619,5 +796,6 @@ See \cite{eigen1978hypercycle}, \cite{eigen1988molecular}, \cite{eigen2002error}
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{section}{Bibliography}
 \bibliography{origins,wikipedia}
+
 
 \end{document}

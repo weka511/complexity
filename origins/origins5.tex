@@ -1,23 +1,56 @@
+% MIT License
+
+% Copyright (c) 2019-2020 Simon Crase
+
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage{titling}
 \setacronymstyle{long-short}
 \usepackage{glossaries-extra}
 \graphicspath{{figs/}} 
 \setlength{\cftsubsecindent}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecnumwidth}{3em}
+% Need this because there is a big matrix in this document
+\setcounter{MaxMatrixCols}{20}
+% logo for first page
+\pretitle{
+	\begin{center}
+		\includegraphics[width=6cm]{KanjiLife}\\	
+	}
+	\posttitle{\end{center}}
 
 %opening
 \title{
 	Notes from Origins of Life\\
 	Week 5: Evolution}
-\author{Simon Crase}
+\author{Simon Crase (compiler)\\simon@greenweaves.nz}
 
 \makeglossaries
 
 \loadglsentries{glossary-entries}
+
+% Prefix section numbers with week number
 
 \renewcommand{\thesection}{5.\arabic{section}}
 \renewcommand{\glstextformat}[1]{\textbf{\em #1}}
@@ -31,92 +64,130 @@
 \maketitle
 
 \begin{abstract}
-   These are my notes from the $5^{th}$ Week of the Santa Fe Institute Origins of Life Course\cite{sfi2019}. The course aims to push the field of Origins of Life research forward by bringing new and synthetic thinking to the question of how life emerged from an abiotic world.\\
+   These are my notes from the $5^{th}$ Week of the Santa Fe Institute Origins of Life Course\cite{sfi2020}. 
    The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
    These notes are distributed in the hope that they will be useful,
    but without any warranty, and without even the implied warranty of
    merchantability or fitness for a particular purpose. All feedback is welcome,
-   but I don't necessarily undertake to do anything with it.
+   but I don't necessarily undertake to do anything with it.\\
+   The source for this document can be found at\\
+   \url{https://github.com/weka511/complexity/tree/master/origins}.
 \end{abstract}
 
 \setcounter{tocdepth}{2}
 \tableofcontents
 \listoffigures
 
-\section{Introduction}
+\section[Introduction]{Introduction--Chris Kempes}
 
-We discuss Selection, Phylogenetics, Macroscopic Regularities across all of life, how has life evolved in creating Complexity, and evolutionary processes in Artificial Life. 
+We discuss Selection, \gls{gls:phylogenetics}, Macroscopic Regularities across all of life, how  life has evolved in creating Complexity, and evolutionary processes in Artificial Life. 
 
-\section{Origins of Eukaryotes}
+\section[Origins of Eukaryotes]{Origins of Eukaryotes--David Baum}
 
-Lecturer: David Baum
+\subsection{Prokaryotes and Eukaryotes}
 
-Cellular life began prokaryotic: metabolic and genetic systems enclosed in a single
-boundary.
+Since life originated, perhaps 4 billion years ago, on this planet, most people would say that the most important subsequent transition was the evolutionary origin of the eukaryotes--the origin of large, complex cells such as we find in the bodies of animals, plants, and fungi. The origin of eukaryotes is a distinct problem to the origin of life, but it shares the features that we don't have intermediate steps, and it happened just once. It can serve as a model for studying difficult and rare transitions.
 
-Eukaryotic cells evolved once; we don't have intermediate steps.
+Cellular life began \gls{gls:prokaryotic}-- \glsdesc{gls:prokaryotic}
+boundary--Figure \ref{fig:prokaryote}. Structurally \gls{gls:prokaryotic} cells are very simple, but we must remember that the \gls{gls:cytoplasm} is very complicated at the biochemical and genetic level.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{Cellular life began \gls{gls:prokaryotic}}\label{fig:prokaryote}
+		\includegraphics[width=0.6\textwidth]{prokaryote}
+	\end{center}
+\end{figure}
+
+\Gls{gls:eukaryotic} cells are structurally complex--Figure \ref{fig:ManyMembranes}. 
 
 \begin{itemize}
-	\item Many internal membrane-bound structures
+	\item They are larger
+	\item They have multiple internal membrane-bound structures
 	\begin{itemize}
-		\item nucleus
-		\item mitochondria
-		\item endomembrane system)
+		\item \emph{nucleus} encloses genetic material
+		\item \emph{mitochondria} generate energy for the cell
+		\item \gls{gls:endomembrane} system
 	\end{itemize}
-	\item A significant evolutionary event!
+	\item We know they arose just once.
 \end{itemize}
 
+\begin{figure}[H]
+	\caption[\Gls{gls:eukaryotic} cells: multiple internal membrane-bound structures]{\Gls{gls:eukaryotic} cells have multiple internal membrane-bound structures}\label{fig:ManyMembranes}
+	\includegraphics[width=0.8\textwidth]{ManyMembranes}
+\end{figure}
+
+So \gls{gls:eukaryotic} cells are significantly different from \gls{gls:prokaryotic} cells, and we have no intermediates known between these two states of being.
+
 \begin{itemize}
-	\item Cellular predators--Figure \ref{figs:Cellular:predators:symbiotic:hosts1}--the lions and tigers of the micro-biotic world!
-	\item Symbiotic hosts--Figure \ref{figs:Cellular:predators:symbiotic:hosts2}-- the farmers of the micro-biotic world!
-	\item Multicellularity
-	\begin{itemize}
-		\item why have only eukaryotes evolved multicellularity?
-		\item Why have eukaryotes evolved it multiple times? The best known instances are animals, plants, and fungi, but there are others.
-	\end{itemize}
+	\item Eukaryotes are cellular predators--Figure \ref{figs:Cellular:predators:symbiotic:hosts1}--the lions and tigers of the micro-biotic world!
+	\item Eukaryotes are symbiotic hosts--Figure \ref{figs:Cellular:predators:symbiotic:hosts2}-- the farmers of the micro-biotic world! They can take in other cells, mostly prokaryotes, shelter them, and foster a close intimate relationship. The best known example is photosynthesis: algae and plants enclose formerly free-living photosynthetic bacteria as chloroplasts.
 \end{itemize}
 
 \begin{figure}[H]
 	\caption{Cellular predators, symbiotic hosts}
 	\label{figs:Cellular:predators:symbiotic:hosts}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{ }
+		\caption{ Cellular predators}
 		\label{figs:Cellular:predators:symbiotic:hosts1}
 		\includegraphics[width=\textwidth]{Eukaryotes1}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{ }
+		\caption{Symbiotic hosts }
 		\label{figs:Cellular:predators:symbiotic:hosts2}
 		\includegraphics[width=\textwidth]{Eukaryotes2}
 	\end{subfigure}
 \end{figure}
+
+The other thing that only eukaryotes do is the formation of multicellular organisms--Figure \ref{fig:multicellularity}. This is a sophisticated form of multicellularity, where cells have specialized, and only one kind of cell is able to pass on its genes to the next generation.
+
+\begin{itemize}
+	\item why have only eukaryotes evolved multicellularity?
+	\item why have eukaryotes evolved multicellularity multiple times? (The best known instances are animals, plants, and fungi, but there are others.)
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{A significant evolutionary event--Multicellularity}\label{fig:multicellularity}
+	\includegraphics[width=0.8\textwidth]{multicellularity}
+\end{figure}
+
+\subsection{Why eukaryotes?}
 Why eukaryotes? There are three ideas at present.
 
 \begin{itemize}
-	\item Mitochondria improve energetic efficiency, and allow energy use to be regulated more nimbly.\cite{lane2010energetics}.
+	\item Mitochondria improve energetic efficiency, and allow energy use to be regulated more nimbly--Figure \ref{fig:EukaryotesMoreEfficient}.
 	
-	\item Flexible membranes allow phagocytosis and generation of internal vesicles. So eukaryotes can do things that prokaryotes can't, such as engulfing food prey--Figure \ref{fig:engulf}.
+	\item Flexible membranes allow \gls{gls:phagocytosis} and generation of internal vesicles. So eukaryotes can do things that prokaryotes can't, such as engulfing food prey--Figure \ref{fig:engulf}.
 	
-	\item Nucleus and \gls{gls:endomembrane} system allow for finer gene
-	regulation--Figure \ref{fig:finer:gene:regulation}\cite{paez2016endocytosis}. 
+	\item Nucleus and \gls{gls:endomembrane} system allow for many more levels of gene
+	regulation--Figure \ref{fig:finer:gene:regulation}--and this may be a reason why eukaryotes alone have evolved multi-cellularity.
 	\begin{itemize}
 		\item Multicellular organization requires communications between different cells, which express different genes and proteins.
-		\item The extra layers of regulation that eukaryotes have may explain why they, and not prokaryotos, have evolved complex multicellular organisms. These layers deal with the genetic control by separating the transcription of a DNA sequence from the reading of the message--there are many steps where regulation can be imposed. 
-		\item Additionally the \gls{gls:endomembrane} system can affect the secretion, degradation and recycling of proteins
+		\item The extra layers of regulation that eukaryotes have may explain why they, and not prokaryotes, have evolved complex multicellular organisms. 
+		\begin{itemize}
+			\item These layers deal with the genetic control by separating the transcription of a \gls{gls:DNA} sequence from the reading of the message--there are many steps where regulation can be imposed. 
+			\item Additionally the \gls{gls:endomembrane} system can affect the secretion, degradation and recycling of proteins
+		\end{itemize}
 	\end{itemize}
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{Flexible membranes allow phagocytosis and generation
+	\begin{center}
+		\caption[Mitochondria improve energetic efficiency]{Mitochondria improve energetic efficiency, and allow energy use to be regulated more nimbly\cite{lane2010energetics}}\label{fig:EukaryotesMoreEfficient}
+		\includegraphics[width=0.6\textwidth]{EukaryotesMoreEfficient}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\caption[Flexible membranes]{Flexible membranes allow phagocytosis and generation
 		of internal vesicles}
 	\label{fig:engulf}
 	\includegraphics[width=0.9\textwidth]{Engulf}
 \end{figure}
 
-
 \begin{figure}[H]
-	\caption{Nucleus and endomembrane system allow for finer gene
-		regulation}\label{fig:finer:gene:regulation}
+	\caption[Nucleus and endomembrane system allow for finer gene
+		regulation]{Nucleus and endomembrane system allow for finer gene
+		regulation\cite{paez2016endocytosis}}\label{fig:finer:gene:regulation}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{Regulation1}
 	\end{subfigure}
@@ -124,98 +195,204 @@ Why eukaryotes? There are three ideas at present.
 	\includegraphics[width=\textwidth]{Regulation2}
 	\end{subfigure}
 \end{figure}
-Easier to study than the
-origin of life
+
+These are some of the reasons why we believe that the eukaryotic transition is well worth studying. Like the origin of life, this is a unique event, but we do have one great advantage in this area:  we can use phylogenetic methods(Section \ref{sec:phylogenetics}) to study both ends of the stem lineage of the eukaryotes.
+
 
 \begin{itemize}
-	\item We can use phylogenetic methods to infer the features of \gls{gls:LECA}--Figure \ref {fig:LECA}. We can study both ends of the \gls{gls:LECA} branch, since we have procaryotes; we cannot do this with \gls{gls:LUCA}.
-	\begin{itemize}
-		\item Mitochondria are endosymbiotic bacteria\cite{germot1996presence}
-		\item Host was an archaeon\cite{spang2015complex}
-		\item Can distinguish genes of archaeal or
-		bacterial ancestry\cite{thiergart2012evolutionary}
-	\end{itemize}
+	\item We can use phylogenetic inference  to reconstruct the trace of \gls{gls:LECA}--Figure \ref {fig:LECA}.
+	
+	\item We can also go down to the end of that stem lineage and identify and infer traits of ancestors of \gls{gls:LECA}.
+	
+	\item  We cannot do this with \gls{gls:LUCA}, as we hit a phylogenetic singularity.
+
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{LECA}\label{fig:LECA}
+	\caption[We can use phylogenetic inference  to reconstruct the trace of LECA]{We can use phylogenetic inference  to reconstruct the trace of \gls{gls:LECA}}\label{fig:LECA}
 	\includegraphics[width=0.9\textwidth]{LECA}
 \end{figure}
 
+We can use phylogenetic methods, and there are things that we have been able to figure out about the origin of the eukaryotes that are quite significant:
+\begin{itemize}
+	\item Mitochondria are endosymbiotic bacteria, descended from alphaproteobacteria--Figure \ref{fig:Mitochondria:are:endosymbiotic:bacteria}. These bacteria were taken up by the ancestral eukaryote and integrated into the cell, but did not completely lose their genome.
+	\item Host was an archaeon--Figure \ref{fig:host:archaeon}
+	\item We can distinguish genes of archaeal or 	bacterial ancestry--Figure \ref{fig:distinguish:genes:archaeal:bacterial}--in modern eukaryotes. This is helpful for figuring out how disparate cells came together for firm a coherent organism.
+\end{itemize}
+
 \begin{figure}[H]
-	\caption{Mitochondria are endosymbiotic bacteria}
-	\label{fig:Mitochondria:are:endosymbiotic:bacteria}
-	\includegraphics[width=0.9\textwidth]{MitochondriaEndosymbiotic}
+	\begin{center}
+		\caption[Mitochondria are endosymbiotic bacteria]{Mitochondria are endosymbiotic bacteria\cite{germot1996presence}} 	\label{fig:Mitochondria:are:endosymbiotic:bacteria}
+		\includegraphics[width=0.9\textwidth]{MitochondriaEndosymbiotic}
+	\end{center}
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Host was an archaeon}
+	\caption[Host was an archaeon]{Host was an archaeon\cite{spang2015complex}}
 	\label{fig:host:archaeon}
 	\includegraphics[width=0.9\textwidth]{HostArchaeon}
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Can distinguish genes of archaeal or bacterial ancestry}
+	\caption[Can distinguish genes of archaeal or bacterial ancestry]{Can distinguish genes of archaeal or bacterial ancestry\cite{thiergart2012evolutionary}}
 	\label{fig:distinguish:genes:archaeal:bacterial}
 	\includegraphics[width=0.9\textwidth]{thiergart2012}
 \end{figure}
 
-Mysteries remain
+Mysteries remain. They are generally structural problems. We can reconstruct the history of genes from their sequences. Membranes and structures don't have genes, so we can't infer their history. Instead we have to come up with scenarios and plausibility arguments to answer questions such as the following. 
+
 \begin{itemize}
-	\item How did a bacterium get into an archaeon? There are two extremes in a range of theories.
-	\begin{itemize}
-		\item In the Outside-in Model, and archaean developed a membrane, Figure \ref{fig:outside:in1}, which became invaginated. It enveloped mitochondria in a mutualistic association--Figure \ref{fig:outside:in2}. Later it developed membranes to protect DNA from the activity (free oxygen) of the mitochondria--Figure \ref{fig:outside:in3}--until the nucleus was fully enclosed--Figure \ref{fig:outside:in4}.
-		\item In the Inside-out Model--Figure \ref{fig:inside:out}--the cell becomes associated with arachaea, which are gradually walled in \cite{baum2014inside}.
-	\end{itemize}
+	\item How did a bacterium get into an archaeon? 
 	\item How was a nucleus formed?
 \end{itemize}
 
+Figures \ref{fig:outside:in} \& \ref{fig:inside:out} depict  two extremes in a range of theories--outside-in and inside-out.
+
 \begin{figure}[H]
-	\caption{Outside-in Model}\label{fig:outside:in}
+	\caption[Origin of membranes and structures: Outside-in Model]{In the Outside-in Model, an ancestral archaeon had a membrane, Figure \ref{fig:outside:in1}, which became invaginated. It enveloped a bacterium in a mutualistic association--Figure \ref{fig:outside:in2}. Later it assembled membranes and vesicles to build a compartment to protect \gls{gls:DNA} from the activity (free oxygen) of the mitochondria--Figure \ref{fig:outside:in3}--until the nucleus was stabilized with the addition of the nuclear pores--Figure \ref{fig:outside:in4}.}\label{fig:outside:in}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{ }\label{fig:outside:in1}
+		\caption{Ancestral archaeon had a membrane which became invaginated }\label{fig:outside:in1}
 		\includegraphics[width=\textwidth]{OutsideIn1}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{ }\label{fig:outside:in2}
+		\caption{ Cell gradually enveloped mitochondria in a mutualistic association. It enveloped a bacterium in a mutualistic association.}\label{fig:outside:in2}
 		\includegraphics[width=\textwidth]{OutsideIn2}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{ }\label{fig:outside:in3}
+		\caption{Cell later assembled membranes and vesicles to build a compartment to protect \gls{gls:DNA} from the activity (free oxygen) of the mitochondria}\label{fig:outside:in3}
 		\includegraphics[width=\textwidth]{OutsideIn3}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{ }\label{fig:outside:in4}
+		\caption{Eventually the nucleus was stabilized with the addition of the nuclear pores}\label{fig:outside:in4}
 		\includegraphics[width=\textwidth]{OutsideIn4}
 	\end{subfigure}
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Inside-Out Model}\label{fig:inside:out}
+	\caption[Origin of membranes and structures: Inside-Out Model]{Origin of membranes and structures: Inside-Out Model\cite{baum2014inside}. A mutualistic relationship is established, and the host extrudes membranes structures, ''blebs'', that gradually formed an external structure to trap and enclose the mitochindria. Finally the structure fused to form a new compartment that enclosed the cytoplasm. The original archaeon became the nucleus.}\label{fig:inside:out}
 	\includegraphics[width=0.9\textwidth]{InsideOut}
 \end{figure}
 
-But still easier to solve than the origin of life!
+At present we cannot distinguish between these two stories, but there is a hope that new genomic data will enable us to do this.
+
 \begin{itemize}
 	\item New genomic data keep emerging
 	\item There is a possibility of finding intermediates
 \end{itemize}
 
-\cite{javaux2003recognizing},  
+\begin{figure}[H]
+	\begin{center}
+		\caption[Prospects for distinguishing between the two stories]{Prospects for distinguishing between the two stories\cite{javaux2003recognizing}}\label{fig:Javaux}
+		\includegraphics[width=0.6\textwidth]{Javaux}
+	\end{center}
+\end{figure}
+  
+See also \cite{martin2015endosymbiotic}
+\section{Phylogenetics}\label{sec:phylogenetics}
 
-\section{\Gls{gls:phylogenetics}}
 
+\subsection[Using Phylogenetics to Travel in Time]{Using Phylogenetics to Travel in Time--Bet{\"u}l Ka{\c c}ar}
 
-\subsection{Using Phylogenetics to Travel in Time}
-Lecturer: Bet{\"u}l Ka{\c c}ar
+This lecture talks about \gls{gls:phylogenetics} and how to make sense of phylogenetic trees.
+\subsubsection{what is a phylogenetic tree?}
 
-A phylogenetic tree is an hypothesis, not an established fact. Key Points:
+Consider these very different organisms: a flower, bacteria, an elephant, a giraffe, an orange, a human being--Figure \ref{fig:WhatDoTheseSpeciesHaveInCommon}.
+As different as they are, what do all these species have in common?
+\begin{figure}[H]
+	\begin{center}
+		\caption{What do these Species have in Common?}\label{fig:WhatDoTheseSpeciesHaveInCommon}
+		\includegraphics[width=0.8\textwidth]{WhatDoTheseSpeciesHaveInCommon}
+	\end{center}
+\end{figure}
+They all contain \gls{gls:DNA}
+and they share a genetic code
+that programs for the different types
+and arrangements of molecules
+that make up their bodies.
+Biologists have found a way
+to utilize this information
+in order to understand
+the relationship between species.
+As different as
+all of these organisms are,
+and as varied as
+all of their genes may be,
+all of Earth's known organisms
+share a small group of genes
+that encode for molecules
+that have the same basic functions
+in each of their cells.
+These genes are critical
+for cell replication,
+meaning that the cells cannot persist
+without these molecules.
+So, it is important that
+the sequences remain functional.
+As a result, these genes tend to have
+similar but not identical sequences
+across different organisms.
+Scientists can compare how similar or how different these similar sequences are to create an ancestral tree that demonstrates whether organisms are more or less related to one another.
+This is what is referred to as a ''phylogenetic tree'' or \gls{gls:phylogeny}.
+
+Phylogenetic trees are hypotheses: they are not definitive facts.
 \begin{itemize}
-	\item A phylogenetic tree demonstrates evolutionary
-	relationships among genes, proteins or organisms.
-	\item In a phylogenetic tree, two species are closely
-	related if they have a more recent shared ancestor.
+	\item The branching pattern	in the phylogenetic tree illustrates how organisms are evolved from a list of common ancestors.
+	
+	\item If organisms are located 	near one another on the tree, 	it is very likely that those organisms are more closely related to one another or that they inherited those genes from a similar ancestor.
 \end{itemize}
+
+In a very broad sense,
+a phylogenetic tree
+that surveys relatedness
+across many diverse groups
+of organisms
+may be thought of as a tree of life--Figure \ref{fig:TOL-5-3}--
+a map that indicates
+how every single organism
+might be related to one another
+going back billions of years to
+the first ancestors of all life on Earth.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[A phylogenetic tree may be thought of as a tree of life]{A phylogenetic tree that surveys relatedness across many diverse groups
+			of organisms may be thought of as a tree of life}\label{fig:TOL-5-3}
+		\includegraphics[width=0.8\textwidth]{TOL-5-3}
+	\end{center}
+\end{figure}
+
+
+But, just because the origin of this tree
+goes back billions of years,
+it doesn't means that we have
+all the information that is needed
+to solve difficult problems
+regarding life's origins and evolution.
+Organisms that leave
+recognizable fossils
+are most from a group
+called the "eukaryotes."
+And, while millions of the these organisms
+have been genetically cataloged,
+over 99 percent of all species
+that have ever lived on our planet
+are estimated to have gone extinct -
+meaning that our ability to extrapolate
+backwards into the past is quite limited.
+The limitations of sampling in our
+available genetic and fossil records
+severely limits our ability
+to make inferences
+about past relationships of organisms,
+and genes... and genomes
+to one another.
+Nevertheless, the high degrees
+of sequence similarities
+across similar genes
+found in all organisms
+gives us ways in which we can
+reconstruct the sequences
+that were likely found in our ancestors.
 
 \begin{itemize}
 	\item $\approx 1.2$ million eukaryotes catalogued
@@ -223,32 +400,133 @@ A phylogenetic tree is an hypothesis, not an established fact. Key Points:
 	\item $>99\%$ of species have gone extinct thus severally limiting our starting pool
 \end{itemize}
 
-Tree Thinking and phylogeny
-\begin{itemize}
-	\item The evolutionary history of a group is its phylogeny
-	\begin{itemize}
-		\item Since we can’t travel back in time to identify
-		common ancestors relationships of existing
-		species must be estimated or inferred from data
-	\end{itemize}
-	\item The branching pattern in a phylogenetic tree illustrates how organisms evolved from a list of common ancestors.
-	\item The evolutionary history of extant organisms can
-	be understood in terms of their shared inheritance
-	\begin{itemize}
-		\item which extant species evolved from the same ancestor?
-		\item how were ancestral traits modified in different lineages?
-	\end{itemize}
-\end{itemize}
+\subsubsection{Tree Thinking and phylogeny}
+
+
+Let's take down to another level
+a simple example of a phylogenetic tree.
+The specific branching pattern
+indicates the degree to which
+current genes may resemble genes
+that were found
+in the common ancestors'
+shared evolutionary history.
+The genes that we can study
+in extant organisms
+are located near the ends of the branches
+and are called ''leaves'' or ''tips''--Gigure \ref{fig:TreeTerminology}.
+These are connected with branches
+back to internal nodes
+that represent the likely states
+of shared ancestors.
+The oldest node may be referred to
+as a ''root'' of the tree.
 
 \begin{figure}[H]
-	\caption{Often there are many ways to model relationships, but generally the simplest will be most accurate.}\label{PhylogenicTree}
+	\begin{center}
+		\caption[Tree Terminology]{The genes that we can study
+			in extant organisms
+			are located near the ends of the branches
+			and are called ''leaves'' or ''tips''--Gigure \ref{fig:TreeTerminology}.
+			These are connected with branches
+			back to internal nodes
+			that represent the likely states
+			of shared ancestors.
+			The oldest node may be referred to
+			as a ''root'' of the tree.}\label{fig:TreeTerminology}
+		\includegraphics[width=0.6\textwidth]{TreeTerminology}
+	\end{center}
+\end{figure}
+
+We can step sequentially backwards
+through the different nodes
+to investigate
+what sequences or attributes
+have been inherited from ancestors
+or to estimate the timing
+for the emergence
+of newly evolved sequences or attributes.
+From this, we can begin to develop
+and investigate more specific questions
+about the relatedness
+of specific groups of organisms
+or to estimate how ancestral traits
+may have been modified
+to yield the traits
+of certain organisms today.
+
+In examining even a simple tree,
+there are many possible combinations
+of sequence changes along the branches
+that would fit the observed distribution
+of sequences in existing organisms.
+But, generally speaking,
+in the lack of compelling evidence
+to the contrary,
+the simplest ways of gaining
+and losing attributes -
+such as requiring the fewest number
+of genes, losses, additions -
+that with the tree
+will probably be the most accurate--Figure \ref{fig:PhylogenicTree}.
+
+\begin{figure}[H]
+	\caption[Generally the simplest tree will be most accurate]{Often there are many ways to model relationships, but generally the simplest will be most accurate.}\label{fig:PhylogenicTree}
 	\includegraphics[width=0.9\textwidth]{PhylogenicTree}
 \end{figure}
+
+
+The steps that we use in this process
+are straightforward--Figure \ref{fig:MolecularPhylogeneticsProtocol}.
+\begin{itemize}
+	\item First - sequences of the same genes
+	from different organisms are collected.
+	\item Next - these genes are aligned
+	so that the key functional portions
+	of each gene
+	match up in the same column
+	with one another.
+	And, keep in mind that we can do
+	this process for genomes as well.
+	With more advanced programs,
+	you can do this with
+	multiple genes at once
+	to get a more complete picture
+	of how organisms might be related.
+	\item Finally - trees are constructed using these genes.
+	\item There are usually
+	many different tree shapes
+	or topologies that are possible
+	using the same data set.
+	So, different analyses are run to see
+	which topologies require
+	the fewest assumptions,
+	or which best match up
+	with the fossil record.
+	
+	\item It is only after a rigorous analysis
+	of many different possible trees
+	that phylogenies can be
+	prudently interpreted
+	and applied to evolutionary questions.
+	
+\end{itemize}
 
 \begin{figure}[H]
 	\caption{Molecular Phylogenetics Protocol}\label{fig:MolecularPhylogeneticsProtocol}
 	\includegraphics[width=0.9\textwidth]{MolecularPhylogeneticsProtocol}
 \end{figure}
+Though we have only run through
+a quick survey
+of how to construct phylogenetic trees,
+there are many different applications
+beyond just comparing the relatedness
+of organisms to one another.
+These applications look at
+many different levels of biology,
+from whole populations
+down to individual proteins
+and how they change over time.
 Some other applications of phylogenetics
 \begin{itemize}
 	\item Classification and taxonomy of genes, proteins and species
@@ -259,26 +537,60 @@ Some other applications of phylogenetics
 	\item Searching for useful traits in related groups
 \end{itemize}
 
+Perhaps the most fundamental
+contribution to origins studies
+was the discovery that
+all organisms on Earth
+fall into one of three major groups--
+bacteria, archaea and eukaryotes--Figure \ref{flg:the:big:picture}.
+Before this magnificent discovery
+by Carl Woese and George Fox in 1977,
+organisms were classified into groupings -
+mostly based on morphology.
+And, there was almost no definitive way
+to distinguish archaea
+from bacteria at all
+since they are both predominantly
+small and single-celled.
+This fundamental view
+has helped to organize a focus
+on the attributes and timing
+of the last universal common ancestor -
+or \gls{gls:LUCA}--
+and has opened new questions
+concerning the extent to which
+\gls{gls:LUCA}'s emergence may actually be
+pretty far removed from life's origins.
+Based on the attributes
+of all of its descendants,
+it seems clear that \gls{gls:LUCA} was already
+a very sophisticated organism
+and many open questions remain
+as to what must have been
+an extensive pre-\gls{gls:LUCA} history
+of emergence and evolutionary innovation.
+
+
 \begin{figure}[H]
-	\caption{Phylogenetic Tree of Life--The big picture}
+	\caption[Phylogenetic Tree of Life--The big picture]{Phylogenetic Tree of Life--The big picture\cite{wiki:tol:biology}}
 	\label{flg:the:big:picture}
 	\includegraphics[width=0.9\textwidth]{TOL5}
 \end{figure}
 
-See \cite{hillis1996molecular}, \cite{zuckerkandl1965molecules}, \cite{williams2006assessing}, \cite{woese2002evolution}
+See \cite{hillis1996molecular,zuckerkandl1965molecules,williams2006assessing,woese2002evolution}
 
-\subsection{A Deeper Dive into Phylogenetics}
+\subsection[A Deeper Dive into Phylogenetics]{A Deeper Dive into Phylogenetics--Andy Rominger}
 
-Lecturer: Andy Rominger
+We will be talking about:
 \begin{itemize}
-	\item How to Infer a Phylogeny
-	\item Why is the Deep Past so difficult to Infer?
+	\item How to statistically infer a phylogeny from data on Species living in the present;
+	\item Why the Deep Past is so difficult to infer from this contemporary data.
 \end{itemize}
 
 \subsubsection{How to Infer a Phylogeny}
-We are going to focus on step 3 of Figure \ref{fig:MolecularPhylogeneticsProtocol}, finding the evolutionary process leading to the data we have. We start with homologous sequences, and we want to infer the speciation, extinction, and passing genes on to daughter lineages.
+We are going to focus on step 3 of Figure \ref{fig:MolecularPhylogeneticsProtocol}, finding the evolutionary process leading to the data we have. We start with \gls{gls:homologous} sequences, and we want to infer the speciation, extinction, and passing genes on to daughter lineages. This process also involves mutation, because the changes in \gls{gls:DNA} are what allow us to infer the past. Figure  \ref{fig:InferringPhylogeny} therefore shows a mutation rate matrix. 
 
-We have transition rates, topology, and sequence data--Figures \ref{fig:InferringPhylogeny} \& \ref{fig:InferringPhylogeny1}, and we want to choose transition rates and a topology to \textit{maximize the likelihood}--Figures \ref{fig:InferringPhylogeny2}. 
+We have transition rates, topology, and sequence data--Figure \ref{fig:InferringPhylogeny1}--and we want to choose transition rates and a topology to \textit{maximize the \gls{gls:likelihood}}--Figures \ref{fig:InferringPhylogeny2}. 
 
 \begin{figure}[H]
 	\caption{Inferring a phylogeny}\label{fig:InferringPhylogeny}
@@ -296,37 +608,34 @@ We have transition rates, topology, and sequence data--Figures \ref{fig:Inferrin
 \end{figure}
 
 \begin{itemize}
-	\item Maximum Likelihood Inference\cite{huelsenbeck1997phylogeny}
+	\item The inference procedure that we have described is called Maximum Likelihood Inference\cite{huelsenbeck1997phylogeny}--Figure \ref{fig:InferingPhylogeny}
 	\item Bayesian inference: traversing the complex topology and
 	rate matrix space lends itself to Bayesian algorithms\cite{huelsenbeck2001mrbayes,huelsenbeck2001introduction}
 \end{itemize}
-
-
-Two other means have been used historically:
+\begin{figure}[H]
+	\caption[Inferring Phylogeny]{Inferring Phylogeny: in practice topologies are not this simple.}\label{fig:InferingPhylogeny}
+	\includegraphics[width=0.8\textwidth]{InferingPhylogeny}
+\end{figure}
+Two other procedures have been used historically:
 \begin{itemize}
 	\item Parsimony
 	\item Distance based inference
 \end{itemize}
 
 \subsubsection{Why is the Deep Past so difficult to infer?}
-Caveats.
+Caveats: Inferring the past it hard.
 \begin{itemize}
-	\item Inferring the past it hard. Unrooted phylogeny arises because mutation process is reversible in our models--Figure \ref{fig:unrooted:phylogeny}. This is why the Banfield Tree of Life\cite{hug2016new}--Figure \ref{fig:banfield:tol}--has no root.
-	\item Rooting the Tree with an Outgoup
+	\item Unrooted phylogeny
+	\item \gls{gls:TOL} has no outgroup.
 	\item Time Calibration
 	\item \Gls{gls:long:branch:attraction}
 	\item What genetic information goes back to LUCA?
 \end{itemize}
 
-
-
+Unrooted phylogeny arises because mutation process is reversible in our models--Figure \ref{fig:unrooted:phylogeny}. We don't know where the ultimate ancestor is, and how it had led to the present tips. This is why the Banfield Tree of Life has no root--Figure \ref{fig:banfield:tol}.
+ 
 \begin{figure}[H]
-	\caption{Banfield Tree of Life}\label{fig:banfield:tol}
-	\includegraphics[width=0.9\textwidth]{TOL4}
-\end{figure}
-
-\begin{figure}[H]
-	\caption{Unrooted phylogeny arises because mutation process is reversible in our models}\label{fig:unrooted:phylogeny}
+	\caption[Unrooted phylogeny arises because mutation process is reversible]{Unrooted phylogeny arises because mutation process is reversible in our models}\label{fig:unrooted:phylogeny}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{InferringPastHard1}
 	\end{subfigure}
@@ -335,113 +644,203 @@ Caveats.
 	\end{subfigure}
 \end{figure}
 
-The best method for finding a root is to use an \gls{gls:outgroup}--Figure \ref{fig:bird:outgroup}--which then gives a temporal direction to the tree: the tree flows away from the hypothetical common ancestor. But the Tree of [all] Life, by definition, has no outgroup!
-
 \begin{figure}[H]
-	\caption{Using a Bird as an Outgroup for the Tree of Mammals}\label{fig:bird:outgroup}
-	\includegraphics[width=0.9\textwidth]{Outgroup}
+	\caption[Banfield Tree of Life]{Banfield Tree of Life\cite{hug2016new}}\label{fig:banfield:tol}
+	\includegraphics[width=0.9\textwidth]{TOL4}
 \end{figure}
 
-Another problem is that rate heterogeneity means that mutations are not clock like\cite{sanderson2003r8s,smit2007evolutionary}. Time in a phylogeny is measured in substitutions, not in years. Since the rate of mutation varies across lineages and across Earth's history, mutation events don't tell us the time on each branch. So species in the Banfield Tree of Life--Figure \ref{fig:banfield:tol}-- don't line up.
+The best method we have for rooting a tree is to use an \gls{gls:outgroup}. We can add a new group to the tree of mammals--Figures \ref{fig:bird:without:outgroup} and \ref{fig:bird:outgroup}. In Figure \ref{fig:bird:outgroup} the root is where the bird connects to the mammals: we have added temporal directionality to the tree.But the \gls{gls:TOL}, by definition, has no \gls{gls:outgroup}!
+
+\begin{figure}[H]
+	\caption{Adding an Outgroup to the Tree of Mammals}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{An unrooted tree of mammals}\label{fig:bird:without:outgroup}
+		\includegraphics[width=0.9\textwidth]{WithoutOutgroup}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Using a Bird as an Outgroup}\label{fig:bird:outgroup}
+		\includegraphics[width=0.9\textwidth]{Outgroup}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Tree of Mammals (plus outgroup)}\label{fig:bird-mammals}
+		\includegraphics[width=0.9\textwidth]{bird-mammals}
+	\end{subfigure}
+\end{figure}
+
+Another problem is that rate heterogeneity means that mutations are not clock like\cite{sanderson2003r8s,smit2007evolutionary}. Time in a phylogeny is measured in substitutions, not in years. Since the rate of mutation varies across lineages and across Earth's history, mutation events don't tell us the time on each branch. So species in the Banfield Tree of Life--Figure \ref{fig:banfield:tol}-- don't line up. We need additional information to calibrate substitution events against time.
 \begin{itemize}
-	\item We may be able to assign times from the fossil record.
+	\item We may be able to assign times from the fossil record--Figure \ref{fig:calibrating-time}.
 	\item In some cases we \textit{do} know the mutation rate and can use it like a clock.
 \end{itemize}
 
-Long branches attract each other\cite{philippe2005heterotachy}--Figure \ref{fig:long:branches}.
+\begin{figure}[H]
+	\caption[We must calibrate 	phylogenies with independent data]{We must calibrate 	phylogenies with independent data, 	e.g. the fossil record, known mutation rates for specific groups.}\label{fig:calibrating-time}
+	\includegraphics[width=0.6\textwidth]{calibrating-time}
+\end{figure}
+Long branches attract each other\cite{philippe2005heterotachy}--Figure \ref{fig:long:branches}. The longer a lineage has been evolving, the more time there has been for mutations to accrue, and divergent sequences can, by chance, appear convergent, or else can evolve totally away. So our inference methods end up clustering data
 
 \begin{figure}[H]
-	\caption{Long branches attract each other}\label{fig:long:branches}
-	\begin{subfigure}[b]{0.45\textwidth}
+	\caption[Long branches attract each other]{Long branches attract each other. Where to group the lowest sequence?}\label{fig:long:branches}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{LongBranchAttraction0}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\includegraphics[width=\textwidth]{LongBranchAttraction1}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\includegraphics[width=\textwidth]{LongBranchAttraction2}
 	\end{subfigure}
 \end{figure}
 
- What genetic information goes back to LUCA--Figure \ref{fig:back_to_LUCA}? Ribosomal RNA and protein genes\cite{quast2012silva} and Figure \ref{fig:Ribosome-5-3-2}.
+ What genetic information goes back to LUCA? Figure \ref{fig:back_to_LUCA} illustrates that billions of years separate bacterial and human DNA. All life needs to translate DNA into proteins, and all of life uses ribosomes to do this. Therefore Ribosomal RNA and protein genes are exactly the genes that we can use to infer these deep phylogenetic relationships\cite{quast2012silva} and Figure \ref{fig:Ribosome-5-3-2}.
  
  \begin{figure}[H]
- 	\caption{What genetic information goes back to LUCA? }\label{fig:back_to_LUCA}
- 	\includegraphics[width=0.9\textwidth]{LUCA_what_goes_back}
+ 	\caption{What genetic information goes back to LUCA? }
+ 	\begin{subfigure}[t]{0.45\textwidth}
+ 		\caption{Billions of years separate bacterial and human DNA}
+ 		\includegraphics[width=\textwidth]{LUCA_what_goes_back}\label{fig:back_to_LUCA}
+ 	\end{subfigure}
+ 	\;\;\;
+	 \begin{subfigure}[t]{0.45\textwidth}
+	 	\caption{Ribosomal RNA and protein genes}\label{fig:Ribosome-5-3-2}
+	 	\includegraphics[width=0.45\textwidth]{Ribosome-5-3-2}
+	 \end{subfigure}
  \end{figure}
 
-\begin{figure}[H]
-	\caption{What genetic information goes back to LUCA? Ribosomal RNA and protein genes}\label{fig:Ribosome-5-3-2}
-	\includegraphics[width=0.9\textwidth]{Ribosome-5-3-2}
-\end{figure}
+Given these caveats, it is remarkable that different research groups have been able to reconstruct such detailed phylogenies for all life, and many of these phylogenies are robust because they have gone to great lengths to overcome these challenges.
 
 
-\section{Macroscopic Theories in Biology}
-
-Lecturer: Chris Kempes
-
+\section[Macroscopic Theories in Biology]{Macroscopic Theories in Biology--Chris Kempes}
+ 
+One of the main questions from this course is: which aspects of extant life are general, and which are arbitrary? If we look at the diversity of life on this planet:
 \begin{itemize}
-	\item Which aspects of extant life are general, and which are arbitrary?
-	\item How much of what we see is peculiar to the trajectory of life on our own planet?
-	\item How much would be true of life anywhere?
+	\item how much of what we see is peculiar to the trajectory of life on our own planet?
+	\item how much would be true of life anywhere?
 \end{itemize}
 
-This matters not just for exobiology, but also for understanding early life and the origin of life in general.
+This matters not just for exobiology, but also for understanding what early life might have looked like, and the origin of life in general (not just our own planet).
 
 In this course we have covered:
 \begin{itemize}
 	\item Laws of chemistry
 	\item General processes of natural selection
 	\item Laws of physics
-	\item Laws of Life?
 \end{itemize}
 
-As an example of Laws of Life, Figure \ref{fig:allometric:scaling} shows the Relationship between peak postfeeding resting metabolic rate and body mass for mammals\cite{white2005allometric}--an approximate power law with an exponent of $\frac{3}{4}$. West, Brown and Enquist\cite{west1997general} have shown how this law follows from the fractal vascular structure of mammals--Figure \ref{fig:FractalBranching}. Optimize so it fills space and bring nutrients to all cells, taking into account hydrodynamics, then wh get the $\frac{3}{4}$ exponent. The same thing works for plants. So Body Plan + Constraints$\rightarrow$Law of Life.
+\subsection{Are there Laws of Life?} 
+
+There are certainly laws of physics and chemistry that apply to life, but are there distinct laws of life? We will talk about not only how the laws of physics and chemistry are coupled to the laws of life but also about how, once you have a particular biological structure, that determines a particular law of life. That law of life is about the evolutionary history that has brought you to a particular structure, and how that structure connects to the fundamental laws of physics, chemistry, and evolution.
+
+What do we mean by a law? The most well know example is Newton's Law of Universal Gravitation:
+\begin{align*}
+	F =& \frac{G m_1 m_2}{r^2} \numberthis \label{eq:newton}
+\end{align*}
+
+This holds anywhere in the Universe, it holds for any two masses, and any distance between them(caveat--see Figure \ref{fig:Newton:Shift}). We can understand all sorts of planetary relationships based on this one law.
+
+\begin{itemize}
+	\item If we were trying to verify the Law experimentally, we might see data like Figure \ref{fig:Newton:Experimental}
+	\item \emph{Maybe} we'd observe a fundamental shift in physics for very small distances--Figure \ref{fig:Newton:Shift}--perhaps a quantum effect. 
+\end{itemize}
+\begin{figure}[H]
+	\caption{Newton's Law of Universal Gravitation}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{If we were trying to verify the Law experimentally, we might see data like this (masses have been randomized)}\label{fig:Newton:Experimental}
+		\includegraphics[width=\textwidth]{Newton}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{\emph{Maybe} we'd observe a fundamental shift in physics for very small distances(contrived example.)}\label{fig:Newton:Shift}
+		\includegraphics[width=\textwidth]{Newton2}
+	\end{subfigure}
+\end{figure}
+
+The question becomes: \begin{itemize}
+	\item are there laws in biology analogous to (\ref{eq:newton})? 
+	\item what do they look like?
+	\item where do they come from?
+\end{itemize}
+
+Why should we expect that there are laws in biology at all? Organisms evolve within the bounds of chemistry and physics; you should never see an organism disobeying any of the known rules of chemistry or physics. At a more subtle level, as organisms evolve they may be able to optimize their physiology with respect to one or more physical constraints. they may see some constraint as a detriment to \gls{gls:fitness}: evolution may select for organisms that are able to do a better job of dealing with the constraint in a way that makes them more fit--more likely to reproduce\cite[Chapter 10, An Agony in Five Fits]{dawkins1982extended}. They might, over time, optimize according to the most dominant constraints given their physiology.
+
+\subsection{Examples of Laws of Life}
+
+\subsubsection{Mammals}
+
+We will start with mammals. This is a very advanced place to start: these are some of the most complicated organism we know, that have had the most evolutionary time to reach the body plan they have. We'll look at Body mass and \gls{gls:BMR}.  Figure \ref{fig:allometric:scaling} shows the Relationship between peak post-feeding resting metabolic rate and body mass for mammals--an approximate power law with an exponent of $\frac{3}{4}$. Since this isn't a simple proportionality is shows that there may be something interesting going on: despite all this diversity of mammals, despite all their diverse strategies, there is this relationship, which we might call a law for mammals. What physics leads to this?
 
 \begin{figure}[H]
-	\caption{Relationship between peak postfeeding resting metabolic rate and body mass.}\label{fig:allometric:scaling}
+	\caption[Relationship between BMR and body mass]{Relationship between peak postfeeding resting metabolic rate and body mass-\cite{white2005allometric}}\label{fig:allometric:scaling}
 	\includegraphics[width=0.9\textwidth]{WhiteSeymour}
 \end{figure}
+
+Geoffrey West, Jim Brown and Brian Enquist\cite{west1997general} have shown that if you: \begin{itemize}
+	\item consider the fractal vascular structure of mammals and plants--Figure \ref{fig:FractalBranching};
+	\item optimize it so it fills space and brings resources to all cells--or, in the case of plants, if we  fill canopy with leaves to so solar radiation can be absorbed;
+	\item think about hydrodynamic resistance, and consider the need to not buckle under the force of gravity in the case of a tree, and put all these physical constraints together;
+	\item minimize the energy required to distribute resources;
+\end{itemize}
+Then the optimization prodicts the $\frac{3}{4}$ exponent: Body Plan + Constraints$\rightarrow$Law of Life.
 
 \begin{figure}[H]
 	\caption{Power Law follows from the fractal vascular structure of mammals.}\label{fig:FractalBranching}
 	\includegraphics[width=0.9\textwidth]{FractalBranching}
 \end{figure}
 
-Example of a Fundamental Constraint: diffusion to a simple spherical cell drifting passively. Cell is living in a still fluid filled with nutrients, and we want to know how nutrients diffuse to cell. If we assume that cell uses all of nutrient, so concentration at surface is held at zero.
+This is a  way to take a body plan, couple it with constraints, and then predict some emergent law for a particular class of organisms.
+
+\subsubsection{Example of a Fundamental Constraint}
+
+The foregoing is a very complicated example, but there are examples of these types of laws at all scales of life, and there are some that connect to very fundamental constraints. We will discuss one example in the next section, but be aware that there is a very rich literature on different physical constraints.
+
+Diffusion to a simple spherical cell drifting passively. The cell is living in a still fluid filled with nutrients, and we want to know how nutrients diffuse to cell. We will solve the diffusion equation\footnote{\cite[Lecture 3.8: Systematics and Limits of Metabolic Rates]{sfi2020}}, and assume that the cell uses all of nutrients, so concentration at surface is held at zero.
 
 \begin{align*}
-C(r) =& C_{\infty}\big(1 - \frac{r_C}{r}\big)\text{, where}\\
-C_{\infty} =& \text{ concentartion at infinity}\\
-C(r) =& \text{ concentration at distance r}\\
-J(r) =& D\frac{\partial C}{\partial R} \text{ flux}\\
-  =& D C_{\infty} \frac{r_c}{r^2}\\
-U =& 4 \pi r_C^2 J(r_C) \text{ total uptake of nutrient}\\
-=&4 \pi D C_{\infty} r_C 
+	C(r) =& C_{\infty}\big(1 - \frac{r_c}{r}\big)\text{, where}\\
+	r_c=& \text{ radius of cell}\\
+	C_{\infty} =& \text{ concentration at infinity}\\
+	C(r) =& \text{ concentration at distance r. Then the flux in is given by}\\
+	J(r) =& D\frac{\partial C}{\partial R} \text{, where $D$ is the diffusion constant}\\
+	  =& D C_{\infty} \frac{r_c}{r^2}\text{. We can compute the total uptake of nutrient}\\
+	U =& 4 \pi r_c^2 J(r_c) \\
+	=& 4 \pi\cancel{ r_c^2} D C_{\infty} \frac{r_c}{\cancel{r_c^2}}\\
+	=&4 \pi D C_{\infty} r_c 
 \end{align*}
 
-No rate process within the cell can use the nutrient more quickly than $U$, so all processes must scale with $r$ at this rate or more slowly. If process want to go faster than $U$, the fluid needs to be disturbed, or the cell needs to move.
+This gives us a variety of physical and metabolic limitations, \emph{since no rate process within the cell can use the nutrient more quickly than $U$, all processes must scale with $r$ at this rate or more slowly}. If process wants to go faster than $U$, the fluid needs to be disturbed, or the cell needs to move. This gives a very particular physiological outcome.
 
-Figure \ref{fig:BacterialPhysiology} shows the variation of component size with cell size\cite{kempes2016evolutionary}; it \textit{bounds} the cell size: at the large end and small end the cell runs out of space for components.
+\subsubsection{Bacterial Physiology}
+
+Chris's  team has looked at cell physiology across the entire range of cell sizes and found they can predict various volumes through power laws--Figure \ref{fig:BacterialPhysiology}. This shows the tradeoffs between quantities for small and large bacteria.
+\begin{itemize}
+	\item at the small end the cell runs out of space for DNA and protein;
+	\item at the large end it runs out of space for all the RNA components.
+\end{itemize}
 
 \begin{figure}[H]
-	\caption{BacterialPhysiology}\label{fig:BacterialPhysiology}
+	\caption[The variation of component size with cell size]{The variation of component size with cell size; it \textit{bounds} the cell size: at the large end and small end the cell runs out of space for fundamental components.\cite{kempes2016evolutionary}}\label{fig:BacterialPhysiology}
 	\includegraphics[width=0.9\textwidth]{BacterialPhysiology}
 \end{figure}
 
-We could see how the fundamental physiological constraint change for other conceivable forms of life.
+This set of physiological laws comes with a particular concept of optimization and physiological tradeoffs. We might play with how these laws might vary and create an abstract physiological space and look at all physiological possibilities. This might be more relevant in a variety of early life contexts before life reaches to degree of optimization discussed in this Section
+
 
 See also \cite{kempes2011predicting}.
 
-\section{Selection}
+\section{Selection-- Michael Lachmann}
 
-Lecturer: Michael Lachmann
+\subsection{The Origin of Species}
+Charles Darwin laid out a careful and well thought argument\cite{darwin1859origin}
+\begin{quote}
+	A naturalist, reflecting on the mutual affinities of organic beings, on their embryological relations, their geographical distribution, geological succession, and other such facts, might come to the conclusion that each species had not been independently created, but had descended, like varieties, from other  species.
+\end{quote}
 
-''A naturalist, reflecting on the mutual affinities of organic beings, on their embryological relations, their geographical distribution, geological succession, and other such facts, might come to the conclusion that each species had not been independently created, but had descended, like varieties, from other  species''--Charles Darwin\cite{darwin1859origin}.
-
-Darwin\cite{darwin1859origin} presented a phylogenetic Tree--\ref{fig:TOL:Darwin}. A modern view, Figure \ref{fig:TOL:Modern} is more like a web.
+Darwin presented a phylogenetic Tree--Figure \ref{fig:TOL:Darwin}. A modern view, Figure \ref{fig:TOL:Modern} is more like a web than a tree. Large parts of our genome came from viruses, and our bodies are full of bacteria and other symbionts. Some may stay for only a few weeks, but others might transmit vertically through the lineage. Out mitochondria, for example, who are responsible for out being able to live with oxygen and use it, were once free living, but, today, live in each cell and reproduce with it.
 
 \begin{figure}[H]
 	\caption{Two views of the Tree of Life}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{After Darwin}\label{fig:TOL:Darwin}
+		\caption{Darwin's TOL\cite{darwin1859origin}}\label{fig:TOL:Darwin}
 		\includegraphics[width=\textwidth]{TOL_Darwin}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
@@ -450,58 +849,944 @@ Darwin\cite{darwin1859origin} presented a phylogenetic Tree--\ref{fig:TOL:Darwin
 	\end{subfigure}
 \end{figure}
 
-''Nevertheless, such a conclusion, even if well founded, would be unsatisfactory, until it could be shown how the innumerable species inhabiting this world have been modified, so as to acquire that perfection of structure and coadaptation which most justly excites our admiration''--\textit{ibid}.
+Darwin made the point that species evolved from one another, but\cite{darwin1859origin}: \begin{quote}
+	Nevertheless, such a conclusion, even if well founded, would be unsatisfactory, until it could be shown how the innumerable species inhabiting this world have been modified, so as to acquire that perfection of structure and coadaptation which most justly excites our admiration.
+\end{quote}
 
-How species acquire that perfection of structure:
+\subsection{How do species acquire that perfection of structure?}
+How do species acquire perfection of structure? There are three parts.
 \begin{itemize}
-	\item Variation
-	\item Inheritance
-	\item Selection
+	\item Variation: individuals in the population differ from one another.
+	\item Inheritance: the variation is passed from one generation to another.
+	\item Selection: the variations affect the survival of some individuals.
 \end{itemize}
 
-\gls{gls:price:equation}--(\ref{eq:price:equation})
+For example, consider a butterfly population with differences in colour, some darker, some lighter, living on black trees--Figure \ref{fig:SelectionMoths0}. Those whose colour blends in with the tree survive better; \emph{ if colour is inherited}, the differential survival will lead to an increase of the frequency of dark butterflies in the population--Figures \ref{fig:SelectionMoths1} and  \ref{fig:SelectionMoths2}. If this continues over many generations, only black butterflies will remain, and we will run out of variation in the population, and the butterflies will not be able to adapt to a new tree colour. Genetic mutation continually inject new variation onto the population, allowing further evolution
+\begin{figure}[H]
+	\caption{Example of natural selection--light and dark butterflies}\label{fig:SelectionMoths}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Butterfly population with differences in colour}\label{fig:SelectionMoths0}
+		\includegraphics[width=0.8\textwidth]{SelectionMoths}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{Those whose colour blends in with the tree survive better.}\label{fig:SelectionMoths1}
+		\includegraphics[width=0.8\textwidth]{SelectionMoths1}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{ \emph{ If colour is inherited}, the frequency of dark butterflies in the population will increase}\label{fig:SelectionMoths2}
+		\includegraphics[width=0.8\textwidth]{SelectionMoths2}
+	\end{subfigure}
+\end{figure}
+
+The example examined survivability, but, in addition to survival, other traits are selected in populations, such as number of offspring produces, mating success, sexual selection--Figure \ref{fig:BrightBird}. What exactly is selected for? Some have looked at number of children, grand-children, etc. The trait that is actually selected is long-term survival of the lineage in question, as compared to other lineages.
+
+\begin{figure}[H]
+	\caption[What exactly is selected for?]{In addition to survival, other traits are selected in populations, such as number of offspring produces, mating success, sexual selection. What exactly is selected for?}\label{fig:BrightBird}
+	\includegraphics[width=0.8\textwidth]{BrightBird}
+\end{figure}
+
+\subsection{Variational versus Transformational Processes}
+Figure \ref{fig:SelectionMoths0} is a variational process. The average colour changed, not because of a change in individual butterflies, but because some butterflies survived more than others. Compare with a population of chameleons, where each chameleon will change colour if you put it on a dark tree--Figure \ref{fig:chamelion}.
+\begin{figure}[H]
+	\begin{center}
+		\caption[ Compare with a population of chameleons]{ Compare with a population of chameleons, where each chameleon will change colour if you put it on a dark tree.}\label{fig:chamelion}
+		\includegraphics[width=0.6\textwidth]{chamelion}
+	\end{center}
+\end{figure}
+
+Consider memes.
+\begin{itemize}
+	\item I can hear a joke and think how to make it funnier so it will spread better
+	\item or maybe jokes that seem funnier spread better
+\end{itemize}
+
+In both cases we end up with funny jokes: in the first can it depends on my ability to transform jokes, in the other we have differences in spreading.
+
+\subsection{The Price Equation}
+
+The \gls{gls:price:equation}\cite{price1970selection} is a nice way to look at these two processes. It looks at the change of something in the population, such as brightness of wing colour or funniness of jokes,  when something happens to a population, and a generation passes, or maybe just a day; some individuals survive, some reproduce. We look at the difference in the property over this time.
 
 \begin{align*}
-\Delta Z =& \frac{Cov(Z,W) + E(W \Delta Z)}{W}\text{, where} \numberthis \label{eq:price:equation}\\
-Z=& \text{ some property, e.g. colour,}\\
-W=& \text{ survival.}\\
- & \textit{Rearranging, }\\
-W \Delta Z =& \underbrace{Cov(Z,W)}_\text{selection} + \underbrace{E(W \Delta Z)}_\text{transformation}
+	\Delta \mathbb{E}_{i\in I}(z_i) =& \underbrace{Cov_{i\in I}(w_i,z_i)}_\text{selection} + \underbrace{\mathbb{E}_{i\in I}(w_i \Delta z_i)}_{transformation} \text{ using the notation of \cite{gardner2020price}.}\\
+	\text{where:}& \numberthis \label{eq:price:equation}\\
+	I =& \text{parents--first generation}\\
+	z_i =& \text{ character value of $i$}\\
+	w_i =& \text{ the relative contribution of $i$ to the population--\gls{gls:fitness}}\\
+	\mathbb{E}_{i\in I}(z^\prime_i)=& \text{ character value of (possible multiple) offspring of $i$}\\
+	\Delta \mathbb{E}_{i\in I}(z_i)=& \mathbb{E}_{i\in I}(z^\prime_i)-\mathbb{E}_{i\in I}(z_i)
+\end{align*}
+ Equation (\ref{eq:price:equation}) shows that the change in character can be partitioned into selection and transformation. Frank \cite{frank2012natural} discusses the tautological nature of (\ref{eq:price:equation}), and explains whu the equation is still useful.
+ 
+\begin{figure}[H]
+	\begin{center}
+		\caption[How do species acquire that perfection of structure? ]{How do species acquire that perfection of structure? Because traits increase in value if they help individuals who have them survive, compared to those they don't.}
+		\includegraphics[width=0.8\textwidth]{dolphin}
+	\end{center}
+\end{figure}
+
+
+\section[Selection Theory]{Selection Theory--Chris Kempes}
+
+How do we think about evolution in a simple and mathematical way?
+
+\subsection{Quasispecies equation}
+
+\subsubsection{Introduction}
+Let's begin by thinking of a genome. Instead of the 4 nucleotides, let's think about a binary genome, $0100001001$, say. A species would be a particular strong of 0s and 1s of distinct length. We can think about one species turning into another via point mutations, and this has an interesting topology--Figure \ref{fig:GenomeTopology}
+
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Topology of genome]{Topology of genome--point mutations represent edges, This shows how one genome can turn into another, and it shows the distances between genomes.}\label{fig:GenomeTopology} 
+		\includegraphics[width=0.8\textwidth]{GenomeTopology}
+	\end{center}
+\end{figure}
+
+How do we get a handle on how evolution is selecting between individual genomes? We will use the idea of the fitness landscape, which maps each string of bits into a fitness in a fixed environment--Figure \ref{fig:FitnessLandscape}. We've transformed the n-dimensional problem of the genomes--Figure \ref{fig:GenomeTopology} into a 1-dimensional problem. There is a peak fitness, so we might expect that the corresponding genome will eventually become the only one in the gene pool. There is any easy way to define this mathematically, and this is some of the most traditional mathematical biology that we know.
+\begin{figure}[H]
+	\begin{center}
+		\caption[Fitness Landscape, showing maximum fitness]{Fitness Landscape, showing maximum fitness. \Gls{gls:fitness} here means relative growth rate of each genome--Fitness(3) in the language of \cite[Chapter 10]{dawkins1982extended}. }\label{fig:FitnessLandscape} 
+		\includegraphics[width=0.8\textwidth]{FitnessLandscape}
+	\end{center}
+\end{figure}
+
+\subsubsection{Quasispecies equation}.
+
+Consider the frequency of a particular sequence $i$.
+\begin{align*}
+	\dot x_i =& f_i x_i - \phi x_i \text{, where }\\
+	x_i =& \text{ frequency of sequence $i$, }\\
+	f_i =&  \text{ fitness,} \\
+	\phi =& \text{ death term--makes sure population stays fixed.}
 \end{align*}
 
-How species acquire that perfection of structure? Because traits increase in value if they help individuals who have them survive, compared to those they don't.
+Then the growth of the $x_i$ with time is given by:
+\begin{align*}
+	\dot{x_i} =& x_i f_i - \phi x_i \numberthis \label{eq:x:dot}\\
+	\sum_{i=1}^{n} \dot x_i =& 0 \text{, assume constant population. What should $\phi$ be?}\\
+	\sum_{i=1}^{n} f_i x_i - \phi \sum_{i=1}^{n} x_i =& 0 \text{, using (\ref{eq:x:dot})}\\
+	\phi =& \sum_{i=1}^{n}x_i f_i\text{, since $\sum_{i=1}^{n}x_i = 1$ from definition of symmetry.} \numberthis \label{eq:qs:norm}
+\end{align*}
+Hence $\phi$ is \emph{average fitness}. 
+
+But this leaves out \emph{mutation!} Include $q_{ij}$, the probability of mutation from $i$ to $j$, and (\ref{eq:x:dot}) becomes:
+\begin{align*}
+	\dot x_i =& \sum_{j=1}^{n} f_j q_{j,i}x_j - \phi x_i\text{, \textbf{full quasispecies equation}} \numberthis \label{eq:quasispecies}
+\end{align*}
+
+The matrix $q_{j,i}$, which gives the probability of species $j$ mutating to $i$, is complicated. We see from Figure \ref{fig:GenomeTopology} that point mutations much more likely than 2-point, etc.
+
+\subsection{What are the basic ways in which we think about evolution?}
+
+\begin{itemize}
+	\item How do we generalize evolution?
+	\item How do we use this to think about origins of life? 
+\end{itemize}
+
+We want to understand the dynamics of populations evolving in accordance with (\ref{eq:quasispecies}). The simplest case is a fitness landscape with one sequence, the "master sequence" with fitness $f_0>1$, competing against all other sequences, which share fitness $f_1=1$--Figure \ref{fig:SteadyStateSolution}. 
+\begin{figure}[H]
+	\caption[Simplify to \emph{Master Sequence}]{Simplify to \emph{Master Sequence}, $f_0$ with all less fit sequences lumped as $f_1$.}\label{fig:SteadyStateSolution} 
+	\includegraphics[width=0.9\textwidth]{SteadyStateSolution}
+\end{figure}
+
+We will lump all states, apart from $f_0$ into one state. Now for $q_{j,i}$ having the same meaning as in (\ref{eq:quasispecies}):
+\begin{align*}
+		q_{0,0} =& (1-u)^L \triangleq q \text{ say, where}\\
+		u =& \text{ mutation rate,}\\
+		L =& \text{ length of genome} \text{, and}\\
+		q_{0,1} =& 1-q_{0,0}\\
+		q_{11} =& 1\text{, $L$ is large, so 1$\rightarrow$1 almost always} \\
+		q_{10} =& 0\text{, $1\nrightarrow0$}
+\end{align*}
 
 
-\section{Artificial Life Theory}
+Substituting the $q_j,i$ (\ref{eq:quasispecies}) becomes:
+\begin{align*}
+	\dot{x_0}=&f_0 q x_0 - \phi x_0\text{,}\\
+	\dot{x_1}=&f_0 (1-q) x_0 + x_1 -\phi x_1\text{, and (\ref{eq:qs:norm}) becomes}\\
+	\phi =& f_0 x_0 + x_1 \text{. But} \\
+	x_0 + x_1 =& 1\text{, so we have}\\
+	\dot{x_0}=& x_0 \big[f_0 q -1 - x_0 (f_0 - 1)\big] \numberthis \label{eq:dx0}
+\end{align*}
 
-Lecturer: Sara Imari Walker
+Now we can look for a steady state solution to (\ref{eq:dx0}):
+\begin{align*}
+	x_0^* =& \frac{f_0 q - 1}{f_0 - 1} \text{, so the master sequnce will die out if}\\
+	f_0 q =& 1 \text{. We need}\\
+	f_0q >& 1 \text{, if the master sequence is to persist. I.e.}\\
+	log(f_0) >& -L\; log(1-u)\text{. Now we assume $L<<1$, and find}\\
+	u <& \frac{log(f_0)}{L}\text{, which is known as the \gls{gls:error:threshold}} 
+\end{align*}
+The \gls{gls:error:threshold} is the \emph{maximum mutation rate that allows for adaptive evolution!} NB: it is more sensitive to $L$ than to $f_0$.
 
-Figure \ref{fig:PhysicsvsBiology} compares the evolution of a physical system with a biological system. Even the laws evolve in biology. Also biological systems involve homeostasis.
+This \gls{gls:error:threshold} or "error catastrophe", as it is sometimes called, really defines the adaptive and mutational thresholds for all of life; it is a commonly used concept and is generally obeyed by all the species we know to exist. In the next lecture we'll connect this to a more chemical form of evolution to see how it helps understand it also.
+\subsection[Quasispecies and Error Catastrophe]{Quasispecies and Error Catastrophe--Michael Lachmann}
+
+We look at growth of types, e.g.:
+\begin{itemize}
+	\item Genome in population
+	\item Molecule in test-tube.
+\end{itemize}
+
+We start with the growth of a single population:
+\begin{align*}
+	\dot{x} =& w \cdot x \text{, so if we want to look $t$ steps into the future:}\\
+	x_t =& w^t x_0
+\end{align*}
+Figure \ref{fig:growth} shows the growth of the population with time.
+\begin{figure}[H]
+	\caption{Growth of Population}\label{fig:growth}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{$w=1.1$: population increases}\label{fig:growth1}
+		\includegraphics[width=\textwidth]{growth1}
+	\end{subfigure}
+	\;\;\;
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{$w=0.9$: population decreases if $w$ is below the extinction threshold.}\label{fig:growth2}
+		\includegraphics[width=\textwidth]{growth2}
+	\end{subfigure}
+\end{figure}
+
+We can represent two or more types as a vector.
+
+\begin{align*}
+	\vec{\dot{x}} =& W \vec{x} \text{, and we see}\\
+	\vec{x_t}=& W^t x_0 
+\end{align*}
+
+Figure \ref{eq:growth3} shows the growth for
+\begin{align*}
+	W=&\begin{bmatrix}
+		1.1&0\\
+		0&0.95
+	\end{bmatrix}
+\end{align*}
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Growth of $\vec{\dot{x}} = W \vec{x}$]{Growth of $\vec{\dot{x}} = W \vec{x}$: type 1 takes over the population!}\label{eq:growth3}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{$\vec{\dot{x}} = W $}
+			\includegraphics[width=\textwidth]{growth3}
+		\end{subfigure}
+		\;\;
+		\begin{subfigure}[t]{0.45\textwidth}
+			\caption{Log-log plot}
+			\includegraphics[width=\textwidth]{growth3-log-log}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+
+A real population will not normally comprise one type that takes over while all other types die out. Let us add a mutation rate of $\mu$, say 1\%, from type 1 to 2, but type 2 doesn't mutate.
+
+
+\begin{align*}
+	\vec{\dot{x}} =& W M \vec{x} \\
+	\vec{x_t}=& ( M )^t x_0  \vec{x}\text{, where}\\
+	M =& \begin{bmatrix}
+	1-\mu & 0 \numberthis \label{eq:M}\\
+	\mu& 1
+	\end{bmatrix}
+\end{align*}
+
+The order of multiplying $M$ and $W$ doesn't matter, as $WMWMWMW...m\approxeq MWMW...W$ for large $t$. 	Let us diagonalize WM
+
+\begin{align*}
+	WM =& VDV^{-1}\\
+	(WM)^t =& V D^t V^{-1}
+\end{align*}
+
+So $D^t$ is dominated by its largest eigenvalue--Figure \ref{fig:growth4}. Notice that type 2 decreases at first, then it starts increasing exponentially, parallel to type 1. The eigenvalues are $\{1.089, 0.950\}$, and the eigenvectors $\{0.9976,0.0682\}$ and $\{0,1\}$. The first mixture of types is known as a quasispecies. Both types in the quasispecies grow exponentially. Figure \ref{fig:growth5} shows the effect of increasing the mutation rate. The eigenvalues are $\{1.012, 0.950\}$, and the eigenvector corresponding to $1.012$ is $\{0.632,0.775\}$. 
+
+Figure \ref{fig:growth6} shows the effect in increasing the mutation rate further: both types decline. The eigenvalues are $\{0.95, 0.88\}$. The crossing from Figure \ref{fig:growth5} to Figure \ref{fig:growth6} is what we call the \emph{error catastrophe}.
+
+\begin{figure}[H]
+	\caption{Log-log plot of $\vec{x}$}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{$\mu=0.01$. Notice that type 1 dominates; type 2 decreases at first, then it starts increasing exponentially, parallel to type 1.}\label{fig:growth4}
+		\includegraphics[width=\textwidth]{growth4}
+	\end{subfigure}
+	\;\;
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{$\mu=0.08$. Types $1$ and $2$ both increase, but $2$ increases faster.}\label{fig:growth5}
+		\includegraphics[width=\textwidth]{growth5}
+	\end{subfigure}
+	\;\;
+	\begin{subfigure}[t]{0.3\textwidth}
+		\caption{$\mu=0.2$. Both types decrease}\label{fig:growth6}
+		\includegraphics[width=\textwidth]{growth6}
+	\end{subfigure}
+\end{figure}
+
+Figure \ref{fig:ErrorCatastropheMu} depicts the development of the error catastrophe as the mutation rate increases.
+\begin{figure}[H]
+	\caption[Development of Error Catastrophe]{Development of Error Catastrophe. The x-axis represents the mutation rate, the y-axis the largest eigenvalue. When the first eigenvalue dips below the second, 0.95, type 1 (the quasi-species) disappears from the population.}\label{fig:ErrorCatastropheMu}
+	\includegraphics[width=0.8\textwidth]{ErrorCatastropheMu}
+\end{figure}
+
+In (\ref{eq:M}) we allow type 1 to mutate to 2, but not back again (c.f. Figure \ref{fig:SteadyStateSolution}). Let us try the effect of allowing mutations back from type 2 to 1. Figure \ref{fig:ErrorCatastropheBackMutation} shows the effect if $M$ is as follows. The eigenvalues never cross: type 1 is not lost, as it is generated from type 2.
+
+\begin{align*}
+	M =& \begin{bmatrix}
+		1-\mu&\frac{\mu}{100}\\
+		\mu&1-\frac{\mu}{100}
+	\end{bmatrix}
+\end{align*}
+
+\begin{figure}[H]
+	\caption[The eigenvalues never cross]{The eigenvalues never cross}\label{eq:ErrorCatastropheBackMutation}
+	\includegraphics[width=0.8\textwidth]{ErrorCatastropheBackMutation}
+\end{figure}
+
+Let us derive the error catastrophe, assuming:
+\begin{align*}
+	M =& \begin{bmatrix}
+		1-\mu&0\\
+		\mu&1
+	\end{bmatrix}\\
+	W=& \begin{bmatrix}
+		w&0\\
+		0&1
+	\end{bmatrix} \text{, whence:}\\
+	WM =& \begin{bmatrix}
+		(1-\mu)w&0\\
+		\mu&1
+	\end{bmatrix} \text{. Now we look for an eingenvector. We want}\\
+	WM\begin{bmatrix}
+		1\\
+		\alpha
+	\end{bmatrix}=&\begin{bmatrix}
+				(1-\mu)w\\
+				\mu+\alpha
+			\end{bmatrix} \text{. In order for this to be an eigenvector, we need}\\
+	\frac{\mu+\alpha}{(1-\mu)w} =& \frac{\alpha}{1} \text{, whence}\\
+	\mu =& \alpha \big(w(1-\mu)-1\big) \text{, rearranging}\\
+	\alpha =& \frac{\mu}{w(1-\mu)-1}
+\end{align*}
+In order for $\alpha$ to be positive, so there is an eigenvector where both types are present, we need $w(1-\mu)-1>0 \equiv w(1-\mu)>1$. If we introduce $s$ such that:
+\begin{align*}
+	w =& 1+s \text{, we need} \numberthis \label{eq:s:w}\\
+	(1+s)(1-\mu) >& 0 \text{, or}\\
+	s \gtrapprox& 0 \text{, for small $\mu$}
+\end{align*}
+
+The original presentation of the error catastrophe was by Manfred Eigen and Peter Schuster. They looked at a DNA genome of length $L$, assuming one optimal sequence, but we will simplify by working with a binary genome: 1 means a bit is identical to the optimum, 0 that it is different; $\nu$ is the mutation rate per site, $0\leftrightarrow1$. We shall assume one mutation per timestep, rate $L\nu$, and let $i$ denote the number of zeroes, i.e. the \emph{type}. The number of ones is $L-i$.
+
+\begin{align*}
+	p_{i\rightarrow i+1} =&\frac{L-i}{L}L\nu = (L-i)\nu \numberthis \label{eq:p:plus}\\
+	p_{i \rightarrow i-1}=& \frac{i}{L}L\nu = i\nu \numberthis \label{eq:p:minus}
+\end{align*}
+
+
+We set:
+\begin{align*}
+	\nu=&0.01\\
+	L=&10 
+\end{align*}
+then
+\begin{align*}
+	M =& \begin{bmatrix}
+		0.9 &0.01&   0&   0&   0&   0&   0&   0&   0&   0&   0\\
+		0.1 & 0.9&0.02&   0&   0&0    &0   &0   &0   &0   &0\\
+		0   &0.09&  .9&0.03& 0&   0&   0&   0&   0&   0&   0\\
+		0   &   0&0.08&  .9&0.04& 0&   0&   0&   0&   0&   0\\
+		0   &   0&   0&0.07&  .9&0.05& 0&  0&   0&   0&   0\\
+		0   &   0&   0&   0&0.06&  .9&0.06& 0&   0&   0&   0\\
+		0   &   0&   0&   0&   0&0.05&  .9&0.07& 0&   0&   0\\
+		0   &   0&   0&   0&   0&   0&0.04&  .9&0.08& 0&   0\\
+		0   &   0&   0&   0&   0&   0&   0&0.03&  .9&0.09& 0\\
+		0   &   0&   0&   0&   0&   0&   0&   0&0.02&0.9&0.1\\
+		0   &   0&   0&   0&   0&   0&   0&   0&   0& 0.01&0.9& 
+	\end{bmatrix}
+\end{align*}
+and, if we take $s=0.3$ in (\ref{eq:s:w}):
+\begin{align*}
+	W =& \begin{bmatrix}
+	    1.3 &0&   0&   0&   0&   0&   0&   0&   0&   0&   0\\
+		0 & 1&0&   0&   0&0    &0   &0   &0   &0   &0\\
+		0 & 0&1&   0&   0&0    &0   &0   &0   &0   &0\\
+		0 & 0&0&   1&   0&0    &0   &0   &0   &0   &0\\
+		0 & 0&0&   0&   1&0    &0   &0   &0   &0   &0\\
+		0 & 0&0&   0&   0&1    &0   &0   &0   &0   &0\\
+		0 & 0&0&   0&   0&0    &1   &0   &0   &0   &0\\
+		0 & 0&0&   0&   0&0    &0   &1   &0   &0   &0\\
+		0 & 0&0&   0&   0&0    &0   &0   &1   &0   &0\\
+		0 & 0&0&   0&   0&0    &0   &0   &0   &1   &0\\
+		0 & 0&0&   0&   0&0    &0   &0   &0   &0   &1\\
+	\end{bmatrix}
+\end{align*}
+We can show that the eigenvector with the largest eigenvalues is:
+\begin{align*}
+	\begin{bmatrix}
+	0.64\\
+	0.24\\
+	0.08\\
+	0.03\\
+	0.01\\
+	0\\
+	0\\
+	0\\
+	0\\
+	0\\
+	0\\
+	\end{bmatrix}
+\end{align*}
+
+This will be the quasispecies.
+Now, let us take $s=0.08$ in (\ref{eq:s:w}). The quasispecies becomes:
+
+\begin{align*}
+	\begin{bmatrix}
+		0.01\\
+		0.02\\
+		0.05\\
+		0.12\\
+		0.21\\
+		0.24\\
+		0.2\\
+		0.11\\
+		0.04\\
+		0.01\\
+		0\\
+	\end{bmatrix}
+\end{align*}
+The optimal type has quite a low frequency, and the sub-optimal types are better represented. Figure \ref{fig:QuasispeciesForDifferentS} shows the effect of varying $s$. Figure \ref{fig:ErrorCatastrophe2} rearranges this data to present frequency as a function of $s$.
+
+\begin{figure}[H]
+	\caption{The effect of varying $s$ on the quasispecies}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{As $s$ decreases the distribution becomes more spread, and at 0.9 most sequences are sub-optimal.}\label{fig:QuasispeciesForDifferentS}
+		\includegraphics[width=0.8\textwidth]{QuasispeciesForDifferentS}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Frequencies of various types. The black line represents the optimal type. Notice the transition below which the optimal type no longer dominates. }\label{fig:ErrorCatastrophe2} 
+		\includegraphics[width=0.9\textwidth]{ErrorCatastrophe2}
+	\end{subfigure}
+\end{figure}
+
+We will calculate the transition of Figure \ref{fig:ErrorCatastrophe2}. From (\ref{eq:p:plus},\ref{eq:p:minus}):
+
+\begin{align*}
+	p_{i\rightarrow i+1} =& (L-i)\nu \\
+	p_{i \rightarrow i-1}=& i\nu \text{. We want to maintain type $0$}\\
+	p_{0\rightarrow 1} =& L \nu \text{. Now, since $\mu = L \nu$ we need}\\
+	s \gtrapprox& L\nu \numberthis \label{eq:error:threshold}
+\end{align*}
+
+Eigen and Schuster used (\ref{eq:error:threshold}) to compute the maximum length possible for a given error rate. You need to cross a threshold of fidelity for a given length molecule.
+
+(\ref{eq:error:threshold}) can also be used to distinguish neutral mutations from non-neutral. We will look at a case there there is more than one fitness--Figure \ref{fig:fitness-stairs}.
+
+\begin{figure}[H]
+	\caption{Distinguishing neutral mutations from non-neutral}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Fitness depends on number of mutations}\label{fig:fitness-stairs}
+		\includegraphics[width=0.8\textwidth]{fitness-stairs}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{In order to remain with a given number of mutations, the black line has to be above the red.}\label{fig:neutral-mutations}
+		\includegraphics[width=0.8\textwidth]{neutral-mutations}
+	\end{subfigure}
+\end{figure}
+
+From (\ref{eq:p:plus})
+\begin{align*}
+	p_{i\rightarrow i+1} =& (L-i)\nu \text{, so we need}\\
+	\Delta s_i > & (L-i)\nu
+\end{align*}
+In order to remain with a given number of mutations, the black line has to be above the red in Figure \ref{fig:neutral-mutations}.
+
+See \cite{eigen1978hypercycle,eigen1988molecular,eigen2002error,crotty2001rna,stadtler2002fitness_landscapes,wessner2010origins}
+
+
+\section[Artificial Life Theory]{Artificial Life Theory--Sara Imari Walker}
+
+Tt's been really exciting
+to be an astrobiologist nowadays
+because astrobiology is starting to
+intersect a lot of other fields
+that care very deeply about
+understanding life -
+from the perspective of thinking about
+more general principles.
+And, one of those fields is
+the artificial life field,
+which has been exploring
+fundamental properties of life
+and evolving systems
+for a number of decades,
+and has made a lot of progress
+in computational models
+of living processes that are starting to
+be able to be used for thinking
+about problems relevant to astrobiology.
+So, I'm going to just talk about
+a little bit of where artificial life comes
+into providing some new insights
+into what biology might be,
+and how we might think about life
+as a broader class of phenomena
+from this astrobiological perspective--
+that we want to understand life, not just on Earth, but life as it might exist anywhere.
+
+And, one of the things that I always find really intriguing--being trained in physics--
+is that biology seems to necessitate a different kind of perspective
+on how we should think about the laws of nature, how we should think about dynamical systems.
+And, one of the things that's really a pretty interesting contrast between physics and biology is that--in physics, when we model systems, we always talk about the initial state.
+You could talk of the initial state of the universe or initial state of the solar system.
+And then, you have some fixed law of motion, like Newton's law of universal gravitation, or we could take Einstein's theory. 
+And then, we can evolve our system forward in time and we can predict the final state--Figure \ref{fig:PhysicsvsBiology}.
 \begin{figure}[H]
 	\caption{Physics: fixed law of evolution to final State, vs. Biology}\label{fig:PhysicsvsBiology}
 	\includegraphics[width=0.9\textwidth]{PhysicsvsBiology}
 \end{figure}
 
-Von Neumann's work on self reproducing automata \cite{neumann1966theory}  \cite{neumann1958computer} is analogous to  the architecture of a modern cell--Figure \ref{fig:VonNeumann}. Note the instructional Tape in Figure  \ref{fig:VonNeumann1}--a small part of a larger biological algorithm. Note also that Von Neumann's work on cellular automata largely preceded our understanding of the translation from DNA to protein.
+In principle, we should be able to do that with perfect prediction power if we had
+big enough supercomputers.
+But, there's nothing about the laws of motion that changes in time.
+So, Newton's law doesn't change--it's just the states that evolve forward in time.
+But, in biology, we have this really interesting case where we have an initial state, like that last universal common ancestor of life on Earth.
+And then, as that system evolves, it changes, and there's many possible final states--Figure \ref{fig:PhysicsvsBiology}
 
 
+So, even though we started from a shared cellular architecture and early history of life,
+because of the interaction of life and its environment and the change of information in those systems, we've ended up with many, many different final states for biology.
+
+So, I'm an organism that descended from that last universal common ancestor.
+And, so is the bacterium on the computer screen that I'm looking at right now.
+There's many final states possible in biology.
+And, one of the ways that we can talk about this is to even talk about the fact that in biology this--the states themselves--are not the only thing that's evolving, but the laws are too.
+We talk about state dependent rules or state dependent laws in biology, and this is the idea--that, as an organism evolves, its genetic information is changing.
+And, even as it expresses that genetic information, it can actually dictate its own state.
+So, biology has its property of \gls{gls:homeostasis} and regulating its own state--that sort of a state control.
+And, this kind of like the rules are actually controlling this state, or the constraints are controlling the state.
+
+So, that seems really fundamentally different than the situation that we see in physics
+and how we model physical systems that aren't living.
+And the real story there is that, in biology, part of the dynamics is the information and how the information is changing in time.
+
+And so, in the artificial life field, people like to try to model these emergent properties, or what's going on in biology, using really simple systems that allow us to understand really basic things about life.
+
+One example that is used commonly in the artificial life field is cellular automata.
+And, one of the reasons that people really like those is because they have really simple local rules, just like the laws of physics do, but we see really interesting global patterns emerging.
+And so, for example, Figure \ref{fig:cellularAutomatonRule150} is an elementary cellular automaton, Rule 150, and you can see here what the pattern is for the rules.
 
 \begin{figure}[H]
-	\caption{Von Neumann's work on self reproducing automata is analogous to the architecture of a modern cell}\label{fig:VonNeumann}
+	\caption[Cellular automaton ''Rule 150'']{Cellular automaton ''Rule 150''.  It has 	really simple local rules, just like the laws of physics do, but we see really interesting global patterns emerging}\label{fig:cellularAutomatonRule150}
+	\includegraphics[width=0.8\textwidth]{cellularAutomatonRule150}
+\end{figure}
+
+So, if you have three white cells
+it maps to one white cell.
+If you have three black cells,
+it maps to a black cell.
+And then, different patterns
+of whites and black cells
+will either map to a black
+or a white cell.
+So, it's a very simple rule,
+but you'll see that there's this
+really regular pattern that emerges
+when you run the dynamics
+that's not encoded in the rule at all.
+So, we talk about that
+as an emergent property.
+
+
+And, life has many emergent properties.
+So, one question is--
+would those emergent properties of life
+be explained by the structure
+of the laws of physics alone,
+or do we need additional principles,
+and do we really need something
+like state planet dynamics
+or information
+or any new principles
+that are uniquely biological
+to explain how biology has
+this sort of many paths
+that we observe
+through the evolutionary process?
+And, that's a great question
+for artificial life.
+People have thought about that
+from many different perspectives
+in addition to cellular automata.
+But, we'll talk about cellular automata
+just a little bit more
+because they're a really
+nice simple example.
+And so, as I said,
+this is an example of this idea in physics
+of starting with an initial state
+of fixed law of motion
+and evolving to some final state.
+
+The Game of Life< is perhaps
+one of the most famous examples
+of using this kind of construction
+to understand
+what emergent properties are
+and how complexity can emerge
+from simple rules--Figure \ref{fig:GameOfLife}.
+
+\begin{figure}[H]
+	\caption[Game of Life]{Game of Life\cite{wiki:game:life}}\label{fig:GameOfLife}
+	\includegraphics[width=0.8\textwidth]{GameOfLife}
+\end{figure}
+
+So, in The Game of Life,
+it's actually a two-dimensional
+cellular automaton
+as opposed to the one-dimensional one
+I showed on the previous slide.
+And, what you see is,
+with The Game of Life
+all kinds of emergent patterns
+appearing--
+from things that glide
+across your screen
+that look like little guns
+shooting things,
+to blinkers,
+to all kinds of different structures,
+and they can interact
+and make more complex structures.
+And so, people have actually...
+there's sort of a cottage industry
+of people studying different emergent
+patterns in The Game of Life,
+and under what conditions they emerge,
+what their computational capacity is.
+So, it's been a really great
+toy model system to explore this idea
+that we might be able to talk about
+emergent properties from simple rules.
+
+One of my favorite cellular automata
+was actually constructed
+by John von Neumann,
+and he was really interested in this idea
+of self-reproducing machines--Figure \ref{fig:VonNeumannSelfRep}.
+
+\begin{figure}[H]
+	\caption[John von Neumann: self-reproducing machines]{John von Neumann was really interested in this idea of self-reproducing machines\cite{neumann1966theory,neumann1958computer}}\label{fig:VonNeumannSelfRep}
+	\includegraphics[width=0.8\textwidth]{VonNeumannSelfRep}
+\end{figure}
+
+
+
+And so, a self-reproducing machine
+or automaton
+would be a system that could make
+a complete reproduction of itself.
+And, he was actually really inspired
+by Alan Turing
+and Turing's work
+on universal computation.
+So, Turing had been interested in
+whether you could build a machine
+that can compute
+any computable function.
+And, von Neumann asked the question,
+inspired by trying to understand life -
+so, this is very early work
+in the artificial life field -
+could you build a machine
+that could build any possible machine
+including itself?
+And, if it could do that,
+then it would be
+a self-reproducing machine.
+But, it would also be a machine
+that could--in principle--be capable of open-ended evolution,
+which is a really important question--
+in the artificial life field
+related to astrobiology--
+about the idea of whether or not evolving
+systems can keep evolving forever.
+
+So, if you had a self-reproducing
+machine that could build itself,
+but not build any arbitrary machine,
+it might stall out and not actually be
+an evolving system.
+And so, von Neumann had this condition
+that it should be able to build anything -
+so that the space of all possible things
+would be completely open,
+that it could potentially evolve into,
+as long as it could maintain the fact
+that it could reproduce itself.
+And so, he came up with
+a particular architecture
+that's necessary for such a machine--Figure \ref{fig:VonNeumann}.
+
+\begin{figure}[H]
+	\caption[Self reproducing automata and the architecture of a modern cell]{Von Neumann's work on self reproducing automata is analogous to the architecture of a modern cell\cite{neumann1966theory}}\label{fig:VonNeumann}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\caption{The ribosome + assisting biomolecules
 			act like a Universal Constructor}\label{fig:VonNeumann1}
 		\includegraphics[width=\textwidth]{VonNeumann1}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{Supervisory Unit}\label{fig:VonNeumann2}
+		\caption{Supervisory Unit  tells it when to copy the instructions just as instructions, rather than reading them out}\label{fig:VonNeumann2}
 		\includegraphics[width=\textwidth]{VonNeumann2}
 	\end{subfigure}
 \end{figure}
 
-“physical” universality: the ability to implement any transformation whatsoever on any finite region \cite{janzing2010there}, \cite{schaeffer2014physicallyuniversal}
+What he basically came up with is that
+you need to have some kind
+of information content -
+the instructions for specifying
+the design of the machine.
+The machine has to be able to read out
+those instructions to build itself,
+and then it has to be able to have
+something called a "supervisory unit"
+that tells it when to copy
+the instructions
+just as instructions,
+rather than reading them out.
+So, the instructions have to
+have a dual role.
+They have to be able to be copied
+to be able to reproduce the organism,
+but they also have to be read out
+to be able to be executed
+to construct the organism.
+And, the machine doing the construction
+is the part that can...
+is the machine that can build
+any possible machine.
+And, he called that
+a "universal constructor."
+And, there is a direct analogy
+with modern cellular architecture
+as we understand it,
+in that the translation machinery -
+ribosomes and all the associated
+tRNAs and translation machinery -
+could be thought of
+as a universal constructor
+that can construct any possible proteins.
+So, it's not a universal constructor
+in the sense that it can make
+any possible object,
+but it is a universal constructor
+in the sense
+that it can produce any possible protein.
+And, the instruction tape is DNA,
+which gets read out by the cell,
+but also gets blindly copied
+by the cell at other stages
+in cellular function.
+So, it does seem to be the case
+that this abstract idea
+from artificial life -
+von Neumann's idea of
+the self-reproducing automata -
+actually maps to some of the function
+that we see in biology.
+And so, this was a case where
+a cellular automata theory
+actually predicted some of the logical
+architecture of modern organisms.
 
-Are the ’laws of life’  the laws of information?
+And so, one of the things that's really
+interesting about von Neumann's idea
+was that he had envisioned
+the possibility of a machine
+that could build any possible machine,
+which means it could do any possible
+transformation on physical matter.
+And, most cellular automata
+actually can't do that.
+So, if you look at cellular automata
+and you evolve them forward in time -
+in the way that we do,
+where we have an initial condition
+and the cellular automata rule
+is fixed for all time -
+not every state transformation
+is possible.
+
+So, you can't move from every state
+to every other state.
+But, there is this idea
+that's implicit in von Neumann's theory
+for biological evolution -
+from this artificial life perspective -
+of \gls{gls:physical:universality},
+which is the ability to implement
+any transformation on any finite region.
+
+\begin{figure}[H]
+	\caption[Physical Universality]{Physical Universality\cite{janzing2010there,schaeffer2014physicallyuniversal}}\label{fig:physicalUniversality}
+	\includegraphics[width=0.8\textwidth]{physicalUniversality}
+\end{figure}
+
+The first physical universal
+cellular automata
+was actually just realized recently
+by Luke Schaeffer...
+and he actually demonstrated
+that it was possible
+to construct such a thing.
+And, he did so within this sort of
+traditional physics paradigm,
+where he started with an initial state
+and evolved the system
+according to a fixed rule,
+and the physical universality
+comes about by programming
+the initial state.
+
+Now if you're thinking about things
+like biological evolution,
+then we want to think about
+biological systems
+in this kind of very abstract way
+inspired by artificial life.
+And, think about von Neumann's theory
+and what it's really telling us
+about biology,
+one of the things we might hope for
+is that biology
+would actually be capable of
+performing any arbitrary transformation.
+And, a good example of that
+is modern technology.
+So, I think actually modern technology
+is a better approximation
+to a universal constructor
+than an interior of a cell,
+in the sense that technology enables
+lots of transformations to be possible.
+So, for example, we can launch
+satellites into space.
+And, that's not a transformation
+that would be able to be happening -
+we wouldn't be...
+our planet wouldn't be anti-accreting -
+launching things into planetary orbit
+without having technology.
+So, it does allow transformations
+and biology seems to do this in general.
+If you think about metabolism...
+allows chemical transformations
+that seem thermodynamically impossible.
+So, if you wanted to talk about
+those kind of properties
+from this cellular automata perspective,
+what you really would like
+is to be able to build
+a cellular automata
+that can perform
+any arbitrary transformation
+and has this kind of inspiration
+from biology--Figure \ref{eq:StateDependentLaws}.
+
+\begin{figure}[H]
+	\caption[Cellular automaton that can perform an arbitrary transformation]{Cellular automaton that can perform an arbitrary transformation }\label{eq:StateDependentLaws}
+	\includegraphics[width=0.8\textwidth]{StateDependentLaws}
+\end{figure}
+So, we've been kind of playing around with those in my group and this is just sort of an example of an artificial life approach to astrobiology.
+Thinking about cellular automata with state-dependent laws, the idea here is that we go back to that difference that we were observing between physics and biology, and think about the fact that life seems to have this property where the rules and the states are very tightly coupled.
+So the expression of my genetic information determines the state of the cells in my body.
+My mental state determines something about what I do.
+
+So, if you want to build systems that do that you can actually build cellular automata with state-dependent laws--Figure \ref{fig:CA-Example}.
+And, you see lots of different rich structures emerging from these kind of systems, and they do have this property of physical universality that Schaeffer observed, but from this very different perspective.
+And so, these are just some examples to raise some questions for you about the kinds of things that we could be thinking about from more abstract models of life in the artificial life field to get at more general principles of living systems.
+
+
+\begin{figure}[H]
+	\caption[You can  build cellular automata
+		with state-dependent laws]{Examples of Case I \gls{gls:CA} exhibiting \gls{gls:OEE}. In each panel the environment $e$ is shown on the left, and organism $o$ on the right. For each $o$, the Poincare recurrence rate for an isolated system is highlighted in blue, and the recurrence time of the states is highlighted in red.\cite{adams2017situation}}\label{fig:CA-Example}
+	\includegraphics[width=0.8\textwidth]{CA-Example}
+\end{figure}
+
+So, we have this idea in mind
+that information perhaps
+might be this unifying principle of life,
+and that really also comes from
+the inspiration of
+the artificial life field--
+because von Neumann was really interested
+in this idea of the instruction,
+the information content being what's
+specifying the design of the machine,
+and that the machine could actually
+implement those instructions--Figure \ref{fig:LawsLifeLawsInformation}.
+
+\begin{figure}[H]
+	\caption{Are the Laws of Life the Laws of Information?}\label{fig:LawsLifeLawsInformation}
+	\includegraphics[width=0.8\textwidth]{LawsLifeLawsInformation}
+\end{figure}
+
+And so, in some sense,
+what he's talking about
+is an algorithmic process
+existing in nature
+is necessary to have open-ended
+evolving systems.
+And so, we really don't understand
+the basic physical principles of that.
+And so, one of the things
+I think is incredibly exciting
+about working across the field
+of artificial life in astrobiology
+is that artificial life models have
+traditionally been these very abstract,
+cellular automata type models,
+or there's other things - like Avida -
+that are these digital systems
+that we program into computers
+and we study their properties
+and they tell us some things
+about emergent properties
+or how systems can evolve.
+But, astrobiology affords the opportunity
+of starting to think about
+those kind of things
+as chemically embodied systems,
+and how do we think about the fact
+that the origin of life transition
+actually did happen -
+these properties emerged
+in the natural world from chemistry.
+
+And so, that's really the challenge
+for astrobiology moving ahead...
+is to take the abstract ideas
+from artificial life
+and turn them into quantitative science
+for astrobiology to build new theories
+of what we think life is,
+and how the transition
+from simple molecules to something
+that has the sophisticated logical
+and informational architecture
+of something
+like a von Neumann machine
+actually emerged on our planet.
+And, what does that actually mean
+in the broadest sense?
+And, what are the kind of classes
+of phenomena
+that we might see in the world
+that could be inspired
+by that understanding...
+i.e. can we find aliens?
+
+And so, that's really a great thing
+to think about.
+
+
 % end of text 
 
 % glossary
