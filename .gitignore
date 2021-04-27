@@ -80,6 +80,7 @@ target/
 *.glg
 *.gls
 *.glsdefs
+*.loa
 
 # Netlogo stuff
 .*.tmp.nlogo
