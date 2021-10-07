@@ -1,6 +1,6 @@
 % MIT License
 
-% Copyright (c) 2019-2020 Simon Crase
+% Copyright (c) 2019-2021 Simon Crase
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -70,11 +70,8 @@
 \begin{abstract}
     These are my notes from the $1^{st}$ week of the Santa Fe Institute Origins of Life Course\cite{sfi2020}.\\
     The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
-    These notes are distributed in the hope that they will be useful,
-    but without any warranty, and without even the implied warranty of
-     merchantability or fitness for a particular purpose. All feedback is welcome,
-    but I don't necessarily undertake to do anything with it.\\
-    \LaTeX source for this week's lectures can be found at\\
+    These notes are distributed in the hope that they will be useful, but without any warranty, and without even the implied warranty of  merchantability or fitness for a particular purpose. All feedback is welcome,  but I don't necessarily undertake to do anything with it.\\
+    \LaTeX source for all six lectures can be found at\\
     \url{https://github.com/weka511/complexity/tree/master/origins}.
 \end{abstract}
 
@@ -785,6 +782,61 @@ Open Questions
 	\item Would we recognize it?
 \end{itemize}
 
+\section[Earth's Early Atmosphere]{Earth's Early Atmosphere--Jim Kasting}
+
+\subsection{Strongly and weakly reducing atmospheres}
+
+\subsubsection{Strongly reducing atmospheres}
+\begin{itemize}
+	\item Alexander Oparin proposed in his 1924 book (in Russian), reprinted in English in 1938, that Earth’s early atmosphere was a mixture of highly reduced gases, like methane  and ammonia\cite{oparin1957origin}
+	\item This is similar to how carbon and nitrogen appear in the atmospheres of Jupiter--Figure \ref{fig:Jupiter-galileo} and Saturn.
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{Jupiter (from Galileo)}\label{fig:Jupiter-galileo}
+	\includegraphics[width=0.8\textwidth]{Jupiter-galileo}
+\end{figure}
+
+\begin{itemize}
+	\item In 1953, Stanley Miller, 	working in Harold Urey’s lab at Univ. of Chicago, showed
+	that plausible prebiotic precursor compounds (e.g.,	amino acids) could be formed by spark discharge\cite{miller1959organic}--Figure \ref{fig:miller_urey3}
+	\item Jupiter and Saturn have strong gravitational fields, which keep hydrogen from escaping. Miller argues that the Earth would also have had hydrogen until it had time to escape. 
+\end{itemize}
+\begin{figure}[H]
+	\caption{Miller-Urey Experiment}\label{fig:miller_urey3}
+	\includegraphics[width=0.8\textwidth]{MillerUrey3}
+\end{figure}
+
+\subsubsection{Weakly reducing atmospheres}
+\begin{itemize}
+	\item But William Rubey, working at the same time as Miller and Urey, noted that the gases being emitted by modern volcanoes--Figure \ref{fig:volcano}-- are not methane and ammonia, but rather carbon dioxide, water vapour, nitrogen, and sulphur dioxide, along with minor amounts of hydrogen and carbon monoxide\cite{rubey1951geologic}
+	\item These gases are relatively oxidized, although free oxygen is absent
+	\item The reason is that Earth’s mantle is partially oxidized: it 	contains some ferric iron 	(Fe +3 ) in addition to ferrous 	iron (Fe +2 ). Metallic iron (Fe 0 )
+	has migrated to the core \cite{wade2005core}
+	\item One can simulate the 	resulting atmosphere using a one-dimensional (globally 	averaged) photochemical model--Figure \ref{fig:kasting}
+
+\end{itemize}
+
+\begin{figure}[H]
+	\caption{Weakly reducing atmospheres}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{William Rubey, working at the same time as Miller and Urey, noted that the gases being emitted by modern volcanoes are not methane and ammonia, but rather carbon dioxide, water vapour, nitrogen, and sulphur dioxide, along with minor amounts of hydrogen and carbon monoxide}\label{fig:volcano}
+		\includegraphics[width=\textwidth]{volcano}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\caption{Atmospheric Simulation\cite{kasting1993earth}
+			A 1-bar atmosphere is assumed, although this need not be the case.
+			CO and O are formed by photolysis of carbon dioxide atoms 	then recombined to form Oxygen.
+			The Hydrogen concentration is 	determined, to first order, by 	balancing volcanic outgassing with escape to space}\label{fig:kasting}
+		\includegraphics[width=\textwidth]{kasting}
+	\end{subfigure}
+\end{figure}
+
+\subsection{The faint young Sun problem}
+
+\subsection{The origin of life: Thermodynamic free energy considerations}
 
 % end of text 
 
