@@ -1,6 +1,6 @@
 % MIT License
 
-% Copyright (c) 2019-2021 Simon Crase
+% Copyright (c) 2019-2022 Simon Crase
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -69,10 +69,7 @@
 \begin{abstract}
  	These are my notes from the $3^{rd}$ week of the Santa Fe Institute Origins of Life Course\cite{sfi2020}.
   	The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
-  	These notes are distributed in the hope that they will be useful,
-  	but without any warranty, and without even the implied warranty of
-  	merchantability or fitness for a particular purpose. All feedback is welcome,
-  	but I don't necessarily undertake to do anything with it.\\
+  	These notes are distributed in the hope that they will be useful, but without any warranty, and without even the implied warranty of merchantability or fitness for a particular purpose. All feedback is welcome, but I don't necessarily undertake to do anything with it.\\
   	\LaTeX source for all six lectures can be found at\\
   	\url{https://github.com/weka511/complexity/tree/master/origins}.
 \end{abstract}
@@ -101,34 +98,12 @@ This week is a more detailed look at biochemistry:\begin{itemize}
 		\includegraphics[width=0.1\textwidth]{DNA}
 	\end{center}
 \end{figure}
-We kind of imagine that
-somehow evolution met this magic
-molecule that has all these properties
-and that's how life emerged,
-or that's how we got \gls{gls:DNA} -
-just from the properties of the \gls{gls:DNA}.
-And, in these two lectures,
-I want to show you
-that this is not such a right -
-a correct - view,
-and \gls{gls:DNA} is much more noisy
-than we think
-and the pairing and their bases
-are much more noisy than that.
+We kind of imagine that somehow evolution met this magic molecule that has all these properties and that's how life emerged, or that's how we got \gls{gls:DNA}--just from the properties of the \gls{gls:DNA}.
+And, in these two lectures, I want to show you that this is not such a right--a correct--view, and \gls{gls:DNA} is much more noisy than we think and the pairing and their bases are much more noisy than that.
 
-\gls{gls:DNA} has a mutation rate
-of ten to the minus ten errors
-per replication per base,
-which is a really amazingly low rate,
-and I will go a bit into
-how we get such a low rate
-in the next lecture.
+\gls{gls:DNA} has a mutation rate of $10^{-10}$ errors per replication per base, which is a really amazingly low rate, and I will go a bit into how we get such a low rate in the next lecture.
 
-In this lecture, I want to talk about
-the bases,
-and for this I need to go a bit into
-the structure of nucleotides.
-
+In this lecture, I want to talk about the bases, and for this I need to go a bit into the structure of nucleotides.
 
 \begin{figure}[H]
 	\caption[The 4 Nucleotides in \gls{gls:DNA}]{The 4 Nucleotides in \gls{gls:DNA}--two \glspl{gls:purine} and two \glspl{gls:pyrimidine}.}\label{fig:Nucleotides} 
@@ -180,23 +155,21 @@ In addition, I listed a couple more modified bases that you can see - one is xan
 \end{figure}
 
 
-There is actually a database online
-that lists
-all the known DNA modifications
-that have been observed
-actually in nature.
-Figure \ref{fig:ModifiedDNA_Nucleobases} includes 44 modified nucleobases
-that actually have been observed
-on DNA in nature.
-In addition, there is the few gray ones
-that have been produced artificially.
+There is actually a database online that lists all the known DNA modifications that have been observed actually in nature.
+Figure \ref{fig:ModifiedDNA_Nucleobases} includes 44 modified nucleobases that actually have been observed on DNA in nature.
+In addition, there are a few gray ones that have been produced artificially.
 
 \begin{figure}[H]
 	\caption[Modified DNA nucleobases]{Modified DNA nucleobases \cite{sood2019dnamod},\cite{sood2019dnamod_website}} \label{fig:ModifiedDNA_Nucleobases} 
 	\includegraphics[width=0.9\textwidth]{ModifiedDNA_Nucleobases}
 \end{figure}
 
-The are a couple of bacteriophages, PBS1 and PBS2, that contain Uracil instead of thymine in their DNA\cite{hemphill1975bacteriophages}. Either the thymine has been replaced, or these phages are more primitive, and never used thymine.
+The are a couple of bacteriophages, PBS1 and PBS2, that contain Uracil instead of thymine in their DNA. Either the thymine has been replaced, or these phages are more primitive, and never used thymine.
+
+\begin{figure}[H]
+	\caption[Phage of Bacillus subtillis]{Phage of Bacillus subtillis\cite{hemphill1975bacteriophages}} \label{fig:PhagePBS1} 
+	\includegraphics[width=0.9\textwidth]{PhagePBS1}
+\end{figure}
 
 When people talk about \gls{gls:methylation} of DNA, they usually mean 5-methylcytosine, Figure \ref{fig:5methylcytosine}, even though there are many other ways to do it
 \begin{figure}[H]
@@ -694,11 +667,11 @@ Even in the RNA world, where RNA can fold and catalyze reaction, folding would b
 A system may be stable in both sense, either, or none--Figure \ref{fig:VisualizingStability}.
 \begin{figure}[H]
 	\begin{center}
-		\caption[A system may be stable in both sense, either, or none]{A system may be stable in both sense, either, or none. Original course image; energy plot added by Michael McGuffin--used by his kind permission.}\label{fig:VisualizingStability}
+		\caption[A system may be stable in both senses, either, or none]{A system may be stable in both senses, either, or none. The die can easily be made to roll, but this wouldn't release any energy. The shipwreck isn't easy to move, and moving it won't release much energy. The man balanced on the chairs would require very little energy to make him fall, and falling would release a lot of energy. The boulder will release a lot of energy if it falls, but it would require a lot of energy to do so. Original course image; energy plot added by Michael McGuffin--used by his kind permission.}\label{fig:VisualizingStability}
 		\includegraphics[width=\textwidth]{MichaelMcGuffinStability}
 	\end{center}
 \end{figure}
-
+ 
 
 Figure \ref{fig:ApplicationsToChemistry} shows how this applies to chemistry.
 
