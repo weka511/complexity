@@ -226,7 +226,7 @@ Where did the modifications come from? They could be fairly new, and we use them
 
 \subsection{DNA base pairing}\label{section:DNAasInfo2}
 
-In this lecture we discuss how pairing is controlled, and how the error rates is kept so low--$10^{-10}$ per (replication*base pair). Usually base pairs are presented as in Figure \ref{fig:BasePairsML}: A only fits T, and C only fits G. Figure \ref{fig:BasePairsML_hydrogen_bonds} shows how this is implemented with hydrogen bonds.
+In this lecture we discuss how pairing is controlled, and how the error rates is kept so low--$10^{-10}$ per replication per base pair. Usually base pairs are presented as in Figure \ref{fig:BasePairsML}: A only fits T, and C only fits G. Figure \ref{fig:BasePairsML_hydrogen_bonds} shows how this is implemented with hydrogen bonds.
 \begin{figure}[H]
 		\caption{Base Pairs}
 		\begin{subfigure}[t]{0.4\textwidth}
@@ -234,27 +234,18 @@ In this lecture we discuss how pairing is controlled, and how the error rates is
 			\includegraphics[width=\textwidth]{BasePairsML}
 		\end{subfigure}
 		\begin{subfigure}[t]{0.55\textwidth}
-			\caption{Figure \ref{fig:BasePairsML} with hydrogen bonds}\label{fig:BasePairsML_hydrogen_bonds}
+			\caption{Implementation by with hydrogen bonds}\label{fig:BasePairsML_hydrogen_bonds}
 			\includegraphics[width=\textwidth]{BasePairsML_hydrogen_bonds}
 		\end{subfigure}
 \end{figure}
 
 \subsubsection{DNA polymerase}
-I will just talk about DNA polymerase,
-which allows DNA replication
-to achieve a very low rate.
-Let's look at the reaction.
-So, usually in any reaction
-we have reactants and products.
-And, we're interested in the rate of going
-from reactants to products...
-or both rates going forward
+I will just talk about DNA polymerase, which allows DNA replication to achieve a very low rate.
+Let's look at the reaction. So, usually in any reaction we have reactants and products.
+And, we're interested in the rate of going from reactants to products... or both rates going forward
 and backward.
-Rate going forward usually is calculated
-by the \gls{gls:arrheniusequation},
-which gives us $e^{-\frac{E_A}{kT}}$--Figure \ref{fig:ArrheniusEquation}.
-So, the higher the activation energy,
-the slower the reaction will be.
+Rate going forward usually is calculated by the \gls{gls:arrheniusequation}, which gives us $e^{-\frac{E_A}{kT}}$--Figure \ref{fig:ArrheniusEquation}.
+So, the higher the activation energy, the slower the reaction will be.
 
 \begin{figure}[H]
 	\caption{The rate of going from reactants to products}
