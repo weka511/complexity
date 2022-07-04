@@ -537,7 +537,7 @@ Other starting values give cell-like behaviour (including division), so maybe ge
 \section[The Central Dogma of Biology]{The Central Dogma of Biology--Chris Kempes}
 
 
-\subsection{The Central Dogma of Biology}
+\subsection{The Central Dogma of Biology}\label{sect:central_dogma}
 
 One of the overarching questions of this class is how do we unwind present day life to learn about origins? Focus on most common properties of all life, especially the Central Dogma.\cite{crick1958biological} \cite{crick1970central}
 
@@ -545,7 +545,6 @@ One of the overarching questions of this class is how do we unwind present day l
 	\caption[The Central Dogma]{The Central Dogma after \cite{crick1970central}}\label{fig:CentralDogma} 
 	\includegraphics[width=0.9\textwidth]{CentralDogma}
 \end{figure}
-
 
 \begin{figure}[H]
 	\caption[Ribosome is conserved across life]{Ribosome is conserved across life, but appears to have onion structure, built up by evolution. Ribosome started with common core, and more added.\cite{hsiao2009peeling}.}\label{fig:Ribosome} 
@@ -567,30 +566,34 @@ Carl Woese used this to build new a Tree of Life. For Viruses, see also \cite{ha
 
 \subsection{The Efficiency of the Central Dogma of Biology}
 
+We've talked in a previous lecture about how conserved the ribosome was, we've talked a little about how it may have evolved through deep time to become this more and more complicated structure.
+A more physical question that we could ask about the ribosome is how efficient or good is it at what it does. And so, one perspective on that is this idea of Landauer's Bound. So what Landauer Bound is in the physics community, is a way of saying take a particular abstract computation and tell me what is the minimal amount of energy that any physical device could use to implement this abstract computation.
+
 \gls{gls:landauer_bound}: \glsdesc{gls:landauer_bound}. 
 
 \begin{figure}[H]
-	\caption[Take unordered set of letters and try to write as specific string]{Take unordered set of letters and try to write as specific string\cite{kempes2017thermodynamic}}\label{fig:LandauerRibosome} 
+	\caption[Illustrating Landuer's Bound]{Take unordered set of letters and try to write as specific string\cite{kempes2017thermodynamic}}\label{fig:LandauerRibosome} 
 	\includegraphics[width=0.9\textwidth]{LandauerRibosome}
 \end{figure}
 
-\begin{itemize}
-	\item Life is only 20 times less efficient that physical limit\cite{kempes2017thermodynamic}
-	\item Computers are 100,000,000 times worse than Landauer's bound!
-\end{itemize}
+If we consider how many ATP are used to polymerize a single amino acid in total, we see thatLife is only 20 times less efficient that physical limit\cite{kempes2017thermodynamic}. Computers are 100,000,000 times worse than Landauer's bound! The ribosome is doing a much better job than the best computers that we have made for performing this abstract computation of writing strings.
+
+
+We mentioned in a Section \ref{sect:central_dogma} that one of our main interests is in understanding how we might take the Central Dogma and use it to learn something about the origins of life. One way to gain information about that Central Dogma is to see how it shifts in terms of computational ratios across the range of organisms, and we can do that in bacteria. Figure \ref{fig:RibosomeTradeoff}, from \cite{kempes2016evolutionary}, looks at the range of bacterial sizes, and asks how the componentry of the Central Dogma is changing across bacteria of very different sizes. As cells become bigger we need less and less volume of the DNA, which follows a power law; at the small end the DNA is taking up almost the entire cell volume. Turning to proteins we also see they are following a power law. At the small end they take up a large volume, and become more dilute as cells become larger. The ribosome is roughly following cell volume, so we have an almost constant concentration until we get to the largest size. Eventually we'd require more ribosome than will actually fit into the cell. So, we can bound the largest and smallest cell sizes for bacteria.
 
 \begin{figure}[H]
-	\caption{Ribosome Tradeoffs}
-	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{For a small cell, DNA and proteins take up (nearly) entire volume; for large cells, Ribosome does same thing! So we have bounds on allowable volume.\cite{kempes2016evolutionary}}\label{fig:RibosomeTradeoffs} 
-		\includegraphics[width=\textwidth]{RibosomeTradeoffs}
-	\end{subfigure}
-	\;\;\;
-	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{A more efficient ribosome would allow larger cells; less efficient might not work at all.}\label{fig:RibosomeTradeoffsEarly} 
-		\includegraphics[width=\textwidth]{RibosomeTradeoffsEarly}
-	\end{subfigure}
+	\caption[Ribosome Tradeoffs]{For a small cell, DNA and proteins take up (nearly) entire volume; for large cells, Ribosome does same thing! So we have bounds on allowable volume.\cite{kempes2016evolutionary}}\label{fig:RibosomeTradeoffs} 
+	\includegraphics[width=\textwidth]{RibosomeTradeoffs}
 \end{figure}
+
+How would this tell us something about early life? Imagine that the ribosome was much worse than the one we have, or much better--Figure \ref{fig:RibosomeTradeoffsEarly}
+
+\begin{figure}[H]
+	\caption[Efficiency of ribosome]{A more efficient ribosome would allow larger cells; less efficient might not work at all\cite{kempes2016evolutionary}}\label{fig:RibosomeTradeoffsEarly} 
+	\includegraphics[width=\textwidth]{RibosomeTradeoffsEarly}
+\end{figure}
+
+So if early organisms before encapsulation had found ribosomes that were very slow, they wouldn't be able to encapsulate them. 
 \section[Biological Similarity]{Biological Similarity--Sarah Mauer}
 
 We will use a top-down approach.
