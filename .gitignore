@@ -59,6 +59,7 @@ target/
 # Jabref
 *.bib.bak
 *.bib.sav
+*.bib.sav.tmp
 
 # Tex stuff
 *.aux
