@@ -1,4 +1,4 @@
-# origins 
+# origins
 
 My notes plus exploratory code for [Origins of Life](https://www.complexityexplorer.org/courses/103-origins-of-life). This material was created initially for an Code for [an earlier iteration of the course](https://www.complexityexplorer.org/courses/95-origins-of-life); it is now being updated.
 The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own.
@@ -31,3 +31,4 @@ I have used [TexStudio](https://www.texstudio.org/) and the [JabRef](https://www
 | |allometric.py|Evolve solution for  [West et al--A General Model for the Origin of Allometric Scaling Laws in Biology](http://hermes.ffn.ub.es/oscar/Biologia/Escala/Science_276_122_1997.pdf)|
 | | ga.py|Genetic algorithm framework|
 ||metabolic.py|Diffusion equation code|
+||quasi.py|Simulate quasi species evolution

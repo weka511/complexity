@@ -19,17 +19,15 @@
 # SOFTWARE.
 
 from matplotlib.pyplot import figure, legend, plot, show
-from numpy import zeros
-from numpy.random import default_rng
+from numpy             import int64, zeros
+from numpy.random      import default_rng
 
 
 
-M                  = 10
-N                  = 2**M
-population_size    = 100
-mutation_frequency = 0.05
-K                  = 1000
-freq               = 100
+M                  = 10        # Number of bits in genome
+N                  = 2**M      # Number of possible bit strings
+population_size    = 100       # Number of indivuduals in gene pool
+K                  = 1000      # NUmber of generations
 
 def get_neighbours(n):
     def copy_with_flip(i,j):
@@ -51,24 +49,28 @@ def bits_to_int(bits):
 if __name__=='__main__':
     figure(figsize=(12,12))
     rng        = default_rng()
-    Counts     = zeros(N)
-    Counts[0]  = population_size
     Neighbours = [get_neighbours(n) for n in range(N)]
-    for k in range(K):
-        Counts_next = zeros(N)
-        for i in range(N):
-            if Counts[i]==0: continue
-            if rng.random()<mutation_frequency:
-                bit_to_flip = rng.integers(0,M)
-                replacement = Neighbours[i][bit_to_flip]
-                index = bits_to_int(replacement)
-                Counts_next[i] += Counts[i]-1
-                Counts_next[index] += 1
-            else:
-                Counts_next[i] += Counts[i]
-        Counts = Counts_next
-        if k%freq == 0:
-            plot(Counts,label=f'Generation: {k}')
+    for mutation_frequency in [0.0001, 0.001, 0.01, 0.1]:
+        Counts     = zeros(N,dtype=int64)
+        Counts[0]  = population_size
+
+        for k in range(K):
+            Counts_next = zeros(N)
+            for i in range(N):
+                mutated = 0
+                for j in range(int(Counts[i])):
+                    if rng.random()<mutation_frequency:
+                        bit_to_flip         = rng.integers(0,M)
+                        replacement         = Neighbours[i][bit_to_flip]
+                        index               = bits_to_int(replacement)
+                        Counts_next[index] += 1
+                        mutated            += 1
+                Counts_next[i] += (Counts[i]-mutated)
+
+            Counts = Counts_next
+            assert Counts.sum() == population_size
+
+        plot(Counts, label=f'{mutation_frequency}')
 
     legend()
     show()
