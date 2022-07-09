@@ -21,29 +21,39 @@ Simulate evolution as modelled by the quasi-species equation.
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from matplotlib.pyplot import figure, legend, plot, savefig, show, title, xlabel, ylabel
+# This program simulates evolution for a population of instances of a Genome that can be
+# represented as a bitstring. It repeatedly evolves the population to compare the density of
+# the master sequnce with mutated copies, and it does this for two mutation rates which
+# bracket the ErrorThreshold.
+
+# I maintain a vector containing the number of insytances each bit string.
+# Each generation we multiply population of master sequence,
+# [0, 0, 0, 0, ...], by f0, and the mutated sequnces by f1, then mutate.
+#
+# I assume that the mutation rate is low enough that only one bit is mutated at a time.
+
+
+
+from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tight_layout, title, xlabel, ylabel
 from numpy             import cumsum, int64, log, searchsorted, zeros
 from numpy.random      import default_rng
 
-# Genome is a bit string. We maintain a vector containg the count for each bit string.
-# Each generation we multiply population of master sequence,
-# [0, 0, 0, 0, ...], by f0, then mutate.
-#
-# We assume that the mutation rate is low enough that only one bit is mutated at a time.
-
 L              = 10        # Number of bits in genome
 N              = 2**L      # Number of possible bit strings
-M              = 1000      # Population
-K              = 100       # number of generations
+M              = 1000      # Number of instances in Population
+K              = 250       # Number of generations
+n              = 5         # Number of iterations
 f0             = 2         # Fitness of master sequence
 f1             = 1         # Fitness of all other sequences
-epsilon        = 0.25       # Used to simulate for mutation rate just above and below master sequence.
-ErrorThreshold = log(f0)/L
+epsilon        = 0.25      # Used to simulate eveolution mutation rate just above and below master sequence.
+
 
 def get_neighbours(n):
     '''
     Get all bitstrings that are one differ from specified bitstring by one bit only.
     We use the convention that 1 is [1,0,0,0,...], 3 [1,1,0,0,0...], and not vice versa
+    This function allows us to build a table of possible mutations for a given genome
+    once and for all, instead of computing it each time.
     '''
 
     def mutate_string(i,Bitstring):
@@ -95,16 +105,21 @@ def replicate(C):
     return select_genomes([C[i] * (f0 if i==0 else f1) for i in range(N)])
 
 def breed(Neighbours,u):
+    '''Perform one cycle of evolution. Replicate, and possibly mutate, each instance in population'''
     Counts     = zeros(N, dtype = int64)  # Number of individuals for each genome - initally just one copy of master sequence
     Counts[0]  = M
 
-    for k in range(K):
-        Counts_next = zeros(N)                     # We will accumulate results for next generation here
-
+    for k in range(K):                        # Iterate over each generation
+        # We will accumulate results for next generation in Counts_next
+        # Note the number of instances for each possible genome may come from two places:
+        # unmutated instances of the same genome, or mutated instances of some other. So
+        # we start with zero, and then use '+=' to accumulate counts.
+        Counts_next = zeros(N)
         for i in range(N):
-            number_of_mutations = 0           # book-keeping: used to reduce number of unmutated individuals
+            number_of_mutations = 0           # book-keeping: used to keep track number of mutated individuals
+                                              # so we can subtract from unmutated individuals
             for j in range(int(Counts[i])):
-                if rng.random() < u*L:           # Are we going to mutate or not? u is probability for 1 bit
+                if rng.random() < u*L:        # Are we going to mutate or not? u is probability for 1 bit
                     bit_to_flip                = rng.integers(0,L)          # Randomly choose which bit to flip
                     mutated_genome             = Neighbours[i][bit_to_flip] # Look mutated genome up from neighbours table
                     genome_index               = bits_to_int(mutated_genome) # Which number corresponds to mutated string?
@@ -116,17 +131,22 @@ def breed(Neighbours,u):
 
 if __name__=='__main__':
     figure(figsize=(12,12))
-    rng        = default_rng()
-    Neighbours = [get_neighbours(n) for n in range(N)] # Build Neighbour table so we can look up mutations
+    rng            = default_rng()
+    Neighbours     = [get_neighbours(n) for n in range(N)] # Build Neighbour table so we can look up mutations
+    k              = 1
+    ErrorThreshold = log(f0)/L
     for u in [ErrorThreshold*(1-epsilon),
               ErrorThreshold*(1+epsilon)]:
-        Counts = breed(Neighbours,u)
-        Z = Counts.sum()                             # Partition function
-        plot(range(N), Counts/Z, label=f'{u:.04f}')
-
-    legend(title='Mutation Rate')
-    title(f'Population after {K} generations')
-    xlabel('Genome')
-    ylabel('Population')
+        subplot(2,1,k)
+        k += 1
+        for i in range(n):
+            Counts = breed(Neighbours,u)
+            Z      = Counts.sum()                             # Partition function
+            plot(range(N), Counts/Z, label=f'{i}')
+        legend(title='Iteration')
+        title(f'Population after {K} generations for u={u:.4f}')
+        xlabel('Genome')
+        ylabel('Population')
+    tight_layout()
     savefig('quasi')
     show()
