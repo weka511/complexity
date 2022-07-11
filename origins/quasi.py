@@ -23,10 +23,10 @@ Simulate evolution as modelled by the quasi-species equation.
 
 # This program simulates evolution for a population of instances of a Genome that can be
 # represented as a bitstring. It repeatedly evolves the population to compare the density of
-# the master sequnce with mutated copies, and it does this for two mutation rates which
+# the master sequence with mutated copies; the evolution is performed for two mutation rates which
 # bracket the ErrorThreshold.
 
-# I maintain a vector containing the number of insytances each bit string.
+# I maintain a vector containing the number of instances each bit string.
 # Each generation we multiply population of master sequence,
 # [0, 0, 0, 0, ...], by f0, and the mutated sequnces by f1, then mutate.
 #
@@ -38,14 +38,14 @@ from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tigh
 from numpy             import cumsum, int64, log, searchsorted, zeros
 from numpy.random      import default_rng
 
-L              = 10        # Number of bits in genome
+L              = 12        # Number of bits in genome
 N              = 2**L      # Number of possible bit strings
 M              = 1000      # Number of instances in Population
-K              = 250       # Number of generations
-n              = 5         # Number of iterations
+K              = 500       # Number of generations
+n              = 10        # Number of iterations
 f0             = 2         # Fitness of master sequence
 f1             = 1         # Fitness of all other sequences
-epsilon        = 0.25      # Used to simulate eveolution mutation rate just above and below master sequence.
+epsilon        = 0.25      # Used to simulate evolution mutation rate just above and below master sequence.
 
 
 def get_neighbours(n):
@@ -99,14 +99,14 @@ def select_genomes(C1):
 
 def replicate(C):
     '''
-    Make copies of indivuduals (according to fitness) next generation,
+    Make copies of individuals (according to fitness) next generation,
     then reduce so total number matches expected population
     '''
     return select_genomes([C[i] * (f0 if i==0 else f1) for i in range(N)])
 
 def breed(Neighbours,u):
     '''Perform one cycle of evolution. Replicate, and possibly mutate, each instance in population'''
-    Counts     = zeros(N, dtype = int64)  # Number of individuals for each genome - initally just one copy of master sequence
+    Counts     = zeros(N, dtype = int64)  # Number of individuals for each genome - initally just M copies of master sequence
     Counts[0]  = M
 
     for k in range(K):                        # Iterate over each generation
@@ -126,27 +126,29 @@ def breed(Neighbours,u):
                     Counts_next[genome_index] += 1
                     number_of_mutations       += 1
             Counts_next[i] += (Counts[i]-number_of_mutations)
+
         Counts = replicate(Counts_next)
     return Counts
 
 if __name__=='__main__':
-    figure(figsize=(12,12))
-    rng            = default_rng()
+    figure(figsize=(12,12))                                # Create a figure to plot into
+    rng            = default_rng()                         # Initalize random number generator
     Neighbours     = [get_neighbours(n) for n in range(N)] # Build Neighbour table so we can look up mutations
-    k              = 1
-    ErrorThreshold = log(f0)/L
-    for u in [ErrorThreshold*(1-epsilon),
-              ErrorThreshold*(1+epsilon)]:
-        subplot(2,1,k)
-        k += 1
+    ErrorThreshold = log(f0/f1)/L
+    for k,u in enumerate([ErrorThreshold*(1-epsilon),ErrorThreshold*(1+epsilon)]):
+        print (f'Mutation rate={u}')
+        subplot(2,1,k+1)                                     # Plot each run in a separate region of the figure
         for i in range(n):
+            print (f'Iteration {i}')
             Counts = breed(Neighbours,u)
             Z      = Counts.sum()                             # Partition function
             plot(range(N), Counts/Z, label=f'{i}')
+
         legend(title='Iteration')
         title(f'Population after {K} generations for u={u:.4f}')
         xlabel('Genome')
         ylabel('Population')
+
     tight_layout()
     savefig('quasi')
     show()
