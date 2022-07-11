@@ -31,4 +31,5 @@ I have used [TexStudio](https://www.texstudio.org/) and the [JabRef](https://www
 | |allometric.py|Evolve solution for  [West et al--A General Model for the Origin of Allometric Scaling Laws in Biology](http://hermes.ffn.ub.es/oscar/Biologia/Escala/Science_276_122_1997.pdf)|
 | | ga.py|Genetic algorithm framework|
 ||metabolic.py|Diffusion equation code|
-||quasi.py|Simulate evolution as modelled by the quasi-species equatio
+||quasi.py|Simulate evolution as modelled by the quasi-species equation
+||quasi1.py|Simulate evolution as modelled by the quasi-species equation
