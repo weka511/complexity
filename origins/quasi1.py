@@ -29,8 +29,9 @@ Simulate evolution as modelled by the quasi-species equation.
 from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tight_layout, title, xlabel, ylabel
 from numpy             import  log,  zeros, sort
 from numpy.random      import default_rng
+from os.path           import basename, splitext
 
-L              = 64        # Number of bits in genome
+L              = 1024        # Number of bits in genome
 M              = 1000      # Number of instances in Population
 K              = 500       # Number of generations
 n              = 10        # Number of iterations
@@ -92,7 +93,7 @@ def evolve(Population,NextGeneration,u=0.1):
     mutate(NextGeneration, m, u=u)
     select(NextGeneration, m, Population)
 
-def get_histogram(Population):
+def get_histogram(Population, density=True):
     '''
     Generate a histogram: counts for each instance that is eactually present
     '''
@@ -106,28 +107,38 @@ def get_histogram(Population):
             cursor = Sorted[i,:]
             bins.append(1)
     assert sum(bins)==M
-    return bins
+    if density:
+        Z = sum(bins)
+        return [count/Z for count in bins]
+    else:
+        return bins
+
+def get_plot_file_name(plot=None):
+    '''Determine plot file name from source file name or command line arguments'''
+    if plot==None:
+        return f'{splitext(basename(__file__))[0]}.png'
+    base,ext = splitext(plot)
+    return f'{plot}.png' if len(ext)==0 else plot
 
 if __name__=='__main__':
     figure(figsize=(12,12))
     rng            = default_rng(1)
-    Population     = zeros((M,L),dtype=bool)
-    NextGeneration = zeros((f0*M,L), dtype=bool)
     ErrorThreshold = log(f0/f1)/L
     for i,u in enumerate([ErrorThreshold*(1-epsilon),ErrorThreshold*(1+epsilon)]):
         print (f'Mutation rate={u}')
         subplot(2,1,i+1)                                     # Plot each run in a separate region of the figure
         for j in range(n):
             print (f'Iteration {j}')
+            Population     = zeros((M,L),dtype=bool)
             for k in range(K):
+                NextGeneration = zeros((f0*M,L), dtype=bool)
                 evolve(Population,NextGeneration,u=u)
-            bins = get_histogram(Population)
-            Z    = sum(bins)
-            plot([count/Z for count in bins], label=f'{j}')
+            plot(get_histogram(Population), label=f'{j}')
         legend(title='Iteration')
         title(f'Population after {K} generations for u={u:.4f}')
         xlabel('Genome')
         ylabel('Population')
 
     tight_layout()
+    savefig(get_plot_file_name())
     show()
