@@ -28,7 +28,7 @@ Simulate evolution as modelled by the quasi-species equation.
 
 from argparse          import ArgumentParser
 from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tight_layout, title, xlabel, ylabel
-from numpy             import log,  zeros, sort
+from numpy             import iinfo, int64, log,  zeros, sort
 from numpy.random      import default_rng
 from os.path           import basename, splitext
 
@@ -141,10 +141,20 @@ def get_plot_file_name(plot=None):
     base,ext = splitext(plot)
     return f'{plot}.png' if len(ext)==0 else plot
 
+def get_seed(seed):
+    '''Choose seed for random number generator'''
+    if seed == None:
+        rng      = default_rng()
+        new_seed = rng.integers(iinfo(int64).max)
+        print (f'Seed={new_seed}')
+        return new_seed
+    else:
+        return seed
+
 if __name__=='__main__':
     figure(figsize=(12,12))
-    args = parse_arguments()
-    rng  = default_rng(args.seed)
+    args           = parse_arguments()
+    rng            = default_rng(get_seed(args.seed))
     ErrorThreshold = log(args.fitness[0]/args.fitness[1])/args.L
     for i,scale in enumerate(args.scale):
         u = scale*ErrorThreshold
@@ -152,11 +162,19 @@ if __name__=='__main__':
         subplot(len(args.scale),1,i+1)                                     # Plot each run in a separate region of the figure
         for j in range(args.n):
             print (f'Iteration {j}')
-            Population     = zeros((args.M,args.L),dtype=int)
+            Population     = zeros((args.M,args.L),
+                                   dtype = int)
             for k in range(args.K):
-                NextGeneration = zeros((args.fitness[0]*args.M,args.L), dtype=int)
-                evolve(Population,NextGeneration,u=u,M=args.M, f0=args.fitness[0],f1=args.fitness[1],L=args.L)
-            plot(get_histogram(Population), label=f'{j}')
+                NextGeneration = zeros((args.fitness[0]*args.M,args.L),
+                                       dtype = int)
+                evolve(Population,NextGeneration,
+                       u  = u,
+                       M  = args.M,
+                       f0 = args.fitness[0],
+                       f1 = args.fitness[1],
+                       L  = args.L)
+            plot(get_histogram(Population),
+                 label = f'{j}')
         legend(title='Iteration')
         title(f'Population after {args.K} generations for u={u:.4f}, L={args.L}')
         xlabel('Genome')
