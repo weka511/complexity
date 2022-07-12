@@ -26,20 +26,39 @@ Simulate evolution as modelled by the quasi-species equation.
 # the master sequence with mutated copies; the evolution is performed for two mutation rates which
 # bracket the ErrorThreshold.
 
+from argparse          import ArgumentParser
 from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tight_layout, title, xlabel, ylabel
-from numpy             import  log,  zeros, sort
+from numpy             import log,  zeros, sort
 from numpy.random      import default_rng
 from os.path           import basename, splitext
 
-L              = 1024        # Number of bits in genome
-M              = 1000      # Number of instances in Population
-K              = 500       # Number of generations
-n              = 10        # Number of iterations
-f0             = 2         # Fitness of master sequence
-f1             = 1         # Fitness of all other sequences
-epsilon        = 0.25      # Used to simulate evolution mutation rate just above and below master sequence.
+# L              = 1024        # Number of bits in genome
+# M              = 1000      # Number of instances in Population
+# K              = 2000       # Number of generations
+# n              = 10        # Number of iterations
+# f0             = 2         # Fitness of master sequence
+# f1             = 1         # Fitness of all other sequences
+# epsilon        = 0.5      #  Used to simulate evolution mutation rate just above and below critical value.
 
-def replicate(Population, NextGeneration):
+def parse_arguments():
+    parser = ArgumentParser(description = __doc__)
+    parser.add_argument('--L', type=int, default=1024, help='Number of bits in genome')
+    parser.add_argument('--M', type=int, default=1000, help='Number of instances in Population')
+    parser.add_argument('--K', type=int, default=2000, help='Number of generations')
+    parser.add_argument('--n', type=int, default=10, help='Number of iterations')
+    parser.add_argument('--seed', type=int, help='For rnamdom number generator')
+    parser.add_argument('--fitness', type=float, nargs=2, default=[2,1], help='Fitness of master sequence, all other sequences')
+    parser.add_argument('--scale', type=float, nargs='+', default=[0.9,1.1], help='Usedcompare mutation rates')
+
+    parser.add_argument('--show',
+                        action = 'store_true',
+                        help   = 'Show plot')
+    parser.add_argument('--plot',
+                        default = None,
+                        help    = 'Name of plot file')
+    return parser.parse_args()
+
+def replicate(Population, NextGeneration,M,f0,f1):
     '''
     Create a new population from the old one. Each instance of the genome is copied one or more times,
     depending on its fitness.
@@ -60,7 +79,8 @@ def replicate(Population, NextGeneration):
     return j
 
 def mutate(NextGeneration,m,
-            u = 0.1):
+            u = 0.1,
+            L = 1):
     '''
     Mutate elements in population
     Parameters:
@@ -71,9 +91,9 @@ def mutate(NextGeneration,m,
     for i in range(m):
         if rng.random() < u*L:
             bit_to_flip = rng.integers(0,L)
-            NextGeneration[i,bit_to_flip] = not NextGeneration[i,bit_to_flip]
+            NextGeneration[i,bit_to_flip] = 1 - NextGeneration[i,bit_to_flip]
 
-def select(NextGeneration,m,Population):
+def select(NextGeneration,m,Population,M=1):
     '''
     Used to decide which raplicated and mutated elements will for the population for next period.
     '''
@@ -83,22 +103,23 @@ def select(NextGeneration,m,Population):
     for i,j in enumerate(Selection):
         Population[i,:] = NextGeneration[j,:]
 
-def evolve(Population,NextGeneration,u=0.1):
+def evolve(Population,NextGeneration,u=0.1,M=1,f0=1,f1=1,L=1):
     '''
     Perform one cycle of evolution: replicate elements in accordance with fitness,
     mutate them, and select data for next cycle.
 
     '''
-    m = replicate(Population, NextGeneration)
-    mutate(NextGeneration, m, u=u)
-    select(NextGeneration, m, Population)
+    m = replicate(Population, NextGeneration,M=M, f0=f0,f1=f1)
+    mutate(NextGeneration, m, u=u,L=L)
+    select(NextGeneration, m, Population,M=M)
 
 def get_histogram(Population, density=True):
     '''
     Generate a histogram: counts for each instance that is eactually present
     '''
+    M,L    = Population.shape
     Sorted = sort(Population,axis=0)
-    cursor = zeros(L,dtype=bool)
+    cursor = zeros(L,dtype=int)
     bins   = [0]
     for i in range(M):
         if (cursor==Sorted[i,:]).all():
@@ -122,20 +143,22 @@ def get_plot_file_name(plot=None):
 
 if __name__=='__main__':
     figure(figsize=(12,12))
-    rng            = default_rng(1)
-    ErrorThreshold = log(f0/f1)/L
-    for i,u in enumerate([ErrorThreshold*(1-epsilon),ErrorThreshold*(1+epsilon)]):
+    args = parse_arguments()
+    rng  = default_rng(args.seed)
+    ErrorThreshold = log(args.fitness[0]/args.fitness[1])/args.L
+    for i,scale in enumerate(args.scale):
+        u = scale*ErrorThreshold
         print (f'Mutation rate={u}')
-        subplot(2,1,i+1)                                     # Plot each run in a separate region of the figure
-        for j in range(n):
+        subplot(len(args.scale),1,i+1)                                     # Plot each run in a separate region of the figure
+        for j in range(args.n):
             print (f'Iteration {j}')
-            Population     = zeros((M,L),dtype=bool)
-            for k in range(K):
-                NextGeneration = zeros((f0*M,L), dtype=bool)
-                evolve(Population,NextGeneration,u=u)
+            Population     = zeros((args.M,args.L),dtype=int)
+            for k in range(args.K):
+                NextGeneration = zeros((args.fitness[0]*args.M,args.L), dtype=int)
+                evolve(Population,NextGeneration,u=u,M=args.M, f0=args.fitness[0],f1=args.fitness[1],L=args.L)
             plot(get_histogram(Population), label=f'{j}')
         legend(title='Iteration')
-        title(f'Population after {K} generations for u={u:.4f}')
+        title(f'Population after {args.K} generations for u={u:.4f}, L={args.L}')
         xlabel('Genome')
         ylabel('Population')
 
