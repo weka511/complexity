@@ -28,19 +28,18 @@ Simulate evolution as modelled by the quasi-species equation.
 
 from argparse          import ArgumentParser
 from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tight_layout, title, xlabel, ylabel
+from matplotlib        import __version__ as plt_version
 from numpy             import iinfo, int64, log,  zeros, sort
+from numpy             import __version__ as np_version
 from numpy.random      import default_rng
 from os.path           import basename, splitext
-
-# L              = 1024        # Number of bits in genome
-# M              = 1000      # Number of instances in Population
-# K              = 2000       # Number of generations
-# n              = 10        # Number of iterations
-# f0             = 2         # Fitness of master sequence
-# f1             = 1         # Fitness of all other sequences
-# epsilon        = 0.5      #  Used to simulate evolution mutation rate just above and below critical value.
+from platform          import platform
+from sys               import version
 
 def parse_arguments():
+    '''
+    Read command line arguments so they can be accessed by the program
+    '''
     parser = ArgumentParser(description = __doc__)
     parser.add_argument('--L', type=int, default=1024, help='Number of bits in genome')
     parser.add_argument('--M', type=int, default=1000, help='Number of instances in Population')
@@ -56,7 +55,19 @@ def parse_arguments():
     parser.add_argument('--plot',
                         default = None,
                         help    = 'Name of plot file')
-    return parser.parse_args()
+
+    parser.add_argument('--version',
+                        default = False,
+                        action = 'store_true',
+                        help   = 'Display version numbers and exit')
+    args = parser.parse_args()
+    if args.version:
+        print (f'Python {version}')
+        print (f'{platform()}')
+        print (f'Numerical python version {np_version}')
+        print (f'Matplotlib version {plt_version}')
+        exit()
+    return args
 
 def replicate(Population, NextGeneration,M,f0,f1):
     '''
