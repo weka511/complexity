@@ -27,10 +27,10 @@ Simulate evolution as modelled by the quasi-species equation.
 # bracket the ErrorThreshold.
 
 from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tight_layout, title, xlabel, ylabel
-from numpy             import  bool_, log,  zeros, sort
+from numpy             import  log,  zeros, sort
 from numpy.random      import default_rng
 
-L              = 12       # Number of bits in genome
+L              = 64        # Number of bits in genome
 M              = 1000      # Number of instances in Population
 K              = 500       # Number of generations
 n              = 10        # Number of iterations
@@ -39,42 +39,71 @@ f1             = 1         # Fitness of all other sequences
 epsilon        = 0.25      # Used to simulate evolution mutation rate just above and below master sequence.
 
 def replicate(Population, NextGeneration):
-    m,_ = NextGeneration.shape
+    '''
+    Create a new population from the old one. Each instance of the genome is copied one or more times,
+    depending on its fitness.
+
+    Parameters:
+           Population
+           NextGeneration
+
+    Returns:
+         Number of elements in next generation
+    '''
     j = 0
     for i in range(M):
-        for _ in range(f0 if i==0 else f1):
+        fitness = f1 if any(Population[i,:]) else f0
+        for _ in range(fitness):
             NextGeneration[j,:] = Population[i,:]
             j += 1
-    assert(j==m)
+    return j
 
-def mutate(NextGeneration,u=0.1):
-    m,_ = NextGeneration.shape
+def mutate(NextGeneration,m,
+            u = 0.1):
+    '''
+    Mutate elements in population
+    Parameters:
+        NextGeneration
+        m
+        u
+    '''
     for i in range(m):
         if rng.random() < u*L:
             bit_to_flip = rng.integers(0,L)
             NextGeneration[i,bit_to_flip] = not NextGeneration[i,bit_to_flip]
 
-def select(NextGeneration,Population):
-    m,_     = NextGeneration.shape
-    Selection = rng.choice(m,M,replace=False)
+def select(NextGeneration,m,Population):
+    '''
+    Used to decide which raplicated and mutated elements will for the population for next period.
+    '''
+    Selection = rng.choice(m,M,
+                           replace = False)
     assert Selection.size == M
     for i,j in enumerate(Selection):
         Population[i,:] = NextGeneration[j,:]
 
 def evolve(Population,NextGeneration,u=0.1):
-    replicate(Population, NextGeneration)
-    mutate(NextGeneration, u=u)
-    select(NextGeneration, Population)
+    '''
+    Perform one cycle of evolution: replicate elements in accordance with fitness,
+    mutate them, and select data for next cycle.
+
+    '''
+    m = replicate(Population, NextGeneration)
+    mutate(NextGeneration, m, u=u)
+    select(NextGeneration, m, Population)
 
 def get_histogram(Population):
-    S      = sort(Population,axis=0)
-    cursor = zeros(L,dtype=bool_)
+    '''
+    Generate a histogram: counts for each instance that is eactually present
+    '''
+    Sorted = sort(Population,axis=0)
+    cursor = zeros(L,dtype=bool)
     bins   = [0]
     for i in range(M):
-        if (cursor==S[i,:]).all():
+        if (cursor==Sorted[i,:]).all():
             bins[-1]+=1
         else:
-            cursor=S[i,:]
+            cursor = Sorted[i,:]
             bins.append(1)
     assert sum(bins)==M
     return bins
@@ -82,12 +111,23 @@ def get_histogram(Population):
 if __name__=='__main__':
     figure(figsize=(12,12))
     rng            = default_rng(1)
-    Population     = zeros((M,L),dtype=bool_)
-    NextGeneration = zeros((f0+f1*(M-1),L), dtype=bool_)
+    Population     = zeros((M,L),dtype=bool)
+    NextGeneration = zeros((f0*M,L), dtype=bool)
     ErrorThreshold = log(f0/f1)/L
-    for k in range(K):
-        evolve(Population,NextGeneration,u=1.1*ErrorThreshold)
-    bins = get_histogram(Population)
-    plot(bins)
+    for i,u in enumerate([ErrorThreshold*(1-epsilon),ErrorThreshold*(1+epsilon)]):
+        print (f'Mutation rate={u}')
+        subplot(2,1,i+1)                                     # Plot each run in a separate region of the figure
+        for j in range(n):
+            print (f'Iteration {j}')
+            for k in range(K):
+                evolve(Population,NextGeneration,u=u)
+            bins = get_histogram(Population)
+            Z    = sum(bins)
+            plot([count/Z for count in bins], label=f'{j}')
+        legend(title='Iteration')
+        title(f'Population after {K} generations for u={u:.4f}')
+        xlabel('Genome')
+        ylabel('Population')
 
+    tight_layout()
     show()
