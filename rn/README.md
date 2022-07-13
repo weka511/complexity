@@ -13,20 +13,20 @@
 
 ## Files
 
-|Lecture|File|Description|
-|------------------------------|------------------------------|-----------------------------|
-||renormalization.tex|Notes from course|
-||renormalization.wpr|Project file for Wing IDE|
-|An Introduction to Coarse-Graining||
-||freqs.py|Frequencies of letters in Pride and Prejudice|
-||entropy.py|Questions 1 & 2: entropy of Pride & Prejudice|
-|Markov Chains|||
-|Cellular Automata|||
-||ca.py|Q1 renormalization of 105 to 150.|
-|Ising Model|||
-||cp.py|Critical temperature of Ising model|
-|Krohn-Rhodes Theorem|||
-|Renormalizing the Thermal Plasma|||
-|Rate-Distortion Theory|||
+Lecture|File|Description
+------------------------------|------------------------------|-----------------------------
+-|renormalization.tex|Notes from course
+-|renormalization.wpr|Project file for Wing IDE
+An Introduction to Coarse-Graining|
+-|freqs.py|Frequencies of letters in Pride and Prejudice
+-|entropy.py|Questions 1 & 2: entropy of Pride & Prejudice
+Markov Chains||
+Cellular Automata||
+-|ca.py|Q1 renormalization of 105 to 150.
+Ising Model||
+-|cp.py|Critical temperature of Ising model - see [Renormalization: Finding Fixed Points](https://www.complexityexplorer.org/courses/67-introduction-to-renormalization/segments/5424)
+Krohn-Rhodes Theorem||
+Renormalizing the Thermal Plasma||
+Rate-Distortion Theory||
 
 ---
