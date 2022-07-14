@@ -1,17 +1,7 @@
-# Exercises from renormalization tutorial
+# Exercises from [Renormalization Tutorial](https://www.complexityexplorer.org/courses/67-introduction-to-renormalization)
 
 ![alt text](https://www.complexityexplorer.org/system//courses/tutorials/logos/000/000/067/normal/PastedGraphic-2.jpg?1554505471 "")
 
-
-## References
-
-* [Tutorial](https://www.complexityexplorer.org/courses/67-introduction-to-renormalization)
-* [Problems](http://tuvalu.santafe.edu/~simon/MOOC_problems.pdf)
-* [Emergent Phenomena Practical](http://tuvalu.santafe.edu/~simon/practical.pdf)
-
----
-
-## Files
 
 #|File|Description
 ------------------------------|------------------------------|-----------------------------
