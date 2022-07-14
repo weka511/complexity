@@ -1,5 +1,27 @@
+% MIT License
+
+% Copyright (c) 2019-2022 Simon Crase
+
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,siunitx,thmtools,cancel}
+\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,thmtools,cancel}
 \graphicspath{{figs/}}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newtheorem{defn}{Definition}
@@ -18,6 +40,9 @@
 
 \begin{abstract}
 My notes from SFI Renormalization Tutorial\cite{dedeo2017renormalization}.
+  The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own. These notes are distributed in the hope that they will be useful,  but without any warranty, and without even the implied warranty of merchantability or fitness for a particular purpose. All feedback is welcome,  but I don't necessarily undertake to do anything with it.\\
+The source for this document can be found at\\
+\url{https://github.com/weka511/complexity/tree/master/rn}.
 \end{abstract}
 
 \tableofcontents
@@ -42,10 +67,9 @@ concepts, became incredibly useful for trying to understand a very different kin
 Renormalization is a general set of tools for how theory simplifies; it is a set of tools to tell you how to throw out information about the world; how to throw out things you may not know, you may not be able to know, and how to throw out 
 things in fact you may not even care about; to throw out the stuff that you think is irrelevant.
 
-Renormalization is the story about what happens when you do that; what happens not just to the observations you make about the world, but also to the theories that you use to explain those observations. So, an example, certainly not from the physical sciences, would be the problem of macroeconomics. Every few months or every six months or every year, every ten years, macroeconomists take a snapshot
-of the state of the economy. They try to figure out who's employed, who's unemployed, where are the pockets where people are developing new businesses, where are the pockets that are contracting, where people are losing their jobs, where people are living.
+Renormalization is the story about what happens when you do that; what happens not just to the observations you make about the world, but also to the theories that you use to explain those observations. So, an example, certainly not from the physical sciences, would be the problem of macroeconomics. Every few months or every six months or every year, every ten years, macroeconomists take a snapshot of the state of the economy. They try to figure out who's employed, who's unemployed, where are the pockets where people are developing new businesses, where are the pockets that are contracting, where people are losing their jobs, where people are living.
 
-So, the macoreconomists take  a snapshot of the economy at different points in time; if you study macoreconomics, your basic job is to look at a snapshot here
+So, the macroeconomists take  a snapshot of the economy at different points in time; if you study macroeconomics, your basic job is to look at a snapshot here
 and to look at the unemployment numbers. Depending upon the kind of 
 macroeconomist you are, you have a small set of variables here, and if you have good macroeconomics, theory is going to tell you what happens next year; if your theory is really good, it might even tell you what happens the year after that.
 
@@ -58,15 +82,10 @@ is a series of second by second accounts of everything
 that happens within, let's say, the United States 
 or indeed everything that happens
 within the global economy, 
-within the aspects of human behavior 
+within the aspects of human behaviour 
 we think of as economic.
 
-And so, what macroeconomics 
-does is, in fact, an attempt is to summarize everything
-that's going on in the economy 
-at one point in time and build a theory about what's going to happen next,
-operating only with these 
-variables here, ok?
+And so, what macroeconomics does is, in fact, an attempt is to summarize everything that's going on in the economy at one point in time and build a theory about what's going to happen next, operating only with these variables here.
 
 But the actual reality of the 
 situation is far more complicated,
@@ -2497,7 +2516,7 @@ This is just a summary of previous section.
 Figure \ref{fig:ising-decimation}\cite{aoki2014domain} shows a decimation of the entire lattice. It exhibits 3 types of coupling:
 
 \begin{enumerate}
-	\item the survivors form a new lattice, rotated \ang{45}, with coupling $2S_2=\frac{1}{4} \log{\cosh{4 \beta}}$\label{item:coupling1}
+	\item the survivors form a new lattice, rotated $45^\circ$, with coupling $2S_2=\frac{1}{4} \log{\cosh{4 \beta}}$\label{item:coupling1}
 	\item long range couplings, over a deleted $S_A$,  $S_2=\frac{1}{8} \log{\cosh{4 \beta}}$\label{item:coupling2}
 	\item quartet couplings $S4=\frac{1}{2} \log{\cosh{2\beta}}$\label{item:coupling3}
 \end{enumerate}
@@ -2552,7 +2571,7 @@ Since the derivative  $\frac{\partial}{\partial \beta}\big[\frac{3}{8} \log{\cos
 
 One objection is that this is only an approximation. However, in the exact solution (Onsager), critical point$\approx0.44069$; so we didn't do too bad--$\approx0.507$. Also $S_4\approxeq0.05$
 
-In (\ref{eq:coupled:sigmas}) we saw that the renormalization took us outside the Isong model, but we forced it back into that model class by approximation.
+In (\ref{eq:coupled:sigmas}) we saw that the renormalization took us outside the Ising model, but we forced it back into that model class by approximation.
 
 \subsection{Ising Model Simulations}
 
@@ -2609,7 +2628,7 @@ All sequences reversible; they form a \textit{group}.
 Krohn Rhodes Irreversible --semigroup
 
 See \cite{dedeo2011effective,malerkrohn,rhodes2009applications}
-\section{A Classical Analogy for Renormalization in Quantum Electrodynamics}
+\section{Renormalization in Quantum Electrodynamics}
 \subsection{From Quantum Electrodynamics to Plasma Physics }
 
 Gell-Man \& Lo: charge of electron modified by virtual pairs. 
@@ -2628,7 +2647,7 @@ Figure \ref{fig:plasma} shows a plasma, coarse grained so each apace is roughly 
 
 \begin{align*}
 n_S(x)=&n_0 e^{- \frac{E(x)}{kT}} \text{ in thermal equilibrium} \numberthis \label{eq:plasma_thermal}\\
-E(x) =& e_S\Phi\text{, where $Phi$ represents the electirical field}\\
+E(x) =& e_S\Phi\text{, where $Phi$ represents the electrical field}\\
 n_S(x)=&n_0 e^{- \frac{e_S\Phi}{kT}}\\
 n_i(x)=&n_0 e^{- \frac{e\Phi}{kT}}\text{ +ve ions}\\
 n_e(x)=&n_0 e^{ \frac{e\Phi}{kT}}\text{ electrons}
@@ -2682,7 +2701,7 @@ We can think of (\ref{eq:delta:rho}) as renormalizing the charge, which is akter
 	\item Gravitation non-renormalizable. Compare with Ising: higher order coupling get larger and larger.
 \end{itemize}
 
-\section{Conclusion: The Future of Renormalization \& Rate Distortion Theory}
+\section{The Future of Renormalization \& Rate Distortion Theory}
 
 When we project, we have some idea what we want.
 
