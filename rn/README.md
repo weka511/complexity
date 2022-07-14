@@ -14,7 +14,7 @@
 3||Cellular Automata
 -|ca.py|Q1 renormalization of 105 to 150.
 4||Ising Model
--|cp.py|Critical temperature of Ising model - see [Renormalization: Finding Fixed Points](https://www.complexityexplorer.org/courses/67-introduction-to-renormalization/segments/5424)
+-|cp.py|Critical temperature of Ising model: used to generate a figure in renormalization.tex - see [Renormalization: Finding Fixed Points](https://www.complexityexplorer.org/courses/67-introduction-to-renormalization/segments/5424)
 5||Krohn-Rhodes Theorem
 6||Renormalizing the Thermal Plasma
 7||Rate-Distortion Theory

@@ -13,7 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
-'''Critical temperature of Ising model - see video Renormalization: Finding Fixed Points from course'''
+'''
+Critical temperature of Ising mode: used to generate a figure in renormalization.tex
+- see video Renormalization: Finding Fixed Points from course
+'''
 
 from matplotlib.pyplot import plot, scatter, text, xlabel, legend, savefig, show, title
 from numpy             import log, cosh, linspace, tanh
