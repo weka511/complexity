@@ -13,7 +13,7 @@
 
 ## Files
 
-Lecture|File|Description
+#|File|Description
 ------------------------------|------------------------------|-----------------------------
 -|renormalization.tex|Notes from course
 -|renormalization.wpr|Project file for Wing IDE
