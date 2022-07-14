@@ -17,16 +17,16 @@ Lecture|File|Description
 ------------------------------|------------------------------|-----------------------------
 -|renormalization.tex|Notes from course
 -|renormalization.wpr|Project file for Wing IDE
-An Introduction to Coarse-Graining|
+1||An Introduction to Renormalization|
 -|freqs.py|Frequencies of letters in Pride and Prejudice
 -|entropy.py|Questions 1 & 2: entropy of Pride & Prejudice
-Markov Chains||
-Cellular Automata||
+2||Markov Chains
+3||Cellular Automata
 -|ca.py|Q1 renormalization of 105 to 150.
-Ising Model||
+4||Ising Model
 -|cp.py|Critical temperature of Ising model - see [Renormalization: Finding Fixed Points](https://www.complexityexplorer.org/courses/67-introduction-to-renormalization/segments/5424)
-Krohn-Rhodes Theorem||
-Renormalizing the Thermal Plasma||
-Rate-Distortion Theory||
+5||Krohn-Rhodes Theorem
+6||Renormalizing the Thermal Plasma
+7||Rate-Distortion Theory
 
 ---
