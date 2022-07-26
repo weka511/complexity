@@ -67,6 +67,7 @@ target/
 *.bbl
 *.blg
 *.synctex.gz
+*.pdf
 
 *.toc
 *.loe
