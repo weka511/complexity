@@ -969,7 +969,7 @@ The matrix $q_{j,i}$, which gives the probability of species $j$ mutating to $i$
 
 We want to understand the dynamics of populations evolving in accordance with (\ref{eq:quasispecies}). The simplest case is a fitness landscape with one sequence, the "master sequence" with fitness $f_0>1$, competing against all other sequences, which share fitness $f_1=1$--Figure \ref{fig:SteadyStateSolution}. 
 \begin{figure}[H]
-	\caption[Simplify to \emph{Master Sequence}]{Simplify to \emph{Master Sequence}, $f_0$ with all less fit sequences lumped as $f_1$.}\label{fig:SteadyStateSolution} 
+	\caption[\emph{Master Sequence}]{\emph{Master Sequence}, $f_0$ with all less fit sequences lumped as $f_1$.}\label{fig:SteadyStateSolution} 
 	\includegraphics[width=0.9\textwidth]{SteadyStateSolution}
 \end{figure}
 
@@ -995,15 +995,16 @@ Substituting the $q_j,i$ (\ref{eq:quasispecies}) becomes:
 
 Now we can look for a steady state solution to (\ref{eq:dx0}):
 \begin{align*}
-	x_0^* =& \frac{f_0 q - 1}{f_0 - 1} \text{, so the master sequnce will die out if}\\
+	x_0^* =& \frac{f_0 q - 1}{f_0 - 1} \text{, so the master sequence will die out if}\\
 	f_0 q =& 1 \text{. We need}\\
 	f_0q >& 1 \text{, if the master sequence is to persist. I.e.}\\
-	log(f_0) >& -L\; log(1-u)\text{. Now we assume $L<<1$, and find}\\
+	log(f_0) >& -L\; log(1-u)\text{. Now we assume $u<<1$, and find}\\
 	u <& \frac{log(f_0)}{L}\text{, which is known as the \gls{gls:error:threshold}} 
 \end{align*}
-The \gls{gls:error:threshold} is the \emph{maximum mutation rate that allows for adaptive evolution!} NB: it is more sensitive to $L$ than to $f_0$.
+The error threshold is the \emph{maximum mutation rate that allows for adaptive evolution}: it is more sensitive to $L$ than to $f_0$.
 
-This \gls{gls:error:threshold} or "error catastrophe", as it is sometimes called, really defines the adaptive and mutational thresholds for all of life; it is a commonly used concept and is generally obeyed by all the species we know to exist. In the next lecture we'll connect this to a more chemical form of evolution to see how it helps understand it also.
+This error threshold, or error catastrophe, as it is sometimes called, really defines the adaptive and mutational thresholds for all of life; it is a commonly used concept and is generally obeyed by all the species we know to exist. In the next lecture we'll connect this to a more chemical form of evolution to see how it helps understand that also.
+
 \subsection[Quasispecies and Error Catastrophe]{Quasispecies and Error Catastrophe--Michael Lachmann}
 
 We look at growth of types, e.g.:
