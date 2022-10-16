@@ -1,6 +1,6 @@
 % MIT License
 
-% Copyright (c) 2019-2010 Simon Crase
+% Copyright (c) 2019-2022 Simon Crase
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -121,7 +121,7 @@
 
 \newglossaryentry{gls:alphadiversity}{
 	name={alpha diversity},
-	description={the mean species diversity in sites or habitats at a local scale. The term was introduced by R. H. Whittaker together with the terms beta diversity  and gamma diversity. Whittaker's idea was that the total species diversity in a landscape (gamma diversity) is determined by two different things, the mean species diversity in sites or habitats at a more local scale (alpha diversity) and the differentiation among those habitats (beta diversity)\cite{wiki:Alphadiversity}  \gls{gls:simpsonsIndex} \&\gls{gls:shannonIndex} are common measures of alpha diversity.}}
+	description={The mean species diversity in sites or habitats at a local scale. The term was introduced by R. H. Whittaker together with the terms beta diversity  and gamma diversity. Whittaker's idea was that the total species diversity in a landscape (gamma diversity) is determined by two different things, the mean species diversity in sites or habitats at a more local scale (alpha diversity) and the differentiation among those habitats (beta diversity)\cite{wiki:Alphadiversity}  \gls{gls:simpsonsIndex} \&\gls{gls:shannonIndex} are common measures of alpha diversity.}}
 
 \newglossaryentry{gls:amphiphile}{
 	name={amphiphile},
@@ -133,15 +133,19 @@
 
 \newglossaryentry{gls:arrheniusequation}{
 	name={Arrhenius Equation},
-	description={a formula for the temperature dependence of reaction rates\cite{wiki:arrheniusequation}
+	description={A formula for the temperature dependence of reaction rates\cite{wiki:arrheniusequation}
+		$k=A e\frac{-E_a}{RF}$, where \begin{itemize}
+			\item k is the rate constant (frequency of collisions resulting in a reaction),
+			\item T is the absolute temperature,
+			\item A is known as the pre-exponential factor.
+			\item $E_a$ is the activation energy for the reaction (in the same units as RT),
+			\item R is the universal gas constant.
+		\end{itemize}
 }}
 
 \newglossaryentry{gls:autocatalytic:set}{
 	name={autocatalytic set},
-	description={An autocatalytic set is defined as
-		a set of reactions
-		and the molecules involved in them,
-		such that:
+	description={A set of reactions and the molecules involved in them, such that:
 		\begin{enumerate}
 			\item Each reaction in the set is catalyzed by at least one of the molecules
 			from the set itself and,
@@ -188,7 +192,7 @@
 
 \newglossaryentry{gls:candidatus}{
 	name={candidatus},
-	description={In prokaryote nomenclature, Candidatus is a component of the taxonomic name for a bacterium or other prokaryote, that cannot be maintained in a microbiological culture collection. It is an interim taxonomic status for yet-to-be-cultured microorganisms\cite{wiki:2018candidatus,murray1994taxonomic}}}
+	description={Candidatus is a component of the taxonomic name for a bacterium or other prokaryote, that cannot be maintained in a microbiological culture collection. It is an interim taxonomic status for yet-to-be-cultured microorganisms\cite{wiki:2018candidatus,murray1994taxonomic}}}
 
 \newglossaryentry{gls:catalyst}{
 	name={catalyst},
@@ -200,11 +204,11 @@
 
 \newglossaryentry{gls:chemoautotroph}{
 	name={chemoautotroph},
-	description={Chemoautotrophs are able to synthesize their own organic molecules from the fixation of carbon dioxide. These organisms are able to produce their own source of food, or energy. The energy required for this process comes from the oxidation of inorganic molecules such as iron, sulfur or magnesium. Chemoautotrophs are able to thrive in very harsh environments, such as deep sea vents, due to their lack of dependence on outside sources of carbon other than carbon dioxide. Chemoautotrophs include nitrogen fixing bacteria located in the soil, iron oxidizing bacteria located in the lava beds, and sulfur oxidizing bacteria located in deep sea thermal vents\cite{libre2020biology}}}
+	description={Chemoautotrophs are able to synthesize their own organic molecules from the fixation of carbon dioxide. These organisms are able to produce their own source of food, or energy\cite{libre2020biology}}}
 
 \newglossaryentry{gls:chemoheterotroph}{
 	name={chemoheterotroph},
-	description={Chemoheterotrophs, unlike \glspl{gls:chemoautotroph}, are unable to synthesize their own organic molecules. Instead, these organisms must ingest preformed carbon molecules, such as carbohydrates and lipids, synthesized by other organisms. They do, however, still obtain energy from the oxidation of inorganic molecules like the chemoautotrophs. Chemoheterotrophs are only able to thrive in environments that are capable of sustaining other forms of life due to their dependence on these organisms for carbon sources. Chemoheterotrophs are the most abundant type of chemotrophic organisms and include most bacteria, fungi and protozoa\cite{libre2020biology}}}
+	description={Chemoheterotrophs, unlike \glspl{gls:chemoautotroph}, are unable to synthesize their own organic molecules. Instead, these organisms must ingest preformed carbon molecules, such as carbohydrates and lipids, synthesized by other organisms. They do, however, still obtain energy from the oxidation of inorganic molecules like the chemoautotrophs.\cite{libre2020biology}}}
 
 \newglossaryentry{gls:chemotroph}{
 	name={chemotroph},
@@ -227,11 +231,11 @@
 	
 \newglossaryentry{gls:cytoplasm}{
 	name={cytoplasm},
-	description={In cell biology, the cytoplasm is all of the material within a cell, enclosed by the cell membrane, except for the cell nucleus. The material inside the nucleus and contained within the nuclear membrane is termed the nucleoplasm. The main components of the cytoplasm are cytosol--a gel-like substance, the organelles--the cell's internal sub-structures, and various cytoplasmic inclusions. The cytoplasm is about 80\% water and usually colorless\cite{wiki:cytoplasm}}}
+	description={The cytoplasm is all of the material within a cell, enclosed by the cell membrane, except for the cell nucleus. The material inside the nucleus and contained within the nuclear membrane is termed the nucleoplasm. The main components of the cytoplasm are cytosol--a gel-like substance, the organelles--the cell's internal sub-structures, and various cytoplasmic inclusions. The cytoplasm is about 80\% water and usually colorless\cite{wiki:cytoplasm}}}
 
 \newglossaryentry{gls:cytosol}{
 	name={cytosol},
-	description={the liquid found inside cells\cite{wiki:cytosol}}}
+	description={The liquid found inside cells\cite{wiki:cytosol}}}
 
 \newglossaryentry{gls:cofactor}{
 	name={cofactor},
@@ -251,7 +255,7 @@
 
 \newglossaryentry{gls:DNAmethyltransferase}	{
 	name={DNAmethyltransferase},
-	description={In biochemistry, the DNA methyltransferase (DNA MTase) family of enzymes catalyze the transfer of a methyl group to DNA. DNA methylation serves a wide variety of biological functions. All the known DNA methyltransferases use S-adenosyl methionine (SAM) as the methyl donor\cite{wiki:DNAmethyltransferase}}}
+	description={The DNA methyltransferase (DNA MTase) family of enzymes catalyze the transfer of a methyl group to DNA. DNA methylation serves a wide variety of biological functions. All the known DNA methyltransferases use S-adenosyl methionine (SAM) as the methyl donor\cite{wiki:DNAmethyltransferase}}}
 
 \newglossaryentry{gls:ediacaran}{
 	name={Ediacaran},
@@ -263,7 +267,7 @@
 
 \newglossaryentry{gls:enantiomer}{
 	name={enantiomer},
-	description={In chemistry, an enantiomer is one of two stereoisomers that are mirror images of each other that are non-superposable (not identical), much as one's left and right hands are mirror images of each other that cannot appear identical simply by reorientation. A single chiral atom or similar structural feature in a compound causes that compound to have two possible structures which are non-superposable, each a mirror image of the other. Each member of the pair is termed an enantiomorph (enantio = opposite; morph = form); the structural property is termed enantiomerism. The presence of multiple chiral features in a given compound increases the number of geometric forms possible, though there may still be some perfect-mirror-image pairs\cite{wiki:enantiomer} }}
+	description={An enantiomer is one of two stereoisomers that are mirror images of each other that are non-superposable (not identical), much as one's left and right hands are mirror images of each other that cannot appear identical simply by reorientation. A single chiral atom or similar structural feature in a compound causes that compound to have two possible structures which are non-superposable, each a mirror image of the other. Each member of the pair is termed an enantiomorph (enantio = opposite; morph = form); the structural property is termed enantiomerism. The presence of multiple chiral features in a given compound increases the number of geometric forms possible, though there may still be some perfect-mirror-image pairs\cite{wiki:enantiomer} }}
 
 \newglossaryentry{gls:enantiomeric-excess}{
 	name={enantiomeric excess},
@@ -271,7 +275,7 @@
 
 \newglossaryentry{gls:endocytosis}{
 	name={endocytosis},
-	description={a cellular process in which substances are brought into the cell. The material to be internalized is surrounded by an area of cell membrane, which then buds off inside the cell to form a vesicle containing the ingested material. Endocytosis includes pinocytosis (cell drinking) and \gls{gls:phagocytosis} (cell eating). It is a form of active transport\cite{wiki:endocytosis}}}
+	description={A cellular process in which substances are brought into the cell. The material to be internalized is surrounded by an area of cell membrane, which then buds off inside the cell to form a vesicle containing the ingested material. Endocytosis includes pinocytosis (cell drinking) and \gls{gls:phagocytosis} (cell eating). It is a form of active transport\cite{wiki:endocytosis}}}
 
 \newglossaryentry{gls:endomembrane}{
 	name={endomembrane},
@@ -317,7 +321,7 @@
 
 \newglossaryentry{gls:fitness}{
 	name={fitness},
-	description={the differential reproductive success conferred by the new mutation-\cite[Lecture 4.7.3]{sfi2020}. See also \cite[Chapter 10, An Agony in Five Fits]{dawkins1982extended}}}
+	description={The differential reproductive success conferred by the new mutation-\cite[Lecture 4.7.3]{sfi2020}. See also \cite[Chapter 10, An Agony in Five Fits]{dawkins1982extended}}}
 
 \newglossaryentry{gls:furan}{
 	name={furan},
@@ -340,7 +344,7 @@
 
 \newglossaryentry{gls:homeostasis}{
 	name={homeostasis},
-	description={the state of steady internal, physical, and chemical conditions maintained by living systems. This is the condition of optimal functioning for the organism and includes many variables, such as body temperature and fluid balance, being kept within certain pre-set limits (homeostatic range). Other variables include the pH of extracellular fluid, the concentrations of sodium, potassium and calcium ions, as well as that of the blood sugar level, and these need to be regulated despite changes in the environment, diet, or level of activity. Each of these variables is controlled by one or more regulators or homeostatic mechanisms, which together maintain life\cite{wiki:homeostasis}}}
+	description={The state of steady internal, physical, and chemical conditions maintained by living systems. This is the condition of optimal functioning for the organism and includes many variables, such as body temperature and fluid balance, being kept within certain pre-set limits (homeostatic range)\cite{wiki:homeostasis}}}
 
 \newglossaryentry{gls:homologous}{
 	name={homologous},
@@ -348,19 +352,19 @@
 
 \newglossaryentry{gls:hydrogenosome }{
 	name={hydrogenosome },
-	description={A hydrogenosome is a membrane-enclosed organelle of some anaerobic ciliates, trichomonads, fungi, and animals. The hydrogenosomes of trichomonads (the most studied of the hydrogenosome-containing microorganisms) produce molecular hydrogen, acetate, carbon dioxide and ATP by the combined actions of pyruvate:ferredoxin oxido-reductase, hydrogenase, acetate:succinate CoA transferase and succinate thiokinase. Superoxide dismutase, malate dehydrogenase (decarboxylating), ferredoxin, adenylate kinase and NADH:ferredoxin oxido-reductase are also localized in the hydrogenosome. It is nearly universally accepted that hydrogenosomes evolved from mitochondria\cite{wiki:hydrogenosome}}}
+	description={A hydrogenosome is a membrane-enclosed organelle of some anaerobic ciliates, trichomonads, fungi, and animals\cite{wiki:hydrogenosome}}}
 
 \newglossaryentry{gls:insolation}{
 	name={insolation},
-	description={the amount of downward solar radiation energy incident on a plane surface\cite{hartmann2015global}}}
+	description={The amount of downward solar radiation energy incident on a plane surface\cite{hartmann2015global}}}
 
 \newglossaryentry{gls:isolated:representatives}{
 	name={isolated representatives},
-	description={(of a phylum) one or more species have been cultured individually in the laboratory\cite{taylor2016branching}}}
+	description={(of a phylum) One or more species that have been cultured individually in the laboratory\cite{taylor2016branching}}}
 
 \newglossaryentry{gls:ketone}{
 	name={ketone},
-	description={In chemistry, a ketone is a functional group with the structure RC(=O)R', where R and R' can be a variety of carbon-containing substituents. Ketones contain a carbonyl group (a carbon-oxygen double bond)\cite{wiki:ketone} }}
+	description={A ketone is a functional group with the structure RC(=O)R', where R and R' can be a variety of carbon-containing substituents. Ketones contain a carbonyl group (a carbon-oxygen double bond)\cite{wiki:ketone} }}
 
 \newglossaryentry{gls:ketose}{
 	name={ketose},
@@ -369,7 +373,7 @@
 
 \newglossaryentry{gls:kinetic:isotope:effect}{
 	name={kinetic isotope effect},
-	description={In physical organic chemistry, a kinetic isotope effect (KIE) is the change in the reaction rate of a chemical reaction when one of the atoms in the reactants is replaced by one of its isotopes. Formally, it is the ratio of rate constants for the reactions involving the light $k_L$ and the heavy $k_H$ (isotopically substituted reactants (isotopologues) $\frac{k_L}{k_H}$\cite{wiki:kinetic:isotope:effect}}}
+	description={A kinetic isotope effect (KIE) is the change in the reaction rate of a chemical reaction when one of the atoms in the reactants is replaced by one of its isotopes. Formally, it is the ratio of rate constants for the reactions involving the light $k_L$ and the heavy $k_H$ (isotopically substituted reactants (isotopologues) $\frac{k_L}{k_H}$\cite{wiki:kinetic:isotope:effect}}}
 
 
 \newglossaryentry{gls:kinetics}{
@@ -393,13 +397,13 @@
 
 \newglossaryentry{gls:life}{
 	name={Life},
-	description={a self-propagating chemical system capable of undergoing adaptive evolution--adapted from \cite{deamer1994origins}}}
+	description={A self-propagating chemical system capable of undergoing adaptive evolution--adapted from \cite{deamer1994origins}}}
 
 \newglossaryentry{gls:likelihood}{
 	name={likelihood},
-	description={In statistics, the likelihood function (often simply called the likelihood) measures the goodness of fit of a statistical model to a sample of data for given values of the unknown parameters. It is formed from the joint probability distribution of the sample, but viewed and used as a function of the parameters only, thus treating the random variables as fixed at the observed values--\cite{wiki:likelihood}}}
+	description={The likelihood function (often simply called the likelihood) measures the goodness of fit of a statistical model to a sample of data for given values of the unknown parameters. It is formed from the joint probability distribution of the sample, but viewed and used as a function of the parameters only, thus treating the random variables as fixed at the observed values--\cite{wiki:likelihood}}}
 
-\newglossaryentry{gls:linkagedisequilibrium}{name={ linkage disequilibrium},description={the non-random association of alleles at different loci in a given population. Loci are said to be in linkage disequilibrium when the frequency of association of their different alleles is higher or lower than what would be expected if the loci were independent and associated randomly\cite{wiki:linkage:disequilibrium}}}
+\newglossaryentry{gls:linkagedisequilibrium}{name={ linkage disequilibrium},description={The non-random association of alleles at different loci in a given population. Loci are said to be in linkage disequilibrium when the frequency of association of their different alleles is higher or lower than what would be expected if the loci were independent and associated randomly\cite{wiki:linkage:disequilibrium}}}
 
 \newglossaryentry{gls:lipid}{
 	name={lipid},
@@ -411,19 +415,19 @@
 
 \newglossaryentry{gls:lokiarchaeota}{
 	name={Lokiarchaeota},
-	description={Lokiarchaeota is a proposed phylum of the Archaea. The phylum includes all members of the group previously named Deep Sea Archaeal Group (DSAG), also known as Marine Benthic Group B (MBG-B). A phylogenetic analysis disclosed a monophyletic grouping of the Lokiarchaeota with the eukaryotes. The analysis revealed several genes with cell membrane-related functions. The presence of such genes support the hypothesis of an archaeal host for the emergence of the eukaryotes; the eocyte-like scenarios --cite{wiki:lokiarchaeota} }}
+	description={Lokiarchaeota is a proposed phylum of the Archaea. The phylum includes all members of the group previously named Deep Sea Archaeal Group (DSAG), also known as Marine Benthic Group B (MBG-B)--\cite{wiki:lokiarchaeota} }}
 
 \newglossaryentry{gls:long:branch:attraction}{
 	name={long branch attraction},
-	description={In phylogenetics, long branch attraction is a form of systematic error whereby distantly related lineages are incorrectly inferred to be closely related. Long branch attraction arises when the amount of molecular or morphological change accumulated within a lineage is sufficient to cause that lineage to appear similar (thus closely related) to another long-branched lineage, solely because they have both undergone a large amount of change, rather than because they are related by descent. Such bias is more common when the overall divergence of some taxa results in long branches within a phylogeny. Long-branches are often attracted to the base of a phylogenetic tree, because the lineage included to represent an outgroup is often also long-branched\cite{wiki:long:branch:attraction}}}
+	description={Long branch attraction is a form of systematic error whereby distantly related lineages are incorrectly inferred to be closely related. Long branch attraction arises when the amount of molecular or morphological change accumulated within a lineage is sufficient to cause that lineage to appear similar (thus closely related) to another long-branched lineage, solely because they have both undergone a large amount of change, rather than because they are related by descent\cite{wiki:long:branch:attraction}}}
 
 \newglossaryentry{gls:methylation}{
 	name={methylation},
-	description={DNA methylation is a biological process by which methyl groups are added to the DNA molecule. Methylation can change the activity of a DNA segment without changing the sequence. When located in a gene promoter, DNA methylation typically acts to repress gene transcription. In mammals, DNA methylation is essential for normal development and is associated with a number of key processes including genomic imprinting, X-chromosome inactivation, repression of transposable elements, aging, and carcinogenesis\cite{wiki:methylation} }}
+	description={DNA methylation is a biological process by which methyl groups are added to the DNA molecule. Methylation can change the activity of a DNA segment without changing the sequence\cite{wiki:methylation} }}
 
 \newglossaryentry{gls:mitosome}{
 	name={mitosome},
-	description={An organelle found in "amitochondrial" unicellular organisms which do not have the capability of gaining energy from oxidative phosphorylation. Mitosomes are almost certainly derived from mitochondria, they have a double membrane and most proteins are delivered to them by a targeting sequence. Unlike mitochondria, mitosomes do not contain any DNA. The mitosome functions in iron-sulphur cluster assembly\cite{uniprot2009mitosome}}}
+	description={An organelle found in "amitochondrial" unicellular organisms which do not have the capability of gaining energy from oxidative phosphorylation. Mitosomes are almost certainly derived from mitochondria, they have a double membrane and most proteins are delivered to them by a targeting sequence. Unlike mitochondria, mitosomes do not contain any DNA\cite{uniprot2009mitosome}}}
 
 \newglossaryentry{gls:nucleolus}{
 	name={nucleolus},
@@ -441,11 +445,11 @@
 \newglossaryentry{gls:operationaltaxonomicunit}{
 	name={operational taxonomic unit},
 	description={An operational taxonomic unit (OTU) is an operational definition used to classify groups of closely related individuals. The term was originally introduced by Robert R. Sokal and Peter H. A. Sneath in the context of numerical taxonomy, where an "Operational Taxonomic Unit" is simply the group of organisms currently being studied. In this sense, an OTU is a pragmatic definition to group individuals by similarity, equivalent to but not necessarily in line with classical Linnaean taxonomy or modern evolutionary taxonomy\cite{wiki:OperationalTaxonomicUnit}\\
-	Nowadays, however, the term is also used in a different context and refers to clusters of (uncultivated or unknown) organisms, grouped by DNA sequence similarity of a specific taxonomic marker gene (originally coined as mOTU; molecular OTU). In other words, OTUs are pragmatic proxies for "species" (microbial or metazoan) at different taxonomic levels, in the absence of traditional systems of biological classification as are available for macroscopic organisms. For several years, OTUs have been the most commonly used units of diversity, especially when analysing small subunit 16S (for prokaryotes) or 18S rRNA (for eukaryotes ) marker gene sequence datasets. This appears to be the interpretation used in \cite{souza2018lost}.}}
+	Nowadays, however, the term is also used in a different context and refers to clusters of (uncultivated or unknown) organisms, grouped by DNA sequence similarity of a specific taxonomic marker gene (originally coined as mOTU; molecular OTU). In other words, OTUs are pragmatic proxies for "species" (microbial or metazoan) at different taxonomic levels, in the absence of traditional systems of biological classification as are available for macroscopic organisms. For several years, OTUs have been the most commonly used units of diversity, especially when analysing small subunit 16S (for prokaryotes) or 18S rRNA (for eukaryotes ) marker gene sequence datasets. This appears to be the interpretation used in \cite{souza2018lost}}}
 
 \newglossaryentry{gls:organelle}{
 	name={organelle},
-	description={a specialized subunit, usually within a cell, that has a specific function. Organelles are either separately enclosed within their own lipid bilayers (also called membrane-bound organelles) or are spatially distinct functional units without a surrounding lipid bilayer (non-membrane bound organelles). Although most organelles are functional units within cells, some functional units that extend outside of cells are often termed organelles, such as cilia, the flagellum and archaellum, and the trichocyst\cite{wiki:organelle}}}
+	description={A specialized subunit, usually within a cell, that has a specific function. Organelles are either separately enclosed within their own lipid bilayers (also called membrane-bound organelles) or are spatially distinct functional units without a surrounding lipid bilayer (non-membrane bound organelles). Although most organelles are functional units within cells, some functional units that extend outside of cells are often termed organelles, such as cilia, the flagellum and archaellum, and the trichocyst\cite{wiki:organelle}}}
 
 \newglossaryentry{gls:orthology}{
 	name={orthology},
@@ -453,7 +457,7 @@
 
 \newglossaryentry{gls:outgroup}{
 	name={outgroup},
-	description={In cladistics or phylogenetics, an outgroup is a more distantly related group of organisms that serves as a reference group when determining the evolutionary relationships of the ingroup, the set of organisms under study, and is distinct from sociological outgroups. The outgroup is used as a point of comparison for the ingroup and specifically allows for the phylogeny to be rooted. Because the polarity (direction) of character change can be determined only on a rooted phylogeny, the choice of outgroup is essential for understanding the evolution of traits along a phylogeny\cite{wiki:outgroup}}}
+	description={An outgroup is a more distantly related group of organisms that serves as a reference group when determining the evolutionary relationships of the ingroup, the set of organisms under study, and is distinct from sociological outgroups. The outgroup is used as a point of comparison for the ingroup and specifically allows for the phylogeny to be rooted. Because the polarity (direction) of character change can be determined only on a rooted phylogeny, the choice of outgroup is essential for understanding the evolution of traits along a phylogeny\cite{wiki:outgroup}}}
 
 \newglossaryentry{gls:parology}{
 	name={parology},
@@ -462,7 +466,7 @@
 \newglossaryentry{gls:phagocytosis}{
 	name={phagocytosis},
 	description={
-		the process by which a cell uses its plasma membrane to engulf a large particle ($\ge 0.5 \mu m$ ), giving rise to an internal compartment called the phagosome. It is one type of \gls{gls:endocytosis}--\cite{wiki:phagocytosis}}}
+		The process by which a cell uses its plasma membrane to engulf a large particle ($\ge 0.5 \mu m$ ), giving rise to an internal compartment called the phagosome. It is one type of \gls{gls:endocytosis}--\cite{wiki:phagocytosis}}}
 	
 \newglossaryentry{gls:phospholipid}{
 	name={phospholipid},
@@ -474,7 +478,7 @@
 
 \newglossaryentry{gls:photoautotroph}{
 	name={photoautotroph},
-	description={An autotroph is an organism able to make its own food. Photoautotrophs are organisms that carry out photosynthesis. Using energy from sunlight, carbon dioxide and water are converted into organic materials to be used in cellular functions such as biosynthesis and respiration. In an ecological context, they provide nutrition for all other forms of life (besides other autotrophs such as chemotrophs ). In terrestrial environments plants are the predominant variety, while aquatic environments include a range of phototrophic organisms such as algae, protists, and bacteria. In photosynthetic bacteria and cyanobacteria that build up carbon dioxide and water into organic cell materials using energy from sunlight, starch is produced as final product. This process is an essential storage form of carbon, which can be used when light conditions are too poor to satisfy the immediate needs of the organism\cite{libre2020biology}}}
+	description={Photoautotrophs are organisms that carry out photosynthesis. Using energy from sunlight, carbon dioxide and water are converted into organic materials to be used in cellular functions such as biosynthesis and respiration\cite{libre2020biology}}}
 
 \newglossaryentry{gls:photoheterotroph}{
 	name={photoheterotroph},
@@ -486,11 +490,11 @@
 
 \newglossaryentry{gls:phylogenetics}{
 	name={phylogenetics},
-	description={In biology, phylogenetics  is the study of the evolutionary history and relationships among individuals or groups of organisms (e.g. species, or populations). These relationships are discovered through phylogenetic inference methods that evaluate observed heritable traits, such as DNA sequences or morphology under a model of evolution of these traits \cite{wiki:phylogenetics}}}
+	description={Phylogenetics  is the study of the evolutionary history and relationships among individuals or groups of organisms (e.g. species, or populations). These relationships are discovered through phylogenetic inference methods that evaluate observed heritable traits, such as DNA sequences or morphology under a model of evolution of these traits \cite{wiki:phylogenetics}}}
 
 \newglossaryentry{gls:physical:universality}{
 	name={physical universality},
-	description={the ability to implement any
+	description={The ability to implement any
 		transformation whatsoever on any finite region\cite[Lecture 5.7]{sfi2020}}}
 	
 \newglossaryentry{gls:poza}{
@@ -523,11 +527,11 @@
 
 \newglossaryentry{gls:PVC}{
 	name={PVC superphylum},
-	description={The PVC superphylum is a grouping of distinct phyla of the domain bacteria proposed initially on the basis of 16S rRNA gene sequence analysis. It consists of a core of phyla Planctomycetes, Verrucomicrobia and Chlamydiae, but several other phyla have been considered to be members, including phylum Lentisphaerae and several other phyla consisting only of yet-to-be cultured members. The genomics-based links between Planctomycetes, Verrucomicrobia and Chlamydiae have been recently strengthened, but there appear to be other features which may confirm the relationship at least of Planctomycetes, Verrucomicrobia and Lentisphaerae. Remarkably these include the unique planctomycetal compartmentalized cell plan differing from the cell organization typical for bacteria. Such a shared cell plan suggests that the common ancestor of the PVC superphylum members may also have been compartmentalized, suggesting this is an evolutionarily homologous feature at least within the superphylum. Both the PVC endomembranes and the eukaryote-homologous membrane-coating MC proteins linked to endocytosis ability in Gemmata obscuriglobus and shared by PVC members suggest such homology may extend beyond the bacteria to the Eukarya. If so, either our definition of bacteria may have to change or PVC members admitted to be exceptions.\cite{fuerst2013pvc}}}
+	description={The PVC superphylum is a grouping of distinct phyla of the domain bacteria proposed initially on the basis of 16S rRNA gene sequence analysis. It consists of a core of phyla Planctomycetes, Verrucomicrobia and Chlamydiae, but several other phyla have been considered to be members, including phylum Lentisphaerae and several other phyla consisting only of yet-to-be cultured members\cite{fuerst2013pvc}}}
 
 \newglossaryentry{gls:pyran}{
 	name={pyran},
-	description={In chemistry, pyran, or oxine, is a six-membered heterocyclic, non-aromatic ring, consisting of five carbon atoms and one oxygen atom and containing two double bonds. The molecular formula is C5H6O. There are two isomers of pyran that differ by the location of the double bonds. In 2H-pyran, the saturated carbon is at position 2, whereas, in 4H-pyran, the saturated carbon is at position 4\cite{wiki:pyran} }
+	description={Pyran, or oxine, is a six-membered heterocyclic, non-aromatic ring, consisting of five carbon atoms and one oxygen atom and containing two double bonds. The molecular formula is C5H6O. There are two isomers of pyran that differ by the location of the double bonds. In 2H-pyran, the saturated carbon is at position 2, whereas, in 4H-pyran, the saturated carbon is at position 4\cite{wiki:pyran} }
 }
 
 \newglossaryentry{gls:pyrimidine}{
@@ -536,12 +540,12 @@
 
 \newglossaryentry{gls:r-K-selection}{
 	name={r/K selection},
-	description={In ecology, r/K selection theory relates to the selection of combinations of traits in an organism that trade off between quantity and quality of offspring. The focus on either an increased quantity of offspring at the expense of individual parental investment of r-strategists, or on a reduced quantity of offspring with a corresponding increased parental investment of K-strategists, varies widely, seemingly to promote success in particular environments\cite{wiki:k-r-selection}}}
+	description={r/K selection theory relates to the selection of combinations of traits in an organism that trade off between quantity and quality of offspring. The focus on either an increased quantity of offspring at the expense of individual parental investment of r-strategists, or on a reduced quantity of offspring with a corresponding increased parental investment of K-strategists, varies widely, seemingly to promote success in particular environments\cite{wiki:k-r-selection}}}
 
 
 \newglossaryentry{gls:reaction-network}{
 	name={reaction network},
-	description={multiple chemical reactions that interact\cite[Lecture 4.6.2]{sfi2020}}}
+	description={Multiple chemical reactions that interact\cite[Lecture 4.6.2]{sfi2020}}}
 
 \newglossaryentry{gls:redqueen}{
 	name={Red Queen},
@@ -561,7 +565,7 @@
 
 \newglossaryentry{gls:selectivesweep}{
 	name={selective sweep},description={
-		the process through which a new beneficial mutation that increases its frequency and becomes fixed (i.e., reaches a frequency of 1) in the population leads to the reduction or elimination of genetic variation among nucleotide sequences that are near the mutation. In selective sweep, positive selection causes the new mutation to reach fixation so quickly that linked alleles can "hitchhike" and also become fixed\cite{wiki:selectivesweep}}}
+		The process through which a new beneficial mutation that increases its frequency and becomes fixed (i.e., reaches a frequency of 1) in the population leads to the reduction or elimination of genetic variation among nucleotide sequences that are near the mutation. In selective sweep, positive selection causes the new mutation to reach fixation so quickly that linked alleles can "hitchhike" and also become fixed\cite{wiki:selectivesweep}}}
 
 \newglossaryentry{gls:serpentinization}{
 	name={serpentinization},
@@ -602,7 +606,7 @@
 
 \newglossaryentry{gls:sympatric-speciation}{
 	name={sympatric speciation},
-	description={the evolution of a new species from a surviving ancestral species while both continue to inhabit the same geographic region\cite{wiki:Sympatric:speciation}}}
+	description={The evolution of a new species from a surviving ancestral species while both continue to inhabit the same geographic region\cite{wiki:Sympatric:speciation}}}
 
 \newglossaryentry{gls:stromatolite}{
 	name={stromatolite},
@@ -626,7 +630,7 @@
 
 \newglossaryentry{gls:translation}{
 	name={translation},
-	description={In molecular biology and genetics, translation is the process in which ribosomes in the cytoplasm or ER synthesize proteins after the process of \gls{gls:transcription} of DNA to RNA in the cell's nucleus--\cite{wiki:translation} }}
+	description={The process in which ribosomes in the cytoplasm or ER synthesize proteins after the process of \gls{gls:transcription} of DNA to RNA in the cell's nucleus--\cite{wiki:translation} }}
 
 \newglossaryentry{gls:vesicle}{
 	name={vesicle},
@@ -635,4 +639,4 @@
 
 \newglossaryentry{gls:zwitterion}{
 	name={zwitterion},
-	description={In chemistry, a zwitterion is a molecule with two or more functional groups, of which at least one has a positive and one has a negative electrical charge and the net charge of the entire molecule is zero\cite{wiki:zwitterion}}}
+	description={A molecule with two or more functional groups, of which at least one has a positive and one has a negative electrical charge and the net charge of the entire molecule is zero\cite{wiki:zwitterion}}}
