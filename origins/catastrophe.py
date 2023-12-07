@@ -20,10 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# This program plots the rates at which a genome changes as the results
-# of mutation, and illustrates the error catastrophe.
+'''
+This program plots the rates at which a genome changes as the results
+of mutation, and illustrates the error catastrophe.
+'''
 
-from numpy import isclose
+from argparse import ArgumentParser
+from matplotlib.pyplot import figure, show
+import numpy as np
 
 # step
 #
@@ -75,24 +79,20 @@ def step(A,s=0.01,nu=0.01):
 def evolve(A,s=0.01,nu=0.01, rtol=1e-05, atol=1e-08,N=100):
     for i in range(N):
         A1 = step(A,s=s,nu=nu)
-        if all(isclose(A,A1,rtol=rtol,atol=atol)):
+        if all(np.isclose(A,A1,rtol=rtol,atol=atol)):
             return A1
         A = [a for a in A1]
     raise Exception('Did not converge within {0} steps, rtol={1},atol={2}'.format(N,rtol,atol))
 
 
 if __name__=='__main__':
-    import matplotlib.pyplot as plt
-    from argparse import ArgumentParser
-
     # Parse command line arguments
-
     parser = ArgumentParser('Plot error catastrophe')
     parser.add_argument('-L','--Length',default=10,type=int,help='Length of genome in bits')
     parser.add_argument('-n','--nu',default=0.01,type=float,help='Mutation rate per bit')
     parser.add_argument('-s','--advantage',default=[0.8,0.6,0.4, 0.3,0.2,0.1,0.09,0.07,0.0],
                         nargs='+',type=float,help='Advantage for optimal genome')
-    parser.add_argument('--N',default=1000,type=int,help='Maximum number of cycles for convergence')
+    parser.add_argument('--N',default=10000,type=int,help='Maximum number of cycles for convergence')
     parser.add_argument('--rtol',default=1e-5,type=float,help='Relative tolerance for convergence')
     parser.add_argument('--atol',default=1e-8,type=float,help='Absolute tolerance for convergence')
     args    = parser.parse_args()
@@ -107,36 +107,38 @@ if __name__=='__main__':
     Populations = [[] for i in range(args.Length+1)]
 
     # Plot distribution for each value of s
-    plt.figure(figsize=(20,20))
+    fig = figure(figsize=(20,20))
+    ax=fig.add_subplot(1,1,1)
 
     for s in Ss:
         A = evolve([1] + args.Length * [0],s=s,nu=args.nu,N=args.N,rtol=args.rtol,atol=args.atol)
         for i in range(len(Populations)):
             Populations[i].append(A[i])
         x = [i + index/len(Ss) for i in range(len(A))]
-        plt.bar(x,A,width=1/len(Ss),color=colours[index%len(colours)],ecolor='face',
+        ax.bar(x,A,width=1/len(Ss),color=colours[index%len(colours)],ecolor='face',
                 hatch=patterns[index//len(colours)],label='{0:.2f}'.format(s))
         index += 1
 
-    plt.title('L={0}, nu={1:.2}'.format(args.Length,args.nu))
-    plt.xlim(0,len(A))
-    plt.xlabel('Hamming Distance from optimum')
-    plt.ylabel('Frequency')
-    plt.legend(title='s')
-    plt.savefig('figs/ErrorCatastrophe1')
+    ax.set_title('L={0}, nu={1:.2}'.format(args.Length,args.nu))
+    ax.set_xlim(0,len(A))
+    ax.set_xlabel('Hamming Distance from optimum')
+    ax.set_ylabel('Frequency')
+    ax.legend(title='s')
+    fig.savefig('figs/ErrorCatastrophe1')
 
     # Plot dependency on s for each Hamming Distance
 
-    plt.figure(figsize=(20,20))
+    fig = figure(figsize=(20,20))
+    ax = fig.add_subplot(1,1,1)
     for i in range(len(Populations)):
-        plt.plot(Ss,Populations[i],color=colours[i%len(colours)],
+        ax.plot(Ss,Populations[i],color=colours[i%len(colours)],
                 ls=line_styles[i//len(colours)],label='{0}'.format(i))
 
-    plt.legend(title='Hamming Distance',loc=6)
-    plt.xlim(min(Ss),max(Ss))
-    plt.xlabel('s')
-    plt.ylabel('Frequency')
-    plt.title('Error catastrophe')
-    plt.savefig('figs/ErrorCatastrophe2')
+    ax.legend(title='Hamming Distance',loc=6)
+    ax.set_xlim(min(Ss),max(Ss))
+    ax.set_xlabel('s')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Error catastrophe')
+    fig.savefig('figs/ErrorCatastrophe2')
 
-    plt.show()
+    show()
