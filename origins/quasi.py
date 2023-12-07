@@ -1,7 +1,6 @@
-'''
-Simulate evolution as modelled by the quasi-species equation.
-'''
-# Copyright (C) 2022 Greenweaves Software Limited
+#!/usr/bin/env python
+
+# Copyright (C) 2022-2023 Simon Crase
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,22 +20,22 @@ Simulate evolution as modelled by the quasi-species equation.
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# This program simulates evolution for a population of instances of a Genome that can be
-# represented as a bitstring. It repeatedly evolves the population to compare the density of
-# the master sequence with mutated copies; the evolution is performed for two mutation rates which
-# bracket the ErrorThreshold.
+'''
+Simulate evolution as modelled by the quasi-species equation.
 
-# I maintain a vector containing the number of instances each bit string.
-# Each generation we multiply population of master sequence,
-# [0, 0, 0, 0, ...], by f0, and the mutated sequnces by f1, then mutate.
-#
-# I assume that the mutation rate is low enough that only one bit is mutated at a time.
+ This program simulates evolution for a population of instances of a Genome that can be
+ represented as a bitstring. It repeatedly evolves the population to compare the density of
+ the master sequence with mutated copies; the evolution is performed for two mutation rates which
+ bracket the ErrorThreshold.
 
+  I maintain a vector containing the number of instances each bit string.
+  Each generation we multiply population of master sequence,
+  [0, 0, 0, 0, ...], by f0, and the mutated sequnces by f1, then mutate.
+  I assume that the mutation rate is low enough that only one bit is mutated at a time.
+ '''
 
-
-from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tight_layout, title, xlabel, ylabel
-from numpy             import cumsum, int64, log, searchsorted, zeros
-from numpy.random      import default_rng
+from matplotlib.pyplot import figure,  show
+import numpy as np
 
 L              = 12        # Number of bits in genome
 N              = 2**L      # Number of possible bit strings
@@ -90,10 +89,10 @@ def select_genomes(C1):
     '''
     Z      = sum(C1)            # Partition function
     P      = [c/Z for c in C1]  # C1 normalized to a probability
-    Cum    = cumsum(P)          # Cumulative probabilities (used for tower sampling)
-    Result = zeros(N, dtype = int64)
+    Cum    = np.cumsum(P)          # Cumulative probabilities (used for tower sampling)
+    Result = np.zeros(N, dtype = np.int64)
     for i in range(M):
-        selection = searchsorted(Cum,rng.random())  # Make random selection based on probabilities
+        selection = np.searchsorted(Cum,rng.random())  # Make random selection based on probabilities
         Result[selection]+= 1
     return Result
 
@@ -106,7 +105,7 @@ def replicate(C):
 
 def breed(Neighbours,u):
     '''Perform one cycle of evolution. Replicate, and possibly mutate, each instance in population'''
-    Counts     = zeros(N, dtype = int64)  # Number of individuals for each genome - initally just M copies of master sequence
+    Counts     = np.zeros(N, dtype = np.int64)  # Number of individuals for each genome - initally just M copies of master sequence
     Counts[0]  = M
 
     for k in range(K):                        # Iterate over each generation
@@ -114,7 +113,7 @@ def breed(Neighbours,u):
         # Note the number of instances for each possible genome may come from two places:
         # unmutated instances of the same genome, or mutated instances of some other. So
         # we start with zero, and then use '+=' to accumulate counts.
-        Counts_next = zeros(N)
+        Counts_next = np.zeros(N)
         for i in range(N):
             number_of_mutations = 0           # book-keeping: used to keep track number of mutated individuals
                                               # so we can subtract from unmutated individuals
@@ -131,24 +130,24 @@ def breed(Neighbours,u):
     return Counts
 
 if __name__=='__main__':
-    figure(figsize=(12,12))                                # Create a figure to plot into
-    rng            = default_rng()                         # Initalize random number generator
-    Neighbours     = [get_neighbours(n) for n in range(N)] # Build Neighbour table so we can look up mutations
-    ErrorThreshold = log(f0/f1)/L
+    fig = figure(figsize=(12,12))                                # Create a figure to plot into
+    rng = np.random.default_rng()                         # Initalize random number generator
+    Neighbours = [get_neighbours(n) for n in range(N)] # Build Neighbour table so we can look up mutations
+    ErrorThreshold = np.log(f0/f1)/L
     for k,u in enumerate([ErrorThreshold*(1-epsilon),ErrorThreshold*(1+epsilon)]):
         print (f'Mutation rate={u}')
-        subplot(2,1,k+1)                                     # Plot each run in a separate region of the figure
+        ax = fig.add_subplot(2,1,k+1)   # Plot each run in a separate region of the figure
         for i in range(n):
             print (f'Iteration {i}')
             Counts = breed(Neighbours,u)
-            Z      = Counts.sum()                             # Partition function
-            plot(range(N), Counts/Z, label=f'{i}')
+            Z = Counts.sum()                             # Partition function
+            ax.plot(range(N), Counts/Z, label=f'{i}')
 
-        legend(title='Iteration')
-        title(f'Population after {K} generations for u={u:.4f}')
-        xlabel('Genome')
-        ylabel('Population')
+        ax.legend(title='Iteration')
+        ax.set_title(f'Population after {K} generations for u={u:.4f}')
+        ax.set_xlabel('Genome')
+        ax.set_ylabel('Population')
 
-    tight_layout()
-    savefig('quasi')
+    fig.tight_layout()
+    fig.savefig('quasi')
     show()

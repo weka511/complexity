@@ -1,4 +1,6 @@
-# Copyright (C) 2019 Greenweaves Software Limited
+#!/usr/bin/env python
+
+# Copyright (C) 2019-2023 Simon Crase
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -31,13 +33,13 @@ def  plot_flux(M=21,N=25):
 
     X, Y       = np.meshgrid(cell_sizes, yCs)
     Z          = flux(X,Y)
-    
+
     plt.contourf(X, Y, Z)
     plt.xlabel('Cell size')
     plt.ylabel('yCs')
     plt.title('Energy Yield')
     plt.colorbar()
     plt.show()
-    
+
 if __name__=='__main__':
     plot_flux()

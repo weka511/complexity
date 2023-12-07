@@ -1,7 +1,6 @@
-'''
-Simulate evolution as modelled by the quasi-species equation.
-'''
-# Copyright (C) 2022 Greenweaves Software Limited
+#!/usr/bin/env python
+
+# Copyright (C) 2022-2023 Simon Crase
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,10 +20,17 @@ Simulate evolution as modelled by the quasi-species equation.
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# This program simulates evolution for a population of instances of a Genome that can be
-# represented as a bitstring. It repeatedly evolves the population to compare the density of
-# the master sequence with mutated copies; the evolution is performed for two mutation rates which
-# bracket the ErrorThreshold.
+
+
+'''
+Simulate evolution as modelled by the quasi-species equation.
+
+ This program simulates evolution for a population of instances of a Genome that can be
+ represented as a bitstring. It repeatedly evolves the population to compare the density of
+ the master sequence with mutated copies; the evolution is performed for two mutation rates which
+ bracket the ErrorThreshold.
+
+'''
 
 from argparse          import ArgumentParser
 from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tight_layout, title, xlabel, ylabel

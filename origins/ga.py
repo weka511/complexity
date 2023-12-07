@@ -1,4 +1,6 @@
-# Copyright (C) 2019-2020 Greenweaves Software Limited
+#!/usr/bin/env python
+
+# Copyright (C) 2019-2023 Simon Crase
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,15 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Evolve a solution using a Genetic Algorithm
+'''
+Evolve a solution using a Genetic Algorithm
 
-# References:
-# [1]  Melanie Mitchell. An introduction to genetic algorithms. MIT press, 1998.
-# [2]  Werner Krauth. Statistical mechanics: algorithms and computations. OUP Oxford, 2006.
+ References:
+ [1]  Melanie Mitchell. An introduction to genetic algorithms. MIT press, 1998.
+ [2]  Werner Krauth. Statistical mechanics: algorithms and computations. OUP Oxford, 2006.
+'''
 
-from numpy import mean, std, argsort, searchsorted
+from argparse import ArgumentParser
 from random import random, choice, sample, gauss
-from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, figure, savefig
+import numpy as np
+from matplotlib import rc
 
 # roulette
 #
@@ -38,15 +43,15 @@ from matplotlib.pyplot import plot, show, legend, xlabel, ylabel, ylim, title, f
 def roulette(population,fitness):
     # Select one element from population using Tower Sampling [2]
     def select(T=None,breaks=[],indices=[]):
-        return indices[searchsorted(breaks,T * random())]
-    
-    indices = argsort(fitness)              # Used to order fitnesses
+        return indices[np.searchsorted(breaks,T * random())]
+
+    indices = np.argsort(fitness)              # Used to order fitnesses
     fitness = [fitness[i] for i in indices] # Organize fitness in ascending order
-     
+
     T       = sum(fitness)                  # Normalizing value, so we can treat fitnesses as probabilities
-    
+
     breaks  = [sum(fitness[:i]) for i in range(1,len(fitness))] # Subtotals for use in tower sampling[2].
-    
+
     return [population[select(T=T,breaks=breaks,indices=indices)] for _ in population]   # Select new population
 
 # mutate_bit_string
@@ -58,14 +63,14 @@ def roulette(population,fitness):
 #      p        Probability a single bit will be mutated
 
 def mutate_bit_string(genome,p=0.001):
-    
+
     # flip
     #
     # flip one bit with probability p
-    
+
     def flip(bit):
         return bit if random()>p else 1 - bit
-    
+
     return [flip(bit) for bit in genome]
 
 # single_point_crossover
@@ -91,17 +96,17 @@ def single_point_crossover(population,p=0.7):
         pi      = pi_head + pj_tail
         pj      = pj_head + pi_tail
     return population
- 
+
 # evolve
 #
 # Use a genetic algorithm to improve fitness
 #
 #    Parameters:
-#      N           Number of generations          
+#      N           Number of generations
 #      M           Size of population
 #      create      Used to create one genome
 #      evaluate    Evaluate fitness
-#      select      Select elements for next generation 
+#      select      Select elements for next generation
 #      mutate      Used to mutate a genome
 #      crossover   Used to perform crossover
 #
@@ -119,18 +124,18 @@ def evolve(N         = 100,
            select    = roulette,
            mutate    = mutate_bit_string,
            crossover = single_point_crossover):
-    
+
     population = [create() for i in range(M)]
     statistics = []
-    
+
     for i in range(N):
         fitness    = [evaluate(individual) for individual in population]
-        statistics.append((max(fitness),mean(fitness),std(fitness)))
+        statistics.append((max(fitness),np.mean(fitness),np.std(fitness)))
         population = [mutate(individual) for individual in crossover(select(population,fitness))]
-        
+
     fitness = [evaluate(individual) for individual in population]
-    statistics.append((max(fitness),mean(fitness),std(fitness)))        
-    return (population,statistics,argsort(fitness))
+    statistics.append((max(fitness),np.mean(fitness),np.std(fitness)))
+    return (population,statistics,np.argsort(fitness))
 
 # plot_fitness
 #
@@ -139,19 +144,19 @@ def evolve(N         = 100,
 #   Parameters:
 #      statistics
 #      name
-def plot_fitness(statistics,name='Exercise 1'):
+def plot_fitness(statistics,name='Exercise 1',ax=None):
     maxima = [a for a,_,_ in statistics]
-    plot(maxima,'r', label='Maximum Fitness')
-    plot([b for _,b,_ in statistics],'g', label='Mean Fitness')
-    plot([c for _,_,c in statistics],'b',label=r'$\sigma$')
-    title(name)
-    ylabel('Fitness')
-    xlabel('Generation')
-    ylim((0,max(maxima)+1))    
-    legend(loc='center')
-   
+    ax.plot(maxima,'r', label='Maximum Fitness')
+    ax.plot([b for _,b,_ in statistics],'g', label='Mean Fitness')
+    ax.plot([c for _,_,c in statistics],'b',label=r'$\sigma$')
+    ax.set_title(name)
+    ax.set_ylabel('Fitness')
+    ax.set_xlabel('Generation')
+    ax.set_ylim((0,max(maxima)+1))
+    ax.legend(loc='center')
+
 # Mutate a continuous value
-# 
+#
 def perturb(x,
             probability = 0.5,  # Probability of mutation
             mean    = 1.0,
@@ -174,18 +179,14 @@ def perturb_n(n,
     return n
 
 if __name__=='__main__':    # Test, based on exercise 1 in [1]
-    
-    from argparse import ArgumentParser
-    from matplotlib import rc
     rc('text', usetex=True)
-    
     parser = ArgumentParser('Genetic Algorithm Demo')
     parser.add_argument('--pc', default=0.7,   type=float, nargs='+', help='Crossover rate')
     parser.add_argument('--pm', default=0.001, type=float, nargs='+', help='Mutation probability')
     parser.add_argument('-n',   default=20,    type=int,              help='Number of Trials')
     parser.add_argument('-N',   default=1000,  type=int,              help='Number of generations')
     args = parser.parse_args();
-    
+
     pcs = args.pc if type(args.pc)==list else [args.pc]
     pms = args.pm if type(args.pm)==list else [args.pm]
     for pc in pcs:
@@ -197,15 +198,15 @@ if __name__=='__main__':    # Test, based on exercise 1 in [1]
                     create    = lambda : [choice([0,1]) for _ in range(20)],
                     evaluate  = lambda individual:sum(individual),
                     mutate    = lambda individual: mutate_bit_string(individual,p=pm),
-                    crossover = lambda population: single_point_crossover(population,p=pc)        
+                    crossover = lambda population: single_point_crossover(population,p=pc)
                 )
                 maxima = [a for a,_,_ in statistics]
                 try:
                     firsts.append(maxima.index(20))
                 except ValueError:
                     firsts.append(args.N+1)
-                    
-            print('{0}, {1}, {2}, {3}'.format(pc,pm,int(mean(firsts)),int(std(firsts))))
+
+            print('{0}, {1}, {2}, {3}'.format(pc,pm,int(np.mean(firsts)),int(np.std(firsts))))
 
 #   Pc       Pm       Mean         Std
 #   0.7      0.001    224         110
