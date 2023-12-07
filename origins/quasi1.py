@@ -33,14 +33,9 @@ Simulate evolution as modelled by the quasi-species equation.
 '''
 
 from argparse          import ArgumentParser
-from matplotlib.pyplot import figure, legend, plot, savefig, show, subplot, tight_layout, title, xlabel, ylabel
-from matplotlib        import __version__ as plt_version
-from numpy             import iinfo, int64, log,  zeros, sort
-from numpy             import __version__ as np_version
-from numpy.random      import default_rng
 from os.path           import basename, splitext
-from platform          import platform
-from sys               import version
+from matplotlib.pyplot import figure, show
+import numpy  as np
 
 def parse_arguments():
     '''
@@ -62,18 +57,7 @@ def parse_arguments():
                         default = None,
                         help    = 'Name of plot file')
 
-    parser.add_argument('--version',
-                        default = False,
-                        action = 'store_true',
-                        help   = 'Display version numbers and exit')
-    args = parser.parse_args()
-    if args.version:
-        print (f'Python {version}')
-        print (f'{platform()}')
-        print (f'Numerical python version {np_version}')
-        print (f'Matplotlib version {plt_version}')
-        exit()
-    return args
+    return parser.parse_args()
 
 def replicate(Population, NextGeneration,M,f0,f1):
     '''
@@ -114,8 +98,7 @@ def select(NextGeneration,m,Population,M=1):
     '''
     Used to decide which raplicated and mutated elements will for the population for next period.
     '''
-    Selection = rng.choice(m,M,
-                           replace = False)
+    Selection = rng.choice(m,M,replace = False)
     assert Selection.size == M
     for i,j in enumerate(Selection):
         Population[i,:] = NextGeneration[j,:]
@@ -135,8 +118,8 @@ def get_histogram(Population, density=True):
     Generate a histogram: counts for each instance that is eactually present
     '''
     M,L    = Population.shape
-    Sorted = sort(Population,axis=0)
-    cursor = zeros(L,dtype=int)
+    Sorted = np.sort(Population,axis=0)
+    cursor = np.zeros(L,dtype=int)
     bins   = [0]
     for i in range(M):
         if (cursor==Sorted[i,:]).all():
@@ -161,42 +144,39 @@ def get_plot_file_name(plot=None):
 def get_seed(seed):
     '''Choose seed for random number generator'''
     if seed == None:
-        rng      = default_rng()
-        new_seed = rng.integers(iinfo(int64).max)
+        rng      = np.random.default_rng()
+        new_seed = rng.integers(np.iinfo(np.int64).max)
         print (f'Seed={new_seed}')
         return new_seed
     else:
         return seed
 
 if __name__=='__main__':
-    figure(figsize=(12,12))
-    args           = parse_arguments()
-    rng            = default_rng(get_seed(args.seed))
-    ErrorThreshold = log(args.fitness[0]/args.fitness[1])/args.L
+    fig = figure(figsize=(12,12))
+    args = parse_arguments()
+    rng  = np.random.default_rng(get_seed(args.seed))
+    ErrorThreshold = np.log(args.fitness[0]/args.fitness[1])/args.L
     for i,scale in enumerate(args.scale):
         u = scale*ErrorThreshold
         print (f'Mutation rate={u}')
-        subplot(len(args.scale),1,i+1)                                     # Plot each run in a separate region of the figure
+        ax = fig.add_subplot(len(args.scale),1,i+1)   # Plot each run in a separate region of the figure
         for j in range(args.n):
             print (f'Iteration {j}')
-            Population     = zeros((args.M,args.L),
-                                   dtype = int)
+            Population = np.zeros((args.M,args.L), dtype = np.int64)
             for k in range(args.K):
-                NextGeneration = zeros((args.fitness[0]*args.M,args.L),
-                                       dtype = int)
+                NextGeneration = np.zeros((args.fitness[0]*args.M,args.L), dtype = np.int64)
                 evolve(Population,NextGeneration,
                        u  = u,
                        M  = args.M,
                        f0 = args.fitness[0],
                        f1 = args.fitness[1],
                        L  = args.L)
-            plot(get_histogram(Population),
-                 label = f'{j}')
-        legend(title='Iteration')
-        title(f'Population after {args.K} generations for u={u:.4f}, L={args.L}')
-        xlabel('Genome')
-        ylabel('Population')
+            ax.plot(get_histogram(Population), label = f'{j}')
+        ax.legend(title='Iteration')
+        ax.set_title(f'Population after {args.K} generations for u={u:.4f}, L={args.L}')
+        ax.set_xlabel('Genome')
+        ax.set_ylabel('Population')
 
-    tight_layout()
-    savefig(get_plot_file_name())
+    fig.tight_layout()
+    fig.savefig(get_plot_file_name())
     show()
