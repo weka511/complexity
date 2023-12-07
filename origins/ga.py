@@ -2,23 +2,18 @@
 
 # Copyright (C) 2019-2023 Simon Crase
 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
 
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 Evolve a solution using a Genetic Algorithm
@@ -30,19 +25,21 @@ Evolve a solution using a Genetic Algorithm
 
 from argparse import ArgumentParser
 from random import random, choice, sample, gauss
+from time import time
 import numpy as np
 from matplotlib import rc
 
-# roulette
-#
-#  Implements fitness proportional selection as described in [1].
-#   Parameters:
-#      population   A collection of genomes
-#      fitness      Fitness values assigned to each genome
-
 def roulette(population,fitness):
-    # Select one element from population using Tower Sampling [2]
+    '''
+    Implements fitness proportional selection as described in [1].
+    Parameters:
+        population   A collection of genomes
+        fitness      Fitness values assigned to each genome
+    '''
     def select(T=None,breaks=[],indices=[]):
+        '''
+        Select one element from population using Tower Sampling [2]
+        '''
         return indices[np.searchsorted(breaks,T * random())]
 
     indices = np.argsort(fitness)              # Used to order fitnesses
@@ -54,35 +51,34 @@ def roulette(population,fitness):
 
     return [population[select(T=T,breaks=breaks,indices=indices)] for _ in population]   # Select new population
 
-# mutate_bit_string
-#
-# Mutate a genome consisting of a bit string
-#
-#   Parameters:
-#      genome
-#      p        Probability a single bit will be mutated
-
 def mutate_bit_string(genome,p=0.001):
+    '''
+    Mutate a genome consisting of a bit string
 
-    # flip
-    #
-    # flip one bit with probability p
+    Parameters:
+        genome
+        p        Probability a single bit will be mutated
+    '''
 
     def flip(bit):
+        '''
+        flip one bit with probability p
+        '''
         return bit if random()>p else 1 - bit
 
     return [flip(bit) for bit in genome]
 
-# single_point_crossover
-#
-# Perform Single point crossover on a genome consisting of a list.
-# Randomly choose pairs of parents (without replacement) and crossover
-# both members of the pair.
-#
-#      Parameters:
-#          population  Collection of genomes
-#          p           Probability of a genome being slected as a parent
+
 def single_point_crossover(population,p=0.7):
+    '''
+    Perform Single point crossover on a genome consisting of a list.
+    Randomly choose pairs of parents (without replacement) and crossover
+    both members of the pair.
+
+    Parameters:
+        population  Collection of genomes
+        p           Probability of a genome being slected as a parent
+    '''
     parents  = iter(sample(range(len(population)),int(p*len(population))))
     for i in parents:
         j       = next(parents)
@@ -97,25 +93,6 @@ def single_point_crossover(population,p=0.7):
         pj      = pj_head + pi_tail
     return population
 
-# evolve
-#
-# Use a genetic algorithm to improve fitness
-#
-#    Parameters:
-#      N           Number of generations
-#      M           Size of population
-#      create      Used to create one genome
-#      evaluate    Evaluate fitness
-#      select      Select elements for next generation
-#      mutate      Used to mutate a genome
-#      crossover   Used to perform crossover
-#
-#    Returns:
-#         population  The population at the end of the evolution
-#         statistics  A list of stats for eact generation: maximum fitness,
-#                                                          average fitness, and standard deviation
-#         indices     A list of indices of the population, in ascending order of fitness
-#                     so population[indices[-1]] will be the most fit solution found
 
 def evolve(N         = 100,
            M         = 100,
@@ -124,7 +101,25 @@ def evolve(N         = 100,
            select    = roulette,
            mutate    = mutate_bit_string,
            crossover = single_point_crossover):
+    '''
+    Use a genetic algorithm to improve fitness
 
+    Parameters:
+        N           Number of generations
+        M           Size of population
+        create      Used to create one genome
+        evaluate    Evaluate fitness
+        select      Select elements for next generation
+        mutate      Used to mutate a genome
+        crossover   Used to perform crossover
+
+    Returns:
+        population  The population at the end of the evolution
+        statistics  A list of stats for eact generation: maximum fitness,
+                                                         average fitness, and standard deviation
+        indices     A list of indices of the population, in ascending order of fitness
+                    so population[indices[-1]] will be the most fit solution found
+    '''
     population = [create() for i in range(M)]
     statistics = []
 
@@ -137,14 +132,14 @@ def evolve(N         = 100,
     statistics.append((max(fitness),np.mean(fitness),np.std(fitness)))
     return (population,statistics,np.argsort(fitness))
 
-# plot_fitness
-#
-# Plot the maximum, mean, and standard deviation of fitness
-#
-#   Parameters:
-#      statistics
-#      name
 def plot_fitness(statistics,name='Exercise 1',ax=None):
+    '''
+    Plot the maximum, mean, and standard deviation of fitness
+
+    Parameters:
+        statistics
+        name
+    '''
     maxima = [a for a,_,_ in statistics]
     ax.plot(maxima,'r', label='Maximum Fitness')
     ax.plot([b for _,b,_ in statistics],'g', label='Mean Fitness')
@@ -155,42 +150,46 @@ def plot_fitness(statistics,name='Exercise 1',ax=None):
     ax.set_ylim((0,max(maxima)+1))
     ax.legend(loc='center')
 
-# Mutate a continuous value
-#
 def perturb(x,
             probability = 0.5,  # Probability of mutation
             mean    = 1.0,
             sigma   = 0.1,
             minimum = 0.05,
             maximum = 0.95):
+    '''
+    Mutate a continuous value
+    '''
     if random()<probability:
         return min(maximum,max(minimum,x*gauss(mean,sigma)))
     return x
 
-# Mutate a discrete value
 def perturb_n(n,
                probability = 0.5,  # Probability of mutation
               min_value=1,
               max_value=32):
+    '''
+    Mutate a discrete value
+    '''
     if random()<probability:
         n_mutated = n + choice([-1,+1])
         if min_value<n_mutated and n_mutated<max_value:
             return n_mutated
     return n
 
-if __name__=='__main__':    # Test, based on exercise 1 in [1]
-    rc('text', usetex=True)
+def parse_args():
     parser = ArgumentParser('Genetic Algorithm Demo')
-    parser.add_argument('--pc', default=0.7,   type=float, nargs='+', help='Crossover rate')
-    parser.add_argument('--pm', default=0.001, type=float, nargs='+', help='Mutation probability')
-    parser.add_argument('-n',   default=20,    type=int,              help='Number of Trials')
-    parser.add_argument('-N',   default=1000,  type=int,              help='Number of generations')
-    args = parser.parse_args();
+    parser.add_argument('--pc', default = [0.7], type=float, nargs='+', help='Crossover rate')
+    parser.add_argument('--pm', default = [0.001], type=float, nargs='+', help='Mutation probability')
+    parser.add_argument('-n', default=20, type=int, help='Number of Trials')
+    parser.add_argument('-N', default=1000, type=int,  help='Number of generations')
+    return parser.parse_args()
 
-    pcs = args.pc if type(args.pc)==list else [args.pc]
-    pms = args.pm if type(args.pm)==list else [args.pm]
-    for pc in pcs:
-        for pm in pms:
+if __name__=='__main__':    # Test, based on exercise 1 in [1]
+    start  = time()
+    rc('text', usetex=True)
+    args = parse_args()
+    for pc in args.pc:
+        for pm in args.pm:
             firsts = []
             for i in range(args.n):
                 _,statistics,_ = evolve(
@@ -207,6 +206,11 @@ if __name__=='__main__':    # Test, based on exercise 1 in [1]
                     firsts.append(args.N+1)
 
             print('{0}, {1}, {2}, {3}'.format(pc,pm,int(np.mean(firsts)),int(np.std(firsts))))
+
+    elapsed = time() - start
+    minutes = int(elapsed/60)
+    seconds = elapsed - 60*minutes
+    print (f'Elapsed Time {minutes} m {seconds:.2f} s')
 
 #   Pc       Pm       Mean         Std
 #   0.7      0.001    224         110
