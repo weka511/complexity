@@ -29,21 +29,19 @@ from argparse import ArgumentParser
 from matplotlib.pyplot import figure, show
 import numpy as np
 
-# step
-#
-# Carry out one breeding step
-#
-# Inputs:
-#        A   Population: A[0} is count of master sequence
-#                        A[i] is count of sequences with 1 base fiffernt from master, etc.
-#        s   Advantage of master sequence, which has 1+s copies made, compared to other
-#            sequences that have 1 copy
-#        nu  Mutation rate per bit
-#
-# Returns: new population following 1 step
-
 def step(A,s=0.01,nu=0.01):
+    '''
+    Carry out one breeding step
 
+    Parameters:
+           A   Population: A[0} is count of master sequence
+                           A[i] is count of sequences with 1 base fiffernt from master, etc.
+           s   Advantage of master sequence, which has 1+s copies made, compared to other
+               sequences that have 1 copy
+           nu  Mutation rate per bit
+
+    Returns: new population following 1 step
+    '''
     def grow(i,a):
         return a * (1+s) if i ==0 else a
 
@@ -60,23 +58,22 @@ def step(A,s=0.01,nu=0.01):
     total = sum(A2)
     return [a/total for a in A2]
 
-# evolve
-#
-# Evolve population
-
-# Inputs:#
-#        A   Population: A[0} is count of master sequence
-#                        A[i] is count of sequences with 1 base fiffernt from master, etc.
-#        s   Advantage of master sequence, which has 1+s copies made, compared to other
-#            sequences that have 1 copy
-#        nu  Mutation rate per bit
-#        rtol
-#        atol
-#        N
-#
-# Returns: new population following 1 step
-
 def evolve(A,s=0.01,nu=0.01, rtol=1e-05, atol=1e-08,N=100):
+    '''
+    Evolve population
+
+    Paraeters:
+           A   Population: A[0} is count of master sequence
+                           A[i] is count of sequences with 1 base fiffernt from master, etc.
+           s   Advantage of master sequence, which has 1+s copies made, compared to other
+               sequences that have 1 copy
+           nu  Mutation rate per bit
+           rtol
+           atol
+           N
+
+    Returns: new population following 1 step
+    '''
     for i in range(N):
         A1 = step(A,s=s,nu=nu)
         if all(np.isclose(A,A1,rtol=rtol,atol=atol)):
@@ -84,10 +81,8 @@ def evolve(A,s=0.01,nu=0.01, rtol=1e-05, atol=1e-08,N=100):
         A = [a for a in A1]
     raise Exception('Did not converge within {0} steps, rtol={1},atol={2}'.format(N,rtol,atol))
 
-
-if __name__=='__main__':
-    # Parse command line arguments
-    parser = ArgumentParser('Plot error catastrophe')
+def parse_arguments():
+    parser = ArgumentParser(__doc__)
     parser.add_argument('-L','--Length',default=10,type=int,help='Length of genome in bits')
     parser.add_argument('-n','--nu',default=0.01,type=float,help='Mutation rate per bit')
     parser.add_argument('-s','--advantage',default=[0.8,0.6,0.4, 0.3,0.2,0.1,0.09,0.07,0.0],
@@ -95,18 +90,17 @@ if __name__=='__main__':
     parser.add_argument('--N',default=10000,type=int,help='Maximum number of cycles for convergence')
     parser.add_argument('--rtol',default=1e-5,type=float,help='Relative tolerance for convergence')
     parser.add_argument('--atol',default=1e-8,type=float,help='Absolute tolerance for convergence')
-    args    = parser.parse_args()
+    return parser.parse_args()
 
-    # Initialize variables used for plotting
-
-    index       = 0
-    colours     = ['r','g','b','y','c','m']
-    patterns    = ['','/']
+if __name__=='__main__':
+    args = parse_arguments()
+    index = 0
+    colours = ['r','g','b','y','c','m']
+    patterns = ['','/']
     line_styles = ['-','--','-.',':']
-    Ss          = sorted(args.advantage,reverse=True)
+    Ss = sorted(args.advantage,reverse=True)
     Populations = [[] for i in range(args.Length+1)]
 
-    # Plot distribution for each value of s
     fig = figure(figsize=(20,20))
     ax=fig.add_subplot(1,1,1)
 
