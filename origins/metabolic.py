@@ -21,25 +21,25 @@
 # SOFTWARE.
 
 import numpy as np
-import matplotlib.pyplot as plt
-import math
+from matplotlib.pyplot import figure, show
 
 def flux(c,yC,D=1):
-    return 4*math.pi * c *yC /(c**3)
+    return 4*np.pi * c *yC /(c**3)
 
 def  plot_flux(M=21,N=25):
     cell_sizes = np.linspace(0.1,1,M)
     yCs        = np.linspace(1.0,10,N)
-
     X, Y       = np.meshgrid(cell_sizes, yCs)
     Z          = flux(X,Y)
 
-    plt.contourf(X, Y, Z)
-    plt.xlabel('Cell size')
-    plt.ylabel('yCs')
-    plt.title('Energy Yield')
-    plt.colorbar()
-    plt.show()
+    fig = figure()
+    ax = fig.add_subplot(1,1,1)
+    mappable = ax.contourf(X, Y, Z)
+    ax.set_xlabel('Cell size')
+    ax.set_ylabel('yCs')
+    ax.set_title('Energy Yield')
+    fig.colorbar(mappable)
+    show()
 
 if __name__=='__main__':
     plot_flux()
