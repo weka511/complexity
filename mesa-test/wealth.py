@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-''' Template for Mesa programs'''
+'''Wealth example from tutorial'''
 
 from argparse import ArgumentParser
 from os.path import basename, join, splitext
@@ -37,7 +37,35 @@ def parse_arguments():
 def get_file_name():
     return join(args.figs,basename(splitext(__file__)[0]))
 
+class MoneyAgent(mesa.Agent):
+    '''An agent with fixed initial wealth.'''
 
+    def __init__(self, model):
+        super().__init__(model)
+        self.wealth = 1
+
+    def say_hi(self):
+        print(f'Hi, I am agent {self.unique_id} and my wealth is {self.wealth}')
+
+    def exchange(self):
+        if self.wealth <= 0: return
+        other_agent = self.random.choice(self.model.agents)
+        if other_agent is not None:
+            other_agent.wealth += 1
+            self.wealth -= 1
+
+
+class MoneyModel(mesa.Model):
+    '''A model with some number of agents.'''
+
+    def __init__(self, n, seed=None):
+        super().__init__(seed=seed)
+        self.num_agents = n
+        MoneyAgent.create_agents(model=self, n=n)
+
+    def step(self):
+        '''Advance the model by one step.'''
+        self.agents.shuffle_do("exchange")
 
 
 if __name__=='__main__':
@@ -46,7 +74,17 @@ if __name__=='__main__':
 
     args = parse_arguments()
 
+    model = MoneyModel(10,seed=args.seed)
+    all_wealth = []
+    for _ in range(100):
+        for _ in range(30):
+            model.step()
 
+        for agent in model.agents:
+            all_wealth.append(agent.wealth)
+
+    g = sns.histplot(all_wealth, discrete=True)
+    g.set(title="Wealth distribution", xlabel="Wealth", ylabel="number of agents");
 
     # fig.savefig(get_file_name())
     elapsed = time() - start
