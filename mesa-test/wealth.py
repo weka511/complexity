@@ -81,10 +81,21 @@ class MoneyModel(mesa.Model):
                            self.rng.integers(0, self.grid.width, size=(n,)),
                            self.rng.integers(0, self.grid.height, size=(n,))):
             self.grid.place_agent(a, (i, j))
+        self.datacollector = mesa.DataCollector(
+             model_reporters={'Gini': get_gini}, agent_reporters={'Wealth': 'wealth'}
+         )
 
     def step(self):
-        self.agents.shuffle_do("move")
-        self.agents.do("give_money")
+        self.datacollector.collect(self)
+        self.agents.shuffle_do('move')
+        self.agents.do('give_money')
+
+def get_gini(model):
+    agent_wealths = [agent.wealth for agent in model.agents]
+    x = sorted(agent_wealths)
+    n = model.num_agents
+    B = sum(xi * (n - i) for i, xi in enumerate(x)) / (n * sum(x))
+    return 1 + (1 / n) - 2 * B
 
 
 if __name__=='__main__':
@@ -106,13 +117,17 @@ if __name__=='__main__':
         for cell_content, (x, y) in model.grid.coord_iter():
             agent_counts[x][y] += len(cell_content)
     fig = figure()
-    ax1 = fig.add_subplot(211)
+    ax1 = fig.add_subplot(311)
     g1 = sns.histplot(all_wealth, discrete=True,ax=ax1)
-    g1.set(title="Wealth distribution", xlabel="Wealth", ylabel="number of agents");
-    ax2 = fig.add_subplot(212)
-    g2 = sns.heatmap(agent_counts, cmap="viridis", annot=False, cbar=True, square=True,ax=ax2)
+    g1.set(title='Wealth distribution', xlabel='Wealth', ylabel='number of agents');
+    ax2 = fig.add_subplot(312)
+    g2 = sns.heatmap(agent_counts, cmap='viridis', annot=False, cbar=True, square=True,ax=ax2)
     # g.figure.set_size_inches(5, 5)
-    g2.set(title="number of agents on each cell of the grid");
+    g2.set(title='number of agents on each cell of the grid');
+    gini = model.datacollector.get_model_vars_dataframe()
+    ax3 = fig.add_subplot(313)
+    g3 = sns.lineplot(data=gini,ax=ax3)
+    g3.set(title='Gini Coefficient over Time', ylabel='Gini Coefficient');
     fig.tight_layout()
     fig.savefig(get_file_name())
     elapsed = time() - start
