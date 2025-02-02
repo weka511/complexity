@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-'''Wealth example from tutorial'''
+'''Wealth example from tutorial https://mesa.readthedocs.io/stable/tutorials/intro_tutorial.html'''
 
 from argparse import ArgumentParser
 from os.path import basename, join, splitext
@@ -117,17 +117,27 @@ if __name__=='__main__':
         for cell_content, (x, y) in model.grid.coord_iter():
             agent_counts[x][y] += len(cell_content)
     fig = figure()
-    ax1 = fig.add_subplot(311)
+    ax1 = fig.add_subplot(221)
     g1 = sns.histplot(all_wealth, discrete=True,ax=ax1)
     g1.set(title='Wealth distribution', xlabel='Wealth', ylabel='number of agents');
-    ax2 = fig.add_subplot(312)
+    ax2 = fig.add_subplot(222)
     g2 = sns.heatmap(agent_counts, cmap='viridis', annot=False, cbar=True, square=True,ax=ax2)
-    # g.figure.set_size_inches(5, 5)
     g2.set(title='number of agents on each cell of the grid');
     gini = model.datacollector.get_model_vars_dataframe()
-    ax3 = fig.add_subplot(313)
+    ax3 = fig.add_subplot(223)
     g3 = sns.lineplot(data=gini,ax=ax3)
     g3.set(title='Gini Coefficient over Time', ylabel='Gini Coefficient');
+    ax4 = fig.add_subplot(224)
+    agent_wealth = model.datacollector.get_agent_vars_dataframe()
+    last_step = agent_wealth.index.get_level_values("Step").max()
+    end_wealth = agent_wealth.xs(last_step, level="Step")["Wealth"]
+    # Create a histogram of wealth at the last step
+    g4 = sns.histplot(end_wealth, discrete=True,ax=ax4)
+    g4.set(
+        title="Distribution of wealth at the end of simulation",
+        xlabel="Wealth",
+        ylabel="number of agents",
+    );
     fig.tight_layout()
     fig.savefig(get_file_name())
     elapsed = time() - start
