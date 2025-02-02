@@ -54,18 +54,37 @@ class MoneyAgent(mesa.Agent):
             other_agent.wealth += 1
             self.wealth -= 1
 
+    def move(self):
+        self.model.grid.move_agent(self,
+                                   self.random.choice(self.model.grid.get_neighborhood(self.pos,
+                                                                                       moore = True,
+                                                                                       include_center = False)))
+
+    def give_money(self):
+        cellmates = self.model.grid.get_cell_list_contents([self.pos])
+        # Ensure agent is not giving money to itself
+        cellmates.pop(cellmates.index(self))
+        if len(cellmates) > 0:
+            other_agent = self.random.choice(cellmates)
+            other_agent.wealth += 1
+            self.wealth -= 1
+
 
 class MoneyModel(mesa.Model):
     '''A model with some number of agents.'''
 
-    def __init__(self, n, seed=None):
+    def __init__(self, n, width=10, height=20, seed=None):
         super().__init__(seed=seed)
         self.num_agents = n
-        MoneyAgent.create_agents(model=self, n=n)
+        self.grid = mesa.space.MultiGrid(width, height, True)
+        for a, i, j in zip(MoneyAgent.create_agents(model=self, n=n),
+                           self.rng.integers(0, self.grid.width, size=(n,)),
+                           self.rng.integers(0, self.grid.height, size=(n,))):
+            self.grid.place_agent(a, (i, j))
 
     def step(self):
-        '''Advance the model by one step.'''
-        self.agents.shuffle_do("exchange")
+        self.agents.shuffle_do("move")
+        self.agents.do("give_money")
 
 
 if __name__=='__main__':
@@ -74,7 +93,7 @@ if __name__=='__main__':
 
     args = parse_arguments()
 
-    model = MoneyModel(10,seed=args.seed)
+    model = MoneyModel(100,10,10,seed=args.seed)
     all_wealth = []
     for _ in range(100):
         for _ in range(30):
