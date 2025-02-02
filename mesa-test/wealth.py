@@ -61,9 +61,9 @@ class MoneyAgent(mesa.Agent):
                                                                                        include_center = False)))
 
     def give_money(self):
+        if self.wealth <= 0: return
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
-        # Ensure agent is not giving money to itself
-        cellmates.pop(cellmates.index(self))
+        cellmates.pop(cellmates.index(self)) # Ensure agent is not giving money to itself
         if len(cellmates) > 0:
             other_agent = self.random.choice(cellmates)
             other_agent.wealth += 1
@@ -95,6 +95,7 @@ if __name__=='__main__':
 
     model = MoneyModel(100,10,10,seed=args.seed)
     all_wealth = []
+    agent_counts = np.zeros((model.grid.width, model.grid.height))
     for _ in range(100):
         for _ in range(30):
             model.step()
@@ -102,10 +103,18 @@ if __name__=='__main__':
         for agent in model.agents:
             all_wealth.append(agent.wealth)
 
-    g = sns.histplot(all_wealth, discrete=True)
-    g.set(title="Wealth distribution", xlabel="Wealth", ylabel="number of agents");
-
-    # fig.savefig(get_file_name())
+        for cell_content, (x, y) in model.grid.coord_iter():
+            agent_counts[x][y] += len(cell_content)
+    fig = figure()
+    ax1 = fig.add_subplot(211)
+    g1 = sns.histplot(all_wealth, discrete=True,ax=ax1)
+    g1.set(title="Wealth distribution", xlabel="Wealth", ylabel="number of agents");
+    ax2 = fig.add_subplot(212)
+    g2 = sns.heatmap(agent_counts, cmap="viridis", annot=False, cbar=True, square=True,ax=ax2)
+    # g.figure.set_size_inches(5, 5)
+    g2.set(title="number of agents on each cell of the grid");
+    fig.tight_layout()
+    fig.savefig(get_file_name())
     elapsed = time() - start
     minutes = int(elapsed/60)
     seconds = elapsed - 60*minutes
