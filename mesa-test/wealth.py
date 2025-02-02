@@ -22,7 +22,7 @@ from os.path import basename, join, splitext
 from time import time
 
 import numpy as np
-from matplotlib.pyplot import figure, show
+from matplotlib.pyplot import subplots, show
 import mesa
 import seaborn as sns
 import pandas as pd
@@ -34,8 +34,7 @@ def parse_arguments():
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
     return parser.parse_args()
 
-def get_file_name():
-    return join(args.figs,basename(splitext(__file__)[0]))
+
 
 class MoneyAgent(mesa.Agent):
     '''An agent with fixed initial wealth.'''
@@ -82,7 +81,8 @@ class MoneyModel(mesa.Model):
                            self.rng.integers(0, self.grid.height, size=(n,))):
             self.grid.place_agent(a, (i, j))
         self.datacollector = mesa.DataCollector(
-             model_reporters={'Gini': get_gini}, agent_reporters={'Wealth': 'wealth'}
+             model_reporters = {'Gini': self.get_gini},
+             agent_reporters = {'Wealth': 'wealth'}
          )
 
     def step(self):
@@ -90,13 +90,33 @@ class MoneyModel(mesa.Model):
         self.agents.shuffle_do('move')
         self.agents.do('give_money')
 
-def get_gini(model):
-    agent_wealths = [agent.wealth for agent in model.agents]
-    x = sorted(agent_wealths)
-    n = model.num_agents
-    B = sum(xi * (n - i) for i, xi in enumerate(x)) / (n * sum(x))
-    return 1 + (1 / n) - 2 * B
+    def get_gini(self):
+        '''Compute Gini index'''
+        agent_wealths =sorted([agent.wealth for agent in model.agents])
+        n = model.num_agents
+        B = sum(xi * (n - i) for i, xi in enumerate(agent_wealths)) / (n * sum(agent_wealths))
+        return 1 + (1 / n) - 2 * B
 
+class PlotContext:
+    '''Used to allocate subplots and save figure to file'''
+    Seq = 0
+    def __init__(self, nrows=1,ncols=1,figs='./figs'):
+        PlotContext.Seq += 1
+        self.nrows = nrows
+        self.ncols = ncols
+        self.figs = figs
+
+    def __enter__(self):
+        self.fig, self.ax = subplots(nrows=self.nrows,ncols=self.ncols)
+        return self.ax
+
+    def __exit__(self, type, value, traceback):
+        self.fig.tight_layout()
+        self.fig.savefig(self.get_file_name())
+
+    def get_file_name(self):
+        base = basename(splitext(__file__)[0])
+        return join(self.figs, base if PlotContext.Seq == 1 else f'{base}{PlotContext.Seq - 0}')
 
 if __name__=='__main__':
     start  = time()
@@ -116,30 +136,25 @@ if __name__=='__main__':
 
         for cell_content, (x, y) in model.grid.coord_iter():
             agent_counts[x][y] += len(cell_content)
-    fig = figure()
-    ax1 = fig.add_subplot(221)
-    g1 = sns.histplot(all_wealth, discrete=True,ax=ax1)
-    g1.set(title='Wealth distribution', xlabel='Wealth', ylabel='number of agents');
-    ax2 = fig.add_subplot(222)
-    g2 = sns.heatmap(agent_counts, cmap='viridis', annot=False, cbar=True, square=True,ax=ax2)
-    g2.set(title='number of agents on each cell of the grid');
-    gini = model.datacollector.get_model_vars_dataframe()
-    ax3 = fig.add_subplot(223)
-    g3 = sns.lineplot(data=gini,ax=ax3)
-    g3.set(title='Gini Coefficient over Time', ylabel='Gini Coefficient');
-    ax4 = fig.add_subplot(224)
-    agent_wealth = model.datacollector.get_agent_vars_dataframe()
-    last_step = agent_wealth.index.get_level_values("Step").max()
-    end_wealth = agent_wealth.xs(last_step, level="Step")["Wealth"]
-    # Create a histogram of wealth at the last step
-    g4 = sns.histplot(end_wealth, discrete=True,ax=ax4)
-    g4.set(
-        title="Distribution of wealth at the end of simulation",
-        xlabel="Wealth",
-        ylabel="number of agents",
-    );
-    fig.tight_layout()
-    fig.savefig(get_file_name())
+
+    with PlotContext(nrows=2,ncols=2,figs=args.figs) as ax:
+        g1 = sns.histplot(all_wealth, discrete=True,ax=ax[0,0])
+        g1.set(title='Wealth distribution', xlabel='Wealth', ylabel='number of agents')
+        g2 = sns.heatmap(agent_counts, cmap='viridis', annot=False, cbar=True, square=True,ax=ax[0,1])
+        g2.set(title='number of agents on each cell of the grid');
+        gini = model.datacollector.get_model_vars_dataframe()
+        g3 = sns.lineplot(data=gini,ax=ax[1,0])
+        g3.set(title='Gini Coefficient over Time', ylabel='Gini Coefficient');
+        agent_wealth = model.datacollector.get_agent_vars_dataframe()
+        last_step = agent_wealth.index.get_level_values("Step").max()
+        end_wealth = agent_wealth.xs(last_step, level="Step")["Wealth"]
+        g4 = sns.histplot(end_wealth, discrete=True,ax=ax[1,1])
+        g4.set(
+            title="Distribution of wealth at the end of simulation",
+            xlabel="Wealth",
+            ylabel="number of agents",
+        );
+
     elapsed = time() - start
     minutes = int(elapsed/60)
     seconds = elapsed - 60*minutes

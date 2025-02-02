@@ -22,7 +22,7 @@ from os.path import basename, join, splitext
 from time import time
 
 import numpy as np
-from matplotlib.pyplot import figure, show
+from matplotlib.pyplot import subplots, show
 import mesa
 import seaborn as sns
 import pandas as pd
@@ -34,10 +34,26 @@ def parse_arguments():
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
     return parser.parse_args()
 
-def get_file_name():
-    return join(args.figs,basename(splitext(__file__)[0]))
+class PlotContext:
+    '''Used to allocate subplots and save figure to file'''
+    Seq = 0
+    def __init__(self, nrows=1,ncols=1,figs='./figs'):
+        Seq += 1
+        self.nrows = nrows
+        self.ncols = ncols
+        self.figs = figs
 
+    def __enter__(self):
+        self.fig, self.ax = subplots(nrows=self.nrows,ncols=self.ncols)
+        return self.ax
 
+    def __exit__(self, type, value, traceback):
+        self.fig.tight_layout()
+        self.fig.savefig(self.get_file_name())
+
+    def get_file_name(self):
+        base = basename(splitext(__file__)[0])
+        return join(self.figs, base if PlotContext.Seq == 1 else f'{base}{PlotContext.Seq - 0}')
 
 
 if __name__=='__main__':
@@ -46,9 +62,9 @@ if __name__=='__main__':
 
     args = parse_arguments()
 
+    with PlotContext(figs=args.figs) as axes:
+        pass
 
-
-    # fig.savefig(get_file_name())
     elapsed = time() - start
     minutes = int(elapsed/60)
     seconds = elapsed - 60*minutes
