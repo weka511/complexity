@@ -34,6 +34,7 @@ def parse_arguments():
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
     parser.add_argument('--capacity', default=70, type=int)
     parser.add_argument('--population', default=100, type=int)
+    parser.add_argument('--iterations', default=100, type=int)
     return parser.parse_args()
 
 class PlotContext:
@@ -59,22 +60,26 @@ class PlotContext:
 
 class Patron(mesa.Agent):
     def __init__(self,model):
-        pass
+        super().__init__(model)
 
-    def go_or_dont_go(self,log):
+    def decide(self):
+        x=self.model.attendance
         return True
 
 class ElFarol(mesa.Model):
     def __init__(self,capacity=70,population=100,seed=None):
         super().__init__(seed=seed)
         self.capacity = capacity
+        self.num_agents = population
         z=Patron.create_agents(model=self, n=population)
+        self.log = []
 
-        def step(self):
-            self.agents.shuffle_do('go_or_dont_go')
+    def step(self):
+        self.attendance=0
+        self.agents.shuffle_do('decide')
 
-    def update_attendance(self):
-        self.log.append(len([i for i in range(len(self.population)) if self.population[i].decide(self.log)]))
+    # def update_attendance(self):
+        # self.log.append(len([i for i in range(len(self.population)) if self.population[i].decide(self.log)]))
 
 if __name__=='__main__':
     start  = time()
@@ -84,8 +89,8 @@ if __name__=='__main__':
 
     bar = ElFarol(capacity=args.capacity,population=args.population,seed=args.seed)
 
-    bar.step()
-
+    for _ in range(args.iterations):
+        bar.step()
 
     with PlotContext(figs=args.figs) as axes:
         pass
