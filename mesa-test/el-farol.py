@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-'''El Farol simulation'''
+'''El Farol simulation--https://sites.santafe.edu/~wbarthur/Papers/El_Farol.pdf'''
 
 from argparse import ArgumentParser
 from os.path import basename, join, splitext
@@ -34,7 +34,7 @@ def parse_arguments():
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
     parser.add_argument('--capacity', default=70, type=int)
     parser.add_argument('--population', default=100, type=int)
-    parser.add_argument('--iterations', default=100, type=int)
+    parser.add_argument('--iterations', default=25, type=int)
     return parser.parse_args()
 
 class PlotContext:
@@ -58,30 +58,29 @@ class PlotContext:
         base = basename(splitext(__file__)[0])
         return join(self.figs, base if PlotContext.Seq == 1 else f'{base}{PlotContext.Seq - 0}')
 
+class Strategy:
+    def __init__(self,random,population=100,log = []):
+        self.random = random
+        self.population = population
+        self.log = log
+
+    def get_predicted_attendance(self):
+        return self.random.random() * self.population
+
 class Patron(mesa.Agent):
     def __init__(self,model):
         super().__init__(model)
 
     def decide(self):
-        if self.model.strategy.go():
+        if self.strategy.get_predicted_attendance() < self.capacity:
             self.model.attendance += 1
 
-class Strategy:
-    def __init__(self,threshold):
-        self.threshold = threshold
-
-    def go(self):
-        return self.random.random()>self.threshold
 
 class ElFarol(mesa.Model):
-    def __init__(self,capacity=70,population=100,seed=None,strategy=None):
+    def __init__(self,population=100,seed=None,log=[]):
         super().__init__(seed=seed)
-        self.capacity = capacity
-        self.num_agents = population
         Patron.create_agents(model=self, n=population)
-        self.log = []
-        strategy.random = self.random
-        self.strategy = strategy
+        self.log = log
 
     def step(self):
         self.attendance = 0
@@ -95,18 +94,22 @@ if __name__=='__main__':
 
     args = parse_arguments()
 
-    strategy = Strategy(0.75)
+    log = []
+    bar = ElFarol(population = args.population,
+                  seed = args.seed,
+                  log = log)
 
-    bar = ElFarol(capacity=args.capacity,
-                  population=args.population,
-                  seed=args.seed,
-                  strategy=strategy)
+    strategy = Strategy(bar.random,population=args.population,log=log)
+    for patron in bar.agents:
+        patron.strategy = strategy
+        patron.capacity = args.capacity
 
     for _ in range(args.iterations):
         bar.step()
 
-    with PlotContext(figs=args.figs) as axes:
-        pass
+    with PlotContext(nrows=2,ncols=2,figs=args.figs) as axes:
+        p1 = sns.barplot(log,ax=axes[0,0],color='blue')
+        p2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0,0],color='red')
 
     elapsed = time() - start
     minutes = int(elapsed/60)
