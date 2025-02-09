@@ -63,23 +63,31 @@ class Patron(mesa.Agent):
         super().__init__(model)
 
     def decide(self):
-        x=self.model.attendance
-        return True
+        if self.model.strategy.go():
+            self.model.attendance += 1
+
+class Strategy:
+    def __init__(self,threshold):
+        self.threshold = threshold
+
+    def go(self):
+        return self.random.random()>self.threshold
 
 class ElFarol(mesa.Model):
-    def __init__(self,capacity=70,population=100,seed=None):
+    def __init__(self,capacity=70,population=100,seed=None,strategy=None):
         super().__init__(seed=seed)
         self.capacity = capacity
         self.num_agents = population
-        z=Patron.create_agents(model=self, n=population)
+        Patron.create_agents(model=self, n=population)
         self.log = []
+        strategy.random = self.random
+        self.strategy = strategy
 
     def step(self):
-        self.attendance=0
+        self.attendance = 0
         self.agents.shuffle_do('decide')
+        self.log.append(self.attendance)
 
-    # def update_attendance(self):
-        # self.log.append(len([i for i in range(len(self.population)) if self.population[i].decide(self.log)]))
 
 if __name__=='__main__':
     start  = time()
@@ -87,7 +95,12 @@ if __name__=='__main__':
 
     args = parse_arguments()
 
-    bar = ElFarol(capacity=args.capacity,population=args.population,seed=args.seed)
+    strategy = Strategy(0.75)
+
+    bar = ElFarol(capacity=args.capacity,
+                  population=args.population,
+                  seed=args.seed,
+                  strategy=strategy)
 
     for _ in range(args.iterations):
         bar.step()
