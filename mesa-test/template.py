@@ -36,7 +36,7 @@ def parse_arguments():
 
 class PlotContext:
     '''Used to allocate subplots and save figure to file'''
-    Seq = 0
+    PlotContext.Seq = 0
     def __init__(self, nrows=1,ncols=1,figs='./figs'):
         Seq += 1
         self.nrows = nrows
