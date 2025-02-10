@@ -30,7 +30,7 @@ import pandas as pd
 def parse_arguments():
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
-    parser.add_argument('--figs', default = './figs')
+    parser.add_argument('--figs', default = './figs',help='Path for storing figures')
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
     return parser.parse_args()
 
