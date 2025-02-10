@@ -17,6 +17,7 @@
 
 '''El Farol simulation--https://sites.santafe.edu/~wbarthur/Papers/El_Farol.pdf'''
 
+from abc import ABC, abstractmethod
 from argparse import ArgumentParser
 from os.path import basename, join, splitext
 from time import time
@@ -58,14 +59,32 @@ class PlotContext:
         base = basename(splitext(__file__)[0])
         return join(self.figs, base if PlotContext.Seq == 1 else f'{base}{PlotContext.Seq - 0}')
 
-class Strategy:
+class Strategy(ABC):
+    '''An abstract class, whose implementation predict attendance'''
     def __init__(self,random,population=100,log = []):
         self.random = random
         self.population = population
         self.log = log
 
+    @abstractmethod
     def get_predicted_attendance(self):
-        return self.random.random() * self.population
+        pass
+
+class YesterdaysWeather(Strategy):
+    '''
+    Predict attendance using a weighted average of the past few weeks.
+    '''
+    def __init__(self,random,population=100,log = [],n=4,a=0.75,b=0.25):
+        super().__init__(random,population,log)
+        self.a = a
+        self.b = b
+        self.n = n
+
+    def get_predicted_attendance(self):
+        if len(self.log) == 0:
+            return self.random.random() * self.population
+        else:
+            return self.a * np.mean(self.log[-self.n:]) + self.b * self.random.random() * self.population
 
 class Patron(mesa.Agent):
     def __init__(self,model):
@@ -99,7 +118,7 @@ if __name__=='__main__':
                   seed = args.seed,
                   log = log)
 
-    strategy = Strategy(bar.random,population=args.population,log=log)
+    strategy = YesterdaysWeather(bar.random,population=args.population,log=log)
     for patron in bar.agents:
         patron.strategy = strategy
         patron.capacity = args.capacity
