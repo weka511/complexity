@@ -30,12 +30,15 @@ import pandas as pd
 
 def parse_arguments():
     parser = ArgumentParser(__doc__)
+    capacity = 70
+    population = 100
+    iterations = 52
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
-    parser.add_argument('--figs', default = './figs')
+    parser.add_argument('--figs', default = './figs',help='Path for storing figures')
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
-    parser.add_argument('--capacity', default=70, type=int)
-    parser.add_argument('--population', default=100, type=int)
-    parser.add_argument('--iterations', default=25, type=int)
+    parser.add_argument('--capacity', default=70, type=int,help = f'Capacity of venue[{capacity}]')
+    parser.add_argument('--population', default=1000, type=int,help = f'Number of people available to attend venue [{population}]')
+    parser.add_argument('--iterations', default=52, type=int, help = f'Number of iterations for running simulation [{iterations}]')
     return parser.parse_args()
 
 class PlotContext:
@@ -66,8 +69,14 @@ class Strategy(ABC):
         self.population = population
         self.log = log
 
-    @abstractmethod
     def get_predicted_attendance(self):
+        if len(self.log) == 0:
+            return self.random.random() * self.population
+        else:
+            return self.get_predicted()
+
+    @abstractmethod
+    def get_predicted(self):
         pass
 
 class YesterdaysWeather(Strategy):
@@ -80,19 +89,16 @@ class YesterdaysWeather(Strategy):
         self.b = b
         self.n = n
 
-    def get_predicted_attendance(self):
-        if len(self.log) == 0:
-            return self.random.random() * self.population
-        else:
-            return self.a * np.mean(self.log[-self.n:]) + self.b * self.random.random() * self.population
+    def get_predicted(self):
+        return self.a * np.mean(self.log[-self.n:]) + self.b * self.random.random() * self.population
 
 class Patron(mesa.Agent):
     def __init__(self,model):
         super().__init__(model)
+        self.happiness = []
 
     def decide(self):
-        if self.strategy.get_predicted_attendance() < self.capacity:
-            self.model.attendance += 1
+        self.attend = self.strategy.get_predicted_attendance() < self.capacity
 
 
 class ElFarol(mesa.Model):
@@ -102,9 +108,10 @@ class ElFarol(mesa.Model):
         self.log = log
 
     def step(self):
-        self.attendance = 0
         self.agents.shuffle_do('decide')
-        self.log.append(self.attendance)
+        self.log.append(sum(1 for agent in self.agents if agent.attend))
+        for agent in self.agents:
+            agent.happiness.append(1 if agent.attend and self.log[-1] < self.capacity else 0)
 
 
 if __name__=='__main__':
@@ -119,6 +126,7 @@ if __name__=='__main__':
                   log = log)
 
     strategy = YesterdaysWeather(bar.random,population=args.population,log=log)
+    bar.capacity = args.capacity
     for patron in bar.agents:
         patron.strategy = strategy
         patron.capacity = args.capacity
@@ -126,9 +134,14 @@ if __name__=='__main__':
     for _ in range(args.iterations):
         bar.step()
 
-    with PlotContext(nrows=2,ncols=2,figs=args.figs) as axes:
-        p1 = sns.barplot(log,ax=axes[0,0],color='blue')
-        p2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0,0],color='red')
+    happiness = [sum(agent.happiness) for agent in bar.agents]
+    with PlotContext(nrows=2,ncols=1,figs=args.figs) as axes:
+        p1 = sns.barplot(log,ax=axes[0],color='blue',label='Attendance')
+        p2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0],color='red',label='Threshold')
+        p1.set_title('Weekly attendance')
+        p1.legend()
+        g1 = sns.histplot(happiness, discrete=True,ax=axes[1],color='blue')
+        g1.set_title('Happiness')
 
     elapsed = time() - start
     minutes = int(elapsed/60)
