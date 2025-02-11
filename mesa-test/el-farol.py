@@ -41,6 +41,8 @@ def parse_arguments():
     iterations = 52
     review_interval = 5
     minimum_happiness = 0.25
+    basket_min = 5
+    basket_max = 12
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
     parser.add_argument('--figs', default = './figs',help='Path for storing figures')
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
@@ -51,7 +53,8 @@ def parse_arguments():
                         help = f'Review strategy every few iterations[{review_interval}]')
     parser.add_argument('--minimum_happiness', default=minimum_happiness, type=float,
                         help = f'Change strategy unless happiness per step is at leaset this value[{minimum_happiness}]')
-
+    parser.add_argument('--basket_min', default=basket_min, type=int,help = f'Minimum size for basket of strategies[{basket_min}]')
+    parser.add_argument('--basket_max', default=basket_max, type=int,help = f'Maximum size for basket of strategies[{basket_max}]')
     return parser.parse_args()
 
 class PlotContext:
@@ -65,7 +68,7 @@ class PlotContext:
         self.suptitle = suptitle
 
     def __enter__(self):
-        self.fig, self.ax = subplots(nrows=self.nrows,ncols=self.ncols)
+        self.fig, self.ax = subplots(nrows=self.nrows,ncols=self.ncols,figsize=(10,10))
         if self.suptitle != None:
             self.fig.suptitle(self.suptitle)
         return self.ax
@@ -79,7 +82,7 @@ class PlotContext:
         return join(self.figs, base if PlotContext.Seq == 1 else f'{base}{PlotContext.Seq - 0}')
 
 class Strategy(ABC):
-    '''An abstract class, whose implementation predict attendance'''
+    '''An abstract class, each of whose implementations predicts attendance'''
     def __init__(self,random,population=100,log = [],m=1,name=''):
         self.random = random
         self.population = population
@@ -88,6 +91,10 @@ class Strategy(ABC):
         self.name = name
 
     def get_predicted_attendance(self):
+        '''
+        Predict attendance. If there is too little data in the log, choose a random value,
+        otherwise delegate to implementation.
+        '''
         if len(self.log) < self.m:
             return self.random.random() * self.population
         else:
@@ -95,6 +102,7 @@ class Strategy(ABC):
 
     @abstractmethod
     def get_predicted(self):
+        '''Used to predict attendance if there is sufficient data'''
         pass
 
 class MirrorImage(Strategy):
@@ -127,11 +135,14 @@ class Trend(Strategy):
         super().__init__(random,population,log,name=f'Average {m}',m=m)
 
     def get_predicted(self):
+        '''
+        Fit a trendline to the last `m` attendances, then extrapolate to the current period.
+        Clamp into range from [0,population]
+        '''
         y = np.array(self.log[-self.m:])
         x = np.arange(0,len(y))
         z = np.polyfit(x,y,1)
-        y1 = z[0] * len(y) + z[1]
-        return  min(0,max(int(y1),self.population))
+        return  min(0,max(z[0] * len(y) + z[1],self.population))
 
 class StrategyFactory:
     '''Used to create strategies'''
@@ -162,18 +173,21 @@ class Patron(mesa.Agent):
         self.review_interval = review_interval
         self.minimum_happiness = minimum_happiness
 
-    def decide(self):
+    def decide_whether_to_attend(self):
         self.attend = self.strategies[self.index].get_predicted_attendance() < self.capacity
 
-    def calculate_happiness(self,bar):
-        self.happiness.append(1 if self.attend and bar.is_comfortable() else 0)
+    def calculate_happiness(self):
+        self.happiness.append(1 if self.attend and self.model.is_comfortable() else 0)
 
-    def review_strategy(self,step_number,random):
-        if step_number>0 and step_number % self.review_interval ==0:
-            if sum(self.happiness) < step_number * self.minimum_happiness:
+    def get_expected_happiness(self):
+        return self.model.step_number * self.minimum_happiness
+
+    def review_strategy(self):
+        if self.model.step_number % self.review_interval ==0:
+            if sum(self.happiness) < self.get_expected_happiness():
                 saved_index = self.index
                 while saved_index == self.index:
-                    self.index = random.randint(0,len(self.strategies)-1)
+                    self.index = self.random.randint(0,len(self.strategies)-1)
 
 class ElFarol(mesa.Model):
     '''
@@ -184,13 +198,18 @@ class ElFarol(mesa.Model):
         Patron.create_agents(model=self, n=population,review_interval = 5,minimum_happiness = 0.25)
         self.log = log
         self.capacity = capacity
+        self.step_number = 0
 
-    def step(self,step_number):
-        self.agents.shuffle_do('decide')
-        self.log.append(sum(1 for agent in self.agents if agent.attend))
-        for patron in self.agents:
-            patron.calculate_happiness(self)
-            patron.review_strategy(step_number,self.random)
+    def step(self):
+        self.step_number += 1
+        self.agents.shuffle_do('decide_whether_to_attend')
+        self.log.append(self.get_attendance())
+        self.agents.do('calculate_happiness')
+        self.agents.do('review_strategy')
+
+    def get_attendance(self):
+        '''Calculate the number of Patrons who have decided to attend'''
+        return sum(1 for patron in self.agents if patron.attend)
 
     def is_comfortable(self):
         '''
@@ -215,22 +234,31 @@ if __name__=='__main__':
     strategyfactory = StrategyFactory(bar.random)
 
     for patron in bar.agents:
-        for _ in range(5): #FIXME
+        m = bar.random.randint(args.basket_min,args.basket_max)
+        for _ in range(m):
             patron.strategies.append(strategyfactory.create(args.population,log))
         patron.capacity = args.capacity
 
-
-    for step_number in range(args.iterations):
-        bar.step(step_number)
+    for _ in range(args.iterations):
+        bar.step()
 
     happiness = [sum(agent.happiness) for agent in bar.agents]
+    happiness_median = np.quantile(happiness, 0.5)
     with PlotContext(nrows=2,ncols=1,figs=args.figs,suptitle='El Farol') as axes:
-        p1 = sns.barplot(log,ax=axes[0],color='blue',label='Attendance')
-        p2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0],color='red',label='Threshold')
-        p1.set_title(f'Weekly attendance: average = {np.mean(log):.1f}')
-        p1.legend()
-        g1 = sns.histplot(happiness, discrete=True,ax=axes[1],color='blue')
-        g1.set_title('Happiness')
+        attendance1 = sns.barplot(log,ax=axes[0],color='blue',label='Attendance')
+        attendance2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0],color='red',label='Capacity')
+        attendance3 = sns.lineplot([np.mean(log)]*args.iterations,
+                                   ax=axes[0],
+                                   color='green',
+                                   linestyle='--',
+                                   label=f'Average {np.mean(log):.1f}')
+        attendance1.set_title(f'Weekly attendance')
+        attendance1.legend()
+
+        happiness1 = sns.histplot(happiness, discrete=True,ax=axes[1],color='blue',label='Happiness')
+        happiness1.axvline(happiness_median,color='r',label=f'Median = {happiness_median}')
+        happiness1.set_title('Happiness')
+        happiness1.legend()
 
     elapsed = time() - start
     minutes = int(elapsed/60)
