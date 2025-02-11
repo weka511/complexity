@@ -98,37 +98,56 @@ class Strategy(ABC):
         pass
 
 class MirrorImage(Strategy):
+    '''A Strategy that assumes the this week will be the mirror image of last week'''
     def __init__(self,random,population=100,log = []):
         super().__init__(random,population,log,name='MirrorImage')
 
     def get_predicted(self):
-        return self.population - log[-1]
+        return self.population - self.log[-1]
 
 class Cycle(Strategy):
+    '''A Strategy that assumes the this week will be the same as an earlier week'''
     def __init__(self,random,population=100,log = [],m=3):
         super().__init__(random,population,log,m=m,name=f'Cycle {m}')
 
     def get_predicted(self):
-        return log[-self.m]
+        return self.log[-self.m]
 
 class Average(Strategy):
+    '''A Strategy that assumes the this week will be the average of the last few weeks'''
     def __init__(self,random,population=100,log = [],m=4):
         super().__init__(random,population,log,name=f'Average {m}')
 
     def get_predicted(self):
         return  np.mean(self.log[-self.m:])
 
+class Trend(Strategy):
+    '''A Strategy that assumes the this week will be the trend from the last few weeks'''
+    def __init__(self,random,population=100,log = [],m=4):
+        super().__init__(random,population,log,name=f'Average {m}',m=m)
+
+    def get_predicted(self):
+        y = np.array(self.log[-self.m:])
+        x = np.arange(0,len(y))
+        z = np.polyfit(x,y,1)
+        y1 = z[0] * len(y) + z[1]
+        return  min(0,max(int(y1),self.population))
+
 class StrategyFactory:
+    '''Used to create strategies'''
     def __init__(self,random):
         self.random = random
-    def create(self,random,population,log):
-        match(self.random.randint(0,3-1)):
+    def create(self,population,log):
+        '''Create a strategy at random'''
+        match(self.random.randint(0,4-1)):
             case 0:
-                return MirrorImage(random,population,log)
+                return MirrorImage(self.random,population,log)
             case 1:
-                return Cycle(random,population,log,m=random.randint(2,4))
+                return Cycle(self.random,population,log,m=self.random.randint(1,4))
             case 2:
-                return Average(random,population,log,m=random.randint(2,4))
+                return Average(self.random,population,log,m=self.random.randint(2,4))
+            case 3:
+                return Trend(self.random,population,log,m=self.random.randint(4,8))
 
 
 class Patron(mesa.Agent):
@@ -197,7 +216,7 @@ if __name__=='__main__':
 
     for patron in bar.agents:
         for _ in range(5): #FIXME
-            patron.strategies.append(strategyfactory.create(bar.random,args.population,log))
+            patron.strategies.append(strategyfactory.create(args.population,log))
         patron.capacity = args.capacity
 
 
@@ -208,7 +227,7 @@ if __name__=='__main__':
     with PlotContext(nrows=2,ncols=1,figs=args.figs,suptitle='El Farol') as axes:
         p1 = sns.barplot(log,ax=axes[0],color='blue',label='Attendance')
         p2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0],color='red',label='Threshold')
-        p1.set_title('Weekly attendance')
+        p1.set_title(f'Weekly attendance: average = {np.mean(log):.1f}')
         p1.legend()
         g1 = sns.histplot(happiness, discrete=True,ax=axes[1],color='blue')
         g1.set_title('Happiness')
