@@ -123,13 +123,15 @@ class StrategyFactory:
 
 class Patron(mesa.Agent):
     '''
-    A bar Patron can decide whther or not to attend
+    A bar Patron can decide whether or not to attend
     '''
-    def __init__(self,model):
+    def __init__(self,model,review_interval = 5,minimum_happiness = 0.25):
         super().__init__(model)
         self.happiness = []
         self.strategies = []
         self.index = 0
+        self.review_interval = review_interval
+        self.minimum_happiness = minimum_happiness
 
     def decide(self):
         self.attend = self.strategies[self.index].get_predicted_attendance() < self.capacity
@@ -137,9 +139,9 @@ class Patron(mesa.Agent):
     def calculate_happiness(self,bar):
         self.happiness.append(1 if self.attend and bar.is_comfortable() else 0)
 
-    def review_happiness(self,step_number,random):
-        if step_number>0 and step_number % 5 ==0:
-            if self.happiness[-1] < step_number * 0.1:
+    def review_strategy(self,step_number,random):
+        if step_number>0 and step_number % self.review_interval ==0:
+            if sum(self.happiness) < step_number * self.minimum_happiness:
                 saved_index = self.index
                 while saved_index == self.index:
                     self.index = random.randint(0,len(self.strategies)-1)
@@ -159,7 +161,7 @@ class ElFarol(mesa.Model):
         self.log.append(sum(1 for agent in self.agents if agent.attend))
         for patron in self.agents:
             patron.calculate_happiness(self)
-            patron.review_happiness(step_number,self.random)
+            patron.review_strategy(step_number,self.random)
 
     def is_comfortable(self):
         '''
