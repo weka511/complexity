@@ -37,14 +37,17 @@ def parse_arguments():
 class PlotContext:
     '''Used to allocate subplots and save figure to file'''
     PlotContext.Seq = 0
-    def __init__(self, nrows=1,ncols=1,figs='./figs'):
+    def __init__(self, nrows=1,ncols=1,figs='./figs',suptitle=None):
         Seq += 1
         self.nrows = nrows
         self.ncols = ncols
         self.figs = figs
+        self.suptitle = suptitle
 
     def __enter__(self):
         self.fig, self.ax = subplots(nrows=self.nrows,ncols=self.ncols)
+        if self.suptitle != None:
+            self.fig.suptitle(self.suptitle)
         return self.ax
 
     def __exit__(self, type, value, traceback):

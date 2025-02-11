@@ -39,25 +39,35 @@ def parse_arguments():
     capacity = 60
     population = 100
     iterations = 52
+    review_interval = 5
+    minimum_happiness = 0.25
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
     parser.add_argument('--figs', default = './figs',help='Path for storing figures')
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
     parser.add_argument('--capacity', default=capacity, type=int,help = f'Capacity of venue[{capacity}]')
     parser.add_argument('--population', default=population, type=int,help = f'Number of people available to attend venue [{population}]')
     parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of iterations for running simulation [{iterations}]')
+    parser.add_argument('--review_interval', default=review_interval, type=int,
+                        help = f'Review strategy every few iterations[{review_interval}]')
+    parser.add_argument('--minimum_happiness', default=minimum_happiness, type=float,
+                        help = f'Change strategy unless happiness per step is at leaset this value[{minimum_happiness}]')
+
     return parser.parse_args()
 
 class PlotContext:
     '''Used to allocate subplots and save figure to file'''
     Seq = 0
-    def __init__(self, nrows=1,ncols=1,figs='./figs'):
+    def __init__(self, nrows=1,ncols=1,figs='./figs',suptitle=None):
         PlotContext.Seq += 1
         self.nrows = nrows
         self.ncols = ncols
         self.figs = figs
+        self.suptitle = suptitle
 
     def __enter__(self):
         self.fig, self.ax = subplots(nrows=self.nrows,ncols=self.ncols)
+        if self.suptitle != None:
+            self.fig.suptitle(self.suptitle)
         return self.ax
 
     def __exit__(self, type, value, traceback):
@@ -150,9 +160,9 @@ class ElFarol(mesa.Model):
     '''
     The El Farol bar, which has a finite capacity
     '''
-    def __init__(self,population=100,seed=None,log=[],capacity = 60):
+    def __init__(self,population=100,seed=None,log=[],capacity = 60,review_interval = 5,minimum_happiness = 0.25):
         super().__init__(seed=seed)
-        Patron.create_agents(model=self, n=population)
+        Patron.create_agents(model=self, n=population,review_interval = 5,minimum_happiness = 0.25)
         self.log = log
         self.capacity = capacity
 
@@ -180,7 +190,9 @@ if __name__=='__main__':
     bar = ElFarol(population = args.population,
                   seed = args.seed,
                   log = log,
-                  capacity = args.capacity)
+                  capacity = args.capacity,
+                  review_interval = args.review_interval,
+                  minimum_happiness = args.minimum_happiness)
     strategyfactory = StrategyFactory(bar.random)
 
     for patron in bar.agents:
@@ -193,7 +205,7 @@ if __name__=='__main__':
         bar.step(step_number)
 
     happiness = [sum(agent.happiness) for agent in bar.agents]
-    with PlotContext(nrows=2,ncols=1,figs=args.figs) as axes:
+    with PlotContext(nrows=2,ncols=1,figs=args.figs,suptitle='El Farol') as axes:
         p1 = sns.barplot(log,ax=axes[0],color='blue',label='Attendance')
         p2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0],color='red',label='Threshold')
         p1.set_title('Weekly attendance')
