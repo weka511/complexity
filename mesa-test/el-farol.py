@@ -68,7 +68,7 @@ class PlotContext:
         self.suptitle = suptitle
 
     def __enter__(self):
-        self.fig, self.ax = subplots(nrows=self.nrows,ncols=self.ncols,figsize=(10,10))
+        self.fig, self.ax = subplots(nrows=self.nrows,ncols=self.ncols,figsize=(10,6))
         if self.suptitle != None:
             self.fig.suptitle(self.suptitle)
         return self.ax
@@ -172,6 +172,7 @@ class Patron(mesa.Agent):
         self.index = 0
         self.review_interval = review_interval
         self.minimum_happiness = minimum_happiness
+        self.attend = False
 
     def decide_whether_to_attend(self):
         self.attend = self.strategies[self.index].get_predicted_attendance() < self.capacity
@@ -199,6 +200,9 @@ class ElFarol(mesa.Model):
         self.log = log
         self.capacity = capacity
         self.step_number = 0
+        self.datacollector = mesa.DataCollector(
+            model_reporters={'Attendance':self.get_attendance}
+        )
 
     def step(self):
         self.step_number += 1
@@ -206,6 +210,7 @@ class ElFarol(mesa.Model):
         self.log.append(self.get_attendance())
         self.agents.do('calculate_happiness')
         self.agents.do('review_strategy')
+        self.datacollector.collect(self)
 
     def get_attendance(self):
         '''Calculate the number of Patrons who have decided to attend'''
@@ -244,8 +249,9 @@ if __name__=='__main__':
 
     happiness = [sum(agent.happiness) for agent in bar.agents]
     happiness_median = np.quantile(happiness, 0.5)
+    attendance = bar.datacollector.get_model_vars_dataframe()
     with PlotContext(nrows=2,ncols=1,figs=args.figs,suptitle='El Farol') as axes:
-        attendance1 = sns.barplot(log,ax=axes[0],color='blue',label='Attendance')
+        attendance1 = sns.lineplot(data=attendance,ax=axes[0],color='blue')
         attendance2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0],color='red',label='Capacity')
         attendance3 = sns.lineplot([np.mean(log)]*args.iterations,
                                    ax=axes[0],
