@@ -40,8 +40,7 @@ def parse_arguments():
     population = 100
     iterations = 52
     review_interval = 5
-    # minimum_happiness = 0.25
-    tolerance=25
+    tolerance = 25
     basket_min = 5
     basket_max = 12
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
@@ -174,29 +173,33 @@ class Patron(mesa.Agent):
     '''
     def __init__(self,model,tolerance=25):
         super().__init__(model)
-        self.happiness = []
         self.strategies = []
         self.index = 0
-        self.happiness_total = 0
+        self.happiness = 0
         self.predictions = []
         self.reality = []
         self.tolerance = tolerance
 
     def decide_whether_to_attend(self):
+        '''
+        Attend if number is predicted to be within capacity
+        '''
         self.predictions.append(self.strategies[self.index].get_predicted_attendance())
         self.attend =  self.predictions[-1] < self.capacity
 
     def calculate_happiness(self):
-        self.happiness_total += (1 if self.attend and self.model.is_comfortable() else 0)
-        self.happiness.append(1 if self.attend and self.model.is_comfortable() else 0)
+        '''
+        Patron is happy iff they attend venue, and the number of patrons is within capacity
+        '''
+        self.happiness += (1 if self.attend and self.model.is_comfortable() else 0)
 
     def record_outcome(self):
         self.reality.append(self.model.get_attendance())
 
-    def get_expected_happiness(self):
-        return self.model.step_number * self.minimum_happiness
-
     def review_strategy(self):
+        '''
+        Periodically compare predictions with reality: if they don't match well enough, change strategy.
+        '''
         if self.model.step_number % self.model.review_interval ==0:
             discrepency = sum(abs(a-b) for a,b in zip(self.predictions,self.reality))
             if discrepency>self.tolerance * len(self.predictions):
@@ -225,7 +228,7 @@ class ElFarol(mesa.Model):
         self.review_interval = review_interval
         self.datacollector = mesa.DataCollector(
             model_reporters={'Attendance' : self.get_attendance},
-            agent_reporters={'Happiness' : 'happiness_total'}
+            agent_reporters={'Happiness' : 'happiness'}
         )
 
     def step(self):
