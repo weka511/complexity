@@ -251,13 +251,11 @@ if __name__=='__main__':
 
     with PlotContext(nrows=2,ncols=1,figs=args.figs,suptitle='El Farol') as axes:
         attendance = bar.datacollector.get_model_vars_dataframe()
+        attendance_mean = attendance.mean().item()
+
         plot1 = sns.lineplot(data=attendance,ax=axes[0],color='blue')
-        plot1_2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0],color='red',label='Capacity')
-        plot1_3 = sns.lineplot([np.mean(log)]*args.iterations,
-                                   ax=axes[0],
-                                   color='green',
-                                   linestyle='--',
-                                   label=f'Average {np.mean(log):.1f}')
+        plot1.axhline(args.capacity,color='red',label=f'Capacity={args.capacity}')
+        plot1.axhline(attendance_mean,color='green', linestyle='--',label=f'Average={attendance_mean:.1f}')
         plot1.set(
             title = 'Weekly attendance',
             xlabel = 'Week',
