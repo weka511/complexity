@@ -1,14 +1,14 @@
-# Mesa tutorials
+#El Farol
 
 ## Tutorials and explorations
 
 File|Description
 -------------|-----------------------------------------------------------------------------------------
-wealth.py|Wealth example from tutorial
+el-farol.py|The [El Farol Bar](https://sites.santafe.edu/~wbarthur/Papers/El_Farol.pdf) problem
+
 
 ## Helper programs
 
 File|Description
 -------------|-----------------------------------------------------------------------------------------
-mesa-test.wpr|WingIDE template
-template.py|Template for new files
+el-farol.wpr|WingIDE project
