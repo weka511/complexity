@@ -172,12 +172,13 @@ class Patron(mesa.Agent):
         self.index = 0
         self.review_interval = review_interval
         self.minimum_happiness = minimum_happiness
-        self.attend = False
+        self.happiness_total = 0
 
     def decide_whether_to_attend(self):
         self.attend = self.strategies[self.index].get_predicted_attendance() < self.capacity
 
     def calculate_happiness(self):
+        self.happiness_total += (1 if self.attend and self.model.is_comfortable() else 0)
         self.happiness.append(1 if self.attend and self.model.is_comfortable() else 0)
 
     def get_expected_happiness(self):
@@ -201,7 +202,8 @@ class ElFarol(mesa.Model):
         self.capacity = capacity
         self.step_number = 0
         self.datacollector = mesa.DataCollector(
-            model_reporters={'Attendance':self.get_attendance}
+            model_reporters={'Attendance' : self.get_attendance},
+            agent_reporters={'Happiness' : 'happiness_total'}
         )
 
     def step(self):
@@ -247,24 +249,35 @@ if __name__=='__main__':
     for _ in range(args.iterations):
         bar.step()
 
-    happiness = [sum(agent.happiness) for agent in bar.agents]
-    happiness_median = np.quantile(happiness, 0.5)
-    attendance = bar.datacollector.get_model_vars_dataframe()
     with PlotContext(nrows=2,ncols=1,figs=args.figs,suptitle='El Farol') as axes:
-        attendance1 = sns.lineplot(data=attendance,ax=axes[0],color='blue')
-        attendance2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0],color='red',label='Capacity')
-        attendance3 = sns.lineplot([np.mean(log)]*args.iterations,
+        attendance = bar.datacollector.get_model_vars_dataframe()
+        plot1 = sns.lineplot(data=attendance,ax=axes[0],color='blue')
+        plot1_2 = sns.lineplot([args.capacity]*args.iterations,ax=axes[0],color='red',label='Capacity')
+        plot1_3 = sns.lineplot([np.mean(log)]*args.iterations,
                                    ax=axes[0],
                                    color='green',
                                    linestyle='--',
                                    label=f'Average {np.mean(log):.1f}')
-        attendance1.set_title(f'Weekly attendance')
-        attendance1.legend()
+        plot1.set(
+            title = 'Weekly attendance',
+            xlabel = 'Week',
+            ylabel= 'Attendance'
+        )
+        plot1.legend()
 
-        happiness1 = sns.histplot(happiness, discrete=True,ax=axes[1],color='blue',label='Happiness')
-        happiness1.axvline(happiness_median,color='r',label=f'Median = {happiness_median}')
-        happiness1.set_title('Happiness')
-        happiness1.legend()
+        agent_happiness = bar.datacollector.get_agent_vars_dataframe()
+        last_step = agent_happiness.index.get_level_values('Step').max()
+        happiness = agent_happiness.xs(last_step, level='Step')['Happiness']
+        happiness_median = happiness.median()
+
+        plot2 = sns.histplot(happiness, discrete=True,ax=axes[1],color='blue')
+        plot2.axvline(happiness_median,color='r',label=f'Median = {happiness_median}')
+        plot2.set(
+            title='Overall Happiness',
+            xlabel='Happiness',
+            ylabel='number of agents',
+        );
+        plot2.legend()
 
     elapsed = time() - start
     minutes = int(elapsed/60)
