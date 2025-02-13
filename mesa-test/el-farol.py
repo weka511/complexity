@@ -40,7 +40,8 @@ def parse_arguments():
     population = 100
     iterations = 52
     review_interval = 5
-    minimum_happiness = 0.25
+    # minimum_happiness = 0.25
+    tolerance=25
     basket_min = 5
     basket_max = 12
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
@@ -51,8 +52,8 @@ def parse_arguments():
     parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of iterations for running simulation [{iterations}]')
     parser.add_argument('--review_interval', default=review_interval, type=int,
                         help = f'Review strategy every few iterations[{review_interval}]')
-    parser.add_argument('--minimum_happiness', default=minimum_happiness, type=float,
-                        help = f'Change strategy unless happiness per step is at leaset this value[{minimum_happiness}]')
+    parser.add_argument('--tolerance', default=tolerance, type=float,
+                        help = f'Change strategy unless accuracy per step is below this value[{tolerance}]')
     parser.add_argument('--basket_min', default=basket_min, type=int,help = f'Minimum size for basket of strategies[{basket_min}]')
     parser.add_argument('--basket_max', default=basket_max, type=int,help = f'Maximum size for basket of strategies[{basket_max}]')
     return parser.parse_args()
@@ -171,12 +172,11 @@ class Patron(mesa.Agent):
     '''
     A bar Patron can decide whether or not to attend
     '''
-    def __init__(self,model,minimum_happiness = 0.25,tolerance=25):
+    def __init__(self,model,tolerance=25):
         super().__init__(model)
         self.happiness = []
         self.strategies = []
         self.index = 0
-        self.minimum_happiness = minimum_happiness
         self.happiness_total = 0
         self.predictions = []
         self.reality = []
@@ -199,13 +199,16 @@ class Patron(mesa.Agent):
     def review_strategy(self):
         if self.model.step_number % self.model.review_interval ==0:
             discrepency = sum(abs(a-b) for a,b in zip(self.predictions,self.reality))
-            if discrepency>self.tolerance * len(self.predictions):#sum(self.happiness) < self.get_expected_happiness():
+            if discrepency>self.tolerance * len(self.predictions):
                 self.change_strategy()
+                self.reset_accuracy_estimators()
 
     def change_strategy(self):
         '''Choose a new strategy at random, making sure it isn't the same as the existing one'''
         self.index += self.random.randint(1,len(self.strategies)-1)
         self.index %= len(self.strategies)
+
+    def reset_accuracy_estimators(self):
         self.predictions = []
         self.reality = []
 
@@ -213,9 +216,9 @@ class ElFarol(mesa.Model):
     '''
     The El Farol bar, which has a finite capacity
     '''
-    def __init__(self,population=100,seed=None,capacity = 60,review_interval = 5,minimum_happiness = 0.25):
+    def __init__(self,population=100,seed=None,capacity = 60,review_interval = 5,tolerance = 25):
         super().__init__(seed=seed)
-        Patron.create_agents(model=self, n=population,minimum_happiness = 0.25)
+        Patron.create_agents(model=self, n=population,tolerance = tolerance)
         self.log = []
         self.capacity = capacity
         self.step_number = 0
@@ -255,7 +258,7 @@ if __name__=='__main__':
                   seed = args.seed,
                   capacity = args.capacity,
                   review_interval = args.review_interval,
-                  minimum_happiness = args.minimum_happiness)
+                  tolerance = args.tolerance)
     strategyfactory = StrategyFactory(bar.random,args.population,bar.log)
 
     for patron in bar.agents:
