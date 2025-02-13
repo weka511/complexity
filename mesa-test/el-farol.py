@@ -171,30 +171,43 @@ class Patron(mesa.Agent):
     '''
     A bar Patron can decide whether or not to attend
     '''
-    def __init__(self,model,minimum_happiness = 0.25):
+    def __init__(self,model,minimum_happiness = 0.25,tolerance=25):
         super().__init__(model)
         self.happiness = []
         self.strategies = []
         self.index = 0
         self.minimum_happiness = minimum_happiness
         self.happiness_total = 0
+        self.predictions = []
+        self.reality = []
+        self.tolerance = tolerance
 
     def decide_whether_to_attend(self):
-        self.attend = self.strategies[self.index].get_predicted_attendance() < self.capacity
+        self.predictions.append(self.strategies[self.index].get_predicted_attendance())
+        self.attend =  self.predictions[-1] < self.capacity
 
     def calculate_happiness(self):
         self.happiness_total += (1 if self.attend and self.model.is_comfortable() else 0)
         self.happiness.append(1 if self.attend and self.model.is_comfortable() else 0)
+
+    def record_outcome(self):
+        self.reality.append(self.model.get_attendance())
 
     def get_expected_happiness(self):
         return self.model.step_number * self.minimum_happiness
 
     def review_strategy(self):
         if self.model.step_number % self.model.review_interval ==0:
-            if sum(self.happiness) < self.get_expected_happiness():
-                saved_index = self.index
-                while saved_index == self.index:
-                    self.index = self.random.randint(0,len(self.strategies)-1)
+            discrepency = sum(abs(a-b) for a,b in zip(self.predictions,self.reality))
+            if discrepency>self.tolerance * len(self.predictions):#sum(self.happiness) < self.get_expected_happiness():
+                self.change_strategy()
+
+    def change_strategy(self):
+        '''Choose a new strategy at random, making sure it isn't the same as the existing one'''
+        self.index += self.random.randint(1,len(self.strategies)-1)
+        self.index %= len(self.strategies)
+        self.predictions = []
+        self.reality = []
 
 class ElFarol(mesa.Model):
     '''
@@ -217,6 +230,7 @@ class ElFarol(mesa.Model):
         self.agents.shuffle_do('decide_whether_to_attend')
         self.log.append(self.get_attendance())
         self.agents.do('calculate_happiness')
+        self.agents.do('record_outcome')
         self.agents.do('review_strategy')
         self.datacollector.collect(self)
 
