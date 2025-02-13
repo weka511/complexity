@@ -114,7 +114,10 @@ class MirrorImage(Strategy):
         return self.population - self.log[-1]
 
 class Cycle(Strategy):
-    '''A Strategy that assumes the this week will be the same as an earlier week'''
+    '''
+    A Strategy that assumes that the past recurs cyclically,
+    so this week will be the same it was `m` weeks ago.
+    '''
     def __init__(self,random,population=100,log = [],m=3):
         super().__init__(random,population,log,m=m,name=f'Cycle {m}')
 
@@ -146,31 +149,33 @@ class Trend(Strategy):
 
 class StrategyFactory:
     '''Used to create strategies'''
-    def __init__(self,random):
+    def __init__(self,random,population,log):
         self.random = random
-    def create(self,population,log):
+        self.log = log
+        self.population = population
+
+    def create(self):
         '''Create a strategy at random'''
         match(self.random.randint(0,4-1)):
             case 0:
-                return MirrorImage(self.random,population,log)
+                return MirrorImage(self.random,self.population,self.log)
             case 1:
-                return Cycle(self.random,population,log,m=self.random.randint(1,4))
+                return Cycle(self.random,self.population,self.log,m=self.random.randint(1,4))
             case 2:
-                return Average(self.random,population,log,m=self.random.randint(2,4))
+                return Average(self.random,self.population,self.log,m=self.random.randint(2,4))
             case 3:
-                return Trend(self.random,population,log,m=self.random.randint(4,8))
+                return Trend(self.random,self.population,self.log,m=self.random.randint(4,8))
 
 
 class Patron(mesa.Agent):
     '''
     A bar Patron can decide whether or not to attend
     '''
-    def __init__(self,model,review_interval = 5,minimum_happiness = 0.25):
+    def __init__(self,model,minimum_happiness = 0.25):
         super().__init__(model)
         self.happiness = []
         self.strategies = []
         self.index = 0
-        self.review_interval = review_interval
         self.minimum_happiness = minimum_happiness
         self.happiness_total = 0
 
@@ -185,7 +190,7 @@ class Patron(mesa.Agent):
         return self.model.step_number * self.minimum_happiness
 
     def review_strategy(self):
-        if self.model.step_number % self.review_interval ==0:
+        if self.model.step_number % self.model.review_interval ==0:
             if sum(self.happiness) < self.get_expected_happiness():
                 saved_index = self.index
                 while saved_index == self.index:
@@ -195,12 +200,13 @@ class ElFarol(mesa.Model):
     '''
     The El Farol bar, which has a finite capacity
     '''
-    def __init__(self,population=100,seed=None,log=[],capacity = 60,review_interval = 5,minimum_happiness = 0.25):
+    def __init__(self,population=100,seed=None,capacity = 60,review_interval = 5,minimum_happiness = 0.25):
         super().__init__(seed=seed)
-        Patron.create_agents(model=self, n=population,review_interval = 5,minimum_happiness = 0.25)
-        self.log = log
+        Patron.create_agents(model=self, n=population,minimum_happiness = 0.25)
+        self.log = []
         self.capacity = capacity
         self.step_number = 0
+        self.review_interval = review_interval
         self.datacollector = mesa.DataCollector(
             model_reporters={'Attendance' : self.get_attendance},
             agent_reporters={'Happiness' : 'happiness_total'}
@@ -231,19 +237,17 @@ if __name__=='__main__':
 
     args = parse_arguments()
 
-    log = []
     bar = ElFarol(population = args.population,
                   seed = args.seed,
-                  log = log,
                   capacity = args.capacity,
                   review_interval = args.review_interval,
                   minimum_happiness = args.minimum_happiness)
-    strategyfactory = StrategyFactory(bar.random)
+    strategyfactory = StrategyFactory(bar.random,args.population,bar.log)
 
     for patron in bar.agents:
         m = bar.random.randint(args.basket_min,args.basket_max)
         for _ in range(m):
-            patron.strategies.append(strategyfactory.create(args.population,log))
+            patron.strategies.append(strategyfactory.create())
         patron.capacity = args.capacity
 
     for _ in range(args.iterations):
@@ -281,5 +285,6 @@ if __name__=='__main__':
     minutes = int(elapsed/60)
     seconds = elapsed - 60*minutes
     print (f'Elapsed Time {minutes} m {seconds:.2f} s')
+
     if args.show:
         show()
