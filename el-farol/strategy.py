@@ -92,17 +92,19 @@ class Trend(Strategy):
 	A Strategy that assumes the this week will continue the trend from the last few weeks
 
 	Attributes
-	    m
+	    n    The number of weeks that we are targetting. If we have fewer points, use
+		     what we have, as long as there are at least two points.
 	'''
-	def __init__(self,random,population=100,log = [],m=4):
-		super().__init__(random,population,log,name=f'Average {m}',m=m)
+	def __init__(self,random,population=100,log = [],n=4,m=2):
+		super().__init__(random,population,log,name=f'Average {n}',m=m)
+		self.n = n
 
 	def get_predicted(self):
 		'''
-		Fit a trendline to the last `m` attendances, then extrapolate to the current period.
+		Fit a trendline to the last `n` attendances, then extrapolate to the current period.
 		Clamp into range from [0,population]
 		'''
-		y = np.array(self.log[-self.m:])
+		y = np.array(self.log[-self.n:])
 		x = np.arange(0,len(y))
 		z = np.polyfit(x,y,1)
 		return  min(0,max(z[0] * len(y) + z[1],self.population))
@@ -128,7 +130,7 @@ class StrategyFactory:
 			case 2:
 				return Average(self.random,self.population,self.log,m=self.random.randint(2,4))  #FIXME -- magic numbers
 			case 3:
-				return Trend(self.random,self.population,self.log,m=self.random.randint(4,8))  #FIXME -- magic numbers
+				return Trend(self.random,self.population,self.log,n=self.random.randint(4,8))  #FIXME -- magic numbers
 
 	def create(self):
 		'''Used by Clients to create a strategy: actually look up from list.'''
