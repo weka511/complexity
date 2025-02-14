@@ -23,7 +23,6 @@
    https://sites.santafe.edu/~wbarthur/Papers/El_Farol.pdf
 '''
 
-
 from argparse import ArgumentParser
 from os.path import basename, join, splitext
 from time import time

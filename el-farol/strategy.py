@@ -29,7 +29,15 @@ from abc import ABC, abstractmethod
 import numpy as np
 
 class Strategy(ABC):
-	'''An abstract class, each of whose implementations predicts attendance'''
+	'''
+	An abstract class, each of whose implementations predicts attendance
+
+	Attributes:
+	    random         Random number generator
+		population     Total number of patrons
+		m              The minumim number of data points in log required to make a prediction
+		name           Name of predictor (used to prevent duplicates)
+	'''
 	def __init__(self,random,population=100,log = [],m=1,name=''):
 		self.random = random
 		self.population = population
@@ -55,7 +63,7 @@ class Strategy(ABC):
 class MirrorImage(Strategy):
 	'''A Strategy that assumes the this week will be the mirror image of last week'''
 	def __init__(self,random,population=100,log = []):
-		super().__init__(random,population,log,name='MirrorImage')
+		super().__init__(random,population,log,name='MirrorImage',m=1)
 
 	def get_predicted(self):
 		return self.population - self.log[-1]
@@ -74,13 +82,18 @@ class Cycle(Strategy):
 class Average(Strategy):
 	'''A Strategy that assumes the this week will be the average of the last few weeks'''
 	def __init__(self,random,population=100,log = [],m=4):
-		super().__init__(random,population,log,name=f'Average {m}')
+		super().__init__(random,population,log,name=f'Average {m}',m=m)
 
 	def get_predicted(self):
 		return  np.mean(self.log[-self.m:])
 
 class Trend(Strategy):
-	'''A Strategy that assumes the this week will be the trend from the last few weeks'''
+	'''
+	A Strategy that assumes the this week will continue the trend from the last few weeks
+
+	Attributes
+	    m
+	'''
 	def __init__(self,random,population=100,log = [],m=4):
 		super().__init__(random,population,log,name=f'Average {m}',m=m)
 
