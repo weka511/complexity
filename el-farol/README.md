@@ -4,10 +4,10 @@
 
 File|Description
 -------------|-----------------------------------------------------------------------------------------
-bar.py|Models the bar
+bar.py|Classes in the module represent the El Farol bar
 el-farol.py|The [El Farol Bar](https://sites.santafe.edu/~wbarthur/Papers/El_Farol.pdf) problem
-patron.py|Models bar patrons
-strategy.py|Staregies for predicting attendance
+patron.py|Classes in the module represent the patrons of the El Farol bar
+strategy.py|Classes in the module are used to predict attendance
 
 ## Helper programs
 

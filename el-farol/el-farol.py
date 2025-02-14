@@ -28,17 +28,17 @@ from argparse import ArgumentParser
 from os.path import basename, join, splitext
 from time import time
 
-import numpy as np
 from matplotlib.pyplot import subplots, show
-import mesa
 import seaborn as sns
-import pandas as pd
 
 from strategy import StrategyFactory
 from patron import Patron
 from bar import ElFarol
 
 def parse_arguments():
+    '''
+    Parse command line arguments and display help text.
+    '''
     parser = ArgumentParser(__doc__)
     capacity = 60
     population = 100

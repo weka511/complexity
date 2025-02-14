@@ -15,6 +15,16 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+'''
+   El Farol simulation
+
+   Inductive Reasoning and Bounded Rationality, Brian Arthur,
+
+   https://sites.santafe.edu/~wbarthur/Papers/El_Farol.pdf
+
+   Classes in the module are used to predict attendance at the El Farol bar
+'''
+
 from abc import ABC, abstractmethod
 import numpy as np
 

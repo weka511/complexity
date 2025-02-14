@@ -15,6 +15,15 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+'''
+   El Farol simulation
+
+   Inductive Reasoning and Bounded Rationality, Brian Arthur,
+
+   https://sites.santafe.edu/~wbarthur/Papers/El_Farol.pdf
+
+   Classes in the module represent the patrons of the El Farol bar
+'''
 import mesa
 
 class Patron(mesa.Agent):
