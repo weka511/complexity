@@ -96,20 +96,29 @@ class Trend(Strategy):
 
 class StrategyFactory:
 	'''Used to create strategies'''
-	def __init__(self,random,population,log):
+	def __init__(self,random,population,log,n_strategies=100):
 		self.random = random
 		self.log = log
 		self.population = population
+		self.strategies = []
+		n_strategy_types = len(Strategy.__subclasses__())
+		for _ in range(n_strategies):
+			self.strategies.append(self.build(n_strategy_types))
 
-	def create(self):
+	def build(self,n_strategy_types):
 		'''Create a strategy at random'''
-		match(self.random.randint(0,4-1)):
+		match(self.random.randint(0,n_strategy_types-1)):
 			case 0:
 				return MirrorImage(self.random,self.population,self.log)
 			case 1:
-				return Cycle(self.random,self.population,self.log,m=self.random.randint(1,4))
+				return Cycle(self.random,self.population,self.log,m=self.random.randint(1,12)) #FIXME -- magic numbers
 			case 2:
-				return Average(self.random,self.population,self.log,m=self.random.randint(2,4))
+				return Average(self.random,self.population,self.log,m=self.random.randint(2,4))  #FIXME -- magic numbers
 			case 3:
-				return Trend(self.random,self.population,self.log,m=self.random.randint(4,8))
+				return Trend(self.random,self.population,self.log,m=self.random.randint(4,8))  #FIXME -- magic numbers
+
+	def create(self):
+		'''Used by Clients to create a strategy: actually look up from list.'''
+		n = len(self.strategies)
+		return self.strategies[self.random.randint(0,n-1)]
 

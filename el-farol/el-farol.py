@@ -47,6 +47,7 @@ def parse_arguments():
     tolerance = 25
     basket_min = 5
     basket_max = 12
+    n_strategies = 100
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
     parser.add_argument('--figs', default = './figs',help='Path for storing figures')
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
@@ -59,6 +60,8 @@ def parse_arguments():
                         help = f'Change strategy unless accuracy per step is below this value[{tolerance}]')
     parser.add_argument('--basket_min', default=basket_min, type=int,help = f'Minimum size for basket of strategies[{basket_min}]')
     parser.add_argument('--basket_max', default=basket_max, type=int,help = f'Maximum size for basket of strategies[{basket_max}]')
+    parser.add_argument('--n_strategies', default=n_strategies, type=int,help = f'Number of strategies at start [{n_strategies}]')
+
     return parser.parse_args()
 
 class PlotContext:
