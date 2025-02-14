@@ -58,8 +58,14 @@ def parse_arguments():
     return parser.parse_args()
 
 class PlotContext:
-    '''Used to allocate subplots and save figure to file'''
+    '''
+    Used to allocate subplots and save figure to file
+
+    Class variables:
+       Seq    Used if more than one file is created
+    '''
     Seq = 0
+
     def __init__(self, nrows=1,ncols=1,figs='./figs',suptitle=None):
         PlotContext.Seq += 1
         self.nrows = nrows
@@ -179,6 +185,7 @@ class Patron(mesa.Agent):
         self.predictions = []
         self.reality = []
         self.tolerance = tolerance
+        self.accuracy = 0
 
     def decide_whether_to_attend(self):
         '''
@@ -195,6 +202,7 @@ class Patron(mesa.Agent):
 
     def record_outcome(self):
         self.reality.append(self.model.get_attendance())
+        self.accuracy = abs(self.reality[-1] - self.predictions[-1])
 
     def review_strategy(self):
         '''
@@ -215,6 +223,7 @@ class Patron(mesa.Agent):
         self.predictions = []
         self.reality = []
 
+
 class ElFarol(mesa.Model):
     '''
     The El Farol bar, which has a finite capacity
@@ -227,8 +236,9 @@ class ElFarol(mesa.Model):
         self.step_number = 0
         self.review_interval = review_interval
         self.datacollector = mesa.DataCollector(
-            model_reporters={'Attendance' : self.get_attendance},
-            agent_reporters={'Happiness' : 'happiness'}
+            model_reporters = {'Attendance' : self.get_attendance},
+            agent_reporters = {'Happiness' : 'happiness',
+                               'Accuracy' : 'accuracy'}
         )
 
     def step(self):
@@ -273,11 +283,11 @@ if __name__=='__main__':
     for _ in range(args.iterations):
         bar.step()
 
-    with PlotContext(nrows=2,ncols=1,figs=args.figs,suptitle='El Farol') as axes:
+    with PlotContext(nrows=2,ncols=2,figs=args.figs,suptitle='El Farol') as axes:
         attendance = bar.datacollector.get_model_vars_dataframe()
         attendance_mean = attendance.mean().item()
 
-        plot1 = sns.lineplot(data=attendance,ax=axes[0],color='blue')
+        plot1 = sns.lineplot(data=attendance,ax=axes[0][0],color='blue')
         plot1.axhline(args.capacity,color='red',label=f'Capacity={args.capacity}')
         plot1.axhline(attendance_mean,color='green', linestyle='--',label=f'Average={attendance_mean:.1f}')
         plot1.set(
@@ -287,12 +297,12 @@ if __name__=='__main__':
         )
         plot1.legend()
 
-        agent_happiness = bar.datacollector.get_agent_vars_dataframe()
-        last_step = agent_happiness.index.get_level_values('Step').max()
-        happiness = agent_happiness.xs(last_step, level='Step')['Happiness']
+        agent_vars = bar.datacollector.get_agent_vars_dataframe()
+        last_step = agent_vars.index.get_level_values('Step').max()
+        happiness = agent_vars.xs(last_step, level='Step')['Happiness']
         happiness_median = happiness.median()
 
-        plot2 = sns.histplot(happiness, discrete=True,ax=axes[1],color='blue')
+        plot2 = sns.histplot(happiness, discrete=True,ax=axes[0][1],color='blue')
         plot2.axvline(happiness_median,color='r',label=f'Median = {happiness_median}')
         plot2.set(
             title='Overall Happiness',
@@ -300,6 +310,8 @@ if __name__=='__main__':
             ylabel='number of agents',
         );
         plot2.legend()
+
+        sns.lineplot(data=agent_vars, x='Step', y='Accuracy', hue='AgentID',ax=axes[1][0])
 
     elapsed = time() - start
     minutes = int(elapsed/60)
