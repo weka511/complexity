@@ -23,7 +23,7 @@
    https://sites.santafe.edu/~wbarthur/Papers/El_Farol.pdf
 '''
 
-from abc import ABC, abstractmethod
+
 from argparse import ArgumentParser
 from os.path import basename, join, splitext
 from time import time
@@ -33,6 +33,10 @@ from matplotlib.pyplot import subplots, show
 import mesa
 import seaborn as sns
 import pandas as pd
+
+from strategy import StrategyFactory
+from patron import Patron
+from bar import ElFarol
 
 def parse_arguments():
     parser = ArgumentParser(__doc__)
@@ -87,180 +91,6 @@ class PlotContext:
         base = basename(splitext(__file__)[0])
         return join(self.figs, base if PlotContext.Seq == 1 else f'{base}{PlotContext.Seq - 0}')
 
-class Strategy(ABC):
-    '''An abstract class, each of whose implementations predicts attendance'''
-    def __init__(self,random,population=100,log = [],m=1,name=''):
-        self.random = random
-        self.population = population
-        self.log = log
-        self.m = m
-        self.name = name
-
-    def get_predicted_attendance(self):
-        '''
-        Predict attendance. If there is too little data in the log, choose a random value,
-        otherwise delegate to implementation.
-        '''
-        if len(self.log) < self.m:
-            return self.random.random() * self.population
-        else:
-            return self.get_predicted()
-
-    @abstractmethod
-    def get_predicted(self):
-        '''Used to predict attendance if there is sufficient data'''
-        pass
-
-class MirrorImage(Strategy):
-    '''A Strategy that assumes the this week will be the mirror image of last week'''
-    def __init__(self,random,population=100,log = []):
-        super().__init__(random,population,log,name='MirrorImage')
-
-    def get_predicted(self):
-        return self.population - self.log[-1]
-
-class Cycle(Strategy):
-    '''
-    A Strategy that assumes that the past recurs cyclically,
-    so this week will be the same it was `m` weeks ago.
-    '''
-    def __init__(self,random,population=100,log = [],m=3):
-        super().__init__(random,population,log,m=m,name=f'Cycle {m}')
-
-    def get_predicted(self):
-        return self.log[-self.m]
-
-class Average(Strategy):
-    '''A Strategy that assumes the this week will be the average of the last few weeks'''
-    def __init__(self,random,population=100,log = [],m=4):
-        super().__init__(random,population,log,name=f'Average {m}')
-
-    def get_predicted(self):
-        return  np.mean(self.log[-self.m:])
-
-class Trend(Strategy):
-    '''A Strategy that assumes the this week will be the trend from the last few weeks'''
-    def __init__(self,random,population=100,log = [],m=4):
-        super().__init__(random,population,log,name=f'Average {m}',m=m)
-
-    def get_predicted(self):
-        '''
-        Fit a trendline to the last `m` attendances, then extrapolate to the current period.
-        Clamp into range from [0,population]
-        '''
-        y = np.array(self.log[-self.m:])
-        x = np.arange(0,len(y))
-        z = np.polyfit(x,y,1)
-        return  min(0,max(z[0] * len(y) + z[1],self.population))
-
-class StrategyFactory:
-    '''Used to create strategies'''
-    def __init__(self,random,population,log):
-        self.random = random
-        self.log = log
-        self.population = population
-
-    def create(self):
-        '''Create a strategy at random'''
-        match(self.random.randint(0,4-1)):
-            case 0:
-                return MirrorImage(self.random,self.population,self.log)
-            case 1:
-                return Cycle(self.random,self.population,self.log,m=self.random.randint(1,4))
-            case 2:
-                return Average(self.random,self.population,self.log,m=self.random.randint(2,4))
-            case 3:
-                return Trend(self.random,self.population,self.log,m=self.random.randint(4,8))
-
-
-class Patron(mesa.Agent):
-    '''
-    A bar Patron can decide whether or not to attend
-    '''
-    def __init__(self,model,tolerance=25):
-        super().__init__(model)
-        self.strategies = []
-        self.index = 0
-        self.happiness = 0
-        self.predictions = []
-        self.reality = []
-        self.tolerance = tolerance
-        self.accuracy = 0
-
-    def decide_whether_to_attend(self):
-        '''
-        Attend if number is predicted to be within capacity
-        '''
-        self.predictions.append(self.strategies[self.index].get_predicted_attendance())
-        self.attend =  self.predictions[-1] < self.capacity
-
-    def calculate_happiness(self):
-        '''
-        Patron is happy iff they attend venue, and the number of patrons is within capacity
-        '''
-        self.happiness += (1 if self.attend and self.model.is_comfortable() else 0)
-
-    def record_outcome(self):
-        self.reality.append(self.model.get_attendance())
-        self.accuracy = abs(self.reality[-1] - self.predictions[-1])
-
-    def review_strategy(self):
-        '''
-        Periodically compare predictions with reality: if they don't match well enough, change strategy.
-        '''
-        if self.model.step_number % self.model.review_interval ==0:
-            discrepency = sum(abs(a-b) for a,b in zip(self.predictions,self.reality))
-            if discrepency>self.tolerance * len(self.predictions):
-                self.change_strategy()
-                self.reset_accuracy_estimators()
-
-    def change_strategy(self):
-        '''Choose a new strategy at random, making sure it isn't the same as the existing one'''
-        self.index += self.random.randint(1,len(self.strategies)-1)
-        self.index %= len(self.strategies)
-
-    def reset_accuracy_estimators(self):
-        self.predictions = []
-        self.reality = []
-
-
-class ElFarol(mesa.Model):
-    '''
-    The El Farol bar, which has a finite capacity
-    '''
-    def __init__(self,population=100,seed=None,capacity = 60,review_interval = 5,tolerance = 25):
-        super().__init__(seed=seed)
-        Patron.create_agents(model=self, n=population,tolerance = tolerance)
-        self.log = []
-        self.capacity = capacity
-        self.step_number = 0
-        self.review_interval = review_interval
-        self.datacollector = mesa.DataCollector(
-            model_reporters = {'Attendance' : self.get_attendance},
-            agent_reporters = {'Happiness' : 'happiness',
-                               'Accuracy' : 'accuracy'}
-        )
-
-    def step(self):
-        self.step_number += 1
-        self.agents.shuffle_do('decide_whether_to_attend')
-        self.log.append(self.get_attendance())
-        self.agents.do('calculate_happiness')
-        self.agents.do('record_outcome')
-        self.agents.do('review_strategy')
-        self.datacollector.collect(self)
-
-    def get_attendance(self):
-        '''Calculate the number of Patrons who have decided to attend'''
-        return sum(1 for patron in self.agents if patron.attend)
-
-    def is_comfortable(self):
-        '''
-        The bar is comfortable provided the attendance doesn't exceed capacity
-        '''
-        return self.log[-1] <= self.capacity
-
-
 if __name__=='__main__':
     start  = time()
     parser = ArgumentParser(__doc__)
@@ -311,7 +141,13 @@ if __name__=='__main__':
         );
         plot2.legend()
 
-        sns.lineplot(data=agent_vars, x='Step', y='Accuracy', hue='AgentID',ax=axes[1][0])
+        sns.color_palette('magma', as_cmap=True)
+        plot3 = sns.lineplot(data=agent_vars, x='Step', y='Discrepency', hue='AgentID',ax=axes[1][0])
+        plot3.set(
+            title = f'Accuracy for each Patron for tolerance {args.tolerance}',
+            xlabel = 'Week',
+            ylabel= 'Discrepency'
+        )
 
     elapsed = time() - start
     minutes = int(elapsed/60)
