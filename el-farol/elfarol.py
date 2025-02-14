@@ -39,7 +39,7 @@ def parse_arguments():
     parser = ArgumentParser(__doc__)
     capacity = 60
     population = 100
-    iterations = 52
+    max_steps = 52
     review_interval = 5
     tolerance = 25
     basket_min = 5
@@ -50,7 +50,7 @@ def parse_arguments():
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
     parser.add_argument('--capacity', default=capacity, type=int,help = f'Capacity of venue[{capacity}]')
     parser.add_argument('--population', default=population, type=int,help = f'Number of people available to attend venue [{population}]')
-    parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of iterations for running simulation [{iterations}]')
+    parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
     parser.add_argument('--review_interval', default=review_interval, type=int,
                         help = f'Review strategy every few iterations[{review_interval}]')
     parser.add_argument('--tolerance', default=tolerance, type=float,
@@ -105,7 +105,7 @@ if __name__=='__main__':
                   basket_min = args.basket_min,
                   basket_max = args.basket_max)
 
-    for _ in range(args.iterations):
+    for _ in range(args.max_steps):
         bar.step()
 
     with PlotContext(nrows=2,ncols=2,figs=args.figs,suptitle='El Farol') as axes:
