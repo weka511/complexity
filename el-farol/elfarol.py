@@ -30,8 +30,6 @@ from time import time
 from matplotlib.pyplot import subplots, show
 import seaborn as sns
 
-from strategy import StrategyFactory
-from patron import Patron
 from bar import ElFarol
 
 def parse_arguments():
@@ -103,14 +101,9 @@ if __name__=='__main__':
                   seed = args.seed,
                   capacity = args.capacity,
                   review_interval = args.review_interval,
-                  tolerance = args.tolerance)
-    strategyfactory = StrategyFactory(bar.random,args.population,bar.log)
-
-    for patron in bar.agents:
-        m = bar.random.randint(args.basket_min,args.basket_max)
-        for _ in range(m):
-            patron.strategies.append(strategyfactory.create())
-        patron.capacity = args.capacity
+                  tolerance = args.tolerance,
+                  basket_min = args.basket_min,
+                  basket_max = args.basket_max)
 
     for _ in range(args.iterations):
         bar.step()

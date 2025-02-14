@@ -27,12 +27,20 @@
 
 import mesa
 from patron import Patron
+from strategy import StrategyFactory
 
 class ElFarol(mesa.Model):
 	'''
 	The El Farol bar, which has a finite capacity
 	'''
-	def __init__(self,population=100,seed=None,capacity = 60,review_interval = 5,tolerance = 25):
+	def __init__(self,
+				 population = 100,
+				 seed = None,
+				 capacity = 60,
+				 review_interval = 5,
+				 tolerance = 25,
+				 basket_min = 5,
+				 basket_max = 12):
 		super().__init__(seed=seed)
 		Patron.create_agents(model=self, n=population,tolerance = tolerance)
 		self.log = []
@@ -44,6 +52,16 @@ class ElFarol(mesa.Model):
 				agent_reporters = {'Happiness' : 'happiness',
 								   'Discrepency' : 'discrepency'}
 			)
+
+		strategyfactory = StrategyFactory(self.random,population,self.log)
+
+		for patron in self.agents:
+			m = self.random.randint(basket_min,basket_max)
+			for _ in range(m):
+				patron.strategies.append(strategyfactory.create())
+			patron.capacity = capacity
+
+		self.running = True
 
 	def step(self):
 		self.step_number += 1
