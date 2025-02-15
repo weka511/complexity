@@ -24,14 +24,11 @@
 '''
 
 from argparse import ArgumentParser
-from os.path import basename, join, splitext
+from os.path import basename, splitext
 from time import time
 
-import numpy as np
-from matplotlib.pyplot import subplots, show
-import mesa
-import seaborn as sns
 import pandas as pd
+import mesa
 import bar
 
 def parse_arguments():
@@ -39,10 +36,9 @@ def parse_arguments():
     iterations = 5
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
-    parser.add_argument('--figs', default = './figs',help='Path for storing figures')
-    parser.add_argument('--show',default=False,action='store_true',help='Show plots')
     parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
     parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of times to runn simulation [{iterations}]')
+    parser.add_argument('--output',default = basename(splitext(__file__)[0]))
     return parser.parse_args()
 
 class PlotContext:
@@ -95,14 +91,12 @@ if __name__=='__main__':
     )
 
     results_df = pd.DataFrame(results)
-    print(results_df.keys())
+    output_file = args.output if len(splitext(args.output)[1])>0 else f'{args.output}.csv'
+    results_df.to_csv(output_file)
+    print (f'Saved results to {output_file}')
 
-    with PlotContext(figs=args.figs) as axes:
-        pass
 
     elapsed = time() - start
     minutes = int(elapsed/60)
     seconds = elapsed - 60*minutes
     print (f'Elapsed Time {minutes} m {seconds:.2f} s')
-    if args.show:
-        show()
