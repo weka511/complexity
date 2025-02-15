@@ -41,37 +41,6 @@ def parse_arguments():
     parser.add_argument('--output',default = basename(splitext(__file__)[0]))
     return parser.parse_args()
 
-class PlotContext:
-    '''
-    Used to allocate subplots and save figure to file
-
-    Class variables:
-       Seq    Used if more than one file is created
-    '''
-    Seq = 0
-
-    def __init__(self, nrows=1,ncols=1,figs='./figs',suptitle=None):
-        PlotContext.Seq += 1
-        self.nrows = nrows
-        self.ncols = ncols
-        self.figs = figs
-        self.suptitle = suptitle
-
-    def __enter__(self):
-        self.fig, self.ax = subplots(nrows=self.nrows,ncols=self.ncols,figsize=(10,6))
-        if self.suptitle != None:
-            self.fig.suptitle(self.suptitle)
-        return self.ax
-
-    def __exit__(self, type, value, traceback):
-        self.fig.tight_layout()
-        self.fig.savefig(self.get_file_name())
-
-    def get_file_name(self):
-        base = basename(splitext(__file__)[0])
-        return join(self.figs, base if PlotContext.Seq == 1 else f'{base}{PlotContext.Seq - 0}')
-
-
 if __name__=='__main__':
     start  = time()
     parser = ArgumentParser(__doc__)
