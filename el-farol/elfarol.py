@@ -109,9 +109,9 @@ if __name__=='__main__':
         bar.step()
 
     with PlotContext(nrows=2,ncols=2,figs=args.figs,suptitle='El Farol') as axes:
-        attendance = bar.datacollector.get_model_vars_dataframe()
+        attendance = bar.datacollector.get_model_vars_dataframe()['Attendance']
         attendance_mean = attendance.mean().item()
-
+        gini = bar.datacollector.get_model_vars_dataframe()['Gini']
         plot1 = sns.lineplot(data=attendance,ax=axes[0][0],color='blue')
         plot1.axhline(args.capacity,color='red',label=f'Capacity={args.capacity}')
         plot1.axhline(attendance_mean,color='green', linestyle='--',label=f'Average={attendance_mean:.1f}')
@@ -143,6 +143,14 @@ if __name__=='__main__':
             xlabel = 'Week',
             ylabel= 'Discrepency'
         )
+
+        plot4 =sns.lineplot(data=gini,ax=axes[1][1],color='blue')
+        plot4.set(
+            title = f'Gini Coefficient',
+            xlabel = 'Week',
+            ylabel= 'Gini Index'
+        )
+
 
     elapsed = time() - start
     minutes = int(elapsed/60)

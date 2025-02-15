@@ -25,7 +25,9 @@
    Classes in the module represent the El Farol bar
 '''
 
+import unittest
 import mesa
+import numpy as np
 from patron import Patron
 from strategy import StrategyFactory
 
@@ -48,7 +50,8 @@ class ElFarol(mesa.Model):
 		self.step_number = 0
 		self.review_interval = review_interval
 		self.datacollector = mesa.DataCollector(
-				model_reporters = {'Attendance' : self.get_attendance},
+				model_reporters = {'Attendance' : self.get_attendance,
+								   'Gini'       : self.get_gini},
 				agent_reporters = {'Happiness' : 'happiness',
 								   'Discrepency' : 'discrepency'}
 			)
@@ -76,8 +79,42 @@ class ElFarol(mesa.Model):
 		'''Calculate the number of Patrons who have decided to attend'''
 		return sum(1 for patron in self.agents if patron.attend)
 
+	def get_gini(self):
+		'''
+		Compute Gini index based on happiness
+		'''
+		return get_gini_coefficient(np.array([agent.happiness for agent in self.agents]))
+
+
 	def is_comfortable(self):
 		'''
 		The bar is comfortable provided the attendance doesn't exceed capacity
 		'''
 		return self.log[-1] <= self.capacity
+
+def get_gini_coefficient(incomes):
+	'''
+	Calculate Gini coefficient from
+	https://en.wikipedia.org/wiki/Gini_coefficientes
+
+	NB. The test for this case breaks
+	'''
+	n, = incomes.shape
+	total_income = incomes.sum()
+	return np.abs(np.subtract.outer(incomes,incomes)).sum() / (2*n*total_income) if total_income > 0 else 0
+
+class TestBar(unittest.TestCase):
+
+	def test_get_gini_coefficient(self):
+		'''
+		Test case based on
+		https://www.core-econ.org/the-economy/microeconomics/05-the-rules-of-the-game-12-measuring-economic-inequality.html
+		#FIXME
+		'''
+		self.assertAlmostEqual(0.56,get_gini_coefficient(np.array([2,4,12])),delta=0.01)
+		self.assertAlmostEqual(1,get_gini_coefficient(np.array([18,0,0])),delta=0.01)
+		self.assertAlmostEqual(0,get_gini_coefficient(np.array([6,6,6])),delta=0.01)
+		self.assertAlmostEqual(0,get_gini_coefficient(np.array([0,0,0])),delta=0.01)
+
+if __name__ == '__main__':
+	unittest.main()

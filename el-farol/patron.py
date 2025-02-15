@@ -29,6 +29,15 @@ import mesa
 class Patron(mesa.Agent):
 	'''
 	A bar Patron can decide whether or not to attend
+
+	Attributes:
+		strategies
+		index
+		happiness
+		predictions
+		reality
+		tolerance
+		discrepency
 	'''
 	def __init__(self,model,tolerance=25):
 		super().__init__(model)
