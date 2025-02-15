@@ -34,6 +34,14 @@ from strategy import StrategyFactory
 class ElFarol(mesa.Model):
 	'''
 	The El Farol bar, which has a finite capacity
+
+	Attributes:
+		log             Used to record attendance for each period
+		capacity        Venue remains confortable if there are fewer attendees than capacity
+		step_number     Keep track of time, so we can review strategies periodically
+		review_interval Determine whether to review strategies
+		datacollector   Used to record data from run
+		running         Used by batch runner
 	'''
 	def __init__(self,
 				 population = 100,
@@ -67,6 +75,9 @@ class ElFarol(mesa.Model):
 		self.running = True
 
 	def step(self):
+		'''
+		Carry out one step of simulation.
+		'''
 		self.step_number += 1
 		self.agents.shuffle_do('decide_whether_to_attend')
 		self.log.append(self.get_attendance())
@@ -107,14 +118,12 @@ class TestBar(unittest.TestCase):
 
 	def test_get_gini_coefficient(self):
 		'''
-		Test case based on
-		https://www.core-econ.org/the-economy/microeconomics/05-the-rules-of-the-game-12-measuring-economic-inequality.html
-		#FIXME
+		Test case based on https://goodcalculators.com/gini-coefficient-calculator/
+		plus one test for case where all inputs are zero
 		'''
-		self.assertAlmostEqual(0.56,get_gini_coefficient(np.array([2,4,12])),delta=0.01)
-		self.assertAlmostEqual(1,get_gini_coefficient(np.array([18,0,0])),delta=0.01)
 		self.assertAlmostEqual(0,get_gini_coefficient(np.array([6,6,6])),delta=0.01)
 		self.assertAlmostEqual(0,get_gini_coefficient(np.array([0,0,0])),delta=0.01)
+		self.assertAlmostEqual(0.28571,get_gini_coefficient(np.array([1000,2000,3000,4000,5000,6000,7000])),delta=0.00005)
 
 if __name__ == '__main__':
 	unittest.main()
