@@ -30,15 +30,15 @@ from time import time
 import pandas as pd
 import mesa
 import bar
+from elfarol import add_common_parameters
 
 def parse_arguments():
-    max_steps = 52
     iterations = 5
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
-    parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
-    parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of times to runn simulation [{iterations}]')
+    parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of times to run simulation [{iterations}]')
     parser.add_argument('--output',default = basename(splitext(__file__)[0]))
+    add_common_parameters(parser)
     return parser.parse_args()
 
 if __name__=='__main__':
@@ -47,11 +47,16 @@ if __name__=='__main__':
 
     args = parse_arguments()
 
-    params = {'review_interval': 7}
-
     results = mesa.batch_run(
         bar.ElFarol,
-        parameters = params,
+        parameters = {
+            'review_interval' : args.review_interval,
+            'capacity'        : args.capacity,
+            'population'      : args.population,
+            'tolerance'       : args.tolerance,
+            'basket_min'      : args.basket_min,
+            'basket_max'      : args.basket_max
+        },
         iterations = args.iterations,
         max_steps = args.max_steps,
         number_processes = 1,
@@ -63,7 +68,6 @@ if __name__=='__main__':
     output_file = args.output if len(splitext(args.output)[1])>0 else f'{args.output}.csv'
     results_df.to_csv(output_file)
     print (f'Saved results to {output_file}')
-
 
     elapsed = time() - start
     minutes = int(elapsed/60)

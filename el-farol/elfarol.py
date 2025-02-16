@@ -32,11 +32,10 @@ import seaborn as sns
 
 from bar import ElFarol
 
-def parse_arguments():
+def add_common_parameters(parser):
     '''
-    Parse command line arguments and display help text.
+    Used to share options with runner.py
     '''
-    parser = ArgumentParser(__doc__)
     capacity = 60
     population = 100
     max_steps = 52
@@ -44,10 +43,7 @@ def parse_arguments():
     tolerance = 25
     basket_min = 5
     basket_max = 12
-    n_strategies = 100
-    parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
-    parser.add_argument('--figs', default = './figs',help='Path for storing figures')
-    parser.add_argument('--show',default=False,action='store_true',help='Show plots')
+
     parser.add_argument('--capacity', default=capacity, type=int,help = f'Capacity of venue[{capacity}]')
     parser.add_argument('--population', default=population, type=int,help = f'Number of people available to attend venue [{population}]')
     parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
@@ -57,6 +53,18 @@ def parse_arguments():
                         help = f'Change strategy unless accuracy per step is below this value[{tolerance}]')
     parser.add_argument('--basket_min', default=basket_min, type=int,help = f'Minimum size for basket of strategies[{basket_min}]')
     parser.add_argument('--basket_max', default=basket_max, type=int,help = f'Maximum size for basket of strategies[{basket_max}]')
+
+
+def parse_arguments():
+    '''
+    Parse command line arguments and display help text.
+    '''
+    parser = ArgumentParser(__doc__)
+    n_strategies = 100
+    parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
+    parser.add_argument('--figs', default = './figs',help='Path for storing figures')
+    parser.add_argument('--show',default=False,action='store_true',help='Show plots')
+    add_common_parameters(parser)
     parser.add_argument('--n_strategies', default=n_strategies, type=int,help = f'Number of strategies at start [{n_strategies}]')
 
     return parser.parse_args()

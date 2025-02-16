@@ -31,18 +31,18 @@ class Patron(mesa.Agent):
 	A bar Patron can decide whether or not to attend
 
 	Attributes:
-		strategies
-		index
-		happiness
-		predictions
-		reality
-		tolerance
-		discrepency
+		strategies     Basket of available strategies
+		index          Index of active strategy
+		happiness      Number of time patron has attended, and total attendance was withing capacity
+		predictions    History of prodictions
+		reality        History of actual attendance
+		tolerance      The prediction error that Patron is willing to tolerate
+		discrepency    Prediction error
 	'''
 	def __init__(self,model,tolerance=25):
 		super().__init__(model)
 		self.strategies = []
-		self.index = 0
+		self.active = 0
 		self.happiness = 0
 		self.predictions = []
 		self.reality = []
@@ -51,18 +51,22 @@ class Patron(mesa.Agent):
 
 	def decide_whether_to_attend(self):
 		'''
-		Attend if number is predicted to be within capacity
+		Predict attendance. Attend if prediction is within capacity
 		'''
-		self.predictions.append(self.strategies[self.index].get_predicted_attendance())
-		self.attend =  self.predictions[-1] < self.capacity
+		self.predictions.append(self.strategies[self.active].get_predicted_attendance())
+		self.attend = self.predictions[-1] < self.capacity
 
 	def calculate_happiness(self):
 		'''
 		Patron is happy iff they attend venue, and the number of patrons is within capacity
 		'''
-		self.happiness += (1 if self.attend and self.model.is_comfortable() else 0)
+		if self.attend and self.model.is_comfortable():
+			self.happiness += 1
 
 	def record_outcome(self):
+		'''
+		Record actual attendance, and calculate discrpancy
+		'''
 		self.reality.append(self.model.get_attendance())
 		self.discrepency = abs(self.reality[-1] - self.predictions[-1])
 
@@ -78,9 +82,10 @@ class Patron(mesa.Agent):
 
 	def change_strategy(self):
 		'''Choose a new strategy at random, making sure it isn't the same as the existing one'''
-		self.index += self.random.randint(1,len(self.strategies)-1)
-		self.index %= len(self.strategies)
+		self.active += self.random.randint(1,len(self.strategies)-1)
+		self.active %= len(self.strategies)
 
 	def reset_accuracy_estimators(self):
+		'''Used when strategy changes to remove history from previous strategy.'''
 		self.predictions = []
 		self.reality = []
