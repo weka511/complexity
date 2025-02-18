@@ -13,5 +13,7 @@ strategy.py|Classes in the module are used to predict attendance
 ## Helper programs
 
 File|Description
--------------|-----------------------------------------------------------------------------------------
+--------------|-----------------------------------------------------------------------------------------
+attendance.Rmd|Used to analyze dpenence of Attendance on capacity
+el-farol.Rproj|RMarkdown project
 el-farol.wpr|WingIDE project
