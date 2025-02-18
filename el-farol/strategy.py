@@ -115,10 +115,7 @@ class StrategyFactory:
 		self.random = random
 		self.log = log
 		self.N = N
-		self.strategies = []
-		n_strategy_types = len(Strategy.__subclasses__())
-		for _ in range(n_strategies):
-			self.strategies.append(self.build(n_strategy_types))
+		self.strategies = [self.build(len(Strategy.__subclasses__())) for _ in range(n_strategies)]
 
 	def build(self,n_strategy_types):
 		'''Create a strategy at random'''

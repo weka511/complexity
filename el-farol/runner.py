@@ -50,7 +50,6 @@ def parse_arguments():
     parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
     parser.add_argument('--review_interval',  type=int, nargs = '*')
     parser.add_argument('--tolerance',  type=int, nargs = '*')
-    parser.add_argument('--basket_min', type=int, nargs = '*')
     parser.add_argument('--k',  type=int, nargs = '*')
     return parser.parse_args()
 
@@ -72,11 +71,11 @@ if __name__=='__main__':
     results = mesa.batch_run(
         bar.Bar,
         parameters = {
-            'review_interval' :  get_param(args.review_interval,default=5),
+            'review_interval' : get_param(args.review_interval,default=5),
             'capacity'        : get_param(args.capacity,default=60),
-            'N'               :  get_param(args.N,default=100),
-            'tolerance'       :  get_param(args.tolerance,default=25),
-            'k'               :  get_param(args.k,default=12),
+            'N'               : get_param(args.N,default=100),
+            'tolerance'       : get_param(args.tolerance,default=25),
+            'k'               : get_param(args.k,default=12),
         },
         iterations = args.iterations,
         max_steps = args.max_steps,
