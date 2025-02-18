@@ -38,24 +38,45 @@ def parse_arguments():
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
     parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of times to run simulation [{iterations}]')
     parser.add_argument('--output',default = basename(splitext(__file__)[0]))
-    add_common_parameters(parser)
+    capacity = 60
+    N = 100
+    max_steps = 52
+    review_interval = 5
+    tolerance = 25
+    k = 12
+
+    parser.add_argument('--capacity', type=int, nargs = '*')
+    parser.add_argument('--N', type=int, nargs = '*')
+    parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
+    parser.add_argument('--review_interval',  type=int, nargs = '*')
+    parser.add_argument('--tolerance',  type=int, nargs = '*')
+    parser.add_argument('--basket_min', type=int, nargs = '*')
+    parser.add_argument('--k',  type=int, nargs = '*')
     return parser.parse_args()
+
+def get_param(argvalue,default=-1):
+    if argvalue==None: return default
+    match (len(argvalue)):
+        case 1:
+            return argvalue
+        case 2:
+            return range(argvalue[0],argvalue[1]+1)
+        case 3:
+            return range(argvalue[0],argvalue[1]+1,argvalue[2])
 
 if __name__=='__main__':
     start  = time()
     parser = ArgumentParser(__doc__)
 
     args = parse_arguments()
-
     results = mesa.batch_run(
-        bar.ElFarol,
+        bar.Bar,
         parameters = {
-            'review_interval' : args.review_interval,
-            'capacity'        : args.capacity,
-            'population'      : args.population,
-            'tolerance'       : args.tolerance,
-            'basket_min'      : args.basket_min,
-            'basket_max'      : args.basket_max
+            'review_interval' :  get_param(args.review_interval,default=5),
+            'capacity'        : get_param(args.capacity,default=60),
+            'N'               :  get_param(args.N,default=100),
+            'tolerance'       :  get_param(args.tolerance,default=25),
+            'k'               :  get_param(args.k,default=12),
         },
         iterations = args.iterations,
         max_steps = args.max_steps,

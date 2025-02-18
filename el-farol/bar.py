@@ -31,7 +31,7 @@ import numpy as np
 from patron import Patron
 from strategy import StrategyFactory
 
-class ElFarol(mesa.Model):
+class Bar(mesa.Model):
 	'''
 	The El Farol bar, which has a finite capacity
 
@@ -44,15 +44,14 @@ class ElFarol(mesa.Model):
 		running         Used by batch runner
 	'''
 	def __init__(self,
-				 population = 100,
+				 N = 100,
 				 seed = None,
 				 capacity = 60,
 				 review_interval = 5,
 				 tolerance = 25,
-				 basket_min = 5,
-				 basket_max = 12):
+				 k = 12):
 		super().__init__(seed=seed)
-		Patron.create_agents(model=self, n=population,tolerance = tolerance)
+		Patron.create_agents(model=self, n=N,tolerance = tolerance)
 		self.log = []
 		self.capacity = capacity
 		self.step_number = 0
@@ -64,11 +63,10 @@ class ElFarol(mesa.Model):
 								   'Discrepency' : 'discrepency'}
 			)
 
-		strategyfactory = StrategyFactory(self.random,population,self.log)
+		strategyfactory = StrategyFactory(self.random,N,self.log)
 
 		for patron in self.agents:
-			m = self.random.randint(basket_min,basket_max)
-			for _ in range(m):
+			for _ in range(k):
 				patron.strategies.append(strategyfactory.create())
 			patron.capacity = capacity
 

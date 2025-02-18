@@ -33,14 +33,14 @@ class Strategy(ABC):
 	An abstract class, each of whose implementations predicts attendance
 
 	Attributes:
-	    random         Random number generator
-		population     Total number of patrons
-		m              The minumim number of data points in log required to make a prediction
-		name           Name of predictor (used to prevent duplicates)
+	    random    Random number generator
+		N         Total number of patrons
+		m         The minimim number of data points in log required to make a prediction
+		name      Name of predictor (used to prevent duplicates)
 	'''
-	def __init__(self,random,population=100,log = [],m=1,name=''):
+	def __init__(self,random,N=100,log = [],m=1,name=''):
 		self.random = random
-		self.population = population
+		self.N = N
 		self.log = log
 		self.m = m
 		self.name = name
@@ -51,7 +51,7 @@ class Strategy(ABC):
 		otherwise delegate to implementation.
 		'''
 		if len(self.log) < self.m:
-			return self.random.random() * self.population
+			return self.random.random() * self.N
 		else:
 			return self.get_predicted()
 
@@ -62,27 +62,27 @@ class Strategy(ABC):
 
 class MirrorImage(Strategy):
 	'''A Strategy that assumes the this week will be the mirror image of last week'''
-	def __init__(self,random,population=100,log = []):
-		super().__init__(random,population,log,name='MirrorImage',m=1)
+	def __init__(self,random,N=100,log = []):
+		super().__init__(random,N,log,name='MirrorImage',m=1)
 
 	def get_predicted(self):
-		return self.population - self.log[-1]
+		return self.N - self.log[-1]
 
 class Cycle(Strategy):
 	'''
 	A Strategy that assumes that the past recurs cyclically,
 	so this week will be the same it was `m` weeks ago.
 	'''
-	def __init__(self,random,population=100,log = [],m=3):
-		super().__init__(random,population,log,m=m,name=f'Cycle {m}')
+	def __init__(self,random,N=100,log = [],m=3):
+		super().__init__(random,N,log,m=m,name=f'Cycle {m}')
 
 	def get_predicted(self):
 		return self.log[-self.m]
 
 class Average(Strategy):
 	'''A Strategy that assumes the this week will be the average of the last few weeks'''
-	def __init__(self,random,population=100,log = [],m=4):
-		super().__init__(random,population,log,name=f'Average {m}',m=m)
+	def __init__(self,random,N=100,log = [],m=4):
+		super().__init__(random,N,log,name=f'Average {m}',m=m)
 
 	def get_predicted(self):
 		return  np.mean(self.log[-self.m:])
@@ -95,26 +95,26 @@ class Trend(Strategy):
 	    n    The number of weeks that we are targetting. If we have fewer points, use
 		     what we have, as long as there are at least two points.
 	'''
-	def __init__(self,random,population=100,log = [],n=4,m=2):
-		super().__init__(random,population,log,name=f'Average {n}',m=m)
+	def __init__(self,random,N=100,log = [],n=4,m=2):
+		super().__init__(random,N,log,name=f'Average {n}',m=m)
 		self.n = n
 
 	def get_predicted(self):
 		'''
 		Fit a trendline to the last `n` attendances, then extrapolate to the current period.
-		Clamp into range from [0,population]
+		Clamp into range from [0,N]
 		'''
 		y = np.array(self.log[-self.n:])
 		x = np.arange(0,len(y))
 		z = np.polyfit(x,y,1)
-		return  min(0,max(z[0] * len(y) + z[1],self.population))
+		return  min(0,max(z[0] * len(y) + z[1],self.N))
 
 class StrategyFactory:
 	'''Used to create strategies'''
-	def __init__(self,random,population,log,n_strategies=100):
+	def __init__(self,random,N,log,n_strategies=100):
 		self.random = random
 		self.log = log
-		self.population = population
+		self.N = N
 		self.strategies = []
 		n_strategy_types = len(Strategy.__subclasses__())
 		for _ in range(n_strategies):
@@ -124,13 +124,13 @@ class StrategyFactory:
 		'''Create a strategy at random'''
 		match(self.random.randint(0,n_strategy_types-1)):
 			case 0:
-				return MirrorImage(self.random,self.population,self.log)
+				return MirrorImage(self.random,self.N,self.log)
 			case 1:
-				return Cycle(self.random,self.population,self.log,m=self.random.randint(1,12)) #FIXME -- magic numbers
+				return Cycle(self.random,self.N,self.log,m=self.random.randint(1,12)) #FIXME -- magic numbers
 			case 2:
-				return Average(self.random,self.population,self.log,m=self.random.randint(2,4))  #FIXME -- magic numbers
+				return Average(self.random,self.N,self.log,m=self.random.randint(2,4))  #FIXME -- magic numbers
 			case 3:
-				return Trend(self.random,self.population,self.log,n=self.random.randint(4,8))  #FIXME -- magic numbers
+				return Trend(self.random,self.N,self.log,n=self.random.randint(4,8))  #FIXME -- magic numbers
 
 	def create(self):
 		'''Used by Clients to create a strategy: actually look up from list.'''

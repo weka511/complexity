@@ -30,29 +30,28 @@ from time import time
 from matplotlib.pyplot import subplots, show
 import seaborn as sns
 
-from bar import ElFarol
+from bar import Bar
 
 def add_common_parameters(parser):
     '''
     Used to share options with runner.py
     '''
     capacity = 60
-    population = 100
+    N = 100
     max_steps = 52
     review_interval = 5
     tolerance = 25
-    basket_min = 5
-    basket_max = 12
+    k = 12
 
     parser.add_argument('--capacity', default=capacity, type=int,help = f'Capacity of venue[{capacity}]')
-    parser.add_argument('--population', default=population, type=int,help = f'Number of people available to attend venue [{population}]')
+    parser.add_argument('--N', default=N, type=int,help = f'Number of people available to attend venue [{N}]')
     parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
     parser.add_argument('--review_interval', default=review_interval, type=int,
                         help = f'Review strategy every few iterations[{review_interval}]')
     parser.add_argument('--tolerance', default=tolerance, type=float,
                         help = f'Change strategy unless accuracy per step is below this value[{tolerance}]')
-    parser.add_argument('--basket_min', default=basket_min, type=int,help = f'Minimum size for basket of strategies[{basket_min}]')
-    parser.add_argument('--basket_max', default=basket_max, type=int,help = f'Maximum size for basket of strategies[{basket_max}]')
+
+    parser.add_argument('--k', default=k, type=int,help = f'Maximum size for basket of strategies[{k}]')
 
 
 def parse_arguments():
@@ -105,13 +104,12 @@ if __name__=='__main__':
 
     args = parse_arguments()
 
-    bar = ElFarol(population = args.population,
-                  seed = args.seed,
-                  capacity = args.capacity,
-                  review_interval = args.review_interval,
-                  tolerance = args.tolerance,
-                  basket_min = args.basket_min,
-                  basket_max = args.basket_max)
+    bar = Bar(N = args.N,
+            seed = args.seed,
+            capacity = args.capacity,
+            review_interval = args.review_interval,
+            tolerance = args.tolerance,
+            k = args.k)
 
     for _ in range(args.max_steps):
         bar.step()
