@@ -26,16 +26,16 @@
 from argparse import ArgumentParser
 from os.path import basename, join, splitext
 from time import time
-
 from matplotlib.pyplot import subplots, show
 import seaborn as sns
-
 from bar import Bar
 
-def add_common_parameters(parser):
+def parse_arguments():
     '''
-    Used to share options with runner.py
+    Parse command line arguments and display help text.
     '''
+    parser = ArgumentParser(__doc__)
+    n_strategies = 100
     capacity = 60
     N = 100
     max_steps = 52
@@ -43,6 +43,10 @@ def add_common_parameters(parser):
     tolerance = 25
     k = 12
 
+    parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
+    parser.add_argument('--figs', default = './figs',help='Path for storing figures')
+    parser.add_argument('--show',default=False,action='store_true',help='Show plots')
+    parser.add_argument('--n_strategies', default=n_strategies, type=int,help = f'Number of strategies at start [{n_strategies}]')
     parser.add_argument('--capacity', default=capacity, type=int,help = f'Capacity of venue[{capacity}]')
     parser.add_argument('--N', default=N, type=int,help = f'Number of people available to attend venue [{N}]')
     parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
@@ -52,19 +56,6 @@ def add_common_parameters(parser):
                         help = f'Change strategy unless accuracy per step is below this value[{tolerance}]')
 
     parser.add_argument('--k', default=k, type=int,help = f'Maximum size for basket of strategies[{k}]')
-
-
-def parse_arguments():
-    '''
-    Parse command line arguments and display help text.
-    '''
-    parser = ArgumentParser(__doc__)
-    n_strategies = 100
-    parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
-    parser.add_argument('--figs', default = './figs',help='Path for storing figures')
-    parser.add_argument('--show',default=False,action='store_true',help='Show plots')
-    add_common_parameters(parser)
-    parser.add_argument('--n_strategies', default=n_strategies, type=int,help = f'Number of strategies at start [{n_strategies}]')
 
     return parser.parse_args()
 

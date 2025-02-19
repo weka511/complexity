@@ -30,9 +30,12 @@ from time import time
 import pandas as pd
 import mesa
 import bar
-from elfarol import add_common_parameters
+
 
 def parse_arguments():
+    '''
+    Parse command line arguments and display help text.
+    '''
     iterations = 5
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
