@@ -2,10 +2,14 @@
 title: "Attendance"
 author: Simon Crase
 date: 19 February 2025
-output: pdf_document
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 2
 ---
 
 
+# Attendance matches capacity
 
 ```{r, echo=FALSE}
 df<-read.csv('attendance.csv')
