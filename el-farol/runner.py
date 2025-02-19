@@ -26,45 +26,52 @@
 from argparse import ArgumentParser
 from os.path import basename, splitext
 from time import time
-
 import pandas as pd
 import mesa
 import bar
-
 
 def parse_arguments():
     '''
     Parse command line arguments and display help text.
     '''
     iterations = 5
-    parser = ArgumentParser(__doc__)
-    parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
-    parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of times to run simulation [{iterations}]')
-    parser.add_argument('--output',default = basename(splitext(__file__)[0]))
     capacity = 60
     N = 100
     max_steps = 52
     review_interval = 5
     tolerance = 25
     k = 12
-
+    parser = ArgumentParser(__doc__)
+    parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
+    parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of times to run simulation [{iterations}]')
+    parser.add_argument('--output',default = basename(splitext(__file__)[0]))
     parser.add_argument('--capacity', type=int, nargs = '*')
-    parser.add_argument('--N', type=int, nargs = '*')
+    parser.add_argument('--N', type=int, default=N, nargs = '*')
     parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
-    parser.add_argument('--review_interval',  type=int, nargs = '*')
-    parser.add_argument('--tolerance',  type=int, nargs = '*')
-    parser.add_argument('--k',  type=int, nargs = '*')
+    parser.add_argument('--review_interval',  default=review_interval, type=int, nargs = '*')
+    parser.add_argument('--tolerance',  type=int, default=tolerance,nargs = '*')
+    parser.add_argument('--k',  default=k, type=int, nargs = '*')
     return parser.parse_args()
 
-def get_param(argvalue,default=-1):
-    if argvalue==None: return default
-    match (len(argvalue)):
-        case 1:
-            return argvalue
-        case 2:
-            return range(argvalue[0],argvalue[1]+1)
-        case 3:
-            return range(argvalue[0],argvalue[1]+1,argvalue[2])
+def get_param(argvalue):
+    '''
+    Extract the parameters for mesa.batch_run.
+    If there is only one value, return it.
+    If there are 2 or 3, construct the appropriate range object. Use argvalue[1]+1 for upper limit,
+    so range is inclusive.
+    '''
+    if type(argvalue)==type([]):
+        match (len(argvalue)):
+            case 1:
+                return argvalue
+            case 2:
+                return range(argvalue[0],argvalue[1]+1)
+            case 3:
+                return range(argvalue[0],argvalue[1]+1,argvalue[2])
+            case _:
+                raise ValueError(f'{argvalue} is too long to use for a range')
+    else:
+        return argvalue
 
 if __name__=='__main__':
     start  = time()
@@ -74,11 +81,11 @@ if __name__=='__main__':
     results = mesa.batch_run(
         bar.Bar,
         parameters = {
-            'review_interval' : get_param(args.review_interval,default=5),
-            'capacity'        : get_param(args.capacity,default=60),
-            'N'               : get_param(args.N,default=100),
-            'tolerance'       : get_param(args.tolerance,default=25),
-            'k'               : get_param(args.k,default=12),
+            'review_interval' : get_param(args.review_interval),
+            'capacity'        : get_param(args.capacity),
+            'N'               : get_param(args.N),
+            'tolerance'       : get_param(args.tolerance),
+            'k'               : get_param(args.k),
         },
         iterations = args.iterations,
         max_steps = args.max_steps,
