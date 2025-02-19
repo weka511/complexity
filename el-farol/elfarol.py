@@ -122,7 +122,7 @@ if __name__=='__main__':
         plot1.axhline(args.capacity,color='red',label=f'Capacity={args.capacity}')
         plot1.axhline(attendance_mean,color='green', linestyle='--',label=f'Average={attendance_mean:.1f}')
         plot1.set(
-            title = 'Weekly attendance',
+            title = f'Weekly attendance for {args.n_strategies} strategies in pool',
             xlabel = 'Week',
             ylabel= 'Attendance'
         )
