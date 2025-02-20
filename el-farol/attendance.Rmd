@@ -4,14 +4,16 @@ author: Simon Crase
 date: 19 February 2025
 output: 
   pdf_document:
+    number_sections: true
     toc: true
     toc_depth: 2
+    fig_caption: yes
 ---
 
 
 # Attendance matches capacity
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,fig.cap="This is my plot"}
 df<-read.csv('attendance.csv')
 df_attendance=aggregate(df$Attendance, list(df$RunId), FUN=mean)
 colnames(df_attendance)=c('RunId','Attendance')
