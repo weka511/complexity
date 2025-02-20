@@ -17,6 +17,7 @@
 
 ''' Template for Mesa programs'''
 
+from abc import ABCMeta
 from argparse import ArgumentParser
 from os.path import basename, join, splitext
 from time import time
@@ -46,11 +47,34 @@ class Consumer(mesa.Agent):
     def __init__(self,model):
         super().__init__(model)
 
+    def say_hi(self):
+        print(f"Hi, I am an agent {type(self)}, you can call me {str(self.unique_id)}.")
+
+class Consumer1(Consumer):
+    def __init__(self,model):
+        super().__init__(model)
+
+class Consumer2(Consumer):
+    def __init__(self,model):
+        super().__init__(model)
+
 class Ecology(mesa.Model):
     def __init__(self,
-                     N = 100,seed=None):
+                N = 100,
+                width = 25,
+                height = 25,
+                seed = None):
         super().__init__(seed=seed)
-        Consumer.create_agents(model=self, n=N)
+        Consumer1.create_agents(model=self, n=N)
+        Consumer2.create_agents(model=self, n=10)
+        self.grid = mesa.space.MultiGrid(width, height, True)
+        x = self.rng.integers(0, self.grid.width, size=(N+10,))
+        y = self.rng.integers(0, self.grid.height, size=(N+10,))
+        for a, i, j in zip(self.agents, x, y):
+            self.grid.place_agent(a, (i, j))
+
+    def step(self):
+        self.agents.shuffle_do("say_hi")
 
 class PlotContext:
     '''
@@ -91,7 +115,7 @@ if __name__=='__main__':
     ecology = Ecology(N = args.N,
             seed = args.seed)
 
-    for _ in range(args.max_steps):
+    for _ in range(1):#args.max_steps):
         ecology.step()
 
     with PlotContext(figs=args.figs) as axes:
