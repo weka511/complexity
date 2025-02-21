@@ -70,6 +70,10 @@ class Critter(mesa.Agent,ABC):
     def move(self):
         pass
 
+    @abstractmethod
+    def retire(self):
+        pass
+
 class PrimaryProducer(Critter):
     instance = None
     def __init__(self,model,
@@ -103,14 +107,21 @@ class PrimaryProducer(Critter):
         '''Grass doesn't move'''
         pass
 
+    def retire(self):
+        pass
+
 class Consumer(Critter):
     '''
     A Consumer depends on energy supplied by grass, either directly, or by consuming lower level consumers.
     '''
-    def __init__(self,model,efficiency=0.9,energy=1):
+    def __init__(self,model,
+                 efficiency = 0.9,
+                 energy = 1,
+                 minimum_energy = 0):
         super().__init__(model)
         self.efficiency = efficiency
         self.energy = energy
+        self.minimum_energy = minimum_energy
 
     def __str__(self):
         return f'{self.unique_id} {self.energy}'
@@ -127,12 +138,21 @@ class Consumer(Critter):
                                                                         moore=True,
                                                                         include_center=False)))
 
+    def retire(self):
+        if self.energy < self.minimum_energy:
+            self.model.retire(self)
+
 class Consumer1(Consumer):
     '''
     A Consumer1 depends on energy supplied by grass directly.
     '''
-    def __init__(self,model,efficiency=0.9,delta_energy = 1):
-        super().__init__(model,efficiency=efficiency)
+    def __init__(self,model,
+                 efficiency = 0.9,
+                 delta_energy = 1,
+                 minimum_energy = 0):
+        super().__init__(model,
+                         efficiency = efficiency,
+                         minimum_energy = minimum_energy)
         self.delta_energy = delta_energy
 
     def acquire_energy(self):
@@ -150,8 +170,12 @@ class Consumer2(Consumer):
     '''
     A Consumer depends on energy ultimately supplied by grass, by consuming lower level consumers.
     '''
-    def __init__(self,model,efficiency=0.9):
-        super().__init__(model,efficiency=efficiency)
+    def __init__(self,model,
+                 efficiency = 0.9,
+                 minimum_energy = 0):
+        super().__init__(model,
+                         efficiency = efficiency,
+                         minimum_energy = minimum_energy)
 
     def acquire_energy(self):
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
@@ -187,11 +211,20 @@ class Ecology(mesa.Model):
                                       max_energy = energy_per_cell,
                                       increment = increment_per_cell)
 
-    def step(self):
-        self.agents.shuffle_do("acquire_energy")
-        self.agents.shuffle_do("replicate")
-        self.agents.shuffle_do("move")
+        self.retired = []
 
+    def step(self):
+        self.agents.shuffle_do('acquire_energy')
+        self.agents.shuffle_do('replicate')
+        self.agents.shuffle_do('retire')
+        self.agents.shuffle_do('move')
+        for consumer in self.retired:
+            self.grid.remove_agent(consumer)
+        self.retired = []
+
+    def retire(self,consumer):
+        self.retired.append(consumer)
+        consumer.remove()
 
 class PlotContext:
     '''
