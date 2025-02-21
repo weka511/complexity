@@ -94,3 +94,9 @@ out.csv
 *.pdf
 
 .Rproj.user
+
+# Clutter from python development
+figs
+*.png
+*.csv
+
