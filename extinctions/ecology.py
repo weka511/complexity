@@ -17,6 +17,7 @@
 
 '''Grass/Sheep/Wolf model'''
 
+import unittest
 from mesa import Model
 from mesa.space import MultiGrid
 from critters import Consumer1, Consumer2, PrimaryProducer
@@ -54,10 +55,47 @@ class Ecology(Model):
 		self.agents.shuffle_do('replicate')
 		self.agents.shuffle_do('retire')
 		self.agents.shuffle_do('move')
-		for consumer in self.retired:
-			self.grid.remove_agent(consumer)
-		self.retired = []
+		self.remove_all_retired()
 
 	def retire(self,consumer):
+		'''
+		Place consumer on retired list
+		'''
 		self.retired.append(consumer)
+
+	def remove_all_retired(self):
+		'''
+		Remove all retired consumers from grid and list of agents
+		'''
+		for consumer in self.retired:
+			self.remove_retired(consumer)
+
+		self.retired = []
+
+	def remove_retired(self,consumer):
+		'''
+		Remove retired consumer from grid and list of agents
+		'''
+		self.grid.remove_agent(consumer)
 		consumer.remove()
+
+class TestRetire(unittest.TestCase):
+
+	def test_retire(self):
+		'''
+		Remove consumer: verify that it is removed from grid ans list of agents
+		'''
+		ecology = Ecology(N1 = 2,
+						  N2 = 1,
+						  seed = 0)
+		self.assertEqual(4,len(ecology.agents),'Verify initial total agents')
+		self.assertEqual(3,len(ecology.grid.agents),'Verify initial agents in grid')
+		retiree = ecology.grid.agents[1]
+		ecology.remove_retired(retiree)
+		self.assertEqual(3,len(ecology.agents),'Verify final total agents')
+		self.assertEqual(2,len(ecology.grid.agents),'Verify final agents in grid')
+
+if __name__ == '__main__':
+	unittest.main()
+
+

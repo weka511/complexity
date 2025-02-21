@@ -35,9 +35,9 @@ class Critter(Agent,ABC):
 		'''
 		pass
 
-		@abstractmethod
-		def replicate(self):
-			pass
+	@abstractmethod
+	def replicate(self):
+		pass
 
 	@abstractmethod
 	def move(self):
@@ -82,6 +82,7 @@ class PrimaryProducer(Critter):
 		pass
 
 	def retire(self):
+		'''Grass doesn't retire'''
 		pass
 
 class Consumer(Critter):
@@ -106,6 +107,7 @@ class Consumer(Critter):
 		pass
 
 	def move(self):
+		'''Move to a neighbouring cell'''
 		self.model.grid.move_agent(self,
                                    self.random.choice(
                                        self.model.grid.get_neighborhood(self.pos,
@@ -113,6 +115,9 @@ class Consumer(Critter):
                                                                         include_center=False)))
 
 	def retire(self):
+		'''
+		Used to remove any consumers that don't have enough energy to continue
+		'''
 		if self.energy < self.minimum_energy:
 			self.model.retire(self)
 
