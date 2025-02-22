@@ -38,6 +38,7 @@ def parse_arguments():
 	N1 = 100
 	N2 = 50
 	max_steps = 52
+	frequency = 25
 	parser = ArgumentParser(__doc__)
 	parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
 	parser.add_argument('--figs', default = './figs',help='Path for storing figures')
@@ -45,6 +46,7 @@ def parse_arguments():
 	parser.add_argument('--N1', default=N1, type=int,help = f'Number of first level consumers [{N1}]')
 	parser.add_argument('--N2', default=N2, type=int,help = f'Number of second level consumers[{N2}]')
 	parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
+	parser.add_argument('--frequency', default=frequency, type=int, help = f'Notify user every [{frequency}] steps')
 	return parser.parse_args()
 
 class PlotContext:
@@ -87,15 +89,16 @@ if __name__=='__main__':
 	                  N2 = args.N2,
 	                  seed = args.seed)
 
-	for _ in range(args.max_steps):
+	for k in range(args.max_steps):
 		ecology.step()
+		if k%args.frequency == 0 and k > 0:
+			print (f'{k} steps')
 
-	# model_vars = model.datacollector.get_model_vars_dataframe()
-	energy = ecology.datacollector.get_agent_vars_dataframe()
-	# print (energy)
-
+	# model_vars = ecology.datacollector.get_model_vars_dataframe()
+	agent_vars = ecology.datacollector.get_agent_vars_dataframe()
+	sheep = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['C1']
 	with PlotContext(figs=args.figs) as axes:
-		pass
+		plot1 = sns.lineplot(data=sheep,ax=axes,color='blue')
 
 	elapsed = time() - start
 	minutes = int(elapsed/60)

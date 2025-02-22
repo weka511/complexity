@@ -51,8 +51,8 @@ class Ecology(Model):
 		self.retired = []
 
 		self.datacollector = DataCollector(
-			# model_reporters={},
-			agent_reporters={'energy': 'energy'}
+			model_reporters={},
+			agent_reporters={'role': 'role'}
 		)
 
 	def step(self): #FIXME

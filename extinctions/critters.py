@@ -25,8 +25,11 @@ class Critter(Agent,ABC):
 	'''
 	This class encompasses all agents in model: grass, sheep, wolves.
 	'''
-	def __init__(self,model):
+	def __init__(self,
+				 model = None,
+				 role = None):
 		super().__init__(model)
+		self.role = role
 
 	@abstractmethod
 	def acquire_energy(self):
@@ -34,29 +37,32 @@ class Critter(Agent,ABC):
 		Agent acquires energy by growing (grass), eating grass, or consuming other agents
 		'''
 
-	@abstractmethod
 	def replicate(self):
 		'''Create a child if appropriate (not grass)'''
+		pass
 
-	@abstractmethod
 	def move(self):
 		'''Change location if appropriate (not grass)'''
+		pass
 
-	@abstractmethod
 	def retire(self):
-		'''Remove agent from model'''
-
+		'''Remove agent from model if appropriate (not grass)'''
+		pass
 
 
 class PrimaryProducer(Critter):
-	'''This class models Grass'''
-	instance = None
-	def __init__(self,model,
+	'''This class produces energy directly, and supplies it to the other Agents.'''
+
+	instance = None # There can be only one Primary Producer
+
+	def __init__(self,
+				 model = None,
                  width = 26,
                  height = 25,
                  max_energy = 10.0,
                  increment = 1.0):
-		super().__init__(model)
+		super().__init__(model = model,role = 'PP')
+		if PrimaryProducer.instance != None: raise RuntimeError('There can be only one Primary Producer')
 		PrimaryProducer.instance = self
 		self.cell_energy = max_energy * np.ones([width,height])
 		self.increment = increment
@@ -76,31 +82,22 @@ class PrimaryProducer(Critter):
 						self.cell_energy[i,j] = self.max_energy
 		self.energy = self.cell_energy.sum()
 
-	def replicate(self):
-		'''Subsumed by acquire_energy'''
-		pass
-
-	def move(self):
-		'''Grass doesn't move'''
-		pass
-
-	def retire(self):
-		'''Grass doesn't retire'''
-		pass
-
 
 class Consumer(Critter):
 	'''
 	A Consumer depends on energy supplied by grass, either directly, or by consuming lower level consumers.
 	'''
-	def __init__(self,model,
+	def __init__(self,
+				 model = None,
                  efficiency = 0.9,
                  energy = 1,
                  minimum_energy = 0,
 				 replication_threshold = 5.0,
 				 replication_cost = 3.0,
-				 replication_efficiency = 0.9):
-		super().__init__(model)
+				 replication_efficiency = 0.9,
+				 role = None):
+		super().__init__(model = model,
+						 role = role)
 		self.efficiency = efficiency
 		self.energy = energy
 		self.minimum_energy = minimum_energy
@@ -113,10 +110,13 @@ class Consumer(Critter):
 
 	@abstractmethod
 	def create(self):
-		'''Factory method--used to replicate'''
+		'''
+		Factory method--used to replicate. It creates a new instance of a type of Consumer.
+		'''
 
 	def replicate(self):
-		'''Create more instances given additional energy
+		'''
+		Create more instances given additional energy
 		'''
 		if self.energy < self.replication_threshold: return
 		child = self.create()
@@ -148,28 +148,34 @@ class Consumer1(Consumer):
 	'''
 	A Consumer1 depends on energy supplied by grass directly.
 	'''
-	def __init__(self,model,
+	def __init__(self,
+				 model = None,
                  efficiency = 0.9,
                  delta_energy = 1,
                  minimum_energy = 0,
 				 replication_threshold = 5.0,
 				 replication_cost = 3.0,
 				 replication_efficiency = 0.9):
-		super().__init__(model,
+		super().__init__(model = model,
                          efficiency = efficiency,
                          minimum_energy = minimum_energy,
 						 replication_threshold = replication_threshold,
 						 replication_cost = replication_cost,
-						 replication_efficiency = replication_efficiency)
+						 replication_efficiency = replication_efficiency,
+						 role = 'C1')
 		self.delta_energy = delta_energy
 
 	def create(self):
-		return Consumer1(self.model,efficiency=self.efficiency,
-                 delta_energy = self.delta_energy,
-                 minimum_energy = self.minimum_energy,
-				 replication_threshold = self.replication_threshold,
-				 replication_cost = self.replication_cost,
-				 replication_efficiency = self.replication_efficiency)
+		'''
+		Factory method--used to replicate. It creates a new instance of a Consumer1.
+		'''
+		return Consumer1(self.model,
+						 efficiency=self.efficiency,
+						 delta_energy = self.delta_energy,
+						 minimum_energy = self.minimum_energy,
+						 replication_threshold = self.replication_threshold,
+						 replication_cost = self.replication_cost,
+						 replication_efficiency = self.replication_efficiency)
 
 	def acquire_energy(self):
 		'''
@@ -185,20 +191,25 @@ class Consumer2(Consumer):
 	'''
 	A Consumer depends on energy ultimately supplied by grass, by consuming lower level consumers.
 	'''
-	def __init__(self,model,
+	def __init__(self,
+				 model = None,
                  efficiency = 0.9,
                  minimum_energy = 0,
 				 replication_threshold = 5.0,
 				 replication_cost = 3.0,
 				 replication_efficiency = 0.9):
-		super().__init__(model,
+		super().__init__(model = model,
                          efficiency = efficiency,
                          minimum_energy = minimum_energy,
 						 replication_threshold = replication_threshold,
 						 replication_cost = replication_cost,
-						 replication_efficiency = replication_efficiency)
+						 replication_efficiency = replication_efficiency,
+						 role = 'C2')
 
 	def create(self):
+		'''
+		Factory method--used to replicate. It creates a new instance of a Consumer2.
+		'''
 		return Consumer2(self.model,
 						 efficiency=self.efficiency,
 						 delta_energy = self.delta_energy,
@@ -207,7 +218,7 @@ class Consumer2(Consumer):
 						 replication_cost = self.replication_cost,
 						 replication_efficiency = self.replication_efficiency)
 
-	def acquire_energy(self):
+	def acquire_energy(self): #FIXME
 		cellmates = self.model.grid.get_cell_list_contents([self.pos])
 		cellmates.pop(
             cellmates.index(self)
