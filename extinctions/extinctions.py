@@ -96,9 +96,13 @@ if __name__=='__main__':
 
 	# model_vars = ecology.datacollector.get_model_vars_dataframe()
 	agent_vars = ecology.datacollector.get_agent_vars_dataframe()
-	sheep = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['C1']
+
 	with PlotContext(figs=args.figs) as axes:
-		plot1 = sns.lineplot(data=sheep,ax=axes,color='blue')
+		sheep = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['C1']
+		wolves = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['C2']
+		plot1 = sns.lineplot(data=sheep,ax=axes,color='blue',label='Sheep')
+		sns.lineplot(data=wolves,ax=axes,color='red',label='Wolves')
+		plot1.legend()
 
 	elapsed = time() - start
 	minutes = int(elapsed/60)

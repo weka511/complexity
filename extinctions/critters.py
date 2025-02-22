@@ -217,7 +217,8 @@ class Consumer2(Consumer):
                  minimum_energy = 0,
 				 replication_threshold = 5.0,
 				 replication_cost = 3.0,
-				 replication_efficiency = 0.9):
+				 replication_efficiency = 0.9,
+				 delta_energy = None):
 		super().__init__(model = model,
                          efficiency = efficiency,
                          minimum_energy = minimum_energy,
@@ -225,6 +226,7 @@ class Consumer2(Consumer):
 						 replication_cost = replication_cost,
 						 replication_efficiency = replication_efficiency,
 						 role = 'C2')
+		self.delta_energy = delta_energy
 
 	def create(self):
 		'''
@@ -238,10 +240,12 @@ class Consumer2(Consumer):
 						 replication_cost = self.replication_cost,
 						 replication_efficiency = self.replication_efficiency)
 
-	def acquire_energy(self): #FIXME
-		cellmates = self.model.grid.get_cell_list_contents([self.pos])
-		cellmates.pop(
-            cellmates.index(self)
-        )
-		if len(cellmates) == 0: return
-		other = self.random.choice(cellmates)
+	def acquire_energy(self):
+		'''
+		Eat any sheep that are sharing my location
+		'''
+		for other in self.model.grid.get_cell_list_contents([self.pos]):
+			if other.role != self.role:
+				self.energy += other.energy*self.efficiency
+				other.energy = 0
+				return
