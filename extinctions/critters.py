@@ -15,7 +15,10 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-'''Agents for Grass/Sheep/Wplves'''
+'''
+	Agents for Grass/Sheep/Wolves. This module encompasses all agents
+	used by the model: grass, sheep, wolves.
+'''
 
 from abc import ABC, abstractmethod
 import numpy as np
@@ -23,7 +26,7 @@ from mesa import Agent
 
 class Critter(Agent,ABC):
 	'''
-	This class encompasses all agents in model: grass, sheep, wolves.
+	This class encompasses all agents used by the model: grass, sheep, wolves.
 	'''
 	def __init__(self,
 				 model = None,
@@ -36,6 +39,13 @@ class Critter(Agent,ABC):
 		'''
 		Agent acquires energy by growing (grass), eating grass, or consuming other agents
 		'''
+
+
+	def consume_energy(self):
+		'''
+		Each agent needs energy to stay alive.
+		'''
+		pass
 
 	def replicate(self):
 		'''Create a child if appropriate (not grass)'''
@@ -51,16 +61,19 @@ class Critter(Agent,ABC):
 
 
 class PrimaryProducer(Critter):
-	'''This class produces energy directly, and supplies it to the other Agents.'''
+	'''
+		This class produces energy directly, and supplies it to the other Agents.
+		There can be only one Primary Producer.
+	'''
 
-	instance = None # There can be only one Primary Producer
+	instance = None
 
 	def __init__(self,
 				 model = None,
                  width = 26,
                  height = 25,
                  max_energy = 10.0,
-                 increment = 1.0):
+                 increment = 0.1):
 		super().__init__(model = model,role = 'PP')
 		if PrimaryProducer.instance != None: raise RuntimeError('There can be only one Primary Producer')
 		PrimaryProducer.instance = self
@@ -92,10 +105,11 @@ class Consumer(Critter):
                  efficiency = 0.9,
                  energy = 1,
                  minimum_energy = 0,
-				 replication_threshold = 5.0,
-				 replication_cost = 3.0,
-				 replication_efficiency = 0.9,
-				 role = None):
+				 replication_threshold = 9.0,
+				 replication_cost = 8.0,
+				 replication_efficiency = 0.5,
+				 role = None,
+				 cost_of_living = 0.1):
 		super().__init__(model = model,
 						 role = role)
 		self.efficiency = efficiency
@@ -104,6 +118,7 @@ class Consumer(Critter):
 		self.replication_threshold = replication_threshold
 		self.replication_cost = replication_cost
 		self.replication_efficiency = replication_efficiency
+		self.cost_of_living = cost_of_living
 
 	def __str__(self):
 		return f'{self.unique_id} {self.energy}'
@@ -126,7 +141,9 @@ class Consumer(Critter):
 
 
 	def move(self):
-		'''Move to a neighbouring cell'''
+		'''
+		Move to a neighbouring cell
+		'''
 		self.model.grid.move_agent(self,self.get_random_neighbour())
 
 	def get_random_neighbour(self):
@@ -135,6 +152,9 @@ class Consumer(Critter):
 			self.model.grid.get_neighborhood(self.pos,
 											 moore=True,
 											 include_center=False))
+
+	def consume_energy(self):
+		self.energy -= self.cost_of_living
 
 	def retire(self):
 		'''

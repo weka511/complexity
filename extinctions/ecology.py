@@ -55,8 +55,9 @@ class Ecology(Model):
 			agent_reporters={'role': 'role'}
 		)
 
-	def step(self): #FIXME
+	def step(self):
 		self.agents.shuffle_do('acquire_energy')
+		self.agents.shuffle_do('consume_energy')
 		self.agents.shuffle_do('replicate')
 		self.agents.shuffle_do('retire')
 		self.agents.shuffle_do('move')
@@ -89,7 +90,7 @@ class TestRetire(unittest.TestCase):
 
 	def test_retire(self):
 		'''
-		Remove consumer: verify that it is removed from grid ans list of agents
+		Remove consumer: verify that it has been removed from grid and list of agents
 		'''
 		ecology = Ecology(N1 = 2,
 						  N2 = 1,
