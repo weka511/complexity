@@ -25,14 +25,11 @@
     link between diversity and stability emerges from simple dynamics.
 '''
 
-
 from argparse import ArgumentParser
 from os.path import basename, join, splitext
 from time import time
-
 import numpy as np
 from matplotlib.pyplot import subplots, show
-# import mesa
 import seaborn as sns
 import pandas as pd
 from ecology import Ecology
@@ -49,10 +46,6 @@ def parse_arguments():
 	parser.add_argument('--N2', default=N2, type=int,help = f'Number of second level consumers[{N2}]')
 	parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
 	return parser.parse_args()
-
-
-
-
 
 class PlotContext:
 	'''
@@ -96,6 +89,10 @@ if __name__=='__main__':
 
 	for _ in range(args.max_steps):
 		ecology.step()
+
+	# model_vars = model.datacollector.get_model_vars_dataframe()
+	energy = ecology.datacollector.get_agent_vars_dataframe()
+	# print (energy)
 
 	with PlotContext(figs=args.figs) as axes:
 		pass

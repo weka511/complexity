@@ -18,7 +18,7 @@
 '''Grass/Sheep/Wolf model'''
 
 import unittest
-from mesa import Model
+from mesa import Model, DataCollector
 from mesa.space import MultiGrid
 from critters import Consumer1, Consumer2, PrimaryProducer
 
@@ -50,12 +50,18 @@ class Ecology(Model):
 
 		self.retired = []
 
-	def step(self):
+		self.datacollector = DataCollector(
+			# model_reporters={},
+			agent_reporters={'energy': 'energy'}
+		)
+
+	def step(self): #FIXME
 		self.agents.shuffle_do('acquire_energy')
 		self.agents.shuffle_do('replicate')
 		self.agents.shuffle_do('retire')
 		self.agents.shuffle_do('move')
 		self.remove_all_retired()
+		self.datacollector.collect(self)
 
 	def retire(self,consumer):
 		'''

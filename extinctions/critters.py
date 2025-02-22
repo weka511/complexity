@@ -23,7 +23,7 @@ from mesa import Agent
 
 class Critter(Agent,ABC):
 	'''
-	This class encompasses all agents in model: grass, shep, wolves.
+	This class encompasses all agents in model: grass, sheep, wolves.
 	'''
 	def __init__(self,model):
 		super().__init__(model)
@@ -33,21 +33,23 @@ class Critter(Agent,ABC):
 		'''
 		Agent acquires energy by growing (grass), eating grass, or consuming other agents
 		'''
-		pass
 
 	@abstractmethod
 	def replicate(self):
-		pass
+		'''Create a child if appropriate (not grass)'''
 
 	@abstractmethod
 	def move(self):
-		pass
+		'''Change location if appropriate (not grass)'''
 
 	@abstractmethod
 	def retire(self):
-		pass
+		'''Remove agent from model'''
+
+
 
 class PrimaryProducer(Critter):
+	'''This class models Grass'''
 	instance = None
 	def __init__(self,model,
                  width = 26,
@@ -56,22 +58,23 @@ class PrimaryProducer(Critter):
                  increment = 1.0):
 		super().__init__(model)
 		PrimaryProducer.instance = self
-		width = 26
-		self.energy = max_energy * np.ones([width,height])
+		self.cell_energy = max_energy * np.ones([width,height])
 		self.increment = increment
 		self.max_energy = max_energy
+		self.energy = self.cell_energy.sum()
 
 	def acquire_energy(self):
 		'''
 		Grass acquires new energy simply by growing
 		'''
-		width,height = self.energy.shape
+		width,height = self.cell_energy.shape
 		for i in range(width):
 			for j in range(height):
-				if self.energy[i,j] < self.max_energy:
-					self.energy[i,j] += self.increment
-					if self.energy[i,j] > self.max_energy:
-						self.energy[i,j] = self.max_energy
+				if self.cell_energy[i,j] < self.max_energy:
+					self.cell_energy[i,j] += self.increment
+					if self.cell_energy[i,j] > self.max_energy:
+						self.cell_energy[i,j] = self.max_energy
+		self.energy = self.cell_energy.sum()
 
 	def replicate(self):
 		'''Subsumed by acquire_energy'''
@@ -85,6 +88,7 @@ class PrimaryProducer(Critter):
 		'''Grass doesn't retire'''
 		pass
 
+
 class Consumer(Critter):
 	'''
 	A Consumer depends on energy supplied by grass, either directly, or by consuming lower level consumers.
@@ -92,27 +96,45 @@ class Consumer(Critter):
 	def __init__(self,model,
                  efficiency = 0.9,
                  energy = 1,
-                 minimum_energy = 0):
+                 minimum_energy = 0,
+				 replication_threshold = 5.0,
+				 replication_cost = 3.0,
+				 replication_efficiency = 0.9):
 		super().__init__(model)
 		self.efficiency = efficiency
 		self.energy = energy
 		self.minimum_energy = minimum_energy
+		self.replication_threshold = replication_threshold
+		self.replication_cost = replication_cost
+		self.replication_efficiency = replication_efficiency
 
 	def __str__(self):
 		return f'{self.unique_id} {self.energy}'
 
-	def replicate(self): #TODO
+	@abstractmethod
+	def create(self):
+		'''Factory method--used to replicate'''
+
+	def replicate(self):
 		'''Create more instances given additional energy
 		'''
-		pass
+		if self.energy < self.replication_threshold: return
+		child = self.create()
+		self.energy -= self.replication_cost
+		child.energy += self.replication_cost * self.replication_efficiency
+		self.model.grid.place_agent(child, self.get_random_neighbour())
+
 
 	def move(self):
 		'''Move to a neighbouring cell'''
-		self.model.grid.move_agent(self,
-                                   self.random.choice(
-                                       self.model.grid.get_neighborhood(self.pos,
-                                                                        moore=True,
-                                                                        include_center=False)))
+		self.model.grid.move_agent(self,self.get_random_neighbour())
+
+	def get_random_neighbour(self):
+		'''Select a neighbouring cell at random'''
+		return self.random.choice(
+			self.model.grid.get_neighborhood(self.pos,
+											 moore=True,
+											 include_center=False))
 
 	def retire(self):
 		'''
@@ -121,6 +143,7 @@ class Consumer(Critter):
 		if self.energy < self.minimum_energy:
 			self.model.retire(self)
 
+
 class Consumer1(Consumer):
 	'''
 	A Consumer1 depends on energy supplied by grass directly.
@@ -128,21 +151,34 @@ class Consumer1(Consumer):
 	def __init__(self,model,
                  efficiency = 0.9,
                  delta_energy = 1,
-                 minimum_energy = 0):
+                 minimum_energy = 0,
+				 replication_threshold = 5.0,
+				 replication_cost = 3.0,
+				 replication_efficiency = 0.9):
 		super().__init__(model,
                          efficiency = efficiency,
-                         minimum_energy = minimum_energy)
+                         minimum_energy = minimum_energy,
+						 replication_threshold = replication_threshold,
+						 replication_cost = replication_cost,
+						 replication_efficiency = replication_efficiency)
 		self.delta_energy = delta_energy
+
+	def create(self):
+		return Consumer1(self.model,efficiency=self.efficiency,
+                 delta_energy = self.delta_energy,
+                 minimum_energy = self.minimum_energy,
+				 replication_threshold = self.replication_threshold,
+				 replication_cost = self.replication_cost,
+				 replication_efficiency = self.replication_efficiency)
 
 	def acquire_energy(self):
 		'''
 		If there is enough grass, eat it
 		'''
 		i,j = self.pos
-		if PrimaryProducer.instance.energy[i,j] > self.delta_energy:
-			PrimaryProducer.instance.energy[i,j] -= self.delta_energy
+		if PrimaryProducer.instance.cell_energy[i,j] > self.delta_energy:
+			PrimaryProducer.instance.cell_energy[i,j] -= self.delta_energy
 			self.energy += self.delta_energy * self.efficiency
-			print (self)
 
 
 class Consumer2(Consumer):
@@ -151,10 +187,25 @@ class Consumer2(Consumer):
 	'''
 	def __init__(self,model,
                  efficiency = 0.9,
-                 minimum_energy = 0):
+                 minimum_energy = 0,
+				 replication_threshold = 5.0,
+				 replication_cost = 3.0,
+				 replication_efficiency = 0.9):
 		super().__init__(model,
                          efficiency = efficiency,
-                         minimum_energy = minimum_energy)
+                         minimum_energy = minimum_energy,
+						 replication_threshold = replication_threshold,
+						 replication_cost = replication_cost,
+						 replication_efficiency = replication_efficiency)
+
+	def create(self):
+		return Consumer2(self.model,
+						 efficiency=self.efficiency,
+						 delta_energy = self.delta_energy,
+						 minimum_energy = self.minimum_energy,
+						 replication_threshold = self.replication_threshold,
+						 replication_cost = self.replication_cost,
+						 replication_efficiency = self.replication_efficiency)
 
 	def acquire_energy(self):
 		cellmates = self.model.grid.get_cell_list_contents([self.pos])
