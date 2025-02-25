@@ -25,7 +25,7 @@ from time import time
 import numpy as np
 from matplotlib.pyplot import subplots, show
 from mesa import Agent, Model, DataCollector
-from mesa.space import MultiGrid
+from mesa.space import MultiGrid, PropertyLayer
 import seaborn as sns
 import pandas as pd
 
@@ -129,8 +129,14 @@ class Sheep(Critter):
         '''
         return Sheep(model=self.model,R=self.R)
 
-    def acquire_energy(self):    #TODO
-        pass
+    def acquire_energy(self):
+        grass = self.model.grid.properties['grass']
+        y = grass.data[self.pos]
+        if grass.data[self.pos] ==0:
+            grass.data[self.pos] += 10 #FIXME
+            self.energy += 5 #FIXME
+        else:
+            grass.data[self.pos] -= 1
 
 class Wolf(Critter):
     def __init__(self,model=None,R=0.5,E1=1,E2=5,E0=5):
@@ -181,14 +187,16 @@ class Ecology(Model):
         Wolf.create_agents(model=self, n=N2, R = R2, E0=E1, E1= E1, E2 = E2)
         self.grid = MultiGrid(width, height, torus=True)
         for agent in self.agents:
-            i = self.rng.choice(self.grid.width)
-            j = self.rng.choice(self.grid.height)
+            i = self.rng.choice(width)
+            j = self.rng.choice(height)
             self.grid.place_agent(agent, (i, j))
         self.datacollector = DataCollector(
                                     model_reporters={},
                                     agent_reporters={'role': 'role'}
                     )
         self.retired = []
+        self.grid.add_property_layer(PropertyLayer('grass', width, height, 0, int))
+
 
     def step(self):
         '''
