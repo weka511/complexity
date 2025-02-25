@@ -31,16 +31,16 @@ import pandas as pd
 
 def parse_arguments():
     N1 = 100
-    N2 = 50
-    nsteps = 52
-    freq = 25
+    N2 = 100
+    nsteps = 50
+    freq = 5
     width = 25
     height = 25
-    R1 = 0.5
-    R2 = 0.1
+    R1 = 0.25
+    R2 = 0.25
     E1 = 1
-    E2 = 5
-    E0 = 5
+    E2 = 6
+    E0 = 5#10
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
     parser.add_argument('--figs', default = './figs',help='Path for storing figures')
@@ -69,6 +69,15 @@ class Critter(Agent):
         super().__init__(model)
         self.R = R
         self.role = role
+
+    def step(self):
+        '''
+        Executed each step
+        '''
+        self.move()
+        self.acquire_energy()
+        if self.retire_if_depleted(): return
+        self.replicate()
 
     @abstractmethod
     def create(self):
@@ -99,8 +108,9 @@ class Critter(Agent):
         '''
         Used to remove any Critters that don't have enough energy to continue
         '''
-        if self.energy < 0:
-            self.model.retire(self)
+        if self.energy >= 0: return False
+        self.model.retire(self)
+        return True
 
     def get_random_neighbour(self):
         '''Select a neighbouring cell at random'''
@@ -110,6 +120,8 @@ class Sheep(Critter):
     def __init__(self,model=None,R=0.5):
             super().__init__(model,R=R,role='S')
             self.energy = 1
+
+
 
     def create(self):
         '''
@@ -159,11 +171,14 @@ class Ecology(Model):
                  height = 25,
                  seed = None,
                  R1 = 0.5,
-                 R2 = 0.5):
+                 R2 = 0.5,
+                 E0 = 1,
+                 E1 = 2,
+                 E2 = 3):
         super().__init__(seed=seed)
 
         Sheep.create_agents(model=self, n=N1, R=R1)
-        Wolf.create_agents(model=self, n=N2, R = R2)
+        Wolf.create_agents(model=self, n=N2, R = R2, E0=E1, E1= E1, E2 = E2)
         self.grid = MultiGrid(width, height, torus=True)
         for agent in self.agents:
             i = self.rng.choice(self.grid.width)
@@ -180,10 +195,7 @@ class Ecology(Model):
         The is the active heart of the model. Agents acquire and consume energy, move about
         and die.
         '''
-        self.agents.shuffle_do('move')
-        self.agents.shuffle_do('acquire_energy')
-        self.agents.shuffle_do('retire_if_depleted')
-        self.agents.shuffle_do('replicate')
+        self.agents.shuffle_do('step')
         self.remove_all_retired()
         self.datacollector.collect(self)
 
@@ -248,7 +260,6 @@ class PlotContext:
 
 if __name__=='__main__':
     start  = time()
-    parser = ArgumentParser(__doc__)
 
     args = parse_arguments()
 
@@ -256,7 +267,12 @@ if __name__=='__main__':
                       N2 = args.N2,
                       seed = args.seed,
                       width = args.width,
-                      height = args.height)
+                      height = args.height,
+                      R1 = args.R1,
+                      R2 = args.R2,
+                      E0 = args.E0,
+                      E1 = args.E1,
+                      E2 = args.E2)
 
     for k in range(args.nsteps):
         ecology.step()
