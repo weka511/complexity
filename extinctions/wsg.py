@@ -93,9 +93,8 @@ class Critter(Agent):
         '''
         Used to remove any consumers that don't have enough energy to continue
         '''
-        pass
-        # if self.energy < 0:
-            # self.model.retire(self)
+        if self.energy < 0:
+            self.model.retire(self)
 
     def get_random_neighbour(self):
         '''Select a neighbouring cell at random'''
@@ -104,6 +103,7 @@ class Critter(Agent):
 class Sheep(Critter):
     def __init__(self,model=None,R=0.5):
             super().__init__(model,R=R,role='S')
+            self.energy = 1
 
     def create(self):
         '''
@@ -115,17 +115,32 @@ class Sheep(Critter):
         pass
 
 class Wolf(Critter):
-    def __init__(self,model=None,R=0.5):
-            super().__init__(model,R=R,role='W')
+    def __init__(self,model=None,R=0.5,E1=1,E2=5,E0=5):
+        super().__init__(model,R=R,role='W')
+        self.energy = E0
+        self.E0 = E0
+        self.E1 = E1
+        self.E2 = E2
 
     def create(self):
         '''
         Factory method--used to replicate. It creates a new instance of a Wolf.
         '''
-        return Wolf(model=self.model,R=self.R)
+        return Wolf(model=self.model,R=self.R,E0=self.E0, E1=self.E1, E2=self.E2)
+
+    def move(self):
+        super().move()
+        self.energy -= self.E1
 
     def acquire_energy(self):
-        pass
+        '''
+        Eat any sheep that are sharing my location
+        '''
+        for other in self.model.grid.get_cell_list_contents([self.pos]):
+            if other.role != self.role:
+                self.energy += self.E2
+                other.energy = - np.inf
+                return
 
 class Ecology(Model):
     '''
@@ -169,6 +184,14 @@ class Ecology(Model):
     def get_neighbours(self,pos):
         return self.grid.get_neighborhood(pos, moore=True, include_center=False)
 
+    def retire(self,consumer):
+        '''
+        Used to get rid of a (deceased) Consumer. To avoid breaking the list of agents while
+        processsing with shuffle_do, we place the consumer on retired list, then use
+        remove_all_retired to clean up at the end of the step.
+        '''
+        self.retired.append(consumer)
+
     def remove_all_retired(self):
         '''
         Remove all retired consumers from grid and list of agents
@@ -177,6 +200,13 @@ class Ecology(Model):
             self.remove_retired(consumer)
 
         self.retired = []
+
+    def remove_retired(self,consumer):
+        '''
+        Remove retired consumer from grid and list of agents
+        '''
+        self.grid.remove_agent(consumer)
+        consumer.remove()
 
 
 class PlotContext:
