@@ -23,6 +23,9 @@ from mesa.space import MultiGrid
 from critters import Consumer1, Consumer2, PrimaryProducer
 
 class Ecology(Model):
+	'''
+	This class represents the Grass/Sheep/Wolf model
+	'''
 	def __init__(self,
 				 N1 = 100,
 				 N2 = 50,
@@ -35,7 +38,7 @@ class Ecology(Model):
 
 		Consumer1.create_agents(model=self, n=N1)
 		Consumer2.create_agents(model=self, n=N2)
-		self.grid = MultiGrid(width, height, True)
+		self.grid = MultiGrid(width, height, torus=True)
 		for agent in self.agents:
 			i = self.rng.choice(self.grid.width)
 			j = self.rng.choice(self.grid.height)
@@ -45,7 +48,7 @@ class Ecology(Model):
 			                          n = 1,
 			                          width = width,
 			                          height = height,
-			                          max_energy = energy_per_cell,
+			                          energy_per_cell = energy_per_cell,
 			                          increment = increment_per_cell)
 
 		self.retired = []
@@ -56,17 +59,23 @@ class Ecology(Model):
 		)
 
 	def step(self):
+		'''
+		The is the active heart of the model. Agents acquire and consume energy, move about
+		and die.
+		'''
 		self.agents.shuffle_do('acquire_energy')
 		self.agents.shuffle_do('consume_energy')
 		self.agents.shuffle_do('replicate')
-		self.agents.shuffle_do('retire')
+		self.agents.shuffle_do('retire_if_depleted')
 		self.agents.shuffle_do('move')
 		self.remove_all_retired()
 		self.datacollector.collect(self)
 
 	def retire(self,consumer):
 		'''
-		Place consumer on retired list
+		Used to get rid of a (deceased) Consumer. To avoid breaking the list of agents while
+		processsing with shuffle_do, we place the consumer on retired list, then use
+		remove_all_retired to clean up at the end of the step.
 		'''
 		self.retired.append(consumer)
 

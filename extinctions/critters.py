@@ -55,7 +55,7 @@ class Critter(Agent,ABC):
 		'''Change location if appropriate (not grass)'''
 		pass
 
-	def retire(self):
+	def retire_if_depleted(self):
 		'''Remove agent from model if appropriate (not grass)'''
 		pass
 
@@ -72,27 +72,25 @@ class PrimaryProducer(Critter):
 				 model = None,
                  width = 26,
                  height = 25,
-                 max_energy = 10.0,
+                 energy_per_cell = 10.0,
                  increment = 0.1):
 		super().__init__(model = model,role = 'PP')
 		if PrimaryProducer.instance != None: raise RuntimeError('There can be only one Primary Producer')
 		PrimaryProducer.instance = self
-		self.cell_energy = max_energy * np.ones([width,height])
+		self.cell_energy = energy_per_cell * np.ones([width,height])
 		self.increment = increment
-		self.max_energy = max_energy
+		# self.max_energy = max_energy
 		self.energy = self.cell_energy.sum()
 
 	def acquire_energy(self):
 		'''
 		Grass acquires new energy simply by growing
 		'''
-		width,height = self.cell_energy.shape
-		for i in range(width):
-			for j in range(height):
-				if self.cell_energy[i,j] < self.max_energy:
-					self.cell_energy[i,j] += self.increment
-					if self.cell_energy[i,j] > self.max_energy:
-						self.cell_energy[i,j] = self.max_energy
+		# width,height = self.cell_energy.shape
+		self.cell_energy += self.increment
+		# for i in range(width):
+			# for j in range(height):
+					# self.cell_energy[i,j] += self.increment
 		self.energy = self.cell_energy.sum()
 
 
@@ -104,10 +102,10 @@ class Consumer(Critter):
 				 model = None,
                  efficiency = 0.9,
                  energy = 1,
-                 minimum_energy = 0,
+                 minimum_energy = 0.1,
 				 replication_threshold = 9.0,
 				 replication_cost = 8.0,
-				 replication_efficiency = 0.5,
+				 replication_efficiency = 0.0,
 				 role = None,
 				 cost_of_living = 0.1):
 		super().__init__(model = model,
@@ -156,7 +154,7 @@ class Consumer(Critter):
 	def consume_energy(self):
 		self.energy -= self.cost_of_living
 
-	def retire(self):
+	def retire_if_depleted(self):
 		'''
 		Used to remove any consumers that don't have enough energy to continue
 		'''
@@ -170,19 +168,23 @@ class Consumer1(Consumer):
 	'''
 	def __init__(self,
 				 model = None,
+				 energy = 1,
                  efficiency = 0.9,
-                 delta_energy = 1,
+                 delta_energy = 5,
                  minimum_energy = 0,
 				 replication_threshold = 5.0,
 				 replication_cost = 3.0,
-				 replication_efficiency = 0.9):
+				 replication_efficiency = 0.9,
+				 cost_of_living = 0.1):
 		super().__init__(model = model,
+						 energy = energy,
                          efficiency = efficiency,
                          minimum_energy = minimum_energy,
 						 replication_threshold = replication_threshold,
 						 replication_cost = replication_cost,
 						 replication_efficiency = replication_efficiency,
-						 role = 'C1')
+						 role = 'C1',
+						 cost_of_living = cost_of_living)
 		self.delta_energy = delta_energy
 
 	def create(self):
@@ -190,7 +192,7 @@ class Consumer1(Consumer):
 		Factory method--used to replicate. It creates a new instance of a Consumer1.
 		'''
 		return Consumer1(self.model,
-						 efficiency=self.efficiency,
+						 efficiency = self.efficiency,
 						 delta_energy = self.delta_energy,
 						 minimum_energy = self.minimum_energy,
 						 replication_threshold = self.replication_threshold,
@@ -213,20 +215,22 @@ class Consumer2(Consumer):
 	'''
 	def __init__(self,
 				 model = None,
-                 efficiency = 0.9,
-                 minimum_energy = 0,
-				 replication_threshold = 5.0,
-				 replication_cost = 3.0,
-				 replication_efficiency = 0.9,
-				 delta_energy = None):
+				 energy = 10,
+                 efficiency = 0.95,
+                 minimum_energy = 10,
+				 replication_threshold = 12.0,
+				 replication_cost = 2.0,
+				 replication_efficiency = 0.,
+				 cost_of_living = 2):
 		super().__init__(model = model,
+						 energy = energy,
                          efficiency = efficiency,
                          minimum_energy = minimum_energy,
 						 replication_threshold = replication_threshold,
 						 replication_cost = replication_cost,
 						 replication_efficiency = replication_efficiency,
-						 role = 'C2')
-		self.delta_energy = delta_energy
+						 role = 'C2',
+						 cost_of_living = cost_of_living)
 
 	def create(self):
 		'''
@@ -234,7 +238,6 @@ class Consumer2(Consumer):
 		'''
 		return Consumer2(self.model,
 						 efficiency=self.efficiency,
-						 delta_energy = self.delta_energy,
 						 minimum_energy = self.minimum_energy,
 						 replication_threshold = self.replication_threshold,
 						 replication_cost = self.replication_cost,
@@ -247,5 +250,5 @@ class Consumer2(Consumer):
 		for other in self.model.grid.get_cell_list_contents([self.pos]):
 			if other.role != self.role:
 				self.energy += other.energy*self.efficiency
-				other.energy = 0
+				other.energy = - float('inf')
 				return
