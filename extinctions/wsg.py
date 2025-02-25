@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-''' Template for Mesa programs'''
+''' Thinking Like a Wolf, a Sheep, or a Firefly -- Uri Wilensky'''
 
 from abc import abstractmethod
 from argparse import ArgumentParser
@@ -32,29 +32,35 @@ import pandas as pd
 def parse_arguments():
     N1 = 100
     N2 = 50
-    max_steps = 52
-    frequency = 25
+    nsteps = 52
+    freq = 25
     width = 25
     height = 25
     R1 = 0.5
     R2 = 0.1
+    E1 = 1
+    E2 = 5
+    E0 = 5
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
     parser.add_argument('--figs', default = './figs',help='Path for storing figures')
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
-    parser.add_argument('--N1', default=N1, type=int,help = f'Number of first level consumers [{N1}]')
-    parser.add_argument('--N2', default=N2, type=int,help = f'Number of second level consumers [{N2}]')
-    parser.add_argument('--max_steps', default=max_steps, type=int, help = f'Number of steps for running simulation [{max_steps}]')
-    parser.add_argument('--frequency', default=frequency, type=int, help = f'Notify user every [{frequency}] steps')
+    parser.add_argument('--N1', default=N1, type=int,help = f'Initial number of sheep[{N1}]')
+    parser.add_argument('--N2', default=N2, type=int,help = f'Initial number of wolves [{N2}]')
+    parser.add_argument('--nsteps', default=nsteps, type=int, help = f'Number of steps for running simulation [{nsteps}]')
+    parser.add_argument('--freq', default=freq, type=int, help = f'Notify user every [{freq}] steps')
     parser.add_argument('--width', default=width, type=int,help = f'Width of grid [{width}]')
     parser.add_argument('--height', default=height, type=int,help = f'Height of grid [{height}]')
     parser.add_argument('--R1', default=R1, type=float,help = f'Probability of a sheep reproducing [{R1}]')
     parser.add_argument('--R2', default=R2, type=float,help = f'Probability of a wolf reproducing [{R2}]')
+    parser.add_argument('--E0', default=E0, type=float,help = f'Starting energy for a wolf [{E0}]')
+    parser.add_argument('--E1', default=E1, type=float,help = f'Cost of movement for a wolf [{E1}]')
+    parser.add_argument('--E2', default=E2, type=float,help = f'Energy gain for a wolf that eats a sheep [{E2}]')
     return parser.parse_args()
 
 class Critter(Agent):
     '''
-    This class encompasses all agents used by the model: grass, sheep, wolves.
+    This class encompasses all agents used by the model:  sheep and wolves.
     '''
     def __init__(self,
                  model = None,
@@ -67,20 +73,20 @@ class Critter(Agent):
     @abstractmethod
     def create(self):
         '''
-        Factory method--used to replicate. It creates a new instance of a type of Consumer.
+        Factory method--used to replicate. It creates a new instance of a type of Critter.
         '''
 
     @abstractmethod
     def acquire_energy(self):
         '''
-        Agent acquires energy by growing (grass), eating grass, or consuming other agents
+        Agent acquires energy by eating grass, or consuming other Critters
         '''
 
     def replicate(self):
-        '''Create a new instance of this critter'''
-        if self.random.uniform(0,1) < self.R:
-            child = self.create()
-            self.model.grid.place_agent(child, self.get_random_neighbour())
+        '''Create a new instance of this critter with probability R'''
+        if self.random.uniform(0,1) > self.R: return
+        child = self.create()
+        self.model.grid.place_agent(child, self.get_random_neighbour())
 
 
     def move(self):
@@ -91,7 +97,7 @@ class Critter(Agent):
 
     def retire_if_depleted(self):
         '''
-        Used to remove any consumers that don't have enough energy to continue
+        Used to remove any Critters that don't have enough energy to continue
         '''
         if self.energy < 0:
             self.model.retire(self)
@@ -111,7 +117,7 @@ class Sheep(Critter):
         '''
         return Sheep(model=self.model,R=self.R)
 
-    def acquire_energy(self):
+    def acquire_energy(self):    #TODO
         pass
 
 class Wolf(Critter):
@@ -252,9 +258,9 @@ if __name__=='__main__':
                       width = args.width,
                       height = args.height)
 
-    for k in range(args.max_steps):
+    for k in range(args.nsteps):
         ecology.step()
-        if k%args.frequency == 0 and k > 0:
+        if k%args.freq == 0 and k > 0:
             print (f'{k} steps')
 
     # model_vars = ecology.datacollector.get_model_vars_dataframe()
@@ -264,7 +270,7 @@ if __name__=='__main__':
         sheep = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['S']
         plot1 = sns.lineplot(data=sheep,ax=axes,color='blue',label=f'Sheep N={args.N1},R={args.R1}')
         wolves = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['W']
-        sns.lineplot(data=wolves,ax=axes,color='red',label=f'Wolves N={args.N2},R={args.R2}')
+        sns.lineplot(data=wolves,ax=axes,color='red',label=f'Wolves N={args.N2},R={args.R2},E0={args.E0},E1={args.E1},E2={args.E2}')
         plot1.legend()
         plot1.set(title=f'Sheep and Wolves: grid = {args.width}x{args.height};',
                                       xlabel = 'Time',
