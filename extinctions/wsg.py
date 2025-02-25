@@ -40,7 +40,10 @@ def parse_arguments():
     R2 = 0.25
     E1 = 1
     E2 = 6
-    E0 = 5#10
+    E0 = 5
+    E3 = 1
+    E4 = 5
+    T1 = 10
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
     parser.add_argument('--figs', default = './figs',help='Path for storing figures')
@@ -56,6 +59,9 @@ def parse_arguments():
     parser.add_argument('--E0', default=E0, type=float,help = f'Starting energy for a wolf [{E0}]')
     parser.add_argument('--E1', default=E1, type=float,help = f'Cost of movement for a wolf [{E1}]')
     parser.add_argument('--E2', default=E2, type=float,help = f'Energy gain for a wolf that eats a sheep [{E2}]')
+    parser.add_argument('--E3', default=E3, type=float,help = f'Energy gain for a sheep that eats a patch of grass [{E3}]')
+    parser.add_argument('--E4', default=E4, type=float,help = f'Cost of movement for a sheep [{E4}]')
+    parser.add_argument('--T1', default=T1, type=float,help = f'Time for grass to regrow [{T1}]')
     return parser.parse_args()
 
 class Critter(Agent):
@@ -65,10 +71,12 @@ class Critter(Agent):
     def __init__(self,
                  model = None,
                  R = 0.5,
-                 role = ''):
+                 role = '',
+                 delta_energy = 0):
         super().__init__(model)
         self.R = R
         self.role = role
+        self.delta_energy = delta_energy
 
     def step(self):
         '''
@@ -103,6 +111,7 @@ class Critter(Agent):
         Move to a neighbouring cell
         '''
         self.model.grid.move_agent(self,self.get_random_neighbour())
+        self.energy -= self.delta_energy
 
     def retire_if_depleted(self):
         '''
@@ -117,30 +126,30 @@ class Critter(Agent):
         return self.random.choice(self.model.get_neighbours(self.pos))
 
 class Sheep(Critter):
-    def __init__(self,model=None,R=0.5):
-            super().__init__(model,R=R,role='S')
+    def __init__(self,model=None,R=0.5,E3=1,E4=5,T1=10):
+            super().__init__(model,R=R,role='S',delta_energy=E3)
             self.energy = 1
-
-
+            self.E3 = E3
+            self.E4 = E4
+            self.T1 = T1
 
     def create(self):
         '''
         Factory method--used to replicate. It creates a new instance of a S.
         '''
-        return Sheep(model=self.model,R=self.R)
+        return Sheep(model=self.model,R=self.R,E3=self.E3,E4=self.E4,T1=self.T1)
 
     def acquire_energy(self):
         grass = self.model.grid.properties['grass']
-        y = grass.data[self.pos]
         if grass.data[self.pos] ==0:
-            grass.data[self.pos] += 10 #FIXME
-            self.energy += 5 #FIXME
+            grass.data[self.pos] += self.T1
+            self.energy += self.E4
         else:
             grass.data[self.pos] -= 1
 
 class Wolf(Critter):
     def __init__(self,model=None,R=0.5,E1=1,E2=5,E0=5):
-        super().__init__(model,R=R,role='W')
+        super().__init__(model,R=R,role='W',delta_energy=E1)
         self.energy = E0
         self.E0 = E0
         self.E1 = E1
@@ -151,10 +160,6 @@ class Wolf(Critter):
         Factory method--used to replicate. It creates a new instance of a Wolf.
         '''
         return Wolf(model=self.model,R=self.R,E0=self.E0, E1=self.E1, E2=self.E2)
-
-    def move(self):
-        super().move()
-        self.energy -= self.E1
 
     def acquire_energy(self):
         '''
@@ -180,11 +185,14 @@ class Ecology(Model):
                  R2 = 0.5,
                  E0 = 1,
                  E1 = 2,
-                 E2 = 3):
+                 E2 = 3,
+                 E3 = 1,
+                 E4 = 5,
+                 T1 = 10):
         super().__init__(seed=seed)
 
-        Sheep.create_agents(model=self, n=N1, R=R1)
-        Wolf.create_agents(model=self, n=N2, R = R2, E0=E1, E1= E1, E2 = E2)
+        Sheep.create_agents(model=self, n=N1, R=R1, E3=E3, E4=E4, T1=T1)
+        Wolf.create_agents(model=self, n=N2, R=R2, E0=E1, E1= E1, E2 = E2)
         self.grid = MultiGrid(width, height, torus=True)
         for agent in self.agents:
             i = self.rng.choice(width)
@@ -292,7 +300,7 @@ if __name__=='__main__':
 
     with PlotContext(figs=args.figs) as axes:
         sheep = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['S']
-        plot1 = sns.lineplot(data=sheep,ax=axes,color='blue',label=f'Sheep N={args.N1},R={args.R1}')
+        plot1 = sns.lineplot(data=sheep,ax=axes,color='blue',label=f'Sheep N={args.N1},R={args.R1},E3={args.E3},E4={args.E4},T1={args.T1}')
         wolves = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['W']
         sns.lineplot(data=wolves,ax=axes,color='red',label=f'Wolves N={args.N2},R={args.R2},E0={args.E0},E1={args.E1},E2={args.E2}')
         plot1.legend()
