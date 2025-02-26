@@ -43,6 +43,7 @@ class Ecology(Model):
         super().__init__(seed=seed)
         self.retired = []
         self.T1 = T1
+        self.is_active = False
 
         Sheep.create_agents(model=self, n=N1, R=R1, E3=E3, E4=E4)
         Wolf.create_agents(model=self, n=N2, R=R2, E0=E1, E1=E1, E2=E2)
@@ -68,6 +69,7 @@ class Ecology(Model):
         self.agents.shuffle_do('step')
         self.remove_all_retired()
         self.datacollector.collect(self)
+        self.is_active = min(len(value) for _,value in self.agents_by_type.items()) > 0
 
     def grass_is_green(self,pos):
         '''

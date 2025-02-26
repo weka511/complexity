@@ -111,6 +111,9 @@ if __name__=='__main__':
         ecology.step()
         if k%args.freq == 0 and k > 0:
             print (f'{k} steps')
+        if not ecology.is_active:
+            print (f'Break after step {k}')
+            break
 
     model_vars = ecology.datacollector.get_model_vars_dataframe()
     agent_vars = ecology.datacollector.get_agent_vars_dataframe()
