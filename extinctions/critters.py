@@ -58,7 +58,7 @@ class Critter(Agent,ABC):
 
     def replicate(self):
         '''Create a new instance of this critter with probability R'''
-        if self.random.uniform(0,1) > self.R: return
+        if self.rng.uniform(0,1) > self.R: return
         child = self.create()
         self.model.grid.place_agent(child, self.get_random_neighbour())
 
@@ -80,7 +80,15 @@ class Critter(Agent,ABC):
 
     def get_random_neighbour(self):
         '''Select a neighbouring cell at random'''
-        return self.random.choice(self.model.get_neighbours(self.pos))
+        return self.rng.choice(self.model.get_neighbours(self.get_pos()))
+
+    def get_pos(self):
+        '''
+        Get position of Critter
+        Convert pos from a numpy array to a tuple. This arose as part of
+        Issue #38 Replace model.random with model.rn
+        '''
+        return tuple(self.pos)
 
 class Sheep(Critter):
     '''
@@ -102,7 +110,7 @@ class Sheep(Critter):
         '''
         Acquire energy from grass, if it has any.
         '''
-        if self.model.grass_is_green(self.pos):
+        if self.model.grass_is_green(self.get_pos()):
             self.energy += self.E4
 
 
