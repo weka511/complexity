@@ -43,7 +43,7 @@ def parse_arguments():
     E0 = 5
     E3 = 1
     E4 = 5
-    T1 = 10
+    T1 = 15
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
     parser.add_argument('--figs', default = './figs',help='Path for storing figures')
@@ -108,7 +108,7 @@ class Critter(Agent):
 
     def move(self):
         '''
-        Move to a neighbouring cell
+        Move to a neighbouring cell. This expends energy.
         '''
         self.model.grid.move_agent(self,self.get_random_neighbour())
         self.energy -= self.delta_energy
@@ -126,28 +126,33 @@ class Critter(Agent):
         return self.random.choice(self.model.get_neighbours(self.pos))
 
 class Sheep(Critter):
-    def __init__(self,model=None,R=0.5,E3=1,E4=5,T1=10):
+    '''
+    Sheep move around, eat grass, and acquire and expend energy
+    '''
+    def __init__(self,model=None,R=0.5,E3=1,E4=5):
             super().__init__(model,R=R,role='S',delta_energy=E3)
             self.energy = 1
             self.E3 = E3
             self.E4 = E4
-            self.T1 = T1
 
     def create(self):
         '''
         Factory method--used to replicate. It creates a new instance of a S.
         '''
-        return Sheep(model=self.model,R=self.R,E3=self.E3,E4=self.E4,T1=self.T1)
+        return Sheep(model=self.model,R=self.R,E3=self.E3,E4=self.E4)
 
     def acquire_energy(self):
-        grass = self.model.grid.properties['grass']
-        if grass.data[self.pos] ==0:
-            grass.data[self.pos] += self.T1
+        '''
+        Acquire energy from grass, if it has any.
+        '''
+        if self.model.grass_is_green(self.pos):
             self.energy += self.E4
-        else:
-            grass.data[self.pos] -= 1
+
 
 class Wolf(Critter):
+    '''
+    Wolves move around, eat Sheep, and acquire and expend energy
+    '''
     def __init__(self,model=None,R=0.5,E1=1,E2=5,E0=5):
         super().__init__(model,R=R,role='W',delta_energy=E1)
         self.energy = E0
@@ -165,7 +170,7 @@ class Wolf(Critter):
         '''
         Eat any sheep that are sharing my location
         '''
-        for other in self.model.grid.get_cell_list_contents([self.pos]):
+        for other in self.model.get_cellmates(self.pos):
             if other.role != self.role:
                 self.energy += self.E2
                 other.energy = - np.inf
@@ -191,7 +196,7 @@ class Ecology(Model):
                  T1 = 10):
         super().__init__(seed=seed)
 
-        Sheep.create_agents(model=self, n=N1, R=R1, E3=E3, E4=E4, T1=T1)
+        Sheep.create_agents(model=self, n=N1, R=R1, E3=E3, E4=E4)
         Wolf.create_agents(model=self, n=N2, R=R2, E0=E1, E1= E1, E2 = E2)
         self.grid = MultiGrid(width, height, torus=True)
         for agent in self.agents:
@@ -199,23 +204,47 @@ class Ecology(Model):
             j = self.rng.choice(height)
             self.grid.place_agent(agent, (i, j))
         self.datacollector = DataCollector(
-                                    model_reporters={},
+                                    model_reporters={'grass': self.get_grass},
                                     agent_reporters={'role': 'role'}
                     )
         self.retired = []
         self.grid.add_property_layer(PropertyLayer('grass', width, height, 0, int))
-
+        self.T1 = T1
 
     def step(self):
         '''
         The is the active heart of the model. Agents acquire and consume energy, move about
         and die.
         '''
+        self.regrow()
         self.agents.shuffle_do('step')
         self.remove_all_retired()
         self.datacollector.collect(self)
 
+    def grass_is_green(self,pos):
+        '''
+        Used by Sheep to acquire energy. If grass is green, returns True  and sets regrowth counter.
+        '''
+        grass = self.grid.properties['grass']
+        if grass.data[pos] > 0: return False
+        grass.data[pos] += self.T1
+        return True
+
+    def regrow(self):
+        '''
+        For each patch of brown grass, reduce the timere by one.
+        '''
+        grass = self.grid.properties['grass'].data
+        m,n = grass.shape
+        for i in range(m):
+            for j in range(n):
+                if grass[i,j] > 0:
+                    grass[i,j] -= 1
+
     def get_neighbours(self,pos):
+        '''
+        Used when we move to find neighboring cells
+        '''
         return self.grid.get_neighborhood(pos, moore=True, include_center=False)
 
     def retire(self,consumer):
@@ -242,6 +271,18 @@ class Ecology(Model):
         self.grid.remove_agent(consumer)
         consumer.remove()
 
+    def get_grass(self):
+        '''
+        Count number of squares that contain edible grass
+        '''
+        grass = self.grid.properties['grass'].data
+        return np.count_nonzero(grass == 0)
+
+    def get_cellmates(self,pos):
+        '''
+        Used by a Wolf to locate other sharing the cell
+        '''
+        return self.grid.get_cell_list_contents([pos])
 
 class PlotContext:
     '''
@@ -295,14 +336,17 @@ if __name__=='__main__':
         if k%args.freq == 0 and k > 0:
             print (f'{k} steps')
 
-    # model_vars = ecology.datacollector.get_model_vars_dataframe()
+    model_vars = ecology.datacollector.get_model_vars_dataframe()
     agent_vars = ecology.datacollector.get_agent_vars_dataframe()
 
     with PlotContext(figs=args.figs) as axes:
-        sheep = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['S']
-        plot1 = sns.lineplot(data=sheep,ax=axes,color='blue',label=f'Sheep N={args.N1},R={args.R1},E3={args.E3},E4={args.E4},T1={args.T1}')
-        wolves = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['W']
+        sheep = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['S'].to_numpy()
+        plot1 = sns.lineplot(data=sheep,ax=axes,color='blue',label=f'Sheep N={args.N1},R={args.R1},E3={args.E3},E4={args.E4}')
+        wolves = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['W'].to_numpy()
         sns.lineplot(data=wolves,ax=axes,color='red',label=f'Wolves N={args.N2},R={args.R2},E0={args.E0},E1={args.E1},E2={args.E2}')
+        grass = model_vars.grass.to_numpy()
+        scale = max(sheep.max(),wolves.max())/grass.max()
+        sns.lineplot(data=scale*grass,ax=axes,color='green',label=f'Grass: T1={args.T1} (Scaled to match Sheep & Wolves)')
         plot1.legend()
         plot1.set(title=f'Sheep and Wolves: grid = {args.width}x{args.height};',
                                       xlabel = 'Time',
