@@ -42,7 +42,7 @@ def parse_arguments():
     T1 = 15
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
-    parser.add_argument('--figs', default = './figs',help='Path for storing figures')
+    parser.add_argument('--figs', default='./figs',help='Path for storing figures')
     parser.add_argument('--show',default=False,action='store_true',help='Show plots')
     parser.add_argument('--N1', default=N1, type=int,help = f'Initial number of sheep[{N1}]')
     parser.add_argument('--N2', default=N2, type=int,help = f'Initial number of wolves [{N2}]')

@@ -41,28 +41,30 @@ class Ecology(Model):
                  E4 = 5,
                  T1 = 10):
         super().__init__(seed=seed)
+        self.retired = []
+        self.T1 = T1
 
         Sheep.create_agents(model=self, n=N1, R=R1, E3=E3, E4=E4)
-        Wolf.create_agents(model=self, n=N2, R=R2, E0=E1, E1= E1, E2 = E2)
+        Wolf.create_agents(model=self, n=N2, R=R2, E0=E1, E1=E1, E2=E2)
+
         self.grid = MultiGrid(width, height, torus=True)
+        self.grid.add_property_layer(PropertyLayer('grass', width, height, 0, int))
         for agent in self.agents:
             i = self.rng.choice(width)
             j = self.rng.choice(height)
             self.grid.place_agent(agent, (i, j))
+
         self.datacollector = DataCollector(
             model_reporters={'grass': self.get_grass},
             agent_reporters={'role': 'role'}
         )
-        self.retired = []
-        self.grid.add_property_layer(PropertyLayer('grass', width, height, 0, int))
-        self.T1 = T1
 
     def step(self):
         '''
-        The is the active heart of the model. Agents acquire and consume energy, move about
-        and die.
+        The is the active heart of the model.
+        Agents acquire and consume energy, move about, and die.
         '''
-        self.regrow()
+        self.regrow_grass()
         self.agents.shuffle_do('step')
         self.remove_all_retired()
         self.datacollector.collect(self)
@@ -76,7 +78,7 @@ class Ecology(Model):
         grass.data[pos] += self.T1
         return True
 
-    def regrow(self):
+    def regrow_grass(self):
         '''
         For each patch of brown grass, reduce the timere by one.
         '''
@@ -93,29 +95,29 @@ class Ecology(Model):
         '''
         return self.grid.get_neighborhood(pos, moore=True, include_center=False)
 
-    def retire(self,consumer):
+    def retire(self,critter):
         '''
-        Used to get rid of a (deceased) Consumer. To avoid breaking the list of agents while
-        processsing with shuffle_do, we place the consumer on retired list, then use
+        Used to get rid of a (deceased) critter. To avoid breaking the list of agents while
+        processsing with shuffle_do, we place the critter on retired list, then use
         remove_all_retired to clean up at the end of the step.
         '''
-        self.retired.append(consumer)
+        self.retired.append(critter)
 
     def remove_all_retired(self):
         '''
-        Remove all retired consumers from grid and list of agents
+        Remove all retired critters from grid and list of agents
         '''
-        for consumer in self.retired:
-            self.remove_retired(consumer)
+        for critter in self.retired:
+            self.remove_retired(critter)
 
         self.retired = []
 
-    def remove_retired(self,consumer):
+    def remove_retired(self,critter):
         '''
-        Remove retired consumer from grid and list of agents
+        Remove retired critter from grid and list of agents
         '''
-        self.grid.remove_agent(consumer)
-        consumer.remove()
+        self.grid.remove_agent(critter)
+        critter.remove()
 
     def get_grass(self):
         '''
@@ -126,6 +128,6 @@ class Ecology(Model):
 
     def get_cellmates(self,pos):
         '''
-        Used by a Wolf to locate other sharing the cell
+        Used by a Wolf to locate others sharing the cell
         '''
         return self.grid.get_cell_list_contents([pos])
