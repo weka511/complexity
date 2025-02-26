@@ -86,7 +86,7 @@ class Critter(Agent,ABC):
         '''
         Get position of Critter
         Convert pos from a numpy array to a tuple. This arose as part of
-        Issue #38 Replace model.random with model.rn
+        Issue #38 Replace model.random with model.rng
         '''
         return tuple(self.pos)
 
