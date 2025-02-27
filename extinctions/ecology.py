@@ -32,7 +32,7 @@ class Ecology(Model):
         T1             Regrowth time for grass
         is_active      Indicates that no class of agents is empty
         grid           Positionsof agents
-        datacollector
+        datacollector  Used to record numbers of Wolves, Sheep, and amount of Grass
     '''
     def __init__(self,
                  N1 = 100,
@@ -88,7 +88,7 @@ class Ecology(Model):
             pos     A tuple representing position of some agent
 
         Returns:
-            True is grass was green
+            True if grass was green
         '''
         grass = self.grid.properties['grass'].data
         if grass[pos] > 0: return False    # if grass is "brown" do nothing

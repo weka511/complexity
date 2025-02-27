@@ -22,7 +22,6 @@ from os.path import basename, join, splitext
 from time import time
 from matplotlib.pyplot import subplots, show
 import seaborn as sns
-import pandas as pd
 from ecology import Ecology
 
 def parse_arguments():
@@ -125,8 +124,9 @@ if __name__=='__main__':
 
         plot1 = sns.lineplot(data=sheep,ax=axes,color='blue',label=f'Sheep N={args.N1},R={args.R1},E3={args.E3},E4={args.E4}')
         sns.lineplot(data=wolves,ax=axes,color='red',label=f'Wolves N={args.N2},R={args.R2},E0={args.E0},E1={args.E1},E2={args.E2}')
+        sns.lineplot(data=scale*grass,ax=axes,color='green',label=f'Grass Patches: T1={args.T1} (Scaled to match Sheep & Wolves)')
+        axes.set_xlabel('Time')
 
-        sns.lineplot(data=scale*grass,ax=axes,color='green',label=f'Grass: T1={args.T1} (Scaled to match Sheep & Wolves)')
         plot1.legend()
         plot1.set(title=f'Population: grid = {args.width}x{args.height};',
                                       xlabel = 'Time',

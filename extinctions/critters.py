@@ -24,20 +24,28 @@ from mesa import Agent
 class Critter(Agent,ABC):
     '''
     This class encompasses all agents used by the model:  sheep and wolves.
+
+    Attributes:
+        R                Proababilty of reproducing during a step
+        role             W or S: wolf or sheep
+        cost_of_moving   Energy expended moving to a neighbouring square
+        energy           Energy of critter: must be non-negative, otherwise critter will be retired.
     '''
     def __init__(self,
                  model = None,
                  R = 0.5,
                  role = '',
-                 delta_energy = 0):
+                 cost_of_moving = 0,
+                 energy = 1):
         super().__init__(model)
         self.R = R
         self.role = role
-        self.delta_energy = delta_energy
+        self.cost_of_moving = cost_of_moving
+        self.energy = energy
 
     def step(self):
         '''
-        Executed each step
+        Executed each step: move to a neighbouring cell, obtain energy, and reproduce
         '''
         self.move()
         self.acquire_energy()
@@ -68,7 +76,7 @@ class Critter(Agent,ABC):
         Move to a neighbouring cell. This expends energy.
         '''
         self.model.grid.move_agent(self,self.get_random_neighbour())
-        self.energy -= self.delta_energy
+        self.energy -= self.cost_of_moving
 
     def retire_if_depleted(self):
         '''
@@ -93,10 +101,13 @@ class Critter(Agent,ABC):
 class Sheep(Critter):
     '''
     Sheep move around, eat grass, and acquire and expend energy
+
+    Attributes:
+        E3       Energy expended moving to a neighbouring square
+        E4       Energy acquired by consuming a square of grass
     '''
     def __init__(self,model=None,R=0.5,E3=1,E4=5):
-        super().__init__(model,R=R,role='S',delta_energy=E3)
-        self.energy = 1
+        super().__init__(model,R=R,role='S',cost_of_moving=E3)
         self.E3 = E3
         self.E4 = E4
 
@@ -108,7 +119,7 @@ class Sheep(Critter):
 
     def acquire_energy(self):
         '''
-        Acquire energy from grass, if it has any.
+        Acquire energy from grass if possible.
         '''
         if self.model.grass_is_green(self.get_pos()):
             self.energy += self.E4
@@ -117,10 +128,14 @@ class Sheep(Critter):
 class Wolf(Critter):
     '''
     Wolves move around, eat Sheep, and acquire and expend energy
+
+    Attributes:
+        E0     Initial energy
+        E1     Energy expended moving to a neighbouring square
+        E2     Energy gain from eating one sheep
     '''
     def __init__(self,model=None,R=0.5,E1=1,E2=5,E0=5):
-        super().__init__(model,R=R,role='W',delta_energy=E1)
-        self.energy = E0
+        super().__init__(model,R=R,role='W',cost_of_moving=E1,energy=E0)
         self.E0 = E0
         self.E1 = E1
         self.E2 = E2
