@@ -115,19 +115,20 @@ if __name__=='__main__':
             print (f'Break after step {k}')
             break
 
-    model_vars = ecology.datacollector.get_model_vars_dataframe()
-    agent_vars = ecology.datacollector.get_agent_vars_dataframe()
-
-    with PlotContext(figs=args.figs) as axes:
+    with PlotContext(figs=args.figs,suptitle='Sheep and Wolves') as axes:
+        model_vars = ecology.datacollector.get_model_vars_dataframe()
+        agent_vars = ecology.datacollector.get_agent_vars_dataframe()
         sheep = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['S'].to_numpy()
-        plot1 = sns.lineplot(data=sheep,ax=axes,color='blue',label=f'Sheep N={args.N1},R={args.R1},E3={args.E3},E4={args.E4}')
         wolves = agent_vars.groupby('Step')['role'].value_counts().unstack(fill_value=0)['W'].to_numpy()
-        sns.lineplot(data=wolves,ax=axes,color='red',label=f'Wolves N={args.N2},R={args.R2},E0={args.E0},E1={args.E1},E2={args.E2}')
         grass = model_vars.grass.to_numpy()
         scale = max(sheep.max(),wolves.max())/grass.max()
+
+        plot1 = sns.lineplot(data=sheep,ax=axes,color='blue',label=f'Sheep N={args.N1},R={args.R1},E3={args.E3},E4={args.E4}')
+        sns.lineplot(data=wolves,ax=axes,color='red',label=f'Wolves N={args.N2},R={args.R2},E0={args.E0},E1={args.E1},E2={args.E2}')
+
         sns.lineplot(data=scale*grass,ax=axes,color='green',label=f'Grass: T1={args.T1} (Scaled to match Sheep & Wolves)')
         plot1.legend()
-        plot1.set(title=f'Sheep and Wolves: grid = {args.width}x{args.height};',
+        plot1.set(title=f'Population: grid = {args.width}x{args.height};',
                                       xlabel = 'Time',
                                       ylabel = 'Population')
 

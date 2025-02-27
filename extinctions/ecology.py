@@ -25,6 +25,14 @@ from critters import Sheep, Wolf
 class Ecology(Model):
     '''
     This class represents the Grass/Sheep/Wolf model
+
+    Attributes:
+        retired        List of agents that have insufficiet energy to continue.
+                       They will be deleted at the end of each step
+        T1             Regrowth time for grass
+        is_active      Indicates that no class of agents is empty
+        grid           Positionsof agents
+        datacollector
     '''
     def __init__(self,
                  N1 = 100,
@@ -73,11 +81,18 @@ class Ecology(Model):
 
     def grass_is_green(self,pos):
         '''
-        Used by Sheep to acquire energy. If grass is green, returns True  and sets regrowth counter.
+        Used by Sheep to acquire energy. If grass is green at specified position,
+        returns True and sets regrowth counter.
+
+        Parameters:
+            pos     A tuple representing position of some agent
+
+        Returns:
+            True is grass was green
         '''
-        grass = self.grid.properties['grass']
-        if grass.data[pos] > 0: return False
-        grass.data[pos] += self.T1
+        grass = self.grid.properties['grass'].data
+        if grass[pos] > 0: return False    # if grass is "brown" do nothing
+        grass[pos] = self.T1               # Set grass brown
         return True
 
     def regrow_grass(self):
@@ -85,11 +100,7 @@ class Ecology(Model):
         For each patch of brown grass, reduce the timere by one.
         '''
         grass = self.grid.properties['grass'].data
-        m,n = grass.shape
-        for i in range(m):
-            for j in range(n):
-                if grass[i,j] > 0:
-                    grass[i,j] -= 1
+        grass [grass > 0] -= 1
 
     def get_neighbours(self,pos):
         '''
