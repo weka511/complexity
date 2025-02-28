@@ -22,6 +22,7 @@
 from argparse import ArgumentParser
 from os.path import basename, splitext
 from time import time
+import numpy as np
 import pandas as pd
 import mesa
 from ecology import Ecology
@@ -78,9 +79,13 @@ def get_param(argvalue):
             case 1:
                 return argvalue
             case 2:
-                return range(argvalue[0],argvalue[1]+1)
+                if all(type(value)==int for value in argvalue):
+                    return range(argvalue[0],argvalue[1]+1)
+                return np.arange(argvalue[0],argvalue[1]+np.finfo(float).eps)
             case 3:
-                return range(argvalue[0],argvalue[1]+1,argvalue[2])
+                if all(type(value)==int for value in argvalue):
+                    return range(argvalue[0],argvalue[1]+1,argvalue[2])
+                return np.arange(argvalue[0],argvalue[1]+np.finfo(float).eps,argvalue[2])
             case _:
                 raise ValueError(f'{argvalue} is too long to use for a range')
     else:
