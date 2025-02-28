@@ -16,7 +16,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
-   Batch runner for Thinking Like a Wolf, a Sheep, or a Firefly
+   Batch runner template
 '''
 
 from argparse import ArgumentParser
@@ -25,43 +25,21 @@ from time import time
 import numpy as np
 import pandas as pd
 import mesa
-from ecology import Ecology
+
 
 def parse_arguments():
     '''
     Parse command line arguments and display help text.
     '''
     iterations = 5
-    N1 = 100
-    N2 = 100
     nsteps = 50
-    width = 25
-    height = 25
-    R1 = 0.25
-    R2 = 0.25
-    E1 = 1
-    E2 = 6
-    E0 = 5
-    E3 = 1
-    E4 = 5
-    T1 = 15
+
     parser = ArgumentParser(__doc__)
     parser.add_argument('--seed',type=int,default=None,help='Seed for random number generator')
     parser.add_argument('--iterations', default=iterations, type=int, help = f'Number of times to run simulation [{iterations}]')
     parser.add_argument('--output',default = basename(splitext(__file__)[0]))
-    parser.add_argument('--N1', default=N1, type=int,help = f'Initial number of sheep[{N1}]')
-    parser.add_argument('--N2', default=N2, type=int,help = f'Initial number of wolves [{N2}]')
     parser.add_argument('--nsteps', default=nsteps, type=int, help = f'Number of steps for running simulation [{nsteps}]')
-    parser.add_argument('--width', default=width, type=int,help = f'Width of grid [{width}]', nargs = '*')
-    parser.add_argument('--height', default=height, type=int,help = f'Height of grid [{height}]', nargs = '*')
-    parser.add_argument('--R1', default=R1, type=float,help = f'Probability of a sheep reproducing [{R1}]', nargs = '*')
-    parser.add_argument('--R2', default=R2, type=float,help = f'Probability of a wolf reproducing [{R2}]', nargs = '*')
-    parser.add_argument('--E0', default=E0, type=float,help = f'Starting energy for a wolf [{E0}]', nargs = '*')
-    parser.add_argument('--E1', default=E1, type=float,help = f'Cost of movement for a wolf [{E1}]', nargs = '*')
-    parser.add_argument('--E2', default=E2, type=float,help = f'Energy gain for a wolf that eats a sheep [{E2}]', nargs = '*')
-    parser.add_argument('--E3', default=E3, type=float,help = f'Energy gain for a sheep that eats a patch of grass [{E3}]', nargs = '*')
-    parser.add_argument('--E4', default=E4, type=float,help = f'Cost of movement for a sheep [{E4}]', nargs = '*')
-    parser.add_argument('--T1', default=T1, type=float,help = f'Time for grass to regrow [{T1}]', nargs = '*')
+
 
     return parser.parse_args()
 
@@ -95,20 +73,9 @@ if __name__=='__main__':
 
     args = parse_arguments()
     results = mesa.batch_run(
-        Ecology,
+        Model,    #FIXME
         parameters = {
-            'N1' : get_param(args.N1),
-            'N2' : get_param(args.N2),
-            'width' : get_param(args.width),
-            'height' : get_param(args.height),
-            'R1' : get_param(args.R1),
-            'R2' : get_param(args.R2),
-            'E0' : get_param(args.E0),
-            'E1' : get_param(args.E1),
-            'E2' : get_param(args.E2),
-            'E3' : get_param(args.E3),
-            'E4' : get_param(args.E4),
-            'T1' : get_param(args.T1)
+
         },
         iterations = args.iterations,
         max_steps = args.nsteps,
