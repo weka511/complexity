@@ -11,4 +11,5 @@ wealth.py|Wealth example from tutorial
 File|Description
 -------------|-----------------------------------------------------------------------------------------
 mesa-test.wpr|WingIDE template
+runner-template.py|Template for batch runner
 template.py|Template for new files
