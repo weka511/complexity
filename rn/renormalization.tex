@@ -1,6 +1,6 @@
 % MIT License
 
-% Copyright (c) 2019-2022 Simon Crase
+% Copyright (c) 2019-2025 Simon Crase
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,17 @@
 % SOFTWARE.
 
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,amsthm,tocloft,thmtools,cancel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tocloft}
+\usepackage{thmtools}
+\usepackage{cancel}
 \graphicspath{{figs/}}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newtheorem{defn}{Definition}
@@ -40,7 +50,7 @@
 
 \begin{abstract}
 My notes from SFI Renormalization Tutorial\cite{dedeo2017renormalization}.
-  The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own. These notes are distributed in the hope that they will be useful,  but without any warranty, and without even the implied warranty of merchantability or fitness for a particular purpose. All feedback is welcome,  but I don't necessarily undertake to do anything with it.\\
+The content and images contained herein are the intellectual property of the Santa Fe Institute, with the exception of any errors in transcription, which are my own. These notes are distributed in the hope that they will be useful,  but without any warranty, and without even the implied warranty of merchantability or fitness for a particular purpose. All feedback is welcome,  but I don't necessarily undertake to do anything with it.\\
 The source for this document can be found at\\
 \url{https://github.com/weka511/complexity/tree/master/rn}.
 \end{abstract}
@@ -55,9 +65,7 @@ The source for this document can be found at\\
 
 \subsection{Introduction}
 
-We'll be talking in this 
-unit about "Renormalization". It's fair enough to say that since 1950 the most interesting thing, in fact, perhaps the only thing that has driven theoretical physics has been the problem of Renormalization. In pursuit of understanding 
-what on Earth that was, we developed an enormous amount of extremely complicated mathematics.
+We'll be talking in this unit about "Renormalization". It's fair enough to say that since 1950 the most interesting thing, in fact, perhaps the only thing that has driven theoretical physics has been the problem of Renormalization. In pursuit of understanding what on Earth that was, we developed an enormous amount of extremely complicated mathematics.
 
 When I\footnote{i.e. Simon DeDeo} came to work in the Cognitive 
 Sciences, when I came to study social systems, and social behaviour, 
@@ -356,14 +364,8 @@ in a later module when we come to the Ising model.
 	\includegraphics[width=0.9\textwidth]{Alice5}
 \end{figure}
 
-What Leo said to do is:
-Don't even bother
-to average over that grid square,
-just take the point
-in the top left corner,
-and have that define it.
-You can see in this case here,
-if we use that decimation rule,
+What Leo said to do is: Don't even bother to average over that grid square, just take the point in the top left corner,
+and have that define it. You can see in this case here, if we use that decimation rule,
 that same patch of die now gets mapped,
 not to black, but to white.
 So what I've introduced you to here
@@ -411,6 +413,11 @@ where here, instead of compressing it
 using 10x10 grids,
 I do a much less aggressive compression
 where I only take little 3x3 grids.
+
+\begin{figure}[h]
+	\caption{Two coarse-graining schemes}
+	\includegraphics[width=0.8\textwidth]{Alice6}
+\end{figure}
 If you compare how ugly
 the 10x10 grid compression is,
 to the 3x3 grid compression,
@@ -2627,7 +2634,7 @@ All sequences reversible; they form a \textit{group}.
 
 Krohn Rhodes Irreversible --semigroup
 
-See \cite{dedeo2011effective,malerkrohn,rhodes2009applications}
+See \cite{dedeo2011effective,maler2010krohn,rhodes2009applications}
 \section{Renormalization in Quantum Electrodynamics}
 \subsection{From Quantum Electrodynamics to Plasma Physics }
 
