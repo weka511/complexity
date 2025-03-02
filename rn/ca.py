@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Greenweaves Software Limited
+# Copyright (C) 2019-2025 Greenweaves Software Limited
 
 # This is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,8 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
+'''Q1 renormalization of 105 to 150'''
 def create_rule(N):
-    n    = N
+    n = N
     rule = []
     while len(rule)<8:
         n,r = divmod(n,2)
@@ -23,9 +24,9 @@ def create_rule(N):
 
 def execute_rule(state,rule):
     extended_state = [0,0] + state + [0,0]
-    new_state      = []
+    new_state = []
     for i in range(len(state)+2):
-        x     = extended_state[i:i+3]
+        x = extended_state[i:i+3]
         input = 2*(2*x[0] + x[1]) + x[2]
         new_state.append(rule[input])
     return new_state
@@ -38,7 +39,7 @@ def convert(state):
 
 def project(state,table=[0,1,1,0]):
     return [table[2*state[i]+state[i+1]] for i in range(0,len(state),2)]
-        
+
 if __name__=='__main__':
     print (create_rule(105))
     #print (create_rule(110))
