@@ -34,6 +34,7 @@
 \usepackage{cancel}
 \graphicspath{{figs/}}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand*\xor{\oplus}
 \newtheorem{defn}{Definition}
 \newtheorem{thm}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -2372,376 +2373,122 @@ that we have to make our models
 more sophisticated.
 In those cases, as we see,
 simplifying the data makes
-the model harder to do.
-
-\cite{dedeo2016conflict}
+the model harder to do. \cite{dedeo2016conflict}
 
 \section{Cellular Automata}
 
 \subsection{Cellular Automata: an Introduction}
 
-as a basic pattern
-to the renormalization story
-you begin with some data
-and a model
-that explains
-the data,
-describes it
-or predicts it.
-Then you imagine
-taking that dataset that you have
-and throwing some of it out,
-performing a lossy compression
-for example,
-projecting it down,
-coarse-graining it.
-So now you have a new dataset
-related to the first
-but needing a new model,
-a new description.
-So then you build a model
-that describes
-or predicts
-or explains
-that simpler dataset.
-And then you ask
-What is the relationship
-between the model
-that describes the coarse-grained data
-and the model
-that describes
-the fine-grained data.
-From here
-to here
-is a coarse-graining
-or projection.
-And what we are interested in
-is what this move
-does to this model here.
-How to go from here
-to here?
-And if these two models
-are comparable in some way,
-for example if these two models
-share the same number of parameters
-we can even talk
-just about how these parameters change
-when you go from here
-to here.
-And that's called
-renormalization group flow.
-In the case of the Markov chain
-to try a first example
-of that whole pattern
-of data
-to data
-model
-to model
-in the case of the Markov chain
-we actually
-are kinda lucky
-because by coarse-graining that system
-in particular
-a coarse-graining operation
-with the decimated time
-only keeps half of all of the time samples
-that we had
-as if somehow
-we're resampling
-on a microphone
-at a lower frequency.
-We may've tossed out
-half the data
-the model that we use
-to predict
-or describe
-that new dataset
-had exactly the same
-mathematical form
-as the original case
-which is described just by a matrix
-an N by N matrix
-where N is the number of states
-that the system can be in
-at any point in time.
-And in that case we are able
-to compare one matrix to another.
-And in fact
-one of the lovely things
-that we saw at the end of that
-series
-was that as I
-coarse-grained
-further and further
-all those matrices
-tended to flow towards
-the lower-dimensional space
-in matrix land.
-The system tended to simplify
-to a small number of places
-within the space.
-And in this section
-we'll talk about a new kind of model,
-the cellular automata
-which has a slightly
-different set of properties
-in many many ways it's simpler
-oh sorry
-in many ways it's identical
-to the Markov chain case
-and the cellular automata
-we will see
-is that the state of the system
-at any time
-depends solely
-upon the state of the system
-at the just previous time step.
+As a basic pattern to the renormalization story you begin with some data
+and a model that explains the data, describes it or predicts it.
+Then you imagine taking that dataset that you have and throwing some of it out, performing a lossy compression for example, projecting it down, coarse-graining it.
+So now you have a new dataset related to the first but needing a new model, a new description.
+So then you build a model that describes or predicts or explains that simpler dataset.
+And then you ask: what is the relationship between the model that describes the coarse-grained data and the model that describes the fine-grained data?
+From here to here is a coarse-graining or projection.
+And what we are interested in is what this move does to this model here.
+How to go from here to here? And if these two models
+are comparable in some way, for example if these two models share the same number of parameters we can even talk just about how these parameters change when you go from here to here. And that's called \emph{renormalization group flow}.
+In the case of the Markov chain, to try a first example of that whole pattern of data
+to data model to model, we actually are kinda lucky because by coarse-graining that system in particular a coarse-graining operation with the decimated time only keeps half of all of the time samples that we had, as if somehow we're resampling on a microphone at a lower frequency, We may've tossed out half the data, the model that we use to predict or describe that new dataset, had exactly the same mathematical form as the original case which is described just by a matrix, an $N \times N$ matrix
+where $N$ is the number of states that the system can be in at any point in time.
+And in that case we are able to compare one matrix to another.
+And in fact one of the lovely things that we saw at the end of that
+series was that, as I coarse-grained further and further, all those matrices tended to flow towards the lower-dimensional space in matrix land.
+The system tended to simplify to a small number of places within the space.
+And in this section we'll talk about a new kind of model, the cellular automaton, which has a slightly different set of properties. 
+In many many ways it's simpler, oh sorry, in many ways it's identical to the Markov chain case. In the cellular automaton, the state of the system at any time depends solely upon the state of the system at the just previous time step.
 So in that sense it is forgetful.
-It doesn't matter
-what's happening
-in the deep past.
-All that matters is
-what's happening just as a moment before.
-So in that sense it is
-forgetful just like the Markov chain
-it has no memory
-that can be contained
-within
-a story about everything
-that just happened.
-But in another sense we'll see
-that as we coarse-grained in time
-the number of things that this moment
-depends upon
-grows.
-So we had to be a little bit more clever
-about how we map
-model of one scale
-into models
-of another scale.
-So let's get
-specific
-and talk about the cellular automata
-themselves.
-Here's an example
-of what a cellular automata
-looks like.
+It doesn't matter what's happening in the deep past.
+All that matters is what's happening just as a moment before.
+So in that sense it is forgetful just like the Markov chain: it has no memory that can be contained within a story about everything that just happened.
+But in another sense we'll see that as we coarse-grained in time the number of things that this moment depends upon grows.
+So we had to be a little bit more clever about how we map model of one scale into models of another scale. 
+So let's get specific and talk about the cellular automata themselves.
+Figure \ref{fig:cellular-automaton-1} is an example of  a cellular automaton.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Examples of Cellular Automata. All three use the same update rule with different initial conditions.}
+		\begin{subfigure}[T]{0.3\textwidth}
+			\caption{A cellular automaton}\label{fig:cellular-automaton-1}
+			\includegraphics[width=\textwidth]{cellular-automaton-1}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[T]{0.3\textwidth}
+			\caption{Another set of initial conditions}\label{fig:cellular-automaton-2}
+			\includegraphics[width=\textwidth]{cellular-automaton-2}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[T]{0.3\textwidth}
+			\caption{Random initial conditions}\label{fig:cellular-automaton-3}
+			\includegraphics[width=\textwidth]{cellular-automaton-3}
+		\end{subfigure}
+	\end{center}
+\end{figure}
 
-How do you read this diagram
-consider the very first line of pixels
-at the top there
-you can see most of the pixels are black
-then there are two white pixels.
-That's the state of the system at time t.
-There is an evolution rule,
-a rule about how to go
-from that first line of pixels
-to that second line of pixels
-and from that second line of pixels
-to that third line of pixels
-and so on.
-There is a rule
-that takes you
-from one line
-to the next
-and produces
-this kind of beautiful patterns
-that you see here.
-So those two little points
-sort of explode
-and evolve over time spreading outwards
-and even interacting with each other
-line sort of waves
-on a beach,
-that kind complicated patterns.
-Here's the same rule
-initiate the same update rule
-but with a different set
-of initial conditions.
-And now what you can see
-is that in fact
-whereas before be began
-with all black pixels
-except for two white ones
-now what I've done
-is add in another two white pixels.
-And again you see that same
-kind of triangular
-sort of expanding wave pattern.
-Another sort of a regular system
-evolves differently.
-You see more complicated patterns
-the further down you go.
-Here's one more example
-of again the same update rule
+How do you read this diagram?
+Consider the very first line of pixels, at the top: you can see most of the pixels are black then there are two white pixels.
+That's the state of the system at time $t$.
+There is an evolution rule, a rule about how to go from that first line of pixels to that second line of pixels and from that second line of pixels to that third line of pixels and so on.
+There is a rule that takes you from one line to the next and produces this kind of beautiful pattern that you see here.
+So those two little points sort of explode and evolve over time spreading outwards and even interact with each other line sort of waves on a beach, that kind complicated patterns.
+Figure \ref{fig:cellular-automaton-2} shows the same update rule with a different set of initial conditions. And now what you can see is that in fact whereas before be began with all black pixels except for two white ones now what I've done is add in another two white pixels. And again you see that same kind of triangular sort of expanding wave pattern. Another sort of a regular system evolves differently.
+You see more complicated patterns the further down you go. Figure \ref{fig:cellular-automaton-3} shows one more example of again the same update rule
 but now with random initial conditions.
-So instead of sort of setting up
-almost everything with the black pixels
-and somewhere white pixels
-now I've just randomly laid out
-black and white at that first line.
-And you can see now
-as system evolves through time
-you kind of lose that very structure
-triangular propagating wave shape.
-It's almost that you have just
-too many waves
-interacting with each other.
-And you get kind of sort of big chunks
-of white and black triangles.
-All of those pictures are generated
-by the same rule
-and that rule
-in contrast to the Markov chain
-is deterministic.
-I can tell you with certainty
-what will happen to one pixel
-depending upon
-all the pixels just previous.
-The rules themselves
-are incredibly simple.
-Here is what I've done is just zoom in
-on an example of the first three lines
-of cellular automata.
-And the state of that pixel marked
-with the question mark
-depends solely upon
-the pixel just above it
-and just above it to the left
-and just above it to the right.
-Notice that this question mark pixel
-doesn't depend upon
-let's say something very far to the left
-or very far to the right
-and also
-just to remind you
-of the kind of forgetful nature
-of the cellular automata
-it doesn't depend
-on the values of pixels
-before
-the line just previous.
-Of course
-I can use facts about the lines
-further up
-the screen
-to predict
+So instead of sort of setting up almost everything with the black pixels
+and somewhere white pixels now I've just randomly laid out black and white at that first line.
+And you can see now as system evolves through time you kind of lose that very structure, the triangular propagating wave shape.
+It's almost that you have just too many waves interacting with each other.
+And you get kind of sort of big chunks of white and black triangles.
+All of those pictures are generated by the same rule and that rule, in contrast to the Markov chain, is deterministic.
+I can tell you with certainty what will happen to one pixel depending upon all the pixels just previous.
+The rules themselves are incredibly simple. Figure \ref{fig:cellular-automaton-rule} zooms in on an example of the first three lines
+of a cellular automaton. 
+
+\begin{figure}[H]
+	\begin{center}
+		\caption{An example of the first three lines
+			of a cellular automaton. The state of that pixel marked
+			with the question mark depends solely upon the pixel just above it and just above it to the left and just above it to the right.}\label{fig:cellular-automaton-rule}
+		\includegraphics[width=0.6\textwidth]{cellular-automaton-rule}
+	\end{center}
+\end{figure}
+Notice that this question mark pixel doesn't depend upon, let's say, something very far to the left or very far to the right and also, just to remind you of the kind of forgetful nature of the cellular automaton, it doesn't depend on the values of pixels
+before the line just previous.
+Of course I can use facts about the lines further up the screen to predict
 what this question mark is going to do.
-But once you tell me
-the value of pixel x, y and z
-you've determined
-for all time
-what will happen
-to the question mark pixel.
-We call that function f
-that function f takes
-the three pixel values
-and tells you
-what will happen next.
-And once I define the function f
-I've defined the evolution rule
-the cellular automata
-and all that remains for me
-to lay down some initial conditions
-and use my computer
-to compute f of x, y and z
-for all the pixels
-at the next line.
-You can think of this as a lookup table
-and because the pixels can either be
-black or white
-let's say one or zero
-in fact now
-we have is a lookup table.
-I have two possible values for x
-two possible values for y
-two possible values for z
-two to the power of three is eight
-possible values
-that could drive the value of
+But once you tell me the value of pixel $x$, $y$, and $z$, you've determined, for all time, what will happen to the question mark pixel.
+We call that function $f$; that function $f$ takes the three pixel values and tells you what will happen next.
+And once I define the function $f$, I've defined the evolution rule of the cellular automaton, and all that remains for me is to lay down some initial conditions and use my computer to compute $f(x,y,z)$ for all the pixels at the next line.
+You can think of this as a lookup table and because the pixels can either be black or white, let's say one or zero, now we have a lookup table.
+I have two possible values for $x$, two possible values for $y$, and two possible values for $z$: $2^3=8$, eight possible values that could drive the value of
 question mark pixel.
-And my function f
-has to tell you what happens
-for each of those possible
-eight combinations.
-If you think about it
-if there are eight possible combinations
-and I have to specify one or zero
-for each of those eight
-I now have two to the power of eight
-different rules
-two choices for each value of the triplet.
-And so in fact
-for a cellular automata
-defined by a neighbor rule
-like this one
-there's only two hundred
-and fifty-six possible rules
-that you can have.
-There's only two hundred and fifty-six
-distinct
-functions f.
-Let's take look at the rule
-I've just showed you evolving
-it's actually called rule one-fifty.
-There's a simple way to write
-that I can tell you
-the lookup table
-but it is also possible
-just to phrase it in terms
-of logical gates.
-And you can phrase rule one-fifty
-as the value
-of the x pixel XORed
-with the values of the y pixel
-and that value XORed
-with the value of the z pixel.
-A XOR is one
-when one of the inputs is zero
-and one of the inputs is one
-and otherwise it's zero.
-It's an exclusive or.
-So if both are off
-it's off,
-if both are on
-it's off,
-and if one is on and the other is off
-then it's on.
-Another way to talk about rule one-fifty,
-another way verbally describe
-that function f
-is not in terms of gates
-but just to say
-in words
-the output is black
-when there's an odd number
-of black cells
-above.
-So now we can watch
-rule one-fifty
-evolve
-over time.
-We begin with these initial conditions
-and after one step
-what you can see
-is that the pixel
-just directly below
-that white pixel
-stays white
-because the value just above it is white
-the value above it to the left is black
-the value above it to the right is black
-that's an even number of black pixels.
-And so that pixel there stays white.
-And now you can begin to see
-how that
-starts to spread out
-over time
-and the different ways
-in which
-these triangular
-patterns
-emerge.
+And my function $f$ has to tell you what happens for each of those possible eight combinations.
+If you think about it if there are eight possible combinations and I have to specify one or zero for each of those eight, I now have $2^8=256$ different rules, two choices for each value of the triplet.
+And so, for a cellular automaton defined by a neighbor rule like this one, there's only 256 possible rules that you can have.
+There's only 256 distinct functions $f$.
+
+Let's take look at the rule I've just showed you evolving. It's actually called rule 150.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Rule 150: $\big((x \xor y) \xor z\big)$}\label{fig:cellular-automaton-rule-2}
+		\includegraphics[width=0.6\textwidth]{cellular-automaton-rule-2}
+	\end{center}
+\end{figure}
+There's a simple way to write that I can tell you, the lookup table, but it is also possible just to phrase it in terms of logical gates.
+And you can phrase rule one-fifty as the value
+of the x pixel XORed with the values of the y pixel and that value XORed with the value of the z pixel. 
+
+Another way to talk about rule 150, another way verbally describe that function $f$ is not in terms of gates but just to say that the output is black when there's an odd number of black cells above.
+In Figure \ref{fig:cellular-automaton-rule-3} we  watch rule 150 evolve over time.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Rule 150 evolving}\label{fig:cellular-automaton-rule-3}
+		\includegraphics[width=0.6\textwidth]{cellular-automaton-rule-3}
+	\end{center}
+\end{figure}
+We begin with these initial conditions and after one step what you can see is that the pixel just directly below that white pixel stays white because the value just above it is white, the value above it to the left is black, the value above it to the right is black, that's an even number of black pixels, so that pixel there stays white.
+And now you can begin to see how that starts to spread out over time and the different ways in which these triangular patterns emerge.
 
 That's rule 150.
 We can also consider a different rule.
