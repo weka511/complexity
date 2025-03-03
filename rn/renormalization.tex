@@ -2566,7 +2566,7 @@ given a particular set of initial conditions.
 What you can see here in Figure \ref{fig:cellular-automaton-rule-7} is all these different structures that appear you have what are called gliders.
 So if you look at that sort of polka dot points or that polka dot stripe there Cook called this an A4 glider, and when an A4 glider meets what he calls an Ebar glider
 which is a much more complicated pattern that propagates to the left the A4 glider and the Ebar glider depending upon exactly how they collide with each other
-can either be absorbed, can change the state of the Ebar glider, and can lead to reemission.
+can either be absorbed, can change the state of the Ebar glider, and can lead to re-emission.
 
 So Figure \ref{fig:cellular-automaton-rule-7} the A4 glider hits the Ebar glider,
 kind of gets stored there for a while and gets spat out a little bit later
@@ -2607,6 +2607,313 @@ Squinting at it in some way, producing a reduced description of that pattern and
 
 \subsection{Israeli and Goldenfeld; projection and commuting diagrams }
 
+So in the first section you had a brief introduction to cellular automata there's a lot more to say about it, but I at least got a chance to give you a taste for the different kinds of patterns that each of the different kinds of rules can produce and I even gave you a little bit of a sense of the magic of Rule 110 and 110 will come back a little bit later.
+
+For now though what I'm going to talk about is how we can think about coarse-graining a cellular automaton.
+And when we go from the Markov chains of the previous section to the cellular automata here there's going to be one important change and that change is going to affect how we think about the renormalization process, so if we go back to the finite state machines, to the Markov chain models, if you have a system that you observe every let's say one second time step, and then you decimate that system down,
+you coarse-grain it and so you now observe the system every two time steps. 
+The original model in order to get from $t+1$ to $t+2$, you needed to know your position among the $N$ states, you need to know which state you were in, and once you knew which state you're in you could figure out which state you were in at time $t+2$.
+
+And similarly to go from time $t$ to $t+1$ you just had to know which state you were in at time $t$. It's a Markov chain and so what that means is that you have a finite and fixed number of states over time. When we came to coarse-grain that model 
+we could still keep the same relationship. In order to know where you were at time $t+2$ all you had to do was know your position among all of the $N$ states of the
+new updated model at time $t$. What that meant was that we stayed within the same model class when we dropped some of the time information. We could produce an $N$-state Markov chain that skipped every step if we had an $N$-state Markov chain at the finer-grained timescale. This changes completely when we come to the cellular automata.
+
+So if we take that grid evolution algorithm that we introduced you to, what you saw was that to know what this the state of the system here is at time $t$ at time $t+1$,
+you needed to know the state of these three grid squares just above it. And then to know the state of that point at time $t+2$ again, you only needed three pieces of information.
+But imagine that we dropped, we coarse-grained, we decimated out the $t+1$ data.
+What do you have to know about this or what do you have to know about the state of the system here to know the value of this point here? Ian Classie,???, one of the people I learned this technique from once said this is sort of like what a physicist would call a light cone because as you go further back in time in order to know the state of this point here you need to know the state of this point here, but in order to know the state at this point here you have to know the state of the system at 
+these three points here.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Light Cone for a Cellular Automaton]{Light Cone for a Cellular Automaton. The cell in the third row depends on three cells in the middle, five in the top.}
+		\includegraphics[width=0.8\textwidth]{cellular-automaton-light-cone}
+	\end{center}
+\end{figure}
+
+And similarly to know the state of the system at this point here, you have to know the state of the system here and here as well.
+And so as you go further and further back in time, as you drop this chunk of data here if you were to naively trying to do the same trick we did with the Markov chain
+which is just come up with a model that work just as well to go from $t$ to $t+2$ you would find that instead of having a rule that looked like $f(x,y,z)$ your rule would now have to include five cells from the top row.
+You'd have to in fact have five inputs to your function $f(a,b,c,d,e)$.
+
+When you coarse-grain a cellular automaton only along the time dimension, you no longer stay within the same model class.
+If you said, okay, produce a model
+that can get you from here to here
+that model would not fall
+in one of the 256 cellular automata
+that we introduced you to
+in the first section of this module.
+So, what do we do? Well, this is a trick
+that was introduced
+by a pair of scientists
+Israeli and Goldenfeld
+and then I learned how to make it work
+in person from Ian Classie and Josh Grosch here
+at the Santa Fe institute.
+
+But here's one story about how to solve this problem.
+If you coarse-grained in time you don't stay within the same model class.
+What Goldenfeld and Israeli did was ask you to think not about individual grid points
+at this later time point, but pairs of grid points.
+And then to look at the backwards light cone, the space of influence that this pair is subject to.
+So, one step back, it's pretty easy: I just have to add one more point in the middle row.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Light Cone for pairs of cells}\label{fig:cellular-automaton-light-cone-pairs}
+		\includegraphics[width=0.8\textwidth]{cellular-automaton-light-cone-pairs}
+	\end{center}
+\end{figure}
+So this is the set of grid points that I have to know in order to predict the state of this pair of grid points at time $t+2$ and then if I zoom one step further back
+what you can see is that I just have to include an additional grid point here on the far left edge.
+So these two grid points at time $t+2$ are influenced by all of these six grid points at time $t$. What Goldenfeld and Israeli then asked us to do was to consider the supercell in the third row as a unit, call this let's say $\hat{a}$ and these six cells in the top row, to group them into three supercell units $\hat{x}$, $\hat{y}$ and $\hat{z}$.
+If you write it this way,
+then the logic of
+the fine-grained simulation
+means that in fact the state
+of the a $\hat{a}$ grid cell
+is now equal to something, we'll call it $\hat{f}(\hat{x},\hat{y},\hat{z})$.
+\begin{align*}
+	\hat{a} = \hat{f}(\hat{x},\hat{y},\hat{z})
+\end{align*}
+So the state of this pair here, whether they're both on, this one's on and this one's off, this one's off and this one's on or they're both on, that state of that grid cell or that supercell here depends upon the state of these three supercells up here and this law here is given
+in the same form as this law here with one change.
+The original evolution law for the cellular automata takes binary variables, ones and zeros.
+This evolution law here takes pairs of ones and zeroes instead of there being two possible states for each supercell there are four.
+And while this one here outputs one or zero
+this function here outputs 00, 01, 10 or 11.
+So we're part of the way there to coarse-graining the cellular automata.
+We're only part of the way, we have something that depends, we have a function that depends upon three arguments and spits out one.
+That's an improvement over what we wanted to do before where we had a function that takes in five arguments.
+
+The problem is is that these arguments are now no longer binary variables.
+So, what do we do? Well, instead of coarse-graining just in time we can also
+coarse-grain in space.
+And what they introduced was a projection operator $P$, which takes the state of a supercell and maps it to a binary variable 0 or 1:
+\begin{align*}
+	P(\hat{x}) \in& \{0,1\}
+\end{align*}
+So explicitly there are four possible states the supercell can be in,
+and what the projection operator does is it maps some of them to let's say the 1 state and it maps the rest of them to the 0 state.
+You can think of this projection operator here as something very similar to what we did in the introduction to this module altogether where I showed you how you could coarse-grain an image in that case the image of Alice and Dinah, her kitten.
+In this case here for example, we could imagine doing a spatial decimation where we take only the value of the first entry in the supercell.
+That kind of spatial decimation would lead to a projection operator where both of these terms were mapped to 0 and both of these terms were mapped to one.
+
+----
+
+So, now that we've introduced the projection operator,
+let's see where we are.
+
+We began with the original evolution law
+of the fine-grained cellular automata f(x, y, z).
+
+We then realize that if we wanted to skip
+two time steps in the future
+
+we would have to have more arguments here.
+
+So we rewrote that as f hat
+
+as a function of x hat, y hat, and z hat.
+
+What this function does is it takes
+the state of the system here
+
+and evolves it two steps forward.
+
+Instead of writing each of these grid cells separately
+
+we write them as a combined variable
+x hat, y hat and z hat.
+
+Now the relationship between this f and this f hat here is totally
+
+is totally deterministic.
+
+Once you tell me this
+I can work out this here.
+
+The problem is is that this f hat is no longer
+in the same model class as this.
+
+All I've told you is that
+
+when you coarse-grain in time,
+you get a different model.
+
+But there's really no good way to relate these
+
+to say like oh this has become more or less complex,
+
+this has become more or less interesting,
+this parameter has changed.
+
+We can't for example place these as dots
+
+in some phase space
+
+and show, how models move
+as you coarse-grain them in time.
+
+But now we have the projection operator
+
+and so we can write
+something like this.
+
+We can project down
+the input supercells.
+
+We can coarse-grain the spatial state of the system,
+
+and then we can talk about
+the function g
+
+that evolves these coarse-grained variables forward in time.
+
+So, we can think about
+
+these two different operations
+
+on a diagram that you can imagine as, well,
+it's sometimes called a commuting diagram.
+
+Down here, we have the fine-grained
+
+system state
+
+specified by three variables x hat, y hat and z hat.
+
+And of course these variables here expand
+
+if you wanted to into a list let's call them $x_i$'s,
+
+i from one to six for that little patch
+
+of the cellular automata.
+
+So this is at time t equals one,
+
+then we can get the fine-grained system
+
+at time t equals two.
+
+And then we can get the fine-grained system
+
+at t equals three.
+
+With the projection operator
+I can take this set of system states here
+
+and map them
+
+to a set of projections
+
+p hat or p of x hat,
+p of y hat and p of z hat.
+
+And then I can evolve that
+coarse-grained system forward
+
+using some function g.
+
+Now what g does
+
+is it takes in three binary variables
+
+and spits out a single binary variable
+
+so g is somewhere in the model class
+
+of cellular automata,
+and out the other side I get
+
+a new set of variables
+
+or rather I get the
+
+evolved state of the system at the coarse-grained level.
+
+From here to here we just require f and f,
+
+we wrote down this
+function f hat that gets you there
+
+it takes all these variables in at once
+
+and so f hat
+
+takes x hat y hat and z hat.
+
+And so going along the bottom
+
+we evolve the supercells.
+
+Going up we project the initial
+configuration of the supercells.
+
+Going right up here
+
+we evolve that projected configuration forward in time.
+
+And so now we can compare
+
+what happens if you
+coarse-grain and evolve
+
+to what happens if you
+evolve and then coarse-grain.
+
+So our goal now will be given a particular
+
+cellular automata, f at the fine-grained level,
+
+can we find a projection operator p
+
+and a coarse-grained evolution operator g
+
+such that if you go along this path
+
+it's equivalent to going along that path?
+
+In other words, can we make this diagram
+in the technical language, commute?
+
+Notice that
+
+this function here g
+
+takes in three binary variables and
+spits out a single binary variable
+
+and so it is in fact
+
+in this same CA [(Cellular Automata)] model class
+
+that is indeed one of the 256
+
+of the cellular automata
+that we can think about to begin with.
+
+If we go with this projection
+operator here
+
+it may even be the case
+that we can find a p such that
+
+the g that makes this diagram commute is
+
+is equal to the f. In other words
+
+if we skip a step and blur
+the spatial dimension in the right way
+
+we may actually get back
+the same evolution operator.
+
+It's a little bit like saying
+If you zoom out
+
+and squint do you get back
+the same process with which you began?
 \subsection{Networks of Renormalization}
 
 \cite{israeli2004computational,israeli2006coarse,dedeo2018origin}
