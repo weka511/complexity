@@ -1074,12 +1074,8 @@ describes something.
 	\includegraphics[width=0.9\textwidth]{commutation}
 \end{figure}
 
-The entire story of
-renormalization, Figure \ref{fig:commutation}, is the relationship
-between what happens when you
-coarse-grain the data and what happens
-when you look at the underlying
-structures of the models that that
+The entire story of renormalization, Figure \ref{fig:commutation}, is the relationship between what happens when you coarse-grain the data and what happens
+when you look at the underlying structures of the models that that
 coarse-graining demands. Surprisingly as
 we'll see sometimes when you course-grain the data the models that you need
 get more complicated. Sometimes
@@ -2384,31 +2380,33 @@ and a model that explains the data, describes it or predicts it.
 Then you imagine taking that dataset that you have and throwing some of it out, performing a lossy compression for example, projecting it down, coarse-graining it.
 So now you have a new dataset related to the first but needing a new model, a new description.
 So then you build a model that describes or predicts or explains that simpler dataset.
+
 And then you ask: what is the relationship between the model that describes the coarse-grained data and the model that describes the fine-grained data?
-From here to here is a coarse-graining or projection.
-And what we are interested in is what this move does to this model here.
-How to go from here to here? And if these two models
+The right hand side of Figure \ref{fig:commutation}--show a coarse-graining or projection.
+And what we are interested in is what this move does to this model to the left of Figure \ref{fig:commutation}: how to go from model to model? And if these two models
 are comparable in some way, for example if these two models share the same number of parameters we can even talk just about how these parameters change when you go from here to here. And that's called \emph{renormalization group flow}.
+
 In the case of the Markov chain, to try a first example of that whole pattern of data
-to data model to model, we actually are kinda lucky because by coarse-graining that system in particular a coarse-graining operation with the decimated time only keeps half of all of the time samples that we had, as if somehow we're resampling on a microphone at a lower frequency, We may've tossed out half the data, the model that we use to predict or describe that new dataset, had exactly the same mathematical form as the original case which is described just by a matrix, an $N \times N$ matrix
+to data model to model, we actually are lucky because by coarse-graining that system in particular a coarse-graining operation with the decimated time only keeps half of all of the time samples that we had, as if somehow we're resampling on a microphone at a lower frequency, We may have tossed out half the data, the model that we use to predict or describe that new dataset, had exactly the same mathematical form as the original case which is described just by a matrix, an $N \times N$ matrix
 where $N$ is the number of states that the system can be in at any point in time.
 And in that case we are able to compare one matrix to another.
-And in fact one of the lovely things that we saw at the end of that
+
+One of the lovely things that we saw at the end of that
 series was that, as I coarse-grained further and further, all those matrices tended to flow towards the lower-dimensional space in matrix land.
 The system tended to simplify to a small number of places within the space.
 And in this section we'll talk about a new kind of model, the cellular automaton, which has a slightly different set of properties. 
-In many many ways it's simpler, oh sorry, in many ways it's identical to the Markov chain case. In the cellular automaton, the state of the system at any time depends solely upon the state of the system at the just previous time step.
+
+In many many ways it's simpler--in many ways it's \emph{identical} to the Markov chain case. In the cellular automaton, the state of the system at any time depends solely upon the state of the system at the just previous time step.
 So in that sense it is forgetful.
 It doesn't matter what's happening in the deep past.
 All that matters is what's happening just as a moment before.
 So in that sense it is forgetful just like the Markov chain: it has no memory that can be contained within a story about everything that just happened.
-But in another sense we'll see that as we coarse-grained in time the number of things that this moment depends upon grows.
-So we had to be a little bit more clever about how we map model of one scale into models of another scale. 
+But in another sense we'll see that as we coarse-grained in time the number of things that this moment depends upon grows, so we had to be a little bit more clever about how we map model of one scale into models of another scale. 
 So let's get specific and talk about the cellular automata themselves.
 Figure \ref{fig:cellular-automaton-1} is an example of  a cellular automaton.
 \begin{figure}[H]
 	\begin{center}
-		\caption{Examples of Cellular Automata. All three use the same update rule with different initial conditions.}
+		\caption[Examples of Cellular Automata.]{Examples of Cellular Automata. All three use the same update rule with different initial conditions.}
 		\begin{subfigure}[T]{0.3\textwidth}
 			\caption{A cellular automaton}\label{fig:cellular-automaton-1}
 			\includegraphics[width=\textwidth]{cellular-automaton-1}
@@ -2426,13 +2424,15 @@ Figure \ref{fig:cellular-automaton-1} is an example of  a cellular automaton.
 	\end{center}
 \end{figure}
 
-How do you read this diagram?
+How do you read Figure \ref{fig:cellular-automaton-1}?
 Consider the very first line of pixels, at the top: you can see most of the pixels are black then there are two white pixels.
 That's the state of the system at time $t$.
 There is an evolution rule, a rule about how to go from that first line of pixels to that second line of pixels and from that second line of pixels to that third line of pixels and so on.
 There is a rule that takes you from one line to the next and produces this kind of beautiful pattern that you see here.
 So those two little points sort of explode and evolve over time spreading outwards and even interact with each other line sort of waves on a beach, that kind complicated patterns.
+
 Figure \ref{fig:cellular-automaton-2} shows the same update rule with a different set of initial conditions. And now what you can see is that in fact whereas before be began with all black pixels except for two white ones now what I've done is add in another two white pixels. And again you see that same kind of triangular sort of expanding wave pattern. Another sort of a regular system evolves differently.
+
 You see more complicated patterns the further down you go. Figure \ref{fig:cellular-automaton-3} shows one more example of again the same update rule
 but now with random initial conditions.
 So instead of sort of setting up almost everything with the black pixels
@@ -2491,35 +2491,38 @@ We begin with these initial conditions and after one step what you can see is th
 And now you can begin to see how that starts to spread out over time and the different ways in which these triangular patterns emerge.
 
 That's rule 150.
-We can also consider a different rule.
-This is for example rule 105.
-Of course because there's
-256 possible f rules
+
+We can also consider a different rule. Figure \ref{fig:cellular-automaton-rule-4} depicts rule 105.
+\begin{figure}[H]
+	\begin{center}
+		\caption{We can also consider a different rule.}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Rule 105}\label{fig:cellular-automaton-rule-4}
+			\includegraphics[width=\textwidth]{cellular-automaton-rule-4}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Rule 90}\label{fig:cellular-automaton-rule-5}
+			\includegraphics[width=\textwidth]{cellular-automaton-rule-5}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.3\textwidth}
+			\caption{Rule 110}\label{fig:cellular-automaton-rule-6}
+			\includegraphics[width=\textwidth]{cellular-automaton-rule-6}
+		\end{subfigure}
+	\end{center}
+\end{figure}
+Of course because there's 256 possible $f$ rules
 we're going to run out of them eventually.
-There's a numbering system
-that people have invented
-and so usually when someone says rule 105
-you can actually figure out exactly
+There's a numbering system that people have invented and so usually when someone says rule 105 you can actually figure out exactly
 what that look up table will appear as.
-Here's rule 90.
-You start to see some of these triangular
-patterns are quite familiar,
-the ways in which these triangles
-interact with each other.
-But here's the different one,
-this is rule 110
-you can see it's sort of asymmetrical.
-So even if I begin with the
-same initial conditions
-as I ??? for rule 150
-Instead of getting a triangle that sort of
-propagates out evenly in both directions
-you kind of have asymmetry here,
-so in fact in Rule 110
-a triangle propagates
-only in one direction
-and keeps a hard
-boundary on the other.
+
+Figure \ref{fig:cellular-automaton-rule-5} depicts rule 90.
+You start to see some of these triangular patterns are quite familiar, the ways in which these triangles interact with each other.
+
+Figure \ref{fig:cellular-automaton-rule-6} depicts a different one,
+rule 110; you can see it's sort of asymmetrical.
+So, even if I begin with the same initial conditions as I used for rule 150, instead of getting a triangle that sort of propagates out evenly in both directions
+you kind of have asymmetry here, so in fact in Rule 110 a triangle propagates only in one direction and keeps a hard boundary on the other.
+
 You can also see here which is kind of fun,
 it's quite clear now that rule 110
 as the triangle propagates
