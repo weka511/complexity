@@ -2524,107 +2524,62 @@ you kind of have asymmetry here, so in fact in Rule 110 a triangle propagates on
 You can also see here which is kind of fun, it's quite clear now that rule 110 as the triangle propagates off the left edge we have it wrap around to the right edge.
 So the neighbor of a pixel on the far right-hand side includes a pixel just up and to the right which wraps around to the far left.
 In fact rule 110 is kind of a magical rule: it's what we call Turing universal.
-I just put up the lookup table at the top there. But the eight possible things that could happen give it a particular cell that you're wondering what its state is going to be.
+Table \ref{table:rule-110} shows the lookup table. But the eight possible things that could happen give it a particular cell that you're wondering what its state is going to be.
+\begin{table}[H]
+	\caption[Lookup table for rule 110]{Lookup table for rule $110 = 64 + 32 + 8 + 4 + 2 = 2^6 + 2^5 + 2^3 + 2^2 +2^1$}\label{table:rule-110}
+	\begin{tabular}{|l|c|c|c|c|c|c|c|c|}\hline
+		Current pattern&111&110&101&100&011&010&001&000\\ \hline
+		New state for centre cell&0&1&1&0&1&1&1&0\\ \hline
+	\end{tabular}
+\end{table}
+
 
 Rule 110 is interesting because it turns out that it can compute any possible function. 
 It's actually equivalent to a computer, to a piece of Python code.
 So how does that work, how does that make sense?
-Well, one way to think of it is this If I imagine let's say a piece of Python code that I want to execute I can of course just put it into a laptop and have it run. 
-But if I'm really clever
-what I can do is I can take
-that Python code,
-turn it into a very long
-initial condition for rule 110,
-evolve rule 110 forward,
-wait for a certain amount of time
-and then read out at the bottom
-the output of that piece of Python code.
-Of course the hard part is figuring out
-how to turn that Python code
-Into a line of ones and zeros
-that form the input to rule 110.
+
+One way to think of it is this. Imagine a piece of Python code that I want to execute I can of course just put it into a laptop and have it run. 
+But if I'm really clever what I can do is I can take that Python code, turn it into a very long initial condition for rule 110, evolve rule 110 forward, wait for a certain amount of time and then read out at the bottom the output of that piece of Python code.
+Of course the hard part is figuring out how to turn that Python code into a line of ones and zeros that form the input to rule 110.
 It's not that easy.
-But what Matthew Cook was able to do
-back in the early 2000s
-was show that it is at least
-in principle possible to do that.\cite{cook2004universality}
-In fact rule 110 given
-sufficiently rich initial conditions
-can perform an arbitrary computation.
-It is in fact one way to implement
-a Turing machine
-if you know this language from computational theory.
+But what Matthew Cook was able to do back in the early 2000s
+was show that it is at least in principle possible to do that.\cite{cook2004universality}
+In fact rule 110 given sufficiently rich initial conditions can perform an arbitrary computation.
+It is in fact one way to implement a Turing machine if you know this language from computational theory.
+
 So how did Matthew do it?
-Well, it's kind of a fun way to play
-just to get a sense of how you might do it.
-Here are two examples
-of how rule 110 behaves
+Well, it's kind of a fun way to play just to get a sense of how you might do it.
+Figure \ref{fig:two:examples:rule110} presents two examples of how rule 110 behaves
 given a particular set of initial conditions.
-What you can see here,
-let's just focus on the left panel,
-is all these different structures
-that appear
-you have what are called gliders.
-So if you look at that sort of polka dot points
-or that polka dot stripe there
-Cook called this an A4 glider,
-and when an A4 glider meets
-what he calls an Ebar glider
-which is a much more complicated pattern
-that propagates to the left
-the A4 glider and the Ebar glider
-depending upon exactly
-how they collide with each other
-can either be absorbed,
-can change the state of the Ebar glider,
-and can lead to reemission.
-So on the Left-hand side the
-A4 glider hits the Ebar glider,
-kind of gets stored there for a while
-and gets spat out a little bit later
-that A4 glider continues unimpeded
-but if it had hit the
-Ebar glider a little earlier
-in its evolution
-in that case what we would have seen
-is that the Ebar and the A4 glider
-return into a stationary object,
-into a C2.
-And that C2 would stay
-stationary over time.
-So what Cook was able
-to do is show
-that in fact all these little sort of
-discreet propagating structures
-that emerge naturally from rule 110
-and there's no magic here in the sense
-that all of these patterns are produced
-solely by Rule 110.
-Playing out the rule for each point
-what happened for each point
-is the state of each point is defined
-by the three units just above it.
-It's just playing out that rule
-over and over and over again
-to produce these lines as they come down the page.
-What Matthew Cook was able to do was show
-this is essentially enough to produce
-what you might now think of
-as a set of logic gates
-or way a system could
-write things to a tape,
-read things back from the tape,
-do something to the value of that tape
-depending upon what it had read,
-and what else was happening
-elsewhere in the system.
-So Rule 110 turns out to be
-not just a kind of
-playful way to make cool patterns,
-but in fact something sufficient to
-describe arbitrarily complicated systems.
-So this has been a little
-introduction to cellular automata.
+\begin{figure}[H]
+	\caption{Rule 110 given a particular set of initial conditions}\label{fig:two:examples:rule110}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Gliders--A4 and Ebar}\label{fig:cellular-automaton-rule-7}
+		\includegraphics[width=\textwidth]{cellular-automaton-rule-7}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Conversion of an EBar into a C2}\label{fig:cellular-automaton-rule-8}
+		\includegraphics[width=\textwidth]{cellular-automaton-rule-8}
+	\end{subfigure}
+\end{figure}
+What you can see here in Figure \ref{fig:cellular-automaton-rule-7} is all these different structures that appear you have what are called gliders.
+So if you look at that sort of polka dot points or that polka dot stripe there Cook called this an A4 glider, and when an A4 glider meets what he calls an Ebar glider
+which is a much more complicated pattern that propagates to the left the A4 glider and the Ebar glider depending upon exactly how they collide with each other
+can either be absorbed, can change the state of the Ebar glider, and can lead to reemission.
+
+So Figure \ref{fig:cellular-automaton-rule-7} the A4 glider hits the Ebar glider,
+kind of gets stored there for a while and gets spat out a little bit later
+that A4 glider continues unimpeded but if it had hit the Ebar glider a little earlier
+in its evolution in that case what we would have seen is that the Ebar and the A4 glider return into a stationary object, into a C2--Figure \ref{fig:cellular-automaton-rule-8}. And that C2 would stay stationary over time.
+
+So what Cook was able to do is show that in fact all these little sort of discreet propagating structures that emerge naturally from rule 110 and there's no magic here in the sense that all of these patterns are produced solely by Rule 110.
+Playing out the rule for each point what happened for each point is the state of each point is defined by the three units just above it.
+It's just playing out that rule over and over and over again to produce these lines as they come down the page. What Matthew Cook was able to do was show this is essentially enough to produce what you might now think of as a set of logic gates or way a system could write things to a tape, read things back from the tape, do something to the value of that tape depending upon what it had read, and what else was happening elsewhere in the system.
+So Rule 110 turns out to be not just a kind of playful way to make cool patterns,
+but in fact something sufficient to describe arbitrarily complicated systems.
+
+So this has been a little introduction to cellular automata.
 What I've tried to do is first of all
 of course tell you how it works,
 tell you what the rules are of this model
