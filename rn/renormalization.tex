@@ -2490,12 +2490,10 @@ In Figure \ref{fig:cellular-automaton-rule-3} we  watch rule 150 evolve over tim
 We begin with these initial conditions and after one step what you can see is that the pixel just directly below that white pixel stays white because the value just above it is white, the value above it to the left is black, the value above it to the right is black, that's an even number of black pixels, so that pixel there stays white.
 And now you can begin to see how that starts to spread out over time and the different ways in which these triangular patterns emerge.
 
-That's rule 150.
-
-We can also consider a different rule. Figure \ref{fig:cellular-automaton-rule-4} depicts rule 105.
+That's rule 150. We can also consider a different rule. Figure \ref{fig:cellular-automaton-rule-4} depicts rule 105.
 \begin{figure}[H]
 	\begin{center}
-		\caption{We can also consider a different rule.}
+		\caption{Three different rules}
 		\begin{subfigure}[t]{0.3\textwidth}
 			\caption{Rule 105}\label{fig:cellular-automaton-rule-4}
 			\includegraphics[width=\textwidth]{cellular-automaton-rule-4}
@@ -2523,37 +2521,15 @@ rule 110; you can see it's sort of asymmetrical.
 So, even if I begin with the same initial conditions as I used for rule 150, instead of getting a triangle that sort of propagates out evenly in both directions
 you kind of have asymmetry here, so in fact in Rule 110 a triangle propagates only in one direction and keeps a hard boundary on the other.
 
-You can also see here which is kind of fun,
-it's quite clear now that rule 110
-as the triangle propagates
-off the left edge
-we have it wrap around
-to the right edge.
-So the neighbor of a pixel on the far
-right-hand side
-includes a pixel just up
-and to the right
-which wraps around
-to the far left.
-In fact rule 110 is kind of a magical rule.
-It's what we call Turing universal.
-I just put up the lookup table at the top there.
-But the eight possible things that could happen
-give it a particular cell that you're
-wondering what its state is going to be.
+You can also see here which is kind of fun, it's quite clear now that rule 110 as the triangle propagates off the left edge we have it wrap around to the right edge.
+So the neighbor of a pixel on the far right-hand side includes a pixel just up and to the right which wraps around to the far left.
+In fact rule 110 is kind of a magical rule: it's what we call Turing universal.
+I just put up the lookup table at the top there. But the eight possible things that could happen give it a particular cell that you're wondering what its state is going to be.
 
-Rule 110 is interesting because it turns out
-
-that it can compute any possible function.
-
-It's actually equivalent to a computer,
-to a piece of Python code.
+Rule 110 is interesting because it turns out that it can compute any possible function. 
+It's actually equivalent to a computer, to a piece of Python code.
 So how does that work, how does that make sense?
-Well, one way to think of it is this
-If I imagine let's say a piece of Python
-code that I want to execute
-I can of course just put it into
-a laptop and have it run.
+Well, one way to think of it is this If I imagine let's say a piece of Python code that I want to execute I can of course just put it into a laptop and have it run. 
 But if I'm really clever
 what I can do is I can take
 that Python code,
@@ -2571,7 +2547,7 @@ It's not that easy.
 But what Matthew Cook was able to do
 back in the early 2000s
 was show that it is at least
-in principle possible to do that.
+in principle possible to do that.\cite{cook2004universality}
 In fact rule 110 given
 sufficiently rich initial conditions
 can perform an arbitrary computation.
@@ -2686,7 +2662,7 @@ the value of any particular point
 is influenced by a huge number
 of inputs from arbitrarily far away.
 So the cellular automata even
-though it has the same forgetfullness
+though it has the same forgetfulness
 as the Markov chain
 and even though the rules
 themselves are incredibly simple
