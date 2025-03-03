@@ -58,6 +58,7 @@ The source for this document can be found at\\
 
 \tableofcontents
 \listoffigures
+\listoftables
 \listoftheorems[ignoreall,onlynamed]
 
 \section{Introduction to Renormalization}
@@ -2447,7 +2448,8 @@ of a cellular automaton.
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{An example of the first three lines
+		\caption[An example of the first three lines
+		of a cellular automaton]{An example of the first three lines
 			of a cellular automaton. The state of that pixel marked
 			with the question mark depends solely upon the pixel just above it and just above it to the left and just above it to the right.}\label{fig:cellular-automaton-rule}
 		\includegraphics[width=0.6\textwidth]{cellular-automaton-rule}
@@ -2646,7 +2648,7 @@ in the first section of this module.
 So, what do we do? Well, this is a trick
 that was introduced
 by a pair of scientists
-Israeli and Goldenfeld
+Israeli and Goldenfeld\cite{israeli2004computational,israeli2006coarse}
 and then I learned how to make it work
 in person from Ian Classie and Josh Grosch here
 at the Santa Fe institute.
@@ -2698,225 +2700,134 @@ You can think of this projection operator here as something very similar to what
 In this case here for example, we could imagine doing a spatial decimation where we take only the value of the first entry in the supercell.
 That kind of spatial decimation would lead to a projection operator where both of these terms were mapped to 0 and both of these terms were mapped to one.
 
-----
+
 
 So, now that we've introduced the projection operator,
 let's see where we are.
-
 We began with the original evolution law
 of the fine-grained cellular automata f(x, y, z).
-
 We then realize that if we wanted to skip
 two time steps in the future
-
 we would have to have more arguments here.
-
 So we rewrote that as f hat
-
 as a function of x hat, y hat, and z hat.
-
 What this function does is it takes
 the state of the system here
-
 and evolves it two steps forward.
-
 Instead of writing each of these grid cells separately
-
 we write them as a combined variable
 x hat, y hat and z hat.
-
 Now the relationship between this f and this f hat here is totally
-
 is totally deterministic.
-
 Once you tell me this
 I can work out this here.
-
 The problem is is that this f hat is no longer
 in the same model class as this.
-
 All I've told you is that
-
 when you coarse-grain in time,
 you get a different model.
-
 But there's really no good way to relate these
-
 to say like oh this has become more or less complex,
-
 this has become more or less interesting,
 this parameter has changed.
-
 We can't for example place these as dots
-
 in some phase space
-
 and show, how models move
 as you coarse-grain them in time.
-
 But now we have the projection operator
-
 and so we can write
 something like this.
-
 We can project down
 the input supercells.
-
 We can coarse-grain the spatial state of the system,
-
 and then we can talk about
 the function g
-
 that evolves these coarse-grained variables forward in time.
-
 So, we can think about
-
 these two different operations
-
 on a diagram that you can imagine as, well,
 it's sometimes called a commuting diagram.
-
 Down here, we have the fine-grained
-
 system state
-
 specified by three variables x hat, y hat and z hat.
-
 And of course these variables here expand
-
 if you wanted to into a list let's call them $x_i$'s,
-
 i from one to six for that little patch
-
 of the cellular automata.
-
 So this is at time t equals one,
-
 then we can get the fine-grained system
-
 at time t equals two.
-
 And then we can get the fine-grained system
-
 at t equals three.
-
 With the projection operator
 I can take this set of system states here
-
 and map them
-
 to a set of projections
-
 p hat or p of x hat,
 p of y hat and p of z hat.
-
 And then I can evolve that
 coarse-grained system forward
-
 using some function g.
-
 Now what g does
-
 is it takes in three binary variables
-
 and spits out a single binary variable
-
 so g is somewhere in the model class
-
 of cellular automata,
 and out the other side I get
-
 a new set of variables
-
 or rather I get the
-
 evolved state of the system at the coarse-grained level.
-
 From here to here we just require f and f,
-
 we wrote down this
 function f hat that gets you there
-
 it takes all these variables in at once
-
 and so f hat
-
 takes x hat y hat and z hat.
-
 And so going along the bottom
-
 we evolve the supercells.
-
 Going up we project the initial
 configuration of the supercells.
-
 Going right up here
-
 we evolve that projected configuration forward in time.
-
 And so now we can compare
-
 what happens if you
 coarse-grain and evolve
-
 to what happens if you
 evolve and then coarse-grain.
-
 So our goal now will be given a particular
-
 cellular automata, f at the fine-grained level,
-
 can we find a projection operator p
-
 and a coarse-grained evolution operator g
-
 such that if you go along this path
-
 it's equivalent to going along that path?
-
 In other words, can we make this diagram
 in the technical language, commute?
-
 Notice that
-
 this function here g
-
 takes in three binary variables and
 spits out a single binary variable
-
 and so it is in fact
-
 in this same CA [(Cellular Automata)] model class
-
 that is indeed one of the 256
-
 of the cellular automata
 that we can think about to begin with.
-
 If we go with this projection
 operator here
-
 it may even be the case
 that we can find a p such that
-
 the g that makes this diagram commute is
-
 is equal to the f. In other words
-
 if we skip a step and blur
 the spatial dimension in the right way
-
 we may actually get back
 the same evolution operator.
-
 It's a little bit like saying
 If you zoom out
-
 and squint do you get back
 the same process with which you began?
 \subsection{Networks of Renormalization}
 
-\cite{israeli2004computational,israeli2006coarse,dedeo2018origin}
+\cite{dedeo2018origin}
 \section{Ising Model}
 
 \subsection{Fixing a projection: From CA’s to Ising}
