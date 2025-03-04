@@ -2812,7 +2812,7 @@ p, g, g
 
 For every two times you iterate $f$ you're going only to iterate $g$ once and this simple example we'll just do the case where you skip one step and so you have supercells of size two.
 
-Fortunately it turns out that it is possible to find a p and g that enable that diagram to commute and here it is in the case of Rule 105
+Fortunately it turns out that it is possible to find a $P$ and $g$ that enable that diagram to commute and here it is in the case of Rule 105
 
 \begin{figure}[H]
 	\begin{center}
@@ -2820,70 +2820,47 @@ Fortunately it turns out that it is possible to find a p and g that enable that 
 		\includegraphics[width=0.6\textwidth]{rule105-P}
 	\end{center}
 \end{figure}
-Right in this case the projection rule says look if the supercell has one cell
-that's black and one cell that's white make that's all white if
-Both cells are white or both cells or black
-then make it black
-It's sort of like an extra rule
-itself in fact
-Actually, it looks a little bit like an edge detector
-it's as, look, if there's a difference within the supercell mark it one way
-But if there's no difference in the supercells
-that are homogeneous mark it the other way
+In this case the projection rule says if the supercell has one cell that's black and one cell that's white, make that all white; if both cells are white or both cells or black then make it black.
+It's sort of like an extra rule itself in fact.
+Actually, it looks a little bit like an edge detector: if there's a difference within the supercell mark it one way; if there's no difference in the supercells that are homogeneous mark it the other way.
 
-If you use that projection operator then it turns out in fact that your g
-Right which is now of course taking binary values right take a binary value because you projected the four possible states supercell down to a cell
+If you use that projection operator then it turns out in fact that your $g$,
+which is now of course taking binary values, take a binary value because you projected the four possible states supercell down to a cell.
 It only has one of two possible states,
-and that's what g operates on
-that g evolution operator actually turns out to be rule 150
+and that's what $g$ operates on,
+that $g$ evolution operator actually turns out to be rule 150.
 So what we've shown
-is that it's possible to find a non-trivial coarse-graining
-??? an interesting one ???
-to find a non-trivial coarse graining and
-an evolution operator that's still within the space of
-cellular automata some of an evolution operator that enables that diagram to commute.
+is that it's possible to find a non-trivial coarse-graining and an evolution operator that's still within the space of
+cellular automata  that enables that diagram to commute.
 And so now just as we were able to talk about different kinds of
 Markov chains coarse-graining into each other
 we're now able to talk about how
 rules coarse-grain into each other.
-And in fact for a non-trivial projection operator Rule 105
-course-grains into rule 150.
+And in fact for a non-trivial projection operator Rule 105 course-grains into rule 150.
 Here's what it looks like.
 \begin{figure}[H]
-	\caption{for a non-trivial projection operator Rule 105
-		course-grains into rule 150}
+	\caption[Rule 105 course-grains into rule 150]{Rule 105 course-grains into rule 150 by a non-trivial projection operator (based on a figure in \cite{israeli2004computational})}\label{fig:105:coarse:grained}
 	\begin{subfigure}[t]{0.45\textwidth}
-		\caption{Fine-grained level description}\label{fig:fine:grain}
-		\includegraphics[width=\textwidth]{cellular-automaton-rule-4}
+		\caption{Rule 105: Fine-grained level}\label{fig:fine:grain}
+		\includegraphics[width=\textwidth]{fine-grain-ca}
 	\end{subfigure}
+	\hfill
 	\begin{subfigure}[t]{0.45\textwidth}
-		\caption{coarse-grained level description}
-		\includegraphics[width=\textwidth]{cellular-automaton-1}
+		\caption{Rule 150: coarse-grained level}
+		\includegraphics[width=\textwidth]{coarse-grain-ca}
 	\end{subfigure}
 \end{figure}
 
 In Figure \ref{fig:fine:grain} you can see that we have the smaller pixels and those smaller pixels are both small in the x direction along this axis here and smaller in the time direction then in the coarse-grained case.
-the coarse-grained case of course
-???mps pairs of states into one and then in fact the jumps are now larger
-there are two time steps instead of one.
-And by looking at the the comparison
-between these two
-you can sort of see what's going on, right.
-First of all of course
-the coarse-grained description is
-capturing something interesting
-about the fine-grained description, right.
-We still have this idea that
-these triangles are sort of
-These these little perturbations that begin
-That we begin with that lead to these expanding ways
-right we still get that kind of wave like texture.
-These sort of propagating spaces that
-have kind of internal structure
-But you can also see that
-we are missing things too, right?
-So if you look at those two
-triangles at the fine-grained level
+The coarse-grained case of course lumps pairs of states into one and then in fact the jumps are now larger there are two time steps instead of one.
+And by looking at the the comparison between these two
+you can sort of see what's going on.
+
+First of all, the coarse-grained description is capturing something interesting about the fine-grained description.
+We still have this idea that these triangles, these little perturbations that we begin with that lead to these expanding waves,  we still get that kind of wave like texture.
+These sort of propagating spaces that have kind of internal structure
+But you can also see that we are missing things too, right?
+So if you look at those two triangles at the fine-grained level
 one of them is sort of darker than the other
 But in fact when we coarse-grain the differences
 between those two triangles goes away.
@@ -2907,13 +2884,9 @@ Propagating triangle waves have
 sort of reached it
 and also within the triangles themselves
 This gives you a little bit of a better sense
-now as we'll see it's not always the case.
-That's the picture that you get
-when you coarse-grain
-looks
-similar in some important respects
-to the fine-grained descriptions
-Here it's a particularly elegant example
+
+As we'll see it's not always the case that the picture that you get when you coarse-grain looks similar in some important respects to the fine-grained descriptions.
+Figure \ref{fig:105:coarse:grained} is a particularly elegant example
 of how we we're able to capture something about the rule
 But of course not everything
 we can't really capture everything of course
@@ -2925,23 +2898,17 @@ whether everything is white or everything is black
 But in fact the rule 150 when
 we do the projection
 it masks both of those cases to the same state.
-so
-Israeli and Goldenfeld hacked and they
-hacked and hacked and hacked
-and they looked at all 256 rules.
-And they tried to figure out
-how or the extent to which one rule
-could course-grain into another.
-So these arrows here
-show you how it's possible
-to find whether or not it's possible
-to find a projection operator
-and an evolution operator that
-allows one rule set to map to another
-upon that coarse-graining and
-in fact they consider not only
-supercells of size 2
-but also size 3 and size 4 and
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Mapping one rule set to another by projection]{Mapping one rule set to another by projection after \cite{israeli2006coarse}}\label{fig:ig-relationships}
+		\includegraphics[width=0.8\textwidth]{ig-relationships}
+	\end{center}
+\end{figure}
+Israeli and Goldenfeld looked at all 256 rules, and  tried to figure out how or the extent to which one rule could course-grain into another.
+So these arrows in Figure \ref{fig:ig-relationships} show you how it's possible
+to find whether or not it's possible to find a projection operator and an evolution operator that allows one rule set to map to another upon that coarse-graining.
+They consider not only supercells of size 2 but also size 3 and size 4 and
 and computation of this starts getting really hard
 because there's so many different kinds
 of projection operators you can use
@@ -2959,6 +2926,7 @@ which is the fact that it's possible
 to find a projection operator
 that takes you from state 105 or
 from evolution rule 105 to evolution rule 150.
+
 By the way one of the things you
 can notice from this graph
 is that it's clear that
@@ -3000,62 +2968,26 @@ really interesting about how
 deterministic rules
 and deterministic projections
 map into each other other.
-One of the things that you'll see
-from that network
-is that not only does rule 105
-coarse-grains to rule 150
-but in fact rule 50 coarse-grains into itself.
-So the pretentious way to say this
-this is a fixed point
-of renormalization group.
-With that projection operator
-you actually take rule 150
-into a zoomed-out version of itself.
-You sort of skip a step,
-you project down the supercells
-and you recover the same rules.
-Now it's important to notice
-there's a subtlety here, right.
-It doesn't mean that
-the image itself is self-similar
-doesn't necessarily mean the rule 150
-is kind of fractal in some interesting way.
-Because the coarse-graining
-may not be
-the kind of coarse-graining
-that just simply zooms out.
-Consider for example the projection
-we had going from rule 105 to 150.
-Now wasn't a simple decimation in the way
-that we did on the Alice picture for example
-at the beginning of this renormalization module.
+
+One of the things that you'll see from that network is that not only does rule 105
+coarse-grains to rule 150 but in fact rule 150 coarse-grains into itself:
+it is a fixed point of renormalization group. With that projection operator you actually take rule 150 into a zoomed-out version of itself.
+You sort of skip a step, you project down the supercells and you recover the same rules.
+Now it's important to notice there's a subtlety here, right.
+It doesn't mean that the image itself is self-similar doesn't necessarily mean the rule 150 is kind of fractal in some interesting way.
+Because the coarse-graining may not be the kind of coarse-graining that just simply zooms out.
+Consider for example the projection we had going from rule 105 to 150.
+Now wasn't a simple decimation in the way that we did on the Alice picture for example at the beginning of this renormalization module.
 In that case, right, we're renormalizing Alice.
-We took her picture,
-we looked at little packages of cells,
-and we just take one of the values to define
-The value of that grid of
-that larger grid cell
-that's supercell in the Alice case.
-But if you remember the
-rule 105 to rule 150 projection
-that worked and that case
+We took her picture, we looked at little packages of cells, and we just take one of the values to define the value of that that larger grid cell that's supercell in the Alice case.
+But if you remember the rule 105 to rule 150 projection that worked and that case
 was actually an edge detector.
-If the cell was all white
-or all black
-it got mapped to something
-that was all black.
-So it doesn't necessarily mean
-that if you kind of fuzz
-rule 150 it still looks like rule 150.
-It really depends upon the details
-of that projection operator.
-That said in fact you might
-think of it another way.
-Ihe rule 150 is a fixed point
-of renormalization group
-with potentially a much more interesting projection
-than a simple decimation.
-----
+If the cell was all white or all black it got mapped to something that was all black.
+So it doesn't necessarily mean that if you kind of fuzz rule 150 it still looks like rule 150.
+It really depends upon the details of that projection operator.
+That said in fact you might think of it another way.
+Rule 150 is a fixed point of renormalization group with potentially a much more interesting projection than a simple decimation.
+
 
 
 \cite{dedeo2018origin}
