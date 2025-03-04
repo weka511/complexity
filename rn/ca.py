@@ -158,29 +158,35 @@ class Matcher:
                 return False
         return True
 
+def parse_args():
+    parser = ArgumentParser(__doc__)
+    parser.add_argument('--list', nargs='*', default=[],type=int, help = 'List of rules to be searched for')
+    parser.add_argument('--first', default=None,type=int, help = 'First rule to be searched for (only if --list not specified)')
+    parser.add_argument('--last',  default=None,type=int, help = 'First rule to be searched for (only if --list not specified)')
+    return parser.parse_args()
+
 def sp(n,pl,s):
     '''
     Correctly pluralize text
     '''
     return pl if n>1 else s
 
-if __name__=='__main__':
-    parser = ArgumentParser(__doc__)
-    parser.add_argument('--list', nargs='*', default=[],type=int, help = 'List of rules to be searched for')
-    parser.add_argument('--first', default=None,type=int, help = 'First rule to be searched for (only if --list not specified)')
-    parser.add_argument('--last',  default=None,type=int, help = 'First rule to be searched for (only if --list not specified)')
-    args = parser.parse_args()
-    matcher = Matcher()
-    worklist = []
-
+def create_worklist(args):
+    product = []
     if len(args.list) > 0:
         if args.first != None or args.last != None:
             raise ValueError('If there is a list of rules, there must not be a first rule or a last')
-        worklist = args.list
+        product = args.list
     else:
         if args.first == None or args.last != None:
             raise ValueError('If there is no list of rules, there must be a first rule and a last')
-        worklist = range(args.first,args.last+1)
+        product = range(args.first,args.last+1)
+    return product
+
+if __name__=='__main__':
+    args = parse_args()
+    worklist = create_worklist(args)
+    matcher = Matcher()
 
     for i in worklist:
         matches = matcher.find_matches(i)
@@ -192,7 +198,3 @@ if __name__=='__main__':
                 print ( f'\tRule {M[0]} with the following projections')
                 for P in M[1]:
                     print (f'\t\t{P}')
-
-
-
-
