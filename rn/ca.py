@@ -20,7 +20,7 @@
     What other projections work?
 '''
 
-
+from argparse import ArgumentParser
 
 class Rule:
     '''
@@ -158,10 +158,40 @@ class Matcher:
                 return False
         return True
 
+def sp(n,pl,s):
+    '''
+    Correctly pluralize text
+    '''
+    return pl if n>1 else s
+
 if __name__=='__main__':
+    parser = ArgumentParser(__doc__)
+    parser.add_argument('--list', nargs='*', default=[],type=int, help = 'List of rules to be searched for')
+    parser.add_argument('--first', default=None,type=int, help = 'First rule to be searched for (only if --list not specified)')
+    parser.add_argument('--last',  default=None,type=int, help = 'First rule to be searched for (only if --list not specified)')
+    args = parser.parse_args()
     matcher = Matcher()
-    # matcher.match(105,150)
-    print (matcher.find_matches(105))
+    worklist = []
+
+    if len(args.list) > 0:
+        if args.first != None or args.last != None:
+            raise ValueError('If there is a list of rules, there must not be a first rule or a last')
+        worklist = args.list
+    else:
+        if args.first == None or args.last != None:
+            raise ValueError('If there is no list of rules, there must be a first rule and a last')
+        worklist = range(args.first,args.last+1)
+
+    for i in worklist:
+        matches = matcher.find_matches(i)
+        if len(matches) ==0:
+            print (f'Rule {i} failed to match any other rule')
+        else:
+            print (f'{i} matches {len(matches)} other {sp(len(matches),'rules','rule')}')
+            for M in matches:
+                print ( f'\tRule {M[0]} with the following projections')
+                for P in M[1]:
+                    print (f'\t\t{P}')
 
 
 
