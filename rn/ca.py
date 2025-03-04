@@ -13,7 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
-'''Q1 renormalization of 105 to 150'''
+'''
+    Q1 Demonstrate the renormalization of Rule 105 to Rule 150.
+    What other projections work?
+'''
 
 class Rule:
     '''
@@ -41,25 +44,20 @@ class Rule:
 
     def two_step(self,superstate):
         if len(superstate) != 6: raise ValueError('superstate should have length 6')
-        supercell_bits = []
+        supercell = []
         for i in range(2):
             triplet = []
             for j in range(3):
                 k = 3*i + j
                 state = State(bits=superstate[k:k+3])
                 triplet.append(self[state])
-            supercell_bits.append(self[State(bits=triplet)])
-            z=0
-    # def execute(self,state):
-        # extended_state = [0,0] + state.bits + [0,0]
-        # new_state = []
-        # for i in range(len(state)+2):
-            # x = extended_state[i:i+3]
-            # new_state.append(self.bits[4*x[0] + 2*x[1] + x[2]])
-        # return new_state
+            supercell.append(self[State(bits=triplet)])
+        return supercell
+
+
 
 class State:
-    def __init__(self,n=None,bits=None):
+    def __init__(self,n=None,bits=None,N=3):
         '''
         Create a state
 
@@ -71,7 +69,7 @@ class State:
         if n != None and bits == None:
             m = n
             result = []
-            for i in range(3):
+            for i in range(N):
                 m,r = divmod(m,2)
                 result.append(r)
             self.bits = result[::-1]
@@ -109,22 +107,18 @@ class Projection:
         if len(key) % 2 != 0: raise ValueError('key should have even length')
         return [self.table[2*key[i]+key[i+1]] for i in range(0,len(key),2)]
 
-### old code ###
-def convert(state):
-    result = 0
-    for i in state:
-        result = 2 * result + i
-    return result
-
-
 
 if __name__=='__main__':
-    r105 = Rule(105)
-    print (r105)
-    for i in range(8):
-        state = State(n=i)
-        print (state,  r105[state])
+    f = Rule(105)
+    g = Rule(150)
     P = Projection()
-    print(P[0,0,0,1,1,0,1,1])
-    r105.two_step([0,1,1,0,0,1])
+
+    for i in range(2 ** 6):
+        state = State(n=i,N=6)
+        f1 = f.two_step(state)
+        Pf = P[f1]
+        g1 = State(bits=P[state])
+        gp = g[g1]
+        print (i, state,Pf,gp)
+
 
