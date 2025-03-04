@@ -2514,8 +2514,7 @@ That's rule 150. We can also consider a different rule. Figure \ref{fig:cellular
 \end{figure}
 Of course because there's 256 possible $f$ rules
 we're going to run out of them eventually.
-There's a numbering system that people have invented and so usually when someone says rule 105 you can actually figure out exactly
-what that look up table will appear as.
+There's a numbering system that people have invented and so usually when someone says rule 105 you can actually figure out exactly what that look up table will appear as.
 
 Figure \ref{fig:cellular-automaton-rule-5} depicts rule 90.
 You start to see some of these triangular patterns are quite familiar, the ways in which these triangles interact with each other.
@@ -2735,7 +2734,7 @@ And so now we can compare what happens if you coarse-grain and evolve to what ha
 
 So our goal now will be given a particular
 cellular automata, $f$ at the fine-grained level,
-can we find a projection operator $p$
+can we find a projection operator $P$
 and a coarse-grained evolution operator $g$
 such that if you go along this path
 it's equivalent to going along that path?
@@ -2749,7 +2748,7 @@ that we can think about to begin with.
 If we go with this projection
 operator here
 it may even be the case
-that we can find a $p$ such that
+that we can find a $P$ such that
 the $g$ that makes this diagram commute is
 is equal to the $f$. In other words
 if we skip a step and blur
@@ -2760,109 +2759,67 @@ It's a little bit like saying
 If you zoom out
 and squint do you get back
 the same process with which you began?
+
 \subsection{Networks of Renormalization}
 
-For Israeli and Goldenfeld
-it's all about taking
-one of two possible paths
-and getting to the same place
-One path says
-Okay, look I have a fine-grained description
-of the system
-I'm going to evolve it forward
-with my fine-grained rule and at the end
-I'm going to simplify the answer
-I'm gonna say look yes
-I mean I kept track of all these details
-but in fact
-you know what?
-I only need to know some of the output
-I only need to know some of the final stages of system
-So you can think of that as sort of walking along like this and then projecting up
-Another way you can do it though
-right, is you can say look you give you this fine-grained description
-but I know I don't really care so much about this I'm going to project that down.
-Here's my fine-grain beginning initial condition
-I'm going to project that down to a simpler
-description and then I'm going to use a new rule
-that allows me to evolve
-that simplified description forward.
-So there are two paths
-and if you've done it right,
-they'll get you to the same place
-evolve the fine-grained
-system forward and project or
-project and evolve the
-coarse-grained description forward.
-A mathematician would say
-that these two operations
-right, the operation of evolving forward
-and the operation of projecting up commute
-you can do one or the other
-in either order,
-and you'll get the same answer
-A then B projecting then evolving is the same as B then A
-evolving and projecting.
+For Israeli and Goldenfeld it's all about taking one of two possible paths and getting to the same place.
+\begin{enumerate}
+	\item One path says I have a fine-grained description of the system
+	I'm going to evolve it forward with my fine-grained rule and at the end I'm going to simplify the answer I'm gonna say look yes I mean I kept track of all these details but in fact you know what? I only need to know some of the output
+	I only need to know some of the final stages of system 	So you can think of that as sort of walking along like this and then projecting up.
+	\item Another way you can do it though 	right, is you can say look you give you this fine-grained description 	but I know I don't really care so much about this I'm going to project that down. 	Here's my fine-grain beginning initial condition 	I'm going to project that down to a simpler description and then I'm going to use a new rule that allows me to evolve
+	that simplified description forward.
+\end{enumerate}
 
-So let's see how this plays out with a particular example.
-Again, I'll just take one from their paper.
-This is rule 105. Rule 105 is quite similar
-to rule 150 which you've seen before.
-It takes the XOR of the three pixels
-above the pixel in question
-and then inverts them.
-So that's the only difference between
-rule 105 and 150 is that final inversion.
-Another way to think of that is
-equivalently, the output is black when
-there's an even number of black cells above.
-alright
-So now you know what we have to do, right?
-The first thing is we're going to consider
-not the final state of one pixel
-but the final state of two pixels.
-And we're going to ask what happens
-not when you take one time step
-but in fact when you take two time steps.
-And that means that those two final pixels
-will depend on a group of six pixels
+So there are two paths and if you've done it right, they'll get you to the same place evolve the fine-grained system forward and project or project and evolve the coarse-grained description forward. A mathematician would say that these two operations \emph{commute}: you can do one or the other in either order,
+and you'll get the same answer; A then B projecting then evolving is the same as B then A evolving and projecting.
+
+So let's see how this plays out with a particular example. Again, I'll just take one from their paper, rule 105--Figure \ref{fig:cellular-automaton-rule-4a}.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Rule 105]{Rule 105: $f_{105}(x_{n-1},x_n,x_{n+1})=\neg [x_{n-1} \xor x_n \xor x_{n+1}]$ Output is black when an even number of input cells is black.}\label{fig:cellular-automaton-rule-4a}
+		\includegraphics[width=0.6\textwidth]{cellular-automaton-rule-4}
+	\end{center}
+\end{figure}
+ Rule 105 is quite similar to rule 150 which you've seen before: it takes the XOR of the three pixels above the pixel in question and then inverts them.
+The only difference between rule 105 and 150 is that final inversion.
+Another way to think of that is equivalently, the output is black when there's an even number of black cells above.
+
+So now you know what we have to do. The first thing is we're going to consider not the final state of one pixel but the final state of two pixels. And we're going to ask what happens not when you take one time step but in fact when you take two time steps.
+And that means that those two final pixels will depend on a group of six pixels
 two time steps previously.
-And now we'll consider those pairs
-of pixels to be the supercells.
-So you have a big supercell here, which is two pixels
-[takes] four possible states
-and you have three supercells up here.
-So that's our f hat
-What we have to do now is
-find a combination, a projection
-p that takes that supercell
-and summarizes it,
-simplifies it.
+And now we'll consider those pairs of pixels to be the supercells.
+So you have a big supercell here, which is two pixels, takes four possible states,
+and you have three supercells up here: that's our $\hat{f}$.
+What we have to do now is find a combination, a projection
+$P$ that takes that supercell and summarizes it, simplifies it.
 
 It maps each of those four possible states down to one of two possible states
-We have a projection p and we want to
-find an evolution operator g
+We have a projection $P$ and we want to
+find an evolution operator $g$
 that allows us to evolve forward
 those projected down superstates.
-So the p is what takes you from the
+So the $P$ is what takes you from the
 fine-grained descriptions up
 to the coarse-grained description
-and that g is what's going to take you
+and that $g$ is what's going to take you
 between to coarse-grained descriptions
 at different times.
 So you can either go
 f, f, f, f, f, p or
 p, g, g
-right
-For every two times you iterate f you're going
-[of course] only to iterate g once
-and this simple example
-we'll just do the case where you skip one step
-and so you have supercells
-of size two
-so
-Fortunately it turns out
-It is possible to find a p and g that enable that diagram to commute and here it is in the case of Rule 105
+
+For every two times you iterate $f$ you're going only to iterate $g$ once and this simple example we'll just do the case where you skip one step and so you have supercells of size two.
+
+Fortunately it turns out that it is possible to find a p and g that enable that diagram to commute and here it is in the case of Rule 105
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Rule 105 can be made to commute]{If we take this as our projection function, rule 105 can be made to commute if we use rule 150.}\label{fig:rule105-P}
+		\includegraphics[width=0.6\textwidth]{rule105-P}
+	\end{center}
+\end{figure}
 Right in this case the projection rule says look if the supercell has one cell
 that's black and one cell that's white make that's all white if
 Both cells are white or both cells or black
@@ -2892,16 +2849,20 @@ rules coarse-grain into each other.
 And in fact for a non-trivial projection operator Rule 105
 course-grains into rule 150.
 Here's what it looks like.
-In the top you can see the
-fine-grained level description
-and the bottom you can see
-the coarse-grained level description.
-At the top there you can see
-that we have the smaller pixels
-and those smaller pixels are both
-small in the x direction along this axis here
-and smaller in the time direction
-then in the coarse-grained case
+\begin{figure}[H]
+	\caption{for a non-trivial projection operator Rule 105
+		course-grains into rule 150}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{Fine-grained level description}\label{fig:fine:grain}
+		\includegraphics[width=\textwidth]{cellular-automaton-rule-4}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\caption{coarse-grained level description}
+		\includegraphics[width=\textwidth]{cellular-automaton-1}
+	\end{subfigure}
+\end{figure}
+
+In Figure \ref{fig:fine:grain} you can see that we have the smaller pixels and those smaller pixels are both small in the x direction along this axis here and smaller in the time direction then in the coarse-grained case.
 the coarse-grained case of course
 ???mps pairs of states into one and then in fact the jumps are now larger
 there are two time steps instead of one.
