@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # Copyright (C) 2019-2025 Greenweaves Software Limited
 
 # This is free software: you can redistribute it and/or modify
@@ -42,19 +44,17 @@ class Rule:
     def __getitem__(self, state):
         return self.bits[state.n]
 
-    def two_step(self,superstate):
+    def two_step(self,superstate): #FIXME
         if len(superstate) != 6: raise ValueError('superstate should have length 6')
         supercell = []
         for i in range(2):
             triplet = []
             for j in range(3):
-                k = 3*i + j
+                k = i + j
                 state = State(bits=superstate[k:k+3])
                 triplet.append(self[state])
             supercell.append(self[State(bits=triplet)])
         return supercell
-
-
 
 class State:
     def __init__(self,n=None,bits=None,N=3):
@@ -84,7 +84,7 @@ class State:
             raise ValueError('Need either n or bits, but not both')
 
     def __str__(self):
-        return str(self.bits)
+        return f'n={self.n},bits={self.bits}'
 
     def __len__(self):
         return len(self.bits)
@@ -115,10 +115,13 @@ if __name__=='__main__':
 
     for i in range(2 ** 6):
         state = State(n=i,N=6)
+        ss = str(state)
         f1 = f.two_step(state)
-        Pf = P[f1]
+        Pf = P[f1][0]
         g1 = State(bits=P[state])
         gp = g[g1]
-        print (i, state,Pf,gp)
+        if Pf != gp:
+            print (i, state,Pf,gp, 'mismatch')
+
 
 
