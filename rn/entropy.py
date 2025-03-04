@@ -1,4 +1,6 @@
-# Copyright (C) 2019 Greenweaves Software Limited
+#!/usr/bin/env python
+
+# Copyright (C) 2019-2025 Greenweaves Software Limited
 
 # This is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,7 +37,7 @@ def coarse_grain(pp,coarsen=lambda l: True):
 def get_entropy(ps):
     def get_entropy_contribution(p):
         return - p * math.log2(p)
-    
+
     return sum([get_entropy_contribution(ps[letter]) for letter in ps.keys()])
 
 def vowel(c):
@@ -51,4 +53,3 @@ if __name__=='__main__':
     print (get_entropy(coarse_grain(pp,coarsen=vowel)))
     #print (get_entropy(restrict(pp,selector=vowel)))
     #print (get_entropy(restrict(pp,selector=lambda l: not vowel(l))))
-    

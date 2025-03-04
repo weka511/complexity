@@ -1,4 +1,6 @@
-# Copyright (C) 2019 Greenweaves Software Limited
+#!/usr/bin/env python
+
+# Copyright (C) 2019-2025 Greenweaves Software Limited
 
 # This is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,7 +30,7 @@ def freqs(r):
     return {c:result[c]/total for c in result.keys()}
 
 if __name__=='__main__':
-    import requests   
+    import requests
     url = 'https://www.gutenberg.org/files/1342/1342-0.txt'
     r   = requests.get(url)
     ps  = freqs(r.text)
