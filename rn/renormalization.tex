@@ -144,16 +144,16 @@ you a series of examples
 that will slowly build up in 
 complexity for how that works.
 
-\subsection{Coarse graining Alice and Dinah}
+\subsection{coarse-graining Alice and Dinah}
 
 The example of the micro-
 to macroeconomic transition
 is a really good one to get
-a sense of how coarse graining works.
+a sense of how coarse-graining works.
 So let's take an example here
 to give you a sense of what we mean
 when we say that we're going
-to coarse grain a system.
+to coarse-grain a system.
 We're going to simplify it,
 we're going to renormalize it,
 in the language of physics.
@@ -203,7 +203,7 @@ who were unemployed or employed
 at a certain point in time,
 those two descriptions are identical.
 
-And so what coarse graining
+And so what coarse-graining
 does in other words,
 is merge states of the world.
 We use a lot of different terms
@@ -235,8 +235,8 @@ both map to the same final storing.
 The macroeconomist is much more certain
 about the world than the microeconomist.
 
-Let's try to get a more intuitive sense of coarse graining,
-and we'll give you a sense of how coarse graining plays out
+Let's try to get a more intuitive sense of coarse-graining,
+and we'll give you a sense of how coarse-graining plays out
 in something that we understand very well, which is the representation
 of images for the human mind. Figure \ref{fig:alice1} is a woodcut from John Tenniel of one of the episodes in "Alice in Wonderland".
 Actually, it's from the second of the two books, "Alice Through the Looking Glass".
@@ -248,7 +248,7 @@ Actually, it's from the second of the two books, "Alice Through the Looking Glas
 You can see Alice here playing with a ball of yarn and her kitten Dinah.
 What I'd like you to imagine us doing here
 is simplifying this image in different ways.
-What we're going to do in particular is coarse grain the image
+What we're going to do in particular is coarse-grain the image
 in the following fashion. So, imagine dividing
 this image up into grids, Figure \ref{fig:alice:coarse}, and then, at each grid point here –
 if we were to zoom in to this digitized
@@ -257,7 +257,7 @@ say just a little on Dinah's ear here –
 we'll see a little patch of that image.
 
 \begin{figure}[H]
-	\caption{Coarse Graining Alice}\label{fig:alice:coarse}
+	\caption{coarse-graining Alice}\label{fig:alice:coarse}
 	\includegraphics[width=0.9\textwidth]{Alice2}
 \end{figure}
 And what we're going to say
@@ -270,7 +270,7 @@ we're going to have that patch
 just take a vote.
 So that image, there it turns out
 as majority black pixels,
-and so it's going to coarse grain
+and so it's going to coarse-grain
 to a single chunky black pixel.
 And we're going to go
 grid square by grid square here,
@@ -292,7 +292,7 @@ our course grading majority vote
 will represent them identically.
 
 \begin{figure}[H]
-	\caption{Two different configuration coarse grained identically.}\label{fig:alice:voting}
+	\caption{Two different configuration coarse-grained identically.}\label{fig:alice:voting}
 	\includegraphics[width=0.9\textwidth]{Alice3}
 \end{figure}
 What we can see in Figure \ref{fig:alice:result:coarse:graining} is that on the left-hand side, we have the original image, and on the right-hand side
@@ -300,7 +300,7 @@ we have something that kind of looks pretty much like what
 Alice sort of looks like, but we're missing quite a lot.
 
 \begin{figure}[H]
-	\caption{Majority Coarse Graining.}\label{fig:alice:result:coarse:graining}
+	\caption{Majority coarse-graining.}\label{fig:alice:result:coarse:graining}
 	\includegraphics[width=0.9\textwidth]{Alice4}
 \end{figure}
 
@@ -308,7 +308,7 @@ Here's another case, this is a different rule.
 In this case, Figure \ref{fig:alice:result:decimation}, instead of taking the majority vote, I did what's called decimation,
 at least in the literature, and this is a term that was invented
 by the physicist Leo Kadanoff\cite{kadanoff2000statistical}
-when he came to do this kind of coarse graining, not on pictures
+when he came to do this kind of coarse-graining, not on pictures
 from "Alice in Wonderland", but on images of atoms
 being spin up or spin down, and we'll talk about that
 in a later module when we come to the Ising model.
@@ -323,26 +323,26 @@ that same patch of die now gets mapped,
 not to black, but to white.
 So what I've introduced you to here
 is two ways to simplify an image,
-two ways to coarse grain the image,
+two ways to coarse-grain the image,
 and, of course, different images
-will now coarse grain to the same thing.
+will now coarse-grain to the same thing.
 I can make many microscopic changes
 in Tenniel's original illustration,
 and still get back
 the same final image of Alice.
 Of course, the microscopic changes
 that my image is insensitive to,
-or that, rather, my coarse graining
+or that, rather, my coarse-graining
 of the image is insensitive to,
 the microscopic changes will depend upon
-the coarse graining algorithm
+the coarse-graining algorithm
 that I choose.
 
 So if I do the majority vote,
 then I'll be able to make some changes
 that won't show up,
 and if I instead take
-the decimation coarse graining rule,
+the decimation coarse-graining rule,
 there's a different set of changes
 that I can make at the microscopic level
 that will leave the system unchanged.
@@ -387,7 +387,7 @@ by a factor of 9.
 What I also can do is take that tiff file,
 open it up, and max preview,
 and now ask the computer
-to do some coarse graining for me.
+to do some coarse-graining for me.
 because we spend a lot of time trying
 to figure out how to compress images,
 how to reduce their size,
@@ -397,15 +397,15 @@ in order to allow the image
 to be transmitted faster,
 to be stored more conveniently.
 So, on the right-hand side here--Figure \ref{fig:alice:2:schemes}--
-we also have a coarse graining of the Alice image, but now using a coarse-graining algorithm called the JPEG.
+we also have a coarse-graining of the Alice image, but now using a coarse-graining algorithm called the JPEG.
 No one's ever referred to the JPEG as a coarse-graining algorithm, at least they don't do it that much.
 What you can see is both images look reasonably good.
 In fact, they have different properties,
 so let's go zoom in here on Dinah.
 What you can see on the left-hand side
-is the majority vote coarse graining.
+is the majority vote coarse-graining.
 One of the features of the majority vote
-coarse graining, by the way, you will see,
+coarse-graining, by the way, you will see,
 is that each pixel
 is still a bit black or white.
 If I zoom in again,
@@ -443,7 +443,7 @@ within that square,
 
 \begin{itemize}
 	\item I'm going to summarize it,
-	\item I'm going to coarse grain it,
+	\item I'm going to coarse-grain it,
 	\item I'm going to simplify it,
 	\item I'm going to losslessly compress it –
 \end{itemize}
@@ -503,7 +503,7 @@ And then it does two things.
 \begin{itemize}
 	\item First of all blurs them,
 	so it does a kind of chunking
-	coarse graining on those components,
+	coarse-graining on those components,
 	\item and then also it just entirely cuts off
 	all the high-frequency components
 	in the image –
@@ -531,18 +531,18 @@ But before it actually wants to transmit
 that image back into your brain
 to make decisions,
 it does itself
-a series of coarse grainings
+a series of coarse-grainings
 using Gabor functions in the particular
 sensitivity of the neurons.
 It does a particular set
-of coarse grainings
+of coarse-grainings
 that, in fact, the JPEG knows about.
 So the things that your retina
 is going to throw out anyway
 as it transmits it backwards,
 the JPEG has already thrown out
 on your behalf.
-\subsection{Coarse graining part I - Clustering algorithms}
+\subsection{coarse-graining part I - Clustering algorithms}
 
 So, in the previous section,
 you had an example of coarse-graining
@@ -812,10 +812,10 @@ People tend to prefer hard clustering,
 because you don't have to think as hard
 when you work with it.
 
-\subsection{Coarse graining part II - Entropy}
+\subsection{coarse-graining part II - Entropy}
 
 The last thing I promised you
-was to tell you how coarse graining
+was to tell you how coarse-graining
 fit into the story of information theory.
 So, even if you have not discovered
 the information theory lectures,
@@ -922,7 +922,7 @@ of being able to shuffle and get the same answer,
 and that, finally, obeys Shannon's coarse-graining axiom. If you enforce all of those, this is the final formula that you're left with, no other formula will do.
 
 And one of the very nice things about this
-is that the course-graining axiom shows you how,
+is that the coarse-graining axiom shows you how,
 when you coarse-grain a system, the uncertainty,
 the information that you have, goes down.
 So let's say that instead of representing
@@ -940,23 +940,23 @@ H (P_A,P_B,P_C) >& H(P_A,P_{B,C})\text{, if there's some possibility of B and C}
 So, in this first module what have we done? I've given you a short introduction
 to the idea of renormalization through the example of the microeconomics story. You have a microeconomic account of the world,
 a very detailed description of what people are doing
-that you then coarse grain to a macroeconomic account.
-That coarse graining generally erases distinctions:
+that you then coarse-grain to a macroeconomic account.
+That coarse-graining generally erases distinctions:
 instead of distinguishing case B from case C,
 you say, "Ah, you know what? They're pretty much the same."
 We had an example of that coarse-graining property
 in the case of coarse-graining the image of Alice in Wonderland.
 And there, I actually gave you three examples,
-majority rule coarse graining, decimation coarse graining,
-and a more complicated, sort of Fourier space kind of coarse graining,
+majority rule coarse-graining, decimation coarse-graining,
+and a more complicated, sort of Fourier space kind of coarse-graining,
 called the JPEG, which of course is now in so much use
 that your computer has a special chip that does JPEG decompression.
-So, I gave you an example of how coarse graining worked,
+So, I gave you an example of how coarse-graining worked,
 and, in this final part of the lecture of this first part of the module,
 what I've done is tell you a little bit about
-how coarse graining plays a central role in information theory.
+how coarse-graining plays a central role in information theory.
 
-But coarse graining is not enough. It's not enough
+But coarse-graining is not enough. It's not enough
 just to simplify the world, because, in the end, what scientists do
 is something more than just create JPEGs. What a biologist does
 is something more than just clustering – or rather you hope a biologist is doing
@@ -970,13 +970,13 @@ with that compressed description is make predictions, produce explanations,
 try to describe, but not just describe: try to explain what happened before
 and what's going to happen next. And in order to do that,
 you need a theory. And what renormalization does,
-is it says, "Great, congratulations, you've constructed a coarse graining,
+is it says, "Great, congratulations, you've constructed a coarse-graining,
 now, how is the theory connecting those different coarse-grained states,
 how is that theory related to the one at the fundamental level?
 
 How can you go, in other words, or rather what happens when you take
 a full economic and psychological theory of the world
-and course-grain it to macroeconomics? What happens when the macroeconomist
+and coarse-grain it to macroeconomics? What happens when the macroeconomist
 then tries to build a theory that relate his coarse-grain quantities?"
 And so, in the next module, we will give you your first simple example
 of how theories about the world change when the objects
@@ -1080,7 +1080,7 @@ describes something.
 The entire story of renormalization, Figure \ref{fig:commutation}, is the relationship between what happens when you coarse-grain the data and what happens
 when you look at the underlying structures of the models that that
 coarse-graining demands. Surprisingly as
-we'll see sometimes when you course-grain the data the models that you need
+we'll see sometimes when you coarse-grain the data the models that you need
 get more complicated. Sometimes
 conversely they simplify and it'll be
 that kind of process that we'll study
@@ -1122,13 +1122,13 @@ graining that to produce a lower
 resolution time series. Now of course
 that's not the only way to coarse-grain
 a time series. You could also imagine
-course-graining each symbol so let's say
+coarse-graining each symbol so let's say
 each point in time you chose from a set
 of 10 symbols. One way to coarse-grain
 that time series is instead of choosing
 from a set of 10 you map those 10
 symbols to either a symbol A or a symbol
-B that kind of course-graining something
+B that kind of coarse-graining something
 we'll see a little bit later you might
 think of it as a projection you're
 projecting down the state space.
@@ -1269,7 +1269,7 @@ understand the relationship between the
 one step in the two step model.
 Notice that in the one step model it's
 impossible for the system to jump from B
-to A. But in fact in the coarse grained
+to A. But in fact in the coarse-grained
 system it's in fact very likely that if
 you see a B the next symbol you'll see
 will be an A. It happens 70 percent of
@@ -1412,7 +1412,7 @@ example of how theories change when the
 data you ask them to describe is
 coarse-grained.
 
-\subsection{Mathematics of coarse grained Markov chains}
+\subsection{Mathematics of coarse-grained Markov chains}
 
 In the previous module,
 I gave you a cartoon example
@@ -1429,7 +1429,7 @@ resolution was poor.
 So, for example let’s say,
 you could only observe the first second
 of each two second block.
-That decimation coarse graining
+That decimation coarse-graining
 transforms the underlying model itself,
 and so, as you saw,
 when we went from the fine-grained model,
@@ -1657,7 +1657,7 @@ is raise T to the power
 that you’re interested in.
 Here n is now just the block size.
 
-\subsection{Mathematics of Coarse grained Markov Chains: The General Case }
+\subsection{Mathematics of coarse-grained Markov Chains: The General Case }
 
 So, can we say anything
 general about that process?
@@ -2319,7 +2319,7 @@ a square root of a stochastic matrix.
 But what that means for us is that
 sometimes you have a model
 and you say what fine-grained theory
-could this have coarse grained from.
+could this have coarse-grained from.
 Where does that model come from
 what's the more fine-grained,
 the more detailed story
@@ -2360,7 +2360,7 @@ is going to be a different class,
 a more complicated, richer class,
 than the one you began with.
 Here when we went from A to T, we simplified the world.
-It turned out by coarse graining
+It turned out by coarse-graining
 we could forget things,
 we could forget details.
 The story we had to tell about the system
@@ -2778,7 +2778,7 @@ So let's see how this plays out with a particular example. Again, I'll just take
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Rule 105]{Rule 105: $f_{105}(x_{n-1},x_n,x_{n+1})=\neg [x_{n-1} \xor x_n \xor x_{n+1}]$ Output is black when an even number of input cells is black.}\label{fig:cellular-automaton-rule-4a}
+		\caption[Rule 105: $f_{105}(x_{n-1},x_n,x_{n+1})=\neg (x_{n-1} \xor x_n \xor x_{n+1})$]{Rule 105: $f_{105}(x_{n-1},x_n,x_{n+1})=\neg [x_{n-1} \xor x_n \xor x_{n+1}]$ Output is black when an even number of input cells is black.}\label{fig:cellular-automaton-rule-4a}
 		\includegraphics[width=0.6\textwidth]{cellular-automaton-rule-4}
 	\end{center}
 \end{figure}
@@ -2836,10 +2836,10 @@ And so now just as we were able to talk about different kinds of
 Markov chains coarse-graining into each other
 we're now able to talk about how
 rules coarse-grain into each other.
-And in fact for a non-trivial projection operator Rule 105 course-grains into rule 150.
+And in fact for a non-trivial projection operator Rule 105 coarse-grains into rule 150.
 Here's what it looks like.
 \begin{figure}[H]
-	\caption[Rule 105 course-grains into rule 150]{Rule 105 course-grains into rule 150 by a non-trivial projection operator (based on a figure in \cite{israeli2004computational})}\label{fig:105:coarse:grained}
+	\caption[Rule 105 coarse-grains into rule 150]{Rule 105 coarse-grains into rule 150 by a non-trivial projection operator (based on a figure in \cite{israeli2004computational})}\label{fig:105:coarse:grained}
 	\begin{subfigure}[t]{0.45\textwidth}
 		\caption{Rule 105: Fine-grained level}\label{fig:fine:grain}
 		\includegraphics[width=\textwidth]{fine-grain-ca}
@@ -2905,7 +2905,7 @@ it masks both of those cases to the same state.
 		\includegraphics[width=0.8\textwidth]{ig-relationships}
 	\end{center}
 \end{figure}
-Israeli and Goldenfeld looked at all 256 rules, and  tried to figure out how or the extent to which one rule could course-grain into another.
+Israeli and Goldenfeld looked at all 256 rules, and  tried to figure out how or the extent to which one rule could coarse-grain into another.
 So these arrows in Figure \ref{fig:ig-relationships} show you how it's possible
 to find whether or not it's possible to find a projection operator and an evolution operator that allows one rule set to map to another upon that coarse-graining.
 They consider not only supercells of size 2 but also size 3 and size 4 and
@@ -2945,7 +2945,7 @@ it's possible to find a projection that takes B into C
 then it should also be possible
 to renormalize A into C
 of course now you're going
-to be course-graining twice
+to be coarse-graining twice
 and it's harder of course for
 Israeli and Goldenfeld to find those
 but if you look at this chart
@@ -2990,24 +2990,24 @@ Rule 150 is a fixed point of renormalization group with potentially a much more 
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Coarse Graining Rule 110}\label{fig:cellular-automaton-rule-6a}
+		\caption{coarse-graining Rule 110}\label{fig:cellular-automaton-rule-6a}
 		\includegraphics[width=0.6\textwidth]{cellular-automaton-rule-6}
 	\end{center}
 \end{figure}
 
-Recall that Rule 110 is Turing complete: given a suitably specified initial condition, we can evolve the rule to perform an arbitrary computation. Can I coarse grain the output, using Israeli and Goldenfeld's methods, to speed up the computation? Israeli and Goldenfeld were able to find projections, but they discarded almost all of the initial information. They exploited ''Garden of Eden States'', which can serve as an initial pattern, but can never be produced by evolution Rule 110 has Garden of Eden States: if $P$. projects Garden of Eden states to black, and all others to white, it doesn't do anything useful. Rule 110 coase grains to Rule 0.
+Recall that Rule 110 is Turing complete: given a suitably specified initial condition, we can evolve the rule to perform an arbitrary computation. Can I coarse-grain the output, using Israeli and Goldenfeld's methods, to speed up the computation? Israeli and Goldenfeld were able to find projections, but they discarded almost all of the initial information. They exploited ''Garden of Eden States'', which can serve as an initial pattern, but can never be produced by evolution Rule 110 has Garden of Eden States: if $P$. projects Garden of Eden states to black, and all others to white, it doesn't do anything useful. Rule 110 coase grains to Rule 0.
 
 
 What is we ask for an evolution rules that works with a specified projection, such as the Alice projection of Figure \ref{fig:rule90-alice}? it turns out that we cannot. Consider the inset: why did this bit switch on? It makes sense in the full view to the left, but not the decimated one on the right. What makes one time steo different from another?
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Rule 90 with Alice Coarse Graining]{Rule 90 with Alice Coarse Graining. On the right we have thrown away all but one pixel from each decimation area.}\label{fig:rule90-alice}
+		\caption[Rule 90 with Alice coarse-graining]{Rule 90 with Alice coarse-graining. On the right we have thrown away all but one pixel from each decimation area.}\label{fig:rule90-alice}
 		\includegraphics[width=0.8\textwidth]{rule90-alice}
 	\end{center}
 \end{figure}
 
-A coarse grained cellular automaton may no longer have a local update rule: distant points may be needed eo explain why a point flicked. Rule 90 is non-renormalizable under the Alice decimation: we need another model.
+A coarse-grained cellular automaton may no longer have a local update rule: distant points may be needed eo explain why a point flicked. Rule 90 is non-renormalizable under the Alice decimation: we need another model.
 
 Just because you simplify the description, it doesn't mean the model simplifies.
 
@@ -3015,10 +3015,10 @@ Just because you simplify the description, it doesn't mean the model simplifies.
 \section{Ising Model}
 
 \subsection{Fixing a projection: From CA’s to Ising}
-Effects of coarse graining in time:
+Effects of coarse-graining in time:
 \begin{itemize}
 	\item Markov Chain--everything flows to lower dimensional subspace; first example of fixed point.
-	\item Cellular Automata--in order to stay within same model class, forced to coarse grain in space also. Can coarse grain universal rule 110, but projection is practically trivial. Non locality arises. 
+	\item Cellular Automata--in order to stay within same model class, forced to coarse-grain in space also. Can coarse-grain universal rule 110, but projection is practically trivial. Non locality arises. 
 \end{itemize}
 
 When we coarse-grain Ising model we also lose locality!
@@ -3039,10 +3039,10 @@ Z(\beta) =& \text{ the partition function (normalization constant).}
 	\item used also to model alignment of opinions.
 \end{itemize}
 
-Start with a very simple course-graining, where we ignore one node, A say, only, as shown in Figure \ref{fig:ising-coarse1}.
+Start with a very simple coarse-graining, where we ignore one node, A say, only, as shown in Figure \ref{fig:ising-coarse1}.
 
 \begin{figure}[H]
-	\caption{Simple coarse graining, ignoring $\sigma_A$}\label{fig:ising-coarse1}
+	\caption{Simple coarse-graining, ignoring $\sigma_A$}\label{fig:ising-coarse1}
 	\includegraphics[width=0.9\textwidth]{ising-coarse1}
 \end{figure}
 
@@ -3059,10 +3059,10 @@ B =& e^{\sum e^{\beta \sum_{i,j \ne A} J_{i,j} \sigma_i \sigma_j}}\\
 =& e^{\log{\cosh({\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)})}} \frac{B}{Z^\prime(\beta)} \text{, absorbing $2$ in $Z^{\prime}$.} \numberthis \label{eq:coarse_ising:P2}
 \end{align*}
 
-Comparing (\ref{eq:coarse_ising:P}) and (\ref{eq:coarse_ising:P2}), we see that coarse graining has complicated equation. However, Figure \ref{fig:ising-cosh} suggests a way forward.
+Comparing (\ref{eq:coarse_ising:P}) and (\ref{eq:coarse_ising:P2}), we see that coarse-graining has complicated equation. However, Figure \ref{fig:ising-cosh} suggests a way forward.
 
 \begin{figure}[H]
-	\caption{Simple coarse graining: analyzing the $\cosh$ term.}\label{fig:ising-cosh}
+	\caption{Simple coarse-graining: analyzing the $\cosh$ term.}\label{fig:ising-cosh}
 	\includegraphics[width=0.9\textwidth]{ising-cosh}
 \end{figure}
 
@@ -3207,7 +3207,7 @@ Plasma - gas with electrons separated from nuclei, e.g. solar wind.
 
 \subsection{The Thermal Physics of Plasma}
 
-Figure \ref{fig:plasma} shows a plasma, coarse grained so each apace is roughly in electrical equilibrium. Moreover, it is in thermal equilibrium (\ref{eq:plasma_thermal}).
+Figure \ref{fig:plasma} shows a plasma, coarse-grained so each apace is roughly in electrical equilibrium. Moreover, it is in thermal equilibrium (\ref{eq:plasma_thermal}).
 \begin{figure}[H]
 	\caption{Plasma}\label{fig:plasma}
 	\includegraphics[width=0.9\textwidth]{plasma}
@@ -3275,7 +3275,7 @@ When we project, we have some idea what we want.
 
 Utility function.
 
-Rate Distortion Theory --how to balance the need for efficient representation and good representation. Let ${x}$ represent state of World, ${\tilde{x}}$ the state of the brain. The mutual information $I(x,\tilde{x})$ is a measure of how good a job the eye is doing. Coarse graining is $P(\tilde{x}\vert x)$ (soft clustering).
+Rate Distortion Theory --how to balance the need for efficient representation and good representation. Let ${x}$ represent state of World, ${\tilde{x}}$ the state of the brain. The mutual information $I(x,\tilde{x})$ is a measure of how good a job the eye is doing. coarse-graining is $P(\tilde{x}\vert x)$ (soft clustering).
 
 Rate Distortion Theory is about choosing the "best" $P(\tilde{x}\vert x)$. We need a distorting=n measure $d(\tilde{x}\vert x)$, the personalty for thinking the world is in state $\vert x$ when it is actually in state $x$ (not symmetric).
 
