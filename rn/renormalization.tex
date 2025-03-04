@@ -2988,7 +2988,28 @@ It really depends upon the details of that projection operator.
 That said in fact you might think of it another way.
 Rule 150 is a fixed point of renormalization group with potentially a much more interesting projection than a simple decimation.
 
+\begin{figure}[H]
+	\begin{center}
+		\caption{Coarse Graining Rule 110}\label{fig:cellular-automaton-rule-6a}
+		\includegraphics[width=0.6\textwidth]{cellular-automaton-rule-6}
+	\end{center}
+\end{figure}
 
+Recall that Rule 110 is Turing complete: given a suitably specified initial condition, we can evolve the rule to perform an arbitrary computation. Can I coarse grain the output, using Israeli and Goldenfeld's methods, to speed up the computation? Israeli and Goldenfeld were able to find projections, but they discarded almost all of the initial information. They exploited ''Garden of Eden States'', which can serve as an initial pattern, but can never be produced by evolution Rule 110 has Garden of Eden States: if $P$. projects Garden of Eden states to black, and all others to white, it doesn't do anything useful. Rule 110 coase grains to Rule 0.
+
+
+What is we ask for an evolution rules that works with a specified projection, such as the Alice projection of Figure \ref{fig:rule90-alice}? it turns out that we cannot. Consider the inset: why did this bit switch on? It makes sense in the full view to the left, but not the decimated one on the right. What makes one time steo different from another?
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Rule 90 with Alice Coarse Graining]{Rule 90 with Alice Coarse Graining. On the right we have thrown away all but one pixel from each decimation area.}\label{fig:rule90-alice}
+		\includegraphics[width=0.8\textwidth]{rule90-alice}
+	\end{center}
+\end{figure}
+
+A coarse grained cellular automaton may no longer have a local update rule: distant points may be needed eo explain why a point flicked. Rule 90 is non-renormalizable under the Alice decimation: we need another model.
+
+Just because you simplify the description, it doesn't mean the model simplifies.
 
 \cite{dedeo2018origin}
 \section{Ising Model}
