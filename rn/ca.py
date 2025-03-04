@@ -20,6 +20,8 @@
     What other projections work?
 '''
 
+
+
 class Rule:
     '''
     Attributes:
@@ -103,25 +105,64 @@ class Projection:
     def __init__(self,table=[0,1,1,0]):
         self.table = table
 
+    def __str__(self):
+        return str(self.table)
+
     def __getitem__(self,key):
         if len(key) % 2 != 0: raise ValueError('key should have even length')
         return [self.table[2*key[i]+key[i+1]] for i in range(0,len(key),2)]
 
+class Matcher:
+    def __init__(self):
+        def to_binary(n,N=4):
+            result = []
+            m = n
+            for i in range(N):
+                m,r = divmod(m,2)
+                result.append(r)
+            return result[::-1]
+
+        self.Rules = [Rule(i) for i in range(256)]
+        self.Projections = []
+        for i in range(1,15):
+            self.Projections.append(Projection(to_binary(i)))
+
+    def find_matches(self,m):
+        matches = []
+        for i in range(256):
+            if i == m: continue
+            match = self.match(m,i)
+            if len (match) > 0:
+                matches.append((i,match))
+        return matches
+
+    def match(self,m,n):
+        matches = []
+        f = matcher.Rules[m]
+        g = matcher.Rules[n]
+        for P in matcher.Projections:
+            if self.match1(f,g,P):
+                matches.append(P)
+        return matches
+
+    def match1(self,f,g,P,verbose=False):
+        for i in range(2 ** 6):
+            state = State(n=i,N=6)
+            ss = str(state)
+            f1 = f.two_step(state)
+            Pf = P[f1][0]
+            g1 = State(bits=P[state])
+            gp = g[g1]
+            if Pf != gp:
+                if verbose: print (i, state,Pf,gp, f'mismatch for {P}')
+                return False
+        return True
 
 if __name__=='__main__':
-    f = Rule(105)
-    g = Rule(150)
-    P = Projection()
+    matcher = Matcher()
+    # matcher.match(105,150)
+    print (matcher.find_matches(105))
 
-    for i in range(2 ** 6):
-        state = State(n=i,N=6)
-        ss = str(state)
-        f1 = f.two_step(state)
-        Pf = P[f1][0]
-        g1 = State(bits=P[state])
-        gp = g[g1]
-        if Pf != gp:
-            print (i, state,Pf,gp, 'mismatch')
 
 
 
