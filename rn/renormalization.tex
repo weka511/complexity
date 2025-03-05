@@ -32,6 +32,8 @@
 \usepackage{tocloft}
 \usepackage{thmtools}
 \usepackage{cancel}
+\usepackage[toc,acronym,nonumberlist]{glossaries}
+\usepackage{glossaries-extra}
 \graphicspath{{figs/}}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newcommand*\xor{\oplus}
@@ -43,6 +45,17 @@
 \setlength{\cftsubsecnumwidth}{3em} 
 \widowpenalty10000
 \clubpenalty10000
+
+\makeglossaries
+\newglossaryentry{gls:CA}{
+	name={CA},
+	description={Cellular Automaton},
+	first={\glsentrydesc{gls:CA} (\glsentrytext{gls:CA})},
+	plural={CA},
+	descriptionplural={Cellular Automata},
+} 
+
+
 %opening
 \title{Introduction to Renormalization}
 \author{Simon Crase}
@@ -69,7 +82,7 @@ The source for this document can be found at\\
 
 \subsection{Introduction}
 
-We'll be talking in this unit about "Renormalization". It's fair enough to say that since 1950 the most interesting thing, in fact, perhaps the only thing that has driven theoretical physics has been the problem of Renormalization. In pursuit of understanding what on Earth that was, we developed an enormous amount of extremely complicated mathematics.
+We'll be talking in this unit about ''Renormalization''. It's fair enough to say that since 1950 the most interesting thing, in fact, perhaps the only thing that has driven theoretical physics has been the problem of Renormalization. In pursuit of understanding what on Earth that was, we developed an enormous amount of extremely complicated mathematics.
 
 When Simon DeDeo came to work in the Cognitive Sciences, when he came to study social systems, and social behaviour,  he realized  that the tools that had developed in physics for Renormalization, and, in fact, not just the tools but the underlying concepts, became incredibly useful for trying to understand a very different kind of problem.
 
@@ -106,45 +119,18 @@ One thing macroeconomics has been going for is not just simplicity.
 The number of equations a good  macroeconomic theory might need to go from here to here, is much smaller than the massive number of equations you need to go from here to here to here every step along the way.
 Not only is the macroeconomist more efficient, but it may be the case that these higher level variables are somehow more useful, more explanatory.
 
-And, of course, we 
-do this all the time.
-So, if you're a cognitive scientist, 
-if you say somebody's interested
-in the psychology of human 
-decision-making, you know, in fact,
-that the account you built has pretty 
-much the same relationship
-to the firing of neurons 
-in somebody's brain
-that macroeconomics has to 
-all of the complexity to everything
-that actually is going on in 
-the economy itself.
-And so, in fact, many 
-scientific subjects are
-fundamentally doing 
+And, of course, we do this all the time.
+So, if you're a cognitive scientist, if you say somebody's interested in the psychology of human decision-making, you know, in fact, that the account you built has pretty much the same relationship to the firing of neurons in somebody's brain
+that macroeconomics has to all of the complexity to everything that actually is going on in the economy itself.
+And so, in fact, many scientific subjects are fundamentally doing 
 this kind of science.
-They're constantly projecting or,
-this is the word that we'll 
-come up over and over in this
-set of modules, or 
-their "coarse-graining".
-This underlying complicated reality to 
-produce a set of good descriptions,
-And not just to produce a set of 
-good descriptions, but, in fact,
-to produce a theory that relates those 
-description as they evolve over time.
-The relationship 
-between this level
-and this level is the 
-story of Renormalization,
-and what we'll do here is give
-you a series of examples
-that will slowly build up in 
+They're constantly projecting or, this is the word that we'll come up over and over in this set of modules, ''coarse-graining''.
+This underlying complicated reality to produce a set of good descriptions, and not just to produce a set of good descriptions, but, in fact, to produce a theory that relates those description as they evolve over time.
+The relationship between this level and this level is the story of Renormalization,
+and what we'll do here is give you a series of examples that will slowly build up in 
 complexity for how that works.
 
-\subsection{coarse-graining Alice and Dinah}
+\subsection{Coarse-graining Alice and Dinah}
 
 The example of the micro-
 to macroeconomic transition
@@ -209,7 +195,7 @@ is merge states of the world.
 We use a lot of different terms
 over the course
 of this series of lectures.
-One term is "equivalence classes".
+One term is ''equivalence classes''.
 So you can think these two descriptions
 are in the same 
 equivalence class,
@@ -238,8 +224,8 @@ about the world than the microeconomist.
 Let's try to get a more intuitive sense of coarse-graining,
 and we'll give you a sense of how coarse-graining plays out
 in something that we understand very well, which is the representation
-of images for the human mind. Figure \ref{fig:alice1} is a woodcut from John Tenniel of one of the episodes in "Alice in Wonderland".
-Actually, it's from the second of the two books, "Alice Through the Looking Glass".
+of images for the human mind. Figure \ref{fig:alice1} is a woodcut from John Tenniel of one of the episodes in ''Alice in Wonderland''.
+Actually, it's from the second of the two books, ''Alice Through the Looking Glass''.
 
 \begin{figure}[H]
 	\caption{Alice and Dinah}\label{fig:alice1}
@@ -257,7 +243,7 @@ say just a little on Dinah's ear here –
 we'll see a little patch of that image.
 
 \begin{figure}[H]
-	\caption{coarse-graining Alice}\label{fig:alice:coarse}
+	\caption{Coarse-graining Alice}\label{fig:alice:coarse}
 	\includegraphics[width=0.9\textwidth]{Alice2}
 \end{figure}
 And what we're going to say
@@ -309,7 +295,7 @@ In this case, Figure \ref{fig:alice:result:decimation}, instead of taking the ma
 at least in the literature, and this is a term that was invented
 by the physicist Leo Kadanoff\cite{kadanoff2000statistical}
 when he came to do this kind of coarse-graining, not on pictures
-from "Alice in Wonderland", but on images of atoms
+from ''Alice in Wonderland'', but on images of atoms
 being spin up or spin down, and we'll talk about that
 in a later module when we come to the Ising model.
 \begin{figure}[H]
@@ -377,7 +363,7 @@ If you compare how ugly
 the 10x10 grid compression is,
 to the 3x3 grid compression,
 you might think,
-"Hey, that's pretty good."
+''Hey, that's pretty good.''
 And, in fact, by doing that,
 by going from a grid that's 1x1,
 by keeping track of every pixel,
@@ -477,11 +463,11 @@ on the back of the armchair
 where Alice is sitting,
 very fine grid lines.
 What the JPEG does, is it says,
-"There's a patch here where things
+''There's a patch here where things
 are oscillating very quickly,
 so I'm going to put that over
 in this high-frequency part
-of the image data."
+of the image data.''
 It's also true of Alice's hair.
 If you look at Alice's hair there,
 she has these sort of kinky curls,
@@ -542,7 +528,7 @@ is going to throw out anyway
 as it transmits it backwards,
 the JPEG has already thrown out
 on your behalf.
-\subsection{coarse-graining part I - Clustering algorithms}
+\subsection{Coarse-graining part I - Clustering algorithms}
 
 So, in the previous section,
 you had an example of coarse-graining
@@ -812,7 +798,7 @@ People tend to prefer hard clustering,
 because you don't have to think as hard
 when you work with it.
 
-\subsection{coarse-graining part II - Entropy}
+\subsection{Coarse-graining part II - Entropy}
 
 The last thing I promised you
 was to tell you how coarse-graining
@@ -943,7 +929,7 @@ a very detailed description of what people are doing
 that you then coarse-grain to a macroeconomic account.
 That coarse-graining generally erases distinctions:
 instead of distinguishing case B from case C,
-you say, "Ah, you know what? They're pretty much the same."
+you say, ''Ah, you know what? They're pretty much the same.''
 We had an example of that coarse-graining property
 in the case of coarse-graining the image of Alice in Wonderland.
 And there, I actually gave you three examples,
@@ -970,14 +956,14 @@ with that compressed description is make predictions, produce explanations,
 try to describe, but not just describe: try to explain what happened before
 and what's going to happen next. And in order to do that,
 you need a theory. And what renormalization does,
-is it says, "Great, congratulations, you've constructed a coarse-graining,
+is it says, ''Great, congratulations, you've constructed a coarse-graining,
 now, how is the theory connecting those different coarse-grained states,
 how is that theory related to the one at the fundamental level?
 
 How can you go, in other words, or rather what happens when you take
 a full economic and psychological theory of the world
 and coarse-grain it to macroeconomics? What happens when the macroeconomist
-then tries to build a theory that relate his coarse-grain quantities?"
+then tries to build a theory that relate his coarse-grain quantities?''
 And so, in the next module, we will give you your first simple example
 of how theories about the world change when the objects
 that they describe simplify.
@@ -2076,7 +2062,7 @@ part of this problem
 by setting that term there equal to $\epsilon$.
 So, what happens we have a squared
 plus 1 minus a squared
-because I've told you that "a" is equal to "b",
+because I've told you that ''a'' is equal to ''b'',
 you can prove it yourself if you're going
 to be distressed by what is about to happen.
 So I have $a^2 + (1-a)^2$ so that's
@@ -2398,7 +2384,7 @@ And in that case we are able to compare one matrix to another.
 One of the lovely things that we saw at the end of that
 series was that, as I coarse-grained further and further, all those matrices tended to flow towards the lower-dimensional space in matrix land.
 The system tended to simplify to a small number of places within the space.
-And in this section we'll talk about a new kind of model, the cellular automaton, which has a slightly different set of properties. 
+And in this section we'll talk about a new kind of model, the \glsdesc{gls:CA}\gls{gls:CA}, which has a slightly different set of properties. 
 
 In many many ways it's simpler--in many ways it's \emph{identical} to the Markov chain case. In the cellular automaton, the state of the system at any time depends solely upon the state of the system at the just previous time step.
 So in that sense it is forgetful.
@@ -2688,11 +2674,10 @@ And what they introduced was a projection operator $P$, which takes the state of
 \begin{align*}
 	P(\hat{x}) \in& \{0,1\}
 \end{align*}
-So explicitly there are four possible states the supercell can be in,
-and what the projection operator does is it maps some of them to 1 and it maps the rest of them to 0.
+So explicitly there are four possible states the supercell can be in, and what the projection operator does is it maps some of them to 1 and it maps the rest of them to 0.
 You can think of this projection operator here as something very similar to what we did in the introduction to this module altogether where I showed you how you could coarse-grain an image--in that case the image of Alice and Dinah, her kitten.
 In this case here for example, we could imagine doing a spatial decimation where we take only the value of the first entry in the supercell.
-That kind of spatial decimation would lead to a projection operator where two terms were mapped to 0 andthe other two to 1.
+That kind of spatial decimation would lead to a projection operator where two terms were mapped to 0 and the other two to 1.
 
 So, now that we've introduced the projection operator, let's see where we are.
 We began with the original evolution law of the fine-grained cellular automata $f(x, y, z)$.
@@ -2714,7 +2699,7 @@ So, we can think about these two different operations on a diagram that you can 
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Commutation digram for cellular automata.}
+		\caption{Commutation diagram for \glsdesc{gls:CA}}
 		\includegraphics[width=0.8\textwidth]{commutation-2}
 	\end{center}
 \end{figure}
@@ -3016,17 +3001,17 @@ We'll return to how renormalization can induce long-range couplings and interact
 
 \section{Ising Model}
 
-\subsection{Fixing a projection: From CA’s to Ising}
-Effects of coarse-graining in time:
+\subsection{Fixing a projection: From \glsdescplural{gls:CA} to Ising}
+We now have two examples of how renormalization works, of the effects of coarse-graining in time:
 \begin{itemize}
 	\item Markov Chain--everything flows to lower dimensional subspace; first example of fixed point.
-	\item Cellular Automata--in order to stay within same model class, forced to coarse-grain in space also. Can coarse-grain universal rule 110, but projection is practically trivial. Non locality arises. 
+	\item \gls{gls:CA} --in order to stay within same model class, forced to coarse-grain in space also. Can coarse-grain universal rule 110, but projection is practically trivial, as the projection exploits Garden of Eden states. What if we specified the projection ahead of time? E.g use majority voting. Sometimes we get two different trajectories in the coarse grained states.Then we get non locality. 
 \end{itemize}
 
-When we coarse-grain Ising model we also lose locality!
+When we coarse-grain a new model, the Ising model, we also lose locality! Arbitrarily long interactions arise. 
 \subsection{Introduction to the Ising Model}
 
-Describe atoms on a lattice, e.g. 2D. Each atom has spin $\sigma=\pm 1$. Things which are near each other "want" to be like each other. The probability of a configuration is given by:
+Describe atoms on a lattice, e.g. 2D. Each atom has spin $\sigma=\pm 1$. Things which are near each other ''want'' to be like each other. The probability of a configuration is given by:
 
 \begin{align*}
 P(\{\sigma_i\}) =& \frac{e^{\beta \sum_{i,j} J_{i,j} \sigma_i \sigma_j}}{Z(\beta)}\text{, where} \numberthis \label{eq:coarse_ising:P} \\
@@ -3037,7 +3022,7 @@ Z(\beta) =& \text{ the partition function (normalization constant).}
 \end{align*}
 
 \begin{itemize}
-	\item "lattice" could be a network;
+	\item ''lattice'' could be a network;
 	\item used also to model alignment of opinions.
 \end{itemize}
 
@@ -3050,7 +3035,7 @@ Start with a very simple coarse-graining, where we ignore one node, A say, only,
 
 \begin{enumerate}
 	\item pull out the term in the sum with $\sigma_A$
-	\item average out ("trace out") $\sigma_A$
+	\item average out (''trace out'') $\sigma_A$
 \end{enumerate}
 Then (\ref{eq:coarse_ising:P}) becomes:
 \begin{align*}
@@ -3155,7 +3140,7 @@ Simon DeDeo demonstrated two simulations \cite{nottelmann2000ising,ashton2012ren
 		
 		\item B. fluctuations away from a uniform +1 or uniform -1 state get smaller and smaller, and the system is dominated by one state or the other.
 		
-		\item C. little islands shrink, but there are larger islands of correlation that scale down to take their place. There are fluctuations on all scale, in a uniform "fractal" pattern.
+		\item C. little islands shrink, but there are larger islands of correlation that scale down to take their place. There are fluctuations on all scale, in a uniform ''fractal'' pattern.
 		
 		\item D. none of the above.
 	\end{itemize}
@@ -3279,7 +3264,9 @@ Utility function.
 
 Rate Distortion Theory --how to balance the need for efficient representation and good representation. Let ${x}$ represent state of World, ${\tilde{x}}$ the state of the brain. The mutual information $I(x,\tilde{x})$ is a measure of how good a job the eye is doing. coarse-graining is $P(\tilde{x}\vert x)$ (soft clustering).
 
-Rate Distortion Theory is about choosing the "best" $P(\tilde{x}\vert x)$. We need a distorting=n measure $d(\tilde{x}\vert x)$, the personalty for thinking the world is in state $\vert x$ when it is actually in state $x$ (not symmetric).
+Rate Distortion Theory is about choosing the ''best'' $P(\tilde{x}\vert x)$. We need a distorting=n measure $d(\tilde{x}\vert x)$, the personalty for thinking the world is in state $\vert x$ when it is actually in state $x$ (not symmetric).
+
+\printglossaries
 
 % bibliography go here
 
