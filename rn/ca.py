@@ -21,6 +21,7 @@
 '''
 
 from argparse import ArgumentParser
+from time import time
 
 class Rule:
     '''
@@ -178,23 +179,29 @@ def create_worklist(args):
             raise ValueError('If there is a list of rules, there must not be a first rule or a last')
         product = args.list
     else:
-        if args.first == None or args.last != None:
+        if args.first == None or args.last == None:
             raise ValueError('If there is no list of rules, there must be a first rule and a last')
         product = range(args.first,args.last+1)
     return product
 
 if __name__=='__main__':
+    start  = time()
     args = parse_args()
     worklist = create_worklist(args)
     matcher = Matcher()
+    with open('matches.txt','w') as matches_file,open('mismatches.txt','w') as mis_matches_file:
+        for i in worklist:
+            matches = matcher.find_matches(i)
+            if len(matches) ==0:
+                mis_matches_file.write(f'{i}\n')
+            else:
+                matches_file.write (f'{i} matches {len(matches)} other {sp(len(matches),'rules','rule')}\n')
+                for M in matches:
+                    matches_file.write( f'\tRule {M[0]} with the following projections\n')
+                    for P in M[1]:
+                        matches_file.write(f'\t\t{P}\n')
 
-    for i in worklist:
-        matches = matcher.find_matches(i)
-        if len(matches) ==0:
-            print (f'Rule {i} failed to match any other rule')
-        else:
-            print (f'{i} matches {len(matches)} other {sp(len(matches),'rules','rule')}')
-            for M in matches:
-                print ( f'\tRule {M[0]} with the following projections')
-                for P in M[1]:
-                    print (f'\t\t{P}')
+    elapsed = time() - start
+    minutes = int(elapsed/60)
+    seconds = elapsed - 60*minutes
+    print (f'Elapsed Time {minutes} m {seconds:.2f} s')
