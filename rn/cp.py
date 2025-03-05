@@ -24,31 +24,29 @@ from matplotlib.pyplot import figure, show
 import numpy as np
 
 def S(beta):
-    ''' '''
-    return (3/8)*np.log(np.cosh(4*beta))
+    '''
+    This is the function from section 4.2 Introduction to the Ising Model
+    '''
+    return (3/8) * np.log(np.cosh(4*beta))
 
 def plot_results(beta,S_beta):
     '''
-    Plot the solution of beta = S(bata)
+    Plot the solution of beta = S(beta)
     '''
     betas = np.linspace(0,1,100)
     fig = figure(figsize=(8,8))
     ax = fig.add_subplot(1,1,1)
-    ax.plot(betas,S(betas),'b',
-         label = r'$\frac{3}{8} \log(\cosh(4\beta))$')
-    ax.plot(betas,betas,'r',
-         label = r'$\beta$')
-    ax.plot(betas,3*np.tanh(4*betas)/2 ,'k',
-         ls    = '-.',
-         label = r'Derivative: $\frac{3}{2} \tanh(4\beta)$')
+    ax.plot(betas,S(betas),'b',label = r'$\frac{3}{8} \log(\cosh(4\beta))$')
+    ax.plot(betas,betas,'r',label = r'$\beta$')
+    ax.plot(betas,3*np.tanh(4*betas)/2 ,'k',ls = '-.',label = r'Derivative: $\frac{3}{2} \tanh(4\beta)$')
     ax.scatter(beta,S_beta)
-    ax.text(beta+0.01,S_beta+0.01,f'Critical point {beta:.6f}')
+    ax.text(beta+0.02,S_beta-0.02,f'Critical point {beta:.6f}')
     ax.set_xlabel(r'$\beta$')
     ax.legend(loc = 'lower right')
     ax.set_title(__doc__)
     fig.savefig('figs/beta.jpg')
 
-def solve(atol = 1e-6):
+def solve(atol = 1e-12):
     '''
     Solve the equation S(beta)==beta by binary search
     Parameters:
@@ -58,10 +56,11 @@ def solve(atol = 1e-6):
     S0 = S(beta0)
     beta1 = 1
     S1 = S(beta1)
-    while beta1-beta0>atol:
-        beta   = 0.5* (beta0+beta1)
+
+    while beta1 - beta0 > atol:
+        beta = 0.5 * (beta0 + beta1)
         S_beta = S(beta)
-        if S_beta<beta:
+        if S_beta < beta:
             beta0 = beta
             S0 = S_beta
         else:
