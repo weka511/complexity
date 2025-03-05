@@ -17,7 +17,6 @@
 
 '''
     Q1 Demonstrate the renormalization of Rule 105 to Rule 150.
-    What other projections work?
 '''
 
 from argparse import ArgumentParser
@@ -66,8 +65,8 @@ class State:
 
         Parameters:
             n
-        Returns:
-            A list of bits
+            bits A list of bits
+            N    Number of bits in state
         '''
         if n != None and bits == None:
             m = n
@@ -80,9 +79,9 @@ class State:
         elif n == None and bits != None:
             self.bits = bits.copy()
             self.n = 0
-            for i in self.bits:
+            for bit in self.bits:
                 self.n *= 2
-                self.n += i
+                self.n += bit
         else:
             raise ValueError('Need either n or bits, but not both')
 
@@ -114,6 +113,10 @@ class Projection:
         return [self.table[2*key[i]+key[i+1]] for i in range(0,len(key),2)]
 
 class Matcher:
+    '''
+    A class that, given a rule f, tries to tries to find a rule g
+    and projection P such that Pf = gP
+    '''
     def __init__(self):
         def to_binary(n,N=4):
             result = []
