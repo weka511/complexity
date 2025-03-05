@@ -34,6 +34,7 @@
 \usepackage{cancel}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
+\usepackage{tikz}
 \graphicspath{{figs/}}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \newcommand*\xor{\oplus}
@@ -3011,20 +3012,34 @@ We now have two examples of how renormalization works, of the effects of coarse-
 When we coarse-grain a new model, the Ising model, we also lose locality! Arbitrarily long interactions arise. 
 \subsection{Introduction to the Ising Model}
 
-Describe atoms on a lattice, e.g. 2D. Each atom has spin $\sigma=\pm 1$. Things which are near each other ''want'' to be like each other. The probability of a configuration is given by:
+The Ising model is one of the classic toy models in the physical sciences for understanding collective behaviour. The Ising model was invented to describe the behaviour of atoms  on a lattice. We will do a 2 dimensional lattice. 
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Ising Model: atoms arranged on a 2 dimensional lattice]{Ising Model: atoms arranged on a 2 dimensional lattice. The spin is shown for one atom only. In reality the ''lattice'' could be a network}
+		\begin{tikzpicture}
+			\draw(-0.5,-0.5) grid (5.5,5.5);
+			\draw[line width=5pt, line cap=round, dash pattern=on 0pt off 1cm](0,0) grid (5,5);
+			\draw (0,5) node[anchor=south west] {$\sigma_1$};
+		\end{tikzpicture}
+	\end{center}
+\end{figure}
+
+Each atom has spin $\sigma=\pm 1$; this is a simplification of the actual state of an atom. In the Ising model, if two atoms are connected by an edge--graph theoretically they are near each other-- they will ''want'' to be in the same state. There is no causality propagating through the system; there is a general propensity for neighbours to find themselves in the same state. The Ising model is just a mathematical specification for things that are near each other wanting to be like each other.
+
+We talk about a probability distribution over all states, $P(\{\sigma_i\})$ The probability of a configuration is given by:
 
 \begin{align*}
-P(\{\sigma_i\}) =& \frac{e^{\beta \sum_{i,j} J_{i,j} \sigma_i \sigma_j}}{Z(\beta)}\text{, where} \numberthis \label{eq:coarse_ising:P} \\
-J_{i,j} =& 1,\text{if $i$ and $j$ are neighbours (connection or adjacency matrix)}\\
-=& 0 \text{ otherwise.}\\
-\beta =& \frac{1}{T}\\
-Z(\beta) =& \text{ the partition function (normalization constant).}
+	P(\{\sigma_i\}) =& \frac{e^{\beta \sum_{i,j} J_{i,j} \sigma_i \sigma_j}}{Z(\beta)}\text{, where} \numberthis \label{eq:coarse_ising:P} \\
+	J_{i,j} =& 1,\text{if $i$ and $j$ are neighbours (connection or adjacency matrix)}\\
+	=& 0 \text{ otherwise.}\\
+	\beta =& \frac{1}{T} \text{, where $T$ represents the ''temperature''}\\
+	Z(\beta) =& \text{ the partition function (normalization constant).}
 \end{align*}
+ 
+If two neighbours are both positive or both negative, $J_{i,j} \sigma_i \sigma_j$ will make a positive contribution to the probability: we add the adjacent pairs that are in the same state, and subtract those that are in different states. As $\beta$ increases, the benefit of all being in the same state gets larger.
 
-\begin{itemize}
-	\item ''lattice'' could be a network;
-	\item used also to model alignment of opinions.
-\end{itemize}
+The Ising model can also be used to model alignment of opinions, in which case the adjacency corresponds to communication.
 
 Start with a very simple coarse-graining, where we ignore one node, A say, only, as shown in Figure \ref{fig:ising-coarse1}.
 
