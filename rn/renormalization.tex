@@ -3041,41 +3041,49 @@ If two neighbours are both positive or both negative, $J_{i,j} \sigma_i \sigma_j
 
 The Ising model can also be used to model alignment of opinions, in which case the adjacency corresponds to communication.
 
-Start with a very simple coarse-graining, where we ignore one node, A say, only, as shown in Figure \ref{fig:ising-coarse1}.
+How are we going to coarse-grain the Ising model? We will start with a very simple coarse-graining, where we take one node, A say, as shown in Figure \ref{fig:ising-coarse1}, and construct the joint probability distribution for all the other nodes. We will take the probability distribution for all other nodes, then sum over the possible values for $\sigma_A$.
 
 \begin{figure}[H]
-	\caption{Simple coarse-graining, ignoring $\sigma_A$}\label{fig:ising-coarse1}
+	\caption{Simple coarse-graining, based on $\sigma_A$}\label{fig:ising-coarse1}
 	\includegraphics[width=0.9\textwidth]{ising-coarse1}
 \end{figure}
 
+When we do this, most things are not going to change: terms that don't involve $\sigma_A$ won't be affected. We therefore focus on the terms with $\sigma_A$. We will:
 \begin{enumerate}
-	\item pull out the term in the sum with $\sigma_A$
-	\item average out (''trace out'') $\sigma_A$
+	\item pull out the term in the sum with $\sigma_A$;
+	\item average out (''trace out'') $\sigma_A$.
 \end{enumerate}
 Then (\ref{eq:coarse_ising:P}) becomes:
 \begin{align*}
-P(\{\sigma_i\}) =& \frac{\big[\sigma_1\sigma_A + \sigma_2\sigma_A + \sigma_2\sigma_A + \sigma_4\sigma_A\big]B}{Z(\beta)} \text{ for fixed $\sigma_A$, where}\\
-B =& e^{\sum e^{\beta \sum_{i,j \ne A} J_{i,j} \sigma_i \sigma_j}}\\
-\sum_{\sigma_A=\pm 1} P(\{\sigma_i\}) =& \big[e^{\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)} + e^{-\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)}\big]  \frac{B}{Z(\beta)}\\
-=& 2 \cosh({\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)})   \frac{B}{Z(\beta)}\\
-=& e^{\log{\cosh({\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)})}} \frac{B}{Z^\prime(\beta)} \text{, absorbing $2$ in $Z^{\prime}$.} \numberthis \label{eq:coarse_ising:P2}
+	P(\{\sigma_i\}) =& \frac{\big[e^{\beta(\sigma_1\sigma_A + \sigma_2\sigma_A + \sigma_2\sigma_A + \sigma_4\sigma_A)}\big]B}{Z(\beta)} \text{ for fixed $\sigma_A$, where}\\
+	B =& e^{\sum e^{\beta \sum_{i,j \ne A} J_{i,j} \sigma_i \sigma_j}}\\
+	\sum_{\sigma_A=\pm 1} P(\{\sigma_i\}) =& \big[e^{\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)} + e^{-\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)}\big]  \frac{B}{Z(\beta)}\\
+	=& 2 \cosh({\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)})   \frac{B}{Z(\beta)}\\
+	=& e^{\log{\cosh({\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)})}} \frac{B}{Z^\prime(\beta)} \text{, absorbing $2$ in $Z^{\prime}$.} \numberthis \label{eq:coarse_ising:P2}
 \end{align*}
 
-Comparing (\ref{eq:coarse_ising:P}) and (\ref{eq:coarse_ising:P2}), we see that coarse-graining has complicated equation. However, Figure \ref{fig:ising-cosh} suggests a way forward.
+Comparing (\ref{eq:coarse_ising:P}) and (\ref{eq:coarse_ising:P2}), we see that coarse-graining has complicated the equation. However, Table \ref{table:ising-cosh} suggests a way forward.
 
-\begin{figure}[H]
-	\caption{Simple coarse-graining: analyzing the $\cosh$ term.}\label{fig:ising-cosh}
-	\includegraphics[width=0.9\textwidth]{ising-cosh}
-\end{figure}
+\begin{table}[H]
+	\begin{center}
+		\caption[Analyzing the $\ln \cosh$ term]{Analyzing the $\ln \cosh$ term in $ e^{\log{\cosh({\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)})}} \frac{B}{Z^\prime(\beta)}$}\label{table:ising-cosh}
+		\begin{tabular}{|c|c|}\hline
+			Neighbour configurations&Value of $\ln \cosh$ terms\\\hline
+			All positive or all negative&$\ln \cosh 4\beta$\\\hline
+			One positive, three negative (or vice versa)&$\ln \cosh 2\beta$\\\hline
+			Two positive, two negative&$\ln \cosh 0 = \ln 1 = 0$\\\hline
+		\end{tabular}
+	\end{center}
+\end{table}
 
 We find that (subject to a constant factor, which can be absorbed in partition function):
 \begin{align*}
-\sum_{\sigma_A=\pm 1} P(\{\sigma_i\}) =&e^{S_2 (\sigma_1\sigma_2 + \sigma_1\sigma_2+ \sigma_2\sigma_3 + \sigma_2 \sigma_4 + \sigma_3 \sigma_4 +\sigma_4 \sigma_1) + S4 \sigma_1 \sigma_2 \sigma_3 \sigma_4} \text{,where} \numberthis \label{eq:coupled:sigmas}\\
-S_2 =& \frac{1}{8} \ln{\cosh{4\beta}} \tag*{pairwise interactions}\\
-S_4 =& S_2 - \frac{1}{2} \ln{\cosh{2\beta}} \tag*{quartet interaction.}
+	\sum_{\sigma_A=\pm 1} P(\{\sigma_i\}) =&e^{S_2 (\sigma_1\sigma_2 + \sigma_1\sigma_2+ \sigma_2\sigma_3 + \sigma_2 \sigma_4 + \sigma_3 \sigma_4 +\sigma_4 \sigma_1) + S_4 \sigma_1 \sigma_2 \sigma_3 \sigma_4} \text{,where} \numberthis \label{eq:coupled:sigmas}\\
+	S_2 =& \frac{1}{8} \ln{\cosh{4\beta}} \tag*{pairwise interactions}\\
+	S_4 =& S_2 - \frac{1}{2} \ln{\cosh{2\beta}} \tag*{quartet interaction.}
 \end{align*}
 
-Notice that (\ref{eq:coupled:sigmas}) couples $\sigma_1, \sigma_2, \sigma_3, \& \sigma_4$! This includes longer range couplings, such as $\sigma_2, \sigma_3$, plus the quartet!
+Notice that (\ref{eq:coupled:sigmas}) couples $\sigma_1, \sigma_2, \sigma_3, \emph{and} \sigma_4$! This includes longer range couplings, such as $\sigma_2, \sigma_3$, plus the quartet! [There is also a consnat factor that can be absorbed.]
 
 \subsection{Coarse-graining the Lattice}
 
