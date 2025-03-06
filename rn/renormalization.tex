@@ -3083,7 +3083,15 @@ We find that (subject to a constant factor, which can be absorbed in partition f
 	S_4 =& S_2 - \frac{1}{2} \ln{\cosh{2\beta}} \tag*{quartet interaction.}
 \end{align*}
 
-Notice that (\ref{eq:coupled:sigmas}) couples $\sigma_1, \sigma_2, \sigma_3, \emph{and} \sigma_4$! This includes longer range couplings, such as $\sigma_2, \sigma_3$, plus the quartet! [There is also a consnat factor that can be absorbed.]
+Notice that (\ref{eq:coupled:sigmas}) couples $\sigma_1, \sigma_2, \sigma_3, \emph{and} \sigma_4$! This includes longer range couplings, such as $\sigma_2, \sigma_3$, plus the quartet! [There is also a constant factor that can be absorbed.] We have taken things that weren't coupled, and coupled them. Previously $\sigma_1$ and $\sigma_2$ didn't care about each other, but now we have removed the mediating variable $\sigma_A$, so now they do care in the renormalized case.
+
+The lattice has also become a hypergraph.
+
+Renormalizing has two effects: it changes the structure of the adjacency matrix, and it also introduces new types of interaction.
+\begin{align*}
+	P^\prime(\{\sigma_i\}) =& \frac{e^{\beta\big(J^\prime_{ij}\sigma_i\sigma_j+K_{ijkl}\sigma_i\sigma_j\sigma_k\sigma_l\big)}}{Z^\prime(\beta)}
+\end{align*}
+We have gone outside the model!
 
 \subsection{Coarse-graining the Lattice}
 
