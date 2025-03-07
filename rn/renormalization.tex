@@ -2895,66 +2895,17 @@ it masks both of those cases to the same state.
 Israeli and Goldenfeld looked at all 256 rules, and  tried to figure out how or the extent to which one rule could coarse-grain into another.
 So these arrows in Figure \ref{fig:ig-relationships} show you how it's possible
 to find whether or not it's possible to find a projection operator and an evolution operator that allows one rule set to map to another upon that coarse-graining.
-They consider not only supercells of size 2 but also size 3 and size 4 and
-and computation of this starts getting really hard
-because there's so many different kinds
-of projection operators you can use
-and there's so many different possible
-evolutions that you can pick
-that you start to run out of time
-it gets exponentially hard to find a good projection operator,
-that gets exponentially hard to
-search the space.
-There's only a partial map, but what
-you can see here is for example
-in the bottom the result that we just
-talked through a little bit laboriously
-which is the fact that it's possible
-to find a projection operator
-that takes you from state 105 or
-from evolution rule 105 to evolution rule 150.
+They consider not only supercells of size 2 but also size 3 and size 4 and and computation of this starts getting really hard because there's so many different kinds of projection operators you can use and there's so many different possible evolutions that you can pick that you start to run out of time it gets exponentially hard to find a good projection operator, that gets exponentially hard to search the space. There's only a partial map, but what you can see here is for example
+in the bottom the result that we just talked through a little bit laboriously which is the fact that it's possible to find a projection operator that takes you from state 105 or from evolution rule 105 to evolution rule 150.
 
-By the way one of the things you
-can notice from this graph
-is that it's clear that
-Israeli and Goldenfeld
-haven't actually found every possible
-coarse-graining relationship.
-And that's because there should be a
-feature of this network
-that doesn't actually happen.
-And that's that if A coarse-grains into B
-If A renormalizes into B,
-if it's possible to find a projection
-and evolution operator to take A and B
-and B renormalizes into C
-it's possible to find a projection that takes B into C
-then it should also be possible
-to renormalize A into C
-of course now you're going
-to be coarse-graining twice
-and it's harder of course for
-Israeli and Goldenfeld to find those
-but if you look at this chart
-what you should see
-is for example the fact that not only
-does rule 23 coarse-grain to rule 128
-and not only does rule 128
-coarse-grain to rule 0
-but it also should be the case
-that it's possible for rule 23
-to coarse-grain all the way down to rule 0
-just by doing two projections
-and zooming out even further.
-That said Israeli and Goldenfeld did a pretty good job
-looking at an enormous number of possible
-relationships between all of these possible rulesets
-And I find these diagrams quite compelling.
-It tells you something really complicated,
-really interesting about how
-deterministic rules
-and deterministic projections
-map into each other other.
+By the way one of the things you can notice from this graph is that it's clear that
+Israeli and Goldenfeld haven't actually found every possible coarse-graining relationship.
+And that's because there should be a feature of this network that doesn't actually happen.
+And that's that if A coarse-grains into B If A renormalizes into B, if it's possible to find a projection and evolution operator to take A and B and B renormalizes into C
+it's possible to find a projection that takes B into C then it should also be possible to renormalize A into C of course now you're going to be coarse-graining twice and it's harder of course for Israeli and Goldenfeld to find those
+but if you look at this chart what you should see is for example the fact that not only does rule 23 coarse-grain to rule 128 and not only does rule 128 coarse-grain to rule 0 but it also should be the case that it's possible for rule 23
+to coarse-grain all the way down to rule 0 just by doing two projections and zooming out even further.
+That said Israeli and Goldenfeld did a pretty good job looking at an enormous number of possible relationships between all of these possible rulesets. I find these diagrams quite compelling. They tell you something really complicated, really interesting about how deterministic rules and deterministic projections map into each other other.
 
 One of the things that you'll see from that network is that not only does rule 105
 coarse-grains to rule 150 but in fact rule 150 coarse-grains into itself:
@@ -2977,7 +2928,7 @@ Rule 150 is a fixed point of renormalization group with potentially a much more 
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{coarse-graining Rule 110}\label{fig:cellular-automaton-rule-6a}
+		\caption{Coarse-graining Rule 110}\label{fig:cellular-automaton-rule-6a}
 		\includegraphics[width=0.6\textwidth]{cellular-automaton-rule-6}
 	\end{center}
 \end{figure}
@@ -3141,22 +3092,85 @@ We have gone outside the model!
 
 \subsection{Coarse-graining the Lattice}
 
-This is just a summary of previous section.
+\begin{figure}[H]
+	\begin{center}
+		\caption[Coarse-graining the Lattice]{Coarse-graining the Lattice. The decimation will throw out the $\sigma_A$ and retain the $\sigma_i$.}\label{fig:ising-decimation}
+		\begin{subfigure}[t]{0.45\textwidth}
+			\begin{center}
+				\caption{The $S2$ couplings, \eqref{eq:coupled:sigmas} are shown in blue. Note that each blue segment actually contributes $2S2$, as there are contributions from two $S_A$s.}\label{fig:ising-decimation:S2}
+			\begin{tikzpicture}[scale=0.9,transform shape]
+				\draw(-0.5,-0.5) grid (3.5,3.5);
+				\draw[line width=5pt, line cap=round, dash pattern=on 0pt off 1cm](0,0) grid (3,3);
+				\draw[blue] (3.5,2.5) -- (0.5,-0.5);
+				\draw[blue] (2.5,3.5) -- (-0.5,0.5);
+				\draw[blue] (-0.5,3.5) -- (3.5,-0.5);
+				\draw[blue] (1.5,3.5) -- (3.5,1.5);
+				\draw[blue] (1.5,-0.5) -- (-0.5,1.5);
+				\draw (1,2) node[anchor=south west] {$\sigma_i$};
+				\draw (2,2) node[anchor=south west] {$\cancel{\sigma_A}$};
+				\draw (3,2) node[anchor=south west] {$\sigma_i$};
+				\draw (0,2) node[anchor=south west] {$\cancel{\sigma_A}$};
+				\draw (1,3) node[anchor=south west] {$\cancel{\sigma_A}$};
+				\draw (2,3) node[anchor=south west] {$\sigma_i$};
+				\draw (3,3) node[anchor=south west] {$\cancel{\sigma_A}$};
+				\draw (0,3) node[anchor=south west] {$\sigma_i$};
+				\draw (1,1) node[anchor=south west] {$\cancel{\sigma_A}$};
+				\draw (2,1) node[anchor=south west] {$\sigma_i$};
+				\draw (3,1) node[anchor=south west] {$\cancel{\sigma_A}$};
+				\draw (0,1) node[anchor=south west] {$\sigma_i$};
+				\draw (1,0) node[anchor=south west] {$\sigma_i$};
+				\draw (2,0) node[anchor=south west] {$\cancel{\sigma_A}$};
+				\draw (3,0) node[anchor=south west] {$\sigma_i$};
+				\draw (0,0) node[anchor=south west] {$\cancel{\sigma_A}$};
+			\end{tikzpicture}
+			\end{center}
+		\end{subfigure}
+			\hfill
+			\begin{subfigure}[t]{0.49\textwidth}
+				\begin{center}
+					\caption{The $S4$ couplings, \eqref{eq:coupled:sigmas} are shown in green.}\label{fig:ising-decimation:S4}
+				\begin{tikzpicture}[scale=0.9,transform shape]
+					\draw(-0.5,-0.5) grid (3.5,3.5);
+					\draw[line width=5pt, line cap=round, dash pattern=on 0pt off 1cm](0,0) grid (3,3);
+					\draw[green,thick] (1,1) circle (1);
+					\draw (1,2) node[anchor=south west] {$\sigma_i$};
+					\draw (2,2) node[anchor=south west] {$\cancel{\sigma_A}$};
+					\draw (3,2) node[anchor=south west] {$\sigma_i$};
+					\draw (0,2) node[anchor=south west] {$\cancel{\sigma_A}$};
+					\draw (1,3) node[anchor=south west] {$\cancel{\sigma_A}$};
+					\draw (2,3) node[anchor=south west] {$\sigma_i$};
+					\draw (3,3) node[anchor=south west] {$\cancel{\sigma_A}$};
+					\draw (0,3) node[anchor=south west] {$\sigma_i$};
+					\draw (1,1) node[anchor=south west] {$\cancel{\sigma_A}$};
+					\draw (2,1) node[anchor=south west] {$\sigma_i$};
+					\draw (3,1) node[anchor=south west] {$\cancel{\sigma_A}$};
+					\draw (0,1) node[anchor=south west] {$\sigma_i$};
+					\draw (1,0) node[anchor=south west] {$\sigma_i$};
+					\draw (2,0) node[anchor=south west] {$\cancel{\sigma_A}$};
+					\draw (3,0) node[anchor=south west] {$\sigma_i$};
+					\draw (0,0) node[anchor=south west] {$\cancel{\sigma_A}$};
+				\end{tikzpicture}
+				\end{center}
+			\end{subfigure}
 
-\subsection{Inducing Quartets \& Commutation Failure}
+	\end{center}
+\end{figure}
 
-Figure \ref{fig:ising-decimation}\cite{aoki2014domain} shows a decimation of the entire lattice. It exhibits 3 types of coupling:
+\subsubsection{Inducing Quartets \& Commutation Failure}
+
+Figure \ref{fig:ising-decimation} shows a decimation of the entire lattice. It exhibits 3 types of coupling:
 
 \begin{enumerate}
-	\item the survivors form a new lattice, rotated $45^\circ$, with coupling $2S_2=\frac{1}{4} \log{\cosh{4 \beta}}$\label{item:coupling1}
+	\item the survivors form a new lattice rotated $45^\circ$, with coupling $2S_2=\frac{1}{4} \log{\cosh{4 \beta}}$\label{item:coupling1}--Figures \ref{fig:ising-decimation:S2} and \ref{fig:ising-decimation-aoki}.
 	\item long range couplings, over a deleted $S_A$,  $S_2=\frac{1}{8} \log{\cosh{4 \beta}}$\label{item:coupling2}
-	\item quartet couplings $S4=\frac{1}{2} \log{\cosh{2\beta}}$\label{item:coupling3}
+	\item quartet couplings $S4=\frac{1}{2} \log{\cosh{2\beta}}$\label{item:coupling3}--Figure \ref{fig:ising-decimation:S4}
 \end{enumerate}
 
 \begin{figure}[H]
-	\caption{Coarse-graining the Lattice}\label{fig:ising-decimation}
+	\caption{Coarse-graining the Lattice\cite{aoki2014domain}}\label{fig:ising-decimation-aoki}
 	\includegraphics[width=0.9\textwidth]{isinng-decimation}
 \end{figure}
+
 
 If we can ignore couplings \ref{item:coupling2} \& \ref{item:coupling3} We have transformed original lattice with coupling $\beta$ into one with coupling \ref{item:coupling1}: $\frac{1}{4} \log{\cosh{4\beta}}$.
 
