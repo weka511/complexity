@@ -3079,23 +3079,57 @@ Comparing (\ref{eq:coarse_ising:P}) and (\ref{eq:coarse_ising:P2}), we see that 
 \begin{table}[H]
 	\begin{center}
 		\caption[Analyzing the $\ln \cosh$ term]{Analyzing the $\ln \cosh$ term in $ e^{\log{\cosh({\beta(\sigma_1+\sigma_2+\sigma_3+\sigma_4)})}} \frac{B}{Z^\prime(\beta)}$}\label{table:ising-cosh}
-		\begin{tabular}{|c|c|}\hline
-			Neighbour configurations&Value of $\ln \cosh$ terms\\\hline
-			All positive or all negative&$\ln \cosh 4\beta$\\\hline
-			One positive, three negative (or vice versa)&$\ln \cosh 2\beta$\\\hline
-			Two positive, two negative&$\ln \cosh 0 = \ln 1 = 0$\\\hline
+		\begin{tabular}{|l|l|l|}\hline
+			\#&Neighbour configurations&Value of $\ln \cosh$ terms\\\hline
+			1&All positive or all negative&$\ln \cosh 4\beta$\\\hline
+			2&One positive, three negative (or vice versa)&$\ln \cosh 2\beta$\\\hline
+			3&Two positive, two negative&$\ln \cosh 0 = \ln 1 = 0$\\\hline
 		\end{tabular}
 	\end{center}
 \end{table}
 
-We find that (subject to a constant factor, which can be absorbed in partition function):
-\begin{align*}
-	\sum_{\sigma_A=\pm 1} P(\{\sigma_i\}) =&e^{S_2 (\sigma_1\sigma_2 + \sigma_1\sigma_2+ \sigma_2\sigma_3 + \sigma_2 \sigma_4 + \sigma_3 \sigma_4 +\sigma_4 \sigma_1) + S_4 \sigma_1 \sigma_2 \sigma_3 \sigma_4} \text{,where} \numberthis \label{eq:coupled:sigmas}\\
-	S_2 =& \frac{1}{8} \ln{\cosh{4\beta}} \tag*{pairwise interactions}\\
-	S_4 =& S_2 - \frac{1}{2} \ln{\cosh{2\beta}} \tag*{quartet interaction.}
-\end{align*}
+\begin{thm}
+	\begin{align*}
+		\sum_{\sigma_A=\pm 1} P(\{\sigma_i\}) \propto&e^{S_2 (\sigma_1\sigma_2 + \sigma_1\sigma_3+ \sigma_1\sigma_4 + \sigma_2 \sigma_3 + \sigma_2 \sigma_4 +\sigma_3 \sigma_4) + S_4 \sigma_1 \sigma_2 \sigma_3 \sigma_4} \numberthis \label{eq:coupled:sigmas}\\
+		 \text{where}\\
+		S_2 =& \frac{1}{8} \ln{\cosh{4\beta}} \tag*{pairwise interactions}\\
+		S_4 =& \frac{1}{8} \ln{\cosh{4\beta}} - \frac{1}{2} \ln{\cosh{2\beta}} \tag*{quartet interaction.}
+	\end{align*}
+		Subject to a constant factor, which can be absorbed in the partition function.
+\end{thm}
 
-Notice that (\ref{eq:coupled:sigmas}) couples $\sigma_1, \sigma_2, \sigma_3, \emph{and} \sigma_4$! This includes longer range couplings, such as $\sigma_2, \sigma_3$, plus the quartet! [There is also a constant factor that can be absorbed.] We have taken things that weren't coupled, and coupled them. Previously $\sigma_1$ and $\sigma_2$ didn't care about each other, but now we have removed the mediating variable $\sigma_A$, so now they do care in the renormalized case.
+\begin{proof}
+	We represent each of the three cases in Table \ref{table:ising-cosh} by an exemplar.
+	\begin{table}[H]
+		\caption[Exemplars for Table \ref{table:ising-cosh}]{Exemplars for Table \ref{table:ising-cosh}, where $\Sigma=\sigma_1\sigma_2 + \sigma_1\sigma_3+ \sigma_1\sigma_4 + \sigma_2 \sigma_3 + \sigma_2 \sigma_4 +\sigma_3 \sigma_4$}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
+			Case&Exemplar&$\sigma_1\sigma_2$&$\sigma_1\sigma_3$&$\sigma_1\sigma_4$&$\sigma_2\sigma_3$&$\sigma_2\sigma_4$&$\sigma_3\sigma_4$&$\Sigma$&$\sigma_1\sigma_2\sigma_3\sigma_4$\\ \hline
+			1&$\sigma_i>0\;\forall i$&$+1$&$+1$&$+1$&$+1$&$+1$&$+1$&$+6$&$+1$\\ \hline
+			2&$\sigma_4<0\;\forall i\ne 4$&$+1$&$+1$&$-1$&$+1$&$-1$&$-1$&$0$&$-1$\\ \hline
+			3&$\sigma_{1,2}>0\land\sigma_{3,4}<0$&$+1$&$-1$&$-1$&$-1$&$-1$&$+1$&$-2$&$+1$\\ \hline
+		\end{tabular}
+	\end{table}
+	Then we try to find $S_1$, $S_2$ and $C$ such that:
+	\begin{align*}
+		\sum_{\sigma_A=\pm 1} P(\{\sigma_i\}) =&e^{S_2 (\sigma_1\sigma_2 + \sigma_1\sigma_3+ \sigma_1\sigma_4 + \sigma_2 \sigma_3 + \sigma_2 \sigma_4 +\sigma_3 \sigma_4) + S_4 \sigma_1 \sigma_2 \sigma_3 \sigma_4}+C \text{. We need}\\
+		6 S_2 + S_4 =& \ln \cosh 4\beta + C \numberthis \label{eq:S2:4:a}\\ 
+		-S_4 =& \ln \cosh 2\beta+C\numberthis \label{eq:S2:4:b}\\ 
+		-2S_2+S_4 =& C \numberthis \label{eq:S2:4:c}
+	\end{align*}
+	From \eqref{eq:S2:4:a} and \eqref{eq:S2:4:c}
+	\begin{align*}
+		8S_2 =& \ln \cosh 4\beta\\
+		S_2 =& \frac{1}{8} \ln \cosh 4\beta \text{,  \eqref{eq:S2:4:b} and \eqref{eq:S2:4:c} give:}\\
+		-2S_2 =& \ln \cosh 2\beta + 2C\\
+		C =& -S_2 - \frac{1}{2} \ln \cosh 2\beta \text{, then \eqref{eq:S2:4:b} becomes}\\
+		S_4 =& - \ln \cosh 2\beta - C\\
+		=& - \ln \cosh 2\beta + S_2 + \frac{1}{2} \ln \cosh 2\beta\\
+		=& \frac{1}{8} \ln \cosh 4\beta  - \frac{1}{2} \ln \cosh 2\beta
+	\end{align*}
+
+\end{proof}
+
+Notice that (\ref{eq:coupled:sigmas}) couples $\sigma_1$, $\sigma_2$, $\sigma_3$, \emph{and} $\sigma_4$! This includes longer range couplings, such as $\sigma_2, \sigma_3$, plus the quartet! [There is also a constant factor that can be absorbed.] We have taken things that weren't coupled, and coupled them. Previously $\sigma_1$ and $\sigma_2$ didn't care about each other, but now we have removed the mediating variable $\sigma_A$, so now they do care in the renormalized case.
 
 The lattice has also become a hypergraph.
 
