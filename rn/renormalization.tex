@@ -3044,8 +3044,19 @@ The Ising model can also be used to model alignment of opinions, in which case t
 How are we going to coarse-grain the Ising model? We will start with a very simple coarse-graining, where we take one node, A say, as shown in Figure \ref{fig:ising-coarse1}, and construct the joint probability distribution for all the other nodes. We will take the probability distribution for all other nodes, then sum over the possible values for $\sigma_A$.
 
 \begin{figure}[H]
-	\caption{Simple coarse-graining, based on $\sigma_A$}\label{fig:ising-coarse1}
-	\includegraphics[width=0.9\textwidth]{ising-coarse1}
+	\begin{center}
+		\caption{Simple coarse-graining, based on $\sigma_A$}\label{fig:ising-coarse1}
+		\begin{tikzpicture}
+			\draw(-0.5,-0.5) grid (5.5,5.5);
+			\draw[line width=5pt, line cap=round, dash pattern=on 0pt off 1cm](0,0) grid (5,5);
+			\draw (3,2) node[anchor=south west] {$\sigma_A$};
+			\draw (3,3) node[anchor=south west] {$\sigma_1$};
+			\draw (4,2) node[anchor=south west] {$\sigma_2$};
+			\draw (2,2) node[anchor=south west] {$\sigma_3$};
+			\draw (3,1) node[anchor=south west] {$\sigma_4$};
+			\draw[red,fill=red] (3,2) circle (.5ex);
+		\end{tikzpicture}
+	\end{center}
 \end{figure}
 
 When we do this, most things are not going to change: terms that don't involve $\sigma_A$ won't be affected. We therefore focus on the terms with $\sigma_A$. We will:
@@ -3053,6 +3064,7 @@ When we do this, most things are not going to change: terms that don't involve $
 	\item pull out the term in the sum with $\sigma_A$;
 	\item average out (''trace out'') $\sigma_A$.
 \end{enumerate}
+
 Then (\ref{eq:coarse_ising:P}) becomes:
 \begin{align*}
 	P(\{\sigma_i\}) =& \frac{\big[e^{\beta(\sigma_1\sigma_A + \sigma_2\sigma_A + \sigma_2\sigma_A + \sigma_4\sigma_A)}\big]B}{Z(\beta)} \text{ for fixed $\sigma_A$, where}\\
