@@ -3178,13 +3178,23 @@ If we can ignore couplings \ref{item:coupling2} \& \ref{item:coupling3}, we have
 \end{thm}
 
 \begin{proof}
+	We will rearrange the demonstrandum to get it into a form that is easier to prove.
 	\begin{align*}
-	\frac{1}{4} \log{\cosh{4\beta}} =& \frac{1}{4} \log{\frac{e^{4\beta} + e^{- 4 \beta}}{2}}\\
-	<&  \frac{1}{4} \log{e^{4\beta} }\\
-	<& \frac{1}{4} \log{e^{4\beta} } \\
-	<& \frac{1}{\cancel{4}}  \cancel{4} \beta\\
-	<& \beta
+		 \frac{1}{4} \log{\cosh{4\beta}} <& \beta\\
+		 \iff&\\
+		 \log{\cosh{4\beta}} <& 4\beta\\
+		 \iff&\text{ transforming $\beta\rightarrow\frac{\beta}{4}$}\\
+		 \log{\cosh{\beta}} <& \beta\\
+		 \iff&\text{$exp$ is monotonic}\\
+		 \cosh{\beta} <& e^{\beta}\\
+		 \iff& \text{ Definition of $\cosh$}\\
+		 \frac{e^{\beta}+e^{-\beta}}{2}<&e^{\beta}\\
+		 \iff&\\
+		 \cancel{e^{\beta}}+e^{-\beta}<\cancel{2}&e^{\beta}\\
+		 \impliedby&\\
+		 \beta<&0 \text{, by hypothesis}
 	\end{align*}
+
 \end{proof}
 
 Since coupling decreases as we zoom out, we are less and less likely to see big domains that are aligned the same way. NB: this is not the same as previous Markov and Cellular automata, where we performed exact renormalization; this is approximate.
