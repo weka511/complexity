@@ -3211,22 +3211,24 @@ How does model flow as we continue to coarse-grain? This replaces the lattice wi
 
 
 \begin{figure}[H]
-	\caption{Solving $\beta=\frac{3}{8} \log{\cosh{4\beta} }$}\label{fig:beta}
+	\caption{The effect of repeated decimation: solving $\beta=\frac{3}{8} \log{\cosh{4\beta} }$}\label{fig:beta}
 	\includegraphics[width=0.9\textwidth]{beta}
 \end{figure}
 
-Figure \ref{fig:beta} shows that the mapping $\beta\rightarrow\frac{3}{8} \log{\cosh{4\beta} }$ has three fixed points.
+Figure \ref{fig:beta} shows that the mapping $\beta\rightarrow\frac{3}{8} \log{\cosh{4\beta} }$ has three fixed points. There are three scenarios for repeated decimation.
 \begin{enumerate}
-	\item $\beta=0$: as we zoom out, spins become random over a large area.
-	\item  $\beta=\infty$: as we zoom out, spins become aligned.
+	\item $\beta=0$: as we zoom out, spins become random over a large area, and there is no long range correlation.
+	\item  $\beta=\infty$: for a physicist this corresponds to a low temperature. As we zoom out, spins become aligned.
 	\item  $\beta=$ critical point (unstable): as we zoom out, things stay the same.
 \end{enumerate}
 
 Since the derivative  $\frac{\partial}{\partial \beta}\big[\frac{3}{8} \log{\cosh{4\beta}}\big]=\frac{3}{2} \tanh(4\beta)$ is positive, the critical point is unstable; $\beta$ flows to $0$ or $\infty$, depending on whether it start below the critical point or above.
 
-One objection is that this is only an approximation. However, in the exact solution (Onsager), critical point$\approx0.44069$; so we didn't do too bad--$\approx0.507$. Also $S_4\approxeq0.05$
+One objection is that this is only an approximation. However, in the exact solution (Onsager), critical point$\approx0.44069$; so we didn't do too bad--$\approx0.507$. Also $S_4\approxeq0.05$, so neglecting it was OK.
 
 In (\ref{eq:coupled:sigmas}) we saw that the renormalization took us outside the Ising model, but we forced it back into that model class by approximation.
+
+What is the meaning of the fixed point in the real world?
 
 \subsection{Ising Model Simulations}
 
