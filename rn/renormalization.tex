@@ -3236,13 +3236,13 @@ Simon DeDeo demonstrated two simulations \cite{nottelmann2000ising,ashton2012ren
 
 \begin{figure}[H]
 	\begin{center}
-		\caption[Ising Model Simulations after \cite{ashton2012renormalization}]{Ising Model Simulations after \cite{ashton2012renormalization}. The left hand panel shows a temperature just greater than the Critical Temperature ($\beta<\beta_{critical}$), the right hand has a temperature just greater than the Critical Temperature, and the middle panel is at the critical value. Each pixel is made of a block of $b\times b$ spins}
+		\caption[Ising Model Simulations after \cite{ashton2012renormalization}]{Ising Model Simulations after \cite{ashton2012renormalization}. The left hand panel shows a temperature just greater than the Critical Temperature ($\beta<\beta_{critical}$), the right hand has a temperature just greater than the Critical Temperature, and the middle panel is at the critical value. Each pixel is made of a block of $b\times b$ spins. Zooming out requires successive block transformations.}\label{fig:douglas:ashton}
 		\includegraphics[width=0.8\textwidth]{DouglasAshton1}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Evolving $T=0.997T_c$ after \cite{ashton2012renormalization}}
+	\caption[Evolving $T=0.997T_c$ after \cite{ashton2012renormalization}]{Evolving $T=0.997T_c$ after \cite{ashton2012renormalization}. The system is strongly coupled, and one colour,in this case white, dominates more and more as we zoom out.}\label{fig:douglas:ashton1}
 	\begin{subfigure}[t]{0.3\textwidth}
 		\includegraphics[width=\textwidth]{DouglasAshton1-1}
 	\end{subfigure}
@@ -3255,7 +3255,7 @@ Simon DeDeo demonstrated two simulations \cite{nottelmann2000ising,ashton2012ren
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Evolving $T=1.003T_c$ after \cite{ashton2012renormalization}}
+	\caption[Evolving $T=1.003T_c$ after \cite{ashton2012renormalization}]{Evolving $T=1.003T_c$ after \cite{ashton2012renormalization}. The coupling is just too weak. As we zoom out, the patches get smaller and smaller, und we end up with something resembling ''snow'' on a TV. Recall that this $T$ and the one in Figure \ref{fig:douglas:ashton1} both looked like the one in the middle of Figure \ref{fig:douglas:ashton} before we zoomed.}
 	\begin{subfigure}[t]{0.3\textwidth}
 		\includegraphics[width=\textwidth]{DouglasAshton2-1}
 	\end{subfigure}
@@ -3268,7 +3268,7 @@ Simon DeDeo demonstrated two simulations \cite{nottelmann2000ising,ashton2012ren
 \end{figure}
 
 \begin{figure}[H]
-	\caption{Evolving $T=T_c$ after \cite{ashton2012renormalization}}
+	\caption[Evolving $T=T_c$ after \cite{ashton2012renormalization}]{Evolving $T=T_c$ after \cite{ashton2012renormalization}.  little islands shrink, but there are larger islands of correlation that scale down to take their place. There are fluctuations on all scale, in a uniform ''fractal'' pattern. }
 	\begin{subfigure}[t]{0.3\textwidth}
 		\includegraphics[width=\textwidth]{DouglasAshton3-1}
 	\end{subfigure}
@@ -3280,37 +3280,12 @@ Simon DeDeo demonstrated two simulations \cite{nottelmann2000ising,ashton2012ren
 	\end{subfigure}
 \end{figure}
 
-\begin{itemize}
-	\item When beta is at the non-zero, but finite, fixed point, what happens when you coarse-grain:
-	
-	\begin{itemize}
-		\item 	A. the little islands where nodes all share the same value get smaller and smaller, and it looks like television snow.
-		
-		\item B. fluctuations away from a uniform +1 or uniform -1 state get smaller and smaller, and the system is dominated by one state or the other.
-		
-		\item C. little islands shrink, but there are larger islands of correlation that scale down to take their place. There are fluctuations on all scale, in a uniform ''fractal'' pattern.
-		
-		\item D. none of the above.
-	\end{itemize}
-	
-	Answer: (C). At this critical point, the system maintains the same level of correlation (beta value) no matter how far you zoom out. We'll see this in action in the final lecture of this unit.
-	
-
-	
-	\item The three models in Douglas Ashton's simulation look pretty similar in terms of their correlations at first. What happens to make them look different?
-	
-	\begin{itemize}
-		\item 	A. we evolve them forward dynamically, and they move to different configurations.
-		
-		\item B. they look the same in a little zoomed in patch, but if we zoom out and look on larger scales, we can see that they have very different large-scale properties
-		
-		\item C.  we alter them by hand, showing the effect of changing beta.
-		
-		\item D.  none of the above
-	\end{itemize}
-
-	Answer: (B). In each of the three cases, Douglas has run a simulation and just taken one image -- basically, sampling the joint probability distribution for each of the three models. There's no dynamical evolution shown here, and nobody is changing the models by hand to become more different. Locally, the models look very similar. But if we zoom out to larger scales -- i.e., if we repeatedly do a decimation transformation, dropping half of the points out and moving the others closer together (so more and more of the image can fit on the screen), we see that they're very different on large scales. The effective beta parameter goes either to zero (totally correlation), or to infinity (totally decorrelated), or (if precisely poised at the critical temperature) it remains the same, self-similar on all scales.
-\end{itemize}
+\begin{figure}[H]
+	\begin{center}
+		\caption[Evolved Ising Model Simulations after \cite{ashton2012renormalization}]{Evolved Ising Model Simulations after \cite{ashton2012renormalization}. A comparison of the three simulations zoomed to the same scale.}
+		\includegraphics[width=0.8\textwidth]{DouglasAshtonSummary}
+	\end{center}
+\end{figure}
 
 See also \cite{dedeo2012dynamics}
 
