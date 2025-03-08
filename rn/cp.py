@@ -29,7 +29,7 @@ def S(beta):
     '''
     return (3/8) * np.log(np.cosh(4*beta))
 
-def plot_results(beta,S_beta):
+def plot_results(beta,S_beta,verbose=False):
     '''
     Plot the solution of beta = S(beta)
     '''
@@ -43,8 +43,9 @@ def plot_results(beta,S_beta):
     ax.text(beta+0.02,S_beta-0.02,f'Critical point {beta:.6f}')
     ax.set_xlabel(r'$\beta$')
     ax.legend(loc = 'lower right')
-    ax.set_title(__doc__)
-    fig.savefig('figs/beta.jpg')
+    if verbose:
+        ax.set_title(__doc__)
+    fig.savefig('figs/beta.jpg',bbox_inches='tight')
 
 def solve(atol = 1e-12):
     '''
