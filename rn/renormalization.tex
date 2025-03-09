@@ -3613,20 +3613,40 @@ The electric field potential is given by
 	\nabla^2 \Phi=& -\frac{\rho}{\epsilon_0}  \text{, so, if the charge $q$ concentrated at a single point}\\
 	\Phi =& \frac{q}{4 \pi \epsilon_0 r}
 \end{align*}
-Now imagine we introduce a small charge $\delta \rho$. If we allow for the movement of charges caused by introducing the extra charge:
+Now imagine we introduce a small charge $\delta \rho$ into our thermal plasma. If we allow for the movement of charges caused by introducing the extra charge:
 \begin{align*}
-	\delta \rho =& \delta \rho_{ext} + e(\delta n_i - \delta n_e)\\
+	\delta \rho =& \underbrace{\delta \rho_{ext}}_\text{Introduced} + \underbrace{e(\delta n_i - \delta n_e)}_\text{Rearrangement of existing charges}.
+\end{align*}
+
+We can calculate $\delta n_i - \delta n_e$.
+\begin{align*}
 	n_i(x)=&n_0 e^{- \frac{e\Phi}{kT}}\\
 	=& n_0\big(1 - \frac{e\Phi}{kT} +...\big)\\
 	n_e(x)=&n_0 e^{ \frac{e\Phi}{kT}}\\
-	=& n_0\big(1 + \frac{e\Phi}{kT} +...\big)\\
-	\delta \rho =& \delta \rho_{ext} - \frac{2 e^2 n_0}{kT}\delta \Phi \numberthis \label{eq:delta:rho}\\
-	\nabla^2 \Phi =& - \frac{1}{\epsilon_0} \big[\delta \rho_{ext} - \frac{2 e^2 n_0}{kT} \delta \Phi\big]\\
-	\delta \Phi =& \frac{q}{4 \pi \epsilon_0 r} r^{- \sqrt{2} \frac{r}{\lambda_D}}\text{, where $\lambda_D$ is the Debye Length}\\
+	=& n_0\big(1 + \frac{e\Phi}{kT} +...\big)
+\end{align*}
+Whence:
+\begin{align*}
+	\delta \rho =& \delta \rho_{ext} - \frac{2 e^2 n_0}{kT}\delta \Phi \numberthis \label{eq:delta:rho}
+\end{align*}
+The reduction in $\delta \rho$ is reduced if the charge of the electron is reduced, or if the temperature increases. Conversely, if the temperature decreases, the test particle can be surrounded by a halo.
+
+\begin{align*}
+	\nabla^2 \delta \Phi =& - \frac{1}{\epsilon_0} \big[\delta \rho_{ext} - \frac{2 e^2 n_0}{kT} \delta \Phi\big]
+\end{align*}
+It can be shown that:
+\begin{align*}
+	\delta \Phi =& \frac{q}{4 \pi \epsilon_0 r} r^{- \sqrt{2} \frac{r}{\lambda_D}}\text{, where $\lambda_D$ is known as the Debye Length}\\
 	\lambda_D =& \sqrt{\frac{kT}{w^2 n_0}}
 \end{align*}
+How can we understand the modification of classical electrodynamics that comes from this background of charges?
 
-[Plot log ]
+\begin{figure}[H]
+	\begin{center}
+		\caption{Log Plot}
+		\includegraphics[width=0.6\textwidth]{log-plot}
+	\end{center}
+\end{figure}
 \subsection{Charge Renormalization and Feedback}
 
 We can think of (\ref{eq:delta:rho}) as renormalizing the charge, which is aktered by the field. Think of sticking particle in, then asking how it behaves if we view it as surrounded by boxes of larger and larger scale. We view it as a theory or coarse-graining charge--Figure \ref{fig:coarse_grain_charge}.
