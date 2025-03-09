@@ -3,7 +3,7 @@
 % Copyright (c) 2019-2025 Simon Crase
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
-% of this software and associated documentation files (the "Software"), to deal
+% of this software and associated documentation files (the ''Software''), to deal
 % in the Software without restriction, including without limitation the rights
 % to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 % copies of the Software, and to permit persons to whom the Software is
@@ -12,7 +12,7 @@
 % The above copyright notice and this permission notice shall be included in all
 % copies or substantial portions of the Software.
 
-% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% THE SOFTWARE IS PROVIDED ''AS IS'', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 % IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 % FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 % AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -2039,12 +2039,12 @@ So if we do that multiplication
 we find in the top corner here
 we have $a^2_1-B(1-1)$
 And let's say down to the right
-we have "a" times "1 - b" plus "b" times "1 - b".
+we have ''a'' times ''1 - b'' plus ''b'' times ''1 - b''.
 Down here we have
-"a" times "1 - a" plus "b" times "1 - a"
+''a'' times ''1 - a'' plus ''b'' times ''1 - a''
 and in the far lower right-hand corner
 we have
-"1 - a" times "1 - b" plus "b" squared.
+''1 - a'' times ''1 - b'' plus ''b'' squared.
 This we're going to set equal to our original
 and much-beloved transition matrix T.
 
@@ -3363,26 +3363,297 @@ Figure \ref{fig:coarse:grain:creature} shows a consistent way to coarse-grain th
 		\end{tikzpicture}
 	\end{subfigure}	
 \end{figure}
-Note that all sequences are reversible; they form a \textit{group}. It is a consequence of the Jordan–H\"older Theorem--Theorem \ref{thm:JH}--that any group can be decomposed this way.
+Note that all sequences are reversible; they form a \textit{group}. It is a consequence of the Jordan–H\''older Theorem--Theorem \ref{thm:JH}--that any two decompositions of a group are isomorphic.
 
-
-
-\begin{thm}[Jordan–H\"older]\label{thm:JH}
-	Let G be a group, and let $G=G_1 \supset G_2\supset...\supset G_p=\{e\}$ be a normal tower such that each group $G_i/G_{i+1}$ is simple, and $G_i\ne G_{i+1}\forall i$. Then any other tower having the same properties is equivalent to this one.\cite{lang02}
+\begin{thm}[Jordan–H\''older]\label{thm:JH}
+	Let G be a group, and let $G=G_1 \supset G_2\supset...\supset G_p=\{e\}$ be a normal tower such that each group $G_i/G_{i+1}$ is simple, and $G_i\ne G_{i+1}\forall i$. Then any other tower having the same properties is equivalent to this one.
 \end{thm}
+\begin{proof}
+	\cite{lang02}
+\end{proof}
 \subsection{Irreversible Computations, Forgetful Computers and the Krohn-Rhodes Theorem }
 
-Krohn Rhodes Irreversible --semigroup
+During the 1960s, Krohn and Rhodes showed that we could also decompose irreversible operations as well.  --semigroup
 
 See \cite{dedeo2011effective,maler2010krohn,rhodes2009applications}
+
 \section{Renormalization in Quantum Electrodynamics}
+
 \subsection{From Quantum Electrodynamics to Plasma Physics }
 
-Gell-Man \& Lo: charge of electron modified by virtual pairs. 
+One of the most important uses of renormalization theory, at least in theoretical physics, is associated with the theory of quantum electrodynamics.
+In fact, the person, or the two people,
+who first told us
+how to use renormalization theory
+to understand the quantum theory
+of electromagnetism,
+how photons and electrons
+could interact with each other
+in cases where, for example,
+electrons could interact,
+not just with other photons,
+but with electron-positron pairs
+that sort of sprung out of a vacuum –
+the people who first helped us
+understand that
+were Murray Gell-Mann,
+our very own from Santa Fe Institute,
+and Frank Low,
+who, in a paper in the 1950s,
+talked about quantum electrodynamics
+at short distances.
+And one of the things they figured out
+was how to describe
+the following phenomenon.
 
-Thermal fluctuations.
+So, you have some electron–-Figure \ref{fig:Virtual_Pairs}--
+in your space, and when you ask what kind of effect does that electron have at a distant point.
+One of the things that you have to take into account, at least in quantum electrodynamics, is that even though this vacuum appears to be empty, even though you sort of stipulated that there's nothing between you and the electron, it so turns out in fact, that field of the electron can actually sort of tear
+positrons--
+positively-charged antielectrons--and electrons out of the vacuum itself.
+\begin{figure}[H]
+	\begin{center}
+		\caption{Virtual Pairs: electrons are blue}\label{fig:Virtual_Pairs}
+		\includegraphics[width=0.6\textwidth]{Virtual_Pairs}
+	\end{center}
+\end{figure}
+So, bizarrely enough,
+you get these.
+Even though you think
+the vacuum is empty,
+quantum mechanically it's not,
+and so you have
+this amazing phenomenon,
+where these, what are called
+literally ''virtual pairs'',
+so you can't actually touch them directly,
+you can't sort of nip in
+and pull one out,
+or maybe you can
+if you're fast enough – right? –
+But sometimes you haven't
+put these in by hand,
+and yet they exist.
+And what that means in fact
+is that the influence
+of the electron on that distant point
+is modified and modulated
+by all of the stuff
+that's happening in between.
+The closer and closer
+you get to the electron,
+the less and less those effects conspire
+to change the underlying theory,
+but what Gell-Mann and Low noticed –
+in fact, everybody
+was dealing with this problem –
+was that the closer
+you got to the electron,
+the more you sort of dove
+into this virtual cloud,
+the stronger and stronger
+the effects of the electron itself got.
+And, in fact, what happened
+at very small distances
+was that the charge of the electron,
+the effect it had on you,
+seemed to diverge and become infinite.
 
-Plasma - gas with electrons separated from nuclei, e.g. solar wind.
+So that was a huge problem.
+No one knew how to solve it 
+And, in the end, they invented
+a series of mathematical tools
+to help people understand
+how they could solve it.
+
+Now, we don't have time to teach you
+quantum field theory,
+let alone the renormalization problem,
+but, beautifully enough,
+we do have a sort of toy model
+for how this renormalization process works
+for the kinds of physics
+that Gell-Mann and Low were doing,
+and then later, of course, Feynman,
+and then a number of other people
+who followed in their footsteps.
+
+And in fact what we can do is talk,
+not about quantum fluctuations,
+which were much harder – right? –
+you had to talk about virtual worlds
+and all sorts
+of philosophically compelling,
+but mathematically difficult things.
+In fact, it turns out that we can tell
+a good part of this story
+not in terms of quantum fluctuations,
+but in terms of sort of
+classical thermal fluctuations.
+And in fact you've already seen
+an example of thermal fluctuations
+when we introduced the Ising model.
+
+As you remember, we had this coupling
+parameter, $\beta$, in the Ising model.
+The stronger the coupling was,
+the more and more the particles
+like to align with each other.
+They wanted their internal states
+to be the same.
+So, now, as you decrease
+the coupling parameter,
+or, in physics language,
+as you increase the temperature,
+particles had a greater
+and greater tolerance
+for, instead of both being
+in the same state like this,
+for sometimes them to flip?
+And you can think of this
+as a thermal fluctuation.
+The minimal energy
+configuration is like this-–
+all the particles all pointing up,
+or all the particles all pointing down,
+but instead, if the temperature
+is high enough,
+you sometimes get these fluctuations,
+and if the temperature
+is high enough in the Ising model,
+those fluctuations can actually
+propagate arbitrarily far:
+you go through the critical point
+and then, in fact, you totally decouple,
+and now they seem
+totally uncorrelated?
+
+So, what we're going to do now
+is tell the story
+
+about the behavior of electrodynamics
+in the presence of thermal fluctuation,
+
+not in the presence of these sort of
+strange virtual particles,
+
+but in something that you interact with
+every day of your life,
+
+although hopefully
+only in an intermediate fashion,
+
+because otherwise you would die.
+
+And that is the plasma.
+
+So, what is a plasma?
+
+A plasma is just a gas
+
+where the positive nuclei
+have been separated
+
+from the negatively charged electrons.
+
+A plasma, I certainly encountered these
+
+when I was a graduate student
+in astrophysics.
+
+In fact, for example,
+in the case of the solar wind,
+
+you have this gas
+that's coming off the Sun,
+
+it's being bombarded by photons,
+
+the Sun is extremely hot,
+
+and occasionally those photons
+will rip the electron off an atom,
+
+and that electron will fly off.
+
+But the gas is so diffuse, in fact,
+
+that it can never really find
+its old nuclei again – right?
+
+It can never sort of
+recondense back together,
+
+and so the solar wind is an example
+of a very diffuse plasma.
+
+On earth we build plasmas all the time.
+
+One of the most extreme cases that we do
+is when we try to build the tokamak,
+
+in other words, when we try
+to get nuclear fusion going.
+
+To do that, we'll take
+something like helium or hydrogen,
+
+we'll heat it up as hot as we can,
+
+separate out the positively charged nuclei
+
+from the electrons,
+
+and then do some magic
+
+and try to get these guys
+to stick together,
+
+and that's a whole another story,
+
+and it's always 20 years
+in the future, that solution.
+
+But plasmas exist in all sorts
+of places in the real world,
+
+including, for example,
+in the fluorescent lights.
+
+So in that tube you have
+a very rarefied gas,
+
+and what happens is the electric field
+produced on either end of that tube,
+
+enables the gas to separate out
+
+into its constituent positively
+and negatively charged particles.
+
+Okay?
+
+So, what we're going to do,
+
+our plasma is going to be
+our virtual background of particles
+
+that occurred in quantum electrodynamics,
+
+except now it's much easier,
+
+we aren't having to think about
+
+how these could be
+ripped apart from nothing.
+
+Instead, what we're going to assume
+
+is that we have some gas,
+let's say in a box,
+
+and the gas is separated into its positive
+and negatively charged parts.
 
 \subsection{The Thermal Physics of Plasma}
 
