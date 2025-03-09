@@ -3636,20 +3636,29 @@ The reduction in $\delta \rho$ is reduced if the charge of the electron is reduc
 \end{align*}
 It can be shown that:
 \begin{align*}
-	\delta \Phi =& \frac{q}{4 \pi \epsilon_0 r} r^{- \sqrt{2} \frac{r}{\lambda_D}}\text{, where $\lambda_D$ is known as the Debye Length}\\
+	\delta \Phi =& \frac{q}{4 \pi \epsilon_0 r} e^{- \sqrt{2} \frac{r}{\lambda_D}}\text{, where } \numberthis \label{eq:delta_phi}\\
 	\lambda_D =& \sqrt{\frac{kT}{w^2 n_0}}
 \end{align*}
+$\lambda_D$ is known as the ''Debye Length''.
+
 How can we understand the modification of classical electrodynamics that comes from this background of charges?
 
 \begin{figure}[H]
 	\begin{center}
-		\caption{Log Plot}
-		\includegraphics[width=0.6\textwidth]{log-plot}
+		\caption[Effect of background of charge]{Modification of classical electrodynamics that comes from this background of charges. If you get far enough away from charge, its effect is negligible because of screening.}
+		\includegraphics[width=0.8\textwidth]{log-plot}
 	\end{center}
 \end{figure}
+
+You can think of this as the force becoming weaker as you go further away. The alternative is to rearrange \eqref{eq:delta_phi}, so the charge weakens with distance.
+\begin{align*}
+	\delta \Phi =& \frac{\overbrace{q e^{- \sqrt{2} \frac{r}{\lambda_D}}}^\text{''Charge''}}{4 \pi \epsilon_0 r} 
+\end{align*}
+This view is in harmony with the notion of renormalization that we developed in for preceding sections.
+
 \subsection{Charge Renormalization and Feedback}
 
-We can think of (\ref{eq:delta:rho}) as renormalizing the charge, which is aktered by the field. Think of sticking particle in, then asking how it behaves if we view it as surrounded by boxes of larger and larger scale. We view it as a theory or coarse-graining charge--Figure \ref{fig:coarse_grain_charge}.
+We can think of \eqref{eq:delta:rho} as renormalizing the charge, which is altered by the field. Think of sticking particle in, then asking how it behaves if we view it as surrounded by boxes of larger and larger scale. We view it as a theory or coarse-graining charge--Figure \ref{fig:coarse_grain_charge}.
 
 \begin{figure}[H]
 	\caption{Coarse-graining the Charge, which falls off past the Debye length}\label{fig:coarse_grain_charge}
