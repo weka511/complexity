@@ -35,6 +35,7 @@
 \usepackage[toc,acronym,nonumberlist]{glossaries}
 \usepackage{glossaries-extra}
 \usepackage{tikz}
+\usepackage{tikz-cd}
 \usetikzlibrary{arrows,automata}
 \graphicspath{{figs/}}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
@@ -3684,6 +3685,149 @@ Rate Distortion Theory --how to balance the need for efficient representation an
 
 Rate Distortion Theory is about choosing the ''best'' $P(\tilde{x}\vert x)$. We need a distorting=n measure $d(\tilde{x}\vert x)$, the personalty for thinking the world is in state $\vert x$ when it is actually in state $x$ (not symmetric).
 
+
+--7.1--
+
+One of the major themes of this series of this series of lectures has been going on the data side from one level of description to another.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[The Renormalization Relationship]{The Renormalization Relationship. If we coarse-grain the data, what is the relationship between the model for the data, and the model for the coarse-grained data?}\label{fig:renormalization-relationship}
+		\begin{tikzcd}
+			Model \arrow[r, "explains"] \arrow[d, "renormalize"]
+			& Data \arrow[d, "coarse grain" ] \\
+			Model^\prime \arrow[r,  "explains"]
+			& || Data^\prime
+		\end{tikzcd}
+	\end{center}
+\end{figure}
+
+That goes all the way from how a Markov chain coarse grains and flows indeed to the sub-manifold of the higher dimensional space that the Markov chains originally lived in. It applies just as well to how electrodynamics changes as you go from the finer grain scale, where, let's say, you can observe electrons on, let's say a scale of 1 millimeter, up to a scale of, let's say, a meter, and that renormalization there, as I indicated could be understood as changing, not the laws of electrodynamics, but just one of its parameters, the electron charge as you moved to different distances. 
+
+The coarse-graining operation in Figure \ref{fig:renormalization-relationship} we've left somewhat ambiguous. In each of the talks I told you
+a coarse graining operation that we were
+going to use. And we did the Markov chains
+and said ''okay, you have some finite time
+resolution'' when we came to study the
+Ising model I said ''okay, look here's how
+we're going to decimate, we have our grid
+and what we're going to do is we're going
+to take every other particle as you go
+along the grid in these directions we're
+going to average over every other particle
+like that, or rather, trace over every
+particle like that.''
+
+ The one time where we
+really started to ask which coarse
+graining do we want to use was when we
+came to do the CAs, we looked at Israeli
+and Goldenfeld's work, where we found is
+that they were simultaneously solving for
+the model, the $g$, that came from the $f$,
+but also, solving for the projection
+function that took the supercells and
+mapped them into groups, into single cell
+examples. And so I'll draw an example here
+of how Goldenfeld and Israeli's projection
+might work in some case, in fact it takes
+blank spaces to a blank cell, but if
+there's one filled-in cell, it always
+takes it to a filled-in cell at the coarse
+grain level description.
+
+\begin{figure}[H]
+	\caption{Goldenfeld and Israeli's projection}\label{fig:renormalize-CAe}
+	\includegraphics[width=0.9\textwidth]{renormalize-CA}
+\end{figure}
+
+ What Israeli and
+Goldenfeld were doing were simultaneously
+solving for these two objects. And when
+they did that, one of the things that we
+talked quite a bit about was that they
+found that in fact, Rule 110 could indeed
+be efficiently coarse-grained. And that's
+kind of remarkable, right? It's sort of
+like saying, ''you know, like, yeah, you
+know your clock speed is 5 GHz and you
+have you know, memory of, you know, 16 GB
+but actually I can do what you think you
+want to do, I could do it in half the
+memory and half the time.'' Now, when we
+actually came to look at what the coarse
+graining was doing for Rule 110, we were
+much less impressed. And for example, one
+of the kinds of coarse grainings that
+Israeli and Goldenfeld discovered was the
+Garden of Eden coarse graining, which
+turned out to be incredibly trivial. What
+it did was it took a certain subset of
+supercells that could never be produced by
+Rule 110, not in fact blocks of two, they
+had to go to a longer set of blocks to
+find them. But they found these Garden of
+Eden supercells and then projected the
+whole world into Garden of Eden versus not
+Garden of Eden, you know post-fall, right?
+And then by projecting them into those two
+spaces, then they could actually map
+Rule 110 onto Rule 0. And yet they
+satisfied what they wanted, and which
+seems like a natural thing to satisfy,
+which is the commutation of the diagram.
+Right, the diagram they wanted to commute
+was if you evolve on the fine grain scale
+and project. If you use the $f$ operation
+twice and then project, it's the same as
+using the projection and then the $g$
+operation once. So these commuted and yet,
+the answer was somewhat unsatisfying.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Israeli and Goldenfeld]{Israeli and Goldenfeld. If you use the $f$ operation twice and then project, it's the same as using the projection and then the $g$ operation once}\label{fig:renormalization-relationship1}
+		\begin{tikzcd}
+			Rule110 \arrow[r, "f"] \arrow[d, "p"]
+			& Data \arrow[d, "p" ] \\
+			Rule0 \arrow[r,  "g"]
+			& || Data^\prime
+		\end{tikzcd}
+	\end{center}
+\end{figure}
+
+In the case of the Ising model, we had
+this goal, our goal was secretly to figure
+out what was going on with phase
+transitions in the sort-of two-dimensional
+grid where all of a sudden at some
+critical point you found that the whole
+system coordinated. And so in the end they
+said ''you know, look, this was not the
+world's greatest coarse graining, because
+you couldn't quite get a solution, but it
+was good enough.'' Always what's happening
+in each of these stories, the Markov
+chain, the cellular automata, the Ising
+model, the Krohn-Rhodes Theorem is that
+secretly we have some idea of what we want
+the data to do for us, and therefore, we
+have some idea of what we want this
+projection operator to be. And in a subset
+of the cases, we also had an idea about g,
+so if you think about the Ising model case
+we really didn't like that term that was
+the quartet, sigma 1, sigma 2, sigma 3 ...
+We actually just neglected it. And we
+didn't like it because it made
+calculations hard. So secretly, we also
+have a little bit of a constraint on g,
+but in general, what we were doing was
+picking a p that we hoped did what we want
+And that goes all the way back to the
+Alice in Wonderland story that we began
+with. Here's an image, here's the coarse
+graining, do you like it?
 \printglossaries
 
 % bibliography go here
