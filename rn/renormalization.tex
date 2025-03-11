@@ -3677,16 +3677,7 @@ We can think of \eqref{eq:delta:rho} as renormalizing the charge, which is alter
 
 \section{The Future of Renormalization \& Rate Distortion Theory}
 
-When we project, we have some idea what we want.
 
-Utility function.
-
-Rate Distortion Theory --how to balance the need for efficient representation and good representation. Let ${x}$ represent state of World, ${\tilde{x}}$ the state of the brain. The mutual information $I(x,\tilde{x})$ is a measure of how good a job the eye is doing. coarse-graining is $P(\tilde{x}\vert x)$ (soft clustering).
-
-Rate Distortion Theory is about choosing the ''best'' $P(\tilde{x}\vert x)$. We need a distorting=n measure $d(\tilde{x}\vert x)$, the personalty for thinking the world is in state $\vert x$ when it is actually in state $x$ (not symmetric).
-
-
---7.1--
 
 One of the major themes of this series of this series of lectures has been going on the data side from one level of description to another.
 
@@ -3754,10 +3745,12 @@ know your clock speed is 5 GHz and you
 have you know, memory of, you know, 16 GB
 but actually I can do what you think you
 want to do, I could do it in half the
-memory and half the time.'' Now, when we
+memory and half the time.'' 
+
+Now, when we
 actually came to look at what the coarse
 graining was doing for Rule 110, we were
-much less impressed. And for example, one
+much less impressed. For example, one
 of the kinds of coarse grainings that
 Israeli and Goldenfeld discovered was the
 Garden of Eden coarse graining, which
@@ -3806,7 +3799,9 @@ system coordinated. And so in the end they
 said ''you know, look, this was not the
 world's greatest coarse graining, because
 you couldn't quite get a solution, but it
-was good enough.'' Always what's happening
+was good enough.''
+
+Always what's happening
 in each of these stories, the Markov
 chain, the cellular automata, the Ising
 model, the Krohn-Rhodes Theorem is that
@@ -3814,20 +3809,42 @@ secretly we have some idea of what we want
 the data to do for us, and therefore, we
 have some idea of what we want this
 projection operator to be. And in a subset
-of the cases, we also had an idea about g,
+of the cases, we also had an idea about $g$,
 so if you think about the Ising model case
 we really didn't like that term that was
-the quartet, sigma 1, sigma 2, sigma 3 ...
-We actually just neglected it. And we
+the quartet: we actually just neglected it. And we
 didn't like it because it made
 calculations hard. So secretly, we also
-have a little bit of a constraint on g,
+have a little bit of a constraint on $g$,
 but in general, what we were doing was
-picking a p that we hoped did what we want
+picking a $p$ that we hoped did what we want
 And that goes all the way back to the
 Alice in Wonderland story that we began
 with. Here's an image, here's the coarse
 graining, do you like it?
+
+
+Hidden inside this story is an unacknowledged utility function. We didn't talk about rate distortion theory.
+
+Rate Distortion Theory is about how to balance the need for efficient representation and good representation. Let ${x}$ represent state of World, ${\tilde{x}}$ the state of the brain. The mutual information $I(x,\tilde{x})$ is a measure of how good a job the eye is doing. coarse-graining is $P(\tilde{x}\vert x)$ (soft clustering).
+
+Rate Distortion Theory is about choosing the ''best'' $P(\tilde{x}\vert x)$--Figure \ref{fig:mapping-world-to-brain}.
+
+\begin{figure}[H]
+	\begin{center}
+		\caption[Mapping the World to your brain]{Mapping the World to your brain. Your eye's task is to map from the state of the World to the state of your brain.}\label{fig:mapping-world-to-brain}
+		\includegraphics[width=\textwidth]{mapping-world-to-brain}
+	\end{center}
+\end{figure}
+
+One way to quantify this is to measure $I(x,\tilde{x})$, the mutual information. We can consider the eye mapping the data probabilistically--$P(\tilde{x}\vline x)$. For rate distortion theory, $P$ is the projection operator.
+
+There is a lot of coarse graining we can do: if we see a tiger, we don't care whether it is male or female. But we can coarse-grain too much, e.g. a tiger and a tree. We want $P(\tilde{x}\vline x)$ to preserve some things about the World. How do we choose the right $P(\tilde{x}\vline x)$?
+
+
+We need a distorting=n measure $d(\tilde{x}\vert x)$, the penalty for thinking the world is in state $\vert x$ when it is actually in state $x$ (not symmetric). This is the major unsolved problem in renormalization.
+
+
 \printglossaries
 
 % bibliography go here
