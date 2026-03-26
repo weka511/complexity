@@ -1,6 +1,6 @@
 % MIT License
 
-% Copyright (c) 2019-2020 Simon Crase
+% Copyright (c) 2019-2026 Simon Crase
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,15 @@
 % SOFTWARE.
 
 \documentclass[]{article}
-\usepackage{caption,subcaption,graphicx,float,url,amsmath,amssymb,tocloft,cancel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tocloft}
+\usepackage{cancel}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,acronym,nonumberlist]{glossaries}
 \usepackage{titling}
@@ -862,10 +870,10 @@ For example, consider a butterfly population with differences in colour, some da
 	\end{subfigure}
 \end{figure}
 
-The example examined survivability, but, in addition to survival, other traits are selected in populations, such as number of offspring produces, mating success, sexual selection--Figure \ref{fig:BrightBird}. What exactly is selected for? Some have looked at number of children, grand-children, etc. The trait that is actually selected is long-term survival of the lineage in question, as compared to other lineages.
+The example examined survivability, but, in addition to survival, other traits are selected in populations, such as number of offspring produced, mating success, sexual selection--Figure \ref{fig:BrightBird}. What exactly is selected for? Some have looked at number of children, grand-children, etc. The trait that is actually selected is long-term survival of the lineage in question, as compared to other lineages.
 
 \begin{figure}[H]
-	\caption[What exactly is selected for?]{In addition to survival, other traits are selected in populations, such as number of offspring produces, mating success, sexual selection. What exactly is selected for?}\label{fig:BrightBird}
+	\caption[What exactly is selected for?]{In addition to survival, other traits are selected in populations, such as number of offspring produced, mating success, sexual selection. What exactly is selected for?}\label{fig:BrightBird}
 	\includegraphics[width=0.8\textwidth]{BrightBird}
 \end{figure}
 
@@ -888,18 +896,18 @@ In both cases we end up with funny jokes: in the first can it depends on my abil
 
 \subsection{The Price Equation}
 
-The \gls{gls:price:equation}\cite{price1970selection} is a nice way to look at these two processes. It looks at the change of something in the population, such as brightness of wing colour or funniness of jokes,  when something happens to a population, and a generation passes, or maybe just a day; some individuals survive, some reproduce. We look at the difference in the property over this time.
+The \gls{gls:price:equation}\cite{price1970selection,gardner2020price,frank2012natural} is a nice way to look at these two processes. It looks at the change of something in the population, such as brightness of wing colour or funniness of jokes,  when something happens to a population, and a generation (or maybe just a day) passes; some individuals survive, some reproduce. We look at the difference in the property over this time.
+\begin{itemize}
+	\item Let $Z$ denote some property, say colour, and
+	\item $W$ denotes survival.
+\end{itemize}
 
 \begin{align*}
-	\Delta \mathbb{E}_{i\in I}(z_i) =& \underbrace{Cov_{i\in I}(w_i,z_i)}_\text{selection} + \underbrace{\mathbb{E}_{i\in I}(w_i \Delta z_i)}_{transformation} \text{ using the notation of \cite{gardner2020price}.}\\
-	\text{where:}& \numberthis \label{eq:price:equation}\\
-	I =& \text{parents--first generation}\\
-	z_i =& \text{ character value of $i$}\\
-	w_i =& \text{ the relative contribution of $i$ to the population--\gls{gls:fitness}}\\
-	\mathbb{E}_{i\in I}(z^\prime_i)=& \text{ character value of (possible multiple) offspring of $i$}\\
-	\Delta \mathbb{E}_{i\in I}(z_i)=& \mathbb{E}_{i\in I}(z^\prime_i)-\mathbb{E}_{i\in I}(z_i)
+	W\Delta Z = \underbrace{cov(Z,W)}_\text{Contribution of $Z$ to survival} + \underbrace{\mathbb{E} (w \Delta Z)}_\text{Change of $Z$ in those that survive.}
 \end{align*}
- Equation (\ref{eq:price:equation}) shows that the change in character can be partitioned into selection and transformation. Frank \cite{frank2012natural} discusses the tautological nature of (\ref{eq:price:equation}), and explains why the equation is still useful.
+
+The first term is \textit{selection}, the second \textit{transformation}.
+
  
 \begin{figure}[H]
 	\begin{center}
